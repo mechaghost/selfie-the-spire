@@ -1,6 +1,7 @@
 import { Application, Container, Graphics, ImageSource, Sprite, Texture } from 'pixi.js';
 import { ActorClip, ActorVisual, LocationVisual } from '../core/battleVisualModels';
 import { BattleLayout, ActorSlot } from './battleLayout';
+import { ImpactNotice, subscribeImpacts } from './CombatPresentation';
 import { frameLocation } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip }
@@ -30,6 +31,8 @@ export class BattleScene {
     private initialized = false;
     private snapshot: SceneSnapshot;
     private time = 0;
+    private reactions = new Map<string,{at:number;effect:ImpactNotice['effect']}>();
+    private unsubscribeImpacts: (()=>void) | undefined;
     constructor(private host: HTMLElement, snapshot: SceneSnapshot, private onFailure: (reason:string)=>void) { this.snapshot = snapshot; }
     async mount(): Promise<boolean> {
         try {
@@ -66,6 +69,10 @@ export class BattleScene {
             }));
             if (this.disposed) return false;
             this.update(this.snapshot);
+            this.unsubscribeImpacts=subscribeImpacts(notice=>{
+                if(this.disposed || this.snapshot.reducedMotion || document.hidden)return;
+                this.reactions.set(notice.targetId,{at:performance.now(),effect:notice.effect});
+            });
             this.app.ticker.add(this.tick);
             document.addEventListener('visibilitychange',this.visibility);
             this.visibility();
@@ -108,6 +115,16 @@ export class BattleScene {
         sprite.anchor.set(...(pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));
         const scale = Math.min(slot.art.width / idle.width,slot.art.height / idle.height);
         sprite.scale.set(scale); sprite.position.set(slot.foot.x,slot.foot.y); sprite.alpha = actor.defeated ? .15 : 1;
+        sprite.tint=0xffffff;
+        const reaction=this.reactions.get(actor.id);
+        if(reaction && !this.snapshot.reducedMotion) {
+            const progress=(performance.now()-reaction.at)/220;
+            if(progress>=1)this.reactions.delete(actor.id);
+            else {
+                sprite.tint=reaction.effect==='heal'?0xb8ffd2:reaction.effect==='blocked'||reaction.effect==='block'?0xaaddff:0xffc5a3;
+                if(['damage','thorns','burn'].includes(reaction.effect))sprite.x+=(actor.id==='player'?-1:1)*Math.sin(Math.max(0,progress)*Math.PI)*7;
+            }
+        }
     }
     private tick = () => {
         if (this.disposed) return;
@@ -132,6 +149,7 @@ export class BattleScene {
     destroy() {
         if (this.disposed) return;
         this.disposed = true;
+        this.unsubscribeImpacts?.(); this.unsubscribeImpacts=undefined;this.reactions.clear();
         document.removeEventListener('visibilitychange',this.visibility);
         this.destroyApp();
         this.sprites.clear(); this.shadows.clear(); this.poses.clear(); this.backgroundSprites=[];

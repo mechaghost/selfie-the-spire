@@ -25,3 +25,17 @@ for(const n of begins)assert.equal(notices.filter(e=>e.battleId===n.battleId && 
 const attackBegin=begins.find(n=>n.type==='PLAY_CARD');const damage=begins.find(n=>n.type==='DAMAGE_ENTITY');assert.equal(attackBegin.commandId,damage.commandId);
 unsubscribe();broken();api.setCombatMotionMode('normal');
 console.log('PASS: late callback cancellation, throwing renderer isolation, unique action identities and normal/reduced/off gameplay parity',durations);
+const impacts=[];const stopImpacts=api.subscribeImpacts(event=>impacts.push(event));
+api.setCombatMotionMode('off');store.getState().initializeRun('impact-results');api.beginPresentationBattle();
+store.setState({inCombat:true,isPlayerTurn:true,enemies:[{id:'target',templateId:'alley_rat',name:'Rat',hp:10,maxHp:40,block:3,statuses:[],intent:null}]});
+function effect(type,payload){store.getState().queueAction({type,payload});store.getState().resolveQueue();settle();}
+effect('DAMAGE_ENTITY',{sourceId:'player',targetId:'target',amount:8});assert.equal(impacts.at(-1).hpDelta,-5);assert.equal(impacts.at(-1).blockDelta,-3);
+effect('HEAL_ENTITY',{targetId:'target',amount:50});assert.equal(impacts.at(-1).hpDelta,35,'healing capped at missing HP');
+store.setState({enemies:store.getState().enemies.map(enemy=>({...enemy,block:20}))});
+effect('DAMAGE_ENTITY',{sourceId:'player',targetId:'target',amount:4});assert.equal(impacts.at(-1).effect,'blocked');assert.equal(impacts.at(-1).hpDelta,0);assert.equal(impacts.at(-1).blockDelta,-4);
+store.setState({enemies:store.getState().enemies.map(enemy=>({...enemy,block:0,statuses:[{id:'thorns',name:'Spikes',amount:3}]}))});
+effect('DAMAGE_ENTITY',{sourceId:'player',targetId:'target',amount:1});assert.equal(impacts.at(-1).effect,'thorns');assert.equal(impacts.at(-1).hpDelta,-3);assert.equal(impacts.at(-1).targetId,'player');
+store.setState({enemies:store.getState().enemies.map(enemy=>({...enemy,hp:20,statuses:[{id:'burn',name:'Burn',amount:3},{id:'regen',name:'Regen',amount:2}]}))});
+effect('STATUS_TICK',{targetId:'target'});assert.deepEqual(impacts.slice(-2).map(e=>[e.effect,e.hpDelta]),[['burn',-3],['heal',2]]);assert.equal(store.getState().enemies[0].hp,19);
+stopImpacts();api.setCombatMotionMode('normal');
+console.log('PASS: actual HP/Block deltas, capped healing, fully blocked hits, retaliation and separate Burn/regen outcomes');

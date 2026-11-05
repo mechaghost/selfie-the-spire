@@ -17,11 +17,18 @@ export function HandHUD() {
     const previousMode = useRef(mode);
     useEffect(() => {
         const previous = previousMode.current; previousMode.current = mode;
-        if (previous !== 'targeting' || mode === 'targeting') return;
+        if (!((previous === 'targeting' && mode === 'inspect') || (previous !== 'idle' && mode === 'idle'))) return;
         const timer = setTimeout(() => document.querySelector<HTMLElement>(mode === 'inspect' ? '[data-play-card]' : '.hand-container .card[tabindex], .end-turn-button')?.focus(), 0);
         return () => clearTimeout(timer);
     }, [mode]);
     const phase = useGameStore(state => state.isPlayerTurn && !state.isResolving && state.actionQueue.length === 0 && !state.combatResult);
+    const previousPhase = useRef(phase);
+    useEffect(() => {
+        const wasReady=previousPhase.current;previousPhase.current=phase;
+        if(!phase || wasReady)return;
+        const timer=setTimeout(()=>document.querySelector<HTMLElement>('.hand-container .card[tabindex], .end-turn-button')?.focus(),0);
+        return()=>clearTimeout(timer);
+    },[phase]);
     const enemies = useGameStore(state => state.enemies);
     const selected = hand.find(card => card.instanceId === selectedId);
     useEffect(() => { if (!phase) close(); }, [phase,close]);

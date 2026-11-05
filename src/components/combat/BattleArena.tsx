@@ -7,6 +7,7 @@ import { battleLayout } from '../../rendering/battleLayout';
 import { intentView } from '../../core/intentView';
 import { setCombatMotionMode } from '../../core/combatTiming';
 import { ActorClip } from '../../core/battleVisualModels';
+import { CombatFeedback } from './CombatFeedback';
 import { BattleStage } from './BattleStage';
 import { InspectionDialog } from '../ui/CardInspector';
 import { describeIntent, describeStatuses } from './EntityPanel';
@@ -41,6 +42,7 @@ export function BattleArena() {
     const entity=inspected==='player' ? player : enemies.find(enemy=>enemy.id===inspected);
     return <div className="battle-arena" ref={root}>
         <BattleStage snapshot={snapshot}/>
+        <CombatFeedback layout={layout}/>
         <button className="actor-hero-hud" style={{left:layout.hero.hud.x,top:layout.hero.hud.y,width:layout.hero.hud.width}} onClick={()=>setInspected('player')} aria-label={`Inspect ${player.name}, ${player.hp} of ${player.maxHp} HP, ${player.block} Block`}><strong>You</strong><span>{player.hp}/{player.maxHp}</span><span>◆ {player.block}</span></button>
         {enemies.map(enemy=>{
             const slot=layout.enemies.find(slot=>slot.id===enemy.id)!;

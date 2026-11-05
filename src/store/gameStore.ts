@@ -1,5 +1,5 @@
 import { CombatClock, combatDelay } from '../core/combatTiming';
-import { beginPresentationBattle, identifyAction, identifyChildren, publishAction } from '../rendering/CombatPresentation';
+import { beginPresentationBattle, identifyAction, identifyChildren, publishAction, publishImpact } from '../rendering/CombatPresentation';
 import { validateSave } from '../core/saveValidation';
 import { attackDamage } from '../core/combatMath';
 import { describeCardEffects } from '../core/cardText';
@@ -1088,7 +1088,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     if (fullyBlocked) {
                         get().addFloatingText({ targetId, value: 'BLOCKED', type: 'blocked' });
                     } else {
-                        get().addFloatingText({ targetId, value: finalDamage, type: 'damage' });
+                        get().addFloatingText({ targetId, value: hpLost, type: 'damage' });
                     }
                     if (hpLost > 0) get().playAnimation(targetId, 'hit');
 
@@ -1096,6 +1096,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                         // H-4: Re-fetch current player state before set
                         const currentPlayer = get().player;
                         set({ player: { ...currentPlayer, hp: newHp, block: newBlock } });
+                        publishImpact(action,{targetId,effect:fullyBlocked?'blocked':'damage',hpDelta:hpLost ? -hpLost : 0,blockDelta:newBlock-target.block});
                         if (hpLost > 0) get().triggerShake(hpLost >= 10 ? 'heavy' : 'light');
 
                         if (newHp <= 0) {
@@ -1113,6 +1114,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                         const currentEnemies = get().enemies;
                         const updatedEnemies = currentEnemies.map(e => e.id === targetId ? { ...e, hp: newHp, block: newBlock } : e);
                         set({ enemies: updatedEnemies });
+                        publishImpact(action,{targetId,effect:fullyBlocked?'blocked':'damage',hpDelta:hpLost ? -hpLost : 0,blockDelta:newBlock-target.block});
 
                         if (updatedEnemies.every(e => e.hp <= 0)) {
                             cancelAllTimeouts();
@@ -1141,6 +1143,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
                             if (isSourcePlayer) {
                                 set({ player: { ...get().player, hp: retHp, block: retBlock } });
+                                publishImpact(action,{targetId:sourceId,effect:'thorns',hpDelta:retHpLost ? -retHpLost : 0,blockDelta:retBlock-liveSource.block});
                                 if (retHpLost > 0) get().triggerShake('light');
                                 if (retHp <= 0) {
                                     cancelAllTimeouts();
@@ -1156,6 +1159,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                             } else {
                                 const afterRet = get().enemies.map(e => e.id === sourceId ? { ...e, hp: retHp, block: retBlock } : e);
                                 set({ enemies: afterRet });
+                                publishImpact(action,{targetId:sourceId,effect:'thorns',hpDelta:retHpLost ? -retHpLost : 0,blockDelta:retBlock-liveSource.block});
                                 if (afterRet.every(e => e.hp <= 0)) {
                                     cancelAllTimeouts();
                                     set(buildVictoryState(get()));
@@ -1193,6 +1197,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     const currentEnemies = get().enemies;
                     set({ enemies: currentEnemies.map(e => e.id === targetId ? { ...e, block: e.block + finalBlock } : e) });
                 }
+                if(target)publishImpact(action,{targetId,effect:'block',hpDelta:0,blockDelta:finalBlock});
                 break;
             }
             case 'PLAY_CARD': {
@@ -1249,6 +1254,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     const newHp = Math.min(currentPlayer.maxHp, currentPlayer.hp + amount);
                     get().addFloatingText({ targetId, value: amount, type: 'heal' });
                     set({ player: { ...currentPlayer, hp: newHp } });
+                    publishImpact(action,{targetId,effect:'heal',hpDelta:newHp-currentPlayer.hp,blockDelta:0});
                 } else {
                     const currentEnemies = get().enemies;
                     const enemy = currentEnemies.find(e => e.id === targetId);
@@ -1256,6 +1262,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                         const newHp = Math.min(enemy.maxHp, enemy.hp + amount);
                         get().addFloatingText({ targetId, value: amount, type: 'heal' });
                         set({ enemies: currentEnemies.map(e => e.id === targetId ? { ...e, hp: newHp } : e) });
+                        publishImpact(action,{targetId,effect:'heal',hpDelta:newHp-enemy.hp,blockDelta:0});
                     }
                 }
                 break;
@@ -1274,23 +1281,32 @@ export const useGameStore = create<GameState>((set, get) => ({
                 if (burnStacks <= 0 && regenStacks <= 0) break;
 
                 let newHp = target.hp;
+                let burnLost=0,regenGained=0;
                 if (burnStacks > 0) {
                     // Burn ignores block — it's already under your skin
                     newHp = Math.max(0, newHp - burnStacks);
+                    burnLost=target.hp-newHp;
                     get().addFloatingText({ targetId, value: burnStacks, type: 'burn' });
                     get().playAnimation(targetId, 'burn-tick');
                 }
                 if (regenStacks > 0 && newHp > 0) {
+                    const beforeRegen=newHp;
                     newHp = Math.min(target.maxHp, newHp + regenStacks);
+                    regenGained=newHp-beforeRegen;
                     get().addFloatingText({ targetId, value: regenStacks, type: 'heal' });
                 }
 
+                const emitStatusImpacts=()=>{
+                    if(burnLost)publishImpact(action,{targetId,effect:'burn',hpDelta:-burnLost,blockDelta:0});
+                    if(regenGained)publishImpact(action,{targetId,effect:'heal',hpDelta:regenGained,blockDelta:0});
+                };
                 const newStatuses = target.statuses
                     .map(s => (s.id === 'burn' || s.id === 'regen') ? { ...s, amount: s.amount - 1 } : s)
                     .filter(s => s.amount > 0);
 
                 if (isPlayer) {
                     set({ player: { ...get().player, hp: newHp, statuses: newStatuses } });
+                    emitStatusImpacts();
                     if (burnStacks > 0) get().triggerShake('light');
                     if (newHp <= 0) {
                         cancelAllTimeouts();
@@ -1306,6 +1322,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 } else {
                     const updatedEnemies = get().enemies.map(e => e.id === targetId ? { ...e, hp: newHp, statuses: newStatuses } : e);
                     set({ enemies: updatedEnemies });
+                    emitStatusImpacts();
                     if (updatedEnemies.every(e => e.hp <= 0)) {
                         cancelAllTimeouts();
                         set(buildVictoryState(get()));
@@ -1314,7 +1331,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     }
                 }
 
-                delay = 350;
+                delay = combatDelay('recovery');
                 break;
             }
             case 'DRAW_CARD': {

@@ -2,6 +2,13 @@ import { GameAction } from '../core/models';
 export interface ActionIdentity {battleId:string;commandId:string;actionId:string}
 export interface ActionNotice extends ActionIdentity {type:GameAction['type'];phase:'begin'|'complete';sourceId?:string;targetId?:string}
 let battle=0,command=0,action=0;
+export interface ImpactNotice extends ActionIdentity {phase:'impact';effect:'damage'|'blocked'|'thorns'|'burn'|'heal'|'block'|'status';targetId:string;hpDelta:number;blockDelta:number;label?:string}
+const impactListeners=new Set<(notice:ImpactNotice)=>void>();
+export function publishImpact(identity:ActionIdentity,result:Omit<ImpactNotice,keyof ActionIdentity|'phase'>){
+    const notice={...identity,...result,phase:'impact' as const};
+    for(const listener of impactListeners){try{listener(notice);}catch{/* Feedback cannot interrupt combat. */}}
+}
+export function subscribeImpacts(listener:(notice:ImpactNotice)=>void){impactListeners.add(listener);return()=>{impactListeners.delete(listener);};}
 const listeners=new Set<(notice:ActionNotice)=>void>();
 /** IDs and presentation notifications never consume gameplay RNG. No subscriber can apply an effect. */
 export function beginPresentationBattle(){battle++;command=0;action=0;}
