@@ -37,7 +37,7 @@ export const ARCHETYPES: Record<string, ArchetypeDefinition> = {
             { name: 'Barrier', imageId: 'neon_blaze_barrier', type: 'Skill', cost: 2, description: 'Gain 12 Block.', target: 'Self', effects: [{ type: 'Block', amount: 12, target: 'Self' }] },
             { name: 'Ignite', imageId: 'neon_flash_burn', type: 'Skill', cost: 1, description: 'Apply 4 Burn.', target: 'Enemy', effects: [{ type: 'ApplyStatus', amount: 4, statusId: 'burn', target: 'Target' }] },
             { name: 'Kindle', imageId: 'neon_inner_fire', type: 'Power', cost: 1, description: 'Gain 2 Strength.', target: 'Self', effects: [{ type: 'ApplyStatus', amount: 2, statusId: 'strength', target: 'Self' }] },
-            { name: 'Burst', imageId: 'neon_sign_burst', type: 'Attack', cost: 2, description: 'Deal 8 damage to ALL enemies. Apply 1 Vulnerable.', target: 'AllEnemies', effects: [{ type: 'Damage', amount: 8, target: 'AllEnemies' }, { type: 'ApplyStatus', amount: 1, statusId: 'vulnerable', target: 'AllEnemies' }] },
+            { name: 'Burst', imageId: 'neon_sign_burst', type: 'Attack', cost: 2, description: 'Deal 8 damage to ALL enemies. Apply 1 Vulnerable to ALL enemies.', target: 'AllEnemies', effects: [{ type: 'Damage', amount: 8, target: 'AllEnemies' }, { type: 'ApplyStatus', amount: 1, statusId: 'vulnerable', target: 'AllEnemies' }] },
         ]
     },
 
@@ -60,7 +60,7 @@ export const ARCHETYPES: Record<string, ArchetypeDefinition> = {
             { name: 'Bulwark', imageId: 'chrome_chrome_wall', type: 'Skill', cost: 2, description: 'Gain 14 Block.', target: 'Self', effects: [{ type: 'Block', amount: 14, target: 'Self' }] },
             { name: 'Drench', imageId: 'chrome_drench', type: 'Skill', cost: 1, description: 'Apply 2 Weak.', target: 'Enemy', effects: [{ type: 'ApplyStatus', amount: 2, statusId: 'weak', target: 'Target' }] },
             { name: 'Current', imageId: 'chrome_deep_current', type: 'Power', cost: 1, description: 'Gain 2 Dexterity.', target: 'Self', effects: [{ type: 'ApplyStatus', amount: 2, statusId: 'dexterity', target: 'Self' }] },
-            { name: 'Mending', imageId: 'chrome_healing_rain', type: 'Skill', cost: 1, description: 'Gain 6 Block. Heal 3 HP.', target: 'Self', effects: [{ type: 'Block', amount: 6, target: 'Self' }, { type: 'Heal', amount: 3, target: 'Self' }], exhausts: true },
+            { name: 'Mending', imageId: 'chrome_healing_rain', type: 'Skill', cost: 1, description: 'Gain 6 Block. Heal 3 HP. Exhaust.', target: 'Self', effects: [{ type: 'Block', amount: 6, target: 'Self' }, { type: 'Heal', amount: 3, target: 'Self' }], exhausts: true },
         ]
     },
 
@@ -81,7 +81,7 @@ export const ARCHETYPES: Record<string, ArchetypeDefinition> = {
             { name: 'Static', imageId: 'volt_static_shield', type: 'Skill', cost: 1, description: 'Gain 4 Block. Gain 2 Spikes.', target: 'Self', effects: [{ type: 'Block', amount: 4, target: 'Self' }, { type: 'ApplyStatus', amount: 2, statusId: 'thorns', target: 'Self' }] },
             { name: 'Freq', imageId: 'volt_frequency_wall', type: 'Skill', cost: 1, description: 'Gain 5 Block.', target: 'Self', effects: [{ type: 'Block', amount: 5, target: 'Self' }] },
             { name: 'Surge', imageId: 'volt_power_surge', type: 'Skill', cost: 2, description: 'Gain 11 Block. Draw 1 card.', target: 'Self', effects: [{ type: 'Block', amount: 11, target: 'Self' }, { type: 'Draw', amount: 1, target: 'Self' }] },
-            { name: 'Overload', imageId: 'volt_overcharge', type: 'Skill', cost: 0, description: 'Draw 2 cards.', target: 'Self', effects: [{ type: 'Draw', amount: 2, target: 'Self' }], exhausts: true },
+            { name: 'Overload', imageId: 'volt_overcharge', type: 'Skill', cost: 0, description: 'Draw 2 cards. Exhaust.', target: 'Self', effects: [{ type: 'Draw', amount: 2, target: 'Self' }], exhausts: true },
             { name: 'Dynamo', imageId: 'volt_surge', type: 'Power', cost: 1, description: 'Gain 2 Strength.', target: 'Self', effects: [{ type: 'ApplyStatus', amount: 2, statusId: 'strength', target: 'Self' }] },
             { name: 'Shock', imageId: 'volt_electrocute', type: 'Attack', cost: 1, description: 'Deal 8 damage. Apply 1 Vulnerable.', target: 'Enemy', effects: [{ type: 'Damage', amount: 8, target: 'Target' }, { type: 'ApplyStatus', amount: 1, statusId: 'vulnerable', target: 'Target' }] },
         ]

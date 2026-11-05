@@ -1,13 +1,23 @@
+import { attackDamage } from '../core/combatMath';
+import { describeCardEffects } from '../core/cardText';
 import { create } from 'zustand';
 import { Card, Enemy, Player, GameAction, FloatingText, ActiveAnimation, AnimationType, ScreenShake, Effect, StatusEffect, UgcPhase, GeneratedCharacter, GeneratedCard, GenerateCharacterResponse } from '../core/models';
 import { RNG } from '../core/rng';
-import { createCardInstance, upgradeCard, CARD_DATABASE } from '../data/cards';
+import { createCardInstance, upgradeCard, canUpgradeCard, CARD_DATABASE } from '../data/cards';
 import { STATUS_REGISTRY } from '../data/statusEffects';
 import { ENCOUNTER_POOLS } from '../data/encounters';
 import { createEnemyInstance, enemies, ELITE_TEMPLATE_IDS, BOSS_TEMPLATE_IDS } from '../data/enemies';
 import { CHARACTERS } from '../data/characters';
 import { EVENTS, GameEvent } from '../data/events';
 
+
+let generationRequest = 0;
+let generationController: AbortController | null = null;
+function cancelGeneration() {
+    generationRequest++;
+    generationController?.abort();
+    generationController = null;
+}
 
 export interface DragState {
     isActive: boolean;
@@ -30,6 +40,7 @@ export interface PlayingCard {
 }
 
 interface GameState {
+    restOutcome: string | null;
     // --- Metagame / Run State ---
     seed: string;
     rng: RNG | null;
@@ -261,7 +272,7 @@ const defaultDragState: DragState = {
 };
 
 // --- Run Persistence (localStorage) ---
-const SAVE_KEY = 'stt_run';
+const SAVE_KEY = import.meta.env.DEV && typeof location !== 'undefined' && new URLSearchParams(location.search).has('review') ? 'stt_review_run' : 'stt_run';
 
 const PERSISTED_KEYS = [
     'seed', 'floor', 'currentNodeId', 'isBossFloor', 'isRunComplete',
@@ -269,7 +280,7 @@ const PERSISTED_KEYS = [
     'inCombat', 'enemies', 'isPlayerTurn', 'isGameOver',
     'combatResult', 'goldReward', 'cardRewards',
     'generatedCharacter', 'generatedCards',
-    'nodeEvent', 'shopCards', 'shopPrices', 'cardRemovalCost', 'cardRemovalsUsed',
+    'restOutcome', 'currentEvent', 'eventOutcome', 'nodeEvent', 'shopCards', 'shopPrices', 'cardRemovalCost', 'cardRemovalsUsed',
 ] as const;
 
 function saveRun(state: GameState) {
@@ -289,6 +300,10 @@ function loadRun(): Partial<GameState> | null {
         if (!raw) return null;
         const data = JSON.parse(raw);
         if (!data.seed) return null;
+        // Refresh mechanical text from saved effects without changing IDs or balance.
+        for (const key of ['masterDeck', 'drawPile', 'hand', 'discardPile', 'exhaustPile', 'cardRewards', 'shopCards', 'generatedCards']) {
+            if (Array.isArray(data[key])) data[key] = data[key].map((card: Card) => ({ ...card, description: describeCardEffects(card) }));
+        }
         // Reconstruct RNG from seed (position won't match, but that's fine)
         data.rng = new RNG(data.seed);
         return data;
@@ -346,6 +361,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     dragState: { ...defaultDragState },
     entityBounds: {},
 
+    restOutcome: null,
     nodeEvent: null,
     shopCards: [],
     shopPrices: {},
@@ -365,6 +381,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     // H-1: Removed undeclared characterId param; M-9: Reset ALL state fields
     initializeRun: (seed: string) => {
+        cancelGeneration();
         cancelAllTimeouts();
         const rng = new RNG(seed);
         const charDef = CHARACTERS['street_runner'];
@@ -389,13 +406,19 @@ export const useGameStore = create<GameState>((set, get) => ({
                 gold: charDef.startingGold
             },
             masterDeck: initialDeck,
+            ugcPhase: null,
+            generatedCharacter: null,
+            generatedCards: null,
+            selfieDataUrl: null,
+            ugcError: null,
             inCombat: false,
             isGameOver: false,
             isPlayerTurn: false,
             combatResult: null,
             goldReward: 0,
             cardRewards: [],
-            nodeEvent: null,
+            restOutcome: null,
+    nodeEvent: null,
             shopCards: [],
             shopPrices: {},
             cardRemovalCost: 75,
@@ -490,7 +513,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
             get().startCombat(enemiesData);
         } else if (node.type === 'Rest') {
-            set({ nodeEvent: 'rest' });
+            set({ nodeEvent: 'rest', restOutcome: null });
         } else if (node.type === 'Shop') {
             get().enterShop();
         } else if (node.type === 'Unknown') {
@@ -503,6 +526,12 @@ export const useGameStore = create<GameState>((set, get) => ({
     },
 
     submitSelfie: async (imageBase64: string) => {
+        if (get().ugcPhase === 'generating') return;
+        cancelGeneration();
+        const request = generationRequest;
+        const controller = new AbortController();
+        generationController = controller;
+        const timeout = setTimeout(() => controller.abort(), 120_000);
         set({ ugcPhase: 'generating', selfieDataUrl: imageBase64, ugcError: null });
         try {
             const apiUrl = (import.meta.env.VITE_API_URL || '') + '/api/generate-character';
@@ -510,12 +539,14 @@ export const useGameStore = create<GameState>((set, get) => ({
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ image: imageBase64 }),
+                signal: controller.signal,
             });
             if (!response.ok) {
                 const errData = await response.json().catch(() => null);
                 throw new Error(errData?.error || `Server error: ${response.status}`);
             }
             const data: GenerateCharacterResponse = await response.json();
+            if (request !== generationRequest) return;
 
             // Append colorless starter cards to the generated deck for reveal
             const colorlessStarters = ['finesse', 'shiv_toss']
@@ -536,10 +567,14 @@ export const useGameStore = create<GameState>((set, get) => ({
             set({
                 ugcPhase: 'reveal',
                 generatedCharacter: data.character,
-                generatedCards: [...data.cards, ...colorlessStarters],
+                generatedCards: [...data.cards.map(card => ({ ...card, description: describeCardEffects(card) })), ...colorlessStarters],
             });
         } catch (err: any) {
-            set({ ugcPhase: 'capture', ugcError: err.message || 'Generation failed' });
+            if (request !== generationRequest) return;
+            set({ ugcPhase: 'capture', ugcError: controller.signal.aborted ? 'That took too long. Please try again.' : err instanceof TypeError ? 'Could not connect. Check your connection and try again.' : err.message || 'Could not create your hero. Please try again.' });
+        } finally {
+            clearTimeout(timeout);
+            if (request === generationRequest) generationController = null;
         }
     },
 
@@ -610,7 +645,8 @@ export const useGameStore = create<GameState>((set, get) => ({
             screenShake: null,
             entityBounds: {},
             dragState: { ...defaultDragState },
-            nodeEvent: null,
+            restOutcome: null,
+    nodeEvent: null,
             shopCards: [],
             shopPrices: {},
             cardRemovalCost: 75,
@@ -621,6 +657,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     },
 
     cancelUgc: () => {
+        cancelGeneration();
         set({
             ugcPhase: null,
             generatedCharacter: null,
@@ -631,21 +668,21 @@ export const useGameStore = create<GameState>((set, get) => ({
     },
 
     restHeal: () => {
-        set((current) => ({
-            player: {
-                ...current.player,
-                hp: Math.min(current.player.maxHp, current.player.hp + Math.floor(current.player.maxHp * 0.3))
-            },
-            nodeEvent: null
-        }));
+        const state = get();
+        if (state.nodeEvent !== 'rest' || state.restOutcome) return;
+        const heal = Math.min(state.player.maxHp - state.player.hp, Math.floor(state.player.maxHp * .3));
+        set({ player: { ...state.player, hp: state.player.hp + heal }, restOutcome: `Rested. Recovered ${heal} HP.` });
     },
 
     restUpgrade: (cardInstanceId: string) => {
+        const state = get();
+        const card = state.masterDeck.find(card => card.instanceId === cardInstanceId && canUpgradeCard(card));
+        if (state.nodeEvent !== 'rest' || state.restOutcome || !card) return;
         set((current) => {
             const newDeck = current.masterDeck.map(card =>
                 card.instanceId === cardInstanceId ? upgradeCard(card) : card
             );
-            return { masterDeck: newDeck, nodeEvent: null };
+            return { masterDeck: newDeck, restOutcome: `${card.name} upgraded.` };
         });
     },
 
@@ -728,10 +765,12 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     chooseEventOption: (choiceId: string) => {
         const state = get();
-        if (!state.currentEvent) return;
+        if (!state.currentEvent || state.eventOutcome !== null) return;
 
         const choice = state.currentEvent.choices.find(c => c.id === choiceId);
         if (!choice) return;
+        if (choice.condition === 'hasGold50' && state.player.gold < 50) return;
+        if (choice.condition === 'hasGold40' && state.player.gold < 40) return;
 
         let player = { ...state.player };
         let masterDeck = [...state.masterDeck];
@@ -763,8 +802,9 @@ export const useGameStore = create<GameState>((set, get) => ({
                 }
                 case 'damage': {
                     const amount = effect.amount || 0;
-                    player.hp = Math.max(1, player.hp - amount);
-                    outcomeLines.push(`Took ${amount} damage.`);
+                    const lost = Math.min(amount, Math.max(0, player.hp - 1));
+                    player.hp -= lost;
+                    outcomeLines.push(`Lost ${lost} HP.`);
                     break;
                 }
                 case 'gold': {
@@ -776,9 +816,10 @@ export const useGameStore = create<GameState>((set, get) => ({
                 }
                 case 'loseMaxHp': {
                     const amount = effect.amount || 0;
-                    player.maxHp = Math.max(1, player.maxHp - amount);
+                    const lost = Math.min(amount, Math.max(0, player.maxHp - 1));
+                    player.maxHp -= lost;
                     if (player.hp > player.maxHp) player.hp = player.maxHp;
-                    outcomeLines.push(`Lost ${amount} max HP.`);
+                    outcomeLines.push(`Lost ${lost} max HP. HP is now ${player.hp}/${player.maxHp}.`);
                     break;
                 }
                 case 'removeRandomCard': {
@@ -813,13 +854,14 @@ export const useGameStore = create<GameState>((set, get) => ({
         set({
             player,
             masterDeck,
-            eventOutcome: outcomeLines.join(' '),
+            eventOutcome: outcomeLines.join(' ') || 'Already at full health. You move on.',
         });
     },
 
     dismissNodeEvent: () => {
         set({
-            nodeEvent: null,
+            restOutcome: null,
+    nodeEvent: null,
             shopCards: [],
             shopPrices: {},
             currentEvent: null,
@@ -858,7 +900,8 @@ export const useGameStore = create<GameState>((set, get) => ({
             screenShake: null,
             dragState: { ...defaultDragState },
             entityBounds: {},
-            nodeEvent: null,
+            restOutcome: null,
+    nodeEvent: null,
             shopCards: [],
             shopPrices: {},
             cardRemovalCost: 75,
@@ -984,33 +1027,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 let source = sourceId === 'player' ? freshState.player : freshState.enemies.find(e => e.id === sourceId);
 
                 if (target) {
-                    let finalDamage = amount;
-
-                    // Modifier 1: Source flat damage (Strength)
-                    if (source) {
-                        let flatMod = 0;
-                        source.statuses.forEach(s => {
-                            const def = STATUS_REGISTRY[s.id];
-                            if (def?.flatDamageGivenPerStack && s.amount > 0) flatMod += def.flatDamageGivenPerStack * s.amount;
-                        });
-                        finalDamage += flatMod;
-                    }
-
-                    // Modifier 2: Source multiplicative (Weak)
-                    if (source) {
-                        source.statuses.forEach(s => {
-                            const def = STATUS_REGISTRY[s.id];
-                            if (def?.damageGivenMultiplier && s.amount > 0) finalDamage = Math.floor(finalDamage * def.damageGivenMultiplier);
-                        });
-                    }
-
-                    // Modifier 3: Target multiplicative (Vulnerable)
-                    target.statuses.forEach(s => {
-                        const def = STATUS_REGISTRY[s.id];
-                        if (def?.damageTakenMultiplier && s.amount > 0) finalDamage = Math.floor(finalDamage * def.damageTakenMultiplier);
-                    });
-
-                    finalDamage = Math.max(0, finalDamage);
+                    const finalDamage = attackDamage(amount, source?.statuses, target.statuses);
 
                     let newBlock = target.block - finalDamage;
                     let newHp = target.hp;
@@ -1448,11 +1465,14 @@ export const useGameStore = create<GameState>((set, get) => ({
     },
 
     playCard: (cardInstanceId: string, targetId?: string) => {
+        const current = get();
+        if (!current.inCombat || !current.isPlayerTurn || current.isResolving || current.actionQueue.length || current.combatResult) { get().resetDragState(); return; }
         set((state) => {
             const cardIndex = state.hand.findIndex(c => c.instanceId === cardInstanceId);
             if (cardIndex === -1) return state;
 
             const card = state.hand[cardIndex];
+            if (card.target === 'Enemy' && !targetId) return state;
             if (state.player.energy < card.cost) return state;
 
             // Don't waste energy swinging at a corpse
@@ -1469,7 +1489,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 card,
                 id: animId,
                 targetId,
-                isExhausting: !!card.exhausts
+                isExhausting: !!card.exhausts || card.type === 'Power'
             };
 
             const playAction: GameAction = { type: 'PLAY_CARD', payload: { card, targetId } };
@@ -1512,6 +1532,8 @@ export const useGameStore = create<GameState>((set, get) => ({
     },
 
     endTurn: () => {
+        const current = get();
+        if (!current.inCombat || !current.isPlayerTurn || current.isResolving || current.actionQueue.length || current.combatResult) return;
         set((state) => {
             let newDiscard = [...state.discardPile, ...state.hand];
             return {

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useGameStore } from '../../store/gameStore';
+import { CardInspector } from '../ui/CardInspector';
+import { upgradeCard, canUpgradeCard } from '../../data/cards';
 import { Card } from '../../core/models';
 import { Flame, Heart, Hammer, ArrowLeft, Check } from 'lucide-react';
 import { eightiesIcon } from '../ui/EightiesIcons';
@@ -9,18 +11,21 @@ import './RestSiteView.css';
 type RestPhase = 'choose' | 'smithing' | 'done';
 
 export function RestSiteView() {
-    const { player, masterDeck, restHeal, restUpgrade, dismissNodeEvent } = useGameStore(state => ({
+    const { player, masterDeck, restHeal, restUpgrade, dismissNodeEvent, restOutcome } = useGameStore(state => ({
         player: state.player,
+        restOutcome: state.restOutcome,
         masterDeck: state.masterDeck,
         restHeal: state.restHeal,
         restUpgrade: state.restUpgrade,
         dismissNodeEvent: state.dismissNodeEvent,
     }));
 
-    const [phase, setPhase] = useState<RestPhase>('choose');
+    const [localPhase, setPhase] = useState<RestPhase>('choose');
+    const phase = restOutcome ? 'done' : localPhase;
+    const [selected, setSelected] = useState<Card | null>(null);
     const [resultText, setResultText] = useState('');
 
-    const healAmount = Math.floor(player.maxHp * 0.3);
+    const healAmount = Math.min(player.maxHp - player.hp, Math.floor(player.maxHp * 0.3));
 
     const handleRest = () => {
         setResultText(`Feeling fresh. +${healAmount} HP.`);
@@ -43,7 +48,7 @@ export function RestSiteView() {
     };
 
     // Cards that can be upgraded (not already upgraded)
-    const upgradableCards = masterDeck.filter(c => !c.upgraded);
+    const upgradableCards = masterDeck.filter(canUpgradeCard);
 
     return (
         <div className="rest-container">
@@ -59,7 +64,7 @@ export function RestSiteView() {
                 </div>
 
                 <h1 className="rest-title">The Neon Dims</h1>
-                <p className="rest-subtitle">A moment of quiet in the static.</p>
+                <p className="rest-subtitle">A moment of quiet. Choose healing or one card upgrade.</p>
 
                 {/* HP Display */}
                 <div className="rest-hp-display">
@@ -76,7 +81,7 @@ export function RestSiteView() {
                             </div>
                             <div className="rest-choice-text">
                                 <span className="rest-choice-label">Catch Some Z's</span>
-                                <span className="rest-choice-desc">Crash out. Heal {healAmount} HP.</span>
+                                <span className="rest-choice-desc">{healAmount > 0 ? `Rest and heal ${healAmount} HP.` : 'Already at full HP. Rest without healing.'}</span>
                             </div>
                         </button>
 
@@ -104,14 +109,14 @@ export function RestSiteView() {
                         </div>
 
                         {upgradableCards.length === 0 ? (
-                            <p className="rest-no-cards">All cards already upgraded. Nice.</p>
+                            <p className="rest-no-cards">No cards can be improved here. Go back to rest.</p>
                         ) : (
                             <div className="rest-card-grid">
                                 {upgradableCards.map(card => (
                                     <button
                                         key={card.instanceId}
                                         className={`rest-card-option type-${card.type.toLowerCase()}${card.isHeroCard ? ' hero' : ''}`}
-                                        onClick={() => handleUpgradeCard(card)}
+                                        onClick={() => setSelected(card)}
                                     >
                                         <div className="rest-card-cost">{card.cost}</div>
                                         <div className="rest-card-name">{card.name}</div>
@@ -142,12 +147,16 @@ export function RestSiteView() {
                         <div className="rest-result-icon">
                             <Check size={32} />
                         </div>
-                        <p className="rest-result-text">{resultText}</p>
+                        <p className="rest-result-text">{restOutcome || resultText}</p>
                         <button className="rest-continue-btn" onClick={handleContinue}>
                             Continue
                         </button>
                     </div>
                 )}
+                {selected && <CardInspector card={selected} onClose={() => setSelected(null)}>
+                    <h3>After upgrade · {upgradeCard(selected).cost} energy</h3><p>{upgradeCard(selected).description}</p>
+                    <button onClick={() => { handleUpgradeCard(selected); setSelected(null); }}>Upgrade this card</button>
+                </CardInspector>}
             </div>
         </div>
     );

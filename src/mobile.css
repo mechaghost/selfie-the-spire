@@ -1,0 +1,85 @@
+/* Phone and short-viewport corrections shared by the game screens. */
+.combat-result-backdrop { box-sizing: border-box; align-items: safe center; }
+.combat-result-card { box-sizing: border-box; min-width: 0; width: min(100%, 680px); flex-shrink: 0; }
+.reward-card-row { max-width: 100%; flex-wrap: wrap; }
+.reveal-screen > * { flex-shrink: 0; }
+.reveal-cards { gap: 16px 12px; padding: 8px 0 20px; }
+.reveal-card-slot .card { --card-width: 100px; --card-height: 148px; width: 100px; height: 148px; }
+@media (max-width: 768px), (max-height: 500px) {
+    button, [role="button"], summary { -webkit-tap-highlight-color: #83d9d033; }
+    .selfie-capture-btn, .selfie-upload-btn, .combat-result-btn, .restart-button, .retry-seed-button,
+    .shop-leave-btn, .rest-back-btn, .inspection-dialog button, .menu-help, .photo-handling summary { min-height: 44px; }
+    .selfie-upload-btn { margin: 4px 0; }
+    .photo-handling summary { display: flex; align-items: center; justify-content: center; }
+    .topbar-container { min-height: 50px; box-sizing: border-box; gap: 4px; padding: 0 6px; flex-shrink: 0; }
+    .topbar-section { gap: 3px; min-width: 0; }
+    .abandon-btn { min-width: 44px; min-height: 44px; }
+    .abandon-yes, .abandon-no { min-height: 44px; }
+    .combat-stage .end-turn-button { min-height: 44px; }
+    .selfie-screen { padding-top: 64px; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+    .selfie-screen .generating-overlay { padding: 24px 0; gap: 24px; }
+    .combat-stage { height: 100dvh; }
+    .entity-panel.enemy { box-sizing: border-box; }
+    .inspection-dialog { max-height: calc(100dvh - 24px); }
+}
+@media (max-width: 360px) {
+    .player-hp-inline { min-width: 52px; }
+    .topbar-container .floor-text { font-size: 11px; }
+    .topbar-container .stat.gold { font-size: 11px; }
+    .deck-browser-trigger { padding: 8px; font-size: 10px; }
+    .combat-stage .enemy-zone { flex-wrap: nowrap; padding: 0; gap: 6px; width: 100%; }
+    .combat-stage .entity-panel.enemy { width: calc((100% - 12px) / 3); min-width: 0; flex-shrink: 0; }
+    .combat-stage .entities-container { padding-left: 10px; padding-right: 10px; padding-bottom: 58px; }
+    .combat-stage .entity-panel.player .entity-avatar { width: 60px; height: 60px; }
+    .reveal-card-slot .card { width: 120px; height: 172px; }
+    .combat-result-card { padding: 18px 10px; }
+    .reward-card-row { gap: 12px; }
+}
+/* Landscape phones need their own geometry, independent of desktop width rules. */
+@media (max-height: 500px) and (min-width: 501px) {
+    .combat-stage { --topbar-height: 50px; --hand-height: 140px; }
+    .combat-stage .arena-location, .combat-stage .hand-caption { display: none; }
+    .combat-stage .entities-container { flex-direction: row; gap: 30px; padding: 4px 12px 54px; min-height: 0; }
+    .combat-stage .enemy-zone { flex-wrap: nowrap; gap: 10px; padding: 0; }
+    .combat-stage .entity-panel.enemy { width: 90px; padding: 3px; gap: 2px; }
+    .combat-stage .entity-avatar { width: 46px; height: 46px; }
+    .combat-stage .entity-panel.player .entity-avatar { width: 54px; height: 54px; }
+    .combat-stage .player-info-bar .hp-bar-container.player-hp { width: 100px; }
+    .combat-stage .entity-name { font-size: 12px; }
+    .combat-stage .intent-value { font-size: 13px; }
+    .combat-stage .table-controls { bottom: calc(var(--hand-height) + 6px); padding: 0 16px; }
+    .combat-stage .end-turn-button { padding: 8px 18px; font-size: 16px; }
+    .combat-stage .energy-orb { width: 40px; height: 40px; font-size: 18px; padding-top: 4px; }
+    .combat-stage .turn-phase-banner { left: auto; right: 10px; top: 52px; transform: none; font-size: 10px; }
+    .combat-stage .deck-table { padding: 0 12px; }
+    .hand-container, .hand-container.hand-overflow { --card-width: 84px; --card-height: 116px; height: 100%; margin: 0; display: flex; gap: 12px; align-items: center; overflow-x: auto; overflow-y: hidden; padding: 10px; box-sizing: border-box; pointer-events: auto; }
+    .hand-container .card-slot { position: relative; left: auto; bottom: auto; flex-shrink: 0; }
+    .hand-container .card { transform: none !important; touch-action: pan-x; padding: 3px; }
+    .hand-container .card-name { font-size: 10px; height: 16px; }
+    .hand-container .card-desc { font-size: 8px; }
+    .hand-container .card-cost { width: 20px; height: 20px; font-size: 10px; }
+    .selfie-screen .generating-overlay { flex-direction: row; gap: 36px; max-width: 700px; }
+    .selfie-screen .generating-portal { width: 150px; height: 150px; flex-shrink: 0; }
+    .selfie-screen .generating-content { max-width: 340px; }
+}
+
+@media (max-width: 360px) {
+    .combat-stage .entity-panel.player .entity-avatar.has-portrait:not(.has-sprite) { width: 60px; height: 60px; }
+}
+@media (max-height: 500px) and (min-width: 501px) {
+    .combat-stage .entity-panel.player .entity-avatar.has-portrait:not(.has-sprite) { width: 54px; height: 54px; }
+    .selfie-screen .generating-selfie { width: 140px; height: 140px; }
+}
+
+.map-scroll-area { overflow-y: auto; overscroll-behavior: contain; }
+.map-paths { position: relative; height: 100%; min-height: 560px; }
+.inspection-dialog .shop-removal-cancel { position: static; transform: none; width: 100%; }
+.inspection-dialog .shop-removal-grid { padding-bottom: 12px; }
+@media (max-height: 500px) {
+    .map-view-container { padding-top: calc(var(--topbar-height) + 8px); padding-bottom: 8px; }
+    .city-route-heading, .map-start-hint { display: none; }
+    .map-legend { flex-shrink: 0; }
+}
+@media (max-width: 768px) and (max-height: 650px), (max-height: 500px) and (min-width: 501px) {
+    .hand-container .card:hover, .hand-container .card:focus-visible { transform: none !important; }
+}

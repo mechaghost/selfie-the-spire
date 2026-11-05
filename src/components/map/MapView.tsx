@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import { MapNode, MapData } from '../../core/mapModels';
 import { generateMap } from '../../core/mapGenerator';
@@ -6,9 +6,11 @@ import { Skull, Tent, Store, Swords } from 'lucide-react';
 import { eightiesIcon } from '../ui/EightiesIcons';
 import { TopBar } from '../ui/TopBar';
 import './MapView.css';
+import { CityBackdrop } from '../ui/CityBackdrop';
 
 export function MapView() {
     const { seed, floor, currentNodeId } = useGameStore();
+    const routeRef = useRef<HTMLDivElement>(null);
     const [mapData, setMapData] = useState<MapData | null>(null);
 
     useEffect(() => {
@@ -29,6 +31,19 @@ export function MapView() {
         const currentNode = mapData.nodes.find(n => n.id === currentNodeId);
         if (!currentNode) return [];
         return mapData.nodes.filter(n => currentNode.connections.includes(n.id));
+    }, [mapData, currentNodeId]);
+
+    useEffect(() => {
+        const area = routeRef.current;
+        if (!area) return;
+        const revealChoices = () => {
+            const next = area.querySelector<HTMLElement>('.map-node.available');
+            if (next) area.scrollTop += next.getBoundingClientRect().top - area.getBoundingClientRect().top - area.clientHeight * 0.65;
+        };
+        revealChoices();
+        const observer = new ResizeObserver(revealChoices);
+        observer.observe(area);
+        return () => observer.disconnect();
     }, [mapData, currentNodeId]);
 
     const handleNodeClick = (node: MapNode) => {
@@ -76,10 +91,10 @@ export function MapView() {
 
     return (
         <div className="map-view-container">
+            <CityBackdrop />
             <TopBar />
-            <div className="map-sparkle map-sparkle-1"><img src={eightiesIcon(1)} alt="" /></div>
-            <div className="map-sparkle map-sparkle-2"><img src={eightiesIcon(6)} alt="" /></div>
-            <div className="map-sparkle map-sparkle-3"><img src={eightiesIcon(15)} alt="" /></div>
+            <div className="city-route-heading"><span>NEO MIAMI / NIGHT RUN</span><h1>The city is yours.</h1><p>Street level to skyline. Pick your next move.</p></div>
+
 
             {showHint && (
                 <div className="map-hint">
@@ -88,7 +103,8 @@ export function MapView() {
                 </div>
             )}
 
-            <div className="map-scroll-area">
+            <div className="map-scroll-area" ref={routeRef} aria-label="Tower route">
+                <div className="map-paths">
 
                 {/* Fix #15: SVG uses numeric percentages instead of calc() which SVG doesn't support */}
                 <svg className="map-connections">
@@ -132,7 +148,9 @@ export function MapView() {
                                 isCurrent ? 'current' : node.y < floor ? 'completed' : '',
                             ].filter(Boolean).join(' ');
                             return (
-                                <div
+                                <button
+                                    aria-label={`${node.type === 'Unknown' ? 'Mystery' : node.type === 'Combat' ? 'Fight' : node.type}, floor ${node.y}${isCurrent ? ', current location' : ''}`}
+                                    disabled={!availableNodes.some(an => an.id === node.id)}
                                     key={node.id}
                                     className={classes}
                                     style={{ left: `${centeredX(node)}%` }}
@@ -142,7 +160,7 @@ export function MapView() {
                                         {renderIcon(node.type)}
                                     </div>
                                     {isCurrent && <div className="node-you-marker">YOU</div>}
-                                </div>
+                                </button>
                             );
                         })}
                     </div>
@@ -150,6 +168,7 @@ export function MapView() {
 
             </div>
 
+            </div>
             <div className="map-legend">
                 <div className="map-legend-item"><Swords size={14} className="node-icon combat" /><span>Fight</span></div>
                 <div className="map-legend-item"><Skull size={14} className="node-icon elite" /><span>Elite</span></div>

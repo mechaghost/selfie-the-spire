@@ -141,3 +141,8 @@
         font-size: 1.2rem;
     }
 }
+
+/* Keep short viewports and keyboard paths usable. */
+.game-over-container { box-sizing: border-box; overflow-y: auto; justify-content: safe center; width: 100%; height: 100dvh; }
+
+.game-over-container { align-items: safe center; }

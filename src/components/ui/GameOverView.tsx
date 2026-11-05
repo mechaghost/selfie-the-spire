@@ -3,7 +3,7 @@ import './GameOverView.css';
 import { Skull } from 'lucide-react';
 
 export function GameOverView() {
-    const { floor, initializeRun, seed } = useGameStore();
+    const { floor, initializeRun, seed, abandonRun } = useGameStore();
 
     const handleRestart = () => {
         // Generate a new seed or let them replay the same one
@@ -22,11 +22,12 @@ export function GameOverView() {
                 </p>
                 <div className="game-over-actions">
                     <button className="restart-button" onClick={handleRestart}>
-                        Play Again
+                        New starter run
                     </button>
                     <button className="retry-seed-button" onClick={() => initializeRun(seed)}>
-                        Retry Seed
+                        Retry route · starter hero
                     </button>
+                    <button className="retry-seed-button" onClick={abandonRun}>Back to home</button>
                 </div>
             </div>
         </div>

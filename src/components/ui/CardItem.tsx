@@ -8,9 +8,10 @@ interface CardItemProps {
     style?: React.CSSProperties;
     canPlay?: boolean;
     isDraggable?: boolean;
+    onInspect?: () => void;
 }
 
-export function CardItem({ card, style, canPlay = true, isDraggable = true }: CardItemProps) {
+export function CardItem({ card, style, canPlay = true, isDraggable = true, onInspect }: CardItemProps) {
     const { dragState, setDragState, resetDragState, playCard } = useGameStore(state => ({
         dragState: state.dragState,
         setDragState: state.setDragState,
@@ -20,7 +21,12 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
 
     const cardRef = useRef<HTMLDivElement>(null);
     const isMouseDragging = useRef(false);
+    const gesture = useRef({ x: 0, y: 0, moved: false });
 
+    const canInteract = () => {
+        const state = useGameStore.getState();
+        return state.inCombat && state.isPlayerTurn && !state.isResolving && state.actionQueue.length === 0 && !state.combatResult;
+    };
     const isTargetingMode = card.target === 'Enemy';
     const isThisActive = dragState.isActive && dragState.cardId === card.instanceId;
     const isBeingTouched = isThisActive && dragState.isTouch;
@@ -45,9 +51,10 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
     // ==========================================
 
     const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        if (!canPlay || !isDraggable || e.button !== 0) return;
+        if (!canPlay || !isDraggable || !canInteract() || e.button !== 0) return;
         e.preventDefault();
 
+        gesture.current = { x: e.clientX, y: e.clientY, moved: false };
         isMouseDragging.current = true;
         refreshEnemyBounds();
 
@@ -71,6 +78,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
 
         const handleMouseMove = (ev: MouseEvent) => {
             if (!isMouseDragging.current) return;
+            if (Math.hypot(ev.clientX - gesture.current.x, ev.clientY - gesture.current.y) > 8) gesture.current.moved = true;
             const state = useGameStore.getState();
             if (state.dragState.isActive) {
                 state.setDragState({
@@ -87,6 +95,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
 
             const state = useGameStore.getState();
             if (!state.dragState.isActive) return;
+            if (!gesture.current.moved) { state.resetDragState(); return; }
 
             if (isTargetingMode) {
                 // Enemy target: check if cursor is over an enemy
@@ -131,10 +140,15 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
     // ==========================================
 
     const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-        if (!canPlay || !isDraggable) return;
+        // In scroll layouts, tapping opens the inspector; native swipes scroll the hand.
+        if ((window.matchMedia('(max-width: 768px)').matches &&
+            (cardRef.current?.closest('.hand-overflow') || window.matchMedia('(max-height: 650px)').matches)) ||
+            window.matchMedia('(max-height: 500px) and (min-width: 501px)').matches) return;
+        if (!canPlay || !isDraggable || !canInteract()) return;
         refreshEnemyBounds();
 
         const touch = e.touches[0];
+        gesture.current = { x: touch.clientX, y: touch.clientY, moved: false };
         const rect = cardRef.current!.getBoundingClientRect();
         // Enemy cards: arrow from card center. Self/AoE: follow from touch point.
         const sx = isTargetingMode ? rect.left + rect.width / 2 : touch.clientX;
@@ -156,6 +170,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
         if (e.cancelable) e.preventDefault();
 
         const touch = e.touches[0];
+        if (Math.hypot(touch.clientX - gesture.current.x, touch.clientY - gesture.current.y) > 8) gesture.current.moved = true;
         setDragState({
             currentX: touch.clientX,
             currentY: touch.clientY
@@ -165,6 +180,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
     const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
         if (!isBeingTouched) return;
         const touch = e.changedTouches[0];
+        if (!gesture.current.moved) { resetDragState(); return; }
 
         if (isTargetingMode) {
             const el = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -193,7 +209,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
     const combinedStyle: React.CSSProperties = { ...style };
 
     // Non-targeting drag: card follows cursor/finger (mouse or touch)
-    const isDragMoving = isThisActive && !isTargetingMode && (isAnyMouseDrag || isBeingTouched);
+    const isDragMoving = gesture.current.moved && isThisActive && !isTargetingMode && (isAnyMouseDrag || isBeingTouched);
 
     if (isDragMoving) {
         const dx = dragState.currentX - dragState.startX;
@@ -221,6 +237,13 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true }: Ca
         <div
             ref={cardRef}
             className={cardClasses}
+            role={onInspect ? 'button' : undefined}
+            tabIndex={onInspect ? 0 : undefined}
+            aria-label={onInspect ? `Inspect ${card.name}, ${card.cost} energy` : undefined}
+            onClick={event => { if (onInspect) { event.stopPropagation(); if (!gesture.current.moved) { cardRef.current?.focus(); onInspect(); } gesture.current.moved = false; } }}
+            onKeyDown={event => { if (onInspect && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); onInspect(); } }}
+            onTouchCancel={resetDragState}
+            onPointerDown={() => { gesture.current.moved = false; }}
             onMouseDown={handleMouseDown}
             onDragStart={handleDragStart}
             onTouchStart={handleTouchStart}

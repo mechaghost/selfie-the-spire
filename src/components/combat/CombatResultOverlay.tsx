@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { CardInspector } from '../ui/CardInspector';
+import { DeckBrowser } from '../ui/DeckBrowser';
 import { useGameStore } from '../../store/gameStore';
 import { Trophy, Skull } from 'lucide-react';
 import { CardItem } from '../ui/CardItem';
@@ -15,6 +18,8 @@ export function CombatResultOverlay() {
         claimCardReward: state.claimCardReward
     }));
 
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+    const selected = cardRewards.find(card => card.instanceId === selectedId);
     if (!combatResult) return null;
 
     const isVictory = combatResult === 'victory';
@@ -49,12 +54,12 @@ export function CombatResultOverlay() {
                 {hasRewards && (
                     <div className="reward-section">
                         <h2 className={`reward-heading ${cardRewards.every(c => c.upgraded) ? 'prime' : ''}`}>
-                            {cardRewards.every(c => c.upgraded) ? 'Prime loot' : 'Loot the remains'}
+                            {cardRewards.every(c => c.upgraded) ? 'Upgraded rewards' : 'Choose a card'}
                         </h2>
                         <p className="reward-hint">
                             {cardRewards.every(c => c.upgraded)
-                                ? 'Pre-sharpened. Tap a card to add it to your deck.'
-                                : 'Tap a card to add it to your deck.'}
+                                ? 'These cards are already upgraded. Choose one, or skip and keep the gold.'
+                                : 'Inspect a card, then add one to your deck. Skipping still awards the gold.'}
                         </p>
                         <div className="reward-card-row">
                             {cardRewards.map((card, i) => (
@@ -62,22 +67,26 @@ export function CombatResultOverlay() {
                                     key={card.instanceId}
                                     className="reward-card-slot"
                                     style={{ animationDelay: `${0.15 + i * 0.12}s` }}
-                                    onClick={() => claimCardReward(card.instanceId)}
+
                                 >
-                                    <CardItem card={card} canPlay={true} isDraggable={false} />
+                                    <CardItem card={card} canPlay={true} isDraggable={false} onInspect={() => setSelectedId(card.instanceId)} />
                                 </div>
                             ))}
                         </div>
                     </div>
                 )}
 
+                {hasRewards && <DeckBrowser />}
+                {selected && <CardInspector card={selected} onClose={() => setSelectedId(null)}>
+                    <button onClick={() => { claimCardReward(selected.instanceId); setSelectedId(null); }}>Add to deck</button>
+                </CardInspector>}
                 <div className="combat-result-actions">
                     {isVictory ? (
                         <button
                             className={`combat-result-btn ${hasRewards ? 'secondary' : 'primary victory'}`}
                             onClick={continueCombatResult}
                         >
-                            {hasRewards ? 'Skip — keep it lean' : 'Continue'}
+                            {hasRewards ? 'Skip card · collect gold' : 'Continue'}
                         </button>
                     ) : (
                         <>
@@ -85,13 +94,13 @@ export function CombatResultOverlay() {
                                 className="combat-result-btn primary defeat"
                                 onClick={handleNewRun}
                             >
-                                New Run
+                                New starter run
                             </button>
                             <button
                                 className="combat-result-btn secondary"
                                 onClick={() => initializeRun(seed)}
                             >
-                                Retry Seed
+                                Retry route · starter hero
                             </button>
                         </>
                     )}

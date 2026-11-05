@@ -697,3 +697,7 @@
         padding: 0.75rem 2.5rem;
     }
 }
+
+/* Keep short viewports and keyboard paths usable. */
+.shop-card-slot--broke { cursor: pointer; }
+.shop-card-slot:focus-visible, .shop-removal-offer:focus-visible, .shop-removal-card-slot:focus-visible { outline: 3px solid #72dccc; outline-offset: 5px; }

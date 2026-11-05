@@ -282,3 +282,7 @@
         height: 500px;
     }
 }
+
+/* Keep short viewports and keyboard paths usable. */
+.mystery-container { justify-content: safe center; }
+.mystery-container > * { flex-shrink: 0; }

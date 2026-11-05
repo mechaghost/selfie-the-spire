@@ -594,3 +594,11 @@
         font-size: 1.5rem;
     }
 }
+
+/* Keep short viewports and keyboard paths usable. */
+.selfie-screen { overflow-y: auto; justify-content: safe center; }
+.selfie-screen > * { flex-shrink: 0; }
+.capture-prompt { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; padding: 1.5rem; text-align: center; color: #c8d2e9; }
+
+.photo-handling { width: min(100%, 34rem); color: #c8d2e9; font-size: .75rem; line-height: 1.6; padding-bottom: 1rem; }
+.photo-handling summary { cursor: pointer; text-align: center; }

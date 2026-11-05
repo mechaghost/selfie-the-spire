@@ -271,3 +271,6 @@
         font-size: 0.7rem;
     }
 }
+
+/* Keep short viewports and keyboard paths usable. */
+.run-victory-container { overflow-y: auto; align-items: safe center; }

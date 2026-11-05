@@ -4,6 +4,7 @@ import { Card } from '../../core/models';
 import { Store, Coins, Flame, LogOut, ShoppingCart } from 'lucide-react';
 import { eightiesIcon } from '../ui/EightiesIcons';
 import './ShopView.css';
+import { CardInspector, InspectionDialog } from '../ui/CardInspector';
 
 interface ConfirmState {
     type: 'buy' | 'remove';
@@ -34,7 +35,7 @@ export function ShopView() {
 
     const handleCardClick = (card: Card) => {
         const price = shopPrices[card.instanceId];
-        if (price == null || player.gold < price) return;
+        if (price == null) return;
         setConfirmState({ type: 'buy', card, price });
     };
 
@@ -42,7 +43,7 @@ export function ShopView() {
         if (!confirmState || confirmState.type !== 'buy') return;
         buyCard(confirmState.card.instanceId, confirmState.price);
         setConfirmState(null);
-        showToast('Pleasure doing biz.');
+        showToast('Card added to your deck.');
     };
 
     const handleRemovalClick = () => {
@@ -59,7 +60,7 @@ export function ShopView() {
         removeCard(confirmState.card.instanceId);
         setConfirmState(null);
         setShowRemovalPicker(false);
-        showToast('Torched. Good riddance.');
+        showToast('Card removed from your deck.');
     };
 
     const canAffordRemoval = player.gold >= cardRemovalCost;
@@ -97,6 +98,8 @@ export function ShopView() {
                                 <div
                                     key={card.instanceId}
                                     className={`shop-card-slot ${!canAfford ? 'shop-card-slot--broke' : ''}`}
+                                    role="button" tabIndex={0} aria-label={`Inspect ${card.name}, ${price} gold`}
+                                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCardClick(card); } }}
                                     onClick={() => handleCardClick(card)}
                                 >
                                     <div className={`shop-card-preview type-${card.type.toLowerCase()} ${!canAfford ? 'shop-card-preview--broke' : ''}`}>
@@ -139,6 +142,8 @@ export function ShopView() {
 
                 <div
                     className={`shop-removal-offer ${!canAffordRemoval ? 'shop-removal-offer--broke' : ''}`}
+                    role="button" tabIndex={0} aria-disabled={!canAffordRemoval}
+                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleRemovalClick(); } }}
                     onClick={handleRemovalClick}
                 >
                     <div className="shop-removal-info">
@@ -148,8 +153,8 @@ export function ShopView() {
                         </div>
                         <div className="shop-removal-desc">
                             {canAffordRemoval
-                                ? 'Burn the dead weight from your deck.'
-                                : "Come back when you've got the scratch."}
+                                ? 'Choose one card to permanently remove.'
+                                : "Not enough gold for card removal."}
                         </div>
                     </div>
                     <div className={`shop-price-tag ${!canAffordRemoval ? 'shop-price-tag--broke' : ''}`}>
@@ -168,15 +173,14 @@ export function ShopView() {
             <div className="shop-footer">
                 <button className="shop-leave-btn" onClick={dismissNodeEvent}>
                     <LogOut size={18} />
-                    I'm Out
+                    Return to map
                 </button>
             </div>
 
             {/* --- Card removal picker overlay --- */}
             {showRemovalPicker && (
-                <div className="shop-removal-overlay">
+                <InspectionDialog title="Pick a Card to Torch" onClose={() => setShowRemovalPicker(false)}>
                     <div className="shop-removal-overlay-header">
-                        <h2 className="shop-removal-overlay-title">Pick a Card to Torch</h2>
                         <p className="shop-removal-overlay-sub">
                             Choose a card to permanently remove from your deck ({cardRemovalCost}g)
                         </p>
@@ -187,6 +191,8 @@ export function ShopView() {
                             <div
                                 key={card.instanceId}
                                 className="shop-removal-card-slot"
+                                role="button" tabIndex={0} aria-label={`Torch ${card.name}`}
+                                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleRemoveCard(card); } }}
                                 onClick={() => handleRemoveCard(card)}
                             >
                                 <div className={`shop-card-preview type-${card.type.toLowerCase()} ${card.isHeroCard ? 'hero-card' : ''}`}>
@@ -214,44 +220,24 @@ export function ShopView() {
                         className="shop-removal-cancel"
                         onClick={() => setShowRemovalPicker(false)}
                     >
-                        Never Mind
+                        Cancel removal
                     </button>
-                </div>
+                </InspectionDialog>
             )}
 
             {/* --- Confirm dialog --- */}
             {confirmState && (
-                <div className="shop-confirm-overlay" onClick={() => setConfirmState(null)}>
-                    <div className="shop-confirm-dialog" onClick={e => e.stopPropagation()}>
-                        <h3 className="shop-confirm-title">
-                            {confirmState.type === 'buy'
-                                ? `Buy ${confirmState.card.name}?`
-                                : `Torch ${confirmState.card.name}?`}
-                        </h3>
-                        <div className="shop-confirm-price">
-                            <Coins size={18} />
-                            {confirmState.price}g
-                        </div>
-                        <div className="shop-confirm-buttons">
-                            <button
-                                className="shop-confirm-btn shop-confirm-btn--buy"
-                                onClick={confirmState.type === 'buy' ? handleConfirmBuy : handleConfirmRemove}
-                            >
-                                {confirmState.type === 'buy' ? 'Buy It' : 'Torch It'}
-                            </button>
-                            <button
-                                className="shop-confirm-btn shop-confirm-btn--cancel"
-                                onClick={() => setConfirmState(null)}
-                            >
-                                Nah
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <CardInspector card={confirmState.card} onClose={() => setConfirmState(null)}>
+                    <p>{confirmState.type === 'buy' ? 'Add to your deck' : 'Permanently remove from your deck'} · {confirmState.price} gold</p>
+                    <button className="inspection-action" disabled={player.gold < confirmState.price}
+                        onClick={confirmState.type === 'buy' ? handleConfirmBuy : handleConfirmRemove}>
+                        {player.gold < confirmState.price ? `Need ${confirmState.price - player.gold} more gold` : confirmState.type === 'buy' ? 'Buy card' : 'Torch card'}
+                    </button>
+                </CardInspector>
             )}
 
             {/* --- Toast --- */}
-            {toast && <div className="shop-toast">{toast}</div>}
+            {toast && <div className="shop-toast" role="status">{toast}</div>}
         </div>
     );
 }

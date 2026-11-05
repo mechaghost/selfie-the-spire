@@ -31,7 +31,7 @@ Reject anything that is not a straightforward photo of a person's face.`;
 // ── Archetype analysis prompt ──
 const ANALYSIS_PROMPT = `You are a street oracle in a neon-lit 1980s urban magic card game called "Selfie the Spire."
 A brave challenger has stepped out of the city crowd and revealed their face to you.
-Analyze their appearance, expression, and energy to determine their street magic archetype.
+Create a fictional street hero inspired by visible styling, colors, and pose. Archetype and traits describe the fictional character, not the real person. Do not infer real personality, identity, background, health, or other personal attributes.
 
 The five archetypes are:
 - **neon**: Fierce, intense, passionate energy. Street pyromancers who bend neon signs, spray-can sorcerers with flame tattoos. Think: 80s punk rocker meets Tokyo back-alley fire dancer.
@@ -42,7 +42,7 @@ The five archetypes are:
 
 IMPORTANT: Names should be 1980s arcade-style usernames/handles — short, punchy, all-caps energy. Think high score screens, BBS handles, and CB radio callsigns. NOT Japanese names, NOT fantasy names. MAX 12 CHARACTERS total including spaces.
 
-CELEBRITY RECOGNITION: If you recognize this person as a public figure, celebrity, athlete, musician, or internet personality — use their real-world NICKNAME or street name as inspiration. Examples: Dwayne Johnson → "THE ROCK", Snoop Dogg → "SNOOP", Arnold Schwarzenegger → "ARNIE", Beyoncé → "QUEEN B", Shaq → "SHAQ", Ice Cube → "CUBE". Keep it to their most iconic short nickname. If you don't recognize them, invent a fresh arcade handle.
+Always invent an original arcade handle. Do not identify the person or use a real person’s name or nickname.
 
 Good name examples: "HOTSHOT", "BLADE", "NEON VIPER", "CHROME FOX", "STATIC", "GHOST WIRE", "TURBO"
 Good title examples: "Street Pyromancer", "The Chrome Mirror", "Antenna Punk", "Warehouse Warden", "The Smoke Signal"
@@ -135,7 +135,7 @@ async function withRetry<T>(fn: () => Promise<T>, retries = 2): Promise<T> {
             return await fn();
         } catch (err: any) {
             if (i === retries) throw err;
-            console.warn(`Image gen attempt ${i + 1} failed: ${err.message}, retrying...`);
+            console.warn(`Image generation attempt ${i + 1} failed; retrying.`);
             await new Promise(r => setTimeout(r, 1000 * (i + 1)));
         }
     }

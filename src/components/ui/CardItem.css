@@ -1,412 +1,125 @@
-/* === Mobile-first base styles === */
-
+/* Geometry, dealing and interaction transforms live on separate elements. */
 .hand-container {
-    position: relative;
-    width: 100%;
-    height: var(--card-height);
-    margin-bottom: 30px;
-    pointer-events: none;
-    z-index: var(--z-hand);
+    position: relative; width: 100%; height: var(--card-height);
+    margin-bottom: 20px; pointer-events: none; z-index: var(--z-hand);
+    --hand-step: min(150px, calc((100vw - 240px - var(--card-width)) / var(--hand-gaps)));
 }
-
-/* Card slot: positioned by CSS variables, eliminates JS/CSS coupling */
 .card-slot {
     position: absolute;
-    left: calc(50% + var(--card-offset) * var(--card-spacing) - var(--card-spacing) / 2);
+    left: calc(50% + var(--card-offset) * var(--hand-step) - var(--card-width) / 2);
     bottom: 0;
-    transition: left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0s;
+    transition: left 280ms cubic-bezier(.22,1,.36,1), bottom 280ms cubic-bezier(.22,1,.36,1);
 }
-
-.card-slot:has(.card.is-dragging) {
-    z-index: var(--z-card-hover) !important;
+.card-slot:has(.card:focus-visible), .card-slot:has(.is-targeting), .card-slot:has(.is-drag-moving) { z-index: 300 !important; }
+.card-deal-motion { animation: cardDeal 360ms cubic-bezier(.16,1,.3,1) backwards; }
+@keyframes cardDeal {
+    from { opacity: 0; transform: translate(-70px, 24px) rotate(-9deg) scale(.88); }
+    to { opacity: 1; transform: translate(0,0) rotate(0) scale(1); }
 }
-
-@media (hover: hover) {
-    .card-slot:has(.card:hover) {
-        z-index: var(--z-card-hover) !important;
-    }
-}
-
 .card {
-    width: var(--card-width);
-    height: var(--card-height);
-    background: var(--color-bg-surface);
-    border: 2px solid var(--color-border);
-    border-radius: 6px;
-    padding: 0.25rem;
-    display: flex;
-    flex-direction: column;
-    pointer-events: auto;
-    cursor: grab;
-    touch-action: none;
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0s, margin 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-    position: relative;
-    transform-origin: bottom center;
+    --card-ink: var(--color-border);
+    box-sizing: border-box; width: var(--card-width); height: var(--card-height);
+    border: 2px solid var(--card-ink); border-radius: 10px; padding: 5px;
+    display: flex; flex-direction: column; gap: 3px; position: relative;
+    color: var(--color-text-primary);
+    background: linear-gradient(155deg, #30304a, #161625 65%);
+    box-shadow: 0 5px 12px #0008, inset 0 1px 0 #ffffff26;
+    pointer-events: auto; touch-action: none; user-select: none; cursor: pointer;
+    transform-origin: 50% 90%;
+    transition: transform 180ms cubic-bezier(.22,1,.36,1), border-color 160ms, box-shadow 180ms;
 }
-
-.card.unplayable {
-    filter: grayscale(100%) brightness(0.45);
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-
-/* Animation variables scoped to the playing wrapper */
-.card-playing-wrapper {
-    --fly-start-y: -60px;
-    --fly-mid-y: -100px;
-    --fly-end-x: calc(50vw - var(--card-half-width) - 15px);
-    --fly-end-y: -140px;
-    --fly-end-scale: 0.3;
-    --fly-end-rotate: 25deg;
-
-    position: absolute;
-    pointer-events: none;
-    z-index: var(--z-card-playing);
-    bottom: 0;
-    left: calc(50% - var(--card-half-width));
-    animation: flyToDiscard 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.card-playing-wrapper .card {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-    border-color: #fff;
-}
-
-@keyframes flyToDiscard {
-    0% {
-        transform: translate(0, var(--fly-start-y)) scale(1.1);
-        opacity: 1;
-    }
-
-    40% {
-        transform: translate(0, var(--fly-mid-y)) scale(1.1);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translate(var(--fly-end-x), var(--fly-end-y)) scale(var(--fly-end-scale)) rotate(var(--fly-end-rotate));
-        opacity: 0;
-    }
-}
-
-/* Animation variables scoped to the draw anim wrapper */
-.card-draw-anim {
-    --draw-start-x: calc(-50vw + var(--card-half-width) + 15px);
-    --draw-start-y: -140px;
-
-    animation: flyFromDrawPile 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-@keyframes flyFromDrawPile {
-    0% {
-        transform: translate(var(--draw-start-x), var(--draw-start-y)) scale(0) rotate(-90deg);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 1;
-    }
-}
-
-.card.is-dragging {
-    cursor: grabbing;
-    transform: translateY(var(--card-hover-lift)) rotate(0deg) scale(var(--card-hover-scale)) !important;
-    z-index: var(--z-card-hover) !important;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 1);
-}
-
-@media (hover: hover) {
-    .card:hover {
-        cursor: grabbing;
-        transform: translateY(var(--card-hover-lift)) rotate(0deg) scale(var(--card-hover-scale)) !important;
-        z-index: var(--z-card-hover) !important;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 1);
-    }
-}
-
-/* Non-targeting drag: card follows cursor/finger — must beat :hover !important */
-.card.is-drag-moving,
-.card.is-drag-moving:hover {
-    transform: translate(var(--drag-dx), var(--drag-dy)) scale(1.05) !important;
-    transition: none !important;
-    z-index: 9999 !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
-    pointer-events: none;
-    cursor: grabbing;
-}
-
-/* Enemy-target card in targeting mode: stays in place, glows */
-.card.is-targeting {
-    transform: translateY(var(--card-hover-lift)) rotate(0deg) scale(var(--card-hover-scale)) !important;
-    z-index: var(--z-card-hover) !important;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 1), 0 0 20px rgba(255, 56, 96, 0.5);
-    border-color: #fff;
-    cursor: crosshair;
-}
-
-.card.type-attack {
-    border-color: var(--color-accent-red);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 8px rgba(255, 56, 96, 0.2);
-}
-
-.card.type-skill {
-    border-color: var(--color-accent-blue);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 212, 255, 0.2);
-}
-
-.card.type-power {
-    border-color: var(--color-accent-violet);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 8px rgba(185, 103, 255, 0.2);
-}
-
+.card.type-attack { --card-ink: var(--color-accent-red); }
+.card.type-skill { --card-ink: var(--color-accent-blue); }
+.card.type-power { --card-ink: var(--color-accent-violet); }
+.card.hero-card { --card-ink: #ffd36a; background: linear-gradient(155deg, #49402c, #191727 70%); }
+.card.unplayable { filter: saturate(.55); }
+.card.unplayable .card-cost { background: #454252; }
 .card-cost {
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    width: 15px;
-    height: 15px;
-    background: var(--color-accent-violet);
-    border: 1px solid #ffb3e6;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.55rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    position: absolute; z-index: 2; top: -8px; left: -7px;
+    width: 24px; height: 24px; display: grid; place-items: center; box-sizing: border-box;
+    background: #33224c; color: #fff; border: 2px solid var(--card-ink); border-radius: 50%;
+    font: bold 12px/1 var(--font-family-base); box-shadow: 0 2px 4px #0009;
 }
-
 .card-name {
-    font-family: var(--font-family-display);
-    font-weight: bold;
-    font-size: 0.6rem;
-    text-align: center;
-    margin-bottom: 0.1rem;
-    text-transform: uppercase;
+    flex: 0 0 auto; height: 22px; padding-left: 12px; padding-right: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font: 14px/1.05 var(--font-family-display); text-align: center;
+    overflow: hidden; overflow-wrap: anywhere;
 }
-
-.card-artwork-wrap {
-    position: relative;
-    width: calc(100% + 0.5rem);
-    margin-left: -0.25rem;
-    margin-right: -0.25rem;
-    aspect-ratio: 4/3;
-    border-radius: 3px;
-    overflow: hidden;
-    background-color: var(--color-bg-base);
+.card-artwork-wrap, .card-artwork-placeholder {
+    position: relative; flex: 0 0 auto; width: 100%; aspect-ratio: 4/3;
+    border-radius: 5px; overflow: hidden; background: #10101b;
 }
-
-.card-artwork {
-    width: 106%;
-    height: 106%;
-    margin: -3% 0 0 -3%;
-    object-fit: cover;
-}
-
+.card-artwork { display: block; width: 100%; height: 100%; object-fit: cover; }
 .card-type-badge {
-    position: absolute;
-    bottom: 3px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.35rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 0.05rem 0.3rem;
-    background: rgba(0, 0, 0, 0.7);
-    color: var(--color-text-secondary);
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    white-space: nowrap;
+    position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+    color: #fff; background: #080810e8; border-radius: 3px;
+    padding: 2px 5px; font-size: 8px; line-height: 1; text-transform: uppercase; letter-spacing: .4px;
 }
-
-.card-artwork-placeholder {
-    width: calc(100% + 0.5rem);
-    margin-left: -0.25rem;
-    margin-right: -0.25rem;
-    aspect-ratio: 4/3;
-    border-radius: 3px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 100%);
-}
-
 .card-desc {
-    font-size: 0.5rem;
-    line-height: 1.15;
-    text-align: center;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: 11px; line-height: 1.25;
+    overflow: hidden; overflow-wrap: anywhere; padding: 2px;
 }
-
-/* === Hero Card (golden signature card) === */
-.card.hero-card {
-    border-color: #ffd700;
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.8),
-        0 0 12px rgba(255, 215, 0, 0.3),
-        inset 0 0 20px rgba(255, 215, 0, 0.05);
-    background: linear-gradient(180deg, var(--color-bg-surface) 0%, rgba(255, 215, 0, 0.08) 100%);
+.card.hero-card .card-name { color: #ffe2a0; }
+.card.is-targeting, .hand-container .card:focus-visible {
+    transform: translateY(-22px) rotate(0) scale(1.06) !important;
+    border-color: #fff; box-shadow: 0 12px 24px #000b, 0 0 0 2px var(--card-ink);
 }
-
-.card.hero-card .card-cost {
-    background: linear-gradient(135deg, #ffd700, #ffaa00);
-    border-color: #fff8dc;
-    color: #1a1a2e;
+@media (hover: hover) and (pointer: fine) {
+    .card-slot:has(.card:hover) { z-index: 300 !important; }
+    .card:hover { transform: translateY(-12px) rotate(0) scale(1.035) !important; box-shadow: 0 12px 24px #000b; }
+    .hand-container .card:hover { transform: translateY(-28px) rotate(0) scale(1.06) !important; }
 }
-
-.card.hero-card .card-type-badge {
-    background: rgba(255, 215, 0, 0.25);
-    border-color: rgba(255, 215, 0, 0.5);
-    color: #ffd700;
+.card.is-drag-moving, .hand-container .card.is-drag-moving:hover {
+    transform: translate(var(--drag-dx), var(--drag-dy)) scale(1.04) !important;
+    transition: none; pointer-events: none; cursor: grabbing; box-shadow: 0 18px 30px #000b;
 }
-
-.card.hero-card .card-name {
-    color: #ffd700;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+.card-playing-wrapper {
+    position: absolute; bottom: 0; left: calc(50% - var(--card-width) / 2);
+    z-index: 400; pointer-events: none;
+    animation: cardPlay 800ms cubic-bezier(.22,1,.36,1) forwards;
 }
-
-.card.hero-card.is-dragging {
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 1),
-        0 0 25px rgba(255, 215, 0, 0.5);
+.card-playing-wrapper .card { pointer-events: none; border-color: #fff; }
+@keyframes cardPlay {
+    0% { opacity: 0; transform: translateY(-12px) scale(.96); }
+    18% { opacity: 1; transform: translateY(-42px) scale(1.04); }
+    48% { opacity: 1; transform: translateY(-52px) scale(1.02); }
+    100% { opacity: 0; transform: translate(calc(50vw - 70px), -90px) rotate(14deg) scale(.45); }
 }
-
-@media (hover: hover) {
-    .card.hero-card:hover {
-        box-shadow:
-            0 12px 30px rgba(0, 0, 0, 1),
-            0 0 25px rgba(255, 215, 0, 0.5);
-    }
-}
-
-.card.hero-card.is-targeting {
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 1),
-        0 0 20px rgba(255, 215, 0, 0.5);
-    border-color: #ffd700;
-}
-
-/* === Mobile: absolute-positioned rows, centered, with transitions === */
-
-@media (max-width: 768px) {
-    .hand-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin-bottom: 0;
-    }
-
-    .card-slot {
-        /* Center each row: 50% + rowOffset * (cardWidth + gap) - half card width */
-        left: calc(50% + var(--row-offset) * (var(--card-width) + 10px) - var(--card-width) / 2) !important;
-        /* Stack rows from bottom, vertically centered in container */
-        bottom: calc(
-            50% - (var(--total-rows) * (var(--card-height) + 8px) - 8px) / 2
-                + var(--row-index) * (var(--card-height) + 8px)
-        ) !important;
-        transition: left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-                    bottom 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    /* Per-row fan: override full-hand fan with row-scoped rotation */
-    .hand-container .card {
-        transform: translateY(var(--row-lift)) rotate(var(--row-rotation)) !important;
-    }
-
-    .hand-container .card.is-targeting {
-        transform: translateY(var(--card-hover-lift)) scale(var(--card-hover-scale)) !important;
-    }
-
-    /* Drag-moving must beat all mobile overrides */
-    .hand-container .card.is-drag-moving,
-    .hand-container .card.is-drag-moving:hover {
-        transform: translate(var(--drag-dx), var(--drag-dy)) scale(1.05) !important;
-        transition: none !important;
-    }
-}
-
-@media (max-width: 768px) and (hover: hover) {
-    .hand-container .card:hover {
-        transform: translateY(var(--card-hover-lift)) scale(var(--card-hover-scale)) !important;
-    }
-}
-
-/* === Desktop overrides === */
-
 @media (min-width: 769px) {
-    .hand-container {
-        height: 110px;
-        top: 0;
+    .hand-container { --card-width: 160px; --card-height: 224px; }
+}
+@media (max-width: 768px) {
+    .hand-container { --card-width: 90px; --card-height: 132px; height: 100%; margin-bottom: 0; }
+    .card-slot {
+        left: calc(50% + var(--row-offset) * (var(--card-width) + 12px) - var(--card-width) / 2);
+        bottom: calc(50% - (min(var(--total-rows), 2) * (var(--card-height) + 12px) - 12px) / 2 + var(--row-index) * (var(--card-height) + 12px));
     }
-
-    .card {
-        padding: 0.5rem;
-        border-width: 3px;
-        border-radius: 10px;
+    .hand-container .card { transform: translateY(var(--row-lift)) rotate(var(--row-rotation)) !important; }
+    .card { border-radius: 7px; padding: 3px; gap: 2px; }
+    .card-name { height: 17px; font-size: 11px; }
+    .card-cost { width: 21px; height: 21px; font-size: 10px; top: -6px; left: -5px; }
+    .card-desc { font-size: 9px; line-height: 1.15; }
+    .card-type-badge { font-size: 6px; padding: 2px 3px; }
+    .hand-container .card.is-targeting, .hand-container .card:focus-visible { transform: translateY(-8px) scale(1.05) !important; }
+    .hand-container .card.is-drag-moving { transform: translate(var(--drag-dx), var(--drag-dy)) scale(1.04) !important; }
+    .hand-overflow { display: grid; grid-template-columns: repeat(3, 90px); justify-content: center; align-content: start; gap: 14px 12px; overflow-y: auto; padding: 14px 5px; box-sizing: border-box; pointer-events: auto; }
+    .hand-overflow .card-slot { position: relative; left: auto; bottom: auto; }
+    .hand-overflow .card { touch-action: pan-y; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .card-deal-motion { animation: none; }
+    .card-slot, .card { transition: none; }
+    .card-playing-wrapper { animation: none; opacity: 0; }
+}
+/* Short phones use a scrollable row instead of clipping the battlefield. */
+@media (max-width: 768px) and (max-height: 650px) {
+    .hand-container, .hand-container.hand-overflow {
+        display: flex; align-items: center; justify-content: flex-start;
+        gap: 12px; overflow-x: auto; overflow-y: hidden; padding: 12px;
+        box-sizing: border-box; pointer-events: auto;
     }
-
-    .card-playing-wrapper {
-        --fly-start-y: -80px;
-        --fly-mid-y: -120px;
-        --fly-end-x: calc(50vw - var(--card-half-width) - 9px);
-        --fly-end-y: -180px;
-        --fly-end-scale: 0;
-        --fly-end-rotate: 90deg;
-    }
-
-    .card-draw-anim {
-        --draw-start-x: calc(-50vw + var(--card-half-width) + 9px);
-        --draw-start-y: -180px;
-    }
-
-    .card-cost {
-        width: 22px;
-        height: 22px;
-        font-size: 0.75rem;
-        top: -6px;
-        left: -6px;
-        border-width: 2px;
-    }
-
-    .card-name {
-        font-size: 0.85rem;
-        margin-bottom: 0.15rem;
-    }
-
-    .card-type-badge {
-        font-size: 0.5rem;
-        padding: 0.1rem 0.4rem;
-        bottom: 5px;
-        border-radius: 8px;
-    }
-
-    .card-artwork-wrap {
-        width: calc(100% + 1rem);
-        margin-left: -0.5rem;
-        margin-right: -0.5rem;
-        border-radius: 5px;
-    }
-
-    .card-artwork-placeholder {
-        width: calc(100% + 1rem);
-        margin-left: -0.5rem;
-        margin-right: -0.5rem;
-    }
-
-    .card-desc {
-        font-size: 0.7rem;
-        line-height: 1.2;
-    }
-
-    .card.hero-card {
-        border-width: 3px;
-    }
+    .hand-container .card-slot { position: relative; left: auto; bottom: auto; flex-shrink: 0; }
+    .hand-container .card { transform: none !important; touch-action: pan-x; }
 }

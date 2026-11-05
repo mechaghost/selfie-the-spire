@@ -4,17 +4,11 @@ import { Shield, Swords, ShieldPlus, Zap } from 'lucide-react';
 import { useGameStore } from '../../store/gameStore';
 import { STATUS_REGISTRY } from '../../data/statusEffects';
 import './EntityPanel.css';
+import { attackDamage } from '../../core/combatMath';
+import { STATUS_HELP } from '../../core/cardText';
 
 // M-3: Status tooltip descriptions keyed by status id
-const STATUS_DESCRIPTIONS: Record<string, string> = {
-    vulnerable: 'Takes 50% more damage',
-    weak: 'Deals 25% less damage',
-    strength: '+1 damage per stack',
-    dexterity: '+1 block per stack',
-    burn: 'Loses HP each turn (ignores block), then cools by 1',
-    thorns: 'Attackers take damage back per stack',
-    regen: 'Heals HP each turn, then fades by 1'
-};
+const STATUS_DESCRIPTIONS = STATUS_HELP;
 
 function floatingTextLabel(ft: FloatingText): string | number {
     if (ft.type === 'damage' || ft.type === 'burn') return `-${ft.value}`;
@@ -27,28 +21,20 @@ function floatingTextClass(ft: FloatingText): string {
     return `floating-text ${ft.type}${big ? ' big' : ''}`;
 }
 
-export function describeIntent(intent: Enemy['intent']): string {
+export function describeIntent(intent: Enemy['intent'], sourceStatuses: Entity['statuses'] = [], targetStatuses: Entity['statuses'] = []): string {
     if (!intent) return 'Waiting...';
-    switch (intent.type) {
-        case 'Attack': return `Attacking for ${intent.damage} damage`;
-        case 'Defend': return `Defending — gaining ${intent.block} block`;
-        case 'AttackDefend': return `Attacking for ${intent.damage} and gaining ${intent.block} block`;
-        case 'Buff': {
-            const parts: string[] = [];
-            if (intent.block) parts.push(`gaining ${intent.block} block`);
-            intent.effects?.forEach(e => {
-                if (e.type === 'ApplyStatus') parts.push(`applying ${e.amount} ${e.statusId}`);
-            });
-            return `Buffing — ${parts.join(', ') || 'powering up'}`;
+    const parts = intent.effects.map(effect => {
+        const n = effect.amount ?? 0;
+        const status = STATUS_REGISTRY[effect.statusId ?? '']?.name ?? effect.statusId;
+        switch (effect.type) {
+            case 'Damage': return `Deals ${attackDamage(n, sourceStatuses, effect.target === 'Self' ? sourceStatuses : targetStatuses)} damage${effect.target === 'Self' ? ' to itself' : ' to you'}`;
+            case 'Block': return `Gains ${n} base Block`;
+            case 'ApplyStatus': return effect.target === 'Self' ? `Gains ${n} ${status}` : `Applies ${n} ${status} to you`;
+            case 'Heal': return `Heals ${n} HP`;
+            default: return '';
         }
-        case 'Debuff': {
-            const effects = intent.effects?.filter(e => e.type === 'ApplyStatus')
-                .map(e => `${e.amount} ${e.statusId}`).join(', ');
-            return `Debuffing — applying ${effects || 'a debuff'} to you`;
-        }
-        case 'AttackDebuff': return `Attacking for ${intent.damage} and applying a debuff`;
-        default: return `Preparing something...`;
-    }
+    }).filter(Boolean);
+    return parts.length ? `Current preview: ${parts.join('. ')}. Before Block. Status changes before the attack can change damage.` : 'Preparing an unknown action.';
 }
 
 export function describeStatuses(statuses: Entity['statuses']): string[] {
@@ -72,7 +58,7 @@ interface EntityPanelProps {
 
 export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
     const avatarRef = useRef<HTMLDivElement>(null);
-    const { floatingTexts, activeAnimations, setEntityBounds, dragState, entityBounds, playerPortraitUrl, playerSpriteUrl } = useGameStore(state => ({
+    const { floatingTexts, activeAnimations, setEntityBounds, dragState, entityBounds, playerPortraitUrl, playerSpriteUrl, playerStatuses } = useGameStore(state => ({
         floatingTexts: state.floatingTexts.filter(ft => ft.targetId === entity.id),
         activeAnimations: state.activeAnimations.filter(a => a.targetId === entity.id),
         setEntityBounds: state.setEntityBounds,
@@ -80,6 +66,7 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
         entityBounds: state.entityBounds,
         playerPortraitUrl: state.player?.portraitUrl,
         playerSpriteUrl: state.player?.spriteUrl,
+        playerStatuses: state.player.statuses,
     }));
     const hpPercentage = (entity.hp / entity.maxHp) * 100;
 
@@ -135,7 +122,8 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
     // --- Player: sprite or portrait or emoji fallback ---
     if (isPlayer) {
         const hasSprite = !!playerSpriteUrl;
-        const hasPortrait = !!playerPortraitUrl;
+        const portrait = playerPortraitUrl || '/assets/characters/neon.webp';
+        const hasPortrait = true;
         const avatarClasses = [
             'entity-avatar',
             animClasses,
@@ -168,7 +156,7 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
                                 <div
                                     key={status.id}
                                     className={`player-status-pip ${def?.type === 'Debuff' ? 'debuff' : 'buff'}`}
-                                    title={`${def?.name}: ${status.amount}`}
+                                    title={describeStatuses([status])[0]}
                                 >
                                     {def?.icon}{status.amount}
                                 </div>
@@ -186,7 +174,7 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
                         {hasSprite
                             ? <img src={playerSpriteUrl} alt={entity.name} className="player-sprite-img" />
                             : hasPortrait
-                                ? <img src={playerPortraitUrl} alt={entity.name} className="player-portrait-img" />
+                                ? <img src={portrait} alt={entity.name} className="player-portrait-img" />
                                 : '🛡️'
                         }
                     </div>
@@ -208,6 +196,8 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
     const isDead = entity.hp <= 0;
     const intent = isDead ? null : enemy.intent;
 
+    const attackHits = intent?.effects.filter(effect => effect.type === 'Damage' && effect.target === 'Target').map(effect => attackDamage(effect.amount ?? 0, entity.statuses, playerStatuses)) ?? [];
+    const damageLabel = attackHits.length > 1 && attackHits.every(hit => hit === attackHits[0]) ? `${attackHits[0]} × ${attackHits.length}` : attackHits.join(' + ');
     let threatClass = '';
     if (intent) {
         if (intent.type.includes('Attack')) threatClass = 'threat-attack';
@@ -223,11 +213,11 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
             {/* Tap-to-inspect highlight */}
             {/* Intent row at top of card */}
             {intent && (
-                <div className="intent-row">
+                <div className="intent-row" title={describeIntent(intent, entity.statuses, playerStatuses)}>
                     {intent.type.includes('Attack') && (
                         <div className="intent-item attack">
                             <Swords size={16} />
-                            <span className="intent-value">{intent.damage}</span>
+                            <span className="intent-value">{damageLabel}</span>
                         </div>
                     )}
                     {intent.type.includes('Defend') && intent.type !== 'AttackDefend' && (
@@ -258,12 +248,7 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
                             <Zap size={16} />
                         </div>
                     )}
-                    {intent.type === 'AttackDebuff' && !intent.type.includes('Defend') && (
-                        <div className="intent-item attack">
-                            <Swords size={16} />
-                            <span className="intent-value">{intent.damage}</span>
-                        </div>
-                    )}
+
                 </div>
             )}
 

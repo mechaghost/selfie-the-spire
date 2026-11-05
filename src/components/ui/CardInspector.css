@@ -1,0 +1,14 @@
+.inspection-dialog { color: var(--color-text-primary); background: #151525; border: 2px solid var(--color-accent-blue); border-radius: 16px; padding: 1.25rem; width: min(440px, calc(100vw - 3rem)); max-height: calc(100dvh - 3rem); overflow: auto; box-sizing: border-box; font: 1rem/1.5 var(--font-family-base); box-shadow: 0 20px 80px #000a; }
+.inspection-dialog::backdrop { background: #050510dd; }
+.inspection-dialog header { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+.inspection-dialog h2 { margin: 0 0 1rem; font-family: var(--font-family-display); font-size: 2rem; overflow-wrap: anywhere; }
+.inspection-dialog button, .deck-browser-trigger { font: inherit; color: inherit; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 6px; padding: .65rem .85rem; min-height: 44px; cursor: pointer; }
+.inspection-dialog button:disabled { opacity: .65; cursor: not-allowed; }
+.inspection-art { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; }
+.inspection-description { font-size: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.inspection-meta { color: var(--color-accent-blue); }
+.inspection-actions { display: flex; flex-direction: column; gap: .75rem; }
+.deck-browser-list { display: grid; gap: .75rem; }
+.deck-browser-list article { border-bottom: 1px solid var(--color-border); padding-bottom: .75rem; }
+.deck-browser-list h3, .deck-browser-list p { margin: .25rem 0; }
+button.map-node { background: none; border: 0; padding: 0; color: inherit; }

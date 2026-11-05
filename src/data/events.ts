@@ -59,7 +59,7 @@ export const EVENTS: GameEvent[] = [
             {
                 id: 'graffiti_touch',
                 label: 'Touch it',
-                description: 'Remove a random card from your deck',
+                description: 'Remove a random non-signature card from your deck',
                 effects: [{ type: 'removeRandomCard' }],
             },
             {
@@ -91,7 +91,7 @@ export const EVENTS: GameEvent[] = [
             {
                 id: 'arcade_kick',
                 label: 'Kick the machine',
-                description: 'Lose 8 HP, gain 25 gold',
+                description: 'Lose up to 8 HP (cannot drop below 1), gain 25 gold',
                 effects: [{ type: 'damage', amount: 8 }, { type: 'gold', amount: 25 }],
             },
             {
@@ -110,7 +110,7 @@ export const EVENTS: GameEvent[] = [
             {
                 id: 'ramen_special',
                 label: 'Eat the special',
-                description: 'Heal to full HP, but lose 5 max HP',
+                description: 'Heal to full, then lose up to 5 max HP for this run (minimum 1)',
                 effects: [{ type: 'healFull' }, { type: 'loseMaxHp', amount: 5 }],
             },
             {
@@ -134,7 +134,7 @@ export const EVENTS: GameEvent[] = [
         choices: [
             {
                 id: 'vinyl_buy',
-                label: 'Buy a record \u2014 40g',
+                label: 'Buy a record \u2014 40 gold',
                 description: 'Add a random card to your deck',
                 condition: 'hasGold40',
                 effects: [{ type: 'gold', amount: -40 }, { type: 'addRandomCard' }],
@@ -142,7 +142,7 @@ export const EVENTS: GameEvent[] = [
             {
                 id: 'vinyl_trade',
                 label: 'Trade a card',
-                description: 'Remove a card, gain a different one',
+                description: 'Remove a random non-signature card, then gain a random card. The new card may be the same type.',
                 effects: [{ type: 'removeRandomCard' }, { type: 'addRandomCard' }],
             },
             {

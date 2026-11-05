@@ -724,3 +724,9 @@
         font-size: 0.7rem;
     }
 }
+
+/* Opaque readout surfaces keep intent and health legible over scenery. */
+.entity-panel.enemy { background: linear-gradient(160deg, #18283af5, #101527f5); box-shadow: 0 12px 25px #03081285, inset 0 1px 0 #ffffff18; border-radius: 12px; }
+.player-info-bar { background: #10182be8; padding: 5px 9px; border-radius: 6px; border: 1px solid #86cfcf33; }
+.entity-panel.player .entity-avatar.has-portrait:not(.has-sprite) { border-color: #7bdfcf; border-radius: 12px; box-shadow: 0 0 0 4px #10182bb0, 0 12px 24px #050a16b0; }
+.player-portrait-img { object-position: 50% 30%; }

@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useGameStore } from '../../store/gameStore';
-import { X, Layers } from 'lucide-react';
+import { X } from 'lucide-react';
 import './TopBar.css';
+import { InspectionDialog } from './CardInspector';
+import { DeckBrowser } from './DeckBrowser';
 
 const FINAL_FLOOR = 9; // 8 map floors + the boss
 
 export function TopBar() {
-    const { player, floor, deckSize, abandonRun } = useGameStore(state => ({
+    const { player, floor, abandonRun } = useGameStore(state => ({
         player: state.player,
         floor: state.floor,
-        deckSize: state.masterDeck.length,
         abandonRun: state.abandonRun,
     }));
     const [confirmAbandon, setConfirmAbandon] = useState(false);
@@ -19,15 +20,13 @@ export function TopBar() {
     return (
         <div className="topbar-container">
             <div className="topbar-section">
-                {confirmAbandon ? (
-                    <div className="abandon-confirm">
-                        <span className="abandon-confirm-text">Quit run?</span>
-                        <button className="abandon-yes" onClick={abandonRun}>Yes</button>
-                        <button className="abandon-no" onClick={() => setConfirmAbandon(false)}>No</button>
-                    </div>
-                ) : (
+                {confirmAbandon && <InspectionDialog title="End this run?" onClose={() => setConfirmAbandon(false)}>
+                    <p>Your progress in this run will be lost.</p>
+                    <button className="abandon-yes" onClick={abandonRun}>End run</button>
+                    <button className="abandon-no" onClick={() => setConfirmAbandon(false)}>Keep playing</button>
+                </InspectionDialog>}
                     <>
-                        <button className="abandon-btn" onClick={() => setConfirmAbandon(true)} title="Abandon run">
+                        <button className="abandon-btn" onClick={() => setConfirmAbandon(true)} title="End run and lose progress" aria-label="End run and lose progress">
                             <X size={16} />
                         </button>
                         {player.maxHp > 0 && (
@@ -39,17 +38,14 @@ export function TopBar() {
                             </div>
                         )}
                     </>
-                )}
             </div>
 
             <div className="topbar-section center">
-                <span className="floor-text">Floor {floor}<span className="floor-total"> / {FINAL_FLOOR}</span></span>
+                <span className="floor-text">{floor === 0 ? 'Street level' : <>Floor {floor}<span className="floor-total"> / {FINAL_FLOOR}</span></>}</span>
             </div>
 
             <div className="topbar-section right">
-                <span className="stat deck" title="Cards in your deck">
-                    <Layers size={14} /> {deckSize}
-                </span>
+                <DeckBrowser />
                 <span className="stat gold">💰 {player.gold}</span>
             </div>
         </div>

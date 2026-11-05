@@ -129,7 +129,7 @@ app.get('/health', (c) => c.json({ status: 'ok' }));
 // The og:/twitter: preview tags need absolute URLs, but the deployed domain
 // isn't known at build time. Template the real origin in at serve time so
 // link previews are correct on any domain (Railway default, custom, etc.).
-const FALLBACK_ORIGIN = 'https://selfie-the-spire-production.up.railway.app';
+const FALLBACK_ORIGIN = 'https://selfiethespire.com';
 let indexTemplate: string | null = null;
 
 function serveIndex(c: Context) {

@@ -59,7 +59,7 @@ export function MysteryEventView() {
         dismissNodeEvent: state.dismissNodeEvent,
     }));
 
-    if (!currentEvent) return null;
+    if (!currentEvent) return <div className="mystery-container"><h1>Back to the streets</h1><p>This encounter could not be restored.</p><button onClick={dismissNodeEvent}>Return to map</button></div>;
 
     const meetsCondition = (condition?: EventChoice['condition']): boolean => {
         if (!condition) return true;

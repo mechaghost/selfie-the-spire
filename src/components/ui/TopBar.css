@@ -241,3 +241,19 @@
         font-size: 1.15rem;
     }
 }
+
+.topbar-container .deck-browser-trigger { white-space: nowrap; padding: .35rem .5rem; font-size: .75rem; }
+.topbar-container .stat.gold { white-space: nowrap; }
+@media (max-width: 360px) {
+    .topbar-container { padding: 0 .4rem; gap: .25rem; }
+    .player-hp-inline { min-width: 65px; }
+}
+.topbar-section { min-width: 0; }
+@media (max-width: 360px) {
+    .topbar-container .deck-browser-trigger { padding: .25rem; font-size: .65rem; }
+    .topbar-container .stat.gold { font-size: .65rem; }
+    .topbar-container .floor-text { font-size: .7rem; }
+}
+
+.topbar-container { background: #0b1523f5; border-bottom: 1px solid #66b8b54d; box-shadow: 0 4px 20px #02091255; }
+.topbar-container .deck-browser-trigger { background: #152737; border-color: #65aba866; color: #c2e6df; }

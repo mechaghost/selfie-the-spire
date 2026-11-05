@@ -1,0 +1,7 @@
+.city-backdrop { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; background: #10152c; }
+.city-backdrop-art { position: absolute; inset: 0; background: url('/assets/environments/ocean-drive.webp') center 40% / cover no-repeat; }
+.city-backdrop-shade { position: absolute; inset: 0; background: linear-gradient(180deg, #07111b30, #10102a18 30%, #080e2066 65%, #080d1bec), radial-gradient(ellipse at center, #0a10203d 15%, transparent 65%); }
+.city-backdrop-light { position: absolute; inset: 0; background: radial-gradient(ellipse at 8% 60%, #ff755630, transparent 45%), radial-gradient(ellipse at 90% 25%, #31dbc028, transparent 45%); animation: coastalLight 12s ease-in-out infinite alternate; }
+@keyframes coastalLight { from { opacity: .4; } to { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .city-backdrop-light { animation: none; opacity: .65; } }
+@media (max-width: 768px) { .city-backdrop-art { background-position: 22% center; } }

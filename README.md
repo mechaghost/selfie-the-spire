@@ -4,7 +4,7 @@
 
 A neon-soaked roguelike deckbuilder where your selfie becomes your street legend. Snap a photo, let the 80's Magic do its thing, and battle your way up a procedurally generated tower with a custom hero and hand-painted cards.
 
-**[Play Now](https://selfie-the-spire-production.up.railway.app)**
+**[Play Now](https://selfiethespire.com)**
 
 ![Selfie the Spire](public/assets/hero-bg.webp)
 
@@ -97,7 +97,7 @@ npm start
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GEMINI_API_KEY` | No | Google Gemini API key for character generation. Without it, the game uses mock data. |
+| `GEMINI_API_KEY` | No | Google Gemini API key for character generation. Without it, hero creation returns an unavailable error; starter runs remain playable. |
 | `PORT` | No | Server port (default: 3001, Railway sets automatically) |
 | `ALLOWED_ORIGINS` | No | CORS origins (default: localhost) |
 | `DAILY_GENERATION_CAP` | No | Max generations per day (default: 200) |

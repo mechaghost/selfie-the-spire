@@ -1,4 +1,5 @@
 import { Card } from '../core/models';
+import { describeCardEffects } from '../core/cardText';
 import { RNG } from '../core/rng';
 
 let _instanceCounter = 0;
@@ -305,7 +306,7 @@ export const CARD_DATABASE: Record<string, Card> = {
         name: 'Surf',
         type: 'Skill',
         cost: 0,
-        description: 'Draw 3 cards. Discard 1 card.',
+        description: 'Draw 3 cards. Discard 1 random card from your hand.',
         target: 'Self',
         effects: [
             { type: 'Draw', amount: 3, target: 'Self' },
@@ -406,8 +407,12 @@ export const createCardInstance = (cardId: string, rng?: RNG): Card => {
  * its first Block effect, else cost -1. Used by rest-site forging and
  * elite/boss loot. Returns the card unchanged if already upgraded.
  */
+export const canUpgradeCard = (card: Card): boolean => !card.upgraded && (
+    card.cost > 0 || card.effects.some(effect => (effect.type === 'Damage' || effect.type === 'Block') && effect.amount != null)
+);
+
 export const upgradeCard = (card: Card): Card => {
-    if (card.upgraded) return card;
+    if (!canUpgradeCard(card)) return card;
     const upgraded = { ...card, upgraded: true };
 
     const dmgIdx = upgraded.effects.findIndex(e => e.type === 'Damage' && e.amount != null);
@@ -416,7 +421,7 @@ export const upgradeCard = (card: Card): Card => {
         newEffects[dmgIdx] = { ...newEffects[dmgIdx], amount: (newEffects[dmgIdx].amount || 0) + 3 };
         upgraded.effects = newEffects;
         upgraded.name = card.name + '+';
-        upgraded.description = upgraded.description.replace(/\d+/, (m) => String(Number(m) + 3));
+        upgraded.description = describeCardEffects(upgraded);
         return upgraded;
     }
 
@@ -426,7 +431,7 @@ export const upgradeCard = (card: Card): Card => {
         newEffects[blkIdx] = { ...newEffects[blkIdx], amount: (newEffects[blkIdx].amount || 0) + 3 };
         upgraded.effects = newEffects;
         upgraded.name = card.name + '+';
-        upgraded.description = upgraded.description.replace(/\d+/, (m) => String(Number(m) + 3));
+        upgraded.description = describeCardEffects(upgraded);
         return upgraded;
     }
 

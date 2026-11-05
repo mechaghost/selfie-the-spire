@@ -66,11 +66,11 @@ export function RunVictoryView() {
                 <div className="run-victory-actions">
                     <button className="rv-btn primary" onClick={abandonRun}>
                         <Camera size={18} />
-                        New Selfie, New Legend
+                        Back to home
                     </button>
                     <button className="rv-btn secondary" onClick={handleQuickRun}>
                         <RotateCcw size={16} />
-                        Quick Run
+                        Starter run
                     </button>
                 </div>
             </div>

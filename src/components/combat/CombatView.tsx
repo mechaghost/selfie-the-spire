@@ -7,6 +7,7 @@ import { HandHUD } from './HandHUD';
 import { TargetingArrow } from './TargetingArrow';
 import { CombatResultOverlay } from './CombatResultOverlay';
 import './CombatView.css';
+import { CityBackdrop } from '../ui/CityBackdrop';
 
 export function CombatView() {
     const {
@@ -22,7 +23,8 @@ export function CombatView() {
         screenShake: state.screenShake
     }));
 
-    const isDisabled = !isPlayerTurn || combatResult !== null;
+    const busy = useGameStore(state => state.isResolving || state.actionQueue.length > 0);
+    const isDisabled = !isPlayerTurn || busy || combatResult !== null;
 
     const [inspectedEnemyId, setInspectedEnemyId] = useState<string | null>(null);
 
@@ -57,8 +59,8 @@ export function CombatView() {
             className={`combat-stage ${screenShake ? `shake-${screenShake.intensity}` : ''}`}
             onClick={handleStageClick}
         >
-            {/* Background particle layer */}
-            <div className="combat-particles" />
+            <CityBackdrop />
+            <div className="arena-location"><span>NEO MIAMI / AFTER HOURS</span><strong>Ocean Drive</strong></div>
 
             <TopBar />
 
@@ -86,7 +88,7 @@ export function CombatView() {
             {inspectedEnemy && (
                 <div className="enemy-info-tooltip">
                     <p className="enemy-info-name">{inspectedEnemy.name}</p>
-                    <p className="enemy-info-intent">{describeIntent(inspectedEnemy.intent)}</p>
+                    <p className="enemy-info-intent">{describeIntent(inspectedEnemy.intent, inspectedEnemy.statuses, useGameStore.getState().player.statuses)}</p>
                     {inspectedEnemy.block > 0 && <p className="enemy-info-line">Block: {inspectedEnemy.block}</p>}
                     {describeStatuses(inspectedEnemy.statuses).map((line, i) => (
                         <p key={i} className="enemy-info-line">{line}</p>
@@ -115,6 +117,7 @@ export function CombatView() {
                         <span className="energy-current">{energy}</span>
                         <span className="energy-max">/{maxEnergy}</span>
                     </div>
+                    <span className="energy-caption">Energy</span>
                 </div>
 
                 <div className="controls-right">
@@ -124,6 +127,7 @@ export function CombatView() {
                 </div>
             </div>
 
+            <div className="hand-caption" aria-hidden="true"><span>Your hand</span><span>Inspect a card. Make your move.</span></div>
             <div className={`deck-table ${isDisabled ? 'disabled' : ''}`}>
                 <HandHUD />
             </div>
