@@ -193,3 +193,9 @@ Connected ActorVisual clip metadata to renderer playback through an absolute-tim
 Current frames reference registered key-pose names (or idle); validation rejects missing frame references and invalid completion/loop metadata. This is a key-pose timeline foundation, not a packed-atlas implementation or newly authored in-between frames. Atlas loading/trim metadata and full art approval remain outstanding.
 
 Boundary/loop/hold/skipped-time/reduced-motion tests pass, as do renderer assets, streaming lifecycle, authoritative normal/reduced/off combat parity, TypeScript, production build and whitespace checks. No browser animation capture or deployment this pass.
+
+## Atlas frame rendering foundation
+
+Added optional inline atlas metadata with packed rectangles, untrimmed source dimensions, trim offsets and per-frame foot anchors. The renderer loads the atlas independently of mandatory idle readiness, builds Pixi texture views sharing the atlas source, and resolves arbitrary named clip frames. Individual key poses and idle remain available if loading fails. Views are destroyed without destroying their shared source before the atlas lease is released. Full manifest bounds are checked before creating views to avoid partial allocations on malformed metadata.
+
+Tests use real Pixi Texture/TextureSource objects to verify untrimmed width/height, trim offsets, source sharing and disposal, plus invalid bounds and named-frame validation. Controlled renderer tests now exercise optional atlas arrival and scene-owned view cleanup; existing readiness/disposal assertions remain passing. Clip tests, TypeScript, production build and whitespace checks pass. No actors are assigned a production atlas yet: source packing, padding/extrusion, mobile texture tiers, real browser rendering and art approval remain open. This is renderer support, not an atlas release-gate pass.

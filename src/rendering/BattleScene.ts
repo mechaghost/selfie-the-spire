@@ -7,6 +7,7 @@ import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
 import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActorMotion } from './actorMotion';
 import { locationAtmosphere } from './locationAtmosphere';
 import { clipFrameAt } from './clipPlayback';
+import { atlasTextures } from './actorAtlas';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
@@ -29,6 +30,7 @@ export class BattleScene {
     private atmosphere = new Graphics();
     private sprites = new Map<string,Sprite>();
     private poses = new Map<string,Texture>();
+    private atlasViews = new Map<string,Texture>();
     private shadows = new Map<string,Graphics>();
     private leases: AssetLease<Texture>[] = [];
     private disposed = false;
@@ -68,6 +70,14 @@ export class BattleScene {
                 const sprite = new Sprite(texture); sprite.zIndex=index*2+1; sprite.anchor.set(...actor.visual.footAnchor);
                 this.sprites.set(actor.id,sprite); this.world.addChild(sprite);
                 this.poses.set(`${actor.id}:idle`,texture);
+                if(actor.visual.atlasUrl && actor.visual.atlasFrames) {
+                    const atlasLease=battleTextures.acquire(actor.visual.atlasUrl);this.leases.push(atlasLease);
+                    void atlasLease.ready.then(atlas=>{
+                        if(this.disposed)return;
+                        for(const [name,view] of atlasTextures(atlas,actor.visual.atlasFrames!))this.atlasViews.set(`${actor.id}:${name}`,view);
+                        this.update(this.snapshot);
+                    }).catch(()=>{ /* Individual poses and mandatory idle remain usable. */ });
+                }
                 void Promise.all(Object.entries(actor.visual.keyPoses ?? {}).map(async ([clip,pose])=>{
                     const poseLease=battleTextures.acquire(pose.imageUrl);this.leases.push(poseLease);
                     try {const poseTexture=await poseLease.ready;if(!this.disposed){this.poses.set(`${actor.id}:${clip}`,poseTexture);this.update(this.snapshot);}}
@@ -126,10 +136,11 @@ export class BattleScene {
         const activeClip=reactionClip ?? clip;
         const authoredClip=actor.visual.clips[activeClip];
         const frame=authoredClip ? clipFrameAt(authoredClip,reactionClip && reaction ? now-reaction.at : elapsed,this.snapshot.reducedMotion) : undefined;
-        const poseClip:ActorClip=authoredClip ? (frame ?? 'idle') as ActorClip : reactionClip ?? actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
-        const pose=actor.visual.keyPoses?.[poseClip];
-        sprite.texture=this.poses.get(`${actor.id}:${poseClip}`) ?? idle;
-        sprite.anchor.set(...(pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));
+        const poseClip=authoredClip ? frame ?? 'idle' : reactionClip ?? actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
+        const atlasView=this.atlasViews.get(`${actor.id}:${poseClip}`);
+        const pose=actor.visual.keyPoses?.[poseClip as ActorClip];
+        sprite.texture=atlasView ?? this.poses.get(`${actor.id}:${poseClip}`) ?? idle;
+        sprite.anchor.set(...(atlasView ? actor.visual.atlasFrames![poseClip].footAnchor : pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));
         const scale = Math.min(slot.art.width / idle.width,slot.art.height / idle.height);
         sprite.scale.set(scale*motion.scaleX,scale*motion.scaleY); sprite.position.set(slot.foot.x+motion.x,slot.foot.y+motion.y); sprite.alpha=motion.alpha; sprite.rotation=motion.rotation;
         sprite.tint=0xffffff;
@@ -174,6 +185,7 @@ export class BattleScene {
         document.removeEventListener('visibilitychange',this.visibility);
         this.destroyApp();
         this.sprites.clear(); this.shadows.clear(); this.poses.clear(); this.backgroundSprites=[];
+        this.atlasViews.forEach(texture=>texture.destroy(false));this.atlasViews.clear();
         this.leases.forEach(lease=>lease.release()); this.leases=[];
     }
 }
