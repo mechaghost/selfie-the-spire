@@ -398,6 +398,7 @@ export const createCardInstance = (cardId: string, rng?: RNG): Card => {
         : (++_instanceCounter).toString(36);
     return {
         ...template,
+        description: describeCardEffects(template),
         instanceId: `${cardId}_${unique}`
     };
 };
