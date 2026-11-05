@@ -4,7 +4,7 @@ await build({ entryPoints:['src/rendering/battleLayout.ts'], outfile:'tests/.e2e
 const {battleLayout,hitTest} = await import('./.e2e-out/battle-layout.mjs');
 const overlaps = (a,b) => a.x < b.x+b.width && a.x+a.width>b.x && a.y < b.y+b.height && a.y+a.height>b.y;
 let cases=0;
-for(const width of [280,320,390,430,768,844,1440]) for(const height of [140,156,220,300,500]) for(const count of [1,2,3]) {
+for(const width of [280,320,390,430,768,844,1440]) for(const height of [140,156,220,250,288,299,300,500]) for(const count of [1,2,3]) {
  const ids=Array.from({length:count},(_,i)=>`e${i}`);
  const layout=battleLayout(width,height,ids);
  for(const slot of layout.enemies) {

@@ -17,3 +17,18 @@
 .impact-burn { color:#ffba79; border-color:#ffba79; }
 @keyframes combatImpactRise { 0% { opacity:0; transform:translate(-50%,8px) scale(.9); } 15%,70% { opacity:1; } 100% { opacity:0; transform:translate(-50%,-30px); } }
 @media(prefers-reduced-motion:reduce) { .combat-impact { animation:none; } }
+
+/* Short landscape reserves a side hand instead of stacking cards over actors. */
+@media (min-width:600px) and (max-height:450px) {
+    .combat-stage.actor-arena-enabled {
+        height:100dvh;
+        grid-template-columns:minmax(0,1fr) 180px;
+        grid-template-rows:var(--topbar-height) minmax(140px,1fr) 52px;
+        grid-template-areas:"topbar topbar" "battlefield hand" "controls hand";
+    }
+    .actor-arena-enabled .battle-arena { margin-bottom:0; }
+    .combat-stage.actor-arena-enabled .table-controls { position:relative; grid-area:controls; bottom:auto; padding:0 12px 8px; align-items:center; }
+    .actor-arena-enabled .deck-table { padding:8px; align-items:center; overflow:hidden; border-left:1px solid #71d6cf60; }
+    .actor-arena-enabled .hand-container { --card-width:152px; --card-height:220px; width:100%; min-width:0; max-height:100%; padding:14px 4px; }
+    .actor-arena-enabled .hand-caption { display:none; }
+}

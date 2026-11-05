@@ -33,6 +33,26 @@ export function battleLayout(width: number, height: number, enemyIds: readonly s
     const areaWidth = width - start - edge;
     const count = Math.max(enemyIds.length, 1);
     const cell = areaWidth / count;
+    // Short portrait: keep the ordered intent strip separate from two art depth lanes.
+    if(width<600 && height>=220 && height<300 && enemyIds.length===3) {
+        const upperFoot=Math.round(height*.61);
+        const artStart=Math.max(90,start);
+        const laneWidth=(width-artStart-edge)/2;
+        hero.art={x:edge,y:ground-140,width:Math.min(90,artStart-edge*2),height:140};
+        hero.foot={x:hero.art.x+hero.art.width/2,y:ground};
+        hero.hud={x:edge,y:4,width:heroWidth,height:72};
+        const enemies=enemyIds.map((id,index):ActorSlot=>{
+            const front=index===2;
+            const artWidth=front ? laneWidth*1.15 : laneWidth-4;
+            const x=front ? width-edge-artWidth-12 : artStart+index*laneWidth;
+            const bottom=front ? ground : upperFoot;
+            const artHeight=front ? Math.max(44,ground-upperFoot-6) : Math.max(44,upperFoot-86);
+            const art={x,y:bottom-artHeight,width:artWidth,height:artHeight};
+            return {id,index,art,foot:{x:x+artWidth/2,y:bottom},target:{...art},
+                hud:{x:start+index*cell+3,y:4,width:cell-6,height:72}};
+        });
+        return {width,height,compact,hero,enemies};
+    }
     // Portrait uses depth lanes rather than compressing three creatures into one narrow row.
     if (width < 600 && height >= 300 && enemyIds.length === 3) {
         const laneWidth = areaWidth / 2;
