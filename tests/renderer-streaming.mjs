@@ -62,3 +62,16 @@ resolve('/enemy-attack');resolve('/player-attack');resolve('/far');resolve('/nea
 assert.ok(atlasFailure.poses.has('enemy:attack'),'fallback pose installed');
 atlasFailure.destroy();assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
 console.log('PASS: atlas failure falls back to individual poses without duplicate requests or leaked leases');
+// Exercise bitmap ownership independently of GPU allocation.
+globalThis.Image.prototype.naturalWidth=1536;
+globalThis.Image.prototype.naturalHeight=1024;
+const bitmaps=[];
+globalThis.ImageBitmap=class {constructor(){bitmaps.push(this);}close(){this.closed=true;}};
+globalThis.createImageBitmap=async()=>new ImageBitmap();
+const resized=new BattleScene(host,snapshot,()=>failures++);
+const resizedMount=resized.mount();await flush();resolve('/player');resolve('/enemy');await flush();await resizedMount;
+resolve('/enemy-atlas');resolve('/player-attack');resolve('/far');resolve('/near');await flush();
+assert.ok(bitmaps.length>=3,'large actor textures use resized bitmaps');
+resized.destroy();assert.ok(bitmaps.every(bitmap=>bitmap.closed),'owned bitmaps close when final texture lease ends');
+assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
+console.log('PASS: resized bitmap ownership and final-lease disposal');

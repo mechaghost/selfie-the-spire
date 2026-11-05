@@ -1,4 +1,4 @@
-import { Application, Container, Graphics, ImageSource, Sprite, Texture } from 'pixi.js';
+import { Application, Container, Graphics, ImageSource, Rectangle, Sprite, Texture } from 'pixi.js';
 import { ActorClip, ActorVisual, LocationVisual } from '../core/battleVisualModels';
 import { BattleLayout, ActorSlot } from './battleLayout';
 import { ImpactNotice, subscribeImpacts } from './CombatPresentation';
@@ -9,18 +9,36 @@ import { locationAtmosphere } from './locationAtmosphere';
 import { clipFrameAt } from './clipPlayback';
 import { atlasTextures } from './actorAtlas';
 import { actorPlacement } from './actorPlacement';
+import { textureDecodePlan } from './textureBudget';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
     return new Promise((resolve,reject) => {
         const image = new Image();
         const timer = window.setTimeout(() => { image.onload = image.onerror = null; image.src = ''; reject(new Error(`Asset timeout: ${url}`)); }, 12000);
-        image.onload = () => { clearTimeout(timer); image.onload = image.onerror = null; resolve(new Texture({source:new ImageSource({resource:image})})); };
+        image.onload = async () => {
+            clearTimeout(timer); image.onload = image.onerror = null;
+            const plan=textureDecodePlan(url,image.naturalWidth,image.naturalHeight);
+            if(plan.resolution<1 && typeof createImageBitmap==='function') {
+                let bitmap:ImageBitmap|undefined;
+                try {
+                    bitmap=await createImageBitmap(image,{resizeWidth:plan.width,resizeHeight:plan.height,resizeQuality:'high'});
+                    const source=new ImageSource({resource:bitmap,resolution:plan.resolution});
+                    resolve(new Texture({source,frame:new Rectangle(0,0,image.naturalWidth,image.naturalHeight)}));
+                    return;
+                } catch {bitmap?.close(); /* Use the original image if browser decoding is unavailable. */}
+            }
+            resolve(new Texture({source:new ImageSource({resource:image})}));
+        };
         image.onerror = () => { clearTimeout(timer); image.onload = image.onerror = null; reject(new Error(`Asset unavailable: ${url}`)); };
         image.src = url;
     });
 }
-export const battleTextures = new AssetLeaseCache(loadTexture, texture => texture.destroy(true));
+export const battleTextures = new AssetLeaseCache(loadTexture, texture => {
+    const resource=texture.source.resource;
+    texture.destroy(true);
+    if(typeof ImageBitmap!=='undefined' && resource instanceof ImageBitmap)resource.close();
+});
 /** Pure presentation: receives snapshots, never accesses game-store actions or RNG. */
 export class BattleScene {
     private app = new Application();
