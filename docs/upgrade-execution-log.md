@@ -97,3 +97,11 @@ Generated Smoke Specter, Taxi Ghost, Manhole Mimic and Neon Hunger with built-in
 Added per-slot roster selection to the development art review scene, including correct Billboard selection for the boss layout. The first mobile inspection caught an extra navigation row displacing the grid; controls now share the existing horizontal toolbar. At 390×844, verified Specter/Taxi/Mimic then Neon Hunger/Taxi/Mimic render as transparent actors against Ocean Drive with legible HUDs and cards. Console warning/error log empty. Evidence: tests/.e2e-out/early-monsters-mobile.png. This is composition review, not actual encounter or hardware certification.
 
 Renderer assets, combat tactics, copy contracts, TypeScript and production build passed before the review controls were added; TypeScript/whitespace checked again after controls. Remaining work includes elite/boss art, authored motion, full gameplay/device verification and release. Arena remains development-only.
+
+## Full roster idle-art coverage
+
+Generated thirteen additional original transparent monster assets with built-in image generation: Boombox Brute, Neon Wraith, Sewer Slime, retained Payphone Phantom, Neon Sentinel, Chrome Phantom, Voltage King, Circuit Breaker, Neon Yakuza, Chrome Bouncer, Billboard, Subway Wyrm and DJ Phantom. Inspected generated compositions, verified alpha transparency (29–72% fully transparent pixels), copied originals into project assets, assigned foot anchors and connected every existing enemy ID to its own artwork. Exact prompts and source dimensions are recorded. All 23 enemy definitions and five hero archetypes now have generated idle cutouts; technical vectors remain emergency renderer fallbacks only.
+
+This closes primary idle-art coverage, not art approval or animation coverage. Generated source images still require full-roster mobile staging, consistent apparent scale/pivot review, edge/glow cleanup where needed, runtime compression and performance measurements. Some designs fill their source frame closely, so margin/pivot consistency needs inspection in motion. Authored attack/hit/defeat coverage remains incomplete. No new browser review or production deployment in this pass.
+
+Renderer asset validation, TypeScript, production build and whitespace checks pass. The reviewed arena remains development-only pending remaining gates.

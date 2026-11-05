@@ -110,3 +110,133 @@ Built-in image generation with transparent background; idle cutout in review.
 Prompt:
 
 Use case: stylized-concept. Asset: one original full-body idle monster sprite for Neo Miami urban deckbuilding combat. Professional hand-painted 2D game illustration, strong dark contour, bold shaded masses, restrained brush texture, coral and weathered teal accents, violet shadows, warm upper-left key light. Three-quarter side view facing LEFT. Full creature visible with generous transparent margin on all sides, readable silhouette at 100 pixels. True transparent RGBA background. No scenery, floor, platform, cast shadow, outside haze or glow, card border, text or UI. One monster only. NEON HUNGER: an original nonhuman neon-consuming street monster, lanky angular humanoid made of cracked violet ceramic and tangled black power cables, long arms ending in three claw fingers, digitigrade legs with two-toed feet, tilted angular teal mask with a wide coral glowing grin. Broken neon tubing embedded securely within torso and shoulders glows amber. No human addiction imagery. Hunched predatory ready stance, whole body visible, distinctive long-limbed silhouette.
+
+## Boombox Brute
+
+Asset: `public/assets/battle/actors/boombox-brute-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Asset type: original full-body idle monster sprite for Neo Miami urban deckbuilding game. Professional hand-painted 2D game illustration with bold clean dark outlines, graphic shaded masses, restrained brush texture, warm upper-left key light, subtle teal rim, violet shadows. Three-quarter side view facing LEFT. Entire character including extremities visible with generous empty margin. Strong distinct silhouette readable at 100 pixels. True transparent RGBA background. No scenery, ground, cast shadow, outside haze, external aura, text, logo, card border or UI. Single monster single pose. BOOMBOX BRUTE: a huge squat gorilla-shaped mechanical monster built around a battered retro boombox torso, twin round black speakers as chest armor, small amber-eyed cassette-slot face, thick articulated teal metal arms with enormous coral armored knuckles, short planted legs with broad sneaker-shaped metal feet. A folded carry handle hugs the top of its back. Aggressive heavy idle stance, distinctive broad shoulders, weathered urban materials.
+
+## Neon Wraith
+
+Asset: `public/assets/battle/actors/neon-wraith-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Asset type: original full-body idle monster sprite for Neo Miami urban deckbuilding game. Professional hand-painted 2D game illustration with bold clean dark outlines, graphic shaded masses, restrained brush texture, warm upper-left key light, subtle teal rim, violet shadows. Three-quarter side view facing LEFT. Entire character including extremities visible with generous empty margin. Strong distinct silhouette readable at 100 pixels. True transparent RGBA background. No scenery, ground, cast shadow, outside haze, external aura, text, logo, card border or UI. Single monster single pose. NEON WRAITH: a floating angular urban spirit with an elongated masked face made from fractured teal neon sign tubing and dark violet metal, luminous coral eyes, tall narrow body wrapped in ragged strips of dark purple sign fabric, two long claw arms, three pointed ribbon-like tails curling tightly beneath. Bright tubing remains attached to body. Sharply defined solid painted silhouette, no diffuse fog. Elegant threatening idle, clearly distinct from a hooded ghost.
+
+## Sewer Slime
+
+Asset: `public/assets/battle/actors/sewer-slime-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Asset type: original full-body idle monster sprite for Neo Miami urban deckbuilding game. Professional hand-painted 2D game illustration with bold clean dark outlines, graphic shaded masses, restrained brush texture, warm upper-left key light, subtle teal rim, violet shadows. Three-quarter side view facing LEFT. Entire character including extremities visible with generous empty margin. Strong distinct silhouette readable at 100 pixels. True transparent RGBA background. No scenery, ground, cast shadow, outside haze, external aura, text, logo, card border or UI. Single monster single pose. SEWER SLIME: a large squat teal-green sludge creature with a single broad asymmetrical gelatinous body, two short powerful pseudopod arms, an expressive deep violet mouth and uneven coral mineral teeth, three amber eyes on short raised brow ridges. A few rusted bolts and a cracked cream ceramic tile embedded within its body. Thick opaque glossy painted material, readable contours and muscular blobs, no puddle or splashes outside creature. Left-facing menacing idle.
+
+## Payphone Phantom
+
+Asset: `public/assets/battle/actors/payphone-phantom-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Asset type: original full-body idle monster sprite for Neo Miami urban deckbuilding game. Professional hand-painted 2D game illustration with bold clean dark outlines, graphic shaded masses, restrained brush texture, warm upper-left key light, subtle teal rim, violet shadows. Three-quarter side view facing LEFT. Entire character including extremities visible with generous empty margin. Strong distinct silhouette readable at 100 pixels. True transparent RGBA background. No scenery, ground, cast shadow, outside haze, external aura, text, logo, card border or UI. Single monster single pose. PAYPHONE PHANTOM: a possessed vintage public payphone monster, tall narrow weathered teal metal torso, coral receiver hooked over one shoulder like a horn, coiled telephone cable forms two long articulated arms with metal claws, amber eyes in the coin slot, stout violet mechanical legs and planted feet. Keypad has blank square keys, no numbers or lettering. A self-contained creature, no phone booth or wall. Three-quarter left-facing guarded idle, eerie charismatic urban folklore.
+
+## Neon Sentinel
+
+Asset: `public/assets/battle/actors/neon-sentinel-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. One original full-body elite monster idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal/coral accents, violet shadows, warm upper-left light. Three-quarter side view facing LEFT toward hero. Entire body and all extremities visible with clear margin; strong silhouette readable at 130px. Transparent RGBA background. No scenery, ground, shadow, outside glow cloud, text, logo, card frame or UI. Single creature only. NEON SENTINEL: tall imposing armored city guardian robot, angular teal helmet with narrow coral eye slit, broad rounded shoulder armor, cream ceramic chest plate, violet mechanical joints, one thick forearm shaped like a riot shield held close, opposite hand a clenched heavy fist, thick planted armored boots. Asymmetric defensive stance, original urban automaton.
+
+## Chrome Phantom
+
+Asset: `public/assets/battle/actors/chrome-phantom-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. One original full-body elite monster idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal/coral accents, violet shadows, warm upper-left light. Three-quarter side view facing LEFT toward hero. Entire body and all extremities visible with clear margin; strong silhouette readable at 130px. Transparent RGBA background. No scenery, ground, shadow, outside glow cloud, text, logo, card frame or UI. Single creature only. CHROME PHANTOM: sleek nonhuman spectral assassin constructed from floating segmented chrome armor plates around a dark violet core, elongated faceless mask with two amber eye slits, angular high collar, long thin bladed forearms held down, narrow waist and digitigrade armored legs. Teal and coral reflections contained within silver surfaces. Full body grounded stealth idle, sleek distinct silhouette, no weapons held separately.
+
+## Voltage King
+
+Asset: `public/assets/battle/actors/voltage-king-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. One original full-body elite monster idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal/coral accents, violet shadows, warm upper-left light. Three-quarter side view facing LEFT toward hero. Entire body and all extremities visible with clear margin; strong silhouette readable at 130px. Transparent RGBA background. No scenery, ground, shadow, outside glow cloud, text, logo, card frame or UI. Single creature only. VOLTAGE KING: huge barrel-chested electrical monster, body formed from weathered violet transformer coils and teal armored utility panels, three short copper insulator prongs forming a crown, amber eyes, broad coral jaw, immense cable-wrapped fists, heavy planted legs. Electricity confined between crown prongs and chest coil, no scattered sparks. Regal imposing ready stance, wide silhouette.
+
+## Circuit Breaker
+
+Asset: `public/assets/battle/actors/circuit-breaker-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. One original full-body elite monster idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal/coral accents, violet shadows, warm upper-left light. Three-quarter side view facing LEFT toward hero. Entire body and all extremities visible with clear margin; strong silhouette readable at 130px. Transparent RGBA background. No scenery, ground, shadow, outside glow cloud, text, logo, card frame or UI. Single creature only. CIRCUIT BREAKER: stocky mechanical urban demolition monster, square teal breaker-box torso with hinged chest armor and glowing amber circuit core, small wedge-shaped head, one oversized coral piston hammer forearm and one thick three-finger metal hand, squat broad legs with steel-toe feet. Battered industrial surfaces, aggressively leaning left, no loose cables beyond silhouette.
+
+## Neon Yakuza
+
+Asset: `public/assets/battle/actors/neon-yakuza-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. One original full-body elite monster idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal/coral accents, violet shadows, warm upper-left light. Three-quarter side view facing LEFT toward hero. Entire body and all extremities visible with clear margin; strong silhouette readable at 130px. Transparent RGBA background. No scenery, ground, shadow, outside glow cloud, text, logo, card frame or UI. Single creature only. NEON RONIN: original nonhuman horned urban enforcer, crimson oni-like ceramic mask with amber eyes, dark violet tailored street jacket with teal lapels, plated forearms, broad crouched athletic build, baggy charcoal trousers, armored sneakers. A short sheathed blade at belt held close, both clawed hands poised for combat. Distinct sharp shoulders and swept-back short teal horns. Full-body left-facing idle, no text or emblems.
+
+## Chrome Bouncer
+
+Asset: `public/assets/battle/actors/chrome-bouncer-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. One original full-body elite monster idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal/coral accents, violet shadows, warm upper-left light. Three-quarter side view facing LEFT toward hero. Entire body and all extremities visible with clear margin; strong silhouette readable at 130px. Transparent RGBA background. No scenery, ground, shadow, outside glow cloud, text, logo, card frame or UI. Single creature only. CHROME BOUNCER: enormous hulking nonhuman chrome nightclub guardian, tiny angular teal robotic head between massive rounded silver shoulders, coral narrow eye visor, dark violet sleeveless vest over thick chrome torso, huge plated fists held near waist, wide short legs with broad black boots. Broadest silhouette of elite roster, intimidating immovable idle stance facing left. Restrained teal reflections, battered metal rather than photorealism.
+
+## The Billboard
+
+Asset: `public/assets/battle/actors/the-billboard-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Original full-body BOSS monster idle sprite for Neo Miami urban deckbuilding game. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal and coral palette with violet shadows, warm upper-left key light. Facing LEFT in three-quarter side view. Whole boss visible, generous transparent margin around every extremity, powerful silhouette readable at 220px. True transparent RGBA background. No scenery, floor, cast shadow, outside haze, text, logos, card frame or UI. Single boss only. THE BILLBOARD: a colossal possessed roadside billboard golem. Broad rectangular teal steel sign torso with a huge menacing coral painted face made of angular abstract eyes and jagged grin, no lettering. Heavy skeletal steel truss arms with enormous three-finger claws, stout structural beam legs and wide bolted feet, two small broken floodlights mounted along top edge. Asymmetric battered sign corners, dark violet support structure. Clearly a three-dimensional monster body in side view, not a flat card. Imposing planted ready stance.
+
+## Subway Wyrm
+
+Asset: `public/assets/battle/actors/subway-wyrm-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Original full-body BOSS monster idle sprite for Neo Miami urban deckbuilding game. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal and coral palette with violet shadows, warm upper-left key light. Facing LEFT in three-quarter side view. Whole boss visible, generous transparent margin around every extremity, powerful silhouette readable at 220px. True transparent RGBA background. No scenery, floor, cast shadow, outside haze, text, logos, card frame or UI. Single boss only. SUBWAY WYRM: enormous coiled mechanical serpent built from articulated retro subway-car segments, weathered cream and teal carriage armor, coral door seams, dark violet flexible joints. Front train cab forms a dragon-like head with amber headlight eyes and an open steel-toothed jaw facing left. Body forms a compact S coil entirely visible, tapering tail curled close behind. Four short clawed undercarriage limbs brace the coil. No railway track or scenery, no lettering. Predatory elevated head, distinctive boss silhouette.
+
+## Dj Phantom
+
+Asset: `public/assets/battle/actors/dj-phantom-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Original full-body BOSS monster idle sprite for Neo Miami urban deckbuilding game. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal and coral palette with violet shadows, warm upper-left key light. Facing LEFT in three-quarter side view. Whole boss visible, generous transparent margin around every extremity, powerful silhouette readable at 220px. True transparent RGBA background. No scenery, floor, cast shadow, outside haze, text, logos, card frame or UI. Single boss only. DJ PHANTOM: a towering theatrical nightclub ghost boss, angular violet masked head with huge coral headphones, sharp amber eyes, flared long teal coat with coral lining over an elongated dark purple spectral body. Two large articulated claw hands hovering above a compact twin-turntable console attached across waist like armor. Vinyl discs and blank knobs, no lettering. Lower body forms two thick swirling tapering ghost tails, opaque painterly shapes, no diffuse haze. Wide dramatic silhouette, facing left, sinister charismatic conductor idle.

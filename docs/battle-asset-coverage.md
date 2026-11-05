@@ -1,6 +1,6 @@
 # Battle asset coverage ledger
 
-Five hero archetypes and ten monsters have generated idle cutouts in review. Thirteen monster entries remain technical placeholders; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
+All five hero archetypes and all 23 monsters have generated idle cutouts in review. No registry entries use technical placeholders as their primary artwork; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
 
 | Visual ID | Reachability | Fallback / dimensions | Provenance | Status |
 |---|---|---|---|---|
@@ -17,20 +17,20 @@ Five hero archetypes and ten monsters have generated idle cutouts in review. Thi
 | smoke_specter | Production encounter pool | /assets/battle/actors/smoke-specter-idle-v1.png / 1145×1374 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | taxi_ghost | Production encounter pool | /assets/battle/actors/taxi-ghost-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | manhole_mimic | Production encounter pool | /assets/battle/actors/manhole-mimic-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| boombox_brute | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| neon_wraith | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| payphone_phantom | Developer/legacy retained | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| sewer_slime | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
+| boombox_brute | Production encounter pool | /assets/battle/actors/boombox-brute-idle-v1.png / 1378×1142 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| neon_wraith | Production encounter pool | /assets/battle/actors/neon-wraith-idle-v1.png / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| payphone_phantom | Developer/legacy retained | /assets/battle/actors/payphone-phantom-idle-v1.png / 1122×1402 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| sewer_slime | Production encounter pool | /assets/battle/actors/sewer-slime-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | fire_escape_spider | Production encounter pool | /assets/battle/actors/fire-escape-spider-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | vending_golem | Developer/legacy retained | /assets/battle/actors/vending-golem-idle-v1.png / 1239×1269 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| neon_sentinel | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| chrome_phantom | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| voltage_king | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| circuit_breaker | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| neon_yakuza | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| chrome_bouncer | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| the_billboard | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| subway_wyrm | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| dj_phantom | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
+| neon_sentinel | Production encounter pool | /assets/battle/actors/neon-sentinel-idle-v1.png / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| chrome_phantom | Production encounter pool | /assets/battle/actors/chrome-phantom-idle-v1.png / 1024×1536 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| voltage_king | Production encounter pool | /assets/battle/actors/voltage-king-idle-v1.png / 1330×1182 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| circuit_breaker | Production encounter pool | /assets/battle/actors/circuit-breaker-idle-v1.png / 1222×1287 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| neon_yakuza | Production encounter pool | /assets/battle/actors/neon-yakuza-idle-v1.png / 1217×1292 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| chrome_bouncer | Production encounter pool | /assets/battle/actors/chrome-bouncer-idle-v1.png / 1222×1287 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| the_billboard | Production encounter pool | /assets/battle/actors/the-billboard-idle-v1.png / 1312×1199 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| subway_wyrm | Production encounter pool | /assets/battle/actors/subway-wyrm-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| dj_phantom | Production encounter pool | /assets/battle/actors/dj-phantom-idle-v1.png / 1210×1300 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 
 Regenerate coverage checks with `node tests/renderer-assets.mjs`. Image dimensions describe fallback source pixels, not estimated GPU allocation or final production resolution. No existing opaque portrait has been mislabeled as approved combat artwork.
