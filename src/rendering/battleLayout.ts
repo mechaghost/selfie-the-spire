@@ -22,10 +22,10 @@ export function battleLayout(width: number, height: number, enemyIds: readonly s
         id: 'player', index: -1, foot: { x: heroWidth / 2 + edge, y: ground },
         art: { x: edge, y: ground - heroArtHeight, width: heroWidth, height: heroArtHeight },
         target: { x: edge, y: height - 56, width: Math.max(44, heroWidth), height: 44 },
-        hud: { x: edge, y: 4, width: heroWidth, height: 72 },
+        hud: { x: edge, y: Math.max(4, ground - heroArtHeight - 78), width: heroWidth, height: 72 },
     };
     if (wideShort) {
-        hero.hud.width = 64;
+        hero.hud.width = 64; hero.hud.y = 4;
         hero.art = { x: edge + 64, y: 12, width: heroWidth - 64, height: ground - 12 };
         hero.foot = { x: hero.art.x + hero.art.width / 2, y: ground };
     }
@@ -49,7 +49,7 @@ export function battleLayout(width: number, height: number, enemyIds: readonly s
         return { id, index, foot: { x: x + slotWidth / 2, y: ground },
             art: { x: artX, y: ground - artHeight, width: artWidth, height: artHeight },
             target: { x, y: 4, width: slotWidth, height: height - 12 },
-            hud: { x, y: 4, width: slotWidth, height: 72 },
+            hud: { x, y: Math.max(4, ground - artHeight - 78), width: slotWidth, height: 72 },
         };
     });
     return { width, height, compact, hero, enemies };
