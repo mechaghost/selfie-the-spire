@@ -4,7 +4,8 @@ import { Shield, Swords, ShieldPlus, Zap } from 'lucide-react';
 import { useGameStore } from '../../store/gameStore';
 import { STATUS_REGISTRY } from '../../data/statusEffects';
 import './EntityPanel.css';
-import { attackDamage } from '../../core/combatMath';
+import { attackDamage, blockGain } from '../../core/combatMath';
+import { intentView } from '../../core/intentView';
 import { targetAtPoint } from '../../core/targeting';
 import { STATUS_HELP } from '../../core/cardText';
 
@@ -29,7 +30,7 @@ export function describeIntent(intent: Enemy['intent'], sourceStatuses: Entity['
         const status = STATUS_REGISTRY[effect.statusId ?? '']?.name ?? effect.statusId;
         switch (effect.type) {
             case 'Damage': return `Deals ${attackDamage(n, sourceStatuses, effect.target === 'Self' ? sourceStatuses : targetStatuses)} damage${effect.target === 'Self' ? ' to itself' : ' to you'}`;
-            case 'Block': return `Gains ${n} base Block`;
+            case 'Block': return effect.target==='Self' ? `Gains ${blockGain(n,sourceStatuses)} Block` : `Grants you ${blockGain(n,targetStatuses)} Block`;
             case 'ApplyStatus': return effect.target === 'Self' ? `Gains ${n} ${status}` : `Applies ${n} ${status} to you`;
             case 'Heal': return `Heals ${n} HP`;
             default: return '';
@@ -183,6 +184,7 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
     const isDead = entity.hp <= 0;
     const intent = isDead ? null : enemy.intent;
 
+    const preview = intentView(intent,entity.statuses,playerStatuses);
     const attackHits = intent?.effects.filter(effect => effect.type === 'Damage' && effect.target === 'Target').map(effect => attackDamage(effect.amount ?? 0, entity.statuses, playerStatuses)) ?? [];
     const damageLabel = attackHits.length > 1 && attackHits.every(hit => hit === attackHits[0]) ? `${attackHits[0]} × ${attackHits.length}` : attackHits.join(' + ');
     let threatClass = '';
@@ -218,23 +220,23 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
                     {intent.type.includes('Defend') && intent.type !== 'AttackDefend' && (
                         <div className="intent-item defend">
                             <ShieldPlus size={16} />
-                            {intent.block != null && <span className="intent-value">{intent.block}</span>}
+                            {preview.block > 0 && <span className="intent-value">{preview.block}</span>}
                         </div>
                     )}
                     {intent.type === 'AttackDefend' && (
                         <div className="intent-item defend">
                             <ShieldPlus size={14} />
-                            <span className="intent-value">{intent.block}</span>
+                            <span className="intent-value">{preview.block}</span>
                         </div>
                     )}
                     {/* M-4: Show block value when Buff intent includes block */}
                     {intent.type === 'Buff' && (
                         <div className="intent-item buff">
                             <Zap size={16} />
-                            {intent.block != null && (
+                            {preview.block > 0 && (
                                 <>
                                     <ShieldPlus size={14} />
-                                    <span className="intent-value">{intent.block}</span>
+                                    <span className="intent-value">{preview.block}</span>
                                 </>
                             )}
                         </div>

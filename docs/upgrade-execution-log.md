@@ -113,3 +113,9 @@ Replaced uniform breathing with pure motion profiles: restrained weight shift fo
 The scene tracks each legacy animation's unique token so snapshot refreshes do not restart attacks and successive attacks can restart without an intervening idle render. Absolute elapsed time expires stale motion after hidden-tab pauses. Reduced motion skips transient transforms and uses the static defeated state. Renderer logic remains presentation-only and cannot change the combat queue.
 
 New actor-motion tests cover direction, wind-up/contact/recovery, stale elapsed time, repeated tokens, defeat and reduced-motion behavior. Combat presentation parity tests, TypeScript, production build and whitespace checks pass. No browser animation review in this pass; visual easing, full roster bounds and authored motion remain to verify before release.
+
+## Intent Block accuracy
+
+Found that arena/legacy intent previews used base Block while the queue applied recipient Dexterity per effect. Extracted shared blockGain calculation and used it in the authoritative GAIN_BLOCK handler, arena intent model and inspection descriptions. Legacy enemy panels now display the derived total instead of optional decorative intent.block metadata. Mixed attack/defend arena labels include the Block amount, and status names use the player-facing registry name. Enemy Block totals exclude effects granting Block to the player.
+
+Added intent-block-parity coverage: 66 roster/current-Dexterity combinations compare previews against actual queue-applied Block, plus repeated Block effects and misleading decorative metadata. Combat presentation parity, copy contracts, TypeScript, production build and whitespace checks pass. These remain current-state previews; sequential status changes earlier in the move are not simulated, as disclosed by the inspection copy. Browser wrapping/short-screen mixed-intent review remains open. No deployment in this pass.

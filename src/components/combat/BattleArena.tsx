@@ -53,7 +53,7 @@ export function BattleArena() {
                 onClick={event=>{event.stopPropagation();if(mode==='targeting')commit(enemy.id);else setInspected(enemy.id);}}>
                 <span className="actor-hud" style={{left:slot.hud.x-slot.target.x,top:slot.hud.y-slot.target.y,width:slot.hud.width}}>
                     <strong>{slot.index+1}. {enemy.name}</strong><span>{enemy.hp}/{enemy.maxHp}</span>
-                    <b>{enemy.hp<=0 ? 'Defeated' : intent.attack ? `⚔ ${intent.attack}${intent.block?' ◆':''}${intent.statuses.length?' ✦':''}` : intent.label}</b>
+                    <b>{enemy.hp<=0 ? 'Defeated' : intent.attack ? `⚔ ${intent.attack}${intent.block?` ◆ ${intent.block}`:''}${intent.statuses.length?' ✦':''}` : intent.label}</b>
                     <small>◆ {enemy.block}{enemy.statuses.length ? ` · ${enemy.statuses.length} effects` : ''}</small>
                 </span><span className="actor-slot-marker">{slot.index+1}</span>
             </button>;

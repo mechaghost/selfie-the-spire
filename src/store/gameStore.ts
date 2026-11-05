@@ -2,7 +2,7 @@ import { appearanceForArchetype, normalizeAppearance } from '../data/actorVisual
 import { CombatClock, combatDelay } from '../core/combatTiming';
 import { beginPresentationBattle, identifyAction, identifyChildren, publishAction, publishImpact } from '../rendering/CombatPresentation';
 import { validateSave } from '../core/saveValidation';
-import { attackDamage } from '../core/combatMath';
+import { attackDamage, blockGain } from '../core/combatMath';
 import { describeCardEffects } from '../core/cardText';
 import { create } from 'zustand';
 import { Card, Enemy, Player, GameAction, FloatingText, ActiveAnimation, AnimationType, ScreenShake, Effect, StatusEffect, UgcPhase, GeneratedCharacter, GeneratedCard, GenerateCharacterResponse } from '../core/models';
@@ -1185,16 +1185,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 const freshState = get();
                 let target = targetId === 'player' ? freshState.player : freshState.enemies.find(e => e.id === targetId);
 
-                let finalBlock = amount;
-                if (target) {
-                    let flatMod = 0;
-                    target.statuses.forEach(s => {
-                        const def = STATUS_REGISTRY[s.id];
-                        if (def?.flatBlockGivenPerStack && s.amount > 0) flatMod += def.flatBlockGivenPerStack * s.amount;
-                    });
-                    finalBlock += flatMod;
-                }
-                finalBlock = Math.max(0, finalBlock);
+                const finalBlock = blockGain(amount,target?.statuses);
 
                 get().addFloatingText({ targetId, value: finalBlock, type: 'block' });
                 if (targetId === 'player') {
