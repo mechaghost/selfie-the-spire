@@ -8,6 +8,7 @@ import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActor
 import { locationAtmosphere } from './locationAtmosphere';
 import { clipFrameAt } from './clipPlayback';
 import { atlasTextures } from './actorAtlas';
+import { actorPlacement } from './actorPlacement';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
@@ -143,7 +144,7 @@ export class BattleScene {
         const pose=actor.visual.keyPoses?.[poseClip as ActorClip];
         sprite.texture=atlasView ?? this.poses.get(`${actor.id}:${poseClip}`) ?? idle;
         sprite.anchor.set(...(atlasView ? actor.visual.atlasFrames![poseClip].footAnchor : pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));
-        const scale = Math.min(slot.art.width / idle.width,slot.art.height / idle.height);
+        const {scale} = actorPlacement(slot,idle.width,idle.height,actor.visual.footAnchor);
         sprite.scale.set(scale*motion.scaleX,scale*motion.scaleY); sprite.position.set(slot.foot.x+motion.x,slot.foot.y+motion.y); sprite.alpha=motion.alpha; sprite.rotation=motion.rotation;
         sprite.tint=0xffffff;
         if(reaction && !actor.defeated && !this.snapshot.reducedMotion) {

@@ -1,6 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import type { BattleScene, SceneSnapshot } from '../../rendering/BattleScene';
 import './BattleStage.css';
+import { actorPlacement } from '../../rendering/actorPlacement';
+import type { ActorSlot } from '../../rendering/battleLayout';
+import type { SceneActor } from '../../rendering/BattleScene';
+function FallbackActor({actor,slot}:{actor:SceneActor;slot:ActorSlot}) {
+    const [dimensions,setDimensions]=useState<{width:number;height:number}|null>(null);
+    const [failed,setFailed]=useState(false);
+    const rect=dimensions ? actorPlacement(slot,dimensions.width,dimensions.height,actor.visual.footAnchor) : {left:slot.art.x,top:slot.art.y,width:slot.art.width,height:slot.art.height};
+    return <div className="battle-fallback-actor" style={{left:rect.left,top:rect.top,width:rect.width,height:rect.height,opacity:actor.defeated?.15:1}}>
+        {(!dimensions || failed) && <svg viewBox="0 0 100 180"><path fill={actor.id==='player'?'#f3b16e':'#b9a4d6'} d="M30 45L8 100 24 110 40 78 34 130 20 175H43L52 136 65 175H87L72 115 70 45ZM32 24A20 20 0 1 0 72 24A20 20 0 1 0 32 24"/></svg>}
+        {!failed && <img src={actor.visual.fallbackImageUrl} alt="" onLoad={event=>setDimensions({width:event.currentTarget.naturalWidth,height:event.currentTarget.naturalHeight})} onError={()=>setFailed(true)} />}
+    </div>;
+}
 export type StageStatus = 'loading' | 'ready' | 'degraded';
 interface Props { snapshot: SceneSnapshot; forceFallback?: boolean; onStatus?: (status:StageStatus)=>void }
 /** DOM fallback exists before asynchronous initialization and remains independent of the canvas. */
@@ -33,10 +45,7 @@ export function BattleStage({snapshot,forceFallback=false,onStatus}: Props) {
             {snapshot.actors.map(actor=>{
                 const slot = actor.id==='player' ? snapshot.layout.hero : snapshot.layout.enemies.find(slot=>slot.id===actor.id);
                 if(!slot)return null;
-                return <div key={actor.id} className="battle-fallback-actor" style={{left:slot.art.x,top:slot.art.y,width:slot.art.width,height:slot.art.height,opacity:actor.defeated?.15:1}}>
-                    <svg viewBox="0 0 100 180"><path fill={actor.id==='player'?'#f3b16e':'#b9a4d6'} d="M30 45L8 100 24 110 40 78 34 130 20 175H43L52 136 65 175H87L72 115 70 45ZM32 24A20 20 0 1 0 72 24A20 20 0 1 0 32 24"/></svg>
-                    <img src={actor.visual.fallbackImageUrl} alt="" onError={event=>{event.currentTarget.style.display='none';}} />
-                </div>;
+                return <FallbackActor key={`${actor.id}:${actor.visual.fallbackImageUrl}`} actor={actor} slot={slot} />;
             })}
         </div>}
         {status==='degraded' && <div className="battle-renderer-notice" role="status">Simplified graphics <button onClick={()=>setAttempt(n=>n+1)}>Retry graphics</button></div>}
