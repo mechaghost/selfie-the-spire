@@ -57,6 +57,10 @@ ACTOR_VISUALS.vending_golem.keyPoses!.hit = {imageUrl:'/assets/battle/actors/ven
 ACTOR_VISUALS.vending_golem.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/vending-golem-defeat-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.hit = {imageUrl:'/assets/battle/actors/fire-escape-spider-hit-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/fire-escape-spider-defeat-v1.webp',footAnchor:[.5,.94]};
+// Explicit key-pose timelines; these do not represent approved multi-frame animation art.
+for(const id of ['hero-neon','alley_rat','vending_golem','fire_escape_spider']) {
+    ACTOR_VISUALS[id].clips.attack={frames:['idle','attack','idle'],durationsMs:[80,160,80],loop:false,completion:'idle'};
+}
 Object.values(ACTOR_VISUALS).forEach(validateActorVisual);
 export function resolveAppearance(value: CombatAppearance | undefined, archetype = 'neon'): ActorVisual {
     if (value?.version === 1 && ACTOR_VISUALS[value.actorVisualId]?.id?.startsWith('hero-')) return ACTOR_VISUALS[value.actorVisualId];

@@ -185,3 +185,11 @@ Exercised Rat hit replay and Rat/Golem defeat in the Pixi study. Desktop and 390
 Added five distinct low-opacity ambient presets behind the actor layer: Ocean Drive pavement shimmer, Wynwood drifting dust, Underpass rain, Club Backlot reflected light pulses, and Rooftop wind particles. Sampling is deterministic and independent of gameplay RNG. At most 16 simple marks are drawn; no new images, filters, timers, or texture leases. Existing scene ticker stops while hidden; reduced-motion snapshots omit atmosphere completely. Existing flattened district artwork remains unchanged, so independent painted parallax layers are still outstanding.
 
 New tests cover all five presets at four viewport sizes, deterministic sampling, disabled reduced-motion output, no Math.random calls, bounded mark count/opacity/position through a full day of elapsed time, and distinct district output. Renderer lifecycle/streaming tests, TypeScript, production build and whitespace checks pass. This pass has no browser aesthetic approval or physical-device frame-time measurement; those gates remain open. Changes remain local.
+
+## Timed key-pose clip playback
+
+Connected ActorVisual clip metadata to renderer playback through an absolute-time sampler. Supports variable frame durations, looping, hold-last or return-to-idle completion, skipped-frame catchup and reduced-motion terminal states. Reaction clips use impact elapsed time; ordinary clips use action identity timing. Added explicit 80/160/80ms idle/attack/idle timelines for Street Runner, Rat, Golem and Spider, preserving the existing 140ms contact beat. No animation completion callback controls combat.
+
+Current frames reference registered key-pose names (or idle); validation rejects missing frame references and invalid completion/loop metadata. This is a key-pose timeline foundation, not a packed-atlas implementation or newly authored in-between frames. Atlas loading/trim metadata and full art approval remain outstanding.
+
+Boundary/loop/hold/skipped-time/reduced-motion tests pass, as do renderer assets, streaming lifecycle, authoritative normal/reduced/off combat parity, TypeScript, production build and whitespace checks. No browser animation capture or deployment this pass.

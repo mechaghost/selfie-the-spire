@@ -20,7 +20,7 @@ const {BattleScene,battleTextures,apps,battleLayout}=await import('./.e2e-out/re
 const flush=async()=>{for(let i=0;i<12;i++)await Promise.resolve();};
 const resolve=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);image.onload();};
 const reject=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);image.onerror();};
-const actor=(id)=>({id,defeated:false,visual:{id,fallbackImageUrl:`/${id}`,footAnchor:[.5,1],keyPoses:{attack:{imageUrl:`/${id}-attack`,footAnchor:[.5,1]}}}});
+const actor=(id)=>({id,defeated:false,visual:{id,clips:{},fallbackImageUrl:`/${id}`,footAnchor:[.5,1],keyPoses:{attack:{imageUrl:`/${id}-attack`,footAnchor:[.5,1]}}}});
 const snapshot={layout:battleLayout(390,400,['enemy'],false),location:{sky:0,ground:0,accent:0,layers:[{url:'/far',depth:0},{url:'/near',depth:2}]},actors:[actor('player'),actor('enemy')],reducedMotion:false};
 const host={appendChild(){}};let failures=0;
 const scene=new BattleScene(host,snapshot,()=>failures++);

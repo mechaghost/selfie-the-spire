@@ -6,6 +6,7 @@ import { frameLocation } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
 import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActorMotion } from './actorMotion';
 import { locationAtmosphere } from './locationAtmosphere';
+import { clipFrameAt } from './clipPlayback';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
@@ -122,7 +123,10 @@ export class BattleScene {
         const motion=sampleActorMotion(motionProfile(actor.visual.id),clip,elapsed,now+slot.foot.x*11,actor.id==='player'?1:-1,this.snapshot.reducedMotion);
         const reaction=this.reactions.get(actor.id);
         const reactionClip=reaction && !actor.defeated && clip!=='celebrate' && !this.snapshot.reducedMotion ? reactionPose(reaction.effect,now-reaction.at) : null;
-        const poseClip=reactionClip ?? actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
+        const activeClip=reactionClip ?? clip;
+        const authoredClip=actor.visual.clips[activeClip];
+        const frame=authoredClip ? clipFrameAt(authoredClip,reactionClip && reaction ? now-reaction.at : elapsed,this.snapshot.reducedMotion) : undefined;
+        const poseClip:ActorClip=authoredClip ? (frame ?? 'idle') as ActorClip : reactionClip ?? actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
         const pose=actor.visual.keyPoses?.[poseClip];
         sprite.texture=this.poses.get(`${actor.id}:${poseClip}`) ?? idle;
         sprite.anchor.set(...(pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));

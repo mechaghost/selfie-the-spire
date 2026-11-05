@@ -34,6 +34,8 @@ export function validateActorVisual(visual: ActorVisual): void {
     }
     for (const clip of Object.values(visual.clips)) {
         if (!clip || !clip.frames.length || clip.frames.length !== clip.durationsMs.length ||
-            clip.frames.some(frame => !frame) || clip.durationsMs.some(ms => !Number.isFinite(ms) || ms < 16 || ms > 10000)) throw new Error(`Invalid animation clip: ${visual.id}`);
+            clip.frames.some(frame => !frame || (frame !== 'idle' && !Object.prototype.hasOwnProperty.call(visual.keyPoses ?? {},frame))) ||
+            !['idle','hold'].includes(clip.completion) || typeof clip.loop !== 'boolean' ||
+            clip.durationsMs.some(ms => !Number.isFinite(ms) || ms < 16 || ms > 10000)) throw new Error(`Invalid animation clip: ${visual.id}`);
     }
 }
