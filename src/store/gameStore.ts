@@ -1,3 +1,5 @@
+import { CombatClock, combatDelay } from '../core/combatTiming';
+import { beginPresentationBattle, identifyAction, identifyChildren, publishAction } from '../rendering/CombatPresentation';
 import { validateSave } from '../core/saveValidation';
 import { attackDamage } from '../core/combatMath';
 import { describeCardEffects } from '../core/cardText';
@@ -137,19 +139,9 @@ interface GameState {
 }
 
 // Track pending timeouts so we can cancel them on combat end / run reset
-const pendingTimeouts = new Set<ReturnType<typeof setTimeout>>();
-function trackedTimeout(fn: () => void, ms: number) {
-    const id = setTimeout(() => {
-        pendingTimeouts.delete(id);
-        fn();
-    }, ms);
-    pendingTimeouts.add(id);
-    return id;
-}
-function cancelAllTimeouts() {
-    pendingTimeouts.forEach(id => clearTimeout(id));
-    pendingTimeouts.clear();
-}
+const combatClock = new CombatClock();
+function trackedTimeout(fn: () => void, ms: number) { return combatClock.schedule(fn,ms); }
+function cancelAllTimeouts() { combatClock.cancel(); }
 
 // Fix #2: resolveEffects now accepts RNG for deterministic RandomEnemy targeting
 export function resolveEffects(
@@ -188,13 +180,13 @@ export function resolveEffects(
         if (effect.type === 'Damage' && effect.amount != null && effect.target === 'AllEnemies' && targets.length > 1) {
             if (sourceId) {
                 actions.push({ type: 'PLAY_ANIMATION', payload: { targetId: sourceId, animation: 'lunge' } });
-                actions.push({ type: 'DELAY', payload: { ms: 250 } });
+                actions.push({ type: 'DELAY', payload: { ms: 250, beat: 'anticipation' } });
             }
             targets.forEach(targetId => {
                 actions.push({ type: 'DAMAGE_ENTITY', payload: { sourceId, targetId, amount: effect.amount! } });
                 actions.push({ type: 'PLAY_ANIMATION', payload: { targetId, animation: 'stagger' } });
             });
-            actions.push({ type: 'DELAY', payload: { ms: 320 } });
+            actions.push({ type: 'DELAY', payload: { ms: 320, beat: 'recovery' } });
             return;
         }
 
@@ -203,11 +195,11 @@ export function resolveEffects(
             if (effect.type === 'Damage' && effect.amount != null) {
                 if (sourceId) {
                     actions.push({ type: 'PLAY_ANIMATION', payload: { targetId: sourceId, animation: 'lunge' } });
-                    actions.push({ type: 'DELAY', payload: { ms: 250 } });
+                    actions.push({ type: 'DELAY', payload: { ms: 250, beat: 'anticipation' } });
                 }
                 actions.push({ type: 'DAMAGE_ENTITY', payload: { sourceId, targetId, amount: effect.amount } });
                 actions.push({ type: 'PLAY_ANIMATION', payload: { targetId, animation: 'stagger' } });
-                actions.push({ type: 'DELAY', payload: { ms: 320 } });
+                actions.push({ type: 'DELAY', payload: { ms: 320, beat: 'recovery' } });
             } else if (effect.type === 'Block' && effect.amount != null) {
                 actions.push({ type: 'GAIN_BLOCK', payload: { sourceId, targetId, amount: effect.amount } });
             } else if (effect.type === 'ApplyStatus' && effect.amount != null && effect.statusId) {
@@ -489,6 +481,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     startCombat: (combatEnemies: Enemy[]) => {
         saveRun(get());
+        beginPresentationBattle();
         set((state) => {
             if (!state.rng) return state;
 
@@ -1028,7 +1021,7 @@ export const useGameStore = create<GameState>((set, get) => ({
             set(state => ({
                 activeAnimations: state.activeAnimations.filter(a => a.id !== id)
             }));
-        }, 500);
+        }, type === 'lunge' ? combatDelay('anticipation') + combatDelay('recovery') : combatDelay('recovery'));
     },
 
     triggerShake: (intensity) => {
@@ -1041,7 +1034,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     queueAction: (action: GameAction) => {
         set((state) => ({
-            actionQueue: [...state.actionQueue, action],
+            actionQueue: [...state.actionQueue, identifyAction(action)],
         }));
     },
 
@@ -1051,7 +1044,8 @@ export const useGameStore = create<GameState>((set, get) => ({
         if (state.actionQueue.length === 0 || state.isResolving) return;
 
         set({ isResolving: true });
-        const action = state.actionQueue[0];
+        const action = identifyAction(state.actionQueue[0]);
+        publishAction(action,'begin');
         let delay = 0;
 
         switch (action.type) {
@@ -1112,6 +1106,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                                 actionQueue: [],
                                 isResolving: false
                             });
+                            publishAction(action,'complete');
                             return;
                         }
                     } else {
@@ -1122,6 +1117,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                         if (updatedEnemies.every(e => e.hp <= 0)) {
                             cancelAllTimeouts();
                             set(buildVictoryState(get()));
+                            publishAction(action,'complete');
                             return;
                         }
                     }
@@ -1154,6 +1150,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                                         actionQueue: [],
                                         isResolving: false
                                     });
+                                    publishAction(action,'complete');
                                     return;
                                 }
                             } else {
@@ -1162,6 +1159,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                                 if (afterRet.every(e => e.hp <= 0)) {
                                     cancelAllTimeouts();
                                     set(buildVictoryState(get()));
+                                    publishAction(action,'complete');
                                     return;
                                 }
                             }
@@ -1205,11 +1203,12 @@ export const useGameStore = create<GameState>((set, get) => ({
                 const cardActions = resolveEffects(card.effects || [], 'player', targetId, allEnemyIds, freshState.rng);
                 // C-1: Replace queue and continue synchronously via the tail call below
                 set((current) => ({
-                    actionQueue: [...cardActions, { type: 'FINALIZE_CARD', payload: { instanceId: card.instanceId } }, ...current.actionQueue.slice(1)],
+                    actionQueue: [...identifyChildren([...cardActions, { type: 'FINALIZE_CARD', payload: { instanceId: card.instanceId } }],action), ...current.actionQueue.slice(1)],
                     isResolving: false
                 }));
                 // C-1: Use trackedTimeout for serialization
                 trackedTimeout(() => get().resolveQueue(), 0);
+                publishAction(action,'complete');
                 return;
             }
             case 'FINALIZE_CARD': {
@@ -1301,6 +1300,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                             actionQueue: [],
                             isResolving: false
                         });
+                        publishAction(action,'complete');
                         return;
                     }
                 } else {
@@ -1309,6 +1309,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     if (updatedEnemies.every(e => e.hp <= 0)) {
                         cancelAllTimeouts();
                         set(buildVictoryState(get()));
+                        publishAction(action,'complete');
                         return;
                     }
                 }
@@ -1372,7 +1373,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                         const intentActions = resolveEffects(enemy.intent.effects, enemy.id, 'player', allEnemyIds, freshState.rng);
                         enemyActions = enemyActions.concat(intentActions);
 
-                        enemyActions.push({ type: 'DELAY', payload: { ms: 400 } });
+                        enemyActions.push({ type: 'DELAY', payload: { ms: 400, beat: 'enemyGap' } });
                     }
                 });
 
@@ -1405,10 +1406,11 @@ export const useGameStore = create<GameState>((set, get) => ({
                 enemyActions.push({ type: 'CALCULATE_INTENTS' });
 
                 set((current) => ({
-                    actionQueue: [...enemyActions, ...current.actionQueue.slice(1)],
+                    actionQueue: [...identifyChildren(enemyActions,action), ...current.actionQueue.slice(1)],
                     isResolving: false
                 }));
                 trackedTimeout(() => get().resolveQueue(), 0);
+                publishAction(action,'complete');
                 return;
             }
             // Fix #3: Use enemy.templateId instead of hardcoded name matching
@@ -1423,13 +1425,13 @@ export const useGameStore = create<GameState>((set, get) => ({
                 set((current) => ({
                     enemies: updatedEnemies,
                     actionQueue: [
-                        { type: 'START_TURN' },
-                        { type: 'STATUS_TICK', payload: { targetId: 'player' } },
+                        ...identifyChildren([{ type: 'START_TURN' }, { type: 'STATUS_TICK', payload: { targetId: 'player' } }],action),
                         ...current.actionQueue.slice(1)
                     ],
                     isResolving: false
                 }));
                 trackedTimeout(() => get().resolveQueue(), 0);
+                publishAction(action,'complete');
                 return;
             }
             case 'START_TURN': {
@@ -1454,14 +1456,16 @@ export const useGameStore = create<GameState>((set, get) => ({
             case 'ANNOUNCE_INTENT': {
                 const { targetId, text } = action.payload;
                 get().addFloatingText({ targetId, value: text, type: 'status' });
-                delay = 650;
+                delay = combatDelay('announcement');
                 break;
             }
             case 'DELAY': {
-                delay = action.payload.ms;
+                delay = action.payload.beat ? combatDelay(action.payload.beat) : action.payload.ms;
                 break;
             }
         }
+
+        publishAction(action,'complete');
 
         // C-1: Advance queue with tracked timeout for proper serialization
         trackedTimeout(() => {
@@ -1558,7 +1562,7 @@ export const useGameStore = create<GameState>((set, get) => ({
             return {
                 hand: [],
                 discardPile: newDiscard,
-                actionQueue: [...state.actionQueue, { type: 'END_TURN' }]
+                actionQueue: [...state.actionQueue, identifyAction({ type: 'END_TURN' })]
             };
         });
         get().resolveQueue();

@@ -5,6 +5,7 @@ import { ACTOR_VISUALS, resolveAppearance } from '../../data/actorVisuals';
 import { locationForFloor } from '../../data/locations';
 import { battleLayout } from '../../rendering/battleLayout';
 import { intentView } from '../../core/intentView';
+import { setCombatMotionMode } from '../../core/combatTiming';
 import { ActorClip } from '../../core/battleVisualModels';
 import { BattleStage } from './BattleStage';
 import { InspectionDialog } from '../ui/CardInspector';
@@ -17,6 +18,7 @@ export function BattleArena() {
     const [size,setSize]=useState({width:320,height:200});
     const [inspected,setInspected]=useState<string|null>(null);
     const [reducedMotion,setReducedMotion]=useState(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
+    useEffect(()=>{setCombatMotionMode(reducedMotion ? 'reduced' : 'normal');return()=>setCombatMotionMode('normal');},[reducedMotion]);
     useEffect(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');const changed=()=>setReducedMotion(media.matches);media.addEventListener('change',changed);return()=>media.removeEventListener('change',changed);},[]);
     useLayoutEffect(()=>{
         const observer=new ResizeObserver(([entry])=>{setSize({width:Math.max(280,entry.contentRect.width),height:Math.max(140,entry.contentRect.height)});useGameStore.getState().resetDragState();});

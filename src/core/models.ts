@@ -115,6 +115,9 @@ export type GameActionType =
     | 'PLAY_ANIMATION';
 
 export interface GameAction {
+    battleId?: string;
+    commandId?: string;
+    actionId?: string;
     type: GameActionType;
     payload?: any;
 }
