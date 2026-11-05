@@ -1,8 +1,8 @@
 {
   "encoding": "WebP lossless, exact RGBA pixel verification",
   "memoryNote": "Decoded RGBA byte estimates; not measured GPU allocation or VRAM. No resizing.",
-  "sourceBytes": 72689365,
-  "runtimeBytes": 50735578,
+  "sourceBytes": 82962599,
+  "runtimeBytes": 57753676,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -11,6 +11,22 @@
       "sourceBytes": 1709853,
       "runtimeBytes": 1147356,
       "decodedRGBABytes": 6294152
+    },
+    {
+      "asset": "actors/alley-rat-defeat-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "sourceBytes": 1720341,
+      "runtimeBytes": 1158214,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "actors/alley-rat-hit-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "sourceBytes": 1877380,
+      "runtimeBytes": 1211856,
+      "decodedRGBABytes": 6291456
     },
     {
       "asset": "actors/alley-rat-idle-v1.webp",
@@ -90,6 +106,22 @@
       "height": 1024,
       "sourceBytes": 1881831,
       "runtimeBytes": 1262346,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "actors/fire-escape-spider-defeat-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "sourceBytes": 1505666,
+      "runtimeBytes": 1008802,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "actors/fire-escape-spider-hit-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "sourceBytes": 1914353,
+      "runtimeBytes": 1253404,
       "decodedRGBABytes": 6291456
     },
     {
@@ -266,6 +298,22 @@
       "height": 1269,
       "sourceBytes": 1576719,
       "runtimeBytes": 1160744,
+      "decodedRGBABytes": 6294240
+    },
+    {
+      "asset": "actors/vending-golem-defeat-v1.webp",
+      "width": 1240,
+      "height": 1269,
+      "sourceBytes": 1589994,
+      "runtimeBytes": 1161830,
+      "decodedRGBABytes": 6294240
+    },
+    {
+      "asset": "actors/vending-golem-hit-v1.webp",
+      "width": 1240,
+      "height": 1269,
+      "sourceBytes": 1665500,
+      "runtimeBytes": 1223992,
       "decodedRGBABytes": 6294240
     },
     {

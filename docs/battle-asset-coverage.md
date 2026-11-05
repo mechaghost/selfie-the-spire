@@ -9,7 +9,7 @@ All five hero archetypes and all 23 monsters have generated idle cutouts in revi
 | hero-volt | Starter/generated archetype | /assets/battle/actors/volt-idle-v1.webp / 1186×1327 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | hero-concrete | Starter/generated archetype | /assets/battle/actors/concrete-idle-v1.webp / 1194×1317 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | hero-smoke | Starter/generated archetype | /assets/battle/actors/smoke-idle-v1.webp / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| alley_rat | Production encounter pool | /assets/battle/actors/alley-rat-idle-v1.webp / 1536×1024 | Built-in image generation; prompts recorded | Idle and attack key poses in review; full clips pending |
+| alley_rat | Production encounter pool | /assets/battle/actors/alley-rat-idle-v1.webp / 1536×1024 | Built-in image generation; prompts recorded | Idle, attack, hit and defeat key poses in review; full clips and pivot review pending |
 | neon_junkie | Production encounter pool | /assets/battle/actors/neon-junkie-idle-v1.webp / 1230×1278 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | graffiti_imp | Production encounter pool | /assets/battle/actors/graffiti-imp-idle-v1.webp / 1230×1278 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | stray_voltage | Production encounter pool | /assets/battle/actors/stray-voltage-idle-v1.webp / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
@@ -21,8 +21,8 @@ All five hero archetypes and all 23 monsters have generated idle cutouts in revi
 | neon_wraith | Production encounter pool | /assets/battle/actors/neon-wraith-idle-v1.webp / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | payphone_phantom | Developer/legacy retained | /assets/battle/actors/payphone-phantom-idle-v1.webp / 1122×1402 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | sewer_slime | Production encounter pool | /assets/battle/actors/sewer-slime-idle-v1.webp / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| fire_escape_spider | Production encounter pool | /assets/battle/actors/fire-escape-spider-idle-v1.webp / 1536×1024 | Built-in image generation; prompts recorded | Idle and attack key poses in review; full clips pending |
-| vending_golem | Developer/legacy retained | /assets/battle/actors/vending-golem-idle-v1.webp / 1239×1269 | Built-in image generation; prompts recorded | Idle and attack key poses in review; full clips pending |
+| fire_escape_spider | Production encounter pool | /assets/battle/actors/fire-escape-spider-idle-v1.webp / 1536×1024 | Built-in image generation; prompts recorded | Idle, attack, hit and defeat key poses in review; full clips and pivot review pending |
+| vending_golem | Developer/legacy retained | /assets/battle/actors/vending-golem-idle-v1.webp / 1239×1269 | Built-in image generation; prompts recorded | Idle, attack, hit and defeat key poses in review; full clips and pivot review pending |
 | neon_sentinel | Production encounter pool | /assets/battle/actors/neon-sentinel-idle-v1.webp / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | chrome_phantom | Production encounter pool | /assets/battle/actors/chrome-phantom-idle-v1.webp / 1024×1536 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | voltage_king | Production encounter pool | /assets/battle/actors/voltage-king-idle-v1.webp / 1330×1182 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |

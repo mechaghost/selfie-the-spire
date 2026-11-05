@@ -300,3 +300,49 @@ Built-in identity-preserving edit of street-runner-idle-v1.png. Transparent alph
 Prompt:
 
 Use case: identity-preserve. Edit the exact supplied Street Runner hero into one CELEBRATE pose: upright with a modest triumphant fist raised just above shoulder, other hand at hip, relaxed confident smile, facing RIGHT. Feet near original positions. No jumping, confetti or effects. Preserve exact face, hair, skin tone, coral jacket, dark tank, teal belt, violet cargo pants, gloves and cream teal sneakers. Preserve hand-painted rendering, lighting, proportions and three-quarter right-facing view. Keep original portrait canvas aspect ratio and head-to-foot scale, bottom baseline near 99 percent. Whole body and extremities visible with transparent padding. True transparent RGBA outside character. No scenery, floor, cast shadow, haze, text, border or UI. Single animation key pose, not a sheet.
+
+## First encounter monster reaction poses
+
+Original transparent PNGs are archived under `art-source/battle/actors`; runtime copies are lossless WebP. These are review-stage key poses, not approved animation clips.
+
+### alley_rat: hit
+
+Reference: `art-source/battle/actors/alley-rat-idle-v1.png`
+Output: `art-source/battle/actors/alley-rat-hit-v1.png`
+
+Use case: identity-preserve. Edit this exact Neo Miami monster into one HIT animation key pose. Preserve charcoal violet fur, ragged coral ears, teal harness, brass charm and tightly curled coral tail. Change only pose: Recoiling toward RIGHT from a blow coming from LEFT, head pulled back, ears flattened, forepaws bent, tense expression. Keep three-quarter LEFT-facing view, exact painted style, proportions, lighting and palette. Preserve source canvas aspect ratio and anatomical scale; do not enlarge a lowered body to fill the frame. Ground-contact baseline near 94 percent height. Whole creature visible with transparent padding. True transparent RGBA background, no scenery, floor, cast shadow, haze, motion effects, text, UI or extra characters. Single pose only.
+
+### alley_rat: defeat
+
+Reference: `art-source/battle/actors/alley-rat-idle-v1.png`
+Output: `art-source/battle/actors/alley-rat-defeat-v1.png`
+
+Use case: identity-preserve. Edit this exact Neo Miami monster into one DEFEAT animation key pose. Preserve charcoal violet fur, ragged coral ears, teal harness, brass charm and tightly curled coral tail. Change only pose: Exhausted collapsed crouch resting on belly, paws folded close, head lowered, eyes closed, tail relaxed in a close curl. No injury or gore. Keep three-quarter LEFT-facing view, exact painted style, proportions, lighting and palette. Preserve source canvas aspect ratio and anatomical scale; do not enlarge a lowered body to fill the frame. Ground-contact baseline near 94 percent height. Whole creature visible with transparent padding. True transparent RGBA background, no scenery, floor, cast shadow, haze, motion effects, text, UI or extra characters. Single pose only.
+
+### vending_golem: hit
+
+Reference: `art-source/battle/actors/vending-golem-idle-v1.png`
+Output: `art-source/battle/actors/vending-golem-hit-v1.png`
+
+Use case: identity-preserve. Edit this exact Neo Miami monster into one HIT animation key pose. Preserve teal coral vending machine torso, cracked can display, amber eyes in dispensing slot and scrap metal limbs. Change only pose: Torso tilts backward toward RIGHT, arms lifted slightly in startled recoil, knees bent, feet braced. Keep three-quarter LEFT-facing view, exact painted style, proportions, lighting and palette. Preserve source canvas aspect ratio and anatomical scale; do not enlarge a lowered body to fill the frame. Ground-contact baseline near 94 percent height. Whole creature visible with transparent padding. True transparent RGBA background, no scenery, floor, cast shadow, haze, motion effects, text, UI or extra characters. Single pose only.
+
+### vending_golem: defeat
+
+Reference: `art-source/battle/actors/vending-golem-idle-v1.png`
+Output: `art-source/battle/actors/vending-golem-defeat-v1.png`
+
+Use case: identity-preserve. Edit this exact Neo Miami monster into one DEFEAT animation key pose. Preserve teal coral vending machine torso, cracked can display, amber eyes in dispensing slot and scrap metal limbs. Change only pose: Powered-down slumped kneel, one knee on ground, one heavy hand resting beside it, machine torso tilted forward, eye lights dim. No detached pieces. Keep three-quarter LEFT-facing view, exact painted style, proportions, lighting and palette. Preserve source canvas aspect ratio and anatomical scale; do not enlarge a lowered body to fill the frame. Ground-contact baseline near 94 percent height. Whole creature visible with transparent padding. True transparent RGBA background, no scenery, floor, cast shadow, haze, motion effects, text, UI or extra characters. Single pose only.
+
+### fire_escape_spider: hit
+
+Reference: `art-source/battle/actors/fire-escape-spider-idle-v1.png`
+Output: `art-source/battle/actors/fire-escape-spider-hit-v1.png`
+
+Use case: identity-preserve. Edit this exact Neo Miami monster into one HIT animation key pose. Preserve eight iron railing legs, coral joints, violet graffiti abdomen, ladder and amber eye cluster. Change only pose: Front legs bent protectively, head recoils toward RIGHT from blow on LEFT, rear legs brace, abdomen tipped slightly backward. Exactly eight legs. Keep three-quarter LEFT-facing view, exact painted style, proportions, lighting and palette. Preserve source canvas aspect ratio and anatomical scale; do not enlarge a lowered body to fill the frame. Ground-contact baseline near 94 percent height. Whole creature visible with transparent padding. True transparent RGBA background, no scenery, floor, cast shadow, haze, motion effects, text, UI or extra characters. Single pose only.
+
+### fire_escape_spider: defeat
+
+Reference: `art-source/battle/actors/fire-escape-spider-idle-v1.png`
+Output: `art-source/battle/actors/fire-escape-spider-defeat-v1.png`
+
+Use case: identity-preserve. Edit this exact Neo Miami monster into one DEFEAT animation key pose. Preserve eight iron railing legs, coral joints, violet graffiti abdomen, ladder and amber eye cluster. Change only pose: Body settled low on ground with all eight legs folded inward in a compact resting silhouette, head lowered, eye lights dim. No detached pieces or gore. Keep three-quarter LEFT-facing view, exact painted style, proportions, lighting and palette. Preserve source canvas aspect ratio and anatomical scale; do not enlarge a lowered body to fill the frame. Ground-contact baseline near 94 percent height. Whole creature visible with transparent padding. True transparent RGBA background, no scenery, floor, cast shadow, haze, motion effects, text, UI or extra characters. Single pose only.

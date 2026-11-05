@@ -51,6 +51,12 @@ ACTOR_VISUALS['hero-neon'].keyPoses!.hit = {imageUrl:'/assets/battle/actors/stre
 ACTOR_VISUALS['hero-neon'].keyPoses!.guard = {imageUrl:'/assets/battle/actors/street-runner-guard-v1.webp',footAnchor:[.5,.99]};
 ACTOR_VISUALS['hero-neon'].keyPoses!.defeat = {imageUrl:'/assets/battle/actors/street-runner-defeat-v1.webp',footAnchor:[.5,.99]};
 ACTOR_VISUALS['hero-neon'].keyPoses!.celebrate = {imageUrl:'/assets/battle/actors/street-runner-celebrate-v1.webp',footAnchor:[.5,.99]};
+ACTOR_VISUALS.alley_rat.keyPoses!.hit = {imageUrl:'/assets/battle/actors/alley-rat-hit-v1.webp',footAnchor:[.5,.94]};
+ACTOR_VISUALS.alley_rat.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/alley-rat-defeat-v1.webp',footAnchor:[.5,.94]};
+ACTOR_VISUALS.vending_golem.keyPoses!.hit = {imageUrl:'/assets/battle/actors/vending-golem-hit-v1.webp',footAnchor:[.5,.94]};
+ACTOR_VISUALS.vending_golem.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/vending-golem-defeat-v1.webp',footAnchor:[.5,.94]};
+ACTOR_VISUALS.fire_escape_spider.keyPoses!.hit = {imageUrl:'/assets/battle/actors/fire-escape-spider-hit-v1.webp',footAnchor:[.5,.94]};
+ACTOR_VISUALS.fire_escape_spider.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/fire-escape-spider-defeat-v1.webp',footAnchor:[.5,.94]};
 Object.values(ACTOR_VISUALS).forEach(validateActorVisual);
 export function resolveAppearance(value: CombatAppearance | undefined, archetype = 'neon'): ActorVisual {
     if (value?.version === 1 && ACTOR_VISUALS[value.actorVisualId]?.id?.startsWith('hero-')) return ACTOR_VISUALS[value.actorVisualId];
