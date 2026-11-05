@@ -46,25 +46,28 @@ export class BattleScene {
             this.app.stage.eventMode = 'none';
             this.app.stage.addChild(this.ground,this.backdrop,this.world);
             this.host.appendChild(this.app.canvas);
-            await Promise.all(this.snapshot.location.layers.map(async layer=>{
+            this.backdrop.sortableChildren=true;
+            this.world.sortableChildren=true;
+            void Promise.all(this.snapshot.location.layers.map(async layer=>{
                 const lease=battleTextures.acquire(layer.url);this.leases.push(lease);
                 try {
                     const texture=await lease.ready;if(this.disposed)return;
-                    const sprite=new Sprite(texture);this.backgroundSprites.push(sprite);this.backdrop.addChild(sprite);
+                    const sprite=new Sprite(texture);sprite.zIndex=layer.depth;this.backgroundSprites.push(sprite);this.backdrop.addChild(sprite);
+                    this.update(this.snapshot);
                 } catch { /* Technical ground remains usable while background art is unavailable. */ }
             }));
             if(this.disposed)return false;
-            await Promise.all(this.snapshot.actors.map(async actor => {
+            await Promise.all(this.snapshot.actors.map(async (actor,index) => {
                 const lease = battleTextures.acquire(actor.visual.fallbackImageUrl); this.leases.push(lease);
                 const texture = await lease.ready;
                 if (this.disposed) return;
-                const shadow = new Graphics(); this.shadows.set(actor.id,shadow); this.world.addChild(shadow);
-                const sprite = new Sprite(texture); sprite.anchor.set(...actor.visual.footAnchor);
+                const shadow = new Graphics(); shadow.zIndex=index*2; this.shadows.set(actor.id,shadow); this.world.addChild(shadow);
+                const sprite = new Sprite(texture); sprite.zIndex=index*2+1; sprite.anchor.set(...actor.visual.footAnchor);
                 this.sprites.set(actor.id,sprite); this.world.addChild(sprite);
                 this.poses.set(`${actor.id}:idle`,texture);
-                await Promise.all(Object.entries(actor.visual.keyPoses ?? {}).map(async ([clip,pose])=>{
+                void Promise.all(Object.entries(actor.visual.keyPoses ?? {}).map(async ([clip,pose])=>{
                     const poseLease=battleTextures.acquire(pose.imageUrl);this.leases.push(poseLease);
-                    try {const poseTexture=await poseLease.ready;if(!this.disposed)this.poses.set(`${actor.id}:${clip}`,poseTexture);}
+                    try {const poseTexture=await poseLease.ready;if(!this.disposed){this.poses.set(`${actor.id}:${clip}`,poseTexture);this.update(this.snapshot);}}
                     catch { /* Idle remains usable if an optional key pose fails to load. */ }
                 }));
             }));

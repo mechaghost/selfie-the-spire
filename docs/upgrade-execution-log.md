@@ -135,3 +135,11 @@ Generated identity-preserving attack edits for Vending Golem and Fire Escape Spi
 The first composite encounter now has attack key poses for hero, Rat, Golem and Spider. Added finite key-pose selection: idle during initial anticipation, attack from 80–240ms, idle through late recovery and any stale attack snapshot. This also prevents a hidden-tab return from holding a strike indefinitely. Motion tests exercise interval boundaries and reduced-motion fallback. Renderer assets, TypeScript, production build and whitespace checks pass.
 
 These are key poses, not full animation clips or a finished-encounter gate pass. Hit/guard/defeat/celebrate artwork, pivot consistency in playback, full battle video, mobile art envelope checks and release gates remain open. No deployment or browser review in this pass.
+
+## Independent optional-art streaming
+
+Found scene readiness awaited every optional key pose and the full backdrop before actors could become ready, allowing missing optional assets to impose the 12-second image timeout. Background layers now stream independently; mandatory actor idle textures determine scene readiness, while optional poses load without blocking and fall back to idle on failure. Late arrivals reframe/update the current scene only while owned. The existing technical ground is visible while backgrounds load.
+
+Fixed load-order-dependent composition by enabling child sorting and assigning stable roster z-indices to actor/shadow pairs and authored depth indices to backdrop layers. Network completion order no longer defines who draws in front.
+
+Added controlled renderer tests with a minimal Pixi double and manually resolved/rejected Image loads. Tests cover delayed mandatory actor readiness, unresolved optional textures, reversed actor/background completion order, optional-pose failure, disposal during optional loading, mandatory actor failure, late-load disposal, listener removal and zero remaining leases. These exercise BattleScene directly but do not certify actual GPU behavior, visual layering or mobile frame times. Existing renderer asset tests, TypeScript, build and whitespace checks pass. No release deployment in this pass.
