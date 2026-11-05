@@ -260,3 +260,43 @@ Built-in image edit; identity reference: `fire-escape-spider-idle-v1.png`. Trans
 Prompt:
 
 Use case: identity-preserve. Edit this exact original Neo Miami monster idle sprite into one ATTACK key pose. Preserve character identity, proportions, materials, painted style, lighting and palette. Change only pose into a leftward striking attack: two foremost legs raised and extended toward screen LEFT, hooked fangs open, body driven low forward, other six legs bracing. Preserve eight total wrought-iron railing legs, coral joints, violet graffiti abdomen, amber eyes and ladder structure. Entire creature including all extremities visible with generous transparent margin, three-quarter facing LEFT. Keep source canvas aspect ratio and approximate body size; grounded feet baseline near 94 percent of canvas height. True transparent RGBA outside creature. No scenery, background, shadow, glow haze, motion trails, text, UI or extra characters. Single pose, not a sheet.
+
+## Street Runner hit key pose
+
+Asset: `public/assets/battle/actors/street-runner-hit-v1.png`
+
+Built-in identity-preserving edit of street-runner-idle-v1.png. Transparent alpha verified; playback review pending.
+
+Prompt:
+
+Use case: identity-preserve. Edit the exact supplied Street Runner hero into one HIT reaction: torso recoils slightly toward LEFT, shoulders turn away from a blow coming from RIGHT, one arm drawn protectively across ribs, knees flexed, strained determined expression. Both feet stay near their original locations. No wound, blood or impact effects. Preserve exact face, hair, skin tone, coral jacket, dark tank, teal belt, violet cargo pants, gloves and cream teal sneakers. Preserve hand-painted rendering, lighting, proportions and three-quarter right-facing view. Keep original portrait canvas aspect ratio and head-to-foot scale, bottom baseline near 99 percent. Whole body and extremities visible with transparent padding. True transparent RGBA outside character. No scenery, floor, cast shadow, haze, text, border or UI. Single animation key pose, not a sheet.
+
+## Street Runner guard key pose
+
+Asset: `public/assets/battle/actors/street-runner-guard-v1.png`
+
+Built-in identity-preserving edit of street-runner-idle-v1.png. Transparent alpha verified; playback review pending.
+
+Prompt:
+
+Use case: identity-preserve. Edit the exact supplied Street Runner hero into one GUARD pose: forearms crossed tightly in front of upper torso and face, chin tucked, knees bent, braced against a blow coming from RIGHT. Both feet near original locations. Confident protective stance. No shield object or visual effects. Preserve exact face, hair, skin tone, coral jacket, dark tank, teal belt, violet cargo pants, gloves and cream teal sneakers. Preserve hand-painted rendering, lighting, proportions and three-quarter right-facing view. Keep original portrait canvas aspect ratio and head-to-foot scale, bottom baseline near 99 percent. Whole body and extremities visible with transparent padding. True transparent RGBA outside character. No scenery, floor, cast shadow, haze, text, border or UI. Single animation key pose, not a sheet.
+
+## Street Runner defeat key pose
+
+Asset: `public/assets/battle/actors/street-runner-defeat-v1.png`
+
+Built-in identity-preserving edit of street-runner-idle-v1.png. Transparent alpha verified; playback review pending.
+
+Prompt:
+
+Use case: identity-preserve. Edit the exact supplied Street Runner hero into one DEFEAT final pose: kneeling on one knee, torso slumped forward slightly, one gloved hand braced on the ground, other hand resting on raised knee, head bowed in exhaustion. Alive but defeated, no injuries or blood. Maintain anatomical scale from reference; do not enlarge kneeling body to fill canvas, leave more empty space above. Preserve exact face, hair, skin tone, coral jacket, dark tank, teal belt, violet cargo pants, gloves and cream teal sneakers. Preserve hand-painted rendering, lighting, proportions and three-quarter right-facing view. Keep original portrait canvas aspect ratio and head-to-foot scale, bottom baseline near 99 percent. Whole body and extremities visible with transparent padding. True transparent RGBA outside character. No scenery, floor, cast shadow, haze, text, border or UI. Single animation key pose, not a sheet.
+
+## Street Runner celebrate key pose
+
+Asset: `public/assets/battle/actors/street-runner-celebrate-v1.png`
+
+Built-in identity-preserving edit of street-runner-idle-v1.png. Transparent alpha verified; playback review pending.
+
+Prompt:
+
+Use case: identity-preserve. Edit the exact supplied Street Runner hero into one CELEBRATE pose: upright with a modest triumphant fist raised just above shoulder, other hand at hip, relaxed confident smile, facing RIGHT. Feet near original positions. No jumping, confetti or effects. Preserve exact face, hair, skin tone, coral jacket, dark tank, teal belt, violet cargo pants, gloves and cream teal sneakers. Preserve hand-painted rendering, lighting, proportions and three-quarter right-facing view. Keep original portrait canvas aspect ratio and head-to-foot scale, bottom baseline near 99 percent. Whole body and extremities visible with transparent padding. True transparent RGBA outside character. No scenery, floor, cast shadow, haze, text, border or UI. Single animation key pose, not a sheet.
