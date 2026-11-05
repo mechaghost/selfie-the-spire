@@ -141,9 +141,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
 
     const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
         // In scroll layouts, tapping opens the inspector; native swipes scroll the hand.
-        if ((window.matchMedia('(max-width: 768px)').matches &&
-            (cardRef.current?.closest('.hand-overflow') || window.matchMedia('(max-height: 650px)').matches)) ||
-            window.matchMedia('(max-height: 500px) and (min-width: 501px)').matches) return;
+        if (window.matchMedia('(max-width: 768px), (max-height: 500px)').matches) return;
         if (!canPlay || !isDraggable || !canInteract()) return;
         refreshEnemyBounds();
 

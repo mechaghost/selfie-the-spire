@@ -24,8 +24,8 @@
   --hand-height: 280px;
 
   /* Card dimensions & spacing */
-  --card-width: 70px;
-  --card-height: 100px;
+  --card-width: 144px;
+  --card-height: 216px;
   --card-spacing: 70px;
   --card-half-width: 35px;
   --card-hover-lift: -20px;
@@ -45,10 +45,10 @@
 @media (min-width: 769px) {
   :root {
     --topbar-height: 60px;
-    --hand-height: 240px;
+    --hand-height: 310px;
 
-    --card-width: 150px;
-    --card-height: 210px;
+    --card-width: 174px;
+    --card-height: 250px;
     --card-spacing: 100px;
     --card-half-width: 75px;
     --card-hover-lift: -50px;

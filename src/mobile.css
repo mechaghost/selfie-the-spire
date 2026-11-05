@@ -1,10 +1,7 @@
 /* Phone and short-viewport corrections shared by the game screens. */
-.combat-result-backdrop { box-sizing: border-box; align-items: safe center; }
-.combat-result-card { box-sizing: border-box; min-width: 0; width: min(100%, 680px); flex-shrink: 0; }
-.reward-card-row { max-width: 100%; flex-wrap: wrap; }
 .reveal-screen > * { flex-shrink: 0; }
 .reveal-cards { gap: 16px 12px; padding: 8px 0 20px; }
-.reveal-card-slot .card { --card-width: 100px; --card-height: 148px; width: 100px; height: 148px; }
+.reveal-card-slot .card { --card-width: 144px; --card-height: 216px; width: 144px; height: 216px; }
 @media (max-width: 768px), (max-height: 500px) {
     button, [role="button"], summary { -webkit-tap-highlight-color: #83d9d033; }
     .selfie-capture-btn, .selfie-upload-btn, .combat-result-btn, .restart-button, .retry-seed-button,
@@ -31,15 +28,12 @@
     .combat-stage .entity-panel.enemy { width: calc((100% - 12px) / 3); min-width: 0; flex-shrink: 0; }
     .combat-stage .entities-container { padding-left: 10px; padding-right: 10px; padding-bottom: 58px; }
     .combat-stage .entity-panel.player .entity-avatar { width: 60px; height: 60px; }
-    .reveal-card-slot .card { width: 120px; height: 172px; }
-    .combat-result-card { padding: 18px 10px; }
-    .reward-card-row { gap: 12px; }
 }
 /* Landscape phones need their own geometry, independent of desktop width rules. */
 @media (max-height: 500px) and (min-width: 501px) {
-    .combat-stage { --topbar-height: 50px; --hand-height: 140px; }
+    .combat-stage { --topbar-height: 50px; --hand-height: 204px; }
     .combat-stage .arena-location, .combat-stage .hand-caption { display: none; }
-    .combat-stage .entities-container { flex-direction: row; gap: 30px; padding: 4px 12px 54px; min-height: 0; }
+    .combat-stage .entities-container { flex-direction: row; gap: 30px; padding: 4px 12px 6px; min-height: 0; }
     .combat-stage .enemy-zone { flex-wrap: nowrap; gap: 10px; padding: 0; }
     .combat-stage .entity-panel.enemy { width: 90px; padding: 3px; gap: 2px; }
     .combat-stage .entity-avatar { width: 46px; height: 46px; }
@@ -52,12 +46,6 @@
     .combat-stage .energy-orb { width: 40px; height: 40px; font-size: 18px; padding-top: 4px; }
     .combat-stage .turn-phase-banner { left: auto; right: 10px; top: 52px; transform: none; font-size: 10px; }
     .combat-stage .deck-table { padding: 0 12px; }
-    .hand-container, .hand-container.hand-overflow { --card-width: 84px; --card-height: 116px; height: 100%; margin: 0; display: flex; gap: 12px; align-items: center; overflow-x: auto; overflow-y: hidden; padding: 10px; box-sizing: border-box; pointer-events: auto; }
-    .hand-container .card-slot { position: relative; left: auto; bottom: auto; flex-shrink: 0; }
-    .hand-container .card { transform: none !important; touch-action: pan-x; padding: 3px; }
-    .hand-container .card-name { font-size: 10px; height: 16px; }
-    .hand-container .card-desc { font-size: 8px; }
-    .hand-container .card-cost { width: 20px; height: 20px; font-size: 10px; }
     .selfie-screen .generating-overlay { flex-direction: row; gap: 36px; max-width: 700px; }
     .selfie-screen .generating-portal { width: 150px; height: 150px; flex-shrink: 0; }
     .selfie-screen .generating-content { max-width: 340px; }

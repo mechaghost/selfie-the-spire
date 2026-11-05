@@ -353,7 +353,7 @@
     }
 
     .table-controls {
-        bottom: calc(var(--hand-height) - 50px);
+        bottom: calc(var(--hand-height) + 8px);
         padding: 0 4rem;
     }
 
@@ -379,15 +379,15 @@
     }
 }
 
-/* Reserve enough table space for two complete mobile card rows. */
+/* A larger, single-row hand keeps the battlefield visible. */
 @media (max-width: 768px) {
-    .combat-stage { --hand-height: 310px; height: 100dvh; }
+    .combat-stage { --hand-height: 248px; height: 100dvh; }
 }
 @media (max-width: 768px) {
     .table-controls { bottom: calc(var(--hand-height) + 8px); }
 }
 @media (max-width: 768px) and (max-height: 650px) {
-    .combat-stage { --hand-height: 170px; }
+    .combat-stage { --hand-height: 208px; }
 }
 .combat-stage { grid-template-columns: minmax(0, 1fr); }
 .deck-table, .entities-container { min-width: 0; }
@@ -429,3 +429,6 @@
 }
 
 @media (max-width: 600px) { .turn-phase-banner { left: auto; right: 12px; transform: none; padding: .25rem .5rem; letter-spacing: 1px; } }
+
+.hand-scroll-hint { display: none; font: inherit; }
+@media (max-width: 768px) { .hand-scroll-hint { display: inline; } }

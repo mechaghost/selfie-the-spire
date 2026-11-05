@@ -127,7 +127,7 @@ export function CombatView() {
                 </div>
             </div>
 
-            <div className="hand-caption" aria-hidden="true"><span>Your hand</span><span>Inspect a card. Make your move.</span></div>
+            <div className="hand-caption" aria-hidden="true"><span>Your hand<small className="hand-scroll-hint"> · swipe</small></span><span>Inspect a card. Make your move.</span></div>
             <div className={`deck-table ${isDisabled ? 'disabled' : ''}`}>
                 <HandHUD />
             </div>

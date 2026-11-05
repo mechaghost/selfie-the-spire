@@ -2,7 +2,7 @@
 .hand-container {
     position: relative; width: 100%; height: var(--card-height);
     margin-bottom: 20px; pointer-events: none; z-index: var(--z-hand);
-    --hand-step: min(150px, calc((100vw - 240px - var(--card-width)) / var(--hand-gaps)));
+    --hand-step: min(202px, calc((100vw - 240px - var(--card-width)) / var(--hand-gaps)));
 }
 .card-slot {
     position: absolute;
@@ -58,7 +58,7 @@
 }
 .card-desc {
     flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center;
-    text-align: center; font-size: 11px; line-height: 1.25;
+    text-align: center; font-size: 13px; line-height: 1.3;
     overflow: hidden; overflow-wrap: anywhere; padding: 2px;
 }
 .card.hero-card .card-name { color: #ffe2a0; }
@@ -88,38 +88,37 @@
     100% { opacity: 0; transform: translate(calc(50vw - 70px), -90px) rotate(14deg) scale(.45); }
 }
 @media (min-width: 769px) {
-    .hand-container { --card-width: 160px; --card-height: 224px; }
+    .hand-container { --card-width: 190px; --card-height: 270px; }
 }
 @media (max-width: 768px) {
-    .hand-container { --card-width: 90px; --card-height: 132px; height: 100%; margin-bottom: 0; }
-    .card-slot {
-        left: calc(50% + var(--row-offset) * (var(--card-width) + 12px) - var(--card-width) / 2);
-        bottom: calc(50% - (min(var(--total-rows), 2) * (var(--card-height) + 12px) - 12px) / 2 + var(--row-index) * (var(--card-height) + 12px));
+    .card { border-radius: 9px; padding: 5px; gap: 3px; }
+    .card-name { height: 24px; font-size: 15px; }
+    .card-cost { width: 26px; height: 26px; font-size: 13px; top: -7px; left: -6px; }
+    .card-desc { font-size: 12px; line-height: 1.3; }
+    .card-type-badge { font-size: 8px; padding: 2px 4px; }
+}
+/* Keep a readable card size as the hand grows. Swipe instead of shrinking. */
+@media (max-width: 768px), (max-height: 500px) {
+    .hand-container, .hand-container.hand-overflow {
+        --card-width: 152px; --card-height: 220px;
+        height: 100%; margin: 0; display: flex; align-items: center;
+        gap: 16px; overflow-x: auto; overflow-y: hidden;
+        padding: 12px 16px; box-sizing: border-box; pointer-events: auto;
+        scroll-snap-type: x proximity; scroll-padding-inline: 16px;
+        overscroll-behavior-x: contain;
     }
-    .hand-container .card { transform: translateY(var(--row-lift)) rotate(var(--row-rotation)) !important; }
-    .card { border-radius: 7px; padding: 3px; gap: 2px; }
-    .card-name { height: 17px; font-size: 11px; }
-    .card-cost { width: 21px; height: 21px; font-size: 10px; top: -6px; left: -5px; }
-    .card-desc { font-size: 9px; line-height: 1.15; }
-    .card-type-badge { font-size: 6px; padding: 2px 3px; }
-    .hand-container .card.is-targeting, .hand-container .card:focus-visible { transform: translateY(-8px) scale(1.05) !important; }
-    .hand-container .card.is-drag-moving { transform: translate(var(--drag-dx), var(--drag-dy)) scale(1.04) !important; }
-    .hand-overflow { display: grid; grid-template-columns: repeat(3, 90px); justify-content: center; align-content: start; gap: 14px 12px; overflow-y: auto; padding: 14px 5px; box-sizing: border-box; pointer-events: auto; }
-    .hand-overflow .card-slot { position: relative; left: auto; bottom: auto; }
-    .hand-overflow .card { touch-action: pan-y; }
+    .hand-container .card-slot { position: relative; left: auto; bottom: auto; flex-shrink: 0; scroll-snap-align: start; }
+    .hand-container .card, .hand-container .card:hover, .hand-container .card:focus-visible { transform: none !important; touch-action: pan-x; }
+    .hand-container .card:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+}
+@media (max-width: 768px) and (max-height: 650px), (max-height: 500px) {
+    .hand-container, .hand-container.hand-overflow { --card-width: 144px; --card-height: 180px; }
+    .hand-container .card-artwork-wrap, .hand-container .card-artwork-placeholder { height: 56px; aspect-ratio: auto; }
+    .hand-container .card-name { height: 24px; font-size: 15px; }
+    .hand-container .card-desc { font-size: 12px; line-height: 1.3; }
 }
 @media (prefers-reduced-motion: reduce) {
     .card-deal-motion { animation: none; }
     .card-slot, .card { transition: none; }
     .card-playing-wrapper { animation: none; opacity: 0; }
-}
-/* Short phones use a scrollable row instead of clipping the battlefield. */
-@media (max-width: 768px) and (max-height: 650px) {
-    .hand-container, .hand-container.hand-overflow {
-        display: flex; align-items: center; justify-content: flex-start;
-        gap: 12px; overflow-x: auto; overflow-y: hidden; padding: 12px;
-        box-sizing: border-box; pointer-events: auto;
-    }
-    .hand-container .card-slot { position: relative; left: auto; bottom: auto; flex-shrink: 0; }
-    .hand-container .card { transform: none !important; touch-action: pan-x; }
 }

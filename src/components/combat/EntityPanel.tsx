@@ -208,6 +208,14 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
     return (
         <div
             className={`entity-panel enemy ${threatClass} ${isTargeted ? 'targeted-panel' : ''} ${isDead ? 'is-dead' : ''}`}
+            role={isDead ? undefined : 'button'}
+            tabIndex={isDead ? undefined : 0}
+            aria-label={isDead ? undefined : `Inspect ${entity.name}'s next move`}
+            onKeyDown={event => {
+                if (!isDead && (event.key === 'Enter' || event.key === ' ')) {
+                    event.preventDefault(); event.stopPropagation(); onInspect?.(entity.id);
+                }
+            }}
             onClick={(e) => { e.stopPropagation(); if (!isDead) onInspect?.(entity.id); }}
         >
             {/* Tap-to-inspect highlight */}
@@ -229,6 +237,7 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
                     {intent.type === 'AttackDefend' && (
                         <div className="intent-item defend">
                             <ShieldPlus size={14} />
+                            <span className="intent-value">{intent.block}</span>
                         </div>
                     )}
                     {/* M-4: Show block value when Buff intent includes block */}
@@ -243,7 +252,7 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
                             )}
                         </div>
                     )}
-                    {intent.type === 'Debuff' && (
+                    {intent.type.includes('Debuff') && (
                         <div className="intent-item debuff">
                             <Zap size={16} />
                         </div>

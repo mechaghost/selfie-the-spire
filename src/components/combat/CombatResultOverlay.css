@@ -1,258 +1,61 @@
-/* === Mobile-first base styles === */
-
 .combat-result-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Above table controls (150) and the enemy tooltip (200) */
-    z-index: 300;
-    animation: backdrop-fade 0.3s ease-out forwards;
-    padding: 1rem;
-    overflow-y: auto;
+    position: fixed; inset: 0; z-index: 300;
+    display: flex; justify-content: center; align-items: safe center;
+    box-sizing: border-box; padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+    overflow-y: auto; overscroll-behavior: contain;
+    background: #030813dc; backdrop-filter: blur(6px);
+    animation: resultFade 180ms ease-out;
 }
-
-@keyframes backdrop-fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 .combat-result-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1.5rem;
-    border-radius: 8px;
-    max-width: 100%;
-    animation: result-slide-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    box-sizing: border-box; width: min(100%, 680px); min-width: 0; flex-shrink: 0;
+    padding: clamp(16px, 4vw, 32px); border: 1px solid #73cdbb80; border-radius: 18px;
+    background: linear-gradient(150deg, #142c33, #101523 70%); color: #f1eee9;
+    box-shadow: 0 24px 80px #0008; text-align: center;
+    display: flex; flex-direction: column; gap: 24px;
+    animation: resultFade 240ms ease-out;
 }
-
-@keyframes result-slide-up {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Victory theme */
-.combat-result-card.victory {
-    background: rgba(13, 26, 13, 0.95);
-    border: 2px solid var(--color-accent-green);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(57, 255, 20, 0.1);
-}
-
-/* Defeat theme */
-.combat-result-card.defeat {
-    background: rgba(26, 13, 20, 0.95);
-    border: 2px solid var(--color-accent-red);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 56, 96, 0.1);
-}
-
-.combat-result-icon {
-    margin-bottom: 0.75rem;
-}
-
-.combat-result-icon.victory {
-    color: var(--color-accent-green);
-    filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.5));
-}
-
-.combat-result-icon.defeat {
-    color: var(--color-accent-red);
-    filter: drop-shadow(0 0 10px rgba(255, 56, 96, 0.5));
-}
-
-.combat-result-title {
-    font-family: var(--font-family-display);
-    font-size: 2rem;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
-}
-
-.combat-result-title.victory {
-    color: var(--color-accent-green);
-}
-
-.combat-result-title.defeat {
-    color: var(--color-accent-red);
-}
-
-.combat-result-stats {
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-    margin: 0.75rem 0 1.25rem 0;
-}
-
-.combat-result-stats strong {
-    color: white;
-}
-
-.combat-result-gold {
-    color: var(--color-accent-amber);
-}
-
-/* === Card rewards (victory loot) === */
-
-.reward-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1.25rem;
-}
-
-.reward-heading {
-    font-family: var(--font-family-display);
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--color-accent-amber);
-    text-shadow: 0 0 10px rgba(255, 179, 71, 0.4);
-    margin: 0 0 0.2rem;
-}
-
-/* Elite/boss loot comes pre-upgraded */
-.reward-heading.prime {
-    color: var(--color-accent-violet);
-    text-shadow: 0 0 12px rgba(185, 103, 255, 0.55);
-}
-
-.reward-hint {
-    font-size: 0.65rem;
-    color: var(--color-text-secondary);
-    margin: 0 0 0.85rem;
-}
-
+.combat-result-card.defeat { border-color: var(--color-accent-red); }
+.combat-result-header { display: grid; grid-template-columns: 36px 1fr; gap: 4px 12px; text-align: left; align-items: center; }
+.combat-result-icon { width: 32px; height: 32px; grid-row: span 2; }
+.combat-result-icon.victory, .combat-result-title.victory { color: #8ee4c7; }
+.combat-result-icon.defeat, .combat-result-title.defeat { color: var(--color-accent-red); }
+.combat-result-title { font: 32px/1.1 var(--font-family-display); letter-spacing: 2px; margin: 0; }
+.combat-result-stats { margin: 0; color: #c3c9d1; font-size: 13px; }
+.combat-result-gold { color: #ffd18c; }
+.reward-section { min-width: 0; }
+.reward-heading { font: 24px/1.2 var(--font-family-display); color: #ffd18c; margin: 0 0 8px; letter-spacing: 1px; }
+.reward-heading.prime { color: #d6afff; }
+.reward-hint { margin: 0 auto 20px; max-width: 42ch; font-size: 12px; line-height: 1.6; color: #c3c9d1; }
 .reward-card-row {
-    display: flex;
-    gap: 0.6rem;
-    justify-content: center;
-    /* Compact cards with a gentle hover inside the modal */
-    --card-width: 92px;
-    --card-height: 134px;
-    --card-hover-lift: -6px;
-    --card-hover-scale: 1.05;
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 20px 16px; padding: 8px 4px;
+    --card-width: 164px; --card-height: 230px;
 }
-
-.reward-card-slot {
-    animation: rewardCardIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.reward-card-slot .card {
-    cursor: pointer;
-}
-
-.reward-card-slot:hover .card {
-    border-color: #fff;
-}
-
-@keyframes rewardCardIn {
-    0% {
-        opacity: 0;
-        transform: translateY(24px) scale(0.6) rotate(-5deg);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotate(0deg);
-    }
-}
-
+.reward-card-slot { flex: 0 0 var(--card-width); }
+.reward-card-slot .card { touch-action: pan-y; }
 .combat-result-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px;
+    border-top: 1px solid #ffffff1f; padding-top: 20px;
 }
-
-.combat-result-btn {
-    font-family: var(--font-family-display);
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    font-weight: bold;
+.combat-result-btn { min-height: 44px; padding: 12px 18px; border-radius: 8px; font: 16px/1.2 var(--font-family-display); cursor: pointer; }
+.combat-result-btn.primary { border: 0; background: #8ee4c7; color: #101523; }
+.combat-result-btn.primary.defeat { background: var(--color-accent-red); color: white; }
+.combat-result-btn.secondary { background: #ffffff08; color: #e0e5ec; border: 1px solid #a3b1c080; }
+.combat-result-btn:hover { filter: brightness(1.15); }
+.combat-result-btn:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+@media (max-width: 600px) {
+    .reward-card-row { --card-width: 144px; --card-height: 216px; gap: 20px 14px; }
+    .reward-card-row .card-name { font-size: 15px; }
+    .reward-card-row .card-desc { font-size: 12px; }
+    .combat-result-card { gap: 20px; }
 }
-
-.combat-result-btn.primary.victory {
-    background-color: var(--color-accent-green);
-    color: #0d0d1a;
-    border: none;
+@media (max-width: 360px) {
+    .combat-result-backdrop { padding-left: 10px; padding-right: 10px; }
+    .combat-result-card { padding: 16px 12px; }
+    .reward-card-row { --card-width: 144px; --card-height: 216px; gap: 18px 14px; padding-inline: 0; }
 }
-
-.combat-result-btn.primary.defeat {
-    background-color: var(--color-accent-red);
-    color: white;
-    border: none;
+@media (max-height: 500px) and (min-width: 601px) {
+    .combat-result-card { padding: 16px 24px; gap: 16px; }
+    .reward-card-row { --card-width: 144px; --card-height: 216px; }
 }
-
-.combat-result-btn.primary:hover {
-    filter: brightness(1.2);
-    transform: scale(1.05);
-}
-
-.combat-result-btn.secondary {
-    background-color: transparent;
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-text-secondary);
-}
-
-.combat-result-btn.secondary:hover {
-    color: white;
-    border-color: white;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* === Desktop overrides === */
-
-@media (min-width: 769px) {
-    .combat-result-card {
-        padding: 2.5rem 3rem;
-    }
-
-    .combat-result-icon {
-        margin-bottom: 1rem;
-    }
-
-    .combat-result-title {
-        font-size: 3rem;
-        letter-spacing: 4px;
-    }
-
-    .combat-result-stats {
-        font-size: 1.1rem;
-        margin: 0.75rem 0 1.5rem 0;
-    }
-
-    .reward-heading {
-        font-size: 1.5rem;
-    }
-
-    .reward-hint {
-        font-size: 0.8rem;
-    }
-
-    .reward-card-row {
-        gap: 1rem;
-        --card-width: 130px;
-        --card-height: 186px;
-    }
-
-    .combat-result-actions {
-        gap: 1rem;
-    }
-
-    .combat-result-btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 1.2rem;
-    }
-}
+@keyframes resultFade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .combat-result-backdrop, .combat-result-card { animation: none; } }

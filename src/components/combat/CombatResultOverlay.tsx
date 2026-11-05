@@ -33,6 +33,7 @@ export function CombatResultOverlay() {
     return (
         <div className="combat-result-backdrop">
             <div className={`combat-result-card ${combatResult}`}>
+                <header className="combat-result-header">
                 {isVictory ? (
                     <Trophy size={48} className="combat-result-icon victory" />
                 ) : (
@@ -50,6 +51,8 @@ export function CombatResultOverlay() {
                         <>Floor reached: <strong>{floor}</strong></>
                     )}
                 </p>
+
+                </header>
 
                 {hasRewards && (
                     <div className="reward-section">
@@ -76,11 +79,12 @@ export function CombatResultOverlay() {
                     </div>
                 )}
 
-                {hasRewards && <DeckBrowser />}
+
                 {selected && <CardInspector card={selected} onClose={() => setSelectedId(null)}>
                     <button onClick={() => { claimCardReward(selected.instanceId); setSelectedId(null); }}>Add to deck</button>
                 </CardInspector>}
                 <div className="combat-result-actions">
+                    {hasRewards && <DeckBrowser />}
                     {isVictory ? (
                         <button
                             className={`combat-result-btn ${hasRewards ? 'secondary' : 'primary victory'}`}
