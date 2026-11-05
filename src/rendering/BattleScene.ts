@@ -5,6 +5,7 @@ import { ImpactNotice, subscribeImpacts } from './CombatPresentation';
 import { frameLocation } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
 import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActorMotion } from './actorMotion';
+import { locationAtmosphere } from './locationAtmosphere';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
@@ -24,6 +25,7 @@ export class BattleScene {
     private backdrop = new Container();
     private backgroundSprites: Sprite[] = [];
     private ground = new Graphics();
+    private atmosphere = new Graphics();
     private sprites = new Map<string,Sprite>();
     private poses = new Map<string,Texture>();
     private shadows = new Map<string,Graphics>();
@@ -44,7 +46,7 @@ export class BattleScene {
             this.app.canvas.setAttribute('aria-hidden','true');
             this.app.canvas.addEventListener('webglcontextlost',this.contextLost);
             this.app.stage.eventMode = 'none';
-            this.app.stage.addChild(this.ground,this.backdrop,this.world);
+            this.app.stage.addChild(this.ground,this.backdrop,this.atmosphere,this.world);
             this.host.appendChild(this.app.canvas);
             this.backdrop.sortableChildren=true;
             this.world.sortableChildren=true;
@@ -108,6 +110,7 @@ export class BattleScene {
             this.place(sprite,slot,actor);
             this.shadows.get(actor.id)?.clear().ellipse(slot.foot.x,slot.foot.y,slot.art.width*.4,Math.min(7,slot.art.height*.04)).fill({color:0x020810,alpha:actor.defeated ? .12 : .45});
         }
+        this.paintAtmosphere();
         this.visibility();
         this.app.render();
     }
@@ -137,6 +140,7 @@ export class BattleScene {
     }
     private tick = () => {
         if (this.disposed) return;
+        this.paintAtmosphere();
         for (const actor of this.snapshot.actors) {
             const sprite = this.sprites.get(actor.id);
             const slot = actor.id === 'player' ? this.snapshot.layout.hero : this.snapshot.layout.enemies.find(slot=>slot.id===actor.id);
@@ -144,6 +148,13 @@ export class BattleScene {
             this.place(sprite,slot,actor);
         }
     };
+    private paintAtmosphere() {
+        this.atmosphere.clear();
+        const {layout,location,reducedMotion}=this.snapshot;
+        for(const mark of locationAtmosphere(location.id,layout.width,layout.height,performance.now(),reducedMotion || document.hidden)) {
+            this.atmosphere.rect(mark.x,mark.y,mark.width,mark.height).fill({color:mark.color,alpha:mark.alpha});
+        }
+    }
     private contextLost = (event: Event) => { event.preventDefault(); this.onFailure('Graphics context lost'); this.destroy(); };
     private visibility = () => { if (!this.disposed && this.initialized) { if (document.hidden || this.snapshot.reducedMotion) { this.app.stop(); this.app.render(); } else this.app.start(); } };
     private destroyApp() {

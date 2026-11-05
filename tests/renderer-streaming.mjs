@@ -29,7 +29,7 @@ await flush();resolve('/enemy');await flush();assert.equal(ready,false,'mandator
 resolve('/player');await flush();await mounting;
 assert.equal(ready,true,'optional poses and backdrop do not delay actor-ready scene');
 assert.equal(pending.size,4);
-const world=apps[0].stage.children[2];assert.equal(world.sortableChildren,true);
+const world=apps[0].stage.children[3];assert.equal(world.sortableChildren,true);
 assert.deepEqual(world.children.map(child=>child.zIndex),[2,3,0,1],'stable roster order independent of completion order');
 resolve('/near');resolve('/far');await flush();
 const backdrop=apps[0].stage.children[1];assert.equal(backdrop.sortableChildren,true);
