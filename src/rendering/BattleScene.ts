@@ -1,8 +1,8 @@
 import { Application, Container, Graphics, ImageSource, Sprite, Texture } from 'pixi.js';
-import { ActorVisual, LocationVisual } from '../core/battleVisualModels';
+import { ActorClip, ActorVisual, LocationVisual } from '../core/battleVisualModels';
 import { BattleLayout, ActorSlot } from './battleLayout';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
-export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean }
+export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
     return new Promise((resolve,reject) => {
@@ -20,6 +20,7 @@ export class BattleScene {
     private world = new Container();
     private ground = new Graphics();
     private sprites = new Map<string,Sprite>();
+    private poses = new Map<string,Texture>();
     private shadows = new Map<string,Graphics>();
     private leases: AssetLease<Texture>[] = [];
     private disposed = false;
@@ -45,6 +46,12 @@ export class BattleScene {
                 const shadow = new Graphics(); this.shadows.set(actor.id,shadow); this.world.addChild(shadow);
                 const sprite = new Sprite(texture); sprite.anchor.set(...actor.visual.footAnchor);
                 this.sprites.set(actor.id,sprite); this.world.addChild(sprite);
+                this.poses.set(`${actor.id}:idle`,texture);
+                await Promise.all(Object.entries(actor.visual.keyPoses ?? {}).map(async ([clip,pose])=>{
+                    const poseLease=battleTextures.acquire(pose.imageUrl);this.leases.push(poseLease);
+                    try {const poseTexture=await poseLease.ready;if(!this.disposed)this.poses.set(`${actor.id}:${clip}`,poseTexture);}
+                    catch { /* Idle remains usable if an optional key pose fails to load. */ }
+                }));
             }));
             if (this.disposed) return false;
             this.update(this.snapshot);
@@ -62,11 +69,12 @@ export class BattleScene {
         if (!this.initialized || this.disposed) return;
         const {width,height} = snapshot.layout;
         this.app.renderer.resize(width,height);
-        this.ground.clear().rect(0,0,width,height).fill(snapshot.location.sky)
-            .rect(0,height*.73,width,height*.27).fill(snapshot.location.ground)
-            .rect(0,height*.73,width,2).fill({color:snapshot.location.accent,alpha:.55});
-        // Bounded architectural silhouettes for technical preview, replaced by authored location layers.
-        for(let i=0;i<12;i++) this.ground.rect(i*width/12,height*.22+(i%3)*13,width/15,height*.51).fill({color:0x081527,alpha:.35});
+        const horizon = width < 600 && height >= 300 && snapshot.layout.enemies.length===3 ? .32 : .73;
+        this.ground.clear().rect(0,0,width,height).fill(snapshot.location.sky);
+        // Temporary depth plane; authored street layers replace this technical backdrop.
+        for(let i=0;i<12;i++) this.ground.rect(i*width/12,height*.1+(i%3)*7,width/15,height*.63).fill({color:0x081527,alpha:.35});
+        this.ground.rect(0,height*horizon,width,height*(1-horizon)).fill(snapshot.location.ground)
+            .rect(0,height*horizon,width,2).fill({color:snapshot.location.accent,alpha:.55});
         for (const actor of snapshot.actors) {
             const slot = actor.id === 'player' ? snapshot.layout.hero : snapshot.layout.enemies.find(slot=>slot.id===actor.id);
             const sprite = this.sprites.get(actor.id);
@@ -78,7 +86,12 @@ export class BattleScene {
         this.app.render();
     }
     private place(sprite: Sprite, slot: ActorSlot, actor: SceneActor) {
-        const scale = Math.min(slot.art.width / sprite.texture.width,slot.art.height / sprite.texture.height);
+        const idle=this.poses.get(`${actor.id}:idle`) ?? sprite.texture;
+        const clip=this.snapshot.reducedMotion ? 'idle' : actor.clip ?? 'idle';
+        const pose=actor.visual.keyPoses?.[clip];
+        sprite.texture=this.poses.get(`${actor.id}:${clip}`) ?? idle;
+        sprite.anchor.set(...(pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));
+        const scale = Math.min(slot.art.width / idle.width,slot.art.height / idle.height);
         sprite.scale.set(scale); sprite.position.set(slot.foot.x,slot.foot.y); sprite.alpha = actor.defeated ? .15 : 1;
     }
     private tick = () => {
@@ -106,7 +119,7 @@ export class BattleScene {
         this.disposed = true;
         document.removeEventListener('visibilitychange',this.visibility);
         this.destroyApp();
-        this.sprites.clear(); this.shadows.clear();
+        this.sprites.clear(); this.shadows.clear(); this.poses.clear();
         this.leases.forEach(lease=>lease.release()); this.leases=[];
     }
 }

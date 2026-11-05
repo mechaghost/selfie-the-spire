@@ -14,7 +14,7 @@ const bad=failures.acquire('missing');await assert.rejects(bad.ready);bad.releas
 // StrictMode-style setup-cleanup-setup while the first load is still pending.
 const first=cache.acquire('strict');first.release();const second=cache.acquire('strict');await Promise.resolve();resolveLoad('strict-texture');await second.ready;assert.notEqual(disposed.at(-1),'strict-texture');second.release();assert.equal(disposed.at(-1),'strict-texture');
 for(let i=0;i<20;i++){const lease=cache.acquire('cycle');await Promise.resolve();resolveLoad(`cycle-${i}`);await lease.ready;lease.release();assert.equal(cache.stats().entries,0);}
-for(const visual of Object.values(ACTOR_VISUALS)){validateActorVisual(visual);await access(`public${visual.fallbackImageUrl}`);}
+for(const visual of Object.values(ACTOR_VISUALS)){validateActorVisual(visual);await access(`public${visual.fallbackImageUrl}`);for(const pose of Object.values(visual.keyPoses ?? {}))await access(`public${pose.imageUrl}`);}
 for(const id of Object.keys(enemies)) assert.ok(ACTOR_VISUALS[id],`legacy/developer actor ${id} represented`);
 for(const pool of Object.values(ENCOUNTER_POOLS))for(const encounter of pool)for(const id of encounter.enemyIds)assert.ok(ACTOR_VISUALS[id],`reachable actor ${id}`);
 assert.equal(Object.keys(ACTOR_VISUALS).length,28);

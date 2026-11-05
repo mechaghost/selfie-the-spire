@@ -29,7 +29,7 @@ export function BattleStage({snapshot,forceFallback=false,onStatus}: Props) {
     return <div className="battle-stage-visual" data-stage-status={status}>
         <div className="battle-canvas" ref={host} />
         {status !== 'ready' && <div className="battle-dom-fallback" aria-hidden="true" style={{backgroundColor:`#${snapshot.location.sky.toString(16).padStart(6,'0')}`}}>
-            <div className="battle-fallback-ground" style={{backgroundColor:`#${snapshot.location.ground.toString(16).padStart(6,'0')}`}} />
+            <div className="battle-fallback-ground" style={{top:snapshot.layout.width<600 && snapshot.layout.height>=300 && snapshot.layout.enemies.length===3 ? '32%' : '73%',backgroundColor:`#${snapshot.location.ground.toString(16).padStart(6,'0')}`}} />
             {snapshot.actors.map(actor=>{
                 const slot = actor.id==='player' ? snapshot.layout.hero : snapshot.layout.enemies.find(slot=>slot.id===actor.id);
                 if(!slot)return null;

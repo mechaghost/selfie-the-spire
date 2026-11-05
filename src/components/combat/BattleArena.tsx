@@ -5,12 +5,13 @@ import { ACTOR_VISUALS, resolveAppearance } from '../../data/actorVisuals';
 import { locationForFloor } from '../../data/locations';
 import { battleLayout } from '../../rendering/battleLayout';
 import { intentView } from '../../core/intentView';
+import { ActorClip } from '../../core/battleVisualModels';
 import { BattleStage } from './BattleStage';
 import { InspectionDialog } from '../ui/CardInspector';
 import { describeIntent, describeStatuses } from './EntityPanel';
 import './BattleArena.css';
 export function BattleArena() {
-    const {player,enemies,floor,isBossFloor} = useGameStore(state=>({player:state.player,enemies:state.enemies,floor:state.floor,isBossFloor:state.isBossFloor}));
+    const {player,enemies,floor,isBossFloor,activeAnimations} = useGameStore(state=>({player:state.player,enemies:state.enemies,floor:state.floor,isBossFloor:state.isBossFloor,activeAnimations:state.activeAnimations}));
     const {mode,commit} = useCombatInteraction();
     const root=useRef<HTMLDivElement>(null);
     const [size,setSize]=useState({width:320,height:200});
@@ -30,10 +31,11 @@ export function BattleArena() {
         useGameStore.setState({entityBounds:bounds});
         return()=>{useGameStore.setState({entityBounds:{}});};
     },[layout]);
+    const clipFor=(id:string):ActorClip=>activeAnimations.some(animation=>animation.targetId===id && animation.type==='lunge') ? 'attack' : 'idle';
     const snapshot=useMemo(()=>({layout,location:locationForFloor(floor),reducedMotion,actors:[
-        {id:'player',visual:resolveAppearance(undefined),defeated:player.hp<=0},
-        ...enemies.map(enemy=>({id:enemy.id,visual:ACTOR_VISUALS[enemy.templateId] ?? ACTOR_VISUALS.alley_rat,defeated:enemy.hp<=0})),
-    ]}),[layout,floor,reducedMotion,player.hp,enemies]);
+        {id:'player',visual:resolveAppearance(undefined),defeated:player.hp<=0,clip:clipFor('player')},
+        ...enemies.map(enemy=>({id:enemy.id,visual:ACTOR_VISUALS[enemy.templateId] ?? ACTOR_VISUALS.alley_rat,defeated:enemy.hp<=0,clip:clipFor(enemy.id)})),
+    ]}),[layout,floor,reducedMotion,player.hp,enemies,activeAnimations]);
     const entity=inspected==='player' ? player : enemies.find(enemy=>enemy.id===inspected);
     return <div className="battle-arena" ref={root}>
         <BattleStage snapshot={snapshot}/>

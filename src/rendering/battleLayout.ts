@@ -33,11 +33,32 @@ export function battleLayout(width: number, height: number, enemyIds: readonly s
     const areaWidth = width - start - edge;
     const count = Math.max(enemyIds.length, 1);
     const cell = areaWidth / count;
+    // Portrait uses depth lanes rather than compressing three creatures into one narrow row.
+    if (width < 600 && height >= 300 && enemyIds.length === 3) {
+        const laneWidth = areaWidth / 2;
+        const laneHeight = height / 2;
+        const heroLaneWidth = Math.min(150, start + laneWidth * .5 - edge * 2);
+        const heroLaneHeight = Math.min(240, height * .55);
+        hero.art = {x:edge,y:ground-heroLaneHeight,width:heroLaneWidth,height:heroLaneHeight};
+        hero.foot = {x:edge+heroLaneWidth/2,y:ground};
+        hero.hud = {x:edge,y:Math.max(4,hero.art.y-78),width:Math.min(100,heroLaneWidth),height:72};
+        const enemies = enemyIds.map((id,index): ActorSlot => {
+            const row = index === 2 ? 1 : 0;
+            const x = start + (index === 2 ? .5 : index) * laneWidth + 3;
+            const top = row * laneHeight + 4;
+            const bottom = (row + 1) * laneHeight - 12;
+            const art = {x,y:top+78,width:laneWidth-6,height:bottom-top-78};
+            return {id,index,art,foot:{x:x+art.width/2,y:bottom},
+                target:{x,y:top,width:laneWidth-6,height:laneHeight-16},
+                hud:{x,y:top,width:laneWidth-6,height:72}};
+        });
+        return {width,height,compact,hero,enemies};
+    }
     const enemies = enemyIds.map((id, index): ActorSlot => {
         const slotWidth = cell - 6;
         const x = start + index * cell + 3;
         const artHeight = Math.min(height - 90, boss ? 340 : compact ? 180 : 250);
-        const artWidth = Math.min(slotWidth, boss ? 300 : 160);
+        const artWidth = Math.min(slotWidth, boss ? 340 : 230);
         const artX = x + (slotWidth - artWidth) / 2;
         if (wideShort) {
             const hudWidth = Math.min(100, slotWidth * .5);

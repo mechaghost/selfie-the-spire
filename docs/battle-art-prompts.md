@@ -1,5 +1,19 @@
 # Neo Miami monster generation
 
+## Attack key poses
+
+Built-in image edits using each idle sprite as the identity reference. These are key poses, not complete animation clips.
+
+`public/assets/battle/actors/street-runner-attack-v1.png`: Use case: identity-preserve. Edit target: the provided Street Runner idle sprite. Create the ATTACK key pose for this exact same original game character. Preserve face, hairstyle, skin, coral windbreaker, charcoal tank, teal belt, violet cargo pants, glove and shoe designs, painted rendering and lighting. Change ONLY pose: a powerful straight rightward punch, torso rotating right, forward arm fully extended toward screen RIGHT, other fist guarding, rear heel lifted, weight over bent front leg. Full body and both shoes visible, entire punching fist visible with padding. Three-quarter side view facing RIGHT, not toward camera. Transparent alpha outside character, no background, no ground shadow, no motion trails, no additional effects, no text, no card frame. Single full-body key pose, professional hand-painted animation asset matching the reference exactly.
+
+`public/assets/battle/actors/alley-rat-attack-v1.png`: Use case: identity-preserve. Edit the provided Alley Rat idle game sprite into the ATTACK key pose of the SAME creature. Preserve exact charcoal-violet fur, huge ragged pink ears, teal scavenger harness, brass bottlecap charm, coral curled tail, cyan eyes, painted style and lighting. Only change pose: explosive forward lunge toward screen LEFT, jaws open showing incisors, forepaws reaching left, powerful rear legs pushing off, tail held curled behind for balance. Full creature including paws and tail visible with generous transparent padding; no crop. Three-quarter side view LEFT. Transparent RGBA outside the creature, no background, haze, shadow, motion trails, lettering or extra objects. One pose only. Strong readable silhouette, polished hand-painted 2D game animation key frame.
+
+## Street Runner hero
+
+Asset: `public/assets/battle/actors/street-runner-idle-v1.png`
+
+Built-in generation prompt: Use case: stylized-concept. Asset type: transparent full-body idle combat sprite for an original Neo Miami urban deckbuilding game. Subject: STREET RUNNER, an athletic adult street courier hero with medium brown skin, short dark curly hair with a shaved side, confident expressive face, cropped coral-orange windbreaker over a charcoal tank, teal utility belt, dark violet tapered cargo pants, worn cream-and-teal high-top sneakers, fingerless gloves. Three-quarter SIDE view facing RIGHT, knees slightly bent, relaxed fists raised in an agile boxing-ready idle stance, two feet firmly planted. Original stylish character, no likeness of any real person. Professional hand-painted 2D game artwork, bold dark contour, strong readable silhouette, large clear shaded shapes with restrained brush texture, neutral warm key light from upper left with subtle teal rim. Same production aesthetic as illustrated urban folklore monsters, not photoreal or flat vector. Whole body including shoes, hands, hair entirely visible. Centered with generous transparent padding. True transparent alpha outside character. No scene, no floor, no shadow, no haze, no glow aura, no card frame, no text, no logo. Readable at 150px tall. Single character single pose.
+
 Built-in image generation, November 5, 2026. Original generated idle cutouts, not final animation sheets. Transparent alpha verified. Production status: review. No portfolio-animation approval implied.
 
 ## Alley Rat
