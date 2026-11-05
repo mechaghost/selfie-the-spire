@@ -432,3 +432,8 @@
 
 .hand-scroll-hint { display: none; font: inherit; }
 @media (max-width: 768px) { .hand-scroll-hint { display: inline; } }
+
+.combat-target-selection { position:fixed; z-index:500; left:50%; bottom:12px; transform:translateX(-50%); width:min(500px,calc(100vw - 24px)); box-sizing:border-box; padding:12px; border:1px solid #f4c990; border-radius:12px; background:#101b30f5; box-shadow:0 8px 24px #0009; pointer-events:auto; }
+.combat-target-selection p { margin:0 0 8px; font-size:14px; }
+.combat-target-selection button { min-height:44px; padding:8px 12px; background:#253c50; color:#fff; border:1px solid #8aa4b4; border-radius:6px; font-size:14px; }
+.combat-target-list { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }

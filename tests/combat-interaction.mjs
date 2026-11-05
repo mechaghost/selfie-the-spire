@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+await build({stdin:{contents:`export {useCombatInteraction} from './src/store/combatInteraction';export {useGameStore} from './src/store/gameStore';export {intentView} from './src/core/intentView';export {targetAtPoint} from './src/core/targeting';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/combat-interaction.mjs',bundle:true,platform:'node',format:'esm',define:{'import.meta.env':'{}'}});
+const {useCombatInteraction:ui,useGameStore:game,intentView,targetAtPoint}=await import('./.e2e-out/combat-interaction.mjs');
+game.getState().initializeRun('targeting');game.setState({inCombat:true,isPlayerTurn:true,enemies:[{id:'living',templateId:'alley_rat',name:'Rat',hp:10,maxHp:10,block:0,statuses:[],intent:null}],resolveQueue:()=>{}});
+const card={id:'test',instanceId:'command',name:'Test',type:'Attack',cost:1,target:'Enemy',description:'Damage',effects:[{type:'Damage',amount:1,target:'Target'}]};game.setState({hand:[card]});
+const energy=game.getState().player.energy;
+ui.getState().inspect(card.instanceId);ui.getState().choose();ui.getState().cancel();assert.equal(ui.getState().mode,'inspect');assert.equal(game.getState().player.energy,energy);assert.equal(game.getState().hand.length,1);
+ui.getState().choose();assert.equal(ui.getState().commit('dead'),false);assert.equal(ui.getState().mode,'targeting');assert.equal(game.getState().player.energy,energy);
+assert.equal(ui.getState().commit('living'),true);assert.equal(ui.getState().commit('living'),false);assert.equal(game.getState().player.energy,energy-1);assert.equal(game.getState().resolvingCards.length,1);
+const bounds={a:{left:20,top:30,width:44,height:80},b:{left:80,top:30,width:44,height:80}};
+assert.equal(targetAtPoint(bounds,['a','b'],70,60),null,'gap is not a target');assert.equal(targetAtPoint(bounds,['b'],30,60),null,'dead target is excluded');assert.equal(targetAtPoint(bounds,['a','b'],90,60),'b');
+const intent={type:'AttackDefend',damage:999,hits:99,effects:[{type:'Damage',target:'Target',amount:6},{type:'Damage',target:'Target',amount:6},{type:'Block',target:'Self',amount:5},{type:'ApplyStatus',target:'Target',statusId:'weak',amount:1}]};
+const view=intentView(intent,[],[]);assert.equal(view.attack,'6 × 2');assert.equal(view.block,5);assert.equal(view.statuses.length,1);
+assert.equal(intentView(intent,[{id:'weak',amount:1}],[]).attack,'4 × 2');assert.equal(intentView(intent,[],[{id:'vulnerable',amount:1}]).attack,'9 × 2');
+console.log('PASS: cancel without spending, stale/dead target rejection, exactly-once commit, rectangle targeting, effect-derived multi-hit and status previews');

@@ -5,6 +5,7 @@ import { useGameStore } from '../../store/gameStore';
 import { STATUS_REGISTRY } from '../../data/statusEffects';
 import './EntityPanel.css';
 import { attackDamage } from '../../core/combatMath';
+import { targetAtPoint } from '../../core/targeting';
 import { STATUS_HELP } from '../../core/cardText';
 
 // M-3: Status tooltip descriptions keyed by status id
@@ -46,8 +47,6 @@ export function describeStatuses(statuses: Entity['statuses']): string[] {
     });
 }
 
-// M-5: Unified hover radius padding
-const HOVER_RADIUS_PADDING = 25;
 
 interface EntityPanelProps {
     entity: Entity;
@@ -84,20 +83,8 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
         return () => window.removeEventListener('resize', updateBounds);
     }, [updateBounds]);
 
-    let isTargeted = false;
-    if (!isPlayer && entity.hp > 0 && dragState.isActive && dragState.targetType === 'Enemy') {
-        const bounds = entityBounds[entity.id];
-        if (bounds) {
-            const centerX = bounds.left + bounds.width / 2;
-            const centerY = bounds.top + bounds.height / 2;
-            const dist = Math.hypot(centerX - dragState.currentX, centerY - dragState.currentY);
-            const hoverRadius = (bounds.width / 2) + HOVER_RADIUS_PADDING;
-
-            if (dist < hoverRadius) {
-                isTargeted = true;
-            }
-        }
-    }
+    const isTargeted = !isPlayer && entity.hp > 0 && dragState.isActive && dragState.targetType === 'Enemy' &&
+        targetAtPoint(entityBounds,useGameStore.getState().enemies.filter(enemy=>enemy.hp>0).map(enemy=>enemy.id),dragState.currentX,dragState.currentY) === entity.id;
 
     const animClasses = activeAnimations.map(a => `anim-${a.type}`).join(' ');
 

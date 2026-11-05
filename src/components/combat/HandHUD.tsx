@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { CardInspector } from '../ui/CardInspector';
 import { useGameStore } from '../../store/gameStore';
 import { CardItem } from '../ui/CardItem';
 import '../ui/CardItem.css';
+import { useCombatInteraction } from '../../store/combatInteraction';
 
 export function HandHUD() {
     const { hand, player, playingCards } = useGameStore(state => ({
@@ -11,14 +12,27 @@ export function HandHUD() {
         playingCards: state.playingCards
     }));
 
-    const [selectedId, setSelectedId] = useState<string | null>(null);
-    const [targeting, setTargeting] = useState(false);
+    const {cardId:selectedId,mode,error,inspect,close,choose,cancel,commit} = useCombatInteraction();
+    const targeting = mode === 'targeting';
+    const previousMode = useRef(mode);
+    useEffect(() => {
+        const previous = previousMode.current; previousMode.current = mode;
+        if (previous !== 'targeting' || mode === 'targeting') return;
+        const timer = setTimeout(() => document.querySelector<HTMLElement>(mode === 'inspect' ? '[data-play-card]' : '.hand-container .card[tabindex], .end-turn-button')?.focus(), 0);
+        return () => clearTimeout(timer);
+    }, [mode]);
     const phase = useGameStore(state => state.isPlayerTurn && !state.isResolving && state.actionQueue.length === 0 && !state.combatResult);
     const enemies = useGameStore(state => state.enemies);
     const selected = hand.find(card => card.instanceId === selectedId);
-    useEffect(() => { if (!phase) { setSelectedId(null); setTargeting(false); } }, [phase]);
-    const close = () => { setSelectedId(null); setTargeting(false); };
-    const commit = (targetId?: string) => { if (selected) useGameStore.getState().playCard(selected.instanceId, targetId); close(); };
+    useEffect(() => { if (!phase) close(); }, [phase,close]);
+    useEffect(() => () => close(), [close]);
+    useEffect(() => {
+        if (!targeting) return;
+        const timer = setTimeout(() => document.querySelector<HTMLButtonElement>('[data-combat-target]:not(:disabled), .combat-target-list button')?.focus(), 0);
+        const escape = (event: KeyboardEvent) => { if(event.key === 'Escape') { event.preventDefault(); cancel(); } };
+        window.addEventListener('keydown',escape);
+        return () => { clearTimeout(timer);window.removeEventListener('keydown',escape); };
+    }, [targeting,cancel]);
     const totalCards = hand.length;
     const totalRows = Math.ceil(totalCards / 3);
 
@@ -57,7 +71,7 @@ export function HandHUD() {
                         <div className="card-deal-motion">
                         <CardItem
                             card={card}
-                            onInspect={() => { setSelectedId(card.instanceId); setTargeting(false); }}
+                            onInspect={() => inspect(card.instanceId)}
                             canPlay={canPlay}
                             isDraggable={true}
                             style={{
@@ -69,15 +83,18 @@ export function HandHUD() {
                 );
             })}
 
-            {selected && <CardInspector card={selected} onClose={close}>
+            {selected && mode === 'inspect' && <CardInspector card={selected} onClose={close}>
                 <div className="inspection-actions">
-                    {!phase ? <p>Wait for your turn.</p> : player.energy < selected.cost ? <p>Not enough energy: need {selected.cost}, have {player.energy}.</p> : targeting ? <>
-                        <p>Choose an enemy</p>
-                        {enemies.filter(enemy => enemy.hp > 0).map((enemy, index) => <button autoFocus={index === 0} key={enemy.id} onClick={() => commit(enemy.id)}>{enemy.name} · {enemy.hp} HP</button>)}
-                        <button onClick={() => setTargeting(false)}>Cancel targeting</button>
-                    </> : <button onClick={() => selected.target === 'Enemy' ? setTargeting(true) : commit()}>Play card</button>}
+                    {error && <p role="alert">{error}</p>}
+                    {!phase ? <p>Wait for your turn.</p> : player.energy < selected.cost ? <p>Not enough energy: need {selected.cost}, have {player.energy}.</p> : <button data-play-card onClick={() => selected.target === 'Enemy' ? choose() : commit()}>Play card</button>}
                 </div>
             </CardInspector>}
+            {selected && targeting && <div className="combat-target-selection" role="region" aria-label="Choose card target" onClick={event=>event.stopPropagation()}>
+                <p><strong>{selected.name}</strong> · Choose an enemy</p>
+                {error && <p role="alert">{error}</p>}
+                <div className="combat-target-list">{enemies.filter(enemy=>enemy.hp>0).map(enemy=><button key={enemy.id} onClick={()=>commit(enemy.id)}>{enemy.name} · {enemy.hp} HP</button>)}</div>
+                <button onClick={cancel}>Cancel targeting</button>
+            </div>}
             {playingCards.map((pc) => (
                 <div key={pc.id} className="card-playing-wrapper">
                     <CardItem

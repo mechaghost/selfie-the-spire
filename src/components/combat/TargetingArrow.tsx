@@ -1,6 +1,7 @@
 import { useGameStore } from '../../store/gameStore';
 import { Sparkles } from 'lucide-react';
 import './TargetingArrow.css';
+import { targetAtPoint } from '../../core/targeting';
 
 export function TargetingArrow() {
     const { dragState, entityBounds, hand } = useGameStore(state => ({
@@ -31,30 +32,8 @@ export function TargetingArrow() {
     const pathD = `M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`;
 
     // --- Hover Target Detection ---
-    let isValidTarget = false;
-
-    if (dragState.targetType === 'Enemy') {
-        Object.entries(entityBounds).forEach(([_id, rect]) => {
-            // Calculate center of the entity panel
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            // Calculate distance from cursor to center
-            const dist = Math.hypot(centerX - dragState.currentX, centerY - dragState.currentY);
-
-            // M-5: Unified hover radius matching EntityPanel
-            const hoverRadius = (rect.width / 2) + 25;
-
-            if (dist < hoverRadius) {
-                isValidTarget = true;
-            }
-        });
-    } else {
-        // Self or AllEnemies targets just need to be dragged high enough (above the bottom 250px UI zone)
-        if (dragState.currentY < window.innerHeight - 250) {
-            isValidTarget = true;
-        }
-    }
+    const livingIds = useGameStore.getState().enemies.filter(enemy=>enemy.hp>0).map(enemy=>enemy.id);
+    const isValidTarget = targetAtPoint(entityBounds,livingIds,dragState.currentX,dragState.currentY) !== null;
 
     const draggedCard = hand.find(c => c.instanceId === dragState.cardId);
 

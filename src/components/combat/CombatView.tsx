@@ -7,9 +7,12 @@ import { HandHUD } from './HandHUD';
 import { TargetingArrow } from './TargetingArrow';
 import { CombatResultOverlay } from './CombatResultOverlay';
 import './CombatView.css';
+import { useCombatInteraction } from '../../store/combatInteraction';
+import { BattleArena } from './BattleArena';
 import { CityBackdrop } from '../ui/CityBackdrop';
 
 export function CombatView() {
+    const actorArena = import.meta.env.DEV && new URLSearchParams(location.search).has('arena');
     const {
         player, enemies, endTurn, energy, maxEnergy, isPlayerTurn, combatResult, screenShake
     } = useGameStore((state) => ({
@@ -24,7 +27,8 @@ export function CombatView() {
     }));
 
     const busy = useGameStore(state => state.isResolving || state.actionQueue.length > 0);
-    const isDisabled = !isPlayerTurn || busy || combatResult !== null;
+    const targeting = useCombatInteraction(state=>state.mode === 'targeting');
+    const isDisabled = !isPlayerTurn || busy || combatResult !== null || targeting;
 
     const [inspectedEnemyId, setInspectedEnemyId] = useState<string | null>(null);
 
@@ -56,7 +60,7 @@ export function CombatView() {
 
     return (
         <div
-            className={`combat-stage ${screenShake ? `shake-${screenShake.intensity}` : ''}`}
+            className={`combat-stage ${actorArena ? 'actor-arena-enabled' : ''} ${screenShake ? `shake-${screenShake.intensity}` : ''}`}
             onClick={handleStageClick}
         >
             <CityBackdrop />
@@ -64,7 +68,7 @@ export function CombatView() {
 
             <TopBar />
 
-            <div className="entities-container">
+            {actorArena ? <BattleArena /> : <div className="entities-container">
                 {/* Compact player presence for animations/floating text */}
                 <div className="player-presence">
                     <EntityPanel entity={player} isPlayer={true} />
@@ -82,7 +86,7 @@ export function CombatView() {
                         />
                     ))}
                 </div>
-            </div>
+            </div>}
 
             {/* Enemy inspect tooltip — rendered outside overflow:hidden container */}
             {inspectedEnemy && (

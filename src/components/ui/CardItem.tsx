@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { Card } from '../../core/models';
 import { useGameStore } from '../../store/gameStore';
 import './CardItem.css';
+import { targetAtPoint } from '../../core/targeting';
 
 interface CardItemProps {
     card: Card;
@@ -98,28 +99,8 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
             if (!gesture.current.moved) { state.resetDragState(); return; }
 
             if (isTargetingMode) {
-                // Enemy target: check if cursor is over an enemy
-                const el = document.elementFromPoint(ev.clientX, ev.clientY);
-                const enemyAvatar = el?.closest('.entity-avatar') as HTMLElement | null;
-                if (enemyAvatar) {
-                    const enemyId = enemyAvatar.getAttribute('data-entity-id');
-                    if (enemyId && enemyId !== 'player') {
-                        playCard(card.instanceId, enemyId);
-                        return;
-                    }
-                }
-                // Also check by distance to entity bounds
-                const { entityBounds } = state;
-                for (const [id, rect] of Object.entries(entityBounds)) {
-                    if (id === 'player') continue;
-                    const cx = rect.left + rect.width / 2;
-                    const cy = rect.top + rect.height / 2;
-                    const dist = Math.hypot(cx - ev.clientX, cy - ev.clientY);
-                    if (dist < (rect.width / 2) + 25) {
-                        playCard(card.instanceId, id);
-                        return;
-                    }
-                }
+                const id = targetAtPoint(state.entityBounds,state.enemies.filter(enemy=>enemy.hp>0).map(enemy=>enemy.id),ev.clientX,ev.clientY);
+                if(id) { playCard(card.instanceId,id);return; }
             } else {
                 // Self/AllEnemies: release above the hand area to play
                 if (ev.clientY < window.innerHeight - 250) {
@@ -181,15 +162,9 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
         if (!gesture.current.moved) { resetDragState(); return; }
 
         if (isTargetingMode) {
-            const el = document.elementFromPoint(touch.clientX, touch.clientY);
-            const enemyAvatar = el?.closest('.entity-avatar') as HTMLElement | null;
-            if (enemyAvatar) {
-                const enemyId = enemyAvatar.getAttribute('data-entity-id');
-                if (enemyId && enemyId !== 'player') {
-                    playCard(card.instanceId, enemyId);
-                    return;
-                }
-            }
+            const state = useGameStore.getState();
+            const id = targetAtPoint(state.entityBounds,state.enemies.filter(enemy=>enemy.hp>0).map(enemy=>enemy.id),touch.clientX,touch.clientY);
+            if(id) { playCard(card.instanceId,id);return; }
         } else {
             if (touch.clientY < window.innerHeight - 250) {
                 playCard(card.instanceId);

@@ -1,6 +1,6 @@
 # Battle asset coverage ledger
 
-All entries are technical placeholders, not art approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
+Most entries remain technical placeholders. Alley Rat, Vending Golem and Fire Escape Spider now have generated idle cutouts in review; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
 
 | Visual ID | Reachability | Fallback / dimensions | Provenance | Status |
 |---|---|---|---|---|
@@ -9,7 +9,7 @@ All entries are technical placeholders, not art approval. Original fallback vect
 | hero-volt | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
 | hero-concrete | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
 | hero-smoke | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
-| alley_rat | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
+| alley_rat | Production encounter pool | /assets/battle/actors/alley-rat-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | neon_junkie | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | graffiti_imp | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | stray_voltage | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
@@ -21,8 +21,8 @@ All entries are technical placeholders, not art approval. Original fallback vect
 | neon_wraith | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | payphone_phantom | Developer/legacy retained | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | sewer_slime | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| fire_escape_spider | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| vending_golem | Developer/legacy retained | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
+| fire_escape_spider | Production encounter pool | /assets/battle/actors/fire-escape-spider-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| vending_golem | Developer/legacy retained | /assets/battle/actors/vending-golem-idle-v1.png / 1239×1269 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | neon_sentinel | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | chrome_phantom | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | voltage_king | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
