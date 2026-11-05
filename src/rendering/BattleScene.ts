@@ -4,7 +4,7 @@ import { BattleLayout, ActorSlot } from './battleLayout';
 import { ImpactNotice, subscribeImpacts } from './CombatPresentation';
 import { frameLocation } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
-import { ActorMotionClock, motionProfile, sampleActorMotion } from './actorMotion';
+import { ActorMotionClock, actorPoseAt, motionProfile, sampleActorMotion } from './actorMotion';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
@@ -114,7 +114,7 @@ export class BattleScene {
         const clip:ActorClip=actor.defeated ? 'defeat' : actor.clip ?? 'idle';
         const elapsed=this.motions.elapsed(actor.id,clip,actor.motionToken,now);
         const motion=sampleActorMotion(motionProfile(actor.visual.id),clip,elapsed,now+slot.foot.x*11,actor.id==='player'?1:-1,this.snapshot.reducedMotion);
-        const poseClip=this.snapshot.reducedMotion ? 'idle' : clip;
+        const poseClip=actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
         const pose=actor.visual.keyPoses?.[poseClip];
         sprite.texture=this.poses.get(`${actor.id}:${poseClip}`) ?? idle;
         sprite.anchor.set(...(pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));

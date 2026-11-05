@@ -2,6 +2,12 @@ import type { ActorClip } from '../core/battleVisualModels';
 
 export type MotionProfile = 'agile' | 'heavy' | 'float' | 'slime';
 export const DEFEAT_PRESENTATION_MS=280;
+/** Key-pose art is finite even if a stale snapshot still says attack. */
+export function actorPoseAt(clip:ActorClip,elapsed:number,reduced:boolean):ActorClip {
+    if(reduced)return 'idle';
+    if(clip==='attack')return elapsed>=80 && elapsed<240 ? 'attack' : 'idle';
+    return clip;
+}
 export interface ActorMotion { x:number; y:number; scaleX:number; scaleY:number; rotation:number; alpha:number }
 const floating = new Set(['smoke_specter','neon_wraith','chrome_phantom','dj_phantom']);
 const heavy = new Set(['vending_golem','dumpster_crawler','boombox_brute','neon_sentinel','voltage_king','circuit_breaker','chrome_bouncer','the_billboard','subway_wyrm','hero-chrome','hero-concrete']);

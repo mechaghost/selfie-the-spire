@@ -240,3 +240,23 @@ Built-in image generation with transparent background; idle cutout in review.
 Prompt:
 
 Use case: stylized-concept. Original full-body BOSS monster idle sprite for Neo Miami urban deckbuilding game. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, weathered teal and coral palette with violet shadows, warm upper-left key light. Facing LEFT in three-quarter side view. Whole boss visible, generous transparent margin around every extremity, powerful silhouette readable at 220px. True transparent RGBA background. No scenery, floor, cast shadow, outside haze, text, logos, card frame or UI. Single boss only. DJ PHANTOM: a towering theatrical nightclub ghost boss, angular violet masked head with huge coral headphones, sharp amber eyes, flared long teal coat with coral lining over an elongated dark purple spectral body. Two large articulated claw hands hovering above a compact twin-turntable console attached across waist like armor. Vinyl discs and blank knobs, no lettering. Lower body forms two thick swirling tapering ghost tails, opaque painterly shapes, no diffuse haze. Wide dramatic silhouette, facing left, sinister charismatic conductor idle.
+
+## vending_golem attack key pose
+
+Asset: `public/assets/battle/actors/vending-golem-attack-v1.png`
+
+Built-in image edit; identity reference: `vending-golem-idle-v1.png`. Transparent RGBA verified. Key pose only, not a full clip approval.
+
+Prompt:
+
+Use case: identity-preserve. Edit this exact original Neo Miami monster idle sprite into one ATTACK key pose. Preserve character identity, proportions, materials, painted style, lighting and palette. Change only pose into a heavy leftward punch: left-facing front fist fully extended toward screen LEFT, vending torso tilted slightly forward, other arm braced beside torso, feet planted widely. Preserve teal/coral machine casing, cracked can display, amber eyes in dispensing slot and all limb designs. Entire creature including all extremities visible with generous transparent margin, three-quarter facing LEFT. Keep source canvas aspect ratio and approximate body size; grounded feet baseline near 94 percent of canvas height. True transparent RGBA outside creature. No scenery, background, shadow, glow haze, motion trails, text, UI or extra characters. Single pose, not a sheet.
+
+## fire_escape_spider attack key pose
+
+Asset: `public/assets/battle/actors/fire-escape-spider-attack-v1.png`
+
+Built-in image edit; identity reference: `fire-escape-spider-idle-v1.png`. Transparent RGBA verified. Key pose only, not a full clip approval.
+
+Prompt:
+
+Use case: identity-preserve. Edit this exact original Neo Miami monster idle sprite into one ATTACK key pose. Preserve character identity, proportions, materials, painted style, lighting and palette. Change only pose into a leftward striking attack: two foremost legs raised and extended toward screen LEFT, hooked fangs open, body driven low forward, other six legs bracing. Preserve eight total wrought-iron railing legs, coral joints, violet graffiti abdomen, amber eyes and ladder structure. Entire creature including all extremities visible with generous transparent margin, three-quarter facing LEFT. Keep source canvas aspect ratio and approximate body size; grounded feet baseline near 94 percent of canvas height. True transparent RGBA outside creature. No scenery, background, shadow, glow haze, motion trails, text, UI or extra characters. Single pose, not a sheet.

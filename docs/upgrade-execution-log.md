@@ -127,3 +127,11 @@ Added a bounded 280ms overlay reveal delay for the development actor arena, matc
 Added the specified current-preview marker: intent models identify previewKind=current, damage badges show ≈ and expose a Current damage preview accessible label, with explanatory title text and inspection copy. This avoids presenting current modifiers as an exact end-turn forecast. Cleared stale plan introduction claiming implementation had not started. Attack marker wrapping and screen-reader behavior still require the planned viewport/accessibility checks.
 
 Actor motion, command checkpoint and intent Block parity tests pass, along with TypeScript, production build and whitespace checks. No new live-site verification or deployment in this pass.
+
+## First encounter attack key poses
+
+Generated identity-preserving attack edits for Vending Golem and Fire Escape Spider using their idle files as references. Golem extends a heavy punch; Spider extends its foremost legs and opens its fangs. Preserved original PNGs, verified alpha, recorded exact prompts and connected both to the renderer. Source dimensions remain effectively the same as idle (Golem 1240×1269 versus 1239×1269; Spider 1536×1024). Foot anchors remain .94 pending motion review.
+
+The first composite encounter now has attack key poses for hero, Rat, Golem and Spider. Added finite key-pose selection: idle during initial anticipation, attack from 80–240ms, idle through late recovery and any stale attack snapshot. This also prevents a hidden-tab return from holding a strike indefinitely. Motion tests exercise interval boundaries and reduced-motion fallback. Renderer assets, TypeScript, production build and whitespace checks pass.
+
+These are key poses, not full animation clips or a finished-encounter gate pass. Hit/guard/defeat/celebrate artwork, pivot consistency in playback, full battle video, mobile art envelope checks and release gates remain open. No deployment or browser review in this pass.

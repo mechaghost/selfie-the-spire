@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 await build({entryPoints:['src/rendering/actorMotion.ts'],outfile:'tests/.e2e-out/actor-motion.mjs',bundle:true,platform:'node',format:'esm'});
-const {sampleActorMotion:sample,ActorMotionClock,motionProfile}=await import('./.e2e-out/actor-motion.mjs');
+const {sampleActorMotion:sample,ActorMotionClock,motionProfile,actorPoseAt}=await import('./.e2e-out/actor-motion.mjs');
+for(const ms of [0,79,240,320,60000])assert.equal(actorPoseAt('attack',ms,false),'idle');
+for(const ms of [80,140,239])assert.equal(actorPoseAt('attack',ms,false),'attack');
+assert.equal(actorPoseAt('attack',140,true),'idle');
 for(const profile of ['agile','heavy','float','slime']){
  for(const direction of [-1,1]){
   const contact=sample(profile,'attack',140,0,direction,false);

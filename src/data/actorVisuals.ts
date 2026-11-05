@@ -45,6 +45,8 @@ for (const [id, file, footY] of [
 }
 ACTOR_VISUALS['hero-neon'].keyPoses = {attack:{imageUrl:'/assets/battle/actors/street-runner-attack-v1.png',footAnchor:[.5,.97]}};
 ACTOR_VISUALS.alley_rat.keyPoses = {attack:{imageUrl:'/assets/battle/actors/alley-rat-attack-v1.png',footAnchor:[.5,.93]}};
+ACTOR_VISUALS.vending_golem.keyPoses = {attack:{imageUrl:'/assets/battle/actors/vending-golem-attack-v1.png',footAnchor:[.5,.94]}};
+ACTOR_VISUALS.fire_escape_spider.keyPoses = {attack:{imageUrl:'/assets/battle/actors/fire-escape-spider-attack-v1.png',footAnchor:[.5,.94]}};
 Object.values(ACTOR_VISUALS).forEach(validateActorVisual);
 export function resolveAppearance(value: CombatAppearance | undefined, archetype = 'neon'): ActorVisual {
     if (value?.version === 1 && ACTOR_VISUALS[value.actorVisualId]?.id?.startsWith('hero-')) return ACTOR_VISUALS[value.actorVisualId];
