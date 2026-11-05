@@ -1,6 +1,6 @@
 # Battle asset coverage ledger
 
-Five hero archetypes and six monsters have generated idle cutouts in review. Seventeen monster entries remain technical placeholders; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
+Five hero archetypes and ten monsters have generated idle cutouts in review. Thirteen monster entries remain technical placeholders; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
 
 | Visual ID | Reachability | Fallback / dimensions | Provenance | Status |
 |---|---|---|---|---|
@@ -10,13 +10,13 @@ Five hero archetypes and six monsters have generated idle cutouts in review. Sev
 | hero-concrete | Starter/generated archetype | /assets/battle/actors/concrete-idle-v1.png / 1194×1317 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | hero-smoke | Starter/generated archetype | /assets/battle/actors/smoke-idle-v1.png / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | alley_rat | Production encounter pool | /assets/battle/actors/alley-rat-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| neon_junkie | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
+| neon_junkie | Production encounter pool | /assets/battle/actors/neon-junkie-idle-v1.png / 1230×1278 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | graffiti_imp | Production encounter pool | /assets/battle/actors/graffiti-imp-idle-v1.png / 1230×1278 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | stray_voltage | Production encounter pool | /assets/battle/actors/stray-voltage-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | dumpster_crawler | Production encounter pool | /assets/battle/actors/dumpster-crawler-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| smoke_specter | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| taxi_ghost | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| manhole_mimic | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
+| smoke_specter | Production encounter pool | /assets/battle/actors/smoke-specter-idle-v1.png / 1145×1374 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| taxi_ghost | Production encounter pool | /assets/battle/actors/taxi-ghost-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| manhole_mimic | Production encounter pool | /assets/battle/actors/manhole-mimic-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | boombox_brute | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | neon_wraith | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | payphone_phantom | Developer/legacy retained | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |

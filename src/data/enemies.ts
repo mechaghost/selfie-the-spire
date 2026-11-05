@@ -36,7 +36,7 @@ export const enemies: Record<string, EnemyDefinition> = {
 
     'neon_junkie': {
         id: 'neon_junkie',
-        name: 'Junkie',
+        name: 'Neon Hunger',
         maxHpRange: [22, 28],
         aiPatterns: [
             {

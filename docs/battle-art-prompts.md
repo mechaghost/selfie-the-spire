@@ -70,3 +70,43 @@ Built-in image generation with transparent background; original idle cutout, rev
 Prompt:
 
 Use case: stylized-concept. Asset type: one original full-body enemy idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, warm neutral upper-left key and subtle cool teal rim, violet shadows. Three-quarter side view facing LEFT toward player. Entire creature and extremities visible, grounded combat-ready idle, generous empty margin. Strong distinctive silhouette readable at 100 pixels. True transparent RGBA outside subject. No scenery, ground platform, cast shadow, haze, outside glow cloud, card border, text, logo or UI. Single monster only. GRAFFITI IMP: a wiry little nonhuman street goblin with oversized pointed ears, coral-red skin, expressive amber eyes, short teal swept-back horn-like hair, dark violet patched vest and baggy shorts, chunky sneakers, a short curled tail, oversized paint-stained hands posed mischievously. One battered spray can held close to torso, no spray cloud. Original urban folklore creature, sharp distinctive silhouette.
+
+## Smoke Specter
+
+Asset: `public/assets/battle/actors/smoke-specter-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Asset: one original full-body idle monster sprite for Neo Miami urban deckbuilding combat. Professional hand-painted 2D game illustration, strong dark contour, bold shaded masses, restrained brush texture, coral and weathered teal accents, violet shadows, warm upper-left key light. Three-quarter side view facing LEFT. Full creature visible with generous transparent margin on all sides, readable silhouette at 100 pixels. True transparent RGBA background. No scenery, floor, platform, cast shadow, outside haze or glow, card border, text or UI. One monster only. SMOKE SPECTER: a floating urban ghost with a sharply defined charcoal-violet smoke body, hunched shoulders in a tattered teal hooded bomber jacket, elongated clawed hands, two piercing pale amber eyes inside a black hood. Lower body tapers into three tightly curled smoke tendrils, self-contained opaque painted smoke shapes rather than diffuse fog. Coral lining accents. Menacing defensive idle, distinctive tall triangular silhouette.
+
+## Taxi Ghost
+
+Asset: `public/assets/battle/actors/taxi-ghost-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Asset: one original full-body idle monster sprite for Neo Miami urban deckbuilding combat. Professional hand-painted 2D game illustration, strong dark contour, bold shaded masses, restrained brush texture, coral and weathered teal accents, violet shadows, warm upper-left key light. Three-quarter side view facing LEFT. Full creature visible with generous transparent margin on all sides, readable silhouette at 100 pixels. True transparent RGBA background. No scenery, floor, platform, cast shadow, outside haze or glow, card border, text or UI. One monster only. TAXI GHOST: a compact haunted retro yellow taxi transformed into a snarling mechanical beast. Squat car-shaped torso, two bright amber headlight eyes, split bumper jaw with chunky metal teeth, four articulated suspension legs ending in small tire paws, short tailpipe tail. Weathered mustard yellow body, teal windshield, violet undercarriage, small blank taxi roof lamp. All four legs and wheels visible. Aggressive forward crouch, charming urban monster, not an ordinary vehicle.
+
+## Manhole Mimic
+
+Asset: `public/assets/battle/actors/manhole-mimic-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Asset: one original full-body idle monster sprite for Neo Miami urban deckbuilding combat. Professional hand-painted 2D game illustration, strong dark contour, bold shaded masses, restrained brush texture, coral and weathered teal accents, violet shadows, warm upper-left key light. Three-quarter side view facing LEFT. Full creature visible with generous transparent margin on all sides, readable silhouette at 100 pixels. True transparent RGBA background. No scenery, floor, platform, cast shadow, outside haze or glow, card border, text or UI. One monster only. MANHOLE MIMIC: a low squat sewer ambush creature with a circular cast-iron manhole lid hinged open like an upper jaw, dark teal embossed concentric metal ridges, huge coral gum-lined mouth with uneven pale triangular teeth and a thick short tongue, two amber eyes on the lid rim, four stubby muscular violet limbs with blunt claws. Entire creature free-standing with no road or hole beneath it. Heavy armored silhouette, left-facing hungry idle.
+
+## Neon Junkie
+
+Asset: `public/assets/battle/actors/neon-junkie-idle-v1.png`
+
+Built-in image generation with transparent background; idle cutout in review.
+
+Prompt:
+
+Use case: stylized-concept. Asset: one original full-body idle monster sprite for Neo Miami urban deckbuilding combat. Professional hand-painted 2D game illustration, strong dark contour, bold shaded masses, restrained brush texture, coral and weathered teal accents, violet shadows, warm upper-left key light. Three-quarter side view facing LEFT. Full creature visible with generous transparent margin on all sides, readable silhouette at 100 pixels. True transparent RGBA background. No scenery, floor, platform, cast shadow, outside haze or glow, card border, text or UI. One monster only. NEON HUNGER: an original nonhuman neon-consuming street monster, lanky angular humanoid made of cracked violet ceramic and tangled black power cables, long arms ending in three claw fingers, digitigrade legs with two-toed feet, tilted angular teal mask with a wide coral glowing grin. Broken neon tubing embedded securely within torso and shoulders glows amber. No human addiction imagery. Hunched predatory ready stance, whole body visible, distinctive long-limbed silhouette.

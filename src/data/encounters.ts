@@ -37,7 +37,7 @@ export const ENCOUNTER_POOLS: Record<string, Encounter[]> = {
         // Medium singles
         {
             id: 'neon_junkie_solo',
-            name: 'Neon Junkie',
+            name: 'Neon Hunger',
             enemyIds: ['neon_junkie']
         },
         {

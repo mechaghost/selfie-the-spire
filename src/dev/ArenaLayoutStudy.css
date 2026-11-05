@@ -29,3 +29,6 @@
 .study-hand .card { touch-action:pan-x; }
 @media (max-height:600px) { .study-hand .card-artwork-wrap,.study-hand .card-artwork-placeholder { height:56px; aspect-ratio:auto; } .study-hand .card-desc { font-size:12px; } }
 @media (max-height:450px) and (min-width:600px) { .study-hand .card-artwork-wrap,.study-hand .card-artwork-placeholder { height:32px; } }
+
+.arena-study nav label { flex-shrink:0; display:flex; flex-direction:column; font-size:11px; }
+.arena-study nav select { min-height:26px; color:#fff; background:#142c3e; border:1px solid #578a99; border-radius:4px; max-width:180px; }
