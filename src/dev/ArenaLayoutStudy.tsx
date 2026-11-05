@@ -7,6 +7,7 @@ import { BattleStage } from '../components/combat/BattleStage';
 import { ACTOR_VISUALS } from '../data/actorVisuals';
 import { LOCATIONS } from '../data/locations';
 import { enemies } from '../data/enemies';
+import { ActorClip } from '../core/battleVisualModels';
 const position = (rect: Rect) => ({ left: rect.x, top: rect.y, width: rect.width, height: rect.height });
 const roster = Object.keys(enemies);
 const cards = Array.from({length:10}, (_, i) => createCardInstance(i % 2 ? 'haymaker' : 'finesse'));
@@ -18,6 +19,7 @@ export default function ArenaLayoutStudy() {
     const [count, setCount] = useState(3);
     const [boss, setBoss] = useState(false);
     const [selected, setSelected] = useState<string | null>(null);
+    const [preview, setPreview] = useState<{actor:string;clip:ActorClip;token:number} | null>(null);
     const [dead, setDead] = useState<string[]>([]);
     const [size, setSize] = useState({width:320,height:220});
     const stage = useRef<HTMLDivElement>(null);
@@ -29,9 +31,9 @@ export default function ArenaLayoutStudy() {
     const layout = battleLayout(size.width, size.height, Array.from({length:count}, (_, i) => `enemy-${i}`), boss);
     return <main className="arena-study">
         <header><strong>NEO MIAMI</strong><span>Combat art and layout review</span></header>
-        <nav aria-label="Layout variants"><button onClick={()=>setRenderer(value=>!value)}>{renderer ? 'DOM study' : 'Pixi scene'}</button><button onClick={()=>setFallback(value=>!value)}>{fallback ? 'Enable graphics' : 'Force fallback'}</button><button onClick={()=>setDistrict(value=>(value+1)%5)}>{LOCATIONS[district].name}</button>{[1,2,3].map(n => <button key={n} onClick={() => {setCount(n);setBoss(false);setDead([]);setSelected(null);}}>{n} {n === 1 ? 'enemy' : 'enemies'}</button>)}<button onClick={() => {setCount(1);setBoss(true);setActorIds(ids=>['the_billboard',...ids.slice(1)]);setDead([]);setSelected(null);}}>Boss</button><button disabled={!selected} onClick={() => setDead([...dead, selected!])}>Defeat selected</button>{actorIds.slice(0,count).map((id,i)=><label key={i}>Enemy {i+1} <select aria-label={`Enemy ${i+1} artwork`} value={id} onChange={event=>{const next=[...actorIds];next[i]=event.target.value;setActorIds(next);setDead([]);setSelected(null);}}>{roster.map(key=><option key={key} value={key}>{enemies[key].name} · {ACTOR_VISUALS[key].productionStatus}</option>)}</select></label>)}</nav>
+        <nav aria-label="Layout variants"><button onClick={()=>setRenderer(value=>!value)}>{renderer ? 'DOM study' : 'Pixi scene'}</button><button onClick={()=>setFallback(value=>!value)}>{fallback ? 'Enable graphics' : 'Force fallback'}</button><button onClick={()=>setDistrict(value=>(value+1)%5)}>{LOCATIONS[district].name}</button>{[1,2,3].map(n => <button key={n} onClick={() => {setCount(n);setBoss(false);setDead([]);setSelected(null);}}>{n} {n === 1 ? 'enemy' : 'enemies'}</button>)}<button onClick={() => {setCount(1);setBoss(true);setActorIds(ids=>['the_billboard',...ids.slice(1)]);setDead([]);setSelected(null);}}>Boss</button><button disabled={!selected} onClick={() => setDead([...dead, selected!])}>Defeat selected</button>{actorIds.slice(0,count).map((id,i)=><label key={i}>Enemy {i+1} <select aria-label={`Enemy ${i+1} artwork`} value={id} onChange={event=>{const next=[...actorIds];next[i]=event.target.value;setActorIds(next);setDead([]);setSelected(null);}}>{roster.map(key=><option key={key} value={key}>{enemies[key].name} · {ACTOR_VISUALS[key].productionStatus}</option>)}</select></label>)}<button onClick={()=>setSelected('player')}>Select hero</button>{(['idle','attack','hit','guard','cast','celebrate'] as const).map(clip=><button key={clip} disabled={!selected || !renderer} onClick={()=>setPreview({actor:selected!,clip,token:Date.now()})}>Replay {clip}</button>)}<button onClick={()=>{setDead([]);setPreview(null);}}>Reset poses</button><span>Missing artwork uses idle. Playback follows normal timing.</span></nav>
         <section className="study-stage" ref={stage} aria-label="Combat composition">
-            {renderer && <BattleStage forceFallback={fallback} snapshot={{layout,location:LOCATIONS[district],reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,actors:[{id:'player',visual:ACTOR_VISUALS['hero-neon'],defeated:false},...layout.enemies.map((slot,i)=>({id:slot.id,visual:ACTOR_VISUALS[actorIds[i]],defeated:dead.includes(slot.id)}))]}} />}
+            {renderer && <BattleStage forceFallback={fallback} snapshot={{layout,location:LOCATIONS[district],reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,actors:[{id:'player',visual:ACTOR_VISUALS['hero-neon'],defeated:dead.includes('player'),clip:preview?.actor==='player'?preview.clip:undefined,motionToken:preview?.actor==='player'?String(preview.token):undefined},...layout.enemies.map((slot,i)=>({id:slot.id,visual:ACTOR_VISUALS[actorIds[i]],defeated:dead.includes(slot.id),clip:preview?.actor===slot.id?preview.clip:undefined,motionToken:preview?.actor===slot.id?String(preview.token):undefined}))]}} />}
             {!renderer && <div className="study-skyline" aria-hidden="true" />}
             {!renderer && <div className="study-road" aria-hidden="true" />}
             <div className="study-hero-hud" style={position(layout.hero.hud)}><strong>You</strong><span>72/80</span><span>◆ 8</span></div>
@@ -44,7 +46,7 @@ export default function ArenaLayoutStudy() {
                 </button>
             </div>)}
         </section>
-        <div className="study-controls"><span><strong>3/3</strong> Energy</span><span>{selected ? `Target ${Number(selected.slice(-1))+1}` : 'Choose a target'}</span><button>End Turn</button></div>
+        <div className="study-controls"><span><strong>3/3</strong> Energy</span><span>{selected==='player' ? 'Hero selected' : selected ? `Target ${Number(selected.slice(-1))+1}` : 'Choose a target'}</span><button>End Turn</button></div>
         <section className="study-hand" aria-label="Ten-card hand">{cards.map(card => <CardItem key={card.instanceId} card={card} canPlay isDraggable={false} onInspect={() => {}} />)}</section>
     </main>;
 }
