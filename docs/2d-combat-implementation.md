@@ -1,6 +1,6 @@
 # 2D combat implementation specification
 
-Revision: reviewed specification v1, November 5, 2026 (draft 3 passed Round 3). Implementation has not started. This specification translates [the research](2d-combat-arena-research.md) into work packages. Review findings and resolutions belong in [the review log](2d-combat-review-log.md).
+Revision: reviewed specification v1, November 5, 2026 (draft 3 passed Round 3). Implementation is in progress; evidence and remaining gaps are tracked in upgrade-execution-log.md. This specification translates [the research](2d-combat-arena-research.md) into work packages. Review findings and resolutions belong in [the review log](2d-combat-review-log.md).
 
 ## Review outcome and starting point
 

@@ -17,7 +17,7 @@ for(const definition of Object.values(enemies))for(const {intent} of definition.
 }
 const mixed={type:'AttackDefend',damage:999,block:999,effects:[{type:'Damage',amount:4,target:'Target'},{type:'Block',amount:3,target:'Self'},{type:'Block',amount:2,target:'Self'}]};
 const preview=intentView(mixed,[{id:'dexterity',amount:2}],[]);
-assert.equal(preview.attack,'4');assert.equal(preview.block,9,'Dexterity applies to each Block effect, not the sum');
+assert.equal(preview.previewKind,'current');assert.equal(preview.attack,'4');assert.equal(preview.block,9,'Dexterity applies to each Block effect, not the sum');
 assert.equal(intentView({type:'Buff',effects:[{type:'Block',amount:3,target:'Target'}]},[],[]).block,0,'enemy HUD does not claim Block granted to player');
 store.getState().initializeRun('cleanup');setCombatMotionMode('normal');
 console.log(`PASS: ${checked} roster Block previews match authoritative gains; mixed effects ignore decorative metadata`);

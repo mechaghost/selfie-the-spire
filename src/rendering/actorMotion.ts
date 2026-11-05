@@ -1,6 +1,7 @@
 import type { ActorClip } from '../core/battleVisualModels';
 
 export type MotionProfile = 'agile' | 'heavy' | 'float' | 'slime';
+export const DEFEAT_PRESENTATION_MS=280;
 export interface ActorMotion { x:number; y:number; scaleX:number; scaleY:number; rotation:number; alpha:number }
 const floating = new Set(['smoke_specter','neon_wraith','chrome_phantom','dj_phantom']);
 const heavy = new Set(['vending_golem','dumpster_crawler','boombox_brute','neon_sentinel','voltage_king','circuit_breaker','chrome_bouncer','the_billboard','subway_wyrm','hero-chrome','hero-concrete']);
@@ -12,7 +13,7 @@ export function sampleActorMotion(profile:MotionProfile, clip:ActorClip, elapsed
     const result:ActorMotion={x:0,y:0,scaleX:1,scaleY:1,rotation:0,alpha:1};
     const ms=Math.max(0,elapsed);
     if(clip==='defeat') {
-        const p=reduced ? 1 : Math.min(1,ms/280);
+        const p=reduced ? 1 : Math.min(1,ms/DEFEAT_PRESENTATION_MS);
         return {...result,y:8*p,scaleY:1-.12*p,alpha:1-.85*p};
     }
     if(reduced)return result;

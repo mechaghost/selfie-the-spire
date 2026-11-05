@@ -214,7 +214,7 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
                     {intent.type.includes('Attack') && (
                         <div className="intent-item attack">
                             <Swords size={16} />
-                            <span className="intent-value">{damageLabel}</span>
+                            <span className="intent-value" aria-label={`Current damage preview: ${damageLabel}`}>≈ {damageLabel}</span>
                         </div>
                     )}
                     {intent.type.includes('Defend') && intent.type !== 'AttackDefend' && (

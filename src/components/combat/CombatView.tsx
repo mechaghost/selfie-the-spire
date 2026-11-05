@@ -137,7 +137,7 @@ export function CombatView() {
             </div>
 
             <TargetingArrow />
-            <CombatResultOverlay />
+            <CombatResultOverlay animateDefeat={actorArena} />
         </div>
     );
 }

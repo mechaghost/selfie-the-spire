@@ -5,8 +5,9 @@ import { useGameStore } from '../../store/gameStore';
 import { Trophy, Skull } from 'lucide-react';
 import { CardItem } from '../ui/CardItem';
 import './CombatResultOverlay.css';
+import { useResultReveal } from './useResultReveal';
 
-export function CombatResultOverlay() {
+export function CombatResultOverlay({animateDefeat=false}:{animateDefeat?:boolean}) {
     const { combatResult, goldReward, cardRewards, floor, seed, initializeRun, continueCombatResult, claimCardReward } = useGameStore((state) => ({
         combatResult: state.combatResult,
         goldReward: state.goldReward,
@@ -19,8 +20,9 @@ export function CombatResultOverlay() {
     }));
 
     const [selectedId, setSelectedId] = useState<string | null>(null);
+    const revealed=useResultReveal(combatResult,animateDefeat);
     const selected = cardRewards.find(card => card.instanceId === selectedId);
-    if (!combatResult) return null;
+    if (!combatResult || !revealed) return null;
 
     const isVictory = combatResult === 'victory';
     const hasRewards = isVictory && cardRewards.length > 0;
