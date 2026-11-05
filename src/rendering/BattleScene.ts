@@ -4,7 +4,8 @@ import { BattleLayout, ActorSlot } from './battleLayout';
 import { ImpactNotice, subscribeImpacts } from './CombatPresentation';
 import { frameLocation } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
-export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip }
+import { ActorMotionClock, motionProfile, sampleActorMotion } from './actorMotion';
+export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
     return new Promise((resolve,reject) => {
@@ -30,7 +31,7 @@ export class BattleScene {
     private disposed = false;
     private initialized = false;
     private snapshot: SceneSnapshot;
-    private time = 0;
+    private motions = new ActorMotionClock();
     private reactions = new Map<string,{at:number;effect:ImpactNotice['effect']}>();
     private unsubscribeImpacts: (()=>void) | undefined;
     constructor(private host: HTMLElement, snapshot: SceneSnapshot, private onFailure: (reason:string)=>void) { this.snapshot = snapshot; }
@@ -109,15 +110,19 @@ export class BattleScene {
     }
     private place(sprite: Sprite, slot: ActorSlot, actor: SceneActor) {
         const idle=this.poses.get(`${actor.id}:idle`) ?? sprite.texture;
-        const clip=this.snapshot.reducedMotion ? 'idle' : actor.clip ?? 'idle';
-        const pose=actor.visual.keyPoses?.[clip];
-        sprite.texture=this.poses.get(`${actor.id}:${clip}`) ?? idle;
+        const now=performance.now();
+        const clip:ActorClip=actor.defeated ? 'defeat' : actor.clip ?? 'idle';
+        const elapsed=this.motions.elapsed(actor.id,clip,actor.motionToken,now);
+        const motion=sampleActorMotion(motionProfile(actor.visual.id),clip,elapsed,now+slot.foot.x*11,actor.id==='player'?1:-1,this.snapshot.reducedMotion);
+        const poseClip=this.snapshot.reducedMotion ? 'idle' : clip;
+        const pose=actor.visual.keyPoses?.[poseClip];
+        sprite.texture=this.poses.get(`${actor.id}:${poseClip}`) ?? idle;
         sprite.anchor.set(...(pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));
         const scale = Math.min(slot.art.width / idle.width,slot.art.height / idle.height);
-        sprite.scale.set(scale); sprite.position.set(slot.foot.x,slot.foot.y); sprite.alpha = actor.defeated ? .15 : 1;
+        sprite.scale.set(scale*motion.scaleX,scale*motion.scaleY); sprite.position.set(slot.foot.x+motion.x,slot.foot.y+motion.y); sprite.alpha=motion.alpha; sprite.rotation=motion.rotation;
         sprite.tint=0xffffff;
         const reaction=this.reactions.get(actor.id);
-        if(reaction && !this.snapshot.reducedMotion) {
+        if(reaction && !actor.defeated && !this.snapshot.reducedMotion) {
             const progress=(performance.now()-reaction.at)/220;
             if(progress>=1)this.reactions.delete(actor.id);
             else {
@@ -128,14 +133,11 @@ export class BattleScene {
     }
     private tick = () => {
         if (this.disposed) return;
-        this.time += this.app.ticker.deltaMS;
-        for (const [index, actor] of this.snapshot.actors.entries()) {
+        for (const actor of this.snapshot.actors) {
             const sprite = this.sprites.get(actor.id);
             const slot = actor.id === 'player' ? this.snapshot.layout.hero : this.snapshot.layout.enemies.find(slot=>slot.id===actor.id);
             if (!sprite || !slot) continue;
             this.place(sprite,slot,actor);
-            // Temporary restrained idle, with planted feet. Authored clips replace this in W4.
-            if (!this.snapshot.reducedMotion && !actor.defeated) sprite.scale.y *= 1 + Math.sin(this.time/650+index)*.008;
         }
     };
     private contextLost = (event: Event) => { event.preventDefault(); this.onFailure('Graphics context lost'); this.destroy(); };
@@ -149,7 +151,7 @@ export class BattleScene {
     destroy() {
         if (this.disposed) return;
         this.disposed = true;
-        this.unsubscribeImpacts?.(); this.unsubscribeImpacts=undefined;this.reactions.clear();
+        this.unsubscribeImpacts?.(); this.unsubscribeImpacts=undefined;this.reactions.clear();this.motions.clear();
         document.removeEventListener('visibilitychange',this.visibility);
         this.destroyApp();
         this.sprites.clear(); this.shadows.clear(); this.poses.clear(); this.backgroundSprites=[];

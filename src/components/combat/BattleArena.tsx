@@ -34,10 +34,10 @@ export function BattleArena() {
         useGameStore.setState({entityBounds:bounds});
         return()=>{useGameStore.setState({entityBounds:{}});};
     },[layout]);
-    const clipFor=(id:string):ActorClip=>activeAnimations.some(animation=>animation.targetId===id && animation.type==='lunge') ? 'attack' : 'idle';
+    const motionFor=(id:string)=>{const animation=[...activeAnimations].reverse().find(animation=>animation.targetId===id && animation.type==='lunge');return {clip:(animation?'attack':'idle') as ActorClip,motionToken:animation?.id};};
     const snapshot=useMemo(()=>({layout,location:locationForFloor(floor),reducedMotion,actors:[
-        {id:'player',visual:resolveAppearance(player.combatAppearance),defeated:player.hp<=0,clip:clipFor('player')},
-        ...enemies.map(enemy=>({id:enemy.id,visual:ACTOR_VISUALS[enemy.templateId] ?? ACTOR_VISUALS.alley_rat,defeated:enemy.hp<=0,clip:clipFor(enemy.id)})),
+        {id:'player',visual:resolveAppearance(player.combatAppearance),defeated:player.hp<=0,...motionFor('player')},
+        ...enemies.map(enemy=>({id:enemy.id,visual:ACTOR_VISUALS[enemy.templateId] ?? ACTOR_VISUALS.alley_rat,defeated:enemy.hp<=0,...motionFor(enemy.id)})),
     ]}),[layout,floor,reducedMotion,player.hp,player.combatAppearance,enemies,activeAnimations]);
     const entity=inspected==='player' ? player : enemies.find(enemy=>enemy.id===inspected);
     return <div className="battle-arena" ref={root}>

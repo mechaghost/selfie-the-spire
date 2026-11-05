@@ -105,3 +105,11 @@ Generated thirteen additional original transparent monster assets with built-in 
 This closes primary idle-art coverage, not art approval or animation coverage. Generated source images still require full-roster mobile staging, consistent apparent scale/pivot review, edge/glow cleanup where needed, runtime compression and performance measurements. Some designs fill their source frame closely, so margin/pivot consistency needs inspection in motion. Authored attack/hit/defeat coverage remains incomplete. No new browser review or production deployment in this pass.
 
 Renderer asset validation, TypeScript, production build and whitespace checks pass. The reviewed arena remains development-only pending remaining gates.
+
+## Per-actor motion foundation
+
+Replaced uniform breathing with pure motion profiles: restrained weight shift for heavy machines, hovering for spirits, planted breathing for agile actors and squash/stretch for slime. Added attack anticipation, directional contact at 140ms and recovery within the existing 320ms queue beat. Existing generated attack key poses still layer with the transform; this does not substitute for the missing authored pose/clip coverage. Defeated actors settle and fade over 280ms while their semantic slots remain unchanged. Terminal combat may still leave the arena before the full defeat motion; result/defeat presentation gating remains open.
+
+The scene tracks each legacy animation's unique token so snapshot refreshes do not restart attacks and successive attacks can restart without an intervening idle render. Absolute elapsed time expires stale motion after hidden-tab pauses. Reduced motion skips transient transforms and uses the static defeated state. Renderer logic remains presentation-only and cannot change the combat queue.
+
+New actor-motion tests cover direction, wind-up/contact/recovery, stale elapsed time, repeated tokens, defeat and reduced-motion behavior. Combat presentation parity tests, TypeScript, production build and whitespace checks pass. No browser animation review in this pass; visual easing, full roster bounds and authored motion remain to verify before release.
