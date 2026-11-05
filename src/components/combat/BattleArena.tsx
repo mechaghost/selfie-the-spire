@@ -36,9 +36,9 @@ export function BattleArena() {
     },[layout]);
     const clipFor=(id:string):ActorClip=>activeAnimations.some(animation=>animation.targetId===id && animation.type==='lunge') ? 'attack' : 'idle';
     const snapshot=useMemo(()=>({layout,location:locationForFloor(floor),reducedMotion,actors:[
-        {id:'player',visual:resolveAppearance(undefined),defeated:player.hp<=0,clip:clipFor('player')},
+        {id:'player',visual:resolveAppearance(player.combatAppearance),defeated:player.hp<=0,clip:clipFor('player')},
         ...enemies.map(enemy=>({id:enemy.id,visual:ACTOR_VISUALS[enemy.templateId] ?? ACTOR_VISUALS.alley_rat,defeated:enemy.hp<=0,clip:clipFor(enemy.id)})),
-    ]}),[layout,floor,reducedMotion,player.hp,enemies,activeAnimations]);
+    ]}),[layout,floor,reducedMotion,player.hp,player.combatAppearance,enemies,activeAnimations]);
     const entity=inspected==='player' ? player : enemies.find(enemy=>enemy.id===inspected);
     return <div className="battle-arena" ref={root}>
         <BattleStage snapshot={snapshot}/>

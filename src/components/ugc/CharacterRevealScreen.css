@@ -488,3 +488,11 @@
         height: 48px;
     }
 }
+.reveal-appearances { display:flex; justify-content:center; align-items:flex-end; gap:20px; max-width:100%; }
+.reveal-appearances figure { margin:0; display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0; }
+.reveal-appearances figcaption { font-size:14px; color:#d4e0e5; text-align:center; }
+.reveal-appearances .reveal-portrait { width:130px; height:190px; margin:0; }
+.reveal-battle-actor { width:145px; height:210px; object-fit:contain; }
+.reveal-appearance-note { max-width:440px; margin:6px 0; font-size:14px; line-height:1.5; text-align:center; color:#d4e0e5; }
+.reveal-back { min-height:44px; padding:8px 18px; border:1px solid #718c99; border-radius:8px; background:#15283a; color:#fff; font-size:14px; }
+@media(max-width:360px) { .reveal-appearances { gap:10px; } .reveal-appearances .reveal-portrait { width:110px; height:170px; } .reveal-battle-actor { width:130px; height:185px; } }

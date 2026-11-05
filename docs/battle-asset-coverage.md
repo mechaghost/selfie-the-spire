@@ -5,10 +5,10 @@ Most entries remain technical placeholders. Alley Rat, Vending Golem and Fire Es
 | Visual ID | Reachability | Fallback / dimensions | Provenance | Status |
 |---|---|---|---|---|
 | hero-neon | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
-| hero-chrome | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
-| hero-volt | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
-| hero-concrete | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
-| hero-smoke | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
+| hero-chrome | Starter/generated archetype | /assets/battle/actors/chrome-idle-v1.png / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| hero-volt | Starter/generated archetype | /assets/battle/actors/volt-idle-v1.png / 1186×1327 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| hero-concrete | Starter/generated archetype | /assets/battle/actors/concrete-idle-v1.png / 1194×1317 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| hero-smoke | Starter/generated archetype | /assets/battle/actors/smoke-idle-v1.png / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | alley_rat | Production encounter pool | /assets/battle/actors/alley-rat-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | neon_junkie | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | graffiti_imp | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |

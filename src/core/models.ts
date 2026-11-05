@@ -1,3 +1,4 @@
+import type { CombatAppearance } from './battleVisualModels';
 export type CardType = 'Attack' | 'Skill' | 'Power' | 'Status' | 'Curse';
 export type TargetType = 'None' | 'Enemy' | 'Self' | 'AllEnemies';
 
@@ -88,7 +89,8 @@ export interface Player extends Entity {
     maxEnergy: number;
     gold: number;
     portraitUrl?: string;
-    spriteUrl?: string; // Full-body transparent sprite for combat animations
+    spriteUrl?: string; // Legacy field; never use a personalized portrait as battle art.
+    combatAppearance?: CombatAppearance;
 }
 
 export interface Enemy extends Entity {

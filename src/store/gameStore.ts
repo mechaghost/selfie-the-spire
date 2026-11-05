@@ -1,3 +1,4 @@
+import { appearanceForArchetype, normalizeAppearance } from '../data/actorVisuals';
 import { CombatClock, combatDelay } from '../core/combatTiming';
 import { beginPresentationBattle, identifyAction, identifyChildren, publishAction, publishImpact } from '../rendering/CombatPresentation';
 import { validateSave } from '../core/saveValidation';
@@ -329,6 +330,11 @@ function loadRun(): Partial<GameState> | null {
             if (Array.isArray(data[key])) data[key] = data[key].map((card: Card) => ({ ...card, description: describeCardEffects(card) }));
         }
         if (parsed.schemaVersion !== 2) loadRecoveryNotice = 'Your saved run was upgraded. Your deck and progress are preserved; future random outcomes may differ from the earlier version.';
+        const savedPlayer=data.player as Player;
+        if(savedPlayer.portraitUrl && !savedPlayer.combatAppearance) {
+            loadRecoveryNotice=[loadRecoveryNotice,'Your portrait is preserved. This older run uses the Street Runner battle appearance.'].filter(Boolean).join(' ');
+        }
+        data.player={...savedPlayer,combatAppearance:normalizeAppearance(savedPlayer.combatAppearance)};
         data.rng = rng;
         return data as Partial<GameState>;
     } catch {
@@ -439,6 +445,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 statuses: [],
                 energy: charDef.maxEnergy,
                 maxEnergy: charDef.maxEnergy,
+                combatAppearance: appearanceForArchetype('neon'),
                 gold: charDef.startingGold
             },
             masterDeck: initialDeck,
@@ -660,7 +667,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 maxEnergy: generatedCharacter.maxEnergy,
                 gold: generatedCharacter.startingGold,
                 portraitUrl: generatedCharacter.portraitUrl || undefined,
-                spriteUrl: generatedCharacter.portraitUrl || undefined,
+                combatAppearance: appearanceForArchetype(generatedCharacter.archetype),
             },
             masterDeck,
             ugcPhase: null,

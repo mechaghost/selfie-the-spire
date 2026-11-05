@@ -12,6 +12,10 @@ export const ACTOR_VISUALS: Record<string, ActorVisual> = Object.fromEntries([
 ]);
 for (const [id, file, footY] of [
     ['hero-neon', 'street-runner-idle-v1.png', .99],
+    ['hero-chrome', 'chrome-idle-v1.png', .99],
+    ['hero-volt', 'volt-idle-v1.png', .99],
+    ['hero-concrete', 'concrete-idle-v1.png', .99],
+    ['hero-smoke', 'smoke-idle-v1.png', .99],
     ['alley_rat', 'alley-rat-idle-v1.png', .94],
     ['vending_golem', 'vending-golem-idle-v1.png', .94],
     ['fire_escape_spider', 'fire-escape-spider-idle-v1.png', .94],
@@ -23,6 +27,13 @@ ACTOR_VISUALS['hero-neon'].keyPoses = {attack:{imageUrl:'/assets/battle/actors/s
 ACTOR_VISUALS.alley_rat.keyPoses = {attack:{imageUrl:'/assets/battle/actors/alley-rat-attack-v1.png',footAnchor:[.5,.93]}};
 Object.values(ACTOR_VISUALS).forEach(validateActorVisual);
 export function resolveAppearance(value: CombatAppearance | undefined, archetype = 'neon'): ActorVisual {
-    if (value?.version === 1 && ACTOR_VISUALS[value.actorVisualId]?.id.startsWith('hero-')) return ACTOR_VISUALS[value.actorVisualId];
+    if (value?.version === 1 && ACTOR_VISUALS[value.actorVisualId]?.id?.startsWith('hero-')) return ACTOR_VISUALS[value.actorVisualId];
     return ACTOR_VISUALS[`hero-${archetype}`] ?? ACTOR_VISUALS['hero-neon'];
+}
+
+export function appearanceForArchetype(archetype:string):CombatAppearance {
+    return {version:1,actorVisualId:resolveAppearance(undefined,archetype).id};
+}
+export function normalizeAppearance(value:CombatAppearance|undefined):CombatAppearance {
+    return {version:1,actorVisualId:resolveAppearance(value).id};
 }
