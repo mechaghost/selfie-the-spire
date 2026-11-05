@@ -1,6 +1,7 @@
 import { Application, Container, Graphics, ImageSource, Sprite, Texture } from 'pixi.js';
 import { ActorClip, ActorVisual, LocationVisual } from '../core/battleVisualModels';
 import { BattleLayout, ActorSlot } from './battleLayout';
+import { frameLocation } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
@@ -18,6 +19,8 @@ export const battleTextures = new AssetLeaseCache(loadTexture, texture => textur
 export class BattleScene {
     private app = new Application();
     private world = new Container();
+    private backdrop = new Container();
+    private backgroundSprites: Sprite[] = [];
     private ground = new Graphics();
     private sprites = new Map<string,Sprite>();
     private poses = new Map<string,Texture>();
@@ -37,8 +40,16 @@ export class BattleScene {
             this.app.canvas.setAttribute('aria-hidden','true');
             this.app.canvas.addEventListener('webglcontextlost',this.contextLost);
             this.app.stage.eventMode = 'none';
-            this.app.stage.addChild(this.ground,this.world);
+            this.app.stage.addChild(this.ground,this.backdrop,this.world);
             this.host.appendChild(this.app.canvas);
+            await Promise.all(this.snapshot.location.layers.map(async layer=>{
+                const lease=battleTextures.acquire(layer.url);this.leases.push(lease);
+                try {
+                    const texture=await lease.ready;if(this.disposed)return;
+                    const sprite=new Sprite(texture);this.backgroundSprites.push(sprite);this.backdrop.addChild(sprite);
+                } catch { /* Technical ground remains usable while background art is unavailable. */ }
+            }));
+            if(this.disposed)return false;
             await Promise.all(this.snapshot.actors.map(async actor => {
                 const lease = battleTextures.acquire(actor.visual.fallbackImageUrl); this.leases.push(lease);
                 const texture = await lease.ready;
@@ -75,6 +86,10 @@ export class BattleScene {
         for(let i=0;i<12;i++) this.ground.rect(i*width/12,height*.1+(i%3)*7,width/15,height*.63).fill({color:0x081527,alpha:.35});
         this.ground.rect(0,height*horizon,width,height*(1-horizon)).fill(snapshot.location.ground)
             .rect(0,height*horizon,width,2).fill({color:snapshot.location.accent,alpha:.55});
+        for(const sprite of this.backgroundSprites) {
+            const frame=frameLocation(width,height,sprite.texture.width,sprite.texture.height,.43,horizon===.32 ? .32 : .5);
+            sprite.position.set(frame.x,frame.y);sprite.width=frame.width;sprite.height=frame.height;
+        }
         for (const actor of snapshot.actors) {
             const slot = actor.id === 'player' ? snapshot.layout.hero : snapshot.layout.enemies.find(slot=>slot.id===actor.id);
             const sprite = this.sprites.get(actor.id);
@@ -119,7 +134,7 @@ export class BattleScene {
         this.disposed = true;
         document.removeEventListener('visibilitychange',this.visibility);
         this.destroyApp();
-        this.sprites.clear(); this.shadows.clear(); this.poses.clear();
+        this.sprites.clear(); this.shadows.clear(); this.poses.clear(); this.backgroundSprites=[];
         this.leases.forEach(lease=>lease.release()); this.leases=[];
     }
 }

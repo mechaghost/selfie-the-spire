@@ -23,7 +23,7 @@ export function BattleStage({snapshot,forceFallback=false,onStatus}: Props) {
             if (!cancelled && mounted) { owned.update(latest.current); setStatus('ready'); }
         }).catch(()=>{if(!cancelled)setStatus('degraded');});
         return () => { cancelled=true; owned?.destroy(); if(scene.current===owned)scene.current=null; };
-    }, [rosterKey,forceFallback,attempt]);
+    }, [rosterKey,snapshot.location.id,forceFallback,attempt]);
     useEffect(()=>{scene.current?.update(snapshot);},[snapshot]);
     useEffect(()=>{onStatus?.(status);},[status,onStatus]);
     return <div className="battle-stage-visual" data-stage-status={status}>

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { build } from 'esbuild';
 import { access } from 'node:fs/promises';
-await build({stdin:{contents:`export * from './src/rendering/AssetLeaseCache'; export * from './src/core/battleVisualModels'; export * from './src/data/actorVisuals'; export * from './src/data/locations'; export { enemies } from './src/data/enemies'; export { ENCOUNTER_POOLS } from './src/data/encounters';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-assets.mjs',bundle:true,platform:'node',format:'esm'});
-const {AssetLeaseCache,ACTOR_VISUALS,validateActorVisual,locationForFloor,enemies,ENCOUNTER_POOLS,resolveAppearance} = await import('./.e2e-out/renderer-assets.mjs');
+await build({stdin:{contents:`export * from './src/rendering/AssetLeaseCache'; export * from './src/rendering/locationFraming'; export * from './src/core/battleVisualModels'; export * from './src/data/actorVisuals'; export * from './src/data/locations'; export { enemies } from './src/data/enemies'; export { ENCOUNTER_POOLS } from './src/data/encounters';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-assets.mjs',bundle:true,platform:'node',format:'esm'});
+const {frameLocation,LOCATIONS,AssetLeaseCache,ACTOR_VISUALS,validateActorVisual,locationForFloor,enemies,ENCOUNTER_POOLS,resolveAppearance} = await import('./.e2e-out/renderer-assets.mjs');
 let loads=0;const disposed=[];let resolveLoad;
 const cache=new AssetLeaseCache(()=>{loads++;return new Promise(resolve=>resolveLoad=resolve);},value=>disposed.push(value));
 const a=cache.acquire('shared'),b=cache.acquire('shared');await Promise.resolve();assert.equal(loads,1);
@@ -23,3 +23,13 @@ assert.equal(resolveAppearance({version:1,actorVisualId:'../../bad'}).id,'hero-n
 assert.throws(()=>validateActorVisual({...ACTOR_VISUALS['hero-neon'],fallbackImageUrl:'https://example.com/image.svg'}));
 assert.throws(()=>validateActorVisual({...ACTOR_VISUALS['hero-neon'],clips:{idle:{frames:['a'],durationsMs:[],loop:true,completion:'idle'}}}));
 console.log('PASS: shared/late/retry/StrictMode texture leases, 20 disposal cycles, 28 actor coverage entries, manifest validation and five floor mappings');
+
+for(const location of LOCATIONS) for(const layer of location.layers) await access(`public${layer.url}`);
+for(const [width,height] of [[320,140],[320,300],[390,480],[844,160],[1440,500]])for(const horizon of [.32,.5]){
+ const frame=frameLocation(width,height,1536,1024,.43,horizon);
+ assert.ok(frame.x<=.00001 && frame.y<=.00001 && frame.x+frame.width>=width-.00001 && frame.y+frame.height>=height-.00001);
+ assert.ok(Math.abs(frame.width/frame.height-1.5)<.00001,'no aspect distortion');
+ assert.ok(Math.abs(frame.y+frame.height*.43-height*horizon)<.00001,'authored ground alignment');
+}
+assert.throws(()=>frameLocation(320,400,1536,1024,NaN));
+console.log('PASS: five district assets and 10 aspect-preserving, edge-covering ground-aligned frames');
