@@ -161,3 +161,9 @@ Generated identity-preserving hit, guard, kneeling defeat and celebration key po
 Connected actual damage/Thorns/Burn impact notices to hit key poses and Block-gain/fully-blocked notices to guard key poses. Reactions override ordinary attack/idle artwork for 220ms, while defeat and celebration take precedence. Missing optional artwork still uses idle. Victory snapshots request the hero celebration; it ends at 600ms. Defeat holds its registered final pose, including the static reduced-motion presentation. No visual path mutates combat state.
 
 Expanded motion tests for hit/guard/cast expiration, finite celebration, held defeat, reduced-motion defeat and impact-to-pose mapping. Renderer streaming, authoritative combat presentation parity, TypeScript, production build and whitespace checks pass. Browser frame/transition review and full mandatory roster animation coverage remain open; no deployment in this pass.
+
+## Lossless runtime asset packaging
+
+Measured 41 original battle PNGs at 72,689,365 bytes. Added repeatable lossless WebP encoding with exact RGBA comparison for every asset; runtime total is 50,735,578 bytes (30.2% smaller). Preserved original PNGs under art-source/battle outside the public build, switched manifests to WebP, updated coverage references and recorded per-file dimensions/transfer bytes/decoded RGBA estimates in battle-art-package.json. No resizing or artwork alteration; decoded memory requirements are unchanged. This is not a completed mobile texture-memory budget.
+
+Renderer assets, five-archetype appearance persistence, TypeScript, production build and whitespace checks pass. Browser at 390×844 reached ready with transparent hero/Rat/Golem/Spider and Ocean Drive; console warnings/errors empty. Screenshot: tests/.e2e-out/lossless-runtime-mobile.png. Full browser compatibility, measured cold/warm transfer, GPU profiling, resolution tiers and atlas packing remain open. No deployment in this pass.
