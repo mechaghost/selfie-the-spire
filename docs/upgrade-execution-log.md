@@ -19,3 +19,11 @@ Implemented command-owned resolving cards and terminal finalization; visual ghos
 Verified `tests/command-checkpoints.mjs`: 10,000-value original RNG parity; mixed RNG call continuity; slow multi-hit beyond 800ms; draw/reshuffle ownership; Power/exhaust; lethal hit and retaliation death; atomic enemy turns; actual store reload; quota failure/recovery; unsafe legacy recovery; save field injection resistance. Existing action-guards, save-and-generation, combat-tactics and copy-contracts pass. TypeScript, Vite production build and diff whitespace check pass.
 
 This baseline also includes the previously reviewed tactical changes (varied enemy moves, enemy Block expiration, Voltage attack payload and starter Cheap Shot/Torch It). Renderer parity starts after this commit; these are not renderer balance changes. Updated obsolete combat-layout guidance to the approved shared-ground actor model. No new renderer is live yet.
+
+## W0b / W1 progress
+
+Corrected rules baseline: `b69d51d`. Presentation work must compare against this revision. Hardware device models and a five-person formative study are not available in this environment; no physical-device or participant results are claimed.
+
+Added a pure CSS-pixel arena layout and shared hit-test projection. Automated `tests/battle-layout.mjs` verifies 105 combinations of dimensions and enemy counts: minimum 44px targets, nonoverlap, art/HUD clearance, viewport offsets, dead-target rejection and stable slots. Added a development-only `?arena-study=1` with ten actual cards, long monster names, status-overflow notation, three maximum-envelope silhouettes and a boss variant. Browser checks at 320×568 and 844×390 caught and corrected compact card-art clipping and landscape actor compression. Selection and defeated-slot stability checked through UI. Evidence: `tests/.e2e-out/arena-study-320.png`.
+
+W1 is in progress, not art-scale lock: silhouettes are placeholders, status inspection and gameplay integration remain in W3, and physical touch/comprehension gates remain outstanding. No prototype is included in production. Next: complete roster ledger, renderer lifecycle/manifests, then shared targeting and presentation coordinator.

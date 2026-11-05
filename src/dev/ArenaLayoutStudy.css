@@ -1,0 +1,31 @@
+.arena-study { height: 100dvh; display: grid; grid-template-rows: 42px 48px minmax(140px,1fr) 52px 236px; background:#091525; color:#f6ece0; overflow:hidden; }
+.arena-study header { display:flex; justify-content:space-between; align-items:center; padding:0 12px; gap:8px; }
+.arena-study header span { font-size:12px; }
+.arena-study nav { display:flex; overflow-x:auto; gap:4px; padding:2px 8px; }
+.arena-study button { min-height:44px; border:1px solid #578a99; border-radius:7px; background:#142c3e; color:#fff; font-size:14px; }
+.arena-study nav button { flex-shrink:0; padding:0 12px; }
+.study-stage { position:relative; min-width:280px; overflow:hidden; isolation:isolate; background:linear-gradient(#101e40,#674259 70%,#324451); }
+.study-skyline { position:absolute; inset:15% 0 20%; background:repeating-linear-gradient(90deg,transparent 0 23px,#0a1e34 24px 59px,transparent 60px 67px); opacity:.7; }
+.study-road { position:absolute; inset:70% 0 0; background:linear-gradient(#213e49,#0c1a2b); border-top:2px solid #a48380; }
+.study-actor { position:absolute; overflow:visible; pointer-events:none; }
+.study-monster.selected { filter:drop-shadow(0 0 5px #f9d29a); }
+.study-monster.is-dead { opacity:.12; }
+.study-hero-hud { position:absolute; display:flex; flex-direction:column; font-size:14px; z-index:2; }
+.arena-study .study-target { position:absolute; background:transparent; border:1px solid transparent; padding:0; display:flex; align-items:flex-start; justify-content:flex-start; border-radius:8px; }
+.arena-study .study-target:focus-visible,.arena-study .study-target[aria-pressed=true] { border:2px solid #ffe0a7; outline:0; }
+.study-hud { display:flex; flex-direction:column; align-items:center; width:100%; background:#091525e8; border-radius:6px; line-height:18px; font-size:14px; }
+.study-hud strong { width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:12px; }
+.study-hud b { color:#ffd6a3; }
+.study-hud span:last-child { font-size:11px; }
+.study-slot-number { position:absolute; bottom:0; border-radius:50%; background:#091525; border:1px solid #9db1b4; width:22px; height:22px; line-height:20px; }
+.study-controls { display:flex; align-items:center; justify-content:space-between; padding:4px 8px; gap:8px; font-size:14px; }
+.study-controls button { padding:0 14px; }
+.study-hand { display:flex; overflow-x:auto; overflow-y:hidden; gap:8px; padding:8px 12px; overscroll-behavior:contain; }
+.study-hand .card { flex:0 0 152px; width:152px; height:220px; transform:none !important; }
+@media (min-width:1000px) and (min-height:650px) { .arena-study { grid-template-rows:48px 48px minmax(240px,1fr) 56px 260px; } .study-hand { justify-content:safe center; } .study-hand .card { flex-basis:176px; width:176px; height:238px; } }
+@media (max-height:600px) { .arena-study { grid-template-rows:36px 44px minmax(140px,1fr) 48px 196px; } .study-hand .card { height:180px; flex-basis:144px; width:144px; } }
+@media (max-height:450px) and (min-width:600px) { .arena-study { grid-template-rows:0 44px minmax(140px,1fr) 44px 150px; } .arena-study header { visibility:hidden; } .study-hand { padding-top:4px; } .study-hand .card { height:140px; } }
+
+.study-hand .card { touch-action:pan-x; }
+@media (max-height:600px) { .study-hand .card-artwork-wrap,.study-hand .card-artwork-placeholder { height:56px; aspect-ratio:auto; } .study-hand .card-desc { font-size:12px; } }
+@media (max-height:450px) and (min-width:600px) { .study-hand .card-artwork-wrap,.study-hand .card-artwork-placeholder { height:32px; } }
