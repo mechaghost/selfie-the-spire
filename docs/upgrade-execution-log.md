@@ -155,3 +155,9 @@ Evidence: tests/.e2e-out/compact-depth-320.png and landscape-side-hand.png. Cons
 ## Street Runner reaction artwork
 
 Generated identity-preserving hit, guard, kneeling defeat and celebration key poses from the Street Runner idle reference. Saved transparent 1106×1422 originals and exact prompts, and registered optional poses. Renderer asset validation, TypeScript and whitespace checks pass. Defeat can use its registered pose; hit/guard event selection and victory celebration dispatch still require wiring and browser review. These images do not constitute completed clip/atlas approval. User asked how selfie personalization reaches combat: current implementation personalizes portrait/deck but uses shared archetype bodies; full-body selfie likeness remains unimplemented and must not be represented as available.
+
+## Reaction pose dispatch
+
+Connected actual damage/Thorns/Burn impact notices to hit key poses and Block-gain/fully-blocked notices to guard key poses. Reactions override ordinary attack/idle artwork for 220ms, while defeat and celebration take precedence. Missing optional artwork still uses idle. Victory snapshots request the hero celebration; it ends at 600ms. Defeat holds its registered final pose, including the static reduced-motion presentation. No visual path mutates combat state.
+
+Expanded motion tests for hit/guard/cast expiration, finite celebration, held defeat, reduced-motion defeat and impact-to-pose mapping. Renderer streaming, authoritative combat presentation parity, TypeScript, production build and whitespace checks pass. Browser frame/transition review and full mandatory roster animation coverage remain open; no deployment in this pass.

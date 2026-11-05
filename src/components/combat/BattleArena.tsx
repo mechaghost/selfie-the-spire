@@ -13,7 +13,7 @@ import { InspectionDialog } from '../ui/CardInspector';
 import { describeIntent, describeStatuses } from './EntityPanel';
 import './BattleArena.css';
 export function BattleArena() {
-    const {player,enemies,floor,isBossFloor,activeAnimations} = useGameStore(state=>({player:state.player,enemies:state.enemies,floor:state.floor,isBossFloor:state.isBossFloor,activeAnimations:state.activeAnimations}));
+    const {player,enemies,floor,isBossFloor,activeAnimations,combatResult} = useGameStore(state=>({player:state.player,enemies:state.enemies,floor:state.floor,isBossFloor:state.isBossFloor,activeAnimations:state.activeAnimations,combatResult:state.combatResult}));
     const {mode,commit} = useCombatInteraction();
     const root=useRef<HTMLDivElement>(null);
     const [size,setSize]=useState({width:320,height:200});
@@ -34,11 +34,11 @@ export function BattleArena() {
         useGameStore.setState({entityBounds:bounds});
         return()=>{useGameStore.setState({entityBounds:{}});};
     },[layout]);
-    const motionFor=(id:string)=>{const animation=[...activeAnimations].reverse().find(animation=>animation.targetId===id && animation.type==='lunge');return {clip:(animation?'attack':'idle') as ActorClip,motionToken:animation?.id};};
+    const motionFor=(id:string)=>{if(id==='player' && combatResult==='victory')return {clip:'celebrate' as ActorClip,motionToken:'victory'};const animation=[...activeAnimations].reverse().find(animation=>animation.targetId===id && animation.type==='lunge');return {clip:(animation?'attack':'idle') as ActorClip,motionToken:animation?.id};};
     const snapshot=useMemo(()=>({layout,location:locationForFloor(floor),reducedMotion,actors:[
         {id:'player',visual:resolveAppearance(player.combatAppearance),defeated:player.hp<=0,...motionFor('player')},
         ...enemies.map(enemy=>({id:enemy.id,visual:ACTOR_VISUALS[enemy.templateId] ?? ACTOR_VISUALS.alley_rat,defeated:enemy.hp<=0,...motionFor(enemy.id)})),
-    ]}),[layout,floor,reducedMotion,player.hp,player.combatAppearance,enemies,activeAnimations]);
+    ]}),[layout,floor,reducedMotion,player.hp,player.combatAppearance,enemies,activeAnimations,combatResult]);
     const entity=inspected==='player' ? player : enemies.find(enemy=>enemy.id===inspected);
     return <div className="battle-arena" ref={root}>
         <BattleStage snapshot={snapshot}/>
