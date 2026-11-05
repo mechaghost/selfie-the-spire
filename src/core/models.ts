@@ -99,6 +99,7 @@ export interface Enemy extends Entity {
 // Actions are objects that describe a single atomic transformation of the game state
 export type GameActionType =
     | 'PLAY_CARD'
+    | 'FINALIZE_CARD'
     | 'DRAW_CARD'
     | 'DISCARD_HAND'
     | 'DAMAGE_ENTITY'

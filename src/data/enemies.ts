@@ -115,7 +115,7 @@ export const enemies: Record<string, EnemyDefinition> = {
                 intent: {
                     type: 'Attack',
                     damage: 4,
-                    effects: [{ type: 'Damage', amount: 4, target: 'Target' }],
+                    effects: [{ type: 'Damage', amount: 4, target: 'Target' }, { type: 'Damage', amount: 4, target: 'Target' }],
                     hits: 2,
                 }
             }
@@ -1022,4 +1022,25 @@ export function createEnemyInstance(templateId: string, id: string, rng: RNG | n
         statuses: [],
         intent: null
     };
+}
+
+/** Preserve openers and low-HP phases, but avoid repeating a move when another is available. */
+export function selectEnemyIntent(enemy: Enemy, rng: RNG | null) {
+    let patterns = enemies[enemy.templateId]?.aiPatterns.filter(pattern => {
+        if (pattern.condition === 'Turn1') return !enemy.intent;
+        if (pattern.condition === 'BelowHalfHP') return enemy.hp <= enemy.maxHp / 2;
+        return !pattern.condition || pattern.condition === 'Always';
+    }) ?? [];
+    const priority = patterns.some(p => p.condition === 'Turn1') ? 'Turn1'
+        : patterns.some(p => p.condition === 'BelowHalfHP') ? 'BelowHalfHP' : null;
+    if (priority) patterns = patterns.filter(p => p.condition === priority);
+    const alternatives = patterns.filter(p => JSON.stringify(p.intent.effects) !== JSON.stringify(enemy.intent?.effects));
+    if (alternatives.length) patterns = alternatives;
+    const total = patterns.reduce((sum, p) => sum + p.chance, 0);
+    let roll = (rng?.next() ?? Math.random()) * total;
+    for (const pattern of patterns) {
+        roll -= pattern.chance;
+        if (roll < 0) return pattern.intent;
+    }
+    return patterns[0]?.intent ?? null;
 }

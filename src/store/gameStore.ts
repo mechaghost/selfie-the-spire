@@ -1,3 +1,4 @@
+import { validateSave } from '../core/saveValidation';
 import { attackDamage } from '../core/combatMath';
 import { describeCardEffects } from '../core/cardText';
 import { create } from 'zustand';
@@ -6,7 +7,7 @@ import { RNG } from '../core/rng';
 import { createCardInstance, upgradeCard, canUpgradeCard, CARD_DATABASE } from '../data/cards';
 import { STATUS_REGISTRY } from '../data/statusEffects';
 import { ENCOUNTER_POOLS } from '../data/encounters';
-import { createEnemyInstance, enemies, ELITE_TEMPLATE_IDS, BOSS_TEMPLATE_IDS } from '../data/enemies';
+import { createEnemyInstance, selectEnemyIntent, ELITE_TEMPLATE_IDS, BOSS_TEMPLATE_IDS } from '../data/enemies';
 import { CHARACTERS } from '../data/characters';
 import { EVENTS, GameEvent } from '../data/events';
 
@@ -65,6 +66,10 @@ interface GameState {
     discardPile: Card[];
     exhaustPile: Card[];
     playingCards: PlayingCard[];
+    resolvingCards: Card[];
+    saveError: string | null;
+    recoveryNotice: string | null;
+    dismissRecovery: () => void;
 
     // --- Action Queue ---
     actionQueue: GameAction[];
@@ -232,6 +237,14 @@ const REWARD_EXCLUDED_IDS = new Set(['neon_jab', 'dodge_roll']);
 // Shared by every kill path (attacks, burn ticks, thorns retaliation).
 // Reward tiers: normal fights pay 10-20 gold, elites 50-80, bosses 90-130.
 // Elite and boss loot comes pre-upgraded (+).
+function finalizedCardState(state: GameState): Partial<GameState> {
+    return {
+        resolvingCards: [],
+        discardPile: [...state.discardPile, ...state.resolvingCards.filter(card => !card.exhausts && card.type !== 'Power')],
+        exhaustPile: [...state.exhaustPile, ...state.resolvingCards.filter(card => card.exhausts || card.type === 'Power')],
+    };
+}
+
 function buildVictoryState(state: GameState): Partial<GameState> {
     const rng = state.rng;
     const hasBoss = state.enemies.some(e => BOSS_TEMPLATE_IDS.has(e.templateId));
@@ -250,6 +263,7 @@ function buildVictoryState(state: GameState): Partial<GameState> {
     }
 
     return {
+        ...finalizedCardState(state),
         combatResult: 'victory',
         goldReward,
         cardRewards,
@@ -283,36 +297,60 @@ const PERSISTED_KEYS = [
     'restOutcome', 'currentEvent', 'eventOutcome', 'nodeEvent', 'shopCards', 'shopPrices', 'cardRemovalCost', 'cardRemovalsUsed',
 ] as const;
 
-function saveRun(state: GameState) {
-    if (!state.seed || state.isGameOver || state.isResolving) return;
+let loadRecoveryNotice: string | null = null;
+let lastCheckpoint: string | null = null;
+let lastStoredCheckpoint: string | null = null;
+
+/** Complete boundaries only. A flying visual ghost is not part of a command. */
+function saveRun(state: GameState): string | null {
+    if (!state.seed || !state.rng || state.isResolving || state.actionQueue.length || state.resolvingCards.length) return state.saveError;
+    const data: Record<string, unknown> = { schemaVersion: 2, rngSnapshot: state.rng.snapshot() };
+    for (const key of PERSISTED_KEYS) data[key] = state[key];
+    lastCheckpoint = JSON.stringify(data);
+    if (typeof localStorage === 'undefined') return null;
     try {
-        const data: Record<string, unknown> = {};
-        for (const key of PERSISTED_KEYS) {
-            data[key] = state[key];
-        }
-        localStorage.setItem(SAVE_KEY, JSON.stringify(data));
-    } catch { /* localStorage full or unavailable */ }
+        if (lastCheckpoint !== lastStoredCheckpoint) localStorage.setItem(SAVE_KEY, lastCheckpoint);
+        lastStoredCheckpoint = lastCheckpoint;
+        return null;
+    } catch {
+        return 'Progress could not be saved. You can keep playing, but reloading may restore older progress.';
+    }
 }
 
+export function getRunCheckpoint(): string | null { return lastCheckpoint; }
+
 function loadRun(): Partial<GameState> | null {
+    if (typeof localStorage === 'undefined') return null;
+    let raw: string | null = null;
     try {
-        const raw = localStorage.getItem(SAVE_KEY);
+        raw = localStorage.getItem(SAVE_KEY);
         if (!raw) return null;
-        const data = JSON.parse(raw);
-        if (!data.seed) return null;
-        // Refresh mechanical text from saved effects without changing IDs or balance.
+        const parsed: unknown = JSON.parse(raw);
+        validateSave(parsed);
+        if (parsed.schemaVersion !== undefined && parsed.schemaVersion !== 2) throw new Error('Unknown save version');
+        // Whitelist data fields so saved JSON can never replace actions or transient state.
+        const data: Record<string, unknown> = {};
+        for (const key of PERSISTED_KEYS) if (key in parsed) data[key] = parsed[key];
+        const rng = parsed.schemaVersion === 2 ? RNG.restore(parsed.rngSnapshot) : new RNG(parsed.seed as string);
+        if (rng.getSeed() !== parsed.seed) throw new Error('Save seed and RNG snapshot disagree');
         for (const key of ['masterDeck', 'drawPile', 'hand', 'discardPile', 'exhaustPile', 'cardRewards', 'shopCards', 'generatedCards']) {
             if (Array.isArray(data[key])) data[key] = data[key].map((card: Card) => ({ ...card, description: describeCardEffects(card) }));
         }
-        // Reconstruct RNG from seed (position won't match, but that's fine)
-        data.rng = new RNG(data.seed);
-        return data;
+        if (parsed.schemaVersion !== 2) loadRecoveryNotice = 'Your saved run was upgraded. Your deck and progress are preserved; future random outcomes may differ from the earlier version.';
+        data.rng = rng;
+        return data as Partial<GameState>;
     } catch {
+        if (raw) {
+            try { localStorage.setItem(`${SAVE_KEY}_recovery`, raw); } catch { /* Original remains untouched. */ }
+            loadRecoveryNotice = 'This saved run was interrupted or is incomplete and cannot safely resume. The original data has been preserved. You can return to the menu or start a new run.';
+        }
         return null;
     }
 }
 
 function clearRun() {
+    lastCheckpoint = null;
+    lastStoredCheckpoint = null;
     try { localStorage.removeItem(SAVE_KEY); } catch { /* noop */ }
 }
 
@@ -351,6 +389,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     discardPile: [],
     exhaustPile: [],
     playingCards: [],
+            resolvingCards: [],
 
     actionQueue: [],
     isResolving: false,
@@ -376,6 +415,10 @@ export const useGameStore = create<GameState>((set, get) => ({
     ugcError: null,
     selfieDataUrl: null,
 
+    saveError: null,
+    recoveryNotice: loadRecoveryNotice,
+    dismissRecovery: () => set({ recoveryNotice: null }),
+
     // Restore saved run if one exists
     ...savedRun,
 
@@ -390,6 +433,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         set({
             seed,
             rng,
+            recoveryNotice: null,
             floor: 0,
             currentNodeId: null,
             isBossFloor: false,
@@ -433,6 +477,7 @@ export const useGameStore = create<GameState>((set, get) => ({
             discardPile: [],
             exhaustPile: [],
             playingCards: [],
+            resolvingCards: [],
             enemies: [],
             floatingTexts: [],
             activeAnimations: [],
@@ -443,6 +488,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     },
 
     startCombat: (combatEnemies: Enemy[]) => {
+        saveRun(get());
         set((state) => {
             if (!state.rng) return state;
 
@@ -464,6 +510,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 discardPile: [],
                 exhaustPile: [],
                 playingCards: [],
+            resolvingCards: [],
                 hand: [],
                 player: freshPlayer,
                 // Intents first so enemies telegraph from turn 1 —
@@ -604,6 +651,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         set({
             seed,
             rng,
+            recoveryNotice: null,
             floor: 0,
             currentNodeId: null,
             isBossFloor: false,
@@ -639,6 +687,7 @@ export const useGameStore = create<GameState>((set, get) => ({
             discardPile: [],
             exhaustPile: [],
             playingCards: [],
+            resolvingCards: [],
             enemies: [],
             floatingTexts: [],
             activeAnimations: [],
@@ -893,6 +942,7 @@ export const useGameStore = create<GameState>((set, get) => ({
             discardPile: [],
             exhaustPile: [],
             playingCards: [],
+            resolvingCards: [],
             actionQueue: [],
             isResolving: false,
             floatingTexts: [],
@@ -1058,6 +1108,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                             cancelAllTimeouts();
                             set({
                                 combatResult: 'defeat',
+                                ...finalizedCardState(get()),
                                 actionQueue: [],
                                 isResolving: false
                             });
@@ -1099,6 +1150,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                                     cancelAllTimeouts();
                                     set({
                                         combatResult: 'defeat',
+                                ...finalizedCardState(get()),
                                         actionQueue: [],
                                         isResolving: false
                                     });
@@ -1153,12 +1205,22 @@ export const useGameStore = create<GameState>((set, get) => ({
                 const cardActions = resolveEffects(card.effects || [], 'player', targetId, allEnemyIds, freshState.rng);
                 // C-1: Replace queue and continue synchronously via the tail call below
                 set((current) => ({
-                    actionQueue: [...cardActions, ...current.actionQueue.slice(1)],
+                    actionQueue: [...cardActions, { type: 'FINALIZE_CARD', payload: { instanceId: card.instanceId } }, ...current.actionQueue.slice(1)],
                     isResolving: false
                 }));
                 // C-1: Use trackedTimeout for serialization
                 trackedTimeout(() => get().resolveQueue(), 0);
                 return;
+            }
+            case 'FINALIZE_CARD': {
+                const card = get().resolvingCards.find(card => card.instanceId === action.payload.instanceId);
+                if (card) set(state => ({
+                    resolvingCards: state.resolvingCards.filter(item => item.instanceId !== card.instanceId),
+                    ...(card.exhausts || card.type === 'Power'
+                        ? { exhaustPile: [...state.exhaustPile, card] }
+                        : { discardPile: [...state.discardPile, card] }),
+                }));
+                break;
             }
             case 'APPLY_STATUS': {
                 const { targetId, status } = action.payload;
@@ -1235,6 +1297,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                         cancelAllTimeouts();
                         set({
                             combatResult: 'defeat',
+                                ...finalizedCardState(get()),
                             actionQueue: [],
                             isResolving: false
                         });
@@ -1330,6 +1393,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 const newPlayerStatuses = decayStatuses(freshState.player.statuses);
                 const newEnemies = freshState.enemies.map(enemy => ({
                     ...enemy,
+                    block: 0, // Old defenses expire when the enemy turn begins.
                     statuses: decayStatuses(enemy.statuses)
                 }));
 
@@ -1353,38 +1417,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 const updatedEnemies = freshState.enemies.map(enemy => {
                     if (enemy.hp <= 0) return enemy;
 
-                    const aiDef = enemies[enemy.templateId];
-                    let newIntent = null;
-
-                    if (aiDef && aiDef.aiPatterns) {
-                        let validPatterns = aiDef.aiPatterns.filter(p => {
-                            if (p.condition === 'Turn1') return !enemy.intent;
-                            if (p.condition === 'BelowHalfHP') return enemy.hp <= enemy.maxHp / 2;
-                            return p.condition === 'Always' || !p.condition;
-                        });
-
-                        if (validPatterns.some(p => p.condition === 'Turn1')) {
-                            validPatterns = validPatterns.filter(p => p.condition === 'Turn1');
-                        } else if (validPatterns.some(p => p.condition === 'BelowHalfHP')) {
-                            validPatterns = validPatterns.filter(p => p.condition === 'BelowHalfHP');
-                        }
-
-                        if (validPatterns.length > 0) {
-                            const totalWeight = validPatterns.reduce((sum, p) => sum + p.chance, 0);
-                            const roll = freshState.rng ? freshState.rng.next() * totalWeight : Math.random() * totalWeight;
-                            let runningSum = 0;
-
-                            // L-1: Use < instead of <= for correct weighted selection
-                            for (const p of validPatterns) {
-                                runningSum += p.chance;
-                                if (roll < runningSum) {
-                                    newIntent = p.intent;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    return { ...enemy, intent: newIntent };
+                    return { ...enemy, intent: selectEnemyIntent(enemy, freshState.rng) };
                 });
 
                 set((current) => ({
@@ -1400,10 +1433,9 @@ export const useGameStore = create<GameState>((set, get) => ({
                 return;
             }
             case 'START_TURN': {
-                // C-2: Reset enemy block at start of player turn
+                // Enemy defenses must survive the player turn to affect targeting choices.
                 set((current) => ({
                     player: { ...current.player, energy: current.player.maxEnergy, block: 0 },
-                    enemies: current.enemies.map(e => ({ ...e, block: 0 })),
                     isPlayerTurn: true
                 }));
                 get().drawCards(5);
@@ -1467,6 +1499,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     playCard: (cardInstanceId: string, targetId?: string) => {
         const current = get();
         if (!current.inCombat || !current.isPlayerTurn || current.isResolving || current.actionQueue.length || current.combatResult) { get().resetDragState(); return; }
+        saveRun(current);
         set((state) => {
             const cardIndex = state.hand.findIndex(c => c.instanceId === cardInstanceId);
             if (cardIndex === -1) return state;
@@ -1502,6 +1535,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 player: { ...state.player, energy: state.player.energy - card.cost },
                 hand: newHand,
                 playingCards: [...state.playingCards, playingCard],
+                resolvingCards: [...state.resolvingCards, card],
                 actionQueue: [...state.actionQueue, playAction]
             };
         });
@@ -1510,30 +1544,15 @@ export const useGameStore = create<GameState>((set, get) => ({
         get().resolveQueue();
     },
 
+    // Flying cards are visual ghosts. Their lifetime never owns a gameplay card.
     cleanupPlayingCard: (animId: string) => {
-        set((state) => {
-            const playingCard = state.playingCards.find(pc => pc.id === animId);
-            if (!playingCard) return state;
-
-            const newPlayingCards = state.playingCards.filter(pc => pc.id !== animId);
-
-            if (playingCard.isExhausting) {
-                return {
-                    playingCards: newPlayingCards,
-                    exhaustPile: [...state.exhaustPile, playingCard.card]
-                };
-            } else {
-                return {
-                    playingCards: newPlayingCards,
-                    discardPile: [...state.discardPile, playingCard.card]
-                };
-            }
-        });
+        set(state => ({ playingCards: state.playingCards.filter(card => card.id !== animId) }));
     },
 
     endTurn: () => {
         const current = get();
         if (!current.inCombat || !current.isPlayerTurn || current.isResolving || current.actionQueue.length || current.combatResult) return;
+        saveRun(current);
         set((state) => {
             let newDiscard = [...state.discardPile, ...state.hand];
             return {
@@ -1573,9 +1592,8 @@ export const useGameStore = create<GameState>((set, get) => ({
     }
 }));
 
-// Auto-save run state to localStorage (debounced)
-let saveTimer: ReturnType<typeof setTimeout> | null = null;
-useGameStore.subscribe((state) => {
-    if (saveTimer) clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => saveRun(state), 100);
+// Persist stable states synchronously. Queue/ownership guards exclude intermediate effects.
+useGameStore.subscribe(state => {
+    const error = saveRun(state);
+    if (error !== state.saveError) useGameStore.setState({ saveError: error });
 });

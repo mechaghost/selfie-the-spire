@@ -1,42 +1,13 @@
 ---
-description: Documentation governing the visual layout, structural CSS, and UX positioning patterns for the Slay the Tower Combat engine.
+description: Layout and interaction constraints for the Neo Miami 2D combat arena.
 ---
 
-# Slay the Tower Combat Layout & Game Mechanics
+# Combat layout
 
-This document establishes the rigid layout conventions, rendering rules, and grid architecture for the `CombatView.tsx` screen. The UI is designed entirely around a **Mobile Portrait constraint**, prioritizing bottom-weighted usability for card management and dragging.
+The approved `docs/2d-combat-implementation.md` supersedes the former portrait-card entity layout. Characters and monsters stand on shared ground; only playable actions are cards. React owns readable HUD and target buttons; the scene owns decorative art and motion. Neither renderer callbacks nor visual card cleanup can change game state.
 
-## 1. Top Navigation Bar (The Header)
-- **Positioning**: Fixed absolutely to the top of the screen (`top: 0`).
-- **Function**: Purely informational. Displays high-level Run statistics that do not impact immediate battle math.
-- **Content Requirements**: 
-  - Floor number
-  - Total Gold
-  - Future Relic displays
-- **Constraint**: Must *never* overlap the Combat Area entities. The combat container must maintain a `top` offset sufficient to securely clear this element.
+Reserve header, controls, safe areas and a bounded horizontal hand before computing the arena. Preserve the larger action cards. Never scale an entire desktop screen down to portrait. Prove 320×568 and 844×390 with three enemies, a boss variant, long names, status overflow and ten cards before art scale lock.
 
-## 2. The Combat Stage (4-Row Vertical Grid)
-The battlefield abandons legacy "side-by-side" rendering in favor of a 4-tier CSS flexbox column.
-- **Orientation**: `flex-direction: column`.
-- **Row 1 (Top)**: Player Character. Pinned horizontally center. This pushes the player physically away from the interaction zone, forcing combat to mathematically "reach up".
-- **Row 2 (Divider)**: A horizontal visual gradient sweeping left-to-right to separate the Player territory from the Enemy territory.
-- **Rows 3 & 4 (Enemies)**: The Enemy squad spawns beneath the divider line, stacked closely to the bottom interaction zone.
+Use one pure layout and projection for sprites, DOM targets, drag and the targeting arrow. Keep enemy slots stable after deaths. Targets must be nonoverlapping and at least 44×44 CSS pixels. Critical HP, intent and controls remain at least 14px. Compact screens may use an ordered intent/target strip paired with visible actors on shared ground. Limit status icons to three plus an inspectable overflow control.
 
-### Enemy Grid Rules
-Enemies are constrained into a strict multi-row block via `flex-wrap: wrap-reverse` and `justify-content: center`.
-- **Bottom-Heavy Population**: The `wrap-reverse` behavior forces new enemies to populate the bottom-most flex row *first*. This guarantees that enemies remain physically adjacent to the player's Hand HUD.
-- **Max Width Caps**: The container width is capped so a maximum of 2 enemies can realistically share a horizontal line (e.g., forming a 2x2 square or 1x4 column based on spawn count).
-- **Gutter Separation**: A massive vertical `gap` (e.g., `6rem`) must be maintained between enemy rows so their floating Intent Badges mathematically cannot overlap the health bars of units above them.
-
-## 3. Deck Table & Hand Controls (The Interaction Zone)
-- **Positioning**: Fixed entirely flat to `bottom: 0`. Rendered with a distinct dark linear-gradient `deck-table` class to represent physical table space.
-- **HandHUD**: The primary interface. Cards are stacked radially in a fanned arc originating from the bottom-center of the screen.
-- **Card Interaction**: Dragging cards works bottom-to-top. Because the Player is anchored at the ceiling while Enemies spawn heavily toward the bottom rows, users can easily target enemies with short, convenient swipe arcs without stretching to the top nav.
-
-## 4. Draw & Discard Piles (Void Mechanics)
-- **Visuals**: Standard box visuals for the Draw/Discard piles are obsolete. They do not render backgrounds, borders, or deck boxes.
-- **Geometry**: The "Origins" of the Draw/Discard mechanics are pinned using absolute CSS coordinates directly onto the left and right rims of the Deck Table surface.
-- **Counters**: The card counts are pure whitespace text featuring heavy contrasting `text-shadows`, planted squarely over the mathematical Void coordinates.
-- **Animations**: Card entry/exit animations mathematically `translate()` to/from these rim coordinates (`left: 4rem` and `right: 4rem`).
-  - **Drawing**: Cards originate from the off-screen left void (`opacity: 0`, `scale: 0`), sweeping inward before fanning.
-  - **Discarding**: Cards sweep right into the right void, scaling down perfectly to `0` exactly over the text coordinates.
+Tap/keyboard inspection and explicit selection are required; drag is optional. Motion must honor reduced-motion preferences. The renderer must have a usable DOM fallback and may not block authoritative combat. Follow the implementation specification's timing, lifecycle and release gates. Prototype silhouettes do not constitute final character art or a portfolio release.

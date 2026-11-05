@@ -32,24 +32,34 @@ export function mulberry32(a: number) {
     }
 }
 
+export interface RNGSnapshot {
+    algorithm: 'mulberry32-v1';
+    seed: string;
+    state: number;
+}
+
 export class RNG {
     private seedValue: string;
-    private generator: () => number;
+    private state: number;
 
     constructor(seedString: string) {
         this.seedValue = seedString;
         const seedHashes = cyrb128(seedString);
-        this.generator = mulberry32(seedHashes[0]);
+        this.state = seedHashes[0];
     }
 
     /** Returns a random number between 0 (inclusive) and 1 (exclusive) */
     public next(): number {
-        return this.generator();
+        this.state = (this.state + 0x6D2B79F5) >>> 0;
+        let t = this.state;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
     }
 
     /** Returns a random integer between min (inclusive) and max (exclusive) */
     public nextInt(min: number, max: number): number {
-        return Math.floor(this.generator() * (max - min) + min);
+        return Math.floor(this.next() * (max - min) + min);
     }
 
     /** Returns a random element from an array */
@@ -65,6 +75,21 @@ export class RNG {
             [result[i], result[j]] = [result[j], result[i]];
         }
         return result;
+    }
+
+    public snapshot(): RNGSnapshot {
+        return { algorithm: 'mulberry32-v1', seed: this.seedValue, state: this.state };
+    }
+
+    public static restore(value: unknown): RNG {
+        const snapshot = value as Partial<RNGSnapshot> | null;
+        if (!snapshot || snapshot.algorithm !== 'mulberry32-v1' || typeof snapshot.seed !== 'string' ||
+            !Number.isInteger(snapshot.state) || snapshot.state! < 0 || snapshot.state! > 0xffffffff) {
+            throw new Error('Invalid random-generator snapshot');
+        }
+        const rng = new RNG(snapshot.seed);
+        rng.state = snapshot.state!;
+        return rng;
     }
 
     public getSeed(): string {

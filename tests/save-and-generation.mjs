@@ -5,7 +5,9 @@ await mkdir('tests/.e2e-out', { recursive: true });
 await build({ entryPoints: ['src/store/gameStore.ts'], outfile: 'tests/.e2e-out/migration.mjs', bundle: true, platform: 'node', format: 'esm', define: { 'import.meta.env': '{}' } });
 const oldCard = { id: 'old', instanceId: 'preserve-me', name: 'Old card', type: 'Skill', cost: 1, target: 'Self', description: 'Wrong old text', effects: [{ type: 'Heal', amount: 4, target: 'Self' }, { type: 'Block', amount: 7, target: 'Self' }] };
 const pileKeys = ['masterDeck', 'drawPile', 'hand', 'discardPile', 'exhaustPile', 'cardRewards', 'shopCards', 'generatedCards'];
-const oldSave = { seed: 'migration', ...Object.fromEntries(pileKeys.map(key => [key, [oldCard]])) };
+const oldSave = { seed: 'migration', floor: 0, inCombat: false, isPlayerTurn: false, combatResult: null, enemies: [],
+    player: { id: 'player', name: 'Legacy hero', hp: 80, maxHp: 80, block: 0, statuses: [], energy: 3, maxEnergy: 3, gold: 99 },
+    ...Object.fromEntries(pileKeys.map(key => [key, [oldCard]])) };
 globalThis.localStorage = { getItem: () => JSON.stringify(oldSave), setItem: () => {}, removeItem: () => {} };
 const { useGameStore } = await import('./.e2e-out/migration.mjs');
 for (const key of pileKeys) {
