@@ -1,19 +1,19 @@
 # Battle asset coverage ledger
 
-Most entries remain technical placeholders. Alley Rat, Vending Golem and Fire Escape Spider now have generated idle cutouts in review; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
+Five hero archetypes and six monsters have generated idle cutouts in review. Seventeen monster entries remain technical placeholders; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
 
 | Visual ID | Reachability | Fallback / dimensions | Provenance | Status |
 |---|---|---|---|---|
-| hero-neon | Starter/generated archetype | /assets/battle/fallbacks/hero.svg / 128×192 | Original repository vector | Placeholder; review pending |
+| hero-neon | Starter/generated archetype | /assets/battle/actors/street-runner-idle-v1.png / 1106×1422 | Built-in image generation; prompts recorded | Idle and attack key poses in review; motion pending |
 | hero-chrome | Starter/generated archetype | /assets/battle/actors/chrome-idle-v1.png / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | hero-volt | Starter/generated archetype | /assets/battle/actors/volt-idle-v1.png / 1186×1327 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | hero-concrete | Starter/generated archetype | /assets/battle/actors/concrete-idle-v1.png / 1194×1317 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | hero-smoke | Starter/generated archetype | /assets/battle/actors/smoke-idle-v1.png / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | alley_rat | Production encounter pool | /assets/battle/actors/alley-rat-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | neon_junkie | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| graffiti_imp | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| stray_voltage | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
-| dumpster_crawler | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
+| graffiti_imp | Production encounter pool | /assets/battle/actors/graffiti-imp-idle-v1.png / 1230×1278 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| stray_voltage | Production encounter pool | /assets/battle/actors/stray-voltage-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| dumpster_crawler | Production encounter pool | /assets/battle/actors/dumpster-crawler-idle-v1.png / 1536×1024 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | smoke_specter | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | taxi_ghost | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |
 | manhole_mimic | Production encounter pool | /assets/battle/fallbacks/monster.svg / 160×192 | Original repository vector | Placeholder; review pending |

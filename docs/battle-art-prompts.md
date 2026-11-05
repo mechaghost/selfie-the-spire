@@ -40,3 +40,33 @@ Prompt:
 
 Use case: stylized-concept. Asset type: isolated transparent 2D game enemy sprite. Create one FIRE ESCAPE SPIDER for an original Neo Miami urban deckbuilder. A sleek predatory mechanical-organic spider made of dark wrought-iron fire-escape rails and weathered teal steel, exactly eight angular articulated legs with rust-coral joints, compact violet-black abdomen with an abstract coral graffiti stripe, clustered amber eyes, two small fang-like metal hooks. Facing LEFT in three-quarter side view, low stalking idle stance, all eight feet and entire silhouette visible, leg arrangement readable without tangled lines. Professional hand-painted game illustration, bold clean dark contour and cel-like shaded masses with restrained painted texture, warm neutral key light from upper left and subtle cool teal rim. Urban folklore monster, charismatic and dangerous, original design. Whole body centered occupying 75 percent of frame, generous transparent margin. True transparent RGBA outside the creature, no backdrop, no haze, no cast shadow, no neon aura, no street, no platform, no text, no card frame, no logos. Readable as a spider at small mobile combat size. Single pose only.
 
+
+## Stray Voltage
+
+Asset: `public/assets/battle/actors/stray-voltage-idle-v1.png`
+
+Built-in image generation with transparent background; original idle cutout, review status.
+
+Prompt:
+
+Use case: stylized-concept. Asset type: one original full-body enemy idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, warm neutral upper-left key and subtle cool teal rim, violet shadows. Three-quarter side view facing LEFT toward player. Entire creature and extremities visible, grounded combat-ready idle, generous empty margin. Strong distinctive silhouette readable at 100 pixels. True transparent RGBA outside subject. No scenery, ground platform, cast shadow, haze, outside glow cloud, card border, text, logo or UI. Single monster only. STRAY VOLTAGE: a feral electrical street creature shaped like a crouching lean dog, body assembled from weathered teal junction boxes and black insulated cables, angular coral ceramic ears, amber lamp eyes, copper coil ribcage and articulated metal paws. A short tightly curled cable tail ending in a plug. Sparks contained within the body, not scattered around it. Alert predatory stance, clearly a nonhuman monster.
+
+## Dumpster Crawler
+
+Asset: `public/assets/battle/actors/dumpster-crawler-idle-v1.png`
+
+Built-in image generation with transparent background; original idle cutout, review status.
+
+Prompt:
+
+Use case: stylized-concept. Asset type: one original full-body enemy idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, warm neutral upper-left key and subtle cool teal rim, violet shadows. Three-quarter side view facing LEFT toward player. Entire creature and extremities visible, grounded combat-ready idle, generous empty margin. Strong distinctive silhouette readable at 100 pixels. True transparent RGBA outside subject. No scenery, ground platform, cast shadow, haze, outside glow cloud, card border, text, logo or UI. Single monster only. DUMPSTER CRAWLER: a squat crab-like urban trash monster with a dented dark teal dumpster for an armored shell, partly raised coral lid resembling a brow, two glowing amber eyes in the front slot, four thick jointed scrap-metal walking legs and two broad claw arms. No loose garbage pile or scenery; the whole character stands on its own. Heavy low silhouette, menacing but charismatic.
+
+## Graffiti Imp
+
+Asset: `public/assets/battle/actors/graffiti-imp-idle-v1.png`
+
+Built-in image generation with transparent background; original idle cutout, review status.
+
+Prompt:
+
+Use case: stylized-concept. Asset type: one original full-body enemy idle sprite for Neo Miami urban card combat. Professional hand-painted 2D game art, bold dark contours, graphic shaded masses, restrained brush texture, warm neutral upper-left key and subtle cool teal rim, violet shadows. Three-quarter side view facing LEFT toward player. Entire creature and extremities visible, grounded combat-ready idle, generous empty margin. Strong distinctive silhouette readable at 100 pixels. True transparent RGBA outside subject. No scenery, ground platform, cast shadow, haze, outside glow cloud, card border, text, logo or UI. Single monster only. GRAFFITI IMP: a wiry little nonhuman street goblin with oversized pointed ears, coral-red skin, expressive amber eyes, short teal swept-back horn-like hair, dark violet patched vest and baggy shorts, chunky sneakers, a short curled tail, oversized paint-stained hands posed mischievously. One battered spray can held close to torso, no spray cloud. Original urban folklore creature, sharp distinctive silhouette.
