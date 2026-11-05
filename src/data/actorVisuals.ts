@@ -1,5 +1,6 @@
 import { ActorVisual, CombatAppearance, validateActorVisual } from '../core/battleVisualModels';
 import { enemies } from './enemies';
+import { GOLEM_ATLAS_FRAMES } from './actorAtlasFrames';
 export const HERO_ARCHETYPES = ['neon','chrome','volt','concrete','smoke'] as const;
 function placeholder(id: string, hero: boolean): ActorVisual {
     return { id, fallbackImageUrl:`/assets/battle/fallbacks/${hero ? 'hero' : 'monster'}.svg`, footAnchor:[.5, .97],
@@ -57,6 +58,8 @@ ACTOR_VISUALS.vending_golem.keyPoses!.hit = {imageUrl:'/assets/battle/actors/ven
 ACTOR_VISUALS.vending_golem.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/vending-golem-defeat-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.hit = {imageUrl:'/assets/battle/actors/fire-escape-spider-hit-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/fire-escape-spider-defeat-v1.webp',footAnchor:[.5,.94]};
+ACTOR_VISUALS.vending_golem.atlasUrl='/assets/battle/actors/vending-golem-poses-v1.webp';
+ACTOR_VISUALS.vending_golem.atlasFrames=GOLEM_ATLAS_FRAMES;
 // Explicit key-pose timelines; these do not represent approved multi-frame animation art.
 for(const id of ['hero-neon','alley_rat','vending_golem','fire_escape_spider']) {
     ACTOR_VISUALS[id].clips.attack={frames:['idle','attack','idle'],durationsMs:[80,160,80],loop:false,completion:'idle'};

@@ -70,19 +70,21 @@ export class BattleScene {
                 const sprite = new Sprite(texture); sprite.zIndex=index*2+1; sprite.anchor.set(...actor.visual.footAnchor);
                 this.sprites.set(actor.id,sprite); this.world.addChild(sprite);
                 this.poses.set(`${actor.id}:idle`,texture);
+                const loadPoses=(onlyMissing=false)=>Promise.all(Object.entries(actor.visual.keyPoses ?? {}).filter(([clip])=>!onlyMissing || !this.atlasViews.has(`${actor.id}:${clip}`)).map(async ([clip,pose])=>{
+                    if(this.disposed)return;
+                    const poseLease=battleTextures.acquire(pose.imageUrl);this.leases.push(poseLease);
+                    try {const poseTexture=await poseLease.ready;if(!this.disposed){this.poses.set(`${actor.id}:${clip}`,poseTexture);this.update(this.snapshot);}}
+                    catch { /* Idle remains usable if an optional key pose fails to load. */ }
+                }));
                 if(actor.visual.atlasUrl && actor.visual.atlasFrames) {
                     const atlasLease=battleTextures.acquire(actor.visual.atlasUrl);this.leases.push(atlasLease);
                     void atlasLease.ready.then(atlas=>{
                         if(this.disposed)return;
                         for(const [name,view] of atlasTextures(atlas,actor.visual.atlasFrames!))this.atlasViews.set(`${actor.id}:${name}`,view);
                         this.update(this.snapshot);
-                    }).catch(()=>{ /* Individual poses and mandatory idle remain usable. */ });
-                }
-                void Promise.all(Object.entries(actor.visual.keyPoses ?? {}).map(async ([clip,pose])=>{
-                    const poseLease=battleTextures.acquire(pose.imageUrl);this.leases.push(poseLease);
-                    try {const poseTexture=await poseLease.ready;if(!this.disposed){this.poses.set(`${actor.id}:${clip}`,poseTexture);this.update(this.snapshot);}}
-                    catch { /* Idle remains usable if an optional key pose fails to load. */ }
-                }));
+                        return loadPoses(true);
+                    }).catch(()=>{ atlasLease.release();void loadPoses(); });
+                } else void loadPoses();
             }));
             if (this.disposed) return false;
             this.update(this.snapshot);
