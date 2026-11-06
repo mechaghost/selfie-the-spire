@@ -273,3 +273,11 @@ Added hero selection to the developer composition/motion review so archetype com
 Added a developer frame-time input and freeze toggle to the composition study. Optional presentation-only elapsed sampling lets the actual renderer hold a selected clip at a precise time without changing game state or normal gameplay clocks. Tests exercise the scene at 140ms contact and 320ms recovery, separately from transient impact/cast reactions.
 
 Reviewed Chrome, Volt, Concrete and Smoke at 140ms in the 390×844 three-enemy composition. Each stays grounded, fits its space and leaves HUD/hand controls unobscured. Volt returns to idle at 320ms. Evidence: tests/.e2e-out/{chrome,volt,concrete,smoke}-contact-mobile.png. Console warnings/errors empty. These held-frame checks do not approve interpolated motion, all viewport sizes, new reaction poses or full roster animation. Renderer streaming/ownership tests, TypeScript, build and whitespace checks pass. No deployment.
+
+## Build-time texture tiers reduce transfer
+
+Moved loose-asset resolution limiting into the packaging step: power-of-two Lanczos derivatives capped at 768px for actors and 1536px for district plates, then lossless WebP encoding with exact derivative pixel verification. Original PNG artwork remains unchanged. Generated source-dimension metadata lets Pixi retain original logical frame/anchor coordinates without downloading or resizing the large source first. Dimension matching prevents stale metadata being applied to an unexpected asset. Atlas packaging remains separate and still uses runtime limiting.
+
+The 53 loose runtime assets now total 21,852,648 bytes versus 63,488,704 previously (65.6% smaller). This is aggregate package size, not a measured cold encounter download; the 3.65MB Golem atlas is additional. The runtime no longer needs a full-size intermediate image for these packaged assets. Texture budget/source-metadata tests, renderer assets, lifecycle tests, TypeScript, build and whitespace checks pass.
+
+Mobile 390×844 Concrete contact frame plus Rat/Golem/Spider remains aligned and readable; no console warnings/errors. Evidence tests/.e2e-out/packaged-tiers-mobile.png. Desktop high-DPR visual quality, full-roster image review, cold/warm network measurements and actual device memory/frame profiling remain open. No deployment.

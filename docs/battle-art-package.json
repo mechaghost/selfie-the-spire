@@ -1,397 +1,544 @@
 {
-  "encoding": "WebP lossless, exact RGBA pixel verification",
-  "memoryNote": "Decoded RGBA byte estimates; not measured GPU allocation or VRAM. No resizing.",
+  "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
+  "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
   "sourceBytes": 91499673,
-  "runtimeBytes": 63488704,
+  "runtimeBytes": 21852648,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
       "width": 1774,
       "height": 887,
+      "runtimeWidth": 444,
+      "runtimeHeight": 222,
+      "resolution": 0.25,
       "sourceBytes": 1709853,
-      "runtimeBytes": 1147356,
-      "decodedRGBABytes": 6294152
+      "runtimeBytes": 95254,
+      "decodedRGBABytes": 394272
     },
     {
       "asset": "actors/alley-rat-defeat-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 1720341,
-      "runtimeBytes": 1158214,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 212740,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/alley-rat-hit-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 1877380,
-      "runtimeBytes": 1211856,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 230946,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/alley-rat-idle-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 2207564,
-      "runtimeBytes": 1454556,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 284708,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/boombox-brute-idle-v1.webp",
       "width": 1378,
       "height": 1142,
+      "runtimeWidth": 689,
+      "runtimeHeight": 571,
+      "resolution": 0.5,
       "sourceBytes": 2494517,
-      "runtimeBytes": 1781826,
-      "decodedRGBABytes": 6294704
+      "runtimeBytes": 489784,
+      "decodedRGBABytes": 1573676
     },
     {
       "asset": "actors/chrome-attack-v1.webp",
       "width": 1199,
       "height": 1312,
+      "runtimeWidth": 600,
+      "runtimeHeight": 656,
+      "resolution": 0.5,
       "sourceBytes": 1151920,
-      "runtimeBytes": 708790,
-      "decodedRGBABytes": 6292352
+      "runtimeBytes": 209780,
+      "decodedRGBABytes": 1574400
     },
     {
       "asset": "actors/chrome-bouncer-idle-v1.webp",
       "width": 1222,
       "height": 1287,
+      "runtimeWidth": 611,
+      "runtimeHeight": 644,
+      "resolution": 0.5,
       "sourceBytes": 2190208,
-      "runtimeBytes": 1526566,
-      "decodedRGBABytes": 6290856
+      "runtimeBytes": 420236,
+      "decodedRGBABytes": 1573936
     },
     {
       "asset": "actors/chrome-idle-v1.webp",
       "width": 1199,
       "height": 1312,
+      "runtimeWidth": 600,
+      "runtimeHeight": 656,
+      "resolution": 0.5,
       "sourceBytes": 1274564,
-      "runtimeBytes": 819470,
-      "decodedRGBABytes": 6292352
+      "runtimeBytes": 235682,
+      "decodedRGBABytes": 1574400
     },
     {
       "asset": "actors/chrome-phantom-idle-v1.webp",
       "width": 1024,
       "height": 1536,
+      "runtimeWidth": 512,
+      "runtimeHeight": 768,
+      "resolution": 0.5,
       "sourceBytes": 1995192,
-      "runtimeBytes": 1314132,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 238060,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/circuit-breaker-idle-v1.webp",
       "width": 1222,
       "height": 1287,
+      "runtimeWidth": 611,
+      "runtimeHeight": 644,
+      "resolution": 0.5,
       "sourceBytes": 1961006,
-      "runtimeBytes": 1451006,
-      "decodedRGBABytes": 6290856
+      "runtimeBytes": 404082,
+      "decodedRGBABytes": 1573936
     },
     {
       "asset": "actors/concrete-attack-v1.webp",
       "width": 1194,
       "height": 1317,
+      "runtimeWidth": 597,
+      "runtimeHeight": 659,
+      "resolution": 0.5,
       "sourceBytes": 1295197,
-      "runtimeBytes": 840476,
-      "decodedRGBABytes": 6289992
+      "runtimeBytes": 250304,
+      "decodedRGBABytes": 1573692
     },
     {
       "asset": "actors/concrete-idle-v1.webp",
       "width": 1194,
       "height": 1317,
+      "runtimeWidth": 597,
+      "runtimeHeight": 659,
+      "resolution": 0.5,
       "sourceBytes": 1275455,
-      "runtimeBytes": 852126,
-      "decodedRGBABytes": 6289992
+      "runtimeBytes": 243710,
+      "decodedRGBABytes": 1573692
     },
     {
       "asset": "actors/dj-phantom-idle-v1.webp",
       "width": 1210,
       "height": 1300,
+      "runtimeWidth": 605,
+      "runtimeHeight": 650,
+      "resolution": 0.5,
       "sourceBytes": 2013668,
-      "runtimeBytes": 1419108,
-      "decodedRGBABytes": 6292000
+      "runtimeBytes": 394416,
+      "decodedRGBABytes": 1573000
     },
     {
       "asset": "actors/dumpster-crawler-idle-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 2315464,
-      "runtimeBytes": 1654944,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 376536,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/fire-escape-spider-attack-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 1881831,
-      "runtimeBytes": 1262346,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 227590,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/fire-escape-spider-cast-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 2173930,
-      "runtimeBytes": 1463618,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 292622,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/fire-escape-spider-defeat-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 1505666,
-      "runtimeBytes": 1008802,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 173082,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/fire-escape-spider-hit-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 1914353,
-      "runtimeBytes": 1253404,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 231270,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/fire-escape-spider-idle-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 1950743,
-      "runtimeBytes": 1300966,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 237116,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/graffiti-imp-idle-v1.webp",
       "width": 1230,
       "height": 1278,
+      "runtimeWidth": 615,
+      "runtimeHeight": 639,
+      "resolution": 0.5,
       "sourceBytes": 1526248,
-      "runtimeBytes": 1081612,
-      "decodedRGBABytes": 6287760
+      "runtimeBytes": 305538,
+      "decodedRGBABytes": 1571940
     },
     {
       "asset": "actors/manhole-mimic-idle-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 2404009,
-      "runtimeBytes": 1638510,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 367452,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/neon-junkie-idle-v1.webp",
       "width": 1230,
       "height": 1278,
+      "runtimeWidth": 615,
+      "runtimeHeight": 639,
+      "resolution": 0.5,
       "sourceBytes": 1429139,
-      "runtimeBytes": 1026778,
-      "decodedRGBABytes": 6287760
+      "runtimeBytes": 303474,
+      "decodedRGBABytes": 1571940
     },
     {
       "asset": "actors/neon-sentinel-idle-v1.webp",
       "width": 1199,
       "height": 1312,
+      "runtimeWidth": 600,
+      "runtimeHeight": 656,
+      "resolution": 0.5,
       "sourceBytes": 1862421,
-      "runtimeBytes": 1323942,
-      "decodedRGBABytes": 6292352
+      "runtimeBytes": 368270,
+      "decodedRGBABytes": 1574400
     },
     {
       "asset": "actors/neon-wraith-idle-v1.webp",
       "width": 1199,
       "height": 1312,
+      "runtimeWidth": 600,
+      "runtimeHeight": 656,
+      "resolution": 0.5,
       "sourceBytes": 1299065,
-      "runtimeBytes": 936724,
-      "decodedRGBABytes": 6292352
+      "runtimeBytes": 278076,
+      "decodedRGBABytes": 1574400
     },
     {
       "asset": "actors/neon-yakuza-idle-v1.webp",
       "width": 1217,
       "height": 1292,
+      "runtimeWidth": 609,
+      "runtimeHeight": 646,
+      "resolution": 0.5,
       "sourceBytes": 1692050,
-      "runtimeBytes": 1153044,
-      "decodedRGBABytes": 6289456
+      "runtimeBytes": 327676,
+      "decodedRGBABytes": 1573656
     },
     {
       "asset": "actors/payphone-phantom-idle-v1.webp",
       "width": 1122,
       "height": 1402,
+      "runtimeWidth": 561,
+      "runtimeHeight": 701,
+      "resolution": 0.5,
       "sourceBytes": 1435101,
-      "runtimeBytes": 1052540,
-      "decodedRGBABytes": 6292176
+      "runtimeBytes": 302376,
+      "decodedRGBABytes": 1573044
     },
     {
       "asset": "actors/sewer-slime-idle-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 2218514,
-      "runtimeBytes": 1542758,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 359796,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/smoke-attack-v1.webp",
       "width": 1199,
       "height": 1312,
+      "runtimeWidth": 600,
+      "runtimeHeight": 656,
+      "resolution": 0.5,
       "sourceBytes": 1030479,
-      "runtimeBytes": 664332,
-      "decodedRGBABytes": 6292352
+      "runtimeBytes": 197072,
+      "decodedRGBABytes": 1574400
     },
     {
       "asset": "actors/smoke-idle-v1.webp",
       "width": 1199,
       "height": 1312,
+      "runtimeWidth": 600,
+      "runtimeHeight": 656,
+      "resolution": 0.5,
       "sourceBytes": 924482,
-      "runtimeBytes": 616372,
-      "decodedRGBABytes": 6292352
+      "runtimeBytes": 178068,
+      "decodedRGBABytes": 1574400
     },
     {
       "asset": "actors/smoke-specter-idle-v1.webp",
       "width": 1145,
       "height": 1374,
+      "runtimeWidth": 573,
+      "runtimeHeight": 687,
+      "resolution": 0.5,
       "sourceBytes": 1353581,
-      "runtimeBytes": 934094,
-      "decodedRGBABytes": 6292920
+      "runtimeBytes": 267642,
+      "decodedRGBABytes": 1574604
     },
     {
       "asset": "actors/stray-voltage-idle-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 2269398,
-      "runtimeBytes": 1540396,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 316594,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/street-runner-attack-v1.webp",
       "width": 1106,
       "height": 1422,
+      "runtimeWidth": 553,
+      "runtimeHeight": 711,
+      "resolution": 0.5,
       "sourceBytes": 1155255,
-      "runtimeBytes": 761906,
-      "decodedRGBABytes": 6290928
+      "runtimeBytes": 216498,
+      "decodedRGBABytes": 1572732
     },
     {
       "asset": "actors/street-runner-celebrate-v1.webp",
       "width": 1106,
       "height": 1422,
+      "runtimeWidth": 553,
+      "runtimeHeight": 711,
+      "resolution": 0.5,
       "sourceBytes": 1044096,
-      "runtimeBytes": 679032,
-      "decodedRGBABytes": 6290928
+      "runtimeBytes": 198768,
+      "decodedRGBABytes": 1572732
     },
     {
       "asset": "actors/street-runner-defeat-v1.webp",
       "width": 1106,
       "height": 1422,
+      "runtimeWidth": 553,
+      "runtimeHeight": 711,
+      "resolution": 0.5,
       "sourceBytes": 881610,
-      "runtimeBytes": 569052,
-      "decodedRGBABytes": 6290928
+      "runtimeBytes": 165344,
+      "decodedRGBABytes": 1572732
     },
     {
       "asset": "actors/street-runner-guard-v1.webp",
       "width": 1106,
       "height": 1422,
+      "runtimeWidth": 553,
+      "runtimeHeight": 711,
+      "resolution": 0.5,
       "sourceBytes": 1077894,
-      "runtimeBytes": 696010,
-      "decodedRGBABytes": 6290928
+      "runtimeBytes": 198492,
+      "decodedRGBABytes": 1572732
     },
     {
       "asset": "actors/street-runner-hit-v1.webp",
       "width": 1106,
       "height": 1422,
+      "runtimeWidth": 553,
+      "runtimeHeight": 711,
+      "resolution": 0.5,
       "sourceBytes": 1066605,
-      "runtimeBytes": 692606,
-      "decodedRGBABytes": 6290928
+      "runtimeBytes": 199876,
+      "decodedRGBABytes": 1572732
     },
     {
       "asset": "actors/street-runner-idle-v1.webp",
       "width": 1106,
       "height": 1422,
+      "runtimeWidth": 553,
+      "runtimeHeight": 711,
+      "resolution": 0.5,
       "sourceBytes": 1050313,
-      "runtimeBytes": 704360,
-      "decodedRGBABytes": 6290928
+      "runtimeBytes": 199110,
+      "decodedRGBABytes": 1572732
     },
     {
       "asset": "actors/subway-wyrm-idle-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 2435970,
-      "runtimeBytes": 1653882,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 359542,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/taxi-ghost-idle-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
       "sourceBytes": 2366261,
-      "runtimeBytes": 1641872,
-      "decodedRGBABytes": 6291456
+      "runtimeBytes": 365868,
+      "decodedRGBABytes": 1572864
     },
     {
       "asset": "actors/the-billboard-idle-v1.webp",
       "width": 1312,
       "height": 1199,
+      "runtimeWidth": 656,
+      "runtimeHeight": 600,
+      "resolution": 0.5,
       "sourceBytes": 1946138,
-      "runtimeBytes": 1474364,
-      "decodedRGBABytes": 6292352
+      "runtimeBytes": 426632,
+      "decodedRGBABytes": 1574400
     },
     {
       "asset": "actors/vending-golem-attack-v1.webp",
       "width": 1240,
       "height": 1269,
+      "runtimeWidth": 620,
+      "runtimeHeight": 635,
+      "resolution": 0.5,
       "sourceBytes": 1576719,
-      "runtimeBytes": 1160744,
-      "decodedRGBABytes": 6294240
+      "runtimeBytes": 332160,
+      "decodedRGBABytes": 1574800
     },
     {
       "asset": "actors/vending-golem-defeat-v1.webp",
       "width": 1240,
       "height": 1269,
+      "runtimeWidth": 620,
+      "runtimeHeight": 635,
+      "resolution": 0.5,
       "sourceBytes": 1589994,
-      "runtimeBytes": 1161830,
-      "decodedRGBABytes": 6294240
+      "runtimeBytes": 334184,
+      "decodedRGBABytes": 1574800
     },
     {
       "asset": "actors/vending-golem-guard-v1.webp",
       "width": 1240,
       "height": 1269,
+      "runtimeWidth": 620,
+      "runtimeHeight": 635,
+      "resolution": 0.5,
       "sourceBytes": 1638333,
-      "runtimeBytes": 1227654,
-      "decodedRGBABytes": 6294240
+      "runtimeBytes": 350646,
+      "decodedRGBABytes": 1574800
     },
     {
       "asset": "actors/vending-golem-hit-v1.webp",
       "width": 1240,
       "height": 1269,
+      "runtimeWidth": 620,
+      "runtimeHeight": 635,
+      "resolution": 0.5,
       "sourceBytes": 1665500,
-      "runtimeBytes": 1223992,
-      "decodedRGBABytes": 6294240
+      "runtimeBytes": 355644,
+      "decodedRGBABytes": 1574800
     },
     {
       "asset": "actors/vending-golem-idle-v1.webp",
       "width": 1239,
       "height": 1269,
+      "runtimeWidth": 620,
+      "runtimeHeight": 635,
+      "resolution": 0.5,
       "sourceBytes": 1811621,
-      "runtimeBytes": 1341044,
-      "decodedRGBABytes": 6289164
+      "runtimeBytes": 376494,
+      "decodedRGBABytes": 1574800
     },
     {
       "asset": "actors/volt-attack-v1.webp",
       "width": 1186,
       "height": 1327,
+      "runtimeWidth": 593,
+      "runtimeHeight": 664,
+      "resolution": 0.5,
       "sourceBytes": 1247215,
-      "runtimeBytes": 830158,
-      "decodedRGBABytes": 6295288
+      "runtimeBytes": 245388,
+      "decodedRGBABytes": 1575008
     },
     {
       "asset": "actors/volt-idle-v1.webp",
       "width": 1186,
       "height": 1327,
+      "runtimeWidth": 593,
+      "runtimeHeight": 664,
+      "resolution": 0.5,
       "sourceBytes": 1256843,
-      "runtimeBytes": 855628,
-      "decodedRGBABytes": 6295288
+      "runtimeBytes": 247310,
+      "decodedRGBABytes": 1575008
     },
     {
       "asset": "actors/voltage-king-idle-v1.webp",
       "width": 1330,
       "height": 1182,
+      "runtimeWidth": 665,
+      "runtimeHeight": 591,
+      "resolution": 0.5,
       "sourceBytes": 2342164,
-      "runtimeBytes": 1682120,
-      "decodedRGBABytes": 6288240
+      "runtimeBytes": 468954,
+      "decodedRGBABytes": 1572060
     },
     {
       "asset": "locations/club-backlot-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
       "sourceBytes": 2177663,
       "runtimeBytes": 1526870,
       "decodedRGBABytes": 6291456
@@ -400,6 +547,9 @@
       "asset": "locations/ocean-drive-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
       "sourceBytes": 2207957,
       "runtimeBytes": 1620744,
       "decodedRGBABytes": 6291456
@@ -408,6 +558,9 @@
       "asset": "locations/rooftop-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
       "sourceBytes": 2261514,
       "runtimeBytes": 1656722,
       "decodedRGBABytes": 6291456
@@ -416,6 +569,9 @@
       "asset": "locations/underpass-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
       "sourceBytes": 2070671,
       "runtimeBytes": 1501020,
       "decodedRGBABytes": 6291456
@@ -424,6 +580,9 @@
       "asset": "locations/wynwood-v1.webp",
       "width": 1536,
       "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
       "sourceBytes": 2275998,
       "runtimeBytes": 1686430,
       "decodedRGBABytes": 6291456

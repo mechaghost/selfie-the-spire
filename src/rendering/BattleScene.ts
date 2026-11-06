@@ -9,7 +9,7 @@ import { locationAtmosphere } from './locationAtmosphere';
 import { clipFrameAt } from './clipPlayback';
 import { atlasTextures } from './actorAtlas';
 import { actorPlacement } from './actorPlacement';
-import { textureDecodePlan } from './textureBudget';
+import { packagedTextureSource, textureDecodePlan } from './textureBudget';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string; previewElapsedMs?:number }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
@@ -18,6 +18,11 @@ function loadTexture(url: string): Promise<Texture> {
         const timer = window.setTimeout(() => { image.onload = image.onerror = null; image.src = ''; reject(new Error(`Asset timeout: ${url}`)); }, 12000);
         image.onload = async () => {
             clearTimeout(timer); image.onload = image.onerror = null;
+            const packaged=packagedTextureSource(url,image.naturalWidth,image.naturalHeight);
+            if(packaged) {
+                resolve(new Texture({source:new ImageSource({resource:image,resolution:packaged.resolution}),frame:new Rectangle(0,0,packaged.width,packaged.height)}));
+                return;
+            }
             const plan=textureDecodePlan(url,image.naturalWidth,image.naturalHeight);
             if(plan.resolution<1 && typeof createImageBitmap==='function') {
                 let bitmap:ImageBitmap|undefined;
