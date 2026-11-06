@@ -614,20 +614,20 @@
       "keyPoses": [
         "attack",
         "hit",
-        "defeat"
+        "defeat",
+        "guard"
       ],
       "timelines": [
         "attack",
         "hit",
-        "defeat"
+        "defeat",
+        "guard"
       ],
       "missingContactPoses": [
-        "guard",
         "cast"
       ],
       "missingTimelines": [
         "idle",
-        "guard",
         "cast"
       ]
     },

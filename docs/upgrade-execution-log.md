@@ -473,3 +473,9 @@ Generation prompt: Final DEFEAT pose of the exact Subway Wyrm reference sprite. 
 ### Subway Wyrm compact pose review
 
 At 320 × 568 in the Pixi boss study, the 140 ms bite, 80 ms hit and 40 ms defeat frames all fit between the HUD and hand. The low cab bite, raised recoil and flattened defeat were visually distinct. The defeated target was disabled and labeled Defeated. Browser logs showed no warnings or errors. Local captures are `tests/.e2e-out/wyrm-bite-320.jpg`, `wyrm-recoil-320.jpg`, and `wyrm-defeat-320.jpg`. Full-speed combat and physical-device checks remain open.
+
+### Subway Wyrm guard
+
+Added a 160 ms brace and 60 ms idle recovery for Block. The Wyrm tucks its cab behind one raised foreclaw and coils its cars into a defensive wall. The 1536 × 1024 source has alpha ≥128 bounds (114,15)–(1379,1006) and uses a .982 foot anchor. All 550 encounter art budgets passed. The bounds audit found zero confirmed intersections across 955,512 samples. Texture, playback and TypeScript checks passed. Mobile visual review of the guard remains open.
+
+Generation prompt: Defensive BLOCK pose for the exact Subway Wyrm train serpent in the reference, still facing screen left. Tuck the cab behind its raised near foreclaw, eyes visible and jaws shut, while the lower rail cars and tail curl together like a protective wall. A firm planted brace with a distinctive claw held up protecting the face. Keep the original cream and teal rail cars, coral doors, purple bellows, amber lamps, exact scale and 1536x1024 frame. All body parts within the original silhouette width. Transparent cutout, including gaps between cars and empty margins, no floor, shadow, props, detached parts, aura, glow or text. Match the inked painted style.
