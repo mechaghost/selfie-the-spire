@@ -6,7 +6,11 @@ description: Architectural guidelines and constraints for the Slay the Tower pro
 # Slay the Tower Map Generation Architecture
 
 ## Overview
-The procedural map generator ensures a strictly traversable, visually appealing tree structure (similar to Slay the Spire) using deterministic RNG.
+The procedural map generator ensures a strictly traversable route graph using deterministic RNG. Its presentation is an original Neo Miami street map, per the user's explicit direction: coastal geography, city blocks, named avenues, and orthogonal street routes. Do not present the graph as a Slay the Spire tower or floating branching nodes.
+
+## Street-map Presentation
+
+Use `src/core/cityMapLayout.ts` to project the graph onto streets and `src/components/map/CityMapArt.tsx` for decorative cartography. Keep route availability authoritative in the game state. Clearly distinguish the current stop, reachable stops, and unavailable stops. Preserve touch targets and readable labels on narrow screens. See `docs/neo-miami-street-map.md` for the implementation and verification record.
 
 ## Structural Constraints
 1. **Grid Dimensions:** The map scales effectively to a 4-column by 10-row grid, though coordinates are stored as floating-point percentages so the UI can scale infinitely.

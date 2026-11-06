@@ -1,0 +1,5 @@
+{
+  "note": "Conservative transformed alpha bounds (alpha >=32), sampled poses at contact/anticipation/recovery. Canvas/HUD intersection candidates require visual inspection; bounding rectangles include transparent corners and are not proof of pixel overlap or full-time animation certification. Loose pose sources represent atlas-equivalent art.",
+  "samples": 2328,
+  "findings": []
+}

@@ -45,7 +45,7 @@ for (const [id, file, footY] of [
         productionStatus:'review', provenance:'Original AI-generated Neo Miami monster using built-in image generation; see docs/battle-art-prompts.md. Idle cutout only; animation approval pending.' };
 }
 ACTOR_VISUALS['hero-neon'].keyPoses = {attack:{imageUrl:'/assets/battle/actors/street-runner-attack-v1.webp',footAnchor:[.5,.97]}};
-ACTOR_VISUALS.alley_rat.keyPoses = {attack:{imageUrl:'/assets/battle/actors/alley-rat-attack-v1.webp',footAnchor:[.5,.93]}};
+ACTOR_VISUALS.alley_rat.keyPoses = {attack:{imageUrl:'/assets/battle/actors/alley-rat-attack-v1.webp',footAnchor:[.5,.93],scale:1536/1774}};
 ACTOR_VISUALS.vending_golem.keyPoses = {attack:{imageUrl:'/assets/battle/actors/vending-golem-attack-v1.webp',footAnchor:[.5,.94]}};
 ACTOR_VISUALS.fire_escape_spider.keyPoses = {attack:{imageUrl:'/assets/battle/actors/fire-escape-spider-attack-v1.webp',footAnchor:[.5,.94]}};
 ACTOR_VISUALS['hero-neon'].keyPoses!.hit = {imageUrl:'/assets/battle/actors/street-runner-hit-v1.webp',footAnchor:[.5,.99]};
