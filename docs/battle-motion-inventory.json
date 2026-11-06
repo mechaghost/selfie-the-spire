@@ -482,10 +482,13 @@
       "id": "chrome_phantom",
       "reachability": "production",
       "status": "review",
-      "keyPoses": [],
-      "timelines": [],
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
       "missingContactPoses": [
-        "attack",
         "hit",
         "defeat",
         "guard",
@@ -493,7 +496,6 @@
       ],
       "missingTimelines": [
         "idle",
-        "attack",
         "hit",
         "defeat",
         "guard",

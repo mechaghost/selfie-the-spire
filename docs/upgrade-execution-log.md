@@ -541,3 +541,11 @@ Generation prompt: Attack CONTACT pose of the exact Neon Sentinel game sprite. A
 The selfie flow now uses Canvas to fit the center of a local photo into an illustrated Street Runner helmet. The player previews the result and gets the standard Street Runner deck, with no inference, remote image processing, or paid request. The cropped portrait and transparent sprite persist in the local run. Version 2 appearance continues to support existing saved sprites. The former public character generation endpoint now returns 410.
 
 Verified TypeScript and all 30 regression suites. Chrome at a 390 × 844 touch viewport accepted an uploaded fixture, produced a 256 × 384 PNG with a transparent corner, showed the preview, opened a real Pixi fight, and restored the personalized sprite after reload. The flow issued no API requests. Physical mobile camera testing and deployment remain open.
+
+### Chrome Phantom forearm slash
+
+Added a left-facing contact pose on the existing 1024 × 1536 canvas. The slash lowers the body into a split stance, with alpha ≥128 bounds (31,224)–(994,1452) and a .945 foot anchor. The attack clip uses 80 ms of idle, 160 ms of contact and 80 ms of recovery to idle. All 550 encounter art budgets passed. The bounds audit found zero confirmed intersections in 1,101,708 samples. Texture, clip playback and TypeScript checks passed.
+
+At a 320 × 568 Chrome touch viewport, the frozen 140 ms frame in the three-enemy Pixi study showed the strike inside the target lane, clear of the HUD and adjacent Golem. The texture loaded with no browser errors. The blade is small at this width. Full-speed combat and physical-device review remain open. Capture: `tests/.e2e-out/chrome-phantom-attack-320.png`.
+
+Generation direction: Keep the existing angular chrome armor, purple body, orange eyes, high red collar and claw boots. Tilt toward screen left, sweep the near wrist blade at waist level and retract the far blade. Use a bent lead knee and planted feet on the original portrait canvas. Preserve true alpha with no slash effects, scenery or added weapons.
