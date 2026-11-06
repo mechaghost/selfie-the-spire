@@ -377,6 +377,13 @@
     "runtimeHeight": 512,
     "resolution": 0.5
   },
+  "/assets/battle/actors/the-billboard-attack-v1.webp": {
+    "width": 1313,
+    "height": 1198,
+    "runtimeWidth": 657,
+    "runtimeHeight": 599,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/the-billboard-idle-v1.webp": {
     "width": 1312,
     "height": 1199,
