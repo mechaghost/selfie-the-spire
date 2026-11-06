@@ -233,7 +233,7 @@ try {
 } finally {reactionScene.destroy();globalThis.performance=originalPerformance;}
 
 // Slime's self-buff applies Block followed immediately by Strength. Preserve the
-// brace when the cast and Block reaction overlap, then let Weak use its own pose.
+// brace when the cast and Block reaction overlap, then play the queued cast.
 const slimeVisual = ACTOR_VISUALS.sewer_slime;
 const slimeSnapshot = {
     ...reactionSnapshot,
@@ -262,8 +262,11 @@ try {
     publishImpact(block,{effect:'block',targetId:'enemy',hpDelta:0,blockDelta:6});
     publishAction(strength,'begin');
     slimeScene.update(slimeSnapshot);
-    assert.equal(sprite.texture,guard,'Block wins over the overlapping self-buff cast');
+    assert.equal(sprite.texture,guard,'Block shows its guard first');
     clock += 220;
+    slimeScene.update(slimeSnapshot);
+    assert.equal(sprite.texture,cast,'Strength plays after the guard');
+    clock += 160;
     slimeScene.update(slimeSnapshot);
     assert.equal(sprite.texture,idle);
     publishAction(weak,'begin');
@@ -277,4 +280,4 @@ try {
     globalThis.performance = originalPerformance;
 }
 assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
-console.log('PASS: Slime guard takes precedence over simultaneous Strength, and Weak plays its cast');
+console.log('PASS: Slime guard then Strength cast, followed by an independent Weak cast');

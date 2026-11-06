@@ -3,16 +3,17 @@ import type { ImpactNotice } from './CombatPresentation';
 
 export type MotionProfile = 'agile' | 'heavy' | 'float' | 'slime';
 export const DEFEAT_PRESENTATION_MS=280;
+export const REACTION_PRESENTATION_MS=220;
 /** Key-pose art is finite even if a stale snapshot still says attack. */
 export function actorPoseAt(clip:ActorClip,elapsed:number,reduced:boolean):ActorClip {
     if(reduced)return clip==='defeat' ? 'defeat' : 'idle';
     if(clip==='attack')return elapsed>=80 && elapsed<240 ? 'attack' : 'idle';
-    if(clip==='hit' || clip==='guard' || clip==='cast')return elapsed<220 ? clip : 'idle';
+    if(clip==='hit' || clip==='guard' || clip==='cast')return elapsed<REACTION_PRESENTATION_MS ? clip : 'idle';
     if(clip==='celebrate')return elapsed<600 ? clip : 'idle';
     return clip;
 }
 export function reactionPose(effect:ImpactNotice['effect'],elapsed:number):ActorClip|null {
-    if(elapsed<0 || elapsed>=220)return null;
+    if(elapsed<0 || elapsed>=REACTION_PRESENTATION_MS)return null;
     if(effect==='damage' || effect==='thorns' || effect==='burn')return 'hit';
     if(effect==='block' || effect==='blocked')return 'guard';
     return null;

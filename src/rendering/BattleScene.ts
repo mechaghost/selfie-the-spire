@@ -4,7 +4,7 @@ import { BattleLayout, ActorSlot } from './battleLayout';
 import { ImpactNotice, subscribeImpacts, subscribePresentation } from './CombatPresentation';
 import { frameLocationLayer, frameForeground } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
-import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActorMotion } from './actorMotion';
+import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActorMotion, REACTION_PRESENTATION_MS } from './actorMotion';
 import { locationAtmosphere } from './locationAtmosphere';
 import { clipFrameAt } from './clipPlayback';
 import { atlasTextures } from './actorAtlas';
@@ -143,7 +143,15 @@ export class BattleScene {
                 // A new attack supersedes this actor's previous cast, including during
                 // hidden/reduced-motion transitions. Other actors keep their own poses.
                 if(notice.type==='DAMAGE_ENTITY') {this.casts.delete(notice.sourceId);return;}
-                if(!this.snapshot.reducedMotion && !document.hidden && notice.type==='APPLY_STATUS')this.casts.set(notice.sourceId,performance.now());
+                if(!this.snapshot.reducedMotion && !document.hidden && notice.type==='APPLY_STATUS') {
+                    const now=performance.now();
+                    const reaction=this.reactions.get(notice.sourceId);
+                    const visual=this.snapshot.actors.find(actor=>actor.id===notice.sourceId)?.visual;
+                    // A compound move gets a full brace, then its authored cast.
+                    const guardEnd=reaction?.effect==='block' && visual?.keyPoses?.guard && visual.keyPoses.cast
+                        ? reaction.at+REACTION_PRESENTATION_MS : now;
+                    this.casts.set(notice.sourceId,Math.max(now,guardEnd));
+                }
             });
             this.app.ticker.add(this.tick);
             document.addEventListener('visibilitychange',this.visibility);
@@ -185,8 +193,8 @@ export class BattleScene {
         const reaction=this.reactions.get(actor.id);
         const reactionClip=reaction && !actor.defeated && clip!=='celebrate' && !this.snapshot.reducedMotion ? reactionPose(reaction.effect,now-reaction.at) : null;
         const castAt=this.casts.get(actor.id);
-        if(castAt!==undefined && now-castAt>=220)this.casts.delete(actor.id);
-        const castClip=castAt!==undefined && now-castAt<220 && !this.snapshot.reducedMotion && !actor.defeated && clip!=='celebrate' ? 'cast' : null;
+        if(castAt!==undefined && now-castAt>=REACTION_PRESENTATION_MS)this.casts.delete(actor.id);
+        const castClip=castAt!==undefined && now>=castAt && now-castAt<REACTION_PRESENTATION_MS && !this.snapshot.reducedMotion && !actor.defeated && clip!=='celebrate' ? 'cast' : null;
         const activeClip=reactionClip ?? castClip ?? clip;
         const authoredClip=actor.visual.clips[activeClip];
         const frame=authoredClip ? clipFrameAt(authoredClip,reactionClip && reaction ? now-reaction.at : castClip && castAt!==undefined ? now-castAt : elapsed,this.snapshot.reducedMotion) : undefined;
@@ -200,7 +208,7 @@ export class BattleScene {
         sprite.scale.set(scale*poseScale*motion.scaleX,scale*poseScale*motion.scaleY); sprite.position.set(slot.foot.x+motion.x,slot.foot.y+motion.y); sprite.alpha=motion.alpha; sprite.rotation=motion.rotation;
         sprite.tint=0xffffff;
         if(reaction && !actor.defeated && !this.snapshot.reducedMotion) {
-            const progress=(performance.now()-reaction.at)/220;
+            const progress=(now-reaction.at)/REACTION_PRESENTATION_MS;
             if(progress>=1)this.reactions.delete(actor.id);
             else {
                 sprite.tint=reaction.effect==='heal'?0xb8ffd2:reaction.effect==='blocked'||reaction.effect==='block'?0xaaddff:0xffc5a3;
