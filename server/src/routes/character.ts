@@ -38,21 +38,17 @@ characterRoute.post('/generate-character', async (c) => {
             // Step 2: Analyze for archetype
             const analysis = await analyzeSelfie(body.image);
 
-            // Step 3: Generate portrait + hero card mechanics in parallel
-            const [portraitUrl, heroMechanics, combatCutout] = await Promise.all([
+            // Card art depends on mechanics, not on the portrait or combat extraction.
+            const mechanicsPromise = generateHeroCardMechanics(analysis);
+            const cardArtPromise = mechanicsPromise.then(mechanics => generateHeroCardArt(
+                body.image, mechanics.name, mechanics.description, mechanics.type, analysis.archetype,
+            ));
+            const [portraitUrl, heroMechanics, combatCutout, heroCardArtUrl] = await Promise.all([
                 generateCharacterArt(body.image, analysis.archetype),
-                generateHeroCardMechanics(analysis),
+                mechanicsPromise,
                 personalCombat ? generateCombatCharacterArt(body.image,analysis.archetype) : Promise.resolve(undefined),
+                cardArtPromise,
             ]);
-
-            // Step 4: Generate hero card art (needs mechanics for name/description)
-            const heroCardArtUrl = await generateHeroCardArt(
-                body.image,
-                heroMechanics.name,
-                heroMechanics.description,
-                heroMechanics.type,
-                analysis.archetype,
-            );
 
             // Step 5: Assemble result with hero card
             const result = generateCharacterFromAnalysis(analysis, portraitUrl, {
