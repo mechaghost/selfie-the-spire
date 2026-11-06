@@ -247,3 +247,11 @@ Generated Golem crossed-arm guard and Spider raised-front-leg cast key poses fro
 Registered both poses. Existing Block impact reactions select Golem guard. Added a presentation-only action subscription that selects a finite 220ms cast on the source of APPLY_STATUS; reduced motion/hidden documents omit it, defeat/celebration take precedence, and disposal removes subscription/state. Combat timing and rules are unchanged. The Spider's Burn action can now present distinct casting art rather than remaining idle.
 
 Controlled renderer tests verify status actions animate their source, not recipient, and cast state is cleared on disposal. Asset manifests, 60 continuous-run motion-parity simulations, TypeScript, build and whitespace checks pass. Pose anatomy/scale/contact timing still require browser/art review; full authored animation baseline and release gates remain open. No deployment.
+
+## Legal encounter mobile input and text review
+
+Entered a legal floor-one Specter/Taxi Ghost encounter through the normal map at 390×844 (arena flag only, no review fixture). The existing local legacy run displayed its migration notice and was continued through the UI. Played Haymaker, Shiv Toss and Jab against Taxi using both scene targeting and the text target list. Observed 8 damage, Vulnerable-amplified 6 damage, then capped lethal 4 HP loss. End Turn let the surviving Specter deal 7 damage; next player turn restored 3 energy, drew five cards and moved focus to End Turn. Updated Haymaker's longer canonical text fits the visible mobile card.
+
+A brief page-focus state during resolution initially looked like a focus-return defect; inspection confirmed the existing ready-phase focus effect restores focus once resolution completes. No speculative focus change made. Found and fixed a real accessible-label defect: dead enemies retained their obsolete attack intent in aria-label. They now announce defeated only; obsolete Block/status detail is hidden and live single-status text uses singular effect.
+
+Browser confirmed Taxi Ghost, defeated in its disabled control after the fix. Console warnings/errors empty. Evidence tests/.e2e-out/legal-encounter-mobile.png. TypeScript/build/whitespace pass. The encounter remains active for later continuation; this is one actual combat turn, not a full browser run or physical-device test. No deployment.

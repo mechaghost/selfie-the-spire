@@ -49,12 +49,12 @@ export function BattleArena() {
             const intent=intentView(enemy.intent,enemy.statuses,player.statuses);
             return <button key={enemy.id} data-combat-target={enemy.id} data-entity-id={enemy.id} className={`actor-target ${mode==='targeting'?'is-selectable':''}`} disabled={enemy.hp<=0}
                 style={{left:slot.target.x,top:slot.target.y,width:slot.target.width,height:slot.target.height}}
-                aria-label={`${mode==='targeting'?'Target':'Inspect'} ${enemy.name}, ${enemy.hp} of ${enemy.maxHp} HP, ${enemy.block} Block. ${intent.label}`}
+                aria-label={enemy.hp<=0 ? `${enemy.name}, defeated` : `${mode==='targeting'?'Target':'Inspect'} ${enemy.name}, ${enemy.hp} of ${enemy.maxHp} HP, ${enemy.block} Block. ${intent.label}`}
                 onClick={event=>{event.stopPropagation();if(mode==='targeting')commit(enemy.id);else setInspected(enemy.id);}}>
                 <span className="actor-hud" style={{left:slot.hud.x-slot.target.x,top:slot.hud.y-slot.target.y,width:slot.hud.width}}>
                     <strong>{slot.index+1}. {enemy.name}</strong><span>{enemy.hp}/{enemy.maxHp}</span>
                     <b title={enemy.hp>0 && intent.attack ? 'Current damage preview. Status changes before this attack can change damage. Inspect for details.' : undefined} aria-label={enemy.hp>0 && intent.attack ? `Current damage preview: ${intent.attack}${intent.block ? `; gains ${intent.block} Block` : ''}` : enemy.hp>0 ? intent.label : undefined}>{enemy.hp<=0 ? 'Defeated' : intent.attack ? `≈ ⚔ ${intent.attack}${intent.block?` ◆ ${intent.block}`:''}${intent.statuses.length?' ✦':''}` : [intent.block?`◆ ${intent.block}`:null,intent.healing?`+${intent.healing} HP`:null,intent.statuses.length?'✦':null].filter(Boolean).join(' ') || 'Preparing'}</b>
-                    <small>◆ {enemy.block}{enemy.statuses.length ? ` · ${enemy.statuses.length} effects` : ''}</small>
+                    {enemy.hp>0 && <small>◆ {enemy.block}{enemy.statuses.length ? ` · ${enemy.statuses.length} ${enemy.statuses.length===1?'effect':'effects'}` : ''}</small>}
                 </span><span className="actor-slot-marker">{slot.index+1}</span>
             </button>;
         })}
