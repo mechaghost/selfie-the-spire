@@ -889,3 +889,7 @@ Added a 110 ms eye-light dip after 5,200 ms of idle. The .989 foot anchor compen
 ### Voltage King authored idle
 
 Added a 130 ms dip of the chest coil and tubes after 6,400 ms of idle. Both poses use the .99 foot anchor and the source alpha masks overlap by 99.2% intersection-over-union. The 320 × 568 Pixi study shows the coil dim while the boots and armor remain aligned. Captures: `tests/.e2e-out/voltage-king-idle-{base,dip,restored}-320.png`. Only the new idle frame uses the 500 px runtime tier, which restores the 5 MB budget for the elite encounter. All 550 budgets, texture caps, bounds, playback and TypeScript passed.
+
+### Circuit Breaker authored idle
+
+Added a 130 ms chest-panel dip after 6,600 ms of idle. The .931 foot anchor compensates for the one-pixel source baseline difference and source alpha masks overlap by 99.0% intersection-over-union. The 320 × 568 Pixi study shows the circuits dimming while the hammer, doors and boots stay aligned. Captures: `tests/.e2e-out/breaker-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
