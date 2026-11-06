@@ -813,3 +813,7 @@ Added a crossed-blade brace with a .990 foot anchor and a 160/60 ms guard/idle c
 ### Chrome Phantom Weak cast
 
 Added an extended-blade, open-palm curse pose with a contained violet wisp, .993 foot anchor and 160/60 ms cast/idle clip. At 320 × 568 in Chromium touch emulation, the Phantom's deterministic opening move showed the raised palm and applied +2 Weak to the player without HP loss. Capture: `tests/.e2e-out/chrome-phantom-live-cast-320.png`. All 550 encounter budgets, texture caps, clip playback and TypeScript passed. Bounds found zero confirmed intersections across 1,120,284 samples.
+
+### Manhole Mimic Vulnerable cast
+
+Added a violet breath cue with a .999 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, its unchanged opening move applied 12 damage before the cast and +1 Vulnerable; player HP ended at 68. The breath remains visible in the capture, although the second player notice's border reaches the left screen edge. Capture: `tests/.e2e-out/manhole-mimic-live-cast-320.png`. All 550 encounter budgets, texture caps, playback and TypeScript passed. Bounds found zero confirmed intersections across 1,120,716 samples.
