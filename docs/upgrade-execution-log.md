@@ -651,3 +651,7 @@ The production smoke now uses Tab and Enter at 320 × 568 to reach and inspect J
 ### Keyboard-only production encounter
 
 Extended `tests/arena-smoke.cjs` with a third case at 320 × 568. Every gameplay action uses Tab and Enter, including starting the run, choosing a map stop, inspecting and playing attacks, choosing live enemies, ending turns, inspecting a victory reward and adding it to the deck. Escape tests still verify both focus restoration steps. The keyboard run won after seven attacks and two enemy turns and restored the reward, gold and map position after reload. Both touch cases still pass. The prior focus-fix CI run 42182278938 passed. This covers the full Rat Pack encounter in Chrome, with a nine-floor keyboard run and physical assistive-technology checks still open.
+
+### Production browser reduced-motion parity
+
+The arena smoke now repeats the same 320 × 568 Rat Pack fight with the browser's reduced-motion preference enabled. It checks that damage feedback remains visible with its CSS animation disabled and compares the normal and reduced runs' attack count, turn count, reward choices, saved HP, gold, ordered deck, current stop and RNG snapshot. The production build passed all four smoke cases, including both normal touch layouts, the keyboard-only encounter and the reduced-motion portrait run. This checks one encounter through the browser preference. The automated engine suites cover disabled motion separately. Prior CI run 42182533738 passed.

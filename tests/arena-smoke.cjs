@@ -25,7 +25,8 @@ async function tabTo(page, control, label) {
     assert.fail(`Could not reach ${label} with Tab`);
 }
 
-async function playFight(page, viewport, input) {
+async function playFight(page, viewport, input, reducedMotion) {
+    const captureId = `${viewport.width}-${input}-${reducedMotion}`;
     const activate = async (control, label) => {
         if (input === 'touch') return control.tap();
         await tabTo(page, control, label);
@@ -44,6 +45,7 @@ async function playFight(page, viewport, input) {
     }, seed);
 
     await page.goto(base);
+    assert.equal(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches), reducedMotion === 'reduce');
     await activate(page.getByRole('button', { name: /Play a starter run/ }), 'starter run');
     await activate(page.locator('.map-node.available.type-combat').first(), 'first fight');
     await page.locator('.battle-arena canvas').waitFor();
@@ -93,8 +95,12 @@ async function playFight(page, viewport, input) {
             await activate(page.getByRole('button', { name: 'Play card', exact: true }), 'Play card');
             if (await targetPrompt.isVisible()) await activate(targets.first(), 'first living enemy');
             if (plays === 0) {
-                await page.locator('.combat-impact.impact-damage').first().waitFor();
-                await page.screenshot({ path: join(output, `full-speed-impact-${viewport.width}-${input}.png`) });
+                const impact = page.locator('.combat-impact.impact-damage').first();
+                await impact.waitFor();
+                if (reducedMotion === 'reduce') {
+                    assert.equal(await impact.evaluate(element => getComputedStyle(element).animationName), 'none');
+                }
+                await page.screenshot({ path: join(output, `full-speed-impact-${captureId}.png`) });
             }
             plays++;
             energy -= cost;
@@ -115,13 +121,14 @@ async function playFight(page, viewport, input) {
     assert.ok(plays > 0 && enemyTurns > 0);
     const rewards = page.locator('.reward-card-slot');
     assert.equal(await rewards.count(), 3);
+    const rewardChoices = await rewards.getByRole('button').evaluateAll(elements => elements.map(element => element.getAttribute('aria-label')));
     await page.locator('.combat-result-card').evaluate(async element => {
         await Promise.all(element.getAnimations({ subtree: true }).filter(animation => animation.effect.getTiming().iterations !== Infinity)
             .map(animation => animation.finished.catch(() => {})));
     });
     const bounds = await page.locator('.combat-result-card').boundingBox();
     assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= viewport.width, 'reward dialog exceeds viewport width');
-    await page.screenshot({ path: join(output, `full-speed-victory-${viewport.width}-${input}.png`) });
+    await page.screenshot({ path: join(output, `full-speed-victory-${captureId}.png`) });
     await activate(rewards.first().getByRole('button'), 'first reward card');
     await activate(page.getByRole('button', { name: 'Add to deck' }), 'Add to deck');
 
@@ -139,7 +146,14 @@ async function playFight(page, viewport, input) {
     assert.equal(save.masterDeck.length, 13);
     assert.ok(save.player.gold > 99);
     assert.deepEqual(errors, []);
-    console.log(`PASS ${viewport.width}×${viewport.height} (${input}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
+    console.log(`PASS ${viewport.width}×${viewport.height} (${input}, ${reducedMotion}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
+    return {
+        plays, enemyTurns, rewardChoices, stop,
+        hp: save.player.hp,
+        gold: save.player.gold,
+        deck: save.masterDeck.map(card => card.id),
+        rng: save.rngSnapshot,
+    };
 }
 
 async function main() {
@@ -153,11 +167,18 @@ async function main() {
             { viewport: { width: 320, height: 568 }, input: 'touch' },
             { viewport: { width: 844, height: 390 }, input: 'touch' },
             { viewport: { width: 320, height: 568 }, input: 'keyboard' },
+            { viewport: { width: 320, height: 568 }, input: 'touch', reducedMotion: 'reduce' },
         ];
-        for (const { viewport, input } of cases) {
-            const page = await browser.newPage({ viewport, isMobile: true, hasTouch: input === 'touch', reducedMotion: 'no-preference' });
+        let portraitBaseline;
+        for (const { viewport, input, reducedMotion = 'no-preference' } of cases) {
+            const page = await browser.newPage({ viewport, isMobile: true, hasTouch: input === 'touch', reducedMotion });
             try {
-                await playFight(page, viewport, input);
+                const result = await playFight(page, viewport, input, reducedMotion);
+                if (!portraitBaseline) portraitBaseline = result;
+                if (reducedMotion === 'reduce') {
+                    assert.deepEqual(result, portraitBaseline, 'Reduced motion changed the fight or saved outcome');
+                    console.log('PASS normal and reduced motion produce identical portrait combat and reward outcomes');
+                }
             } finally {
                 await page.close();
             }
