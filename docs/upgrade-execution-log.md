@@ -697,3 +697,9 @@ The 320 × 568 solo Pixi study showed a distinct shutdown below the HUD. The rec
 Added a backward, chest-clutching recoil and a held seated collapse with a bowed head. The sword stays sheathed in both, leaving the draw slash distinct. Both sources are 1217 × 1293. Hit uses .985 and a 160/60 ms hit/idle clip. Defeat uses .989 and a 280 ms hold.
 
 At 320 × 568 in the solo Pixi study, the recoil horns sit close to the HUD but remain visible. The defeated target was disabled and its marker hidden. No browser page errors. Captures: `tests/.e2e-out/neon-yakuza-{hit,defeat}-320.png`. All 550 encounter art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,112,724 samples. Full-speed elite and physical-device review remain open.
+
+### Chrome Bouncer recoil and defeat
+
+Added a backward torso recoil and a held collapse with a dark visor. Both use the original 1222 × 1287 canvas. Hit uses a .990 foot anchor and 160/60 ms hit/idle timing. Defeat uses .992 and a 280 ms hold. All 21 reachable enemy templates now have authored attack, hit and defeat poses. Idle loops, mechanics-specific guard and cast poses, and final art approval remain separate work.
+
+In the 320 × 568 solo Pixi study, the recoil tilted visibly away from the hero and the defeat settled below the HUD with its target disabled and marker hidden. The recoil visor is close to the HUD. No browser page errors. Captures: `tests/.e2e-out/chrome-bouncer-{hit,defeat}-320.png`. All 550 encounter art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,113,372 samples.

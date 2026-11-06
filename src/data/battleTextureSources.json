@@ -90,6 +90,20 @@
     "runtimeHeight": 703,
     "resolution": 0.5
   },
+  "/assets/battle/actors/chrome-bouncer-defeat-v1.webp": {
+    "width": 1222,
+    "height": 1287,
+    "runtimeWidth": 611,
+    "runtimeHeight": 644,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/chrome-bouncer-hit-v1.webp": {
+    "width": 1222,
+    "height": 1287,
+    "runtimeWidth": 611,
+    "runtimeHeight": 644,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/chrome-bouncer-idle-v1.webp": {
     "width": 1222,
     "height": 1287,
