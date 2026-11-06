@@ -5,3 +5,9 @@
 The GitHub Combat regression workflow uses Ubuntu24.04 and Node24, pinned action revisions already used by the previous project workflow, read-only contents permission, no persisted Git credentials, and no deployment step. It builds the enabled arena, then runs all current suites, including production builds with both arena flag values, controlled browser-cutout/provider tests, scene lifecycle, legal-run parity, save continuity and actual local HTTP serving. Failed suites retain their logs and do not stop subsequent suites. Artifacts retain logs and parity JSON for14days.
 
 No ONNX weights, model preparation or provider credentials are involved. This supersedes the canceled native-matting workflow. These are automated software checks; they do not establish real generated-image quality, screen-reader behavior, physical-device performance or final art approval. Workflow execution evidence must be checked for the exact commit; merely adding this file is not a successful Linux run.
+
+## Verified Linux run
+
+[Run42165457614](https://github.com/mechaghost/selfie-the-spire/actions/runs/42165457614) completed successfully for exact revision `796701a82222b03ed10b483119f2e2db7d9b4634`. Downloaded artifact report records clean worktree, Linux x64, Nodev24.22.2,30 passed and0 failed. The arena build, dependency install, regression suites and evidence upload all passed; job duration59seconds. Local artifact copy:`tests/.e2e-out/linux-regression-42165457614/`. This verifies the browser-removal implementation's automated Linux checks without ONNX; actual browser decoding remains covered separately by the local browser fixture.
+
+GitHub reported that the pinned v4 action runtimes target deprecated Node20 and are being forced onto Node24. The job succeeded, but updating those pinned action revisions should be handled separately with official-source verification. The application/test runtime itself was explicitly Node24.
