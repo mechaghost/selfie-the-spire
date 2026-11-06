@@ -753,3 +753,9 @@ Opened the local arena production build in Safari on the iPhone 18 Pro simulator
 ### Smoke Specter guard
 
 Added a crossed-forearm guard with a .993 tail anchor and a 160/60 ms guard/idle clip. A 320 × 568 Chromium touch fixture selected the Specter's existing Defend intent, then used End Turn to resolve it through the combat queue. The pose appeared alongside +5 Block, and the player remained at 80 HP. Capture: `tests/.e2e-out/smoke-specter-live-guard-320.png`. All 550 encounter budgets, texture, playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,115,964 samples.
+
+### Smoke Specter Weak cast and CI repair
+
+Added a raised-claw smoke cast, with a .999 tail anchor, a 160/60 ms cast/idle clip and a 600 px runtime tier. At 320 × 568, the Specter's real Debuff effect displayed the cast and applied +2 Weak with no HP loss. Capture: `tests/.e2e-out/smoke-specter-live-cast-320.png`. All 550 encounter budgets passed after adjusting the runtime tier. Bounds, texture, playback and TypeScript passed.
+
+CI run 42194280975 passed the production arena smoke suite but timed out while sampling the four-hit feedback stack. The mechanics regression now advances a dedicated browser page's virtual clock to a fixed point before notices expire. Both feedback cases passed locally. CI artifact upload now includes the explicitly listed outputs under the hidden `.e2e-out` directory.
