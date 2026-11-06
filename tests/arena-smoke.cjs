@@ -88,6 +88,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     await page.locator('.battle-stage-visual[data-stage-status="ready"] canvas').waitFor();
     assert.equal(await page.evaluate(() => typeof window.__gameStore), 'undefined');
     const targets = page.locator('.actor-target:not([disabled])');
+    assert.deepEqual(await page.locator('.actor-hud:not(.actor-hero-hud) strong').allTextContents(), ['Rat', 'Rat', 'Rat']);
     assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => element.getAttribute('aria-label').split(',').slice(0, 2).join(','))),
         ['Inspect Rat, slot 1', 'Inspect Rat, slot 2', 'Inspect Rat, slot 3']);
 
@@ -134,7 +135,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
         const list = page.locator('.combat-target-list');
         await list.waitFor();
         assert.deepEqual((await list.getByRole('button').allTextContents()).map(label => label.split(' · ')[0]),
-            ['1. Rat', '2. Rat', '3. Rat']);
+            ['Rat', 'Rat', 'Rat']);
         await tabTo(page, page.getByRole('button', { name: 'Use arena targets' }), 'arena target toggle');
         await page.keyboard.press('Enter');
         await page.keyboard.press('Escape');

@@ -156,7 +156,7 @@ export function CombatView() {
                 <HandHUD targetControls={actorArena?targetControls:'list'} onTargetControlsChange={actorArena?setTargetControls:undefined}/>
             </div>
 
-            <TargetingArrow />
+            {!actorArena && <TargetingArrow />}
             <CombatResultOverlay animateDefeat={actorArena} />
         </div>
     );

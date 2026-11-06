@@ -4,6 +4,8 @@ const pixi=`
 export const apps=[];
 export const textureFailures={remaining:0};
 export const initialization={wait:undefined};
+export class ColorMatrixFilter {}
+export class BlurFilter {}
 export class Rectangle {constructor(x,y,width,height){Object.assign(this,{x,y,width,height});}}
 class Pair {set(x,y=x){this.x=x;this.y=y;}}
 export class Container {children=[];addChild(...items){this.children.push(...items);} }
@@ -11,7 +13,7 @@ export class Graphics extends Container {clear(){return this;}rect(){return this
 export class Sprite {constructor(texture){this.texture=texture;}anchor=new Pair();scale=new Pair();position=new Pair();}
 export class ImageSource {constructor({resource}){this.resource=resource;}}
 export class Texture {constructor({source}){if(textureFailures.remaining>0){textureFailures.remaining--;throw new Error('texture construction failed');}this.source=source;this.width=100;this.height=100;}destroy(){this.destroyed=true;}}
-export class Application {constructor(){apps.push(this);}stage=new Container();canvas={setAttribute(){},addEventListener(){},removeEventListener(){}};renderer={resize(){}};ticker={add(){}};async init(){await initialization.wait;}render(){}start(){}stop(){}destroy(){this.destroyed=true;}}
+export class Application {constructor(){apps.push(this);}stage=new Container();canvas={setAttribute(){},addEventListener(){},removeEventListener(){}};screen={width:0,height:0};renderer={resize(){}};ticker={add(){}};async init(){await initialization.wait;}render(){}start(){}stop(){}destroy(){this.destroyed=true;}}
 `;
 await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {ACTOR_VISUALS} from './src/data/actorVisuals'; export {publishImpact,publishAction,identifyAction} from './src/rendering/CombatPresentation'; export {startStageMount} from './src/rendering/stageMountLifecycle'; export {apps,textureFailures,initialization} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
 const pending=new Map();

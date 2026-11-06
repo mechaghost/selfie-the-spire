@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { Card } from '../../core/models';
 import { useGameStore } from '../../store/gameStore';
 import './CardItem.css';
+import { canDropUntargeted } from '../../core/arenaDrag';
 import { targetAtPoint } from '../../core/targeting';
 
 interface CardItemProps {
@@ -22,6 +23,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
 
     const cardRef = useRef<HTMLDivElement>(null);
     const isMouseDragging = useRef(false);
+    const touchGesture = useRef<{id:number; armed:boolean}|null>(null);
     const gesture = useRef({ x: 0, y: 0, moved: false });
 
     const canInteract = () => {
@@ -37,7 +39,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
     const refreshEnemyBounds = useCallback(() => {
         if (card.target === 'Enemy') {
             const state = useGameStore.getState();
-            document.querySelectorAll('.entity-avatar').forEach(el => {
+            document.querySelectorAll('.actor-target:not(:disabled), .entity-avatar').forEach(el => {
                 const id = el.getAttribute('data-entity-id');
                 if (id) {
                     state.setEntityBounds(id, el.getBoundingClientRect());
@@ -103,7 +105,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
                 if(id) { playCard(card.instanceId,id);return; }
             } else {
                 // Self/AllEnemies: release above the hand area to play
-                if (ev.clientY < window.innerHeight - 250) {
+                if (canDropUntargeted(ev.clientX,ev.clientY)) {
                     playCard(card.instanceId);
                     return;
                 }
@@ -121,57 +123,51 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
     // ==========================================
 
     const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-        // In scroll layouts, tapping opens the inspector; native swipes scroll the hand.
-        if (window.matchMedia('(max-width: 768px), (max-height: 500px)').matches) return;
-        if (!canPlay || !isDraggable || !canInteract()) return;
-        refreshEnemyBounds();
-
+        if (!canPlay || !isDraggable || !canInteract() || e.touches.length !== 1) return;
         const touch = e.touches[0];
         gesture.current = { x: touch.clientX, y: touch.clientY, moved: false };
-        const rect = cardRef.current!.getBoundingClientRect();
-        // Enemy cards: arrow from card center. Self/AoE: follow from touch point.
-        const sx = isTargetingMode ? rect.left + rect.width / 2 : touch.clientX;
-        const sy = isTargetingMode ? rect.top : touch.clientY;
-        setDragState({
-            isActive: true,
-            isTouch: true,
-            cardId: card.instanceId,
-            targetType: card.target,
-            startX: sx,
-            startY: sy,
-            currentX: touch.clientX,
-            currentY: touch.clientY
-        });
+        touchGesture.current = {id:touch.identifier,armed:false};
     };
 
     const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-        if (!isBeingTouched) return;
-        if (e.cancelable) e.preventDefault();
-
-        const touch = e.touches[0];
-        if (Math.hypot(touch.clientX - gesture.current.x, touch.clientY - gesture.current.y) > 8) gesture.current.moved = true;
-        setDragState({
-            currentX: touch.clientX,
-            currentY: touch.clientY
-        });
+        const pending = touchGesture.current;
+        if (!pending) return;
+        const touch = Array.from(e.touches).find(touch=>touch.identifier===pending.id);
+        if (!touch) return;
+        if (!pending.armed) {
+            const {x,y}=gesture.current;
+            const dx=touch.clientX-x,dy=touch.clientY-y;
+            if (Math.hypot(dx,dy)<=8) return;
+            gesture.current.moved = true;
+            // The hand scrolls sideways; a deliberate lift starts a card drag.
+            if (dy>=0 || -dy<=Math.abs(dx)) { touchGesture.current=null; return; }
+            if (!canInteract()) { touchGesture.current=null; return; }
+            pending.armed = true;
+            refreshEnemyBounds();
+            const rect=cardRef.current!.getBoundingClientRect();
+            setDragState({isActive:true,isTouch:true,cardId:card.instanceId,targetType:card.target,
+                startX:isTargetingMode ? rect.left+rect.width/2 : x,
+                startY:isTargetingMode ? rect.top : y,currentX:touch.clientX,currentY:touch.clientY});
+            return;
+        }
+        if (isBeingTouched) setDragState({currentX:touch.clientX,currentY:touch.clientY});
     };
 
     const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-        if (!isBeingTouched) return;
-        const touch = e.changedTouches[0];
-        if (!gesture.current.moved) { resetDragState(); return; }
-
+        const pending = touchGesture.current;
+        if (!pending) return;
+        const touch = Array.from(e.changedTouches).find(touch=>touch.identifier===pending.id);
+        if (!touch) return;
+        touchGesture.current = null;
+        const state = useGameStore.getState();
+        if (!pending.armed || !state.dragState.isActive || state.dragState.cardId!==card.instanceId) return;
         if (isTargetingMode) {
-            const state = useGameStore.getState();
             const id = targetAtPoint(state.entityBounds,state.enemies.filter(enemy=>enemy.hp>0).map(enemy=>enemy.id),touch.clientX,touch.clientY);
             if(id) { playCard(card.instanceId,id);return; }
-        } else {
-            if (touch.clientY < window.innerHeight - 250) {
-                playCard(card.instanceId);
-                return;
-            }
+        } else if (canDropUntargeted(touch.clientX,touch.clientY)) {
+            playCard(card.instanceId);
+            return;
         }
-
         resetDragState();
     };
 
@@ -215,7 +211,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
             aria-label={onInspect ? `Inspect ${card.name}, ${card.cost} energy` : undefined}
             onClick={event => { if (onInspect) { event.stopPropagation(); if (!gesture.current.moved) { cardRef.current?.focus(); onInspect(); } gesture.current.moved = false; } }}
             onKeyDown={event => { if (onInspect && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); onInspect(); } }}
-            onTouchCancel={resetDragState}
+            onTouchCancel={() => { touchGesture.current=null; resetDragState(); }}
             onPointerDown={() => { gesture.current.moved = false; }}
             onMouseDown={handleMouseDown}
             onDragStart={handleDragStart}

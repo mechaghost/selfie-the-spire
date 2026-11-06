@@ -2,8 +2,8 @@ import {build} from 'esbuild';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import sharp from '../tests/server-sharp.mjs';
 await mkdir('tests/.e2e-out',{recursive:true});
-await build({stdin:{contents:"export {ACTOR_VISUALS} from './src/data/actorVisuals';export {battleLayout} from './src/rendering/battleLayout';export {actorPlacement} from './src/rendering/actorPlacement';export {sampleActorMotion,motionProfile,actorPoseAt} from './src/rendering/actorMotion';export {clipFrameAt} from './src/rendering/clipPlayback';export {ENCOUNTER_POOLS} from './src/data/encounters';",resolveDir:process.cwd()},outfile:'tests/.e2e-out/actor-bounds.mjs',bundle:true,platform:'node',format:'esm'});
-const {ACTOR_VISUALS,battleLayout,actorPlacement,sampleActorMotion,motionProfile,actorPoseAt,clipFrameAt,ENCOUNTER_POOLS}=await import('../tests/.e2e-out/actor-bounds.mjs');
+await build({stdin:{contents:"export {ACTOR_VISUALS} from './src/data/actorVisuals';export {battleLayout} from './src/rendering/battleLayout';export {actorPlacement} from './src/rendering/actorPlacement';export {actorShape} from './src/rendering/actorShape';export {sampleActorMotion,motionProfile,actorPoseAt} from './src/rendering/actorMotion';export {clipFrameAt} from './src/rendering/clipPlayback';export {ENCOUNTER_POOLS} from './src/data/encounters';",resolveDir:process.cwd()},outfile:'tests/.e2e-out/actor-bounds.mjs',bundle:true,platform:'node',format:'esm'});
+const {ACTOR_VISUALS,battleLayout,actorPlacement,actorShape,sampleActorMotion,motionProfile,actorPoseAt,clipFrameAt,ENCOUNTER_POOLS}=await import('../tests/.e2e-out/actor-bounds.mjs');
 const metadata=JSON.parse(await readFile('src/data/battleTextureSources.json','utf8'));
 const bounds=new Map();
 const pixels=new Map();
@@ -43,10 +43,12 @@ function motionSamples(visual) {
 }
 const actorSamples=new Map(Object.values(ACTOR_VISUALS).map(visual=>[visual.id,motionSamples(visual)]));
 for(const [width,height] of sizes)for(const [count,boss] of [[1,false],[2,false],[3,false],[1,true]]) {
-    const layout=battleLayout(width,height,Array.from({length:count},(_,i)=>`e${i}`),boss);
+    const ids=Array.from({length:count},(_,i)=>`e${i}`);
     for(const visual of Object.values(ACTOR_VISUALS)) {
         const hero=visual.id.startsWith('hero-');
         if(boss && !hero && !bossIds.has(visual.id))continue;
+        const shape=actorShape(visual);
+        const layout=battleLayout(width,height,ids,boss,Object.fromEntries((hero?['player']:ids).map(id=>[id,shape])));
         for(const slot of hero?[layout.hero]:layout.enemies)for(const {frame,pose,clip,elapsed,reduced,phase,idleTime} of actorSamples.get(visual.id)) {
             const source=metadata[pose.imageUrl],idle=metadata[visual.fallbackImageUrl],box=bounds.get(pose.imageUrl);
             const motion=sampleActorMotion(motionProfile(visual.id),clip,elapsed,idleTime,hero?1:-1,reduced);
@@ -86,6 +88,7 @@ for(const [width,height] of sizes)for(const [count,boss] of [[1,false],[2,false]
     }
 }
 const report={note:'Conservative transformed alpha bounds (alpha >=32), clips sampled every 20ms plus authored frame boundaries and completion; normal/reduced motion and idle phase extrema, one/two/three enemies and solo boss layout. Canvas/HUD intersection candidates require visual inspection; rectangles include transparent corners and discrete samples are not continuous-time certification. HUD candidates are refined by inverse-transforming 1 CSS pixel sample centers into runtime alpha inside a 2px HUD inset; this excludes transparent rectangle corners but is not GPU filtering equivalence. Boss slots use the actual boss roster. Loose pose sources represent atlas-equivalent art.',sizes,samples,rectangleCandidates,findings};
-await writeFile('docs/actor-bounds-audit.json',JSON.stringify(report,null,2)+'\n');
+const output=process.argv.find(arg=>arg.startsWith('--output='))?.slice('--output='.length) || 'docs/actor-bounds-audit.json';
+await writeFile(output,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({samples,rectangleCandidates,candidates:findings.length,worst:findings.sort((a,b)=>(b.overflow??b.overlapY)-(a.overflow??a.overlapY)).slice(0,8)},null,2));
 if(process.argv.includes('--check') && findings.length)process.exitCode=1;

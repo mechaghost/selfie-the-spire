@@ -1,4 +1,4 @@
-import { Application, Container, Graphics, ImageSource, Rectangle, Sprite, Texture } from 'pixi.js';
+import { BlurFilter, ColorMatrixFilter, Application, Container, Graphics, ImageSource, Rectangle, Sprite, Texture } from 'pixi.js';
 import { ActorClip, ActorVisual, LocationVisual } from '../core/battleVisualModels';
 import { BattleLayout, ActorSlot } from './battleLayout';
 import { ImpactNotice, subscribeImpacts, subscribePresentation } from './CombatPresentation';
@@ -10,7 +10,7 @@ import { clipFrameAt } from './clipPlayback';
 import { atlasTextures } from './actorAtlas';
 import { actorPlacement } from './actorPlacement';
 import { packagedTextureSource, textureDecodePlan } from './textureBudget';
-export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string; previewElapsedMs?:number }
+export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; glow?: 'available' | 'active'; clip?: ActorClip; motionToken?: string; previewElapsedMs?:number }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function disposeTexture(texture:Texture) {
     const resource=texture.source.resource;
@@ -69,6 +69,8 @@ export class BattleScene {
     private ground = new Graphics();
     private atmosphere = new Graphics();
     private sprites = new Map<string,Sprite>();
+    private glows = new Map<string,Sprite>();
+    private glowFilters: [ColorMatrixFilter, BlurFilter] | undefined;
     private poses = new Map<string,Texture>();
     private atlasViews = new Map<string,Texture>();
     private shadows = new Map<string,Graphics>();
@@ -168,8 +170,8 @@ export class BattleScene {
         this.snapshot = snapshot;
         if (!this.initialized || this.disposed) return;
         const {width,height} = snapshot.layout;
-        this.app.renderer.resize(width,height);
-        const horizon = width < 600 && height >= 300 && snapshot.layout.enemies.length===3 ? .32 : .73;
+        if(this.app.screen.width!==width || this.app.screen.height!==height)this.app.renderer.resize(width,height);
+        const {horizon} = snapshot.layout;
         this.ground.clear().rect(0,0,width,height).fill(snapshot.location.sky);
         // Temporary depth plane; authored street layers replace this technical backdrop.
         for(let i=0;i<12;i++) this.ground.rect(i*width/12,height*.1+(i%3)*7,width/15,height*.63).fill({color:0x081527,alpha:.35});
@@ -180,7 +182,11 @@ export class BattleScene {
             const sprite = this.sprites.get(actor.id);
             if (!slot || !sprite) continue;
             this.place(sprite,slot,actor);
-            this.shadows.get(actor.id)?.clear().ellipse(slot.foot.x,slot.foot.y,slot.art.width*.4,Math.min(7,slot.art.height*.04)).fill({color:0x020810,alpha:actor.defeated ? .12 : .45});
+            this.placeGlow(sprite,actor);
+            const radius=slot.target.width*.33;
+            this.shadows.get(actor.id)?.clear()
+                .ellipse(slot.foot.x,slot.foot.y,radius,Math.max(3,radius*.19)).fill({color:0x020810,alpha:actor.defeated ? .09 : .28})
+                .ellipse(slot.foot.x,slot.foot.y,radius*.72,Math.max(2,radius*.12)).fill({color:0x020810,alpha:actor.defeated ? .08 : .45});
         }
         this.paintAtmosphere();
         this.visibility();
@@ -222,6 +228,33 @@ export class BattleScene {
             }
         }
     }
+    private placeGlow(sprite: Sprite, actor: SceneActor) {
+        let glow = this.glows.get(actor.id);
+        if (!actor.glow || actor.defeated) {
+            if (glow) glow.visible = false;
+            return;
+        }
+        if (!glow) {
+            if (!this.glowFilters) {
+                const color = new ColorMatrixFilter();
+                // Replace RGB while preserving the texture's alpha silhouette.
+                color.matrix = [0,0,0,0,1, 0,0,0,0,.79, 0,0,0,0,.36, 0,0,0,1,0];
+                this.glowFilters = [color, new BlurFilter({strength:3,quality:2})];
+            }
+            glow = new Sprite(sprite.texture);
+            glow.filters = this.glowFilters;
+            glow.zIndex = sprite.zIndex - .5;
+            this.glows.set(actor.id,glow);
+            this.world.addChild(glow);
+        }
+        glow.visible = true;
+        glow.texture = sprite.texture;
+        glow.anchor.set(sprite.anchor.x,sprite.anchor.y);
+        glow.position.set(sprite.position.x,sprite.position.y);
+        glow.scale.set(sprite.scale.x*1.05,sprite.scale.y*1.03);
+        glow.rotation = sprite.rotation;
+        glow.alpha = actor.glow === 'active' ? 1 : .52;
+    }
     private tick = () => {
         if (this.disposed) return;
         this.paintAtmosphere();
@@ -230,12 +263,13 @@ export class BattleScene {
             const slot = actor.id === 'player' ? this.snapshot.layout.hero : this.snapshot.layout.enemies.find(slot=>slot.id===actor.id);
             if (!sprite || !slot) continue;
             this.place(sprite,slot,actor);
+            this.placeGlow(sprite,actor);
         }
     };
     private paintAtmosphere() {
         this.atmosphere.clear();
         const {layout,location,reducedMotion}=this.snapshot;
-        const horizon=layout.width<600 && layout.height>=300 && layout.enemies.length===3 ? .32 : .5;
+        const {horizon}=layout;
         for(const {sprite,layer} of this.backgroundSprites) {
             const frame=layer.plane==='foreground'
                 ? frameForeground(layout.width,layout.height,sprite.texture.width,sprite.texture.height,performance.now(),reducedMotion || document.hidden,layer.sway)
@@ -261,6 +295,7 @@ export class BattleScene {
         this.unsubscribeActions?.();this.unsubscribeActions=undefined;this.casts.clear();
         document.removeEventListener('visibilitychange',this.visibility);
         this.destroyApp();
+        this.glowFilters?.forEach(filter=>filter.destroy()); this.glowFilters=undefined; this.glows.clear();
         this.sprites.clear(); this.shadows.clear(); this.poses.clear(); this.backgroundSprites=[];
         this.atlasViews.forEach(texture=>texture.destroy(false));this.atlasViews.clear();
         this.leases.forEach(lease=>lease.release()); this.leases=[];

@@ -62,7 +62,7 @@
     overflow: hidden; overflow-wrap: anywhere; padding: 2px;
 }
 .card.hero-card .card-name { color: #ffe2a0; }
-.card.is-targeting, .hand-container .card:focus-visible {
+.combat-stage:not(.actor-arena-enabled) .card.is-targeting, .hand-container .card:focus-visible {
     transform: translateY(-22px) rotate(0) scale(1.06) !important;
     border-color: #fff; box-shadow: 0 12px 24px #000b, 0 0 0 2px var(--card-ink);
 }

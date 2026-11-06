@@ -95,3 +95,17 @@ print(f"Verified {len(records)} assets: {report['sourceBytes']:,} → {report['r
 
 metadata = {'/assets/battle/'+row['asset']: {key: row[key] for key in ['width','height','runtimeWidth','runtimeHeight','resolution']} for row in records}
 Path('src/data/battleTextureSources.json').write_text(json.dumps(metadata,indent=2)+'\n')
+
+# Project visible idle artwork rather than the transparent texture rectangle.
+idle_bounds = {}
+for row in records:
+    asset = Path(row['asset'])
+    if asset.parts[0] != 'actors' or not asset.name.endswith('-idle-v1.webp'):
+        continue
+    with Image.open(args.output / asset) as image:
+        alpha = image.convert('RGBA').getchannel('A')
+        left, top, right, bottom = alpha.point(lambda value: 255 if value >= 32 else 0).getbbox()
+        idle_bounds[asset.name] = [round(left / image.width, 4), round(top / image.height, 4),
+                                   round(right / image.width, 4), round(bottom / image.height, 4)]
+Path('src/data/actorIdleBounds.json').write_text(
+    '{\n' + ',\n'.join(f'  {json.dumps(name)}: {json.dumps(bounds)}' for name, bounds in idle_bounds.items()) + '\n}\n')

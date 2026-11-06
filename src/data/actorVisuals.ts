@@ -4,7 +4,7 @@ import { GOLEM_ATLAS_FRAMES } from './actorAtlasFrames';
 export const HERO_ARCHETYPES = ['neon','chrome','volt','concrete','smoke'] as const;
 function placeholder(id: string, hero: boolean): ActorVisual {
     return { id, fallbackImageUrl:`/assets/battle/fallbacks/${hero ? 'hero' : 'monster'}.svg`, footAnchor:[.5, .97],
-        facing:hero ? 'right' : 'left', mirrorAllowed:true,visualHeight:192,clips:{},productionStatus:'placeholder',
+        facing:hero ? 'right' : 'left', mirrorAllowed:true,visualHeight:hero ? 144 : 132,clips:{},productionStatus:'placeholder',
         provenance:'Original inline vector silhouette authored for renderer fallback; not final production art.' };
 }
 export const ACTOR_VISUALS: Record<string, ActorVisual> = Object.fromEntries([
@@ -44,6 +44,13 @@ for (const [id, file, footY] of [
     ACTOR_VISUALS[id] = { ...ACTOR_VISUALS[id], fallbackImageUrl:`/assets/battle/actors/${file}`, footAnchor:[.5,footY],
         productionStatus:'review', provenance:'Original Neo Miami actor art made with built-in image generation. See docs/battle-art-prompts.md and docs/upgrade-execution-log.md.' };
 }
+// World heights express the creature's stature independently of image dimensions
+// and encounter size. Wide bodies are additionally limited by the camera lanes.
+for (const [height, ids] of [
+    [82, ['alley_rat','sewer_slime','manhole_mimic']],
+    [104, ['fire_escape_spider','stray_voltage','graffiti_imp']],
+    [152, ['the_billboard','subway_wyrm','dj_phantom','voltage_king','circuit_breaker']],
+] as const) for (const id of ids) ACTOR_VISUALS[id].visualHeight = height;
 // Explicit review list. New roster entries start in review.
 for (const id of [
     'hero-neon', 'hero-chrome', 'hero-volt', 'hero-concrete', 'hero-smoke',
