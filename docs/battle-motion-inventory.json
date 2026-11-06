@@ -636,19 +636,19 @@
       "status": "review",
       "keyPoses": [
         "attack",
-        "hit"
+        "hit",
+        "defeat"
       ],
       "timelines": [
         "attack",
-        "hit"
+        "hit",
+        "defeat"
       ],
       "missingContactPoses": [
-        "defeat",
         "cast"
       ],
       "missingTimelines": [
         "idle",
-        "defeat",
         "cast"
       ]
     }
