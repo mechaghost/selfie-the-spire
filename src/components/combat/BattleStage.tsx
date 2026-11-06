@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
 import type { BattleScene, SceneSnapshot } from '../../rendering/BattleScene';
 import './BattleStage.css';
@@ -14,9 +15,9 @@ function FallbackActor({actor,slot}:{actor:SceneActor;slot:ActorSlot}) {
     </div>;
 }
 export type StageStatus = 'loading' | 'ready' | 'degraded';
-interface Props { snapshot: SceneSnapshot; forceFallback?: boolean; onStatus?: (status:StageStatus)=>void }
+interface Props { snapshot: SceneSnapshot; noticeHost: HTMLElement | null; forceFallback?: boolean; onStatus?: (status:StageStatus)=>void }
 /** DOM fallback exists before asynchronous initialization and remains independent of the canvas. */
-export function BattleStage({snapshot,forceFallback=false,onStatus}: Props) {
+export function BattleStage({snapshot,noticeHost,forceFallback=false,onStatus}: Props) {
     const host = useRef<HTMLDivElement>(null);
     const scene = useRef<BattleScene | null>(null);
     const latest = useRef(snapshot); latest.current = snapshot;
@@ -48,6 +49,6 @@ export function BattleStage({snapshot,forceFallback=false,onStatus}: Props) {
                 return <FallbackActor key={`${actor.id}:${actor.visual.fallbackImageUrl}`} actor={actor} slot={slot} />;
             })}
         </div>}
-        {status==='degraded' && <div className="battle-renderer-notice" role="status">Simplified graphics <button onClick={()=>setAttempt(n=>n+1)}>Retry graphics</button></div>}
+        {status==='degraded' && noticeHost && createPortal(<div className="battle-renderer-notice" role="status">Simplified graphics <button onClick={()=>setAttempt(n=>n+1)}>Retry graphics</button></div>,noticeHost)}
     </div>;
 }

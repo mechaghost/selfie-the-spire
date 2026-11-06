@@ -32,3 +32,8 @@
     .actor-arena-enabled .hand-container { --card-width:152px; --card-height:220px; width:100%; min-width:0; max-height:100%; padding:14px 4px; }
     .actor-arena-enabled .hand-caption { display:none; }
 }
+
+/* Status controls occupy layout space outside the measured actor/target plane. */
+.battle-arena { display:grid; grid-template-rows:minmax(140px,1fr) auto; min-height:min-content; }
+.battle-arena-content { position:relative; min-height:140px; min-width:0; overflow:hidden; }
+.battle-notice-host:empty { display:none; }

@@ -16,6 +16,7 @@ export function BattleArena() {
     const {player,enemies,floor,isBossFloor,activeAnimations,combatResult} = useGameStore(state=>({player:state.player,enemies:state.enemies,floor:state.floor,isBossFloor:state.isBossFloor,activeAnimations:state.activeAnimations,combatResult:state.combatResult}));
     const {mode,commit} = useCombatInteraction();
     const root=useRef<HTMLDivElement>(null);
+    const [noticeHost,setNoticeHost]=useState<HTMLDivElement|null>(null);
     const [size,setSize]=useState({width:320,height:200});
     const [inspected,setInspected]=useState<string|null>(null);
     const [reducedMotion,setReducedMotion]=useState(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -40,8 +41,8 @@ export function BattleArena() {
         ...enemies.map(enemy=>({id:enemy.id,visual:ACTOR_VISUALS[enemy.templateId] ?? ACTOR_VISUALS.alley_rat,defeated:enemy.hp<=0,...motionFor(enemy.id)})),
     ]}),[layout,floor,reducedMotion,player.hp,player.combatAppearance,enemies,activeAnimations,combatResult]);
     const entity=inspected==='player' ? player : enemies.find(enemy=>enemy.id===inspected);
-    return <div className="battle-arena" ref={root}>
-        <BattleStage snapshot={snapshot}/>
+    return <div className="battle-arena"><div className="battle-arena-content" ref={root}>
+        <BattleStage snapshot={snapshot} noticeHost={noticeHost} forceFallback={import.meta.env.DEV && new URLSearchParams(location.search).has('fallback')}/>
         <CombatFeedback layout={layout}/>
         <button className="actor-hero-hud" style={{left:layout.hero.hud.x,top:layout.hero.hud.y,width:layout.hero.hud.width}} onClick={()=>setInspected('player')} aria-label={`Inspect ${player.name}, ${player.hp} of ${player.maxHp} HP, ${player.block} Block`}><strong>You</strong><span>{player.hp}/{player.maxHp}</span><span>◆ {player.block}</span></button>
         {enemies.map(enemy=>{
@@ -58,6 +59,7 @@ export function BattleArena() {
                 </span><span className="actor-slot-marker">{slot.index+1}</span>
             </button>;
         })}
+        </div><div className="battle-notice-host" ref={setNoticeHost}/>
         {entity && <InspectionDialog title={entity.name} onClose={()=>setInspected(null)}>
             <p>{entity.hp}/{entity.maxHp} HP · {entity.block} Block</p>
             {'intent' in entity && <p>{describeIntent(entity.intent,entity.statuses,player.statuses)}</p>}
