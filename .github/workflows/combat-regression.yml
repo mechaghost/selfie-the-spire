@@ -44,6 +44,17 @@ jobs:
       - name: Enforce encounter art budgets
         if: success() || failure()
         run: node scripts/report_encounter_art_budget.mjs --check
+      - name: Install locked Chromium
+        run: node node_modules/playwright-core/cli.js install --with-deps chromium
+      - name: Exercise the production arena
+        run: |
+          mkdir -p tests/.e2e-out
+          node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4173 --strictPort > tests/.e2e-out/arena-preview.log 2>&1 &
+          trap 'kill "$!" 2>/dev/null || true' EXIT
+          curl --retry 20 --retry-connrefused --retry-delay 1 --fail --silent http://127.0.0.1:4173/ > /dev/null
+          E2E_BASE=http://127.0.0.1:4173 node tests/arena-smoke.cjs 2>&1 | tee tests/.e2e-out/arena-smoke.log
+      - name: Verify a legal route through all five districts
+        run: node tests/e2e.cjs all 2>&1 | tee tests/.e2e-out/arena-full-run.log
       - name: Retain test logs and parity evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -55,4 +66,10 @@ jobs:
             tests/.e2e-out/encounter-motion-parity.json
             tests/.e2e-out/run-motion-parity.json
             tests/.e2e-out/run-save-continuity.json
+            tests/.e2e-out/arena-preview.log
+            tests/.e2e-out/arena-smoke.log
+            tests/.e2e-out/arena-full-run.log
+            tests/.e2e-out/vite.log
+            tests/.e2e-out/full-speed-*.png
+            tests/.e2e-out/final_*.png
           retention-days: 14
