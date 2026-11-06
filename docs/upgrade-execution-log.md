@@ -679,3 +679,9 @@ The arena now exposes the active district in its accessible name. The legacy com
 Updated the browser full-run harness for local selfie composition, explicit rest-site exits and the arena renderer. The victory case pins a run seed and checks that every selected stop is reachable. At 390 × 844, the scripted run entered Pixi combat in all five districts, cleared six fights and three rest stops, defeated Subway Wyrm, claimed an upgraded reward and reached Spire Cleared with 42 HP, 254 gold and 18 cards. The defeat case ended on floor 6. The full mechanics, victory and defeat suite passed without unexpected failed requests or console errors.
 
 Run with `node tests/e2e.cjs all`. This harness drives legal commands through the development store. The separate production smoke covers touch and keyboard UI input. Physical-device nine-floor play, roster approval and live release remain open.
+
+### Voltage King recoil and power-down
+
+Added a backward recoil with one boot lifted and a held defeat with grounded gauntlets and dark crown and chest coil. Both use the original 1330 × 1182 canvas. Recoil uses a .979 foot anchor and 160/60 ms hit/idle timing. Defeat uses .961 and a 280 ms hold.
+
+The 320 × 568 solo Pixi study shows the bright recoil crown close to the HUD and the dark collapse below it. The defeated target was disabled, and there were no browser page errors. Captures: `tests/.e2e-out/voltage-king-{hit,defeat}-320.png`. All 550 encounter art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,111,428 samples. Full-speed elite and physical-device review remain open.
