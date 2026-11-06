@@ -79,6 +79,10 @@ for(const archetype of ['chrome','volt','concrete','smoke']) {
 ACTOR_VISUALS.taxi_ghost.keyPoses={attack:{imageUrl:'/assets/battle/actors/taxi-ghost-attack-v1.webp',footAnchor:[.5,.99]}};
 ACTOR_VISUALS.smoke_specter.keyPoses={attack:{imageUrl:'/assets/battle/actors/smoke-specter-attack-v1.webp',footAnchor:[.5,.99]}};
 ACTOR_VISUALS.graffiti_imp.keyPoses={attack:{imageUrl:'/assets/battle/actors/graffiti-imp-attack-v1.webp',footAnchor:[.5,.947]}};
+ACTOR_VISUALS.graffiti_imp.keyPoses.hit={imageUrl:'/assets/battle/actors/graffiti-imp-hit-v1.webp',footAnchor:[.5,.988]};
+ACTOR_VISUALS.graffiti_imp.clips.hit={frames:['hit','idle'],durationsMs:[160,60],loop:false,completion:'idle'};
+ACTOR_VISUALS.graffiti_imp.keyPoses.defeat={imageUrl:'/assets/battle/actors/graffiti-imp-defeat-v1.webp',footAnchor:[.5,.999],scale:.84};
+ACTOR_VISUALS.graffiti_imp.clips.defeat={frames:['defeat'],durationsMs:[280],loop:false,completion:'hold'};
 ACTOR_VISUALS.neon_junkie.keyPoses={attack:{imageUrl:'/assets/battle/actors/neon-junkie-attack-v1.webp',footAnchor:[.5,.979]}};
 ACTOR_VISUALS.neon_junkie.keyPoses.hit={imageUrl:'/assets/battle/actors/neon-junkie-hit-v1.webp',footAnchor:[.5,.992]};
 ACTOR_VISUALS.neon_junkie.clips.hit={frames:['hit','idle'],durationsMs:[160,60],loop:false,completion:'idle'};

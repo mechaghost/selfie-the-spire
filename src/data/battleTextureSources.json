@@ -254,16 +254,30 @@
   "/assets/battle/actors/graffiti-imp-attack-v1.webp": {
     "width": 1230,
     "height": 1278,
-    "runtimeWidth": 615,
-    "runtimeHeight": 639,
-    "resolution": 0.5
+    "runtimeWidth": 462,
+    "runtimeHeight": 480,
+    "resolution": 0.3755868544600939
+  },
+  "/assets/battle/actors/graffiti-imp-defeat-v1.webp": {
+    "width": 1357,
+    "height": 1159,
+    "runtimeWidth": 480,
+    "runtimeHeight": 410,
+    "resolution": 0.3537214443625645
+  },
+  "/assets/battle/actors/graffiti-imp-hit-v1.webp": {
+    "width": 1230,
+    "height": 1278,
+    "runtimeWidth": 462,
+    "runtimeHeight": 480,
+    "resolution": 0.3755868544600939
   },
   "/assets/battle/actors/graffiti-imp-idle-v1.webp": {
     "width": 1230,
     "height": 1278,
-    "runtimeWidth": 615,
-    "runtimeHeight": 639,
-    "resolution": 0.5
+    "runtimeWidth": 462,
+    "runtimeHeight": 480,
+    "resolution": 0.3755868544600939
   },
   "/assets/battle/actors/manhole-mimic-attack-v1.webp": {
     "width": 1536,
