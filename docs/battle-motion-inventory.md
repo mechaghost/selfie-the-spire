@@ -1,6 +1,6 @@
 # Runtime motion inventory
 
-Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Street Runner, Rat, Golem, Spider, Wraith and Slime have prototype authored blink loops; other actors still need authored idle sequences, and all idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
+Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Street Runner, Rat, Golem, Spider, Wraith, Slime and Billboard have prototype authored blink loops; other actors still need authored idle sequences, and all idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
@@ -29,7 +29,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | circuit_breaker | production | none | none | attack, hit, defeat, guard, cast | review |
 | neon_yakuza | production | none | none | attack, hit, defeat, cast | review |
 | chrome_bouncer | production | none | none | attack, hit, defeat, guard, cast | review |
-| the_billboard | production | attack, hit, guard, cast, defeat | hit, guard, cast, defeat, attack | none | review |
+| the_billboard | production | attack, hit, guard, cast, defeat, blink | hit, guard, cast, defeat, idle, attack | none | review |
 | subway_wyrm | production | none | none | attack, hit, defeat, guard, cast | review |
 | dj_phantom | production | none | none | attack, hit, defeat, cast | review |
 

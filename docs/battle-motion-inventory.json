@@ -593,19 +593,19 @@
         "hit",
         "guard",
         "cast",
-        "defeat"
+        "defeat",
+        "blink"
       ],
       "timelines": [
         "hit",
         "guard",
         "cast",
         "defeat",
+        "idle",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "idle"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "subway_wyrm",
