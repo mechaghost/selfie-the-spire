@@ -29,7 +29,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | circuit_breaker | production | none | none | attack, hit, defeat, guard, cast | review |
 | neon_yakuza | production | none | none | attack, hit, defeat, cast | review |
 | chrome_bouncer | production | none | none | attack, hit, defeat, guard, cast | review |
-| the_billboard | production | attack, hit, defeat | hit, defeat, attack | guard, cast | review |
+| the_billboard | production | attack, hit, guard, defeat | hit, guard, defeat, attack | cast | review |
 | subway_wyrm | production | none | none | attack, hit, defeat, guard, cast | review |
 | dj_phantom | production | none | none | attack, hit, defeat, cast | review |
 
