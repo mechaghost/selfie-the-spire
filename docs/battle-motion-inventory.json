@@ -65,21 +65,20 @@
         "hit",
         "guard",
         "cast",
-        "defeat"
+        "defeat",
+        "celebrate"
       ],
       "timelines": [
         "hit",
         "guard",
         "cast",
         "defeat",
+        "celebrate",
         "attack"
       ],
-      "missingContactPoses": [
-        "celebrate"
-      ],
+      "missingContactPoses": [],
       "missingTimelines": [
-        "idle",
-        "celebrate"
+        "idle"
       ]
     },
     {

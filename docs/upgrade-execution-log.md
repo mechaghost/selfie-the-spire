@@ -965,3 +965,11 @@ Added an open-handed skill activation pose with a .978 foot anchor and a 160/60 
 Built-in imagegen prompt with `volt-idle-v1.png` as reference:
 
 > A single full-body cast-contact game sprite of the exact Volt fighter shown. Preserve face, cream hair streak, yellow and teal electrician jacket, orange cable loop, dark cargos and teal cream sneakers, same rendering, camera and scale. Both feet planted facing right. Distinct skill activation gesture: left palm wide open upward in front at mid torso, right open palm facing it from above at shoulder height, like charging a small invisible sphere between his hands. Keep his head fully visible and the gesture compact and readable. Entire character with transparent margins. No sphere, sparks, glow, ground, shadows, props or environment. Real alpha background.
+
+### Volt victory pose
+
+Added a two-finger victory sign with a .979 foot anchor and the existing 600 ms celebration timeline. In the 320 × 568 Chromium touch fixture, Volt landed a lethal Jab, showed the victory sign and reached the normal reward overlay with 80 HP. Capture: `tests/.e2e-out/volt-live-celebrate-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `volt-idle-v1.png` as reference:
+
+> Create a transparent full-body victory key pose for this exact Volt fighter. Keep the same swept black hair with cream streak, yellow and teal electrician jacket, orange cable loop, dark cargo trousers, cream and teal sneakers, and inked game-sprite art style. Same camera facing right, original scale, both boots planted at their original ground line. He straightens slightly, grins, and gives an energetic two-finger victory sign with one hand out to the right at shoulder height. His other hand rests at his belt. Keep the whole silhouette in frame with clear padding. No text, props, floor, shadow, environment or effects. True alpha transparency.
