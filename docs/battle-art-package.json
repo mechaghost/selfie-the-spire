@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 210931235,
-  "runtimeBytes": 33188106,
+  "sourceBytes": 213101953,
+  "runtimeBytes": 33641186,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -536,6 +536,32 @@
       "sourceBytes": 1221641,
       "runtimeBytes": 255946,
       "decodedRGBABytes": 1575848
+    },
+    {
+      "asset": "actors/neon-junkie-defeat-v1.webp",
+      "width": 1230,
+      "height": 1278,
+      "runtimeWidth": 615,
+      "runtimeHeight": 639,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 794030,
+      "runtimeBytes": 160390,
+      "decodedRGBABytes": 1571940
+    },
+    {
+      "asset": "actors/neon-junkie-hit-v1.webp",
+      "width": 1230,
+      "height": 1278,
+      "runtimeWidth": 615,
+      "runtimeHeight": 639,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1376688,
+      "runtimeBytes": 292690,
+      "decodedRGBABytes": 1571940
     },
     {
       "asset": "actors/neon-junkie-idle-v1.webp",

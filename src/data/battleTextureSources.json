@@ -286,6 +286,20 @@
     "runtimeHeight": 701,
     "resolution": 0.5
   },
+  "/assets/battle/actors/neon-junkie-defeat-v1.webp": {
+    "width": 1230,
+    "height": 1278,
+    "runtimeWidth": 615,
+    "runtimeHeight": 639,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/neon-junkie-hit-v1.webp": {
+    "width": 1230,
+    "height": 1278,
+    "runtimeWidth": 615,
+    "runtimeHeight": 639,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/neon-junkie-idle-v1.webp": {
     "width": 1230,
     "height": 1278,
