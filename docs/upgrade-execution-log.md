@@ -623,3 +623,9 @@ At 320 × 568 in the Pixi Spectral Fog lineup, both poses stayed in Specter's la
 Added a nose-up recoil on compressed rear springs and a held defeat with the suspension folded and lights dark. Both 1536 × 1024 cutouts retain the checker cab and original texture tier. Hit uses a .94 anchor and 160/60 ms hit/idle timing. Defeat uses a .988 anchor and a 280 ms held clip.
 
 At 320 × 568 in the Spectral Fog Pixi study, both poses remained in Taxi Ghost's lane. The collapse sits low and nearly fills the lane width. The defeated target was disabled and its ground marker removed, while Specter remained enabled. No browser errors. Captures: `tests/.e2e-out/taxi-ghost-{hit,defeat}-320.png`. All 550 art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,108,188 samples. Preceding CI run 42179907099 passed. Full-speed and physical-device review remain open.
+
+### Manhole Mimic recoil and shut-lid defeat
+
+Added a backward head tilt with a curled claw and clenched jaw, plus a held collapse with the lid shut and limbs splayed. Both 1536 × 1024 cutouts retain the original rusty spiral cover and purple limbs. Hit uses a .99 anchor and 160/60 ms hit/idle timing. Defeat uses a .994 anchor and a 280 ms hold.
+
+At 320 × 568 in the solo Pixi study the recoil stayed below the HUD, and the wider collapse reaches close to both edges of its lane. The defeated target was disabled and its marker removed. No browser errors. Captures: `tests/.e2e-out/manhole-mimic-{hit,defeat}-320.png`. All 550 art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,108,836 samples. Prior Taxi Ghost CI run 42180383234 passed. Full-speed and physical-device review remain open.
