@@ -16,8 +16,9 @@ export function battleLayout(width: number, height: number, enemyIds: readonly s
     const edge = 8;
     const wideShort = width >= 600 && height < 240;
     const ground = height - 12;
-    const heroWidth = Math.min(width * .22, 180);
-    const heroArtHeight = Math.min(height - 90, compact ? 170 : 270);
+    const roomyPortrait=width<600 && height>=300 && enemyIds.length<=2;
+    const heroWidth = roomyPortrait ? Math.min(width*.34,150) : Math.min(width * .22, 180);
+    const heroArtHeight = Math.min(height - 90, roomyPortrait ? 240 : compact ? 170 : 270);
     const hero: ActorSlot = {
         id: 'player', index: -1, foot: { x: heroWidth / 2 + edge, y: ground },
         art: { x: edge, y: ground - heroArtHeight, width: heroWidth, height: heroArtHeight },
