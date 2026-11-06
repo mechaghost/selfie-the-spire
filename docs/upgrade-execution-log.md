@@ -1123,3 +1123,9 @@ The optimized arena build from `fed03f9` passed all eight WebKit smoke scenarios
 Drove MobileSafari with an XCUITest runner on the iPhone 18 Pro simulator, iOS 27.0, against the optimized arena build from `fed03f9`. A starter run opened the street map. In the legal Palm Avenue encounter, Safari rotated to landscape and back, went to the Home Screen, then resumed combat. Touch card inspection, play, targeting and End Turn defeated Neon Hunger. The combat script failed its final accessibility query as the End Turn button disappeared, so victory was verified from the rendered screen and separately by tapping the reward action. Safari's Refresh button then restored the same Palm Avenue stop. The restored map showed 117 gold and 12 cards after skipping the card for 18 gold.
 
 Evidence under `tests/.e2e-out/`: `ios-safari-{portrait,landscape,victory,restored-map}.png` and `ios-safari-runner/reload.xcresult`. The reload test passed. This was simulator Safari with system rotation and app switching. Physical iOS and Android, camera, hardware performance, the complete nine-floor device run, and participant sessions remain open. Linux regression run 42222417514 passed for `fed03f9`.
+
+### First-load fonts and constrained network
+
+Bundled the existing Bebas Neue and Space Mono Google Fonts WOFF2 subsets with their OFL notices. The production smoke now blocks third-party HTTP requests and verifies that Bebas Neue regular and both Space Mono weights load before exercising the local selfie flow. The nine smoke scenarios passed in Chromium and WebKit. TypeScript and both production build variants passed.
+
+A separate cold-cache Chromium run at 390 × 844, 1.6 Mbps downstream and 150 ms simulated latency reached the starter menu in 963 ms and an input-ready Pixi arena 11,426 ms after tapping the fight. These are single-run desktop emulation measurements. The arena startup delay remains a release review item.

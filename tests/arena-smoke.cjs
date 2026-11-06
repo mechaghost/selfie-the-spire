@@ -262,9 +262,23 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
 
 async function verifyLocalSelfie(page) {
     const remoteRequests = [];
+    const thirdPartyRequests = [];
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
+    const origin = new URL(base).origin;
+    await page.route(/^https?:/, route => {
+        const url = route.request().url();
+        if (new URL(url).origin === origin) return route.continue();
+        thirdPartyRequests.push(url);
+        return route.abort();
+    });
     await page.goto(base);
+    const fonts = await page.evaluate(async () => {
+        const faces = await Promise.all(['400 16px "Bebas Neue"', '400 16px "Space Mono"', '700 16px "Space Mono"']
+            .map(font => document.fonts.load(font, 'Ocean Drive')));
+        return faces.map(group => group.some(face => face.status === 'loaded'));
+    });
+    assert.deepEqual(fonts, [true, true, true]);
     await page.getByRole('button', { name: /Put me in the game/ }).tap();
     page.on('request', request => {
         if (['fetch', 'xhr'].includes(request.resourceType()) || request.method() !== 'GET') {
@@ -317,6 +331,7 @@ async function verifyLocalSelfie(page) {
     })));
     assert.ok(renderedSprites.includes(sprite.url), 'Combat fallback must render the exact selfie sprite from the preview');
     assert.deepEqual(remoteRequests, []);
+    assert.deepEqual(thirdPartyRequests, []);
     assert.deepEqual(errors, []);
     console.log('PASS 320×568: photo picker, transparent preview, same sprite after reload and WebGL loss, no API calls');
 }
