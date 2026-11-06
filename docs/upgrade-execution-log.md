@@ -885,3 +885,7 @@ Street Runner, Alley Rat, Vending Golem and Fire Escape Spider now explicitly re
 ### Chrome Phantom authored idle
 
 Added a 110 ms eye-light dip after 5,200 ms of idle. The .989 foot anchor compensates for the two-pixel difference in the source silhouette baseline. Source alpha masks overlap by 98.2% intersection-over-union. At 320 × 568, the Pixi study shows the eye lights dim and return while the chrome armor and feet stay aligned. Captures: `tests/.e2e-out/phantom-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
+
+### Voltage King authored idle
+
+Added a 130 ms dip of the chest coil and tubes after 6,400 ms of idle. Both poses use the .99 foot anchor and the source alpha masks overlap by 99.2% intersection-over-union. The 320 × 568 Pixi study shows the coil dim while the boots and armor remain aligned. Captures: `tests/.e2e-out/voltage-king-idle-{base,dip,restored}-320.png`. Only the new idle frame uses the 500 px runtime tier, which restores the 5 MB budget for the elite encounter. All 550 budgets, texture caps, bounds, playback and TypeScript passed.

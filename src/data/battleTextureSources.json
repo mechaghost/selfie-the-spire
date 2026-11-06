@@ -1098,6 +1098,13 @@
     "runtimeHeight": 591,
     "resolution": 0.5
   },
+  "/assets/battle/actors/voltage-king-blink-v1.webp": {
+    "width": 1330,
+    "height": 1182,
+    "runtimeWidth": 500,
+    "runtimeHeight": 445,
+    "resolution": 0.37593984962406013
+  },
   "/assets/battle/actors/voltage-king-cast-v1.webp": {
     "width": 1330,
     "height": 1182,
