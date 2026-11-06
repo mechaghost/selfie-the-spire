@@ -793,3 +793,7 @@ The production smoke suite now scrolls the side hand to its end at 844 × 390, c
 ### Voltage King guard
 
 Added a crossed-coil forearm brace with a .991 foot anchor and a 160/60 ms guard/idle clip. In a 320 × 568 Chromium touch fixture, Voltage King's existing mixed Buff intent displayed the brace with +8 Block and +1 Strength together. Both effects resolved and the player's HP stayed at 80. Capture: `tests/.e2e-out/voltage-king-live-guard-320.png`. All 550 encounter budgets, texture caps, playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,118,124 samples.
+
+### Voltage King Strength cast
+
+Added an open-handed chest-coil charge with a .988 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, the unmodified opening intent showed the 8 damage first, then the cast and +2 Strength; HP ended at 72 and the boss held two Strength. Capture: `tests/.e2e-out/voltage-king-live-cast-320.png`. All 550 budgets, texture caps, clip playback and TypeScript passed. Bounds found zero confirmed intersections in 1,118,556 samples. Linux run 42197578000 passed the production smoke cases and the five-district route on the preceding landscape fix.
