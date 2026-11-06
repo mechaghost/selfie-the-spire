@@ -785,3 +785,7 @@ Added a planted, raised-fist charge pose with illuminated speaker rings, a .998 
 ### Ten-card touch scrolling
 
 Chromium touch input swiped across ten real card instances and opened the final Haymaker at 320 × 568 and 844 × 390. The portrait cards remained 144 × 180 and landscape cards 152 × 220. The 44 px End Turn control and the arena stayed outside the scrolling hand. The first landscape pass exposed a clipped last-card edge because the shared mobile padding overrode the side-hand rule. The arena-specific rule now leaves enough horizontal room for the entire card. Captures: `tests/.e2e-out/full-hand-touch-{320,844}.png`. The fixture save and pile-ownership test passed. Linux CI run 42196269355 passed on the preceding Taxi Ghost revision.
+
+### Landscape card-edge regression
+
+The production smoke suite now scrolls the side hand to its end at 844 × 390, checks the final card's full 152 × 220 geometry, and returns to the start before fighting. A targeted comparison measured the final card 1 px outside the old build's scrollport and fully inside the fixed build, with 15 px on the left and 4 px on the right. All eight production smoke cases passed on the fixed build.

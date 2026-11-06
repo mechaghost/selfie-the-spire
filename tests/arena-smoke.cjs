@@ -93,6 +93,25 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     const endTurn = page.getByRole('button', { name: 'End Turn', exact: true });
     const handAttacks = page.locator('.hand-container').getByRole('button', { name: attacks });
     const targetPrompt = page.getByRole('region', { name: 'Choose card target' });
+    if (viewport.width > viewport.height) {
+        const hand = page.locator('.hand-container');
+        await hand.locator('.card').last().waitFor({ state: 'attached' });
+        const edges = await hand.evaluate(async element => {
+            await Promise.all(element.getAnimations({ subtree: true })
+                .filter(animation => animation.effect.getTiming().iterations !== Infinity)
+                .map(animation => animation.finished.catch(() => {})));
+            element.scrollTo({ left: element.scrollWidth, behavior: 'instant' });
+            const { left, right } = element.getBoundingClientRect();
+            const card = element.querySelector('.card-slot:last-child .card').getBoundingClientRect();
+            const measured = { left, right, cardLeft: card.left, cardRight: card.right, width: card.width, height: card.height };
+            element.scrollTo({ left: 0, behavior: 'instant' });
+            return measured;
+        });
+        assert.equal(edges.width, 152);
+        assert.equal(edges.height, 220);
+        assert.ok(edges.cardLeft >= edges.left && edges.cardRight <= edges.right,
+            `Landscape hand clips the last card at its scroll limit: ${JSON.stringify(edges)}`);
+    }
     if (input === 'keyboard') {
         await waitForDecision(page);
         const jab = page.locator('.hand-container').getByRole('button', { name: 'Inspect Jab, 1 energy' }).first();
