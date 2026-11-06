@@ -55,6 +55,13 @@
     "runtimeHeight": 360,
     "resolution": 0.3515625
   },
+  "/assets/battle/actors/boombox-brute-cast-v1.webp": {
+    "width": 1377,
+    "height": 1142,
+    "runtimeWidth": 540,
+    "runtimeHeight": 448,
+    "resolution": 0.39215686274509803
+  },
   "/assets/battle/actors/boombox-brute-defeat-v1.webp": {
     "width": 1377,
     "height": 1142,

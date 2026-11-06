@@ -777,3 +777,7 @@ Combat notices now use the available gap between the HUD and the sprite when tha
 ### Manhole Mimic guard
 
 Added a planted crouch with the iron lid clamped shut, a .981 foot anchor and a 160/60 ms guard/idle clip. At 320 × 568, the existing Defend intent showed the braced lid and +10 Block with player HP unchanged. Capture: `tests/.e2e-out/manhole-mimic-live-guard-320.png`. All 550 encounter budgets, texture caps, playback and TypeScript passed, with zero confirmed intersections in 1,117,260 bounds samples. The separate production build of the preceding notice-placement commit passed all eight Chromium smoke cases, including rotation and both graphics-loss paths.
+
+### Boombox Brute Strength cast
+
+Added a planted, raised-fist charge pose with illuminated speaker rings, a .998 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, Boombox Brute's deterministic first turn displayed the pose with +3 Strength and left the player at 80 HP. Both fists and speaker rings remained visible. Capture: `tests/.e2e-out/boombox-brute-live-cast-320.png`. All 550 encounter budgets, texture caps, playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,117,692 samples.
