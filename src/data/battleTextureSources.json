@@ -699,6 +699,13 @@
     "runtimeHeight": 664,
     "resolution": 0.5
   },
+  "/assets/battle/actors/voltage-king-attack-v1.webp": {
+    "width": 1330,
+    "height": 1182,
+    "runtimeWidth": 665,
+    "runtimeHeight": 591,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/voltage-king-idle-v1.webp": {
     "width": 1330,
     "height": 1182,

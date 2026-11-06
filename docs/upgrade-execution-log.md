@@ -549,3 +549,9 @@ Added a left-facing contact pose on the existing 1024 × 1536 canvas. The slash 
 At a 320 × 568 Chrome touch viewport, the frozen 140 ms frame in the three-enemy Pixi study showed the strike inside the target lane, clear of the HUD and adjacent Golem. The texture loaded with no browser errors. The blade is small at this width. Full-speed combat and physical-device review remain open. Capture: `tests/.e2e-out/chrome-phantom-attack-320.png`.
 
 Generation direction: Keep the existing angular chrome armor, purple body, orange eyes, high red collar and claw boots. Tilt toward screen left, sweep the near wrist blade at waist level and retract the far blade. Use a bent lead knee and planted feet on the original portrait canvas. Preserve true alpha with no slash effects, scenery or added weapons.
+
+### Voltage King punch and Neon Sentinel contact review
+
+Added Voltage King's leftward gauntlet punch. The 1330 × 1182 source preserves the shoulder armor, copper core and live crown, with alpha ≥128 bounds (18,154)–(1313,1135), a .960 foot anchor and an 80/160/80 ms idle/contact/idle clip. The generation direction was a compact left-facing punch with the other gauntlet tucked, legs planted and no external effects.
+
+At 320 × 568 in the three-enemy Pixi study, the frozen 140 ms frames showed Voltage King's extended fist and Neon Sentinel's shield bash inside their lanes. Both textures loaded without browser errors. Voltage King's HUD name truncates visually at this width and the target control retains its full name. Captures are `tests/.e2e-out/{voltage-king,neon-sentinel}-attack-320.png`. All 550 encounter art budgets, texture checks, clip playback and TypeScript passed. The bounds audit confirmed zero intersections across 1,102,356 samples. Full-speed combat and physical-device review remain open.
