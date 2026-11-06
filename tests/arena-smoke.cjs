@@ -25,8 +25,40 @@ async function tabTo(page, control, label) {
     assert.fail(`Could not reach ${label} with Tab`);
 }
 
-async function playFight(page, { viewport, input, reducedMotion = 'no-preference', loseGraphics }) {
-    const captureId = `${viewport.width}-${input}-${loseGraphics ? `graphics-loss-${loseGraphics}` : reducedMotion}`;
+async function verifyTargetingAfterRotation(page, viewport, targetPrompt, targets) {
+    await targetPrompt.waitFor();
+    const before = await targets.evaluateAll(elements => elements.map(element => ({
+        id: element.dataset.combatTarget,
+        label: element.getAttribute('aria-label'),
+    })));
+    const energy = await page.locator('.energy-current').textContent();
+    const portrait = await targets.first().boundingBox();
+    for (const size of [{ width: 844, height: 390 }, viewport]) {
+        await page.setViewportSize(size);
+        await page.waitForFunction(({ expectedWidth, portraitX, landscape }) => {
+            const arena = document.querySelector('.battle-arena')?.getBoundingClientRect();
+            const targets = [...document.querySelectorAll('.actor-target.is-selectable:not(:disabled)')];
+            const boxes = targets.map(target => target.getBoundingClientRect());
+            return innerWidth === expectedWidth && arena && boxes.length === 3 &&
+                (Math.abs(boxes[0].left - portraitX) > 1) === landscape &&
+                boxes.every((box, index) => box.width >= 44 && box.height >= 44 &&
+                    box.left >= arena.left && box.right <= arena.right &&
+                    box.top >= arena.top && box.bottom <= arena.bottom &&
+                    boxes.slice(0, index).every(other => other.right <= box.left || box.right <= other.left ||
+                        other.bottom <= box.top || box.bottom <= other.top));
+        }, { expectedWidth: size.width, portraitX: portrait.x, landscape: size.width > size.height });
+        assert.equal(await targetPrompt.isVisible(), true);
+        assert.equal(await page.locator('.energy-current').textContent(), energy);
+        assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => ({
+            id: element.dataset.combatTarget,
+            label: element.getAttribute('aria-label'),
+        }))), before);
+    }
+}
+
+async function playFight(page, { viewport, input, reducedMotion = 'no-preference', loseGraphics, rotate }) {
+    const scenario = loseGraphics ? `graphics-loss-${loseGraphics}` : rotate ? 'rotation' : reducedMotion;
+    const captureId = `${viewport.width}-${input}-${scenario}`;
     const activate = async (control, label) => {
         if (input === 'touch') return control.tap();
         await tabTo(page, control, label);
@@ -95,6 +127,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
             const { index, cost } = affordable[0];
             await activate(handAttacks.nth(index), labels[index]);
             await activate(page.getByRole('button', { name: 'Play card', exact: true }), 'Play card');
+            if (plays === 0 && rotate) await verifyTargetingAfterRotation(page, viewport, targetPrompt, targets);
             const interrupt = plays === 0 && loseGraphics;
             if (interrupt) {
                 await targetPrompt.waitFor();
@@ -195,7 +228,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     assert.equal(save.masterDeck.length, 13);
     assert.ok(save.player.gold > 99);
     assert.deepEqual(errors, []);
-    console.log(`PASS ${viewport.width}×${viewport.height} (${input}, ${loseGraphics ? `graphics loss during ${loseGraphics} and retry` : reducedMotion}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
+    console.log(`PASS ${viewport.width}×${viewport.height} (${input}, ${scenario}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
     return {
         plays, enemyTurns, rewardChoices, stop,
         hp: save.player.hp,
@@ -271,10 +304,11 @@ async function main() {
             { viewport: { width: 320, height: 568 }, input: 'touch', reducedMotion: 'reduce' },
             { viewport: { width: 320, height: 568 }, input: 'touch', loseGraphics: 'targeting' },
             { viewport: { width: 320, height: 568 }, input: 'touch', loseGraphics: 'resolution' },
+            { viewport: { width: 320, height: 568 }, input: 'touch', rotate: true },
         ];
         let portraitBaseline;
         for (const testCase of cases) {
-            const { viewport, input, reducedMotion = 'no-preference', loseGraphics } = testCase;
+            const { viewport, input, reducedMotion = 'no-preference', loseGraphics, rotate } = testCase;
             const page = await browser.newPage({ viewport, isMobile: true, hasTouch: input === 'touch', reducedMotion });
             try {
                 const result = await playFight(page, testCase);
@@ -284,6 +318,7 @@ async function main() {
                     console.log('PASS normal and reduced motion produce identical portrait combat and reward outcomes');
                 }
                 if (loseGraphics) assert.deepEqual(result, portraitBaseline, 'Graphics loss or retry changed the fight or saved outcome');
+                if (rotate) assert.deepEqual(result, portraitBaseline, 'Rotation changed the fight or saved outcome');
             } finally {
                 await page.close();
             }

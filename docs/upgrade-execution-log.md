@@ -741,3 +741,7 @@ Added a crouched guard with both pincers held in front of the shell, a .944 foot
 ### Production photo picker regression
 
 The production arena smoke suite now selects a JPEG through the real file input at 320 × 568, decodes the 256 × 384 preview PNG and checks transparent corner and opaque visor samples. It starts the run, reloads the map, compares the saved sprite with the preview, and enters the rendered arena. The flow records no Fetch, XHR, or non-GET requests. This case and the six existing arena smoke cases passed locally against the production build in Chromium. The camera and physical devices remain separate verification.
+
+### Combat targeting during viewport rotation
+
+The production smoke suite now opens the first card's target prompt in the three-Rat fight, switches from 320 × 568 to 844 × 390, and returns to portrait before selecting a target. Both layouts keep the three target buttons at least 44 × 44, fully inside the arena, and mutually disjoint. Target identity, labels, and energy remain stable. The completed fight and persisted outcome match the fixed-portrait baseline. All eight production smoke cases passed locally in Chromium. Physical rotation and background/resume remain open.
