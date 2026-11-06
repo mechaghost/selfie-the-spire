@@ -13,7 +13,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | neon_junkie | production | attack | attack | hit, defeat, cast | review |
 | graffiti_imp | production | attack | attack | hit, defeat, cast | review |
 | stray_voltage | production | attack | attack | hit, defeat | review |
-| dumpster_crawler | production | none | none | attack, hit, defeat, guard | review |
+| dumpster_crawler | production | attack | attack | hit, defeat, guard | review |
 | smoke_specter | production | attack | attack | hit, defeat, guard, cast | review |
 | taxi_ghost | production | attack | attack | hit, defeat, cast | review |
 | manhole_mimic | production | none | none | attack, hit, defeat, guard, cast | review |
