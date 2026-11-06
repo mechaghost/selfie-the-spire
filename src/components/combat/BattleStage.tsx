@@ -18,6 +18,7 @@ export type StageStatus = 'loading' | 'ready' | 'degraded';
 interface Props { snapshot: SceneSnapshot; noticeHost: HTMLElement | null; forceFallback?: boolean; onStatus?: (status:StageStatus)=>void }
 /** DOM fallback exists before asynchronous initialization and remains independent of the canvas. */
 export function BattleStage({snapshot,noticeHost,forceFallback=false,onStatus}: Props) {
+    const focusReturn = useRef<HTMLDivElement>(null);
     const host = useRef<HTMLDivElement>(null);
     const scene = useRef<BattleScene | null>(null);
     const latest = useRef(snapshot); latest.current = snapshot;
@@ -39,7 +40,7 @@ export function BattleStage({snapshot,noticeHost,forceFallback=false,onStatus}: 
     }, [rosterKey,snapshot.location.id,forceFallback,attempt]);
     useEffect(()=>{scene.current?.update(snapshot);},[snapshot]);
     useEffect(()=>{onStatus?.(status);},[status,onStatus]);
-    return <div className="battle-stage-visual" data-stage-status={status}>
+    return <div className="battle-stage-visual" ref={focusReturn} role="group" aria-label="Combat arena" tabIndex={-1} data-stage-status={status}>
         <div className="battle-canvas" ref={host} />
         {status !== 'ready' && <div className="battle-dom-fallback" aria-hidden="true" style={{backgroundColor:`#${snapshot.location.sky.toString(16).padStart(6,'0')}`}}>
             <div className="battle-fallback-ground" style={{top:snapshot.layout.width<600 && snapshot.layout.height>=300 && snapshot.layout.enemies.length===3 ? '32%' : '73%',backgroundColor:`#${snapshot.location.ground.toString(16).padStart(6,'0')}`}} />
@@ -49,6 +50,11 @@ export function BattleStage({snapshot,noticeHost,forceFallback=false,onStatus}: 
                 return <FallbackActor key={`${actor.id}:${actor.visual.fallbackImageUrl}`} actor={actor} slot={slot} />;
             })}
         </div>}
-        {status==='degraded' && noticeHost && createPortal(<div className="battle-renderer-notice" role="status">Simplified graphics <button onClick={()=>setAttempt(n=>n+1)}>Retry graphics</button></div>,noticeHost)}
+        {status==='degraded' && noticeHost && createPortal(<div className="battle-renderer-notice" role="status">Simplified graphics <button onClick={()=>{
+            // The retry button disappears while mounting. Return keyboard focus
+            // before removal; the next Tab follows the arena's target controls.
+            focusReturn.current?.focus({preventScroll:true});
+            setAttempt(n=>n+1);
+        }}>Retry graphics</button></div>,noticeHost)}
     </div>;
 }

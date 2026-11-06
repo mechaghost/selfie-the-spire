@@ -1,0 +1,7 @@
+# Graphics retry keyboard recovery
+
+The Retry graphics control is conditionally rendered only while degraded. Starting another renderer mount can remove the focused button and send browser focus to the body. BattleStage now supplies a labeled Combat arena group with a programmatic-only focus target. Retry focuses that persistent group before changing the attempt counter. A visible focus outline identifies the destination; ordinary Tab proceeds to the existing hero/enemy controls. The group is not an additional sequential tab stop. No game-store action is dispatched by retry.
+
+Verified locally at 390×844 in actual CombatView with the development forced-fallback flag, three enemies, and a normal five-card hand. From idle, Retry graphics focuses Combat arena and Tab reaches Inspect Street Runner. During Torch It targeting, retry preserves the selected card, enemy HP and 3/3 energy. Tab reaches hero inspection, then Rat targeting; Enter commits once. After resolution Rat has 9/13 HP and one status effect, energy is 2/3, Torch It has left the hand, and focus is on enabled End Turn. No browser warning/error logs. Evidence: `tests/.e2e-out/fallback-retry-keyboard.png`. TypeScript passes.
+
+This verifies focus recovery and command continuity in forced fallback. Actual WebGL context loss/restoration during a resolving queue, successful retry on physical devices, and screen-reader behavior still require their separate release checks. This change does not claim those checks or alter rollout status.
