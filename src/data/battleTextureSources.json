@@ -244,6 +244,13 @@
     "runtimeHeight": 656,
     "resolution": 0.5
   },
+  "/assets/battle/actors/neon-wraith-attack-v2.webp": {
+    "width": 1199,
+    "height": 1312,
+    "runtimeWidth": 600,
+    "runtimeHeight": 656,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/neon-wraith-idle-v1.webp": {
     "width": 1199,
     "height": 1312,

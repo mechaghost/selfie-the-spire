@@ -86,8 +86,9 @@ ACTOR_VISUALS.boombox_brute.keyPoses={attack:{imageUrl:'/assets/battle/actors/bo
 ACTOR_VISUALS.manhole_mimic.keyPoses={attack:{imageUrl:'/assets/battle/actors/manhole-mimic-attack-v1.webp',footAnchor:[.5,.97]}};
 ACTOR_VISUALS.the_billboard.keyPoses={attack:{imageUrl:'/assets/battle/actors/the-billboard-attack-v1.webp',footAnchor:[.5,.952]}};
 ACTOR_VISUALS.sewer_slime.keyPoses={attack:{imageUrl:'/assets/battle/actors/sewer-slime-attack-v1.webp',footAnchor:[.5,.93]}};
+ACTOR_VISUALS.neon_wraith.keyPoses={attack:{imageUrl:'/assets/battle/actors/neon-wraith-attack-v2.webp',footAnchor:[.5,.99]}};
 // Explicit key-pose timelines; these do not represent approved multi-frame animation art.
-for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost','graffiti_imp','neon_junkie','stray_voltage','dumpster_crawler','boombox_brute','manhole_mimic','the_billboard','sewer_slime']) {
+for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost','graffiti_imp','neon_junkie','stray_voltage','dumpster_crawler','boombox_brute','manhole_mimic','the_billboard','sewer_slime','neon_wraith']) {
     ACTOR_VISUALS[id].clips.attack={frames:['idle','attack','idle'],durationsMs:[80,160,80],loop:false,completion:'idle'};
 }
 ACTOR_VISUALS['hero-neon'].keyPoses!.windup={imageUrl:'/assets/battle/actors/street-runner-windup-v1.webp',footAnchor:[.5,.974],scale:1422/1478};

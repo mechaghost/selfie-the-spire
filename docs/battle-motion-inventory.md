@@ -18,7 +18,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | taxi_ghost | production | attack | attack | hit, defeat, cast | review |
 | manhole_mimic | production | attack | attack | hit, defeat, guard, cast | review |
 | boombox_brute | production | attack | attack | hit, defeat, cast | review |
-| neon_wraith | production | none | none | attack, hit, defeat, cast | review |
+| neon_wraith | production | attack | attack | hit, defeat, cast | review |
 | payphone_phantom | legacy/dev | none | none | attack, hit, defeat, guard, cast | review |
 | sewer_slime | production | attack | attack | hit, defeat, guard, cast | review |
 | fire_escape_spider | production | attack, hit, defeat, cast, guard, blink, windup, recovery | idle, attack | none | review |
