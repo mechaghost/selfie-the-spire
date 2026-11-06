@@ -20,7 +20,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | boombox_brute | production | attack | attack | hit, defeat, cast | review |
 | neon_wraith | production | attack, hit, defeat, cast, blink | hit, defeat, cast, idle, attack | none | review |
 | payphone_phantom | legacy/dev | none | none | attack, hit, defeat, guard, cast | review |
-| sewer_slime | production | attack, hit, defeat, guard | hit, defeat, guard, attack | cast | review |
+| sewer_slime | production | attack, hit, defeat, guard, cast | hit, defeat, guard, cast, attack | none | review |
 | fire_escape_spider | production | attack, hit, defeat, cast, guard, blink, windup, recovery | idle, attack | none | review |
 | vending_golem | legacy/dev | attack, hit, defeat, guard, cast, blink, windup, recovery | idle, attack | none | review |
 | neon_sentinel | production | none | none | attack, hit, defeat, guard, cast | review |
