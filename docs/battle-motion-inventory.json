@@ -554,17 +554,19 @@
       "id": "neon_yakuza",
       "reachability": "production",
       "status": "review",
-      "keyPoses": [],
-      "timelines": [],
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
       "missingContactPoses": [
-        "attack",
         "hit",
         "defeat",
         "cast"
       ],
       "missingTimelines": [
         "idle",
-        "attack",
         "hit",
         "defeat",
         "cast"
@@ -574,10 +576,13 @@
       "id": "chrome_bouncer",
       "reachability": "production",
       "status": "review",
-      "keyPoses": [],
-      "timelines": [],
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
       "missingContactPoses": [
-        "attack",
         "hit",
         "defeat",
         "guard",
@@ -585,7 +590,6 @@
       ],
       "missingTimelines": [
         "idle",
-        "attack",
         "hit",
         "defeat",
         "guard",

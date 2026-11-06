@@ -69,6 +69,13 @@
     "runtimeHeight": 656,
     "resolution": 0.5
   },
+  "/assets/battle/actors/chrome-bouncer-attack-v1.webp": {
+    "width": 1119,
+    "height": 1406,
+    "runtimeWidth": 560,
+    "runtimeHeight": 703,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/chrome-bouncer-idle-v1.webp": {
     "width": 1222,
     "height": 1287,
@@ -340,6 +347,13 @@
     "height": 1312,
     "runtimeWidth": 600,
     "runtimeHeight": 656,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/neon-yakuza-attack-v1.webp": {
+    "width": 1217,
+    "height": 1293,
+    "runtimeWidth": 609,
+    "runtimeHeight": 647,
     "resolution": 0.5
   },
   "/assets/battle/actors/neon-yakuza-idle-v1.webp": {

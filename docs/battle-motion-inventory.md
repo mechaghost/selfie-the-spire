@@ -27,8 +27,8 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | chrome_phantom | production | attack | attack | hit, defeat, guard, cast | review |
 | voltage_king | production | attack | attack | hit, defeat, guard, cast | review |
 | circuit_breaker | production | attack | attack | hit, defeat, guard, cast | review |
-| neon_yakuza | production | none | none | attack, hit, defeat, cast | review |
-| chrome_bouncer | production | none | none | attack, hit, defeat, guard, cast | review |
+| neon_yakuza | production | attack | attack | hit, defeat, cast | review |
+| chrome_bouncer | production | attack | attack | hit, defeat, guard, cast | review |
 | the_billboard | production | attack, hit, guard, cast, defeat, blink | hit, guard, cast, defeat, idle, attack | none | review |
 | subway_wyrm | production | attack, hit, defeat, guard, cast, blink | attack, hit, defeat, guard, cast, idle | none | review |
 | dj_phantom | production | attack, hit, defeat, cast, blink | attack, hit, defeat, cast, idle | none | review |

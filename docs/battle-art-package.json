@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 207229787,
-  "runtimeBytes": 32499608,
+  "sourceBytes": 210931235,
+  "runtimeBytes": 33188106,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -133,6 +133,19 @@
       "sourceBytes": 1151920,
       "runtimeBytes": 205220,
       "decodedRGBABytes": 1574400
+    },
+    {
+      "asset": "actors/chrome-bouncer-attack-v1.webp",
+      "width": 1119,
+      "height": 1406,
+      "runtimeWidth": 560,
+      "runtimeHeight": 703,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 2106585,
+      "runtimeBytes": 387024,
+      "decodedRGBABytes": 1574720
     },
     {
       "asset": "actors/chrome-bouncer-idle-v1.webp",
@@ -640,6 +653,19 @@
       "sourceBytes": 1299065,
       "runtimeBytes": 278254,
       "decodedRGBABytes": 1574400
+    },
+    {
+      "asset": "actors/neon-yakuza-attack-v1.webp",
+      "width": 1217,
+      "height": 1293,
+      "runtimeWidth": 609,
+      "runtimeHeight": 647,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1594863,
+      "runtimeBytes": 301474,
+      "decodedRGBABytes": 1576092
     },
     {
       "asset": "actors/neon-yakuza-idle-v1.webp",
