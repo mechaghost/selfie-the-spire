@@ -112,22 +112,22 @@
       "status": "review",
       "keyPoses": [
         "attack",
-        "hit"
+        "hit",
+        "guard"
       ],
       "timelines": [
         "hit",
+        "guard",
         "attack"
       ],
       "missingContactPoses": [
         "defeat",
-        "guard",
         "cast",
         "celebrate"
       ],
       "missingTimelines": [
         "idle",
         "defeat",
-        "guard",
         "cast",
         "celebrate"
       ]

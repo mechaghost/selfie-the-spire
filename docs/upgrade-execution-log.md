@@ -1023,3 +1023,11 @@ Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
 > Create one transparent full-body hit reaction sprite of the exact Smoke fighter shown. Preserve her dark bun, warm complexion, purple hooded jacket with pale chevrons, coral scarf, teal sash, dark cargo trousers, fingerless gloves and cream high-tops. Same inked game art, character scale and right-facing camera. After a blow from screen right her torso snaps back left, knees flex with both shoes planted, one forearm draws over her ribs and the other hand opens outward for balance. Her head recoils and eyes wince. Preserve the standing canvas and leave clear alpha margins. True transparency, no ground, shadow, effects, blood or props.
 
 Linux run 42214339304 passed its build, rules, art budgets, and six production smoke scenarios including the browser selfie case. Chromium installation took over ten minutes and the job hit its time limit before rotation or the five-district route finished. Increased the job limit from 15 to 25 minutes to accommodate cold installs.
+
+### Smoke guard pose
+
+Added a side-on crouch with a raised leading forearm, a .981 foot anchor and a 160/60 ms guard/idle clip. In a 320 × 568 Chromium touch fixture, playing Dodge triggered the stance and granted 5 Block without changing HP. Capture: `tests/.e2e-out/smoke-live-guard-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
+
+> One transparent full-body defense sprite of the exact Smoke fighter in the reference. Preserve her dark bun, purple chevron hooded jacket, coral scarf, teal sash, dark cargo trousers and cream high-tops. Same inked game art and right-facing camera. Both shoes planted, she lowers into a narrow side-on crouch, leading forearm held vertically just in front of her cheek, rear forearm held horizontally across her ribs, elbows tucked and eyes on the threat. Clearly read as guarding at small size. Match original standing canvas and ground line, keep all limbs visible. Real alpha, no shield, effects, props, scenery, ground or shadow.
