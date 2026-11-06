@@ -23,8 +23,8 @@ export const GOLEM_ATLAS_FRAMES: Record<string,AtlasFrame> = {
   },
   "hit": {
     "rect": [
+      1246,
       2,
-      1275,
       1240,
       1269
     ],
@@ -44,7 +44,7 @@ export const GOLEM_ATLAS_FRAMES: Record<string,AtlasFrame> = {
   "defeat": {
     "rect": [
       2,
-      2548,
+      1275,
       1240,
       1269
     ],
@@ -60,5 +60,34 @@ export const GOLEM_ATLAS_FRAMES: Record<string,AtlasFrame> = {
       0.5,
       0.94
     ]
+  },
+  "guard": {
+    "rect": [
+      1246,
+      1275,
+      1240,
+      1269
+    ],
+    "sourceSize": [
+      1240,
+      1269
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "footAnchor": [
+      0.5,
+      0.94
+    ]
+  }
+};
+export const GOLEM_ATLAS_SOURCE = {
+  "/assets/battle/actors/vending-golem-poses-v1.webp": {
+    "width": 2488,
+    "height": 2546,
+    "runtimeWidth": 1244,
+    "runtimeHeight": 1273,
+    "resolution": 0.5
   }
 };

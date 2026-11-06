@@ -18,6 +18,9 @@ for(const asset of packageInfo.assets) {
  assert.ok(plan.width/plan.resolution-asset.width<1/plan.resolution);
  original+=asset.width*asset.height*4;budgeted+=plan.width*plan.height*4;
 }
+const packedAtlas=packagedTextureSource('/assets/battle/actors/vending-golem-poses-v1.webp',1244,1273);
+assert.deepEqual(packedAtlas,{width:2488,height:2546,runtimeWidth:1244,runtimeHeight:1273,resolution:.5});
+assert.equal(packagedTextureSource('/assets/battle/actors/vending-golem-poses-v1.webp',1244,3819),undefined);
 const atlas=textureDecodePlan('/assets/battle/actors/vending-golem-poses-v1.webp',1244,3819);
 assert.deepEqual(atlas,{width:622,height:1910,resolution:.5});
 assert.deepEqual(textureDecodePlan('/assets/battle/actors/small.webp',128,256),{width:128,height:256,resolution:1});
