@@ -115,9 +115,13 @@ Each location delivers desktop and portrait composition guides and independent b
 
 ## Selfie integration
 
-Separate `portraitUrl` from `combatAppearance`. Keep the user's portrait in character UI. Initial combat guarantees an authored archetype body with approved animation and the generated portrait in character UI. Face/head customization is a separate gated spike, not a release promise; full outfit matching is out of scope. The exact combat actor and portrait appear side by side before acceptance with the copy: “Your portrait is personalized. Your battle character uses the [archetype] appearance.” Back returns without starting a run.
+Updated by the user's subsequent requirements: a submitted selfie must produce a personalized full-body battle character, with the exact accepted cutout used in preview and gameplay. Keep `portraitUrl` separate from `combatAppearance`. Gemini generates controlled green-screen character art; browser Canvas removes the background without an AI removal model or paid removal service. Server ONNX matting was rejected on cost grounds and is removed. Existing Gemini generation charges remain.
 
-Preview the representation before starting. If generation fails, offer an explicit archetype fallback without blocking gameplay. Never show the portrait rectangle as the combat actor. Old generated saves resolve safely. Cache versioned approved visual assets; no battle-time image generation. Preserve cancellation and the existing photo-handling disclosure.
+Persist the bounded transparent WebP as version 2 appearance. Personalized cutouts use procedural movement and must never switch to another hero's authored action poses. The full-roster authored animation requirement still applies to stock actors; personalized procedural motion is an explicit separate representation requiring quality review. Show the exact battle character before starting the run. The rollout flag remains disabled until real generated-image quality and browser compatibility pass.
+
+An invalid backdrop, clipped silhouette or processing failure returns an actionable retry message with the existing starter-hero escape path. Do not silently replace failed personal artwork with stock art. Existing saves without personalized cutouts keep explicit archetype resolution and recovery feedback. No battle-time image generation, model downloads, or photo-to-removal-service transmission is needed. Preserve generation cancellation, stale-request protection and the existing photo-handling disclosure.
+
+See [browser character cutout implementation and evidence](browser-character-cutout.md). Earlier face-personalization exclusions in the original review record describe the initial scope and are superseded by this user requirement.
 
 ## Work packages and dependency order
 
@@ -130,7 +134,7 @@ Preview the representation before starting. If generation fails, offer an explic
 | W3 | Queue-to-presentation protocol and actor HUD/target layer | W2 | Rules parity and input tests; exactly-once effect application |
 | W4 | Finished hero + three-monster encounter, timing and effects | W3 | Full battle and reward video; readable intent and reactions |
 | W5 | Five locations, deterministic mapping, migration and streaming | W4 | All districts across enemy-count/layout matrix |
-| W6 | Selfie appearance contract and archetype fallback | W3, W4 | Existing/new generated run and failure-path tests |
+| W6 | Personalized selfie cutout, browser removal, explicit starter fallback | W3, W4 | Preview/run/save identity, real generated-image quality, browser compatibility and failure-path tests |
 | W7 | Full roster coverage, device QA, performance and deployment | W5, W6 | Every reachable encounter has usable actors; release checklist passes |
 
 Release tiers are explicit:
