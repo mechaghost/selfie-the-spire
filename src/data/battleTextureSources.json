@@ -405,6 +405,13 @@
     "runtimeHeight": 635,
     "resolution": 0.5
   },
+  "/assets/battle/actors/vending-golem-cast-v1.webp": {
+    "width": 1240,
+    "height": 1269,
+    "runtimeWidth": 620,
+    "runtimeHeight": 635,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/vending-golem-defeat-v1.webp": {
     "width": 1240,
     "height": 1269,

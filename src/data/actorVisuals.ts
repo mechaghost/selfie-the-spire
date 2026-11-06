@@ -61,6 +61,7 @@ ACTOR_VISUALS.fire_escape_spider.keyPoses!.hit = {imageUrl:'/assets/battle/actor
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/fire-escape-spider-defeat-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.vending_golem.atlasUrl='/assets/battle/actors/vending-golem-poses-v1.webp';
 ACTOR_VISUALS.vending_golem.keyPoses!.guard={imageUrl:'/assets/battle/actors/vending-golem-guard-v1.webp',footAnchor:[.5,.94]};
+ACTOR_VISUALS.vending_golem.keyPoses!.cast={imageUrl:'/assets/battle/actors/vending-golem-cast-v1.webp',footAnchor:[.5,.959]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.cast={imageUrl:'/assets/battle/actors/fire-escape-spider-cast-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.guard={imageUrl:'/assets/battle/actors/fire-escape-spider-guard-v1.webp',footAnchor:[.5,.913]};
 ACTOR_VISUALS.vending_golem.atlasFrames=GOLEM_ATLAS_FRAMES;

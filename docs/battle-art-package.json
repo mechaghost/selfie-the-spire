@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers; actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 143132045,
-  "runtimeBytes": 23336204,
+  "sourceBytes": 145004883,
+  "runtimeBytes": 23746248,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -756,6 +756,19 @@
       "compositedPSNR": null,
       "sourceBytes": 1576719,
       "runtimeBytes": 327602,
+      "decodedRGBABytes": 1574800
+    },
+    {
+      "asset": "actors/vending-golem-cast-v1.webp",
+      "width": 1240,
+      "height": 1269,
+      "runtimeWidth": 620,
+      "runtimeHeight": 635,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1872838,
+      "runtimeBytes": 410044,
       "decodedRGBABytes": 1574800
     },
     {
