@@ -495,3 +495,9 @@ Generation prompt: Precise edit of this exact Subway Wyrm to create a mechanical
 ### Subway Wyrm compact guard, cast and idle review
 
 At 320 × 568 in the Pixi boss study, the 80 ms guard and cast cleared the HUD and hand. The raised claw and upward roar read as separate gestures. The lamps were dim at 6,219 ms and bright at 6,220 ms without visible displacement at the baseline. Browser logs showed no warnings or errors. Captures are `tests/.e2e-out/wyrm-guard-320.jpg`, `wyrm-cast-320.jpg`, `wyrm-lamps-dim-320.jpg`, and `wyrm-lamps-open-320.jpg`. Full-speed and physical-device review remain open.
+
+### DJ Phantom scratch strike
+
+Added a turntable scratch at the attack contact beat. The Phantom leans into the left record while its other claw works the crossfader. The 1210 × 1300 source has alpha ≥128 bounds (8,112)–(1208,1298) with a .998 foot anchor. The clip uses 80 ms idle, 160 ms contact and 80 ms idle recovery. All 550 encounter art budgets passed. The bounds audit found zero confirmed intersections across 1,035,648 samples. Texture, playback and TypeScript checks passed. Mobile visual review and full-speed four-hit combat review remain open.
+
+Generation prompt: Attack contact frame for this exact DJ Phantom game boss. A rhythmic turntable scratch strike: lean sharply toward screen LEFT, press and drag the near claw diagonally across the left record, and plant the other claw on the central crossfader. Face the opponent left, head angled down into the scratch. Same purple angular mask, coral headphones, teal and coral long coat, two turntables with red record labels, and two trailing purple spectral tails with no legs. Preserve canvas dimensions, full size, baseline, painterly inked art. Keep both coat hems inside original silhouette width, elbows close, no stretching across screen. No sound waves, motion lines, sparks, external glow, extra equipment, backdrop, floor, shadow or text. Truly transparent exterior and gaps. One sprite.

@@ -111,6 +111,13 @@
     "runtimeHeight": 659,
     "resolution": 0.5
   },
+  "/assets/battle/actors/dj-phantom-attack-v1.webp": {
+    "width": 1210,
+    "height": 1300,
+    "runtimeWidth": 605,
+    "runtimeHeight": 650,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/dj-phantom-idle-v1.webp": {
     "width": 1210,
     "height": 1300,
