@@ -2,6 +2,7 @@ import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import { ImpactNotice, subscribeImpacts } from '../../rendering/CombatPresentation';
 import { BattleLayout } from '../../rendering/battleLayout';
 interface Feedback extends ImpactNotice {key:string}
+const FEEDBACK_ROW_HEIGHT = 32;
 export function impactLabel(impact:ImpactNotice):string {
     if(impact.effect==='blocked')return `Blocked ${Math.abs(impact.blockDelta)}`;
     if(impact.effect==='block')return `+${impact.blockDelta} Block`;
@@ -26,11 +27,18 @@ export function CombatFeedback({layout}:{layout:BattleLayout}) {
         return()=>{unsubscribe();timers.forEach(clearTimeout);seen.current.clear();};
     },[]);
     return <div className="combat-feedback" aria-live="polite" aria-atomic="false">
-        {items.map((item,index)=>{
-            const slot=item.targetId==='player'?layout.hero:layout.enemies.find(slot=>slot.id===item.targetId);
-            if(!slot)return null;
-            const offset=items.slice(0,index).filter(other=>other.targetId===item.targetId).length*23;
-            return <span key={item.key} className={`combat-impact impact-${item.effect}`} style={{'--impact-x': `${slot.foot.x}px`, '--impact-right': `${layout.width-slot.foot.x}px`,top:Math.max(8,slot.art.y+slot.art.height*.35-offset)} as CSSProperties}>{impactLabel(item)}</span>;
+        {[layout.hero, ...layout.enemies].map(slot => {
+            const notices = items.filter(item => item.targetId === slot.id);
+            if (!notices.length) return null;
+            const style = {
+                '--impact-x': `${slot.foot.x}px`,
+                '--impact-right': `${layout.width - slot.foot.x}px`,
+                top: Math.max(8, Math.min(slot.art.y + slot.art.height * .35, layout.height - notices.length * FEEDBACK_ROW_HEIGHT - 8)),
+                '--impact-row': `${FEEDBACK_ROW_HEIGHT}px`,
+            } as CSSProperties;
+            return <div key={slot.id} className="combat-impact-stack" style={style}>
+                {notices.map(item => <span key={item.key} className={`combat-impact impact-${item.effect}`}>{impactLabel(item)}</span>)}
+            </div>;
         })}
     </div>;
 }

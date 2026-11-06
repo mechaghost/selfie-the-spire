@@ -723,3 +723,9 @@ The capture exposed edge clipping on long notices anchored over the player. Comb
 ### Neon Hunger Strength cast
 
 Added a raised-claw power-up with brighter amber tubes. The 1230 × 1278 cutout uses a .990 foot anchor and a 160/60 ms cast/idle clip. A live 320 × 568 dev combat fixture used Neon Hunger's unchanged opening turn and showed the cast with +2 Strength. The mask sits close to the HUD and both claws remain visible. No browser page errors. Capture: `tests/.e2e-out/neon-junkie-live-cast-320.png`. All 550 art budgets, texture, playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,115,100 samples.
+
+### Keep rapid combat feedback readable
+
+Combat feedback now groups each target's notices into a vertical stack with 32 px rows. The stack repositions as a unit to fit above the hand, with no layout transition that could briefly leave the newest row outside the arena. Individual labels retain the horizontal edge clamp and normal-motion rise.
+
+At 320 × 568 with reduced motion, browser fixtures ran Graffiti Imp's two-debuff intent and DJ Phantom's four-hit intent. Both sets of notice boxes were fully inside the arena and vertically separated when measured together. TypeScript and the combat presentation suite passed.

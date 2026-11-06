@@ -14,7 +14,8 @@
 .combat-stage.actor-arena-enabled .arena-location { display:none; }
 @media (max-height:500px) { .battle-arena { margin-bottom:48px; } }
 .combat-feedback { position:absolute; inset:0; z-index:6; pointer-events:none; }
-.combat-impact { position:absolute; left:var(--impact-x); translate:clamp(calc(4px - var(--impact-x)), -50%, calc(var(--impact-right) - 100% - 4px)); white-space:nowrap; padding:4px 7px; border-radius:5px; background:#111829ed; border:1px solid #ffd4ad; color:#ffe1c5; font:bold 16px/1.2 var(--font-family-base); box-shadow:0 3px 8px #0008; animation:combatImpactRise 1100ms ease-out both; }
+.combat-impact-stack { position:absolute; left:var(--impact-x); display:grid; grid-auto-rows:var(--impact-row); justify-items:start; align-items:start; transition:none; }
+.combat-impact { translate:clamp(calc(4px - var(--impact-x)), -50%, calc(var(--impact-right) - 100% - 4px)); white-space:nowrap; padding:4px 7px; border-radius:5px; background:#111829ed; border:1px solid #ffd4ad; color:#ffe1c5; font:bold 16px/1.2 var(--font-family-base); box-shadow:0 3px 8px #0008; animation:combatImpactRise 1100ms ease-out both; }
 .impact-heal { color:#baf6c5; border-color:#baf6c5; }
 .impact-block,.impact-blocked { color:#a7e8ff; border-color:#a7e8ff; }
 .impact-burn { color:#ffba79; border-color:#ffba79; }
