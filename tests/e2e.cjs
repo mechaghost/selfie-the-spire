@@ -397,6 +397,10 @@ async function verifyCombatFeedback(page) {
                     type ? intent.type === type : intent.hits === hits);
                 store.setState(state => ({ enemies: state.enemies.map(actor => ({ ...actor, intent: pattern.intent })) }));
             }, fixture);
+            if (fixture.shake) {
+                // Sample the artwork animation at exact times independently of the combat clock.
+                await page.locator('.battle-canvas').evaluate(canvas => { canvas.style.animationPlayState = 'paused'; });
+            }
             // Measure after the queue delivers every hit, before any notice expires.
             // Software rendering on CI can stretch these timers in wall-clock time.
             await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
@@ -426,6 +430,19 @@ async function verifyCombatFeedback(page) {
                     measured.shake.stage === 'none' && measured.shake.artwork === 'stageShakeHeavy' &&
                     arena.left === 0 && notices.every(({ box }) => box.left >= 3.9 && box.right <= 316),
                     JSON.stringify(measured));
+                const exposedEdge = await page.locator('.battle-canvas').evaluate(canvas => {
+                    const shake = canvas.getAnimations().find(animation => animation.animationName === 'stageShakeHeavy');
+                    if (!shake) return 'missing animation';
+                    const arena = canvas.closest('.battle-arena-content').getBoundingClientRect();
+                    for (let ms = 0; ms < 500; ms += 5) {
+                        shake.currentTime = ms;
+                        const artwork = canvas.getBoundingClientRect();
+                        if (artwork.left > arena.left + .1 || artwork.right < arena.right - .1 ||
+                            artwork.top > arena.top + .1 || artwork.bottom < arena.bottom - .1) return ms;
+                    }
+                    return null;
+                });
+                check('[feedback] heavy shake covers all arena edges', exposedEdge === null, String(exposedEdge));
             }
             await page.clock.resume();
             await waitIdleTurn(page);

@@ -837,3 +837,7 @@ Added a chest-thump pose with illuminated gauntlet seams, a .992 foot anchor and
 ### Neon Yakuza cast and enemy reaction coverage
 
 Added a raised-hand charge with the sword sheathed, a .988 foot anchor, .91 pose scale and a 160/60 ms cast/idle clip. At 320 × 568, the existing AttackDebuff intent dealt 10 damage and then showed the cast with +2 Weak. Capture: `tests/.e2e-out/neon-yakuza-live-cast-320.png`. All 550 encounter budgets, texture caps, clip playback and TypeScript passed. Bounds found zero confirmed intersections across 1,122,012 samples. All 21 encounter enemies now have the guard and cast poses required by their effects in the inventory. This records coverage, with authored idle work and final art review still open.
+
+### Cover the arena edges during impact shake
+
+The artwork now scales slightly during each translation peak, covering the arena without moving its HUD or notices. The 2D arena uses translation without roll to avoid exposing corners. The real Mimic regression samples the full 500 ms heavy shake at 5 ms intervals at 320 × 568 and confirms every edge stays covered. The Chromium mechanics suite passed. The Yakuza follow-up capture shows the scene still fills the arena during the cast. The preceding hosted run was canceled during the production arena step, so its five-district result is unavailable.
