@@ -1,7 +1,7 @@
 import { Application, Container, Graphics, ImageSource, Rectangle, Sprite, Texture } from 'pixi.js';
 import { ActorClip, ActorVisual, LocationVisual } from '../core/battleVisualModels';
 import { BattleLayout, ActorSlot } from './battleLayout';
-import { ImpactNotice, subscribeImpacts } from './CombatPresentation';
+import { ImpactNotice, subscribeImpacts, subscribePresentation } from './CombatPresentation';
 import { frameLocation } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
 import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActorMotion } from './actorMotion';
@@ -58,6 +58,8 @@ export class BattleScene {
     private motions = new ActorMotionClock();
     private reactions = new Map<string,{at:number;effect:ImpactNotice['effect']}>();
     private unsubscribeImpacts: (()=>void) | undefined;
+    private unsubscribeActions: (()=>void) | undefined;
+    private casts=new Map<string,number>();
     constructor(private host: HTMLElement, snapshot: SceneSnapshot, private onFailure: (reason:string)=>void) { this.snapshot = snapshot; }
     async mount(): Promise<boolean> {
         try {
@@ -111,6 +113,9 @@ export class BattleScene {
                 if(this.disposed || this.snapshot.reducedMotion || document.hidden)return;
                 this.reactions.set(notice.targetId,{at:performance.now(),effect:notice.effect});
             });
+            this.unsubscribeActions=subscribePresentation(notice=>{
+                if(!this.disposed && !this.snapshot.reducedMotion && !document.hidden && notice.phase==='begin' && notice.type==='APPLY_STATUS' && notice.sourceId)this.casts.set(notice.sourceId,performance.now());
+            });
             this.app.ticker.add(this.tick);
             document.addEventListener('visibilitychange',this.visibility);
             this.visibility();
@@ -154,10 +159,13 @@ export class BattleScene {
         const motion=sampleActorMotion(motionProfile(actor.visual.id),clip,elapsed,now+slot.foot.x*11,actor.id==='player'?1:-1,this.snapshot.reducedMotion);
         const reaction=this.reactions.get(actor.id);
         const reactionClip=reaction && !actor.defeated && clip!=='celebrate' && !this.snapshot.reducedMotion ? reactionPose(reaction.effect,now-reaction.at) : null;
-        const activeClip=reactionClip ?? clip;
+        const castAt=this.casts.get(actor.id);
+        if(castAt!==undefined && now-castAt>=220)this.casts.delete(actor.id);
+        const castClip=castAt!==undefined && now-castAt<220 && !this.snapshot.reducedMotion && !actor.defeated && clip!=='celebrate' ? 'cast' : null;
+        const activeClip=reactionClip ?? castClip ?? clip;
         const authoredClip=actor.visual.clips[activeClip];
-        const frame=authoredClip ? clipFrameAt(authoredClip,reactionClip && reaction ? now-reaction.at : elapsed,this.snapshot.reducedMotion) : undefined;
-        const poseClip=authoredClip ? frame ?? 'idle' : reactionClip ?? actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
+        const frame=authoredClip ? clipFrameAt(authoredClip,reactionClip && reaction ? now-reaction.at : castClip && castAt!==undefined ? now-castAt : elapsed,this.snapshot.reducedMotion) : undefined;
+        const poseClip=authoredClip ? frame ?? 'idle' : reactionClip ?? castClip ?? actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
         const atlasView=this.atlasViews.get(`${actor.id}:${poseClip}`);
         const pose=actor.visual.keyPoses?.[poseClip as ActorClip];
         sprite.texture=atlasView ?? this.poses.get(`${actor.id}:${poseClip}`) ?? idle;
@@ -203,6 +211,7 @@ export class BattleScene {
         if (this.disposed) return;
         this.disposed = true;
         this.unsubscribeImpacts?.(); this.unsubscribeImpacts=undefined;this.reactions.clear();this.motions.clear();
+        this.unsubscribeActions?.();this.unsubscribeActions=undefined;this.casts.clear();
         document.removeEventListener('visibilitychange',this.visibility);
         this.destroyApp();
         this.sprites.clear(); this.shadows.clear(); this.poses.clear(); this.backgroundSprites=[];

@@ -346,3 +346,17 @@ Reference: `art-source/battle/actors/fire-escape-spider-idle-v1.png`
 Output: `art-source/battle/actors/fire-escape-spider-defeat-v1.png`
 
 Use case: identity-preserve. Edit this exact Neo Miami monster into one DEFEAT animation key pose. Preserve eight iron railing legs, coral joints, violet graffiti abdomen, ladder and amber eye cluster. Change only pose: Body settled low on ground with all eight legs folded inward in a compact resting silhouette, head lowered, eye lights dim. No detached pieces or gore. Keep three-quarter LEFT-facing view, exact painted style, proportions, lighting and palette. Preserve source canvas aspect ratio and anatomical scale; do not enlarge a lowered body to fill the frame. Ground-contact baseline near 94 percent height. Whole creature visible with transparent padding. True transparent RGBA background, no scenery, floor, cast shadow, haze, motion effects, text, UI or extra characters. Single pose only.
+
+## vending-golem guard v1
+
+Reference: art-source/battle/actors/vending-golem-idle-v1.png
+Output: art-source/battle/actors/vending-golem-guard-v1.png
+
+Edit the referenced exact Neo Miami vending-machine golem into a GUARD pose. Same teal/coral chipped machine casing, glass can display, angry amber eyes in dispensing slot, scrap metal limbs, painted comic-game style and three-quarter LEFT-facing camera. Both bulky forearms cross in front of the torso as a defensive shield, fists closed, feet firmly planted apart, knees slightly bent. Preserve character anatomy, source canvas aspect ratio and anatomical scale. Entire body visible, foot baseline at 94% canvas height, clear transparent padding. True transparent background, no scenery, shadow, glow, text, UI, effects, or extra characters. One animation key pose.
+
+## fire-escape-spider cast v1
+
+Reference: art-source/battle/actors/fire-escape-spider-idle-v1.png
+Output: art-source/battle/actors/fire-escape-spider-cast-v1.png
+
+Edit the referenced exact Neo Miami fire-escape spider into a STATUS-CAST pose. Preserve the violet graffiti abdomen, teal iron railing legs, coral joints, ladder on back, amber eye cluster, painted comic-game style and three-quarter LEFT-facing camera. Exactly eight legs: two foremost legs lifted and curled toward the opponent on LEFT in a deliberate weaving gesture, remaining six firmly planted, abdomen lifted slightly and head angled forward. Distinct from an attack lunge. Preserve source canvas aspect ratio and anatomical scale. Entire body visible with transparent padding and foot baseline at 94% canvas height. True transparent background; remove any backdrop haze. No scenery, floor, cast shadow, glow, particles, webs, text, UI or extra characters. One animation key pose.

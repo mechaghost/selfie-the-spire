@@ -239,3 +239,11 @@ Added storage-backed run continuity tests that re-import a fresh store module at
 The first test failed because new card instances retained template descriptions while restored cards regenerated descriptions from effects. Updated createCardInstance to use the same effect-description generator as loading and upgrades. This prevents card wording changing merely because the page reloaded. Effects, costs, identities and RNG use remain unchanged.
 
 Save continuity, copy contracts (27 base and 50 archetype cards), 60 continuous motion-parity runs, command checkpoints, TypeScript, production build and whitespace checks pass. This uses actual persistence serialization/module initialization with in-memory localStorage, not a physical browser reload or storage-pressure test on a phone. Browser copy layout and device/release gates remain open. No deployment.
+
+## First encounter guard and cast artwork
+
+Generated Golem crossed-arm guard and Spider raised-front-leg cast key poses from their original idle references using built-in image generation. Archived PNG originals, exact prompts and lossless WebP runtime copies; 49 loose assets pass exact decoded RGBA packaging verification. Golem guard is outside its existing three-pose atlas and loads as the intentionally uncovered optional pose.
+
+Registered both poses. Existing Block impact reactions select Golem guard. Added a presentation-only action subscription that selects a finite 220ms cast on the source of APPLY_STATUS; reduced motion/hidden documents omit it, defeat/celebration take precedence, and disposal removes subscription/state. Combat timing and rules are unchanged. The Spider's Burn action can now present distinct casting art rather than remaining idle.
+
+Controlled renderer tests verify status actions animate their source, not recipient, and cast state is cleared on disposal. Asset manifests, 60 continuous-run motion-parity simulations, TypeScript, build and whitespace checks pass. Pose anatomy/scale/contact timing still require browser/art review; full authored animation baseline and release gates remain open. No deployment.

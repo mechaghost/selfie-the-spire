@@ -11,13 +11,13 @@ export class ImageSource {constructor({resource}){this.resource=resource;}}
 export class Texture {constructor({source}){this.source=source;this.width=100;this.height=100;}destroy(){this.destroyed=true;}}
 export class Application {constructor(){apps.push(this);}stage=new Container();canvas={setAttribute(){},addEventListener(){},removeEventListener(){}};renderer={resize(){}};ticker={add(){}};async init(){}render(){}start(){}stop(){}destroy(){this.destroyed=true;}}
 `;
-await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {apps} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
+await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {publishAction,identifyAction} from './src/rendering/CombatPresentation'; export {apps} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
 const pending=new Map();
 globalThis.Image=class {set src(url){if(url)pending.set(url,this);}};
 globalThis.window={devicePixelRatio:1,setTimeout};
 const listeners=new Set();
 globalThis.document={hidden:false,addEventListener:(type,fn)=>listeners.add(fn),removeEventListener:(type,fn)=>listeners.delete(fn)};
-const {BattleScene,battleTextures,apps,battleLayout}=await import('./.e2e-out/renderer-streaming.mjs');
+const {BattleScene,battleTextures,apps,battleLayout,publishAction,identifyAction}=await import('./.e2e-out/renderer-streaming.mjs');
 const flush=async()=>{for(let i=0;i<12;i++)await Promise.resolve();};
 const resolve=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);image.onload();};
 const reject=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);image.onerror();};
@@ -31,6 +31,9 @@ let ready=false;const mounting=scene.mount().then(value=>ready=value);
 await flush();resolve('/enemy');await flush();assert.equal(ready,false,'mandatory hero still loading');
 resolve('/player');await flush();await mounting;
 assert.equal(ready,true,'optional poses and backdrop do not delay actor-ready scene');
+publishAction(identifyAction({type:'APPLY_STATUS',payload:{sourceId:'enemy',targetId:'player'}}),'begin');
+assert.equal(scene.casts.has('enemy'),true,'status action animates source, not recipient');
+assert.equal(scene.casts.has('player'),false);
 assert.equal(pending.size,4);
 const world=apps[0].stage.children[3];assert.equal(world.sortableChildren,true);
 assert.deepEqual(world.children.map(child=>child.zIndex),[2,3,0,1],'stable roster order independent of completion order');
@@ -41,7 +44,7 @@ resolve('/enemy-atlas');await flush();
 assert.equal(scene.atlasViews.size,1,'optional atlas installs frame views');
 const atlasView=scene.atlasViews.get('enemy:attack');
 reject('/player-attack');await flush();assert.equal(failures,0,'missing optional pose keeps idle scene usable');
-scene.destroy();assert.equal(atlasView.destroyed,true,'atlas views disposed with scene');assert.equal(scene.atlasViews.size,0);assert.equal(listeners.size,0);assert.equal(apps[0].destroyed,true);
+scene.destroy();assert.equal(atlasView.destroyed,true,'atlas views disposed with scene');assert.equal(scene.atlasViews.size,0);assert.equal(scene.casts.size,0);assert.equal(listeners.size,0);assert.equal(apps[0].destroyed,true);
 assert.equal(pending.has('/enemy-attack'),false,'atlas-covered poses are not downloaded twice');
 await flush();
 assert.deepEqual(battleTextures.stats(),{entries:0,references:0},'late optional textures released after disposal');
