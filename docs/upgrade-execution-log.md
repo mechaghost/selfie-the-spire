@@ -797,3 +797,7 @@ Added a crossed-coil forearm brace with a .991 foot anchor and a 160/60 ms guard
 ### Voltage King Strength cast
 
 Added an open-handed chest-coil charge with a .988 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, the unmodified opening intent showed the 8 damage first, then the cast and +2 Strength; HP ended at 72 and the boss held two Strength. Capture: `tests/.e2e-out/voltage-king-live-cast-320.png`. All 550 budgets, texture caps, clip playback and TypeScript passed. Bounds found zero confirmed intersections in 1,118,556 samples. Linux run 42197578000 passed the production smoke cases and the five-district route on the preceding landscape fix.
+
+### Circuit Breaker guard
+
+Added closed breaker doors and a braced hammer, using a .944 foot anchor, .92 pose scale to match the idle height and a 160/60 ms guard/idle clip. At 320 × 568, the deterministic opening move showed the closed chest with +10 Block and +3 Strength, and player HP stayed at 80. The notices overlap the lower hammer, while the chest and upper pose remain visible. Capture: `tests/.e2e-out/circuit-breaker-live-guard-320.png`. All 550 encounter budgets, texture, playback and TypeScript passed. Bounds found zero confirmed intersections in 1,118,988 samples.
