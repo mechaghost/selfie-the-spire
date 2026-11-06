@@ -8,4 +8,12 @@ Before the correction, three candidates involved the Rat attack and player HUD a
 
 Browser verification used the actual Pixi scene at a 390×844 viewport, Rat in the upper-left enemy slot, Golem upper-right, Voltage lower-right, ten-card hand, and frozen attack contact at 140ms. The Rat clears the player HUD and remains inside the canvas. No browser warnings or errors were captured. Evidence: `tests/.e2e-out/rat-attack-bounds-mobile.png`.
 
-This audit uses conservative bounding rectangles, not pixel-perfect collisions. It samples contact/anticipation/recovery times rather than every animation time, does not cover boss-specific layout, and treats loose pose sources as atlas-equivalent art. It is not a full animation, roster art-approval, or physical-device certification. These changes remain local.
+## Expanded motion and boss pass
+
+The audit now samples idle, attack, hit, guard, cast, celebrate, and defeat every 20ms through completion, plus authored frame boundaries and their preceding millisecond. It resolves the active artwork through the renderer's clip sampler and pose fallback. Every sample includes normal/reduced motion and idle-wave extrema. Solo boss layouts use the authoritative boss encounter roster; ordinary layouts continue to exercise all artwork in each enemy slot.
+
+Conservative alpha rectangles identified small overlaps around floating actors' transparent corners. HUD candidates now receive a second pass: inverse-transform CSS pixel centers into the packaged texture and check alpha >=32, excluding a two-pixel inset around the HUD. This avoids shrinking artwork to correct empty corners. Canvas containment still uses conservative rectangles.
+
+Result: 522,304 samples, 1,104 rectangle candidates, zero visible HUD intersections or canvas overflows beyond the tolerance. A deliberate regression check temporarily restored the old Rat attack scale: the command exited 1 with 27 Rat findings. Restoring the corrected scale returned exit 0. No temporary manifest change remains.
+
+Limitations: discrete time and pixel-center sampling are not continuous-time or GPU-filtering proof. Overlapping reaction/cast overrides during another motion, failed texture loading, personalized cutouts, and simultaneous actor-to-actor intersections are not covered by this script. Loose pose sources represent atlas-equivalent art. This is not a full animation, roster art-approval, or physical-device certification. These changes remain local.

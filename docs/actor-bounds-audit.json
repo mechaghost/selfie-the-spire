@@ -1,5 +1,40 @@
 {
-  "note": "Conservative transformed alpha bounds (alpha >=32), sampled poses at contact/anticipation/recovery. Canvas/HUD intersection candidates require visual inspection; bounding rectangles include transparent corners and are not proof of pixel overlap or full-time animation certification. Loose pose sources represent atlas-equivalent art.",
-  "samples": 2328,
+  "note": "Conservative transformed alpha bounds (alpha >=32), clips sampled every 20ms plus authored frame boundaries and completion; normal/reduced motion and idle phase extrema, one/two/three enemies and solo boss layout. Canvas/HUD intersection candidates require visual inspection; rectangles include transparent corners and discrete samples are not continuous-time certification. HUD candidates are refined by inverse-transforming 1 CSS pixel sample centers into runtime alpha inside a 2px HUD inset; this excludes transparent rectangle corners but is not GPU filtering equivalence. Boss slots use the actual boss roster. Loose pose sources represent atlas-equivalent art.",
+  "sizes": [
+    [
+      320,
+      220
+    ],
+    [
+      320,
+      300
+    ],
+    [
+      390,
+      380
+    ],
+    [
+      390,
+      464
+    ],
+    [
+      430,
+      520
+    ],
+    [
+      664,
+      250
+    ],
+    [
+      768,
+      500
+    ],
+    [
+      1440,
+      650
+    ]
+  ],
+  "samples": 522304,
+  "rectangleCandidates": 1104,
   "findings": []
 }
