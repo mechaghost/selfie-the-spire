@@ -102,3 +102,7 @@
 
 @keyframes arenaTurnFadeIn { from { opacity:0; } }
 @keyframes arenaTurnFadeOut { to { opacity:0; } }
+
+@media (orientation:landscape) and (max-height:350px) {
+    .actor-arena-enabled .hand-container { --card-height:180px; }
+}
