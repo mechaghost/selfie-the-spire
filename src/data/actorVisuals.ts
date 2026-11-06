@@ -44,8 +44,14 @@ for (const [id, file, footY] of [
     ACTOR_VISUALS[id] = { ...ACTOR_VISUALS[id], fallbackImageUrl:`/assets/battle/actors/${file}`, footAnchor:[.5,footY],
         productionStatus:'review', provenance:'Original Neo Miami actor art made with built-in image generation. See docs/battle-art-prompts.md and docs/upgrade-execution-log.md.' };
 }
-for (const archetype of HERO_ARCHETYPES) {
-    ACTOR_VISUALS[`hero-${archetype}`].productionStatus = 'approved';
+// Explicit review list. New roster entries start in review.
+for (const id of [
+    'hero-neon', 'hero-chrome', 'hero-volt', 'hero-concrete', 'hero-smoke',
+    'alley_rat', 'neon_junkie', 'graffiti_imp', 'stray_voltage', 'dumpster_crawler', 'smoke_specter', 'taxi_ghost',
+    'manhole_mimic', 'boombox_brute', 'neon_wraith', 'sewer_slime', 'fire_escape_spider', 'neon_sentinel', 'chrome_phantom',
+    'voltage_king', 'circuit_breaker', 'neon_yakuza', 'chrome_bouncer', 'the_billboard', 'subway_wyrm', 'dj_phantom',
+]) {
+    ACTOR_VISUALS[id].productionStatus = 'approved';
 }
 ACTOR_VISUALS['hero-neon'].keyPoses = {attack:{imageUrl:'/assets/battle/actors/street-runner-attack-v1.webp',footAnchor:[.5,.97]}};
 ACTOR_VISUALS.alley_rat.keyPoses = {attack:{imageUrl:'/assets/battle/actors/alley-rat-attack-v1.webp',footAnchor:[.5,.93],scale:1536/1774}};

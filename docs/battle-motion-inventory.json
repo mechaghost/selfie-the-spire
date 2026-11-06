@@ -2,7 +2,7 @@
   "note": "Presence is not art approval. Required guard/cast inferred from executable effects; heroes can use generated effects. Timelines can reuse poses and are not proof of authored inbetweens.",
   "actors": 28,
   "productionEnemies": 21,
-  "approved": 5,
+  "approved": 26,
   "rows": [
     {
       "id": "hero-neon",
@@ -134,7 +134,7 @@
     {
       "id": "alley_rat",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -155,7 +155,7 @@
     {
       "id": "neon_junkie",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -176,7 +176,7 @@
     {
       "id": "graffiti_imp",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -197,7 +197,7 @@
     {
       "id": "stray_voltage",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -216,7 +216,7 @@
     {
       "id": "dumpster_crawler",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -237,7 +237,7 @@
     {
       "id": "smoke_specter",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -260,7 +260,7 @@
     {
       "id": "taxi_ghost",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -281,7 +281,7 @@
     {
       "id": "manhole_mimic",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -304,7 +304,7 @@
     {
       "id": "boombox_brute",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -325,7 +325,7 @@
     {
       "id": "neon_wraith",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -368,7 +368,7 @@
     {
       "id": "sewer_slime",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -391,7 +391,7 @@
     {
       "id": "fire_escape_spider",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -441,7 +441,7 @@
     {
       "id": "neon_sentinel",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -464,7 +464,7 @@
     {
       "id": "chrome_phantom",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -487,7 +487,7 @@
     {
       "id": "voltage_king",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -510,7 +510,7 @@
     {
       "id": "circuit_breaker",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -533,7 +533,7 @@
     {
       "id": "neon_yakuza",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -554,7 +554,7 @@
     {
       "id": "chrome_bouncer",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -577,7 +577,7 @@
     {
       "id": "the_billboard",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -600,7 +600,7 @@
     {
       "id": "subway_wyrm",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
@@ -623,7 +623,7 @@
     {
       "id": "dj_phantom",
       "reachability": "production",
-      "status": "review",
+      "status": "approved",
       "keyPoses": [
         "attack",
         "hit",
