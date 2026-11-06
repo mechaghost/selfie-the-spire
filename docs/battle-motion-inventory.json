@@ -615,20 +615,19 @@
         "attack",
         "hit",
         "defeat",
-        "guard"
+        "guard",
+        "cast"
       ],
       "timelines": [
         "attack",
         "hit",
         "defeat",
-        "guard"
-      ],
-      "missingContactPoses": [
+        "guard",
         "cast"
       ],
+      "missingContactPoses": [],
       "missingTimelines": [
-        "idle",
-        "cast"
+        "idle"
       ]
     },
     {
