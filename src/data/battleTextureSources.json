@@ -496,6 +496,13 @@
     "runtimeHeight": 600,
     "resolution": 0.5
   },
+  "/assets/battle/actors/the-billboard-hit-v1.webp": {
+    "width": 1312,
+    "height": 1199,
+    "runtimeWidth": 656,
+    "runtimeHeight": 600,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/the-billboard-idle-v1.webp": {
     "width": 1312,
     "height": 1199,

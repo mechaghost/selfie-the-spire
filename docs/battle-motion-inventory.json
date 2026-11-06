@@ -590,20 +590,20 @@
       "status": "review",
       "keyPoses": [
         "attack",
+        "hit",
         "defeat"
       ],
       "timelines": [
+        "hit",
         "defeat",
         "attack"
       ],
       "missingContactPoses": [
-        "hit",
         "guard",
         "cast"
       ],
       "missingTimelines": [
         "idle",
-        "hit",
         "guard",
         "cast"
       ]
