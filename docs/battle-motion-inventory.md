@@ -14,7 +14,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | graffiti_imp | production | attack, hit, cast, defeat | hit, cast, defeat, attack | none | review |
 | stray_voltage | production | attack, hit, defeat | hit, defeat, attack | none | review |
 | dumpster_crawler | production | attack, hit, guard, defeat | hit, guard, defeat, attack | none | review |
-| smoke_specter | production | attack, hit, defeat | hit, defeat, attack | guard, cast | review |
+| smoke_specter | production | attack, hit, guard, defeat | hit, guard, defeat, attack | cast | review |
 | taxi_ghost | production | attack, hit, defeat | hit, defeat, attack | cast | review |
 | manhole_mimic | production | attack, hit, defeat | hit, defeat, attack | guard, cast | review |
 | boombox_brute | production | attack, hit, defeat | hit, defeat, attack | cast | review |

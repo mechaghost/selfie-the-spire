@@ -622,6 +622,13 @@
     "runtimeHeight": 687,
     "resolution": 0.5
   },
+  "/assets/battle/actors/smoke-specter-guard-v1.webp": {
+    "width": 1145,
+    "height": 1374,
+    "runtimeWidth": 573,
+    "runtimeHeight": 687,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/smoke-specter-hit-v1.webp": {
     "width": 1145,
     "height": 1374,

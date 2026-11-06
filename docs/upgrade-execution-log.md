@@ -749,3 +749,7 @@ The production smoke suite now opens the first card's target prompt in the three
 ### Safari device preflight
 
 Opened the local arena production build in Safari on the iPhone 18 Pro simulator (iOS 27.0, build 24A434). The landing screen rendered with both start actions visible above the Safari controls. Capture: `tests/.e2e-out/safari-simulator-menu.png`. SafariDriver could not find a simulator session host. For the connected physical iPhone 13 it found the device but rejected the session because Web Inspector is disabled. Physical combat, camera, rotation and background/resume therefore remain unverified. Chromium tab switching and minimization under automation did not produce a hidden document, so those probes were excluded from lifecycle evidence.
+
+### Smoke Specter guard
+
+Added a crossed-forearm guard with a .993 tail anchor and a 160/60 ms guard/idle clip. A 320 × 568 Chromium touch fixture selected the Specter's existing Defend intent, then used End Turn to resolve it through the combat queue. The pose appeared alongside +5 Block, and the player remained at 80 HP. Capture: `tests/.e2e-out/smoke-specter-live-guard-320.png`. All 550 encounter budgets, texture, playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,115,964 samples.

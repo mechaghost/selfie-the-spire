@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 266587457,
-  "runtimeBytes": 41265408,
+  "sourceBytes": 267612310,
+  "runtimeBytes": 41462434,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -1159,6 +1159,19 @@
       "compositedPSNR": null,
       "sourceBytes": 819358,
       "runtimeBytes": 156052,
+      "decodedRGBABytes": 1574604
+    },
+    {
+      "asset": "actors/smoke-specter-guard-v1.webp",
+      "width": 1145,
+      "height": 1374,
+      "runtimeWidth": 573,
+      "runtimeHeight": 687,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1024853,
+      "runtimeBytes": 197026,
       "decodedRGBABytes": 1574604
     },
     {
