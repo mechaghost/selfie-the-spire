@@ -1,5 +1,6 @@
 import type { Entity } from '../../core/models';
 import { STATUS_REGISTRY } from '../../data/statusEffects';
+import { StatusIcon } from '../ui/StatusIcon';
 
 /** The containing actor button supplies the accessible name and inspection action. */
 export function ActorStatusSummary({statuses,width}:{statuses:Entity['statuses'];width:number}) {
@@ -10,7 +11,7 @@ export function ActorStatusSummary({statuses,width}:{statuses:Entity['statuses']
     const shown=statuses.length<=Math.min(3,Math.floor(width/18)) ? statuses.length : capacity;
     const remaining=statuses.length-shown;
     return <span className="actor-status-summary" aria-hidden="true" title="Inspect character for effect stacks and details">
-        {statuses.slice(0,shown).map(status=><span className="actor-status-symbol" key={status.id} title={`${STATUS_REGISTRY[status.id]?.name ?? status.name ?? status.id} ×${status.amount}`}>{STATUS_REGISTRY[status.id]?.icon ?? '?'}</span>)}
+        {statuses.slice(0,shown).map(status=><span className="actor-status-symbol" key={status.id} title={`${STATUS_REGISTRY[status.id]?.name ?? status.name ?? status.id} ×${status.amount}`}><StatusIcon id={status.id}/></span>)}
         {remaining>0 && <span className="actor-status-overflow">+{remaining}</span>}
     </span>;
 }

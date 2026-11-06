@@ -4,6 +4,7 @@ import { Card } from '../../core/models';
 import './CardInspector.css';
 import { STATUS_HELP } from '../../core/cardText';
 import { STATUS_REGISTRY } from '../../data/statusEffects';
+import { StatusIcon } from './StatusIcon';
 
 export function InspectionDialog({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
     const dialog = useRef<HTMLDialogElement>(null);
@@ -31,7 +32,7 @@ export function CardInspector({ card, onClose, children }: { card: Card; onClose
         <p className="inspection-meta">Values shown are before status modifiers.</p>
         {card.effects.some(effect => effect.type === 'Draw') && <p>Your hand holds up to 10 cards. Extra drawn cards go to your discard pile. If your draw pile is empty, your discard pile is shuffled into it.</p>}
         {card.effects.some(effect => effect.type === 'Block') && <p>Block absorbs damage and resets at the start of your next turn.</p>}
-        {[...new Set(card.effects.map(effect => effect.statusId).filter((id): id is string => !!id))].map(id => <p key={id}><strong>{STATUS_REGISTRY[id]?.name ?? id}:</strong> {STATUS_HELP[id] ?? 'Special effect.'}</p>)}
+        {[...new Set(card.effects.map(effect => effect.statusId).filter((id): id is string => !!id))].map(id => <p className="effect-description" key={id}><StatusIcon id={id}/><span><strong>{STATUS_REGISTRY[id]?.name ?? id}:</strong> {STATUS_HELP[id] ?? 'Special effect.'}</span></p>)}
         {card.isHeroCard && <p>Signature card: created for your hero. Random event removal cannot remove it.</p>}
         {card.type === 'Power' && !card.exhausts && <p>Power: removed from play after use for the rest of this battle. It returns to your deck for the next battle.</p>}
         {card.exhausts && <p>Exhaust: removed from play for the rest of this battle.</p>}

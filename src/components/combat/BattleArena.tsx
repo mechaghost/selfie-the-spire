@@ -11,6 +11,7 @@ import { CombatFeedback } from './CombatFeedback';
 import { BattleStage } from './BattleStage';
 import { ActorStatusSummary } from './ActorStatusSummary';
 import { InspectionDialog } from '../ui/CardInspector';
+import { StatusIcon } from '../ui/StatusIcon';
 import { describeIntent, describeStatuses } from './EntityPanel';
 import './BattleArena.css';
 export function BattleArena({targetControls='arena'}:{targetControls?:'arena'|'list'}) {
@@ -65,7 +66,7 @@ export function BattleArena({targetControls='arena'}:{targetControls?:'arena'|'l
         {entity && <InspectionDialog title={entity.name} onClose={()=>setInspected(null)}>
             <p>{entity.hp}/{entity.maxHp} HP · {entity.block} Block</p>
             {'intent' in entity && <p>{describeIntent(entity.intent,entity.statuses,player.statuses)}</p>}
-            {describeStatuses(entity.statuses).map(line=><p key={line}>{line}</p>)}
+            {entity.statuses.map(status=><p className="effect-description" key={status.id}><StatusIcon id={status.id}/><span>{describeStatuses([status])[0]}</span></p>)}
             {!entity.statuses.length && <p>No active effects.</p>}
         </InspectionDialog>}
     </div>;
