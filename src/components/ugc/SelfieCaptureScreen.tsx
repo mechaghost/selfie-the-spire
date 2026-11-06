@@ -73,6 +73,7 @@ export function SelfieCaptureScreen() {
         const ctx = canvas.getContext('2d')!;
         const sx = (video.videoWidth - size) / 2;
         const sy = (video.videoHeight - size) / 2;
+        ctx.setTransform(-1, 0, 0, 1, 512, 0);
         ctx.drawImage(video, sx, sy, size, size, 0, 0, 512, 512);
 
         const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
@@ -129,7 +130,7 @@ export function SelfieCaptureScreen() {
                     <div className="generating-content">
                         <Loader size={36} className="generating-spinner" />
                         <p className="generating-label">Creating your hero</p>
-                        <p role="status" className="generating-text">Generating your portrait and signature card. This may take up to two minutes.</p>
+                        <p role="status" className="generating-text">Fitting your photo into your Street Runner helmet.</p>
                         <button className="selfie-upload-btn" onClick={cancelUgc}>Cancel and go home</button>
                     </div>
                 </div>
@@ -149,11 +150,11 @@ export function SelfieCaptureScreen() {
             <div className="selfie-sparkle selfie-sparkle-4"><img src={eightiesIcon(18)} alt="" /></div>
 
             <h2 className="selfie-title">Show Us Your Mug</h2>
-            <p className="selfie-subtitle">Keep your face centered. Your photo is cropped to a square.</p>
+            <p className="selfie-subtitle">Center your face inside the inner circle. That area goes into your helmet.</p>
 
             <div className="selfie-viewport">
                 <div className="selfie-orbit-ring" />
-                {preview ? <img src={preview} alt="Photo preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : !cameraError ? (
+                {preview ? <img src={preview} alt="Photo preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} /> : !cameraError ? (
                     <video
                         ref={videoRef}
                         aria-hidden="true"
@@ -170,6 +171,7 @@ export function SelfieCaptureScreen() {
                 )}
                 {!preview && !cameraReady && !cameraError && <div className="selfie-placeholder capture-prompt"><Camera size={40} /><p>{cameraPending ? 'Starting camera… Allow access if prompted.' : 'Your legend starts here.'}</p><p>Choose a photo or turn on your camera.</p></div>}
                 <div className="selfie-frame" />
+                {(preview || cameraReady) && <div className="selfie-face-guide" aria-hidden="true" />}
             </div>
 
             {(ugcError || fileError) && (
@@ -195,12 +197,11 @@ export function SelfieCaptureScreen() {
                 </>}
             </div>
             {ugcError && <button className="selfie-upload-btn" onClick={() => initializeRun(crypto.randomUUID())}>Play a starter hero</button>}
-            <p className="selfie-subtitle">Your photo is sent to our server and AI service to create your hero when you choose Use this photo.</p>
+            <p className="selfie-subtitle">Your photo stays in this browser.</p>
 
             <details className="photo-handling"><summary>How your photo is used</summary>
-                <p>We crop your photo to a square and send it through our server to Google Gemini to create your fictional hero and artwork.</p>
-                <p>Your original photo is not included in the saved run. Generated artwork and your deck are saved in this browser so you can resume.</p>
-                <p>Canceling stops this app from waiting for the result. A request already sent to the AI service may still finish.</p>
+                <p>Your browser fits the center of your photo into a Street Runner helmet. Your hero uses the standard starter deck.</p>
+                <p>Your cropped portrait and battle sprite are saved on this device when you start your run.</p>
             </details>
             <input
                 ref={fileInputRef}

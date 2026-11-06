@@ -28,7 +28,7 @@ export function MainMenu() {
                             <Swords aria-hidden="true" size={23} /><span><strong>Play a starter run</strong><small>Street Runner · jump straight in</small></span><ArrowUpRight aria-hidden="true" size={24} />
                         </button>
                         <button className="menu-create" onClick={startSelfieCapture}>
-                            <Camera aria-hidden="true" size={23} /><span><strong>Create my hero</strong><small>Your photo → an AI hero & signature card</small></span><ArrowUpRight aria-hidden="true" size={24} />
+                            <Camera aria-hidden="true" size={23} /><span><strong>Put me in the game</strong><small>Your photo · Street Runner helmet</small></span><ArrowUpRight aria-hidden="true" size={24} />
                         </button>
                         <button className="menu-help" onClick={() => setHelp(true)}><BookOpen aria-hidden="true" size={17} /> How to play <ArrowRight aria-hidden="true" size={16} /></button>
                     </nav>
@@ -45,7 +45,7 @@ export function MainMenu() {
         </div>
         {card && <CardInspector card={card} onClose={() => setCard(null)} />}
         {help && <InspectionDialog title="How to play" onClose={() => setHelp(false)}>
-            <ol className="menu-rules"><li><strong>Choose your hero.</strong> Start immediately with Street Runner, or use a photo to create an AI hero and signature card.</li><li><strong>Pick a route.</strong> Choose connected stops on the map: fights, shops, rest sites, and mystery encounters.</li><li><strong>Spend your energy.</strong> Inspect a card to read it and play it. Attacks may ask you to choose an enemy. Block absorbs damage.</li><li><strong>Read the enemy intentions.</strong> End your turn when you’re ready for enemies to act. Your energy refills and Block resets on your next turn.</li><li><strong>Build for the boss.</strong> Take one card reward or skip it, upgrade at rest sites, and reach the ninth floor. If your HP reaches zero, the run ends.</li></ol>
+            <ol className="menu-rules"><li><strong>Choose your hero.</strong> Start immediately with Street Runner, or put your photo in the Street Runner’s helmet.</li><li><strong>Pick a route.</strong> Choose connected stops on the map: fights, shops, rest sites, and mystery encounters.</li><li><strong>Spend your energy.</strong> Inspect a card to read it and play it. Attacks may ask you to choose an enemy. Block absorbs damage.</li><li><strong>Read the enemy intentions.</strong> End your turn when you’re ready for enemies to act. Your energy refills and Block resets on your next turn.</li><li><strong>Build for the boss.</strong> Take one card reward or skip it, upgrade at rest sites, and reach the ninth floor. If your HP reaches zero, the run ends.</li></ol>
             <p>Your run saves in this browser. Ending a run clears that progress.</p>
             <button className="inspection-action" onClick={() => setHelp(false)}>Got it</button>
         </InspectionDialog>}

@@ -28,6 +28,6 @@ try {
     response=await fetch(`${origin}/api/generate-character`,{method:'OPTIONS',headers:{Origin:'http://localhost:5173','Access-Control-Request-Method':'POST'}});
     assert.equal(response.status,204);assert.equal(response.headers.get('access-control-allow-origin'),'http://localhost:5173');
     response=await fetch(`${origin}/api/generate-character`,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
-    assert.equal(response.status,503);assert.match((await response.json()).error,/starter hero/);
-    console.log('PASS: real server HTTP health, built HTML/JS/HEAD, security headers, CORS preflight and honest unavailable-provider response');
+    assert.equal(response.status,410);assert.match((await response.json()).error,/runs in your browser/);
+    console.log('PASS: real server HTTP health, built HTML/JS/HEAD, security headers, CORS preflight and retired generation endpoint');
 } finally {child.kill('SIGTERM');await exited;}

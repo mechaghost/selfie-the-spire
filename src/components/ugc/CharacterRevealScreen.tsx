@@ -18,9 +18,9 @@ export function CharacterRevealScreen() {
             <figure><figcaption>Your portrait</figcaption><div className="reveal-portrait visible"><img src={hero.portraitUrl || '/assets/characters/neon.webp'} alt={hero.name} className="reveal-portrait-img" /></div></figure>
             <figure><figcaption>Battle character</figcaption><img className="reveal-battle-actor" src={battleActor.fallbackImageUrl} alt={`${hero.archetype} battle appearance`} /></figure>
         </div>
-        <p className="reveal-appearance-note">{appearance.version===2 ? 'Your portrait and battle character are personalized from your photo.' : `Your portrait is personalized. Your battle character uses the shared ${hero.archetype} appearance shown here.`}</p>
+        <p className="reveal-appearance-note">{appearance.version===2 ? 'Your photo is fitted into the Street Runner’s helmet.' : `Your portrait is personalized. Your battle character uses the shared ${hero.archetype} appearance shown here.`}</p>
         <button className="reveal-back" onClick={cancelUgc}>Back to menu</button>
-        <div className="reveal-traits visible">{hero.traits.map(trait => <span key={trait} className="reveal-trait">{trait}</span>)}</div>
+        {hero.traits.length > 0 && <div className="reveal-traits visible">{hero.traits.map(trait => <span key={trait} className="reveal-trait">{trait}</span>)}</div>}
         <button className="reveal-cta visible" onClick={startGeneratedRun}>Begin your journey</button>
         <p className="reveal-hero-label">Your starting deck · inspect any card</p>
         <div className="reveal-cards visible">{cards.map(card => <div className="reveal-card-slot" key={card.instanceId}><CardItem card={card} isDraggable={false} onInspect={() => setSelected(card)} /></div>)}</div>

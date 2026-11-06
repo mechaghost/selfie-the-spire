@@ -42,19 +42,6 @@ setup();
 store.getState().endTurn(); store.getState().endTurn();
 assert.equal(store.getState().actionQueue.length, 1);
 store.setState({ resolveQueue });
-// A provider may finish even after the browser aborts. Ignore that stale result.
-let finish;
-const originalFetch = globalThis.fetch;
-globalThis.fetch = () => new Promise(resolve => { finish = resolve; });
-store.getState().startSelfieCapture();
-const pending = store.getState().submitSelfie('synthetic-local-fixture');
-store.getState().initializeRun('starter');
-finish({ ok: true, json: async () => ({ character: { name: 'Stale' }, cards: [] }) });
-await pending;
-assert.equal(store.getState().seed, 'starter');
-assert.equal(store.getState().ugcPhase, null);
-assert.equal(store.getState().generatedCharacter, null);
-globalThis.fetch = originalFetch;
 store.getState().initializeRun('cleanup');
 setup({ combatResult: 'victory', cardRewards: [card], goldReward: 25 });
 const initialGold = store.getState().player.gold;
@@ -64,7 +51,7 @@ store.getState().claimCardReward(card.instanceId);
 assert.equal(store.getState().player.gold, initialGold + 25);
 assert.equal(store.getState().masterDeck.length, initialDeck + 1);
 store.getState().initializeRun('cleanup');
-console.log('PASS: reward commitment is idempotent; phase guards, missing/dead targets, duplicate play/end turn, stale generation response');
+console.log('PASS: reward commitment is idempotent; phase guards, missing/dead targets, duplicate play/end turn');
 
 // Rest resolves once, preserves feedback, and never over-heals.
 store.getState().initializeRun('rest');

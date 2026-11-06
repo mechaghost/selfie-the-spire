@@ -5,7 +5,7 @@ import { validateSave } from '../core/saveValidation';
 import { attackDamage, blockGain } from '../core/combatMath';
 import { describeCardEffects } from '../core/cardText';
 import { create } from 'zustand';
-import { Card, Enemy, Player, GameAction, FloatingText, ActiveAnimation, AnimationType, ScreenShake, Effect, StatusEffect, UgcPhase, GeneratedCharacter, GeneratedCard, GenerateCharacterResponse } from '../core/models';
+import { Card, Enemy, Player, GameAction, FloatingText, ActiveAnimation, AnimationType, ScreenShake, Effect, StatusEffect, UgcPhase, GeneratedCharacter, GeneratedCard } from '../core/models';
 import { RNG } from '../core/rng';
 import { createCardInstance, upgradeCard, canUpgradeCard, CARD_DATABASE } from '../data/cards';
 import { STATUS_REGISTRY } from '../data/statusEffects';
@@ -573,63 +573,42 @@ export const useGameStore = create<GameState>((set, get) => ({
     },
 
     submitSelfie: async (imageBase64: string) => {
-        if (get().ugcPhase === 'generating') return;
+        if (get().ugcPhase !== 'capture') return;
         cancelGeneration();
         const request = generationRequest;
         const controller = new AbortController();
         generationController = controller;
-        const timeout = setTimeout(() => controller.abort(), 120_000);
         set({ ugcPhase: 'generating', selfieDataUrl: imageBase64, ugcError: null });
         try {
-            const apiUrl = (import.meta.env.VITE_API_URL || '') + '/api/generate-character';
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ image: imageBase64 }),
-                signal: controller.signal,
-            });
-            if (!response.ok) {
-                const errData = await response.json().catch(() => null);
-                throw new Error(errData?.error || `Server error: ${response.status}`);
+            if (imageBase64.length > 512_000 || !/^data:image\/jpeg;base64,[A-Za-z0-9+/]+={0,2}$/.test(imageBase64)) {
+                throw new Error('Invalid photo');
             }
-            const data: GenerateCharacterResponse = await response.json();
+            const { composeSelfieHero } = await import('../core/composeSelfieHero');
+            const idleImageUrl = await composeSelfieHero(imageBase64, controller.signal);
             if (request !== generationRequest) return;
 
-            if(data.combatArtwork) {
-                if(data.combatArtwork.version!==1 || data.combatArtwork.background!=='green')throw new Error('Unsupported character background');
-                const {prepareBrowserCombatCutout}=await import('../core/browserCombatCutout');
-                const idleImageUrl=await prepareBrowserCombatCutout(data.combatArtwork.imageUrl,controller.signal);
-                if(request!==generationRequest)return;
-                controller.signal.throwIfAborted();
-                data.character.combatAppearance={version:2,actorVisualId:`hero-${data.character.archetype}`,idleImageUrl};
-            }
-
-            // Append colorless starter cards to the generated deck for reveal
-            const colorlessStarters = ['finesse', 'shiv_toss']
-                .map(id => CARD_DATABASE[id])
-                .filter(Boolean)
-                .map(c => ({
-                    id: c.id,
-                    name: c.name,
-                    type: c.type,
-                    cost: c.cost,
-                    description: c.description,
-                    target: c.target,
-                    effects: c.effects,
-                    imageId: c.imageId,
-                    exhausts: c.exhausts,
-                }));
-
+            const starter = CHARACTERS.street_runner;
             set({
                 ugcPhase: 'reveal',
-                generatedCharacter: data.character,
-                generatedCards: [...data.cards.map(card => ({ ...card, description: describeCardEffects(card) })), ...colorlessStarters],
+                selfieDataUrl: null,
+                generatedCharacter: {
+                    id: 'photo-runner',
+                    name: starter.name,
+                    archetype: 'neon',
+                    title: 'Neo Miami Local',
+                    portraitUrl: imageBase64,
+                    maxHp: starter.maxHp,
+                    maxEnergy: starter.maxEnergy,
+                    startingGold: starter.startingGold,
+                    traits: [],
+                    combatAppearance: { version: 2, actorVisualId: 'hero-neon', idleImageUrl },
+                },
+                generatedCards: starter.startingDeck.map(id => CARD_DATABASE[id]),
             });
-        } catch (err: any) {
+        } catch {
             if (request !== generationRequest) return;
-            set({ ugcPhase: 'capture', ugcError: controller.signal.aborted ? 'That took too long. Please try again.' : err instanceof TypeError ? 'Could not connect. Check your connection and try again.' : err.message || 'Could not create your hero. Please try again.' });
+            set({ ugcPhase: 'capture', selfieDataUrl: null, ugcError: 'Could not fit that photo. Try another JPEG or PNG.' });
         } finally {
-            clearTimeout(timeout);
             if (request === generationRequest) generationController = null;
         }
     },

@@ -51,7 +51,9 @@ export function EntityPanel({ entity, isPlayer, onInspect }: EntityPanelProps) {
         dragState: state.dragState,
         entityBounds: state.entityBounds,
         playerPortraitUrl: state.player?.portraitUrl,
-        playerSpriteUrl: state.player?.spriteUrl,
+        playerSpriteUrl: state.player?.combatAppearance?.version === 2
+            ? state.player.combatAppearance.idleImageUrl
+            : state.player?.spriteUrl,
         playerStatuses: state.player.statuses,
     }));
     const hpPercentage = (entity.hp / entity.maxHp) * 100;

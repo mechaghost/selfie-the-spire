@@ -164,7 +164,7 @@ export function resolveAppearance(value: CombatAppearance | undefined, archetype
         // cutout uses procedural movement until identity-matched poses are available.
         return {...base,id:`${base.id}-personalized`,fallbackImageUrl:value.idleImageUrl,
             atlasUrl:undefined,atlasFrames:undefined,keyPoses:undefined,clips:{},footAnchor:[.5,.99],
-            productionStatus:'review',provenance:'Personalized generated combat cutout; matching pose generation pending.'};
+            productionStatus:'review',provenance:'Personalized combat sprite; procedural motion.'};
     }
     return base;
 }

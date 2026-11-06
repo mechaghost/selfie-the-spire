@@ -602,3 +602,11 @@
 
 .photo-handling { width: min(100%, 34rem); color: #c8d2e9; font-size: .75rem; line-height: 1.6; padding-bottom: 1rem; }
 .photo-handling summary { cursor: pointer; text-align: center; }
+
+.selfie-face-guide {
+    position: absolute;
+    inset: 14%;
+    border: 2px dashed #79eff4;
+    border-radius: 50%;
+    pointer-events: none;
+}
