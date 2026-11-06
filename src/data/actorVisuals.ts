@@ -89,6 +89,8 @@ ACTOR_VISUALS.sewer_slime.keyPoses={attack:{imageUrl:'/assets/battle/actors/sewe
 ACTOR_VISUALS.neon_wraith.keyPoses={attack:{imageUrl:'/assets/battle/actors/neon-wraith-attack-v2.webp',footAnchor:[.5,.99]}};
 ACTOR_VISUALS.neon_wraith.keyPoses.hit={imageUrl:'/assets/battle/actors/neon-wraith-hit-v1.webp',footAnchor:[.5,.99]};
 ACTOR_VISUALS.neon_wraith.clips.hit={frames:['hit','idle'],durationsMs:[140,80],loop:false,completion:'idle'};
+ACTOR_VISUALS.neon_wraith.keyPoses.defeat={imageUrl:'/assets/battle/actors/neon-wraith-defeat-v1.webp',footAnchor:[.5,.99]};
+ACTOR_VISUALS.neon_wraith.clips.defeat={frames:['defeat'],durationsMs:[280],loop:false,completion:'hold'};
 // Explicit key-pose timelines; these do not represent approved multi-frame animation art.
 for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost','graffiti_imp','neon_junkie','stray_voltage','dumpster_crawler','boombox_brute','manhole_mimic','the_billboard','sewer_slime','neon_wraith']) {
     ACTOR_VISUALS[id].clips.attack={frames:['idle','attack','idle'],durationsMs:[80,160,80],loop:false,completion:'idle'};

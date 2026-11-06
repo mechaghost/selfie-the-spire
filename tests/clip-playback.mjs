@@ -70,3 +70,9 @@ console.log('PASS: Rat authored blink duration, cycle boundary and reduced-motio
 for(const [ms,frame] of [[0,'idle'],[4199,'idle'],[4200,'blink'],[4299,'blink'],[4300,'idle'],[8500,'blink']])assert.equal(clipFrameAt(neon.clips.idle,ms),frame);
 assert.equal(clipFrameAt(neon.clips.idle,4250,true),null);
 console.log('PASS: Street Runner authored blink duration, cycle boundary and reduced-motion static fallback');
+
+const wraith=ACTOR_VISUALS.neon_wraith;
+for(const ms of [0,140,279,280,10000])assert.equal(clipFrameAt(wraith.clips.defeat,ms),'defeat','Wraith defeat holds, never returns to living idle');
+assert.equal(clipFrameAt(wraith.clips.defeat,0,true),'defeat','reduced motion still communicates defeat');
+for(const [ms,expected] of [[0,'hit'],[139,'hit'],[140,'idle'],[219,'idle'],[220,null]])assert.equal(clipFrameAt(wraith.clips.hit,ms),expected);
+console.log('PASS: Wraith hit recovery and held defeat, including reduced-motion defeat');
