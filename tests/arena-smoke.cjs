@@ -25,8 +25,8 @@ async function tabTo(page, control, label) {
     assert.fail(`Could not reach ${label} with Tab`);
 }
 
-async function playFight(page, { viewport, input, reducedMotion = 'no-preference', loseGraphics = false }) {
-    const captureId = `${viewport.width}-${input}-${loseGraphics ? 'graphics-loss' : reducedMotion}`;
+async function playFight(page, { viewport, input, reducedMotion = 'no-preference', loseGraphics }) {
+    const captureId = `${viewport.width}-${input}-${loseGraphics ? `graphics-loss-${loseGraphics}` : reducedMotion}`;
     const activate = async (control, label) => {
         if (input === 'touch') return control.tap();
         await tabTo(page, control, label);
@@ -50,7 +50,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     await activate(page.locator('.map-node.available.type-combat').first(), 'first fight');
     const stage = page.locator('.battle-stage-visual');
     const canvas = stage.locator('canvas');
-    await canvas.waitFor();
+    await page.locator('.battle-stage-visual[data-stage-status="ready"] canvas').waitFor();
     assert.equal(await page.evaluate(() => typeof window.__gameStore), 'undefined');
     const targets = page.locator('.actor-target:not([disabled])');
     assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => element.getAttribute('aria-label').split(',')[0])),
@@ -95,26 +95,50 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
             const { index, cost } = affordable[0];
             await activate(handAttacks.nth(index), labels[index]);
             await activate(page.getByRole('button', { name: 'Play card', exact: true }), 'Play card');
-            if (plays === 0 && loseGraphics) {
+            const interrupt = plays === 0 && loseGraphics;
+            if (interrupt) {
                 await targetPrompt.waitFor();
-                const energyDisplay = page.locator('.energy-current');
-                const beforeLoss = await energyDisplay.textContent();
-                await canvas.evaluate(element => {
+                await canvas.evaluate((element, phase) => {
                     const gl = element.getContext('webgl2') ?? element.getContext('webgl');
                     const extension = gl?.getExtension('WEBGL_lose_context');
                     if (!extension) throw new Error('The active renderer does not support WEBGL_lose_context');
-                    extension.loseContext();
-                });
+                    if (phase === 'targeting') {
+                        extension.loseContext();
+                        return;
+                    }
+                    const stageElement = element.closest('.battle-stage-visual');
+                    const target = document.querySelector('[data-combat-target]:not(:disabled)');
+                    const feedback = document.querySelector('.combat-feedback');
+                    const observer = new MutationObserver(() => {
+                        if (!feedback.querySelector('.impact-damage')) return;
+                        stageElement.dataset.statusAtImpact = stageElement.dataset.stageStatus;
+                        observer.disconnect();
+                    });
+                    observer.observe(feedback, { childList: true });
+                    target.addEventListener('click', () => setTimeout(() => {
+                        stageElement.dataset.energyAtLoss = document.querySelector('.energy-current').textContent;
+                        stageElement.dataset.targetAtLoss = target.getAttribute('aria-label');
+                        extension.loseContext();
+                    }, 0), { once: true });
+                }, loseGraphics);
+            }
+            if (interrupt && loseGraphics === 'targeting') {
                 await stage.locator('.battle-dom-fallback').waitFor();
-                await page.getByRole('button', { name: 'Retry graphics' }).waitFor();
-                assert.equal(await stage.getAttribute('data-stage-status'), 'degraded');
                 assert.equal(await targetPrompt.isVisible(), true, 'graphics loss dismissed the card target prompt');
-                assert.equal(await energyDisplay.textContent(), beforeLoss, 'graphics loss spent energy');
+                assert.equal(await page.locator('.energy-current').textContent(), String(energy), 'graphics loss spent energy');
             }
             if (await targetPrompt.isVisible()) await activate(targets.first(), 'first living enemy');
+            if (interrupt && loseGraphics === 'resolution') {
+                await stage.locator('.battle-dom-fallback').waitFor();
+                assert.equal(await stage.getAttribute('data-energy-at-loss'), String(energy - cost));
+                assert.match(await stage.getAttribute('data-target-at-loss'), /14 of 14 HP/);
+            }
             if (plays === 0) {
                 const impact = page.locator('.combat-impact.impact-damage').first();
                 await impact.waitFor();
+                if (interrupt && loseGraphics === 'resolution') {
+                    assert.equal(await stage.getAttribute('data-status-at-impact'), 'degraded');
+                }
                 if (reducedMotion === 'reduce') {
                     assert.equal(await impact.evaluate(element => getComputedStyle(element).animationName), 'none');
                 }
@@ -171,7 +195,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     assert.equal(save.masterDeck.length, 13);
     assert.ok(save.player.gold > 99);
     assert.deepEqual(errors, []);
-    console.log(`PASS ${viewport.width}×${viewport.height} (${input}, ${loseGraphics ? 'graphics loss and retry' : reducedMotion}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
+    console.log(`PASS ${viewport.width}×${viewport.height} (${input}, ${loseGraphics ? `graphics loss during ${loseGraphics} and retry` : reducedMotion}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
     return {
         plays, enemyTurns, rewardChoices, stop,
         hp: save.player.hp,
@@ -193,7 +217,8 @@ async function main() {
             { viewport: { width: 844, height: 390 }, input: 'touch' },
             { viewport: { width: 320, height: 568 }, input: 'keyboard' },
             { viewport: { width: 320, height: 568 }, input: 'touch', reducedMotion: 'reduce' },
-            { viewport: { width: 320, height: 568 }, input: 'touch', loseGraphics: true },
+            { viewport: { width: 320, height: 568 }, input: 'touch', loseGraphics: 'targeting' },
+            { viewport: { width: 320, height: 568 }, input: 'touch', loseGraphics: 'resolution' },
         ];
         let portraitBaseline;
         for (const testCase of cases) {

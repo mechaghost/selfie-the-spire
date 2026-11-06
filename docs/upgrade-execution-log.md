@@ -659,3 +659,7 @@ The arena smoke now repeats the same 320 × 568 Rat Pack fight with the browser'
 ### Production WebGL loss during targeting
 
 The production arena smoke now includes a fifth case at 320 × 568. It calls the live canvas's `WEBGL_lose_context` extension while targeting the first Jab, waits for the degraded DOM renderer, and asserts that the target prompt and energy remain intact. The Jab resolves in the fallback and takes the first Rat from 14 to 8 HP. Retry graphics restores Pixi without changing the enemy state. The fight, reward choices, and reloaded save match the normal portrait baseline, including the RNG snapshot. All five smoke cases passed. This exercises real context loss in Chrome with software WebGL. Mid-resolution device recovery remains open. Prior CI run 42182875694 passed.
+
+### Production WebGL loss during damage resolution
+
+Added a sixth arena smoke case. It triggers actual WebGL loss just after Jab is committed. At the trigger, energy is spent and the Rat still has 14 HP. The first damage feedback arrives with the DOM fallback active, the Rat ends at 8 HP, and Retry graphics preserves that state. Final reward choices and save data, including RNG, match the uninterrupted portrait run. All six cases passed in local production Chrome with software WebGL. Prior CI run 42183193026 passed. Physical-device context-loss verification remains open.
