@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 92967137,
-  "runtimeBytes": 22140648,
+  "sourceBytes": 95372084,
+  "runtimeBytes": 22516652,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -431,6 +431,17 @@
       "resolution": 0.5,
       "sourceBytes": 2435970,
       "runtimeBytes": 359542,
+      "decodedRGBABytes": 1572864
+    },
+    {
+      "asset": "actors/taxi-ghost-attack-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
+      "sourceBytes": 2404947,
+      "runtimeBytes": 376004,
       "decodedRGBABytes": 1572864
     },
     {

@@ -65,9 +65,10 @@ ACTOR_VISUALS.vending_golem.atlasFrames=GOLEM_ATLAS_FRAMES;
 for(const archetype of ['chrome','volt','concrete','smoke']) {
     ACTOR_VISUALS[`hero-${archetype}`].keyPoses={attack:{imageUrl:`/assets/battle/actors/${archetype}-attack-v1.webp`,footAnchor:[.5,.98]}};
 }
+ACTOR_VISUALS.taxi_ghost.keyPoses={attack:{imageUrl:'/assets/battle/actors/taxi-ghost-attack-v1.webp',footAnchor:[.5,.99]}};
 ACTOR_VISUALS.smoke_specter.keyPoses={attack:{imageUrl:'/assets/battle/actors/smoke-specter-attack-v1.webp',footAnchor:[.5,.99]}};
 // Explicit key-pose timelines; these do not represent approved multi-frame animation art.
-for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_golem','fire_escape_spider','smoke_specter']) {
+for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost']) {
     ACTOR_VISUALS[id].clips.attack={frames:['idle','attack','idle'],durationsMs:[80,160,80],loop:false,completion:'idle'};
 }
 Object.values(ACTOR_VISUALS).forEach(validateActorVisual);

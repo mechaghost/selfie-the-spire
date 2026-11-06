@@ -371,3 +371,11 @@ TypeScript, 168 pure layout cases, renderer-streaming and production build pass.
 Moved the shared intent description into the pure intent-view module while retaining EntityPanel's public export for existing consumers. Damage-before-Block/status-change caveats now appear only for executable Damage effects; Golem's initial guard/status description is exactly “Current preview: Gains 10 Block. Gains 2 Spikes.” Healing wording distinguishes enemy self-healing from healing the player. No combat effects changed.
 
 Validation: 78 roster intent descriptions checked for caveat relevance and undefined/NaN text; the real Golem definition is asserted directly. Modified-damage and healing-recipient examples pass. Existing 66 authoritative Block preview checks, copy contracts across 27 base/50 archetype cards, TypeScript and diff checks pass. The initial added example used the display name as a status ID; corrected it to use the real roster definition instead of an invented fixture. No deployment.
+
+### Taxi Ghost attack art and pending Specter mobile check
+
+Generated Taxi Ghost's leftward bite/lunge contact pose with built-in imagegen using its idle reference. Inspected four wheel-legs, checker stripe, rusted yellow body and toothed bumper; source canvas remains 1536×1024 with alpha. Archived original and generated a verified lossless 768×512 derivative (376,004 bytes), registered at .5/.99 and the existing finite 80/160/80 ms timeline.
+
+Browser study at 390×844: held Taxi attack at 140 ms, then sampled 320 ms to confirm idle recovery; inspected the previously pending Specter attack at 140 ms. Both silhouettes remain distinct and grounded inside the scene without HUD overlap, and no rectangular background is visible. Browser warnings/errors empty. Evidence taxi-contact-mobile.png and specter-contact-mobile.png under tests/.e2e-out. These are contact/recovery samples, not full clip-motion approval or a complete device matrix.
+
+Validation: clip-playback (including Taxi), renderer-assets, texture-budget, TypeScript and diff checks passed; 55 loose assets packaged with exact decoded derivative checks. Remaining enemy pose coverage, authored inbetweens, scene-wide motion review and release gates remain open. No deployment.
