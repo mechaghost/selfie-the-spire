@@ -386,20 +386,20 @@
       "keyPoses": [
         "attack",
         "hit",
-        "defeat"
+        "defeat",
+        "guard"
       ],
       "timelines": [
         "hit",
         "defeat",
+        "guard",
         "attack"
       ],
       "missingContactPoses": [
-        "guard",
         "cast"
       ],
       "missingTimelines": [
         "idle",
-        "guard",
         "cast"
       ]
     },
