@@ -207,17 +207,17 @@
       "keyPoses": [
         "attack",
         "hit",
-        "defeat"
+        "defeat",
+        "blink"
       ],
       "timelines": [
         "hit",
         "defeat",
+        "idle",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "idle"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "dumpster_crawler",

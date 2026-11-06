@@ -38,9 +38,10 @@ def encode(source):
         # increase an existing smaller tier (the wider attack is already 444px).
         if relative.parts[0]=='actors' and relative.name.startswith('alley-rat-'):
             resolution=min(resolution,672/max(rgba.size))
-        if relative.parts[0]=='actors' and relative.name.startswith(('sewer-slime-', 'graffiti-imp-', 'stray-voltage-')):
+        if relative.parts[0]=='actors' and relative.name.startswith(('sewer-slime-', 'graffiti-imp-')):
             resolution=min(resolution,480/max(rgba.size))
-        if relative.parts[0]=='actors' and relative.name=='graffiti-imp-blink-v1.webp':
+        # Keep the Street Ambush trio under its transfer budget with both idle loops.
+        if relative.parts[0]=='actors' and (relative.name=='graffiti-imp-blink-v1.webp' or relative.name.startswith('stray-voltage-')):
             resolution=min(resolution,416/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith('boombox-brute-'):
             resolution=min(resolution,540/max(rgba.size))

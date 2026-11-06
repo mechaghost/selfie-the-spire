@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 307059225,
-  "runtimeBytes": 47012384,
+  "sourceBytes": 309307711,
+  "runtimeBytes": 47014800,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -1412,53 +1412,66 @@
       "asset": "actors/stray-voltage-attack-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 480,
-      "runtimeHeight": 320,
-      "resolution": 0.3125,
+      "runtimeWidth": 416,
+      "runtimeHeight": 278,
+      "resolution": 0.2708333333333333,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2331425,
-      "runtimeBytes": 155560,
-      "decodedRGBABytes": 614400
+      "runtimeBytes": 121408,
+      "decodedRGBABytes": 462592
+    },
+    {
+      "asset": "actors/stray-voltage-blink-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 416,
+      "runtimeHeight": 278,
+      "resolution": 0.2708333333333333,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 2248486,
+      "runtimeBytes": 109758,
+      "decodedRGBABytes": 462592
     },
     {
       "asset": "actors/stray-voltage-defeat-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 480,
-      "runtimeHeight": 320,
-      "resolution": 0.3125,
+      "runtimeWidth": 416,
+      "runtimeHeight": 278,
+      "resolution": 0.2708333333333333,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 1470447,
-      "runtimeBytes": 81642,
-      "decodedRGBABytes": 614400
+      "runtimeBytes": 63590,
+      "decodedRGBABytes": 462592
     },
     {
       "asset": "actors/stray-voltage-hit-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 480,
-      "runtimeHeight": 320,
-      "resolution": 0.3125,
+      "runtimeWidth": 416,
+      "runtimeHeight": 278,
+      "resolution": 0.2708333333333333,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2050228,
-      "runtimeBytes": 118292,
-      "decodedRGBABytes": 614400
+      "runtimeBytes": 92704,
+      "decodedRGBABytes": 462592
     },
     {
       "asset": "actors/stray-voltage-idle-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 480,
-      "runtimeHeight": 320,
-      "resolution": 0.3125,
+      "runtimeWidth": 416,
+      "runtimeHeight": 278,
+      "resolution": 0.2708333333333333,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2269398,
-      "runtimeBytes": 137048,
-      "decodedRGBABytes": 614400
+      "runtimeBytes": 107498,
+      "decodedRGBABytes": 462592
     },
     {
       "asset": "actors/street-runner-attack-v1.webp",

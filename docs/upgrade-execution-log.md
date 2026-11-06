@@ -869,3 +869,7 @@ Added a 140 ms dip of the amber tubes after 6,100 ms of idle. The first draft re
 ### Stagger duplicate enemy idle loops
 
 Enemy idle clips now sample a deterministic 613 ms phase offset per slot. Identical enemies can blink at different times even when they mount in the same frame. Resizing preserves the phase, while the art scrubber still samples the exact requested frame and reduced motion holds idle. The controlled Pixi renderer test verifies these cases with two Slimes and also exercises guard/cast sequencing. Actor motion, TypeScript and both production build variants passed. Linux run 42205335776 passed on the preceding revision.
+
+### Stray Voltage authored idle
+
+Added a 120 ms dip in the eye lamps and coil glow after 5,100 ms of idle, with a .961 foot anchor to match the base pose. The source alpha masks overlap by 95.8% intersection-over-union. In the 320 × 568 Pixi study, the paws stay planted as the lamps change. Captures: `tests/.e2e-out/stray-idle-{base,dip,restored}-320.png`. Stray Voltage uses a 416 px runtime tier so the Street Ambush trio stays within budget with both new idle loops. All 550 encounter combinations, texture caps, bounds, playback and TypeScript passed.

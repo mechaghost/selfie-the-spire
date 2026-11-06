@@ -758,30 +758,37 @@
   "/assets/battle/actors/stray-voltage-attack-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 480,
-    "runtimeHeight": 320,
-    "resolution": 0.3125
+    "runtimeWidth": 416,
+    "runtimeHeight": 278,
+    "resolution": 0.2708333333333333
+  },
+  "/assets/battle/actors/stray-voltage-blink-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 416,
+    "runtimeHeight": 278,
+    "resolution": 0.2708333333333333
   },
   "/assets/battle/actors/stray-voltage-defeat-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 480,
-    "runtimeHeight": 320,
-    "resolution": 0.3125
+    "runtimeWidth": 416,
+    "runtimeHeight": 278,
+    "resolution": 0.2708333333333333
   },
   "/assets/battle/actors/stray-voltage-hit-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 480,
-    "runtimeHeight": 320,
-    "resolution": 0.3125
+    "runtimeWidth": 416,
+    "runtimeHeight": 278,
+    "resolution": 0.2708333333333333
   },
   "/assets/battle/actors/stray-voltage-idle-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 480,
-    "runtimeHeight": 320,
-    "resolution": 0.3125
+    "runtimeWidth": 416,
+    "runtimeHeight": 278,
+    "resolution": 0.2708333333333333
   },
   "/assets/battle/actors/street-runner-attack-v1.webp": {
     "width": 1106,
