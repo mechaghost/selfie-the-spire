@@ -673,3 +673,9 @@ The 320 × 568 solo Pixi study showed distinct silhouettes and a disabled defeat
 ### Five districts on production combat reload
 
 The arena now exposes the active district in its accessible name. The legacy combat title uses the floor's district rather than a fixed Ocean Drive label. At 320 × 568, an arena-enabled production build restored a saved starter fight with its floor set to 1, 3, 5, 7 and 9 in separate browser contexts. Each case displayed the expected accessible district name, loaded its own background and ground assets, reached Pixi ready and had an enabled End Turn control. The browser reported no page errors. Captures: `tests/.e2e-out/district-production-{ocean-drive,wynwood,underpass,club-backlot,rooftop}-320.png`. This isolates district selection from progression. The encounter was reused across floors, including the rooftop, and does not verify a legal nine-floor route. All 30 regression suites, six production smoke cases and TypeScript passed.
+
+### Legal nine-floor arena route
+
+Updated the browser full-run harness for local selfie composition, explicit rest-site exits and the arena renderer. The victory case pins a run seed and checks that every selected stop is reachable. At 390 × 844, the scripted run entered Pixi combat in all five districts, cleared six fights and three rest stops, defeated Subway Wyrm, claimed an upgraded reward and reached Spire Cleared with 42 HP, 254 gold and 18 cards. The defeat case ended on floor 6. The full mechanics, victory and defeat suite passed without unexpected failed requests or console errors.
+
+Run with `node tests/e2e.cjs all`. This harness drives legal commands through the development store. The separate production smoke covers touch and keyboard UI input. Physical-device nine-floor play, roster approval and live release remain open.

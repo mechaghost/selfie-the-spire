@@ -10,7 +10,7 @@
  * Modes:
  *   mechanics — deterministic combat-engine checks (statuses, rewards,
  *               loot tiers, run completion, corpse guard)
- *   victory   — full run: selfie → generation → 9 floors → beat the boss
+ *   victory   — full run: selfie → local sprite → 9 floors → beat the boss
  *   defeat    — full run that stops blocking from floor 5 and dies
  *   all       — mechanics + victory + defeat
  *
@@ -28,7 +28,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(__dirname, '.e2e-out');
 const BASE = process.env.E2E_BASE || 'http://localhost:5173';
-const API_HEALTH = 'http://localhost:3001/health';
+
 const FIXTURE = path.join(__dirname, 'fixtures', 'bob_ross.jpg');
 
 const mode = (process.argv[2] || 'all').toLowerCase();
@@ -124,13 +124,7 @@ async function ensureServers() {
         launch('npx', ['vite', '--port', '5173'], ROOT, 'vite.log');
         await waitFor(BASE, 'vite');
     }
-    if (await up(API_HEALTH)) {
-        console.log('  API server already running on :3001');
-    } else {
-        console.log('  starting API server...');
-        launch('npm', ['run', 'dev'], path.join(ROOT, 'server'), 'server.log');
-        await waitFor(API_HEALTH, 'API server');
-    }
+
 }
 
 // ── Shared page helpers ─────────────────────────────────────────────
@@ -157,7 +151,9 @@ async function newPage(browser, consoleErrors, failedRequests) {
     page.on('console', msg => { if (msg.type() === 'error') consoleErrors.push(msg.text()); });
     page.on('pageerror', err => consoleErrors.push('PAGEERROR: ' + err.message));
     page.on('requestfailed', req => failedRequests.push(req.url()));
-    await page.goto(BASE);
+    const appUrl = new URL(BASE);
+    appUrl.searchParams.set('arena', '');
+    await page.goto(appUrl.href);
     await page.waitForFunction(() => !!window.__gameStore, null, { timeout: 20000 });
     await freshStore(page);
     return page;
@@ -376,6 +372,7 @@ async function runMechanics(page) {
 // ── Full-run suite (victory / defeat) ───────────────────────────────
 async function runFullRun(page, runMode) {
     console.log(`— full run: ${runMode} —`);
+    await page.setViewportSize({ width: 390, height: 844 });
 
     // Selfie from the fixture (read in Node, no public/ copy needed)
     let dataUrl;
@@ -394,20 +391,29 @@ async function runFullRun(page, runMode) {
 
     const gen = await page.evaluate(async (img) => {
         const store = window.__gameStore;
+        store.getState().startSelfieCapture();
         await store.getState().submitSelfie(img);
         const s = store.getState();
         return { phase: s.ugcPhase, name: s.generatedCharacter?.name, archetype: s.generatedCharacter?.archetype, cards: s.generatedCards?.length, err: s.ugcError };
     }, dataUrl);
-    check(`[${runMode}] character generated`, gen.phase === 'reveal', JSON.stringify(gen));
+    check(`[${runMode}] selfie hero created`, gen.phase === 'reveal', JSON.stringify(gen));
     if (gen.phase !== 'reveal') return;
     console.log(`  Character: ${gen.name} (${gen.archetype}), ${gen.cards} cards`);
 
-    await page.evaluate(() => window.__gameStore.getState().startGeneratedRun());
+    await page.evaluate(() => {
+        const now = Date.now;
+        Date.now = () => 1760000000000;
+        try { window.__gameStore.getState().startGeneratedRun(); }
+        finally { Date.now = now; }
+    });
 
+    // This route visits a real combat in every district of the pinned seed.
+    const victoryRoute = ['node_1_1', 'node_2_2', 'node_3_1', 'node_4_0', 'node_5_0', 'node_6_0', 'node_7_0', 'node_8_0', 'node_boss'];
+    const districts = new Set();
     let bossBeaten = false;
     let died = false;
     for (let floor = 1; floor <= 9; floor++) {
-        const nav = await page.evaluate(async () => {
+        const nav = await page.evaluate(async (plannedStop) => {
             const store = window.__gameStore;
             const s = store.getState();
             const mapData = window.__mapgen.generateMap(s.seed);
@@ -423,17 +429,25 @@ async function runFullRun(page, runMode) {
             const priority = hpPct < 0.5
                 ? ['Rest', 'Combat', 'Shop', 'Unknown', 'Elite', 'Boss']
                 : ['Combat', 'Shop', 'Unknown', 'Rest', 'Elite', 'Boss'];
-            let chosen = null;
-            for (const t of priority) { chosen = available.find(n => n.type === t); if (chosen) break; }
+            let chosen = plannedStop ? available.find(node => node.id === plannedStop) : null;
+            if (plannedStop && !chosen) throw new Error(`Planned stop ${plannedStop} is not reachable`);
+            for (const type of priority) {
+                if (chosen) break;
+                chosen = available.find(node => node.type === type);
+            }
             if (!chosen) chosen = available[0];
             store.getState().advanceFloor(chosen);
             const a = store.getState();
             return { floor: a.floor, type: chosen.type, inCombat: a.inCombat, nodeEvent: a.nodeEvent, hp: `${a.player.hp}/${a.player.maxHp}` };
-        });
+        }, runMode === 'victory' ? victoryRoute[floor - 1] : null);
         if (nav.done) break;
         console.log(`  Floor ${nav.floor}: ${nav.type} — HP ${nav.hp}`);
 
         if (nav.inCombat) {
+            await page.locator('.battle-stage-visual[data-stage-status="ready"] canvas').waitFor();
+            const arena = await page.locator('.battle-stage-visual').getAttribute('aria-label');
+            districts.add(arena);
+            console.log(`    ${arena}`);
             const throwFight = runMode === 'defeat' && floor >= 5;
             await page.evaluate((giveUp) => {
                 if (window.__combatAI) clearInterval(window.__combatAI);
@@ -498,7 +512,11 @@ async function runFullRun(page, runMode) {
                 if (nav.type === 'Boss') bossBeaten = true;
             }
         } else if (nav.nodeEvent === 'rest') {
-            await page.evaluate(() => window.__gameStore.getState().restHeal());
+            await page.evaluate(() => {
+                const state = window.__gameStore.getState();
+                state.restHeal();
+                state.dismissNodeEvent();
+            });
         } else if (nav.nodeEvent === 'shop') {
             await page.evaluate(() => window.__gameStore.getState().dismissNodeEvent());
         } else if (nav.nodeEvent === 'mystery') {
@@ -526,6 +544,10 @@ async function runFullRun(page, runMode) {
     await page.screenshot({ path: path.join(OUT_DIR, `final_${runMode}.png`) });
 
     if (runMode === 'victory') {
+        const expected = ['Ocean Drive', 'Wynwood After Dark', 'Floodline Underpass', 'Club Backlot', 'Skyline Rooftop'];
+        check('[victory] fought in all five districts',
+            [...districts].join('|') === expected.map(name => `Combat arena · ${name}`).join('|'),
+            [...districts].join(' | '));
         check('[victory] boss beaten', bossBeaten);
         check('[victory] run ends on SPIRE CLEARED', final.runComplete === true);
     } else {
@@ -547,7 +569,7 @@ async function main() {
 
     await ensureServers();
 
-    const browser = await chromium.launch({ executablePath, headless: true });
+    const browser = await chromium.launch({ executablePath, headless: true, args: ['--enable-unsafe-swiftshader'] });
     const consoleErrors = [];
     const failedRequests = [];
 
