@@ -43,7 +43,12 @@ assert.deepEqual(backdrop.children.map(child=>child.zIndex),[2,0],'authored dept
 resolve('/enemy-atlas');await flush();
 assert.equal(scene.atlasViews.size,1,'optional atlas installs frame views');
 const atlasView=scene.atlasViews.get('enemy:attack');
-scene.casts.clear(); // Isolate clip sampling from the earlier status-action reaction.
+publishAction(identifyAction({type:'DAMAGE_ENTITY',payload:{sourceId:'player',targetId:'enemy',amount:6}}),'begin');
+assert.equal(scene.casts.has('enemy'),true,'another actor attacking does not cancel this source cast');
+publishAction(identifyAction({type:'DAMAGE_ENTITY',payload:{sourceId:'enemy',targetId:'player',amount:6}}),'complete');
+assert.equal(scene.casts.has('enemy'),true,'completion does not start a new pose transition');
+publishAction(identifyAction({type:'DAMAGE_ENTITY',payload:{sourceId:'enemy',targetId:'player',amount:6}}),'begin');
+assert.equal(scene.casts.has('enemy'),false,'following attack cancels the source cast before anticipation/contact');
 const preview={...snapshot,actors:snapshot.actors.map(actor=>actor.id==='enemy'?{...actor,clip:'attack',previewElapsedMs:140}:actor)};
 scene.update(preview);assert.equal(scene.sprites.get('enemy').texture,atlasView,'scrub holds contact frame');
 scene.update({...preview,actors:preview.actors.map(actor=>({...actor,previewElapsedMs:320}))});

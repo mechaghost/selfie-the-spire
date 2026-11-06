@@ -119,7 +119,11 @@ export class BattleScene {
                 this.reactions.set(notice.targetId,{at:performance.now(),effect:notice.effect});
             });
             this.unsubscribeActions=subscribePresentation(notice=>{
-                if(!this.disposed && !this.snapshot.reducedMotion && !document.hidden && notice.phase==='begin' && notice.type==='APPLY_STATUS' && notice.sourceId)this.casts.set(notice.sourceId,performance.now());
+                if(this.disposed || notice.phase!=='begin' || !notice.sourceId)return;
+                // A new attack supersedes this actor's previous cast, including during
+                // hidden/reduced-motion transitions. Other actors keep their own poses.
+                if(notice.type==='DAMAGE_ENTITY') {this.casts.delete(notice.sourceId);return;}
+                if(!this.snapshot.reducedMotion && !document.hidden && notice.type==='APPLY_STATUS')this.casts.set(notice.sourceId,performance.now());
             });
             this.app.ticker.add(this.tick);
             document.addEventListener('visibilitychange',this.visibility);

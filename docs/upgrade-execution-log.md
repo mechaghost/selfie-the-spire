@@ -293,3 +293,9 @@ Validation: texture-budget, real-Pixi actor-atlas (all four production frames at
 Verified the actual local Pixi arena study after enabling its Pixi scene control (the study defaults to DOM silhouettes). Held Golem guard at 140 ms on 390×844, 320×568 and 844×390, with three enemies and the ten-card study hand. Also inspected the attack contact frame at 390×844. Both distinct atlas frames render at the intended size, with feet inside the actor area and no enemy HUD overlap or visible atlas-edge contamination. Browser warnings/errors were empty. Evidence: tests/.e2e-out/golem-packed-guard-mobile.png, golem-packed-guard-320.png and golem-packed-guard-landscape.png. Viewport override reset afterward.
 
 This closes the previous atlas-specific browser check, not full animation approval or actual CombatView landscape hand verification. The study hero HP text has weak contrast over bright scenery; inspect the real combat HUD before deciding whether that is study-only. Production release and personalized selfie bodies remain open.
+
+### Cast-to-attack presentation correction
+
+Reproduced a lingering source cast when DAMAGE_ENTITY begins within its 220 ms lifetime: the renderer-streaming regression failed before the fix. BattleScene now removes that source's cast on attack begin, before the attack anticipation/contact pose. Other actors' casts and completion notifications are unaffected; clearing also works while hidden or reduced-motion so a stale cast cannot reappear after a mode transition. This changes presentation only.
+
+Validation: renderer-streaming passed with source-specific action-transition assertions and an atlas contact frame assertion (no manual cast-map clearing); actor-motion and combat-presentation passed, including normal/reduced/off outcome parity and impact-delta checks. TypeScript and diff checks passed. Continuous visual animation review remains open.
