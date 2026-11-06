@@ -1,0 +1,240 @@
+{
+  "revision": "ef719597d5b5b3e29d428c3c50aac5fa3cd616de",
+  "scope": "Local Node regression scripts and production build; not browser/device certification or real provider generation.",
+  "scripts": 32,
+  "passed": 32,
+  "failed": 0,
+  "results": [
+    {
+      "test": "tests/action-guards.mjs",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "log": "tests/.e2e-out/regression/action-guards.log",
+      "sha256": "fac8286c528874c135d82fbd70104de2b606a5858917958dec92a59258eee7ac"
+    },
+    {
+      "test": "tests/actor-atlas.mjs",
+      "exitCode": 0,
+      "seconds": 0.13,
+      "log": "tests/.e2e-out/regression/actor-atlas.log",
+      "sha256": "1fe91df144d3cfca6964932caf72e52eb02f94921fe4f46d6d86df670a4d2714"
+    },
+    {
+      "test": "tests/actor-motion.mjs",
+      "exitCode": 0,
+      "seconds": 0.04,
+      "log": "tests/.e2e-out/regression/actor-motion.log",
+      "sha256": "9ac8e6e2526ccb07c65a5697fc1c0a71dc9f3b0ce05a5dbbd31770affcf9083a"
+    },
+    {
+      "test": "tests/arena-production-build.mjs",
+      "exitCode": 0,
+      "seconds": 3.11,
+      "log": "tests/.e2e-out/regression/arena-production-build.log",
+      "sha256": "9e671140d6ca855e11a723547da39e2c4bb579a72190b1bba634e5b9bf3f422b"
+    },
+    {
+      "test": "tests/battle-layout.mjs",
+      "exitCode": 0,
+      "seconds": 0.04,
+      "log": "tests/.e2e-out/regression/battle-layout.log",
+      "sha256": "a5804a201f060ccad4d841d3848e208a55a9f59a290f7156eead525f7e45a9b2"
+    },
+    {
+      "test": "tests/city-map-layout.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/city-map-layout.log",
+      "sha256": "a18ad3d81ac2bd2f2c8ea66eaef9fefb24f7e476dd739797590413fa17f8f56a"
+    },
+    {
+      "test": "tests/clip-playback.mjs",
+      "exitCode": 0,
+      "seconds": 0.04,
+      "log": "tests/.e2e-out/regression/clip-playback.log",
+      "sha256": "fdc497425e7c2b22b9144e11716449b641f809d636282625f2b14af532eb1b9e"
+    },
+    {
+      "test": "tests/combat-appearance.mjs",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "log": "tests/.e2e-out/regression/combat-appearance.log",
+      "sha256": "8ebf9bda973498d88fb6611ab906b2cdc5183842af3dc785dc6c201b3d3ea763"
+    },
+    {
+      "test": "tests/combat-cutout.mjs",
+      "exitCode": 0,
+      "seconds": 0.23,
+      "log": "tests/.e2e-out/regression/combat-cutout.log",
+      "sha256": "2a6b7e8e08af093405d42466575479284970ad817074239c13b82ba68928d8ae"
+    },
+    {
+      "test": "tests/combat-deployment.mjs",
+      "exitCode": 0,
+      "seconds": 1.32,
+      "log": "tests/.e2e-out/regression/combat-deployment.log",
+      "sha256": "cb54218e1578c63347b0534f278dc6d4b8c99e4a2d107b751b7d1cb42bea5e7e"
+    },
+    {
+      "test": "tests/combat-interaction.mjs",
+      "exitCode": 0,
+      "seconds": 0.88,
+      "log": "tests/.e2e-out/regression/combat-interaction.log",
+      "sha256": "a6fbc3a2af6343a756df7f4d2fe8411ce4d0a21e39a6fa07db077c35dec3c7f1"
+    },
+    {
+      "test": "tests/combat-matting.mjs",
+      "exitCode": 0,
+      "seconds": 2.96,
+      "log": "tests/.e2e-out/regression/combat-matting.log",
+      "sha256": "1d70808ead7dd730bc83f23434bdf736acbf642c1e88f50fee56aee468aa4a96"
+    },
+    {
+      "test": "tests/combat-presentation.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/combat-presentation.log",
+      "sha256": "853326abc162ad471fb157cbdc8effdf1098f1c3e5bf3e1617a1b4c82904cbea"
+    },
+    {
+      "test": "tests/combat-tactics.mjs",
+      "exitCode": 0,
+      "seconds": 0.83,
+      "log": "tests/.e2e-out/regression/combat-tactics.log",
+      "sha256": "aef2c148cfdf6b3f0bb96598ea750f3ac802e3c9a243cb373c426f4eb1ea52a6"
+    },
+    {
+      "test": "tests/command-checkpoints.mjs",
+      "exitCode": 0,
+      "seconds": 0.13,
+      "log": "tests/.e2e-out/regression/command-checkpoints.log",
+      "sha256": "b22a3d99c5fbde2858616c90bd631d30aaae2487127566a2169147e1e0fd9123"
+    },
+    {
+      "test": "tests/copy-contracts.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/copy-contracts.log",
+      "sha256": "e367d63f76cf471fea75c7d8448f5cb27130d446cc23e330ccd5cfed2d873498"
+    },
+    {
+      "test": "tests/encounter-motion-parity.mjs",
+      "exitCode": 0,
+      "seconds": 1.16,
+      "log": "tests/.e2e-out/regression/encounter-motion-parity.log",
+      "sha256": "5c99ce5c1e05d7b7e71564d1474019904073ba267429103105b65bdcf862a4df"
+    },
+    {
+      "test": "tests/full-hand-review.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/full-hand-review.log",
+      "sha256": "76aa5322451e93312d52f30706f1d26fad05cabebd1d1f9a981a4b0cf67ab048"
+    },
+    {
+      "test": "tests/generation-budget.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/generation-budget.log",
+      "sha256": "c2021df3463b1e6b8dda1c70d6b91f656eedafcd32af183eab96a6f3318851ec"
+    },
+    {
+      "test": "tests/intent-block-parity.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/intent-block-parity.log",
+      "sha256": "0cae9f817e8a9b9c61900650e703c297a3835c5e3c8cd4b97d7a867af4b60f5b"
+    },
+    {
+      "test": "tests/location-atmosphere.mjs",
+      "exitCode": 0,
+      "seconds": 0.04,
+      "log": "tests/.e2e-out/regression/location-atmosphere.log",
+      "sha256": "4fb25810132791acc7bab7bd94704001e03474a2a34c357761bcb2ddf4cc4806"
+    },
+    {
+      "test": "tests/location-layers.mjs",
+      "exitCode": 0,
+      "seconds": 0.18,
+      "log": "tests/.e2e-out/regression/location-layers.log",
+      "sha256": "ee36d911bf7d7ba77f463ca27ff3413020fe2bd8e213ba420187cf1ccbba0d0d"
+    },
+    {
+      "test": "tests/personalized-generation-route.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/personalized-generation-route.log",
+      "sha256": "319f2b2ddc28439dda6af65af061b9d6793094ed2bf056fd2adfe8187bc85cfc"
+    },
+    {
+      "test": "tests/renderer-assets.mjs",
+      "exitCode": 0,
+      "seconds": 0.04,
+      "log": "tests/.e2e-out/regression/renderer-assets.log",
+      "sha256": "e3cb9d502905a4c4c901fb43c9e72f78f9835605b9dce054becc83564c58887d"
+    },
+    {
+      "test": "tests/renderer-streaming.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/renderer-streaming.log",
+      "sha256": "7133f1f3e17d00a999d08f8820d988631887f55e891a37029c6a1d99407a002c"
+    },
+    {
+      "test": "tests/run-motion-parity.mjs",
+      "exitCode": 0,
+      "seconds": 1.48,
+      "log": "tests/.e2e-out/regression/run-motion-parity.log",
+      "sha256": "3526759c7cd63ce818a29723a5f345bb27949acf6270cf987635f2a6985f8f13"
+    },
+    {
+      "test": "tests/run-save-continuity.mjs",
+      "exitCode": 0,
+      "seconds": 1.1,
+      "log": "tests/.e2e-out/regression/run-save-continuity.log",
+      "sha256": "e600698a638648858ff79b2e562a0e147a0036447dd5923645326e0e7808ab7f"
+    },
+    {
+      "test": "tests/save-and-generation.mjs",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "log": "tests/.e2e-out/regression/save-and-generation.log",
+      "sha256": "be0e19bbe1af1be8ac97cd90afc3fbd5d9e1ecdbaf61e8fd43bc0a488f75fc36"
+    },
+    {
+      "test": "tests/server-http.mjs",
+      "exitCode": 0,
+      "seconds": 0.18,
+      "log": "tests/.e2e-out/regression/server-http.log",
+      "sha256": "6a51094f96ca83e7dd6e00e6b71a629ee086eea19c85569f51ca52853c72af2c"
+    },
+    {
+      "test": "tests/stage-mount-lifecycle.mjs",
+      "exitCode": 0,
+      "seconds": 0.04,
+      "log": "tests/.e2e-out/regression/stage-mount-lifecycle.log",
+      "sha256": "b7c82ddd3410d998c9fa11cb945d4069118269abcd04e6b5a0f9cb0a99af1f65"
+    },
+    {
+      "test": "tests/studio-matte.mjs",
+      "exitCode": 0,
+      "seconds": 0.04,
+      "log": "tests/.e2e-out/regression/studio-matte.log",
+      "sha256": "d6ac1c950a07ff5afa30bfd000a2f5ebba5cf53fffe7953ff94447cabda15e58"
+    },
+    {
+      "test": "tests/texture-budget.mjs",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "log": "tests/.e2e-out/regression/texture-budget.log",
+      "sha256": "7cd06f0ffb5d027cccb93a5a78e94484e7ec4e983bbf9976a17909eaf7768553"
+    }
+  ],
+  "productionBuild": {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "tests/.e2e-out/regression/production-build.log",
+    "sha256": "e449372e98cf16e7ab4ce257a77ea671611aa0fb98880c500a1308c00621286c",
+    "personalizedCombatEnabled": false
+  }
+}
