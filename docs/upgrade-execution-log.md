@@ -1047,3 +1047,11 @@ Added a palm-up gesture with a .987 foot anchor and a 160/60 ms cast/idle clip. 
 Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
 
 > Create one full-body cast sprite of the exact Smoke fighter. Same dark bun, purple chevron hoodie, coral scarf, teal sash, charcoal cargo pants, cream high-tops, inked game art, right-facing camera, standing scale and ground line. She makes a deliberate skill activation gesture: front arm extended slightly downward, wrist turned palm up, fingers open, and rear hand touching her scarf at the collar. Her weight stays centered with shoes planted. Keep all limbs visible and transparent clearance around the silhouette. True alpha, no smoke, effects, glow, scenery, floor, lettering or shadows.
+
+### Smoke victory pose
+
+Added a collar-flip salute with a .986 foot anchor and the 600 ms celebration timeline. In a 320 × 568 Chromium touch fixture, Smoke landed a lethal Jab, showed the pose and reached the regular victory overlay with 80 HP. Capture: `tests/.e2e-out/smoke-live-celebrate-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed. All five stock heroes now have authored contact poses for attack, hit, guard, cast, defeat and victory. Idle coverage and final animation approval are tracked separately.
+
+Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
+
+> Create one transparent full-body victory key pose of the exact Smoke fighter. Match dark bun, purple chevron jacket, coral scarf, teal sash, dark cargos, gloves and cream high-tops, same right-facing camera, inked game art, original ground line and character scale. She straightens with a sly smile and flips her jacket collar outward with one hand while the other rests on her hip, chin lifted, both shoes planted. Distinct relaxed victory body language. Keep full body and hair inside the frame with padding. Real alpha, no effects, props, text, shadow, scenery or floor.
