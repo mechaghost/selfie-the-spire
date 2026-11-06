@@ -58,6 +58,17 @@ async function run(seed,reload){
  return {trace,visited,commands,complete:store.getState().isRunComplete,floor:store.getState().floor};
 }
 const report=[];
+for (const encounterId of [undefined, 'retired-encounter']) {
+ const seed='legacy-encounter-fallback';
+ store.getState().initializeRun(seed);
+ const node=generateMap(seed).nodes.find(node=>node.y===1 && node.type==='Combat');
+ assert.ok(node);
+ store.getState().advanceFloor({...node,encounterId});
+ settle();
+ assert.equal(store.getState().inCombat,true);
+ assert.deepEqual(store.getState().enemies.map(enemy=>enemy.templateId),['alley_rat']);
+ await reloadStable();
+}
 for(let i=0;i<10;i++){
  const seed=`route-audit-${i}`,baseline=await run(seed,false);
  assert.deepEqual(await run(seed,true),baseline,`${seed}: transition reload preserves future run`);

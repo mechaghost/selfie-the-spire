@@ -555,7 +555,7 @@ export const useGameStore = create<GameState>((set, get) => ({
             }
 
             if (enemiesData.length === 0) {
-                enemiesData = [createEnemyInstance('jaw_worm', `enemy_${node.id}_0`, state.rng)];
+                enemiesData = [createEnemyInstance('alley_rat', `enemy_${node.id}_0`, state.rng)];
             }
 
             get().startCombat(enemiesData);
