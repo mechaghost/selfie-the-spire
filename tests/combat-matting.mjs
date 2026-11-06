@@ -26,8 +26,8 @@ for(const name of ['street-runner','chrome','volt','concrete','smoke']) {
  const iou=intersection/union,foregroundRetention=intersection/originalForeground;
  assert.ok(iou>.9,`${name}: foreground mask IoU ${iou} must exceed .9`);
  assert.ok(foregroundRetention>.97,`${name}: foreground retention ${foregroundRetention} must exceed .97`);
- results.push({name,durationMs,maskIoU:iou,foregroundRetention,outputCharacters:personal.length});
+ results.push({name,durationMs,maskIoU:iou,foregroundRetention,outputCharacters:personal.length,rssAfterBytes:process.memoryUsage().rss});
 }
 await assert.rejects(removeCombatBackground(Buffer.from('bad')));
 await writeFile('tests/.e2e-out/combat-matting-report.json',JSON.stringify(results,null,2));
-console.log(JSON.stringify({result:'PASS',results,note:'Controlled artwork fixtures, not live selfie generation or deployment performance'}));
+console.log(JSON.stringify({result:'PASS',results,note:'Controlled artwork fixtures, not live selfie generation or deployment performance. RSS is sampled process resident memory after each fixture, not peak or model-only memory.'}));

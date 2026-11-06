@@ -19,6 +19,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash # GitHub invokes explicit bash with -e -o pipefail.
+
 concurrency:
   group: combat-linux-${{ github.ref }}
   cancel-in-progress: true
@@ -31,6 +35,7 @@ jobs:
       ENABLE_PERSONALIZED_COMBAT: '1'
       VITE_COMBAT_ARENA: '1'
       GEMINI_API_KEY: ''
+      ONNXRUNTIME_NODE_INSTALL: skip # CPU binaries are bundled; no optional GPU downloads.
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
