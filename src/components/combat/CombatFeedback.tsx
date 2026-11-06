@@ -1,8 +1,31 @@
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import { ImpactNotice, subscribeImpacts } from '../../rendering/CombatPresentation';
-import { BattleLayout } from '../../rendering/battleLayout';
+import { ActorSlot, BattleLayout } from '../../rendering/battleLayout';
+import { actorPlacement } from '../../rendering/actorPlacement';
+import { textureSourceInfo } from '../../rendering/textureBudget';
+import type { SceneActor } from '../../rendering/BattleScene';
 interface Feedback extends ImpactNotice {key:string}
 const FEEDBACK_ROW_HEIGHT = 32;
+const FEEDBACK_GAP = 8;
+
+function feedbackTop(slot: ActorSlot, actor: SceneActor | undefined, height: number, rows: number) {
+    const stackHeight = rows * FEEDBACK_ROW_HEIGHT;
+    const defaultTop = Math.max(FEEDBACK_GAP,
+        Math.min(slot.art.y + slot.art.height * .6, height - stackHeight - FEEDBACK_GAP));
+    const visual = actor?.visual;
+    const idle = visual && textureSourceInfo(visual.fallbackImageUrl);
+    if (!visual || !idle) return defaultTop;
+
+    const placement = actorPlacement(slot, idle.width, idle.height, visual.footAnchor);
+    let silhouetteTop = placement.top;
+    for (const pose of Object.values(visual.keyPoses ?? {})) {
+        const texture = textureSourceInfo(pose.imageUrl);
+        if (texture) silhouetteTop = Math.min(silhouetteTop,
+            slot.foot.y - texture.height * placement.scale * (pose.scale ?? 1) * pose.footAnchor[1]);
+    }
+    const above = Math.floor(silhouetteTop - stackHeight - FEEDBACK_GAP);
+    return above >= slot.hud.y + slot.hud.height + FEEDBACK_GAP ? above : defaultTop;
+}
 export function impactLabel(impact:ImpactNotice):string {
     if(impact.effect==='blocked')return `Blocked ${Math.abs(impact.blockDelta)}`;
     if(impact.effect==='block')return `+${impact.blockDelta} Block`;
@@ -12,7 +35,7 @@ export function impactLabel(impact:ImpactNotice):string {
     return `${prefix}${impact.hpDelta<0 ? impact.hpDelta : 'Blocked'}${impact.blockDelta<0 ? ` · ◆ ${Math.abs(impact.blockDelta)}` : ''}`;
 }
 /** Result feedback is independent of graphics availability and cannot mutate battle state. */
-export function CombatFeedback({layout}:{layout:BattleLayout}) {
+export function CombatFeedback({layout,actors}:{layout:BattleLayout;actors:readonly SceneActor[]}) {
     const [items,setItems]=useState<Feedback[]>([]);
     const seen=useRef(new Set<string>());
     useEffect(()=>{
@@ -33,7 +56,7 @@ export function CombatFeedback({layout}:{layout:BattleLayout}) {
             const style = {
                 '--impact-x': `${slot.foot.x}px`,
                 '--impact-right': `${layout.width - slot.foot.x}px`,
-                top: Math.max(8, Math.min(slot.art.y + slot.art.height * .6, layout.height - notices.length * FEEDBACK_ROW_HEIGHT - 8)),
+                top: feedbackTop(slot, actors.find(actor => actor.id === slot.id), layout.height, notices.length),
                 '--impact-row': `${FEEDBACK_ROW_HEIGHT}px`,
             } as CSSProperties;
             return <div key={slot.id} className="combat-impact-stack" style={style}>

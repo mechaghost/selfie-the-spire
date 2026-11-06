@@ -769,3 +769,7 @@ In a two-Specter combat fixture, the old notice took 165 ms to reach full opacit
 Added a raised-suspension charge pose with a brighter roof beacon, a .989 wheel anchor and a 160/60 ms cast/idle clip. Spectral Fog at 320 × 568 resolved Smoke Specter's guard and Taxi Ghost's existing Buff intent. Taxi Ghost gained 1 Strength and the player remained at 80 HP. The capture shows the raised suspension and beacon, with the notice crossing the cab body in portrait. Capture: `tests/.e2e-out/taxi-ghost-live-cast-320.png`. The 600 px Taxi Ghost runtime tier kept all 550 encounter combinations under budget. Bounds, texture, playback and TypeScript passed.
 
 Linux run 42195618670 passed the production arena cases and five-district route and uploaded the evidence. The separate local run exercised the notice readability commit and completed the nine-floor victory with 42 HP and the intentional floor-six defeat.
+
+### Leave room above short combat sprites
+
+Combat notices now use the available gap between the HUD and the sprite when that gap fits the whole stack. The calculation shares the renderer's idle projection and reserves space for known authored poses. Actors without packaged dimensions and tightly packed layouts keep the existing lower placement. The 320 × 568 Spectral Fog capture shows +1 Strength above Taxi Ghost's roof beacon, with the cab and raised suspension visible and the Specter's Block notice still separate. TypeScript, mechanics (including the Imp and DJ stacks), texture caps and both production build variants passed.

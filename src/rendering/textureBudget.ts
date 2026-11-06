@@ -2,8 +2,11 @@ import textureSources from '../data/battleTextureSources.json';
 import { GOLEM_ATLAS_SOURCE } from '../data/actorAtlasFrames';
 const packagedSources = {...textureSources,...GOLEM_ATLAS_SOURCE};
 export interface TextureSourceInfo {width:number;height:number;runtimeWidth:number;runtimeHeight:number;resolution:number}
+export function textureSourceInfo(url:string):TextureSourceInfo|undefined {
+    return (packagedSources as Record<string,TextureSourceInfo>)[url];
+}
 export function packagedTextureSource(url:string,width:number,height:number):TextureSourceInfo|undefined {
-    const entry=(packagedSources as Record<string,TextureSourceInfo>)[url];
+    const entry=textureSourceInfo(url);
     return entry && entry.runtimeWidth===width && entry.runtimeHeight===height ? entry : undefined;
 }
 /** Power-of-two decode tiers keep atlas coordinates in source units. */

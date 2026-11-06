@@ -45,7 +45,7 @@ export function BattleArena({targetControls='arena'}:{targetControls?:'arena'|'l
     const entity=inspected==='player' ? player : enemies.find(enemy=>enemy.id===inspected);
     return <div className="battle-arena"><div className="battle-arena-content" ref={root}>
         <BattleStage snapshot={snapshot} noticeHost={noticeHost} forceFallback={import.meta.env.DEV && new URLSearchParams(location.search).has('fallback')}/>
-        <CombatFeedback layout={layout}/>
+        <CombatFeedback layout={layout} actors={snapshot.actors}/>
         <button className="actor-hero-hud" style={{left:layout.hero.hud.x,top:layout.hero.hud.y,width:layout.hero.hud.width}} onClick={()=>setInspected('player')} aria-label={`Inspect ${player.name}, ${player.hp} of ${player.maxHp} HP, ${player.block} Block. ${describeStatuses(player.statuses).map(status=>status.split(' — ')[0]).join('; ') || 'No active effects.'}`}><HeroHUDContents entity={player} width={layout.hero.hud.width}/></button>
         {enemies.map(enemy=>{
             const slot=layout.enemies.find(slot=>slot.id===enemy.id)!;
