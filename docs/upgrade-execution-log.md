@@ -781,3 +781,7 @@ Added a planted crouch with the iron lid clamped shut, a .981 foot anchor and a 
 ### Boombox Brute Strength cast
 
 Added a planted, raised-fist charge pose with illuminated speaker rings, a .998 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, Boombox Brute's deterministic first turn displayed the pose with +3 Strength and left the player at 80 HP. Both fists and speaker rings remained visible. Capture: `tests/.e2e-out/boombox-brute-live-cast-320.png`. All 550 encounter budgets, texture caps, playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,117,692 samples.
+
+### Ten-card touch scrolling
+
+Chromium touch input swiped across ten real card instances and opened the final Haymaker at 320 × 568 and 844 × 390. The portrait cards remained 144 × 180 and landscape cards 152 × 220. The 44 px End Turn control and the arena stayed outside the scrolling hand. The first landscape pass exposed a clipped last-card edge because the shared mobile padding overrode the side-hand rule. The arena-specific rule now leaves enough horizontal room for the entire card. Captures: `tests/.e2e-out/full-hand-touch-{320,844}.png`. The fixture save and pile-ownership test passed. Linux CI run 42196269355 passed on the preceding Taxi Ghost revision.
