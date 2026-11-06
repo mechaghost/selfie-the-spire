@@ -1087,3 +1087,11 @@ Added a 120 ms visor dip after 5,800 ms of idle. The accepted edit shares the or
 Built-in imagegen prompt with `neon-sentinel-idle-v1.png` as reference:
 
 > Image editing, preserve the exact input framing and aspect ratio. Make one tiny local change to this RGBA game sprite: darken just the thin coral visor stripe beneath the angular teal helmet, like a brief power dip. Do not redraw anything else. Keep both boots and shield exactly where they are, with the same transparent margins on every side. Preserve every armor contour, head angle, shield angle, weathering, palette and original shadows. Return the full source-sized image with genuine transparency.
+
+### Chrome idle blink
+
+Used the closed-eye cell from a matched two-frame sheet, retaining the existing standing art. Extracted the 599 × 793 cell at (1147, 0) without resampling. The manifest uses a 1.713 source-space scale and (.456, .970) anchor to align the cell with the standing silhouette and ground line. In the 320 px Pixi frame study, the blink plays for 100 ms after 4,900 ms of idle, with no visible foot slide. Captures: `tests/.e2e-out/chrome-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, sprite bounds, texture caps, playback and TypeScript passed. All 26 stock heroes and encounter actors now have the required pose and timeline entries. Final visual approval remains open.
+
+Built-in imagegen prompt with `chrome-idle-v1.png` as reference:
+
+> Make a two-frame 2D fighting game sprite sheet on a genuinely transparent wide canvas with two equal columns. Use the supplied Chrome fighter as an exact style and pose reference. Left column: one full-body Chrome character as shown, eyes open. Right column: an EXACT duplicate of the same figure, every contour and boot and hand identical at the same position relative to its column, but the visible eyelid closed. Both figures must have precisely the same scale, foot baseline, and spacing within their columns. Leave wide clear padding between the two full figures and around the outer edges. Do not add text, guides, shadows, effects, scenery or backgrounds. The only difference between the two aligned frames is the eyelid.

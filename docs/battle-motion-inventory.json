@@ -41,7 +41,8 @@
         "guard",
         "cast",
         "defeat",
-        "celebrate"
+        "celebrate",
+        "blink"
       ],
       "timelines": [
         "hit",
@@ -49,12 +50,11 @@
         "cast",
         "defeat",
         "celebrate",
+        "idle",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "idle"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "hero-volt",

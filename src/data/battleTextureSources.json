@@ -97,6 +97,13 @@
     "runtimeHeight": 656,
     "resolution": 0.5
   },
+  "/assets/battle/actors/chrome-blink-v1.webp": {
+    "width": 599,
+    "height": 793,
+    "runtimeWidth": 300,
+    "runtimeHeight": 397,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/chrome-bouncer-attack-v1.webp": {
     "width": 1119,
     "height": 1406,
