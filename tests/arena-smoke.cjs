@@ -127,7 +127,8 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
         const play = page.getByRole('button', { name: 'Play card', exact: true });
         await tabTo(page, play, 'Play card');
         await page.keyboard.press('Enter');
-        await page.waitForFunction(() => document.activeElement.matches('[data-combat-target]:not(:disabled)'));
+        assert.equal(await page.evaluate(() => document.activeElement === document.querySelector('[data-combat-target]:not(:disabled)')), true,
+            'Play card moves focus directly to the first available arena target');
         await tabTo(page, page.getByRole('button', { name: 'Use target list' }), 'target list toggle');
         await page.keyboard.press('Enter');
         const list = page.locator('.combat-target-list');
@@ -159,7 +160,15 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
             if (!affordable.length) break;
             const { index, cost } = affordable[0];
             await activate(handAttacks.nth(index), labels[index]);
-            await activate(page.getByRole('button', { name: 'Play card', exact: true }), 'Play card');
+            const playCard = page.getByRole('button', { name: 'Play card', exact: true });
+            if (plays === 0 && viewport.width > viewport.height) {
+                assert.ok(await playCard.evaluate(button => {
+                    const buttonRect = button.getBoundingClientRect();
+                    const dialogRect = button.closest('dialog').getBoundingClientRect();
+                    return buttonRect.top >= dialogRect.top && buttonRect.bottom <= dialogRect.bottom;
+                }), 'Play card is fully visible when the landscape inspection opens');
+            }
+            await activate(playCard, 'Play card');
             if (plays === 0 && rotate) await verifyTargetingAfterRotation(page, viewport, targetPrompt, targets);
             const interrupt = plays === 0 && loseGraphics;
             if (interrupt) {

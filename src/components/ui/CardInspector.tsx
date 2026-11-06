@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useId, useRef } from 'react';
+import { ReactNode, useLayoutEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Card } from '../../core/models';
 import './CardInspector.css';
@@ -9,7 +9,7 @@ import { StatusIcon } from './StatusIcon';
 export function InspectionDialog({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
     const dialog = useRef<HTMLDialogElement>(null);
     const heading = useId();
-    useEffect(() => {
+    useLayoutEffect(() => {
         const previous = document.activeElement as HTMLElement | null;
         const element = dialog.current!;
         element.showModal();

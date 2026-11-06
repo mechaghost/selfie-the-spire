@@ -1,6 +1,10 @@
 import { StatusEffect } from './models';
 import { STATUS_REGISTRY } from '../data/statusEffects';
 
+export function statusDecaysAtEnemyTurn(status: StatusEffect): boolean {
+    return !!STATUS_REGISTRY[status.id]?.decreasesPerTurn && status.amount > 0 && !status.justApplied;
+}
+
 /** Block modifiers belong to the recipient, once per executable Block effect. */
 export function blockGain(base:number, recipient:StatusEffect[]=[]):number {
     return Math.max(0,recipient.reduce((value,status)=>value+(status.amount>0 ? (STATUS_REGISTRY[status.id]?.flatBlockGivenPerStack ?? 0)*status.amount : 0),base));

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { CardInspector } from '../ui/CardInspector';
 import { useGameStore } from '../../store/gameStore';
 import { CardItem } from '../ui/CardItem';
@@ -43,12 +43,12 @@ export function HandHUD({targetControls='list',onTargetControlsChange}:{targetCo
     const selected = hand.find(card => card.instanceId === selectedId);
     useEffect(() => { if (!phase) close(); }, [phase,close]);
     useEffect(() => () => close(), [close]);
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!targeting) return;
-        const timer = setTimeout(() => document.querySelector<HTMLButtonElement>(targetControls==='arena' ? '[data-combat-target]:not(:disabled)' : '.combat-target-list button')?.focus(), 0);
+        document.querySelector<HTMLButtonElement>(targetControls==='arena' ? '[data-combat-target]:not(:disabled)' : '.combat-target-list button')?.focus();
         const escape = (event: KeyboardEvent) => { if(event.key === 'Escape') { event.preventDefault(); cancel(); } };
         window.addEventListener('keydown',escape);
-        return () => { clearTimeout(timer);window.removeEventListener('keydown',escape); };
+        return () => window.removeEventListener('keydown',escape);
     }, [targeting,cancel,targetControls]);
     const totalCards = hand.length;
     const totalRows = Math.ceil(totalCards / 3);

@@ -2,7 +2,7 @@ import { appearanceForArchetype, normalizeAppearance } from '../data/actorVisual
 import { CombatClock, combatDelay } from '../core/combatTiming';
 import { beginPresentationBattle, identifyAction, identifyChildren, publishAction, publishImpact } from '../rendering/CombatPresentation';
 import { validateSave } from '../core/saveValidation';
-import { attackDamage, blockGain } from '../core/combatMath';
+import { attackDamage, blockGain, statusDecaysAtEnemyTurn } from '../core/combatMath';
 import { describeCardEffects } from '../core/cardText';
 import { create } from 'zustand';
 import { Card, Enemy, Player, GameAction, FloatingText, ActiveAnimation, AnimationType, ScreenShake, Effect, StatusEffect, UgcPhase, GeneratedCharacter, GeneratedCard } from '../core/models';
@@ -1387,8 +1387,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 // Process status decay
                 const decayStatuses = (statuses: StatusEffect[]) => {
                     return statuses.map(s => {
-                        const def = STATUS_REGISTRY[s.id];
-                        if (def?.decreasesPerTurn && s.amount > 0 && !s.justApplied) {
+                        if (statusDecaysAtEnemyTurn(s)) {
                             return { ...s, amount: s.amount - 1 };
                         }
                         if (s.justApplied) {

@@ -4,7 +4,7 @@ import { Shield, Swords, ShieldPlus, Zap } from 'lucide-react';
 import { useGameStore } from '../../store/gameStore';
 import { STATUS_REGISTRY } from '../../data/statusEffects';
 import './EntityPanel.css';
-import { attackDamage } from '../../core/combatMath';
+import { attackDamage, statusDecaysAtEnemyTurn } from '../../core/combatMath';
 import { intentView, describeIntent } from '../../core/intentView';
 import { targetAtPoint } from '../../core/targeting';
 import { STATUS_HELP } from '../../core/cardText';
@@ -30,7 +30,10 @@ export function describeStatuses(statuses: Entity['statuses']): string[] {
         const desc = STATUS_DESCRIPTIONS[s.id];
         const def = STATUS_REGISTRY[s.id];
         const name = def?.name || s.id;
-        return `${name} ×${s.amount}${desc ? ` — ${desc}` : ''}`;
+        const expiry = s.amount === 1 && statusDecaysAtEnemyTurn(s)
+            ? 'Expires before enemies act when you end your turn.' : '';
+        const detail = [desc, expiry].filter(Boolean).join(' ');
+        return `${name} ×${s.amount}${detail ? ` — ${detail}` : ''}`;
     });
 }
 

@@ -15,6 +15,7 @@ function reveal(personal=false) { useGameStore.setState({ seed: '', ugcPhase: 'r
 const screens = ['Landing', 'Capture', 'Waiting', 'Error', 'Reveal', 'Personal reveal', 'Personal combat', 'Map', 'Combat', 'First-turn playtest', 'Full hand', 'Status HUD', 'Rewards', 'Shop', 'Rest', 'Mystery', 'Victory', 'Defeat'] as const;
 export default function ReviewHarness() {
     const [revision, setRevision] = useState(0);
+    const [playtesting, setPlaytesting] = useState(false);
     const show = (screen: string) => {
         const store = useGameStore;
         store.getState().initializeRun('portfolio-review');
@@ -30,6 +31,7 @@ export default function ReviewHarness() {
             case 'Personal combat': reveal(true); store.getState().startGeneratedRun();store.getState().startCombat(['alley_rat','vending_golem','fire_escape_spider'].map((id,i)=>createEnemyInstance(id,`review-personal-${i}`,store.getState().rng)));break;
             case 'Combat': store.getState().startCombat(['alley_rat', 'vending_golem', 'fire_escape_spider'].map((id, i) => createEnemyInstance(id, `review-${i}`, store.getState().rng))); break;
             case 'First-turn playtest': {
+                setPlaytesting(true);
                 const ids = ['graffiti_imp', 'alley_rat', 'stray_voltage'];
                 const deck = Array.from({length:12}, () => createCardInstance('neon_jab'));
                 store.setState({masterDeck:deck});
@@ -75,5 +77,18 @@ export default function ReviewHarness() {
         }
         setRevision(value => value + 1);
     };
-    return <><App key={revision} /><details style={{ position: 'fixed', right: 4, bottom: 4, zIndex: 20000, background: '#080d1b', color: 'white', maxWidth: 300, border: '1px solid #72dccc', padding: 6, fontSize: 12 }}><summary>Review screens · local fixtures</summary><div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, padding: 8 }}>{screens.map(screen => <button key={screen} onClick={event => { show(screen); event.currentTarget.closest('details')?.removeAttribute('open'); }}>{screen}</button>)}<GraphicsLossReview key={revision}/><BrowserCutoutReview/></div></details></>;
+    return <>
+        <App key={revision} />
+        {!playtesting && <details style={{ position: 'fixed', right: 4, bottom: 4, zIndex: 20000, background: '#080d1b', color: 'white', maxWidth: 300, border: '1px solid #72dccc', padding: 6, fontSize: 12 }}>
+            <summary>Review screens · local fixtures</summary>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, padding: 8 }}>
+                {screens.map(screen => <button key={screen} onClick={event => {
+                    show(screen);
+                    event.currentTarget.closest('details')?.removeAttribute('open');
+                }}>{screen}</button>)}
+                <GraphicsLossReview key={revision} />
+                <BrowserCutoutReview />
+            </div>
+        </details>}
+    </>;
 }

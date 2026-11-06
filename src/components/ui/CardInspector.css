@@ -8,6 +8,14 @@
 .inspection-description { font-size: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; }
 .inspection-meta { color: var(--color-accent-blue); }
 .inspection-actions { display: flex; flex-direction: column; gap: .75rem; }
+@media (orientation: landscape) and (max-height: 480px) {
+    .inspection-dialog:has(.inspection-actions) .inspection-art {
+        float: right;
+        width: min(36%, 140px);
+        margin: 0 0 .5rem .75rem;
+    }
+    .inspection-actions { clear: both; }
+}
 .deck-browser-list { display: grid; gap: .75rem; }
 .deck-browser-list article { border-bottom: 1px solid var(--color-border); padding-bottom: .75rem; }
 .deck-browser-list h3, .deck-browser-list p { margin: .25rem 0; }
