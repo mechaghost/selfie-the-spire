@@ -58,3 +58,6 @@ for(const invalid of [{...defeat,loop:true},{...defeat,completion:'idle'}])asser
 for(const invalid of [{...loopingIdle,loop:false},{...loopingIdle,completion:'hold'}])assert.throws(()=>validateActorVisual({...neon,clips:{idle:invalid}}),/lifecycle/);
 assert.throws(()=>validateActorVisual({...neon,clips:{unknown:loopingIdle}}),/lifecycle/);
 console.log('PASS: authored idle loops, finite action/reaction completion, held defeat, reduced motion and invalid lifecycle rejection');
+for(const [ms,frame] of [[0,'idle'],[3899,'idle'],[3900,'blink'],[4009,'blink'],[4010,'idle'],[7910,'blink']])assert.equal(clipFrameAt(golem.clips.idle,ms),frame);
+assert.equal(clipFrameAt(golem.clips.idle,3950,true),null);
+console.log('PASS: Golem authored blink duration, cycle boundary and reduced-motion static fallback');

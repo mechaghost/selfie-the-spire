@@ -22,8 +22,9 @@ const findings=[];let samples=0,rectangleCandidates=0;
 const clips={idle:0,attack:320,hit:220,guard:220,cast:220,celebrate:600,defeat:280};
 function motionSamples(visual) {
     const result=[];
-    for(const [clip,duration] of Object.entries(clips)) {
+    for(const [clip,defaultDuration] of Object.entries(clips)) {
         const authored=visual.clips[clip];
+        const duration=Math.max(defaultDuration,authored?.durationsMs.reduce((sum,ms)=>sum+ms,0)??0);
         const times=new Set([0,duration,...Array.from({length:Math.ceil(duration/20)},(_,i)=>i*20)]);
         let boundary=0;
         for(const ms of authored?.durationsMs??[]) {boundary+=ms;times.add(boundary-1);times.add(boundary);}
