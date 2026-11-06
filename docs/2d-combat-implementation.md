@@ -1,3 +1,5 @@
+> November 5 update: user rejected server ONNX removal. Browser Canvas green-screen removal replaces that approach; native model deployment gates below are historical and superseded. See [current implementation and verification limits](browser-character-cutout.md).
+
 # 2D combat implementation specification
 
 Revision: reviewed specification v1, November 5, 2026 (draft 3 passed Round 3). Implementation is in progress; evidence and remaining gaps are tracked in upgrade-execution-log.md. This specification translates [the research](2d-combat-arena-research.md) into work packages. Review findings and resolutions belong in [the review log](2d-combat-review-log.md).

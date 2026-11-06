@@ -595,6 +595,15 @@ export const useGameStore = create<GameState>((set, get) => ({
             const data: GenerateCharacterResponse = await response.json();
             if (request !== generationRequest) return;
 
+            if(data.combatArtwork) {
+                if(data.combatArtwork.version!==1 || data.combatArtwork.background!=='green')throw new Error('Unsupported character background');
+                const {prepareBrowserCombatCutout}=await import('../core/browserCombatCutout');
+                const idleImageUrl=await prepareBrowserCombatCutout(data.combatArtwork.imageUrl,controller.signal);
+                if(request!==generationRequest)return;
+                controller.signal.throwIfAborted();
+                data.character.combatAppearance={version:2,actorVisualId:`hero-${data.character.archetype}`,idleImageUrl};
+            }
+
             // Append colorless starter cards to the generated deck for reveal
             const colorlessStarters = ['finesse', 'shiv_toss']
                 .map(id => CARD_DATABASE[id])

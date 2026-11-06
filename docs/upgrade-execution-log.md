@@ -1,3 +1,5 @@
+> November 5 update: user rejected server ONNX removal. Browser Canvas green-screen removal replaces that approach; native model deployment gates below are historical and superseded. See [current implementation and verification limits](browser-character-cutout.md).
+
 # Upgrade execution log
 
 ## UI release — November 5, 2026

@@ -1,7 +1,6 @@
 import { Hono } from 'hono';
 import {GenerationTimeout,withGenerationBudget} from '../services/generationBudget.js';
 import { moderateSelfie, analyzeSelfie, generateCharacterArt, generateHeroCardMechanics, generateHeroCardArt, generateCombatCharacterArt } from '../services/gemini.js';
-import { ensureCombatMattingReady } from '../services/removeCombatBackground.js';
 import { generateCharacterFromAnalysis } from '../services/generator.js';
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB in base64 chars
@@ -27,9 +26,7 @@ characterRoute.post('/generate-character', async (c) => {
 
         // Generate only with a configured provider; never disguise a preset as a generated hero.
         return await withGenerationBudget(c.req.raw.signal,async signal=>{
-            // Validate deployment model readiness before spending on generation.
             const personalCombat=process.env.ENABLE_PERSONALIZED_COMBAT==='1';
-            if(personalCombat)await ensureCombatMattingReady();
             signal.throwIfAborted();
             // Step 1: Moderate the selfie
             const moderation = await moderateSelfie(body.image,signal);
@@ -47,7 +44,7 @@ characterRoute.post('/generate-character', async (c) => {
             const cardArtPromise = mechanicsPromise.then(mechanics => generateHeroCardArt(
                 body.image, mechanics.name, mechanics.description, mechanics.type, analysis.archetype, signal,
             ));
-            const [portraitUrl, heroMechanics, combatCutout, heroCardArtUrl] = await Promise.all([
+            const [portraitUrl, heroMechanics, combatArtwork, heroCardArtUrl] = await Promise.all([
                 generateCharacterArt(body.image, analysis.archetype,signal),
                 mechanicsPromise,
                 personalCombat ? generateCombatCharacterArt(body.image,analysis.archetype,signal) : Promise.resolve(undefined),
@@ -60,8 +57,8 @@ characterRoute.post('/generate-character', async (c) => {
                 imageUrl: heroCardArtUrl,
             });
 
-            if(combatCutout) {
-                return c.json({...result,character:{...result.character,combatAppearance:{version:2,actorVisualId:`hero-${analysis.archetype}`,idleImageUrl:combatCutout}}});
+            if(combatArtwork) {
+                return c.json({...result,combatArtwork:{version:1,background:'green',imageUrl:combatArtwork}});
             }
             return c.json(result);
         });

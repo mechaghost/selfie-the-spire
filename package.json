@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && cd server && npm ci && npm run prepare:deployment",
+    "build": "tsc && vite build && cd server && npm ci",
     "start": "cd server && npm start",
     "preview": "vite preview",
     "test:e2e": "node tests/e2e.cjs"

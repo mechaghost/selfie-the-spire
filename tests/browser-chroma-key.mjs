@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {mkdir} from 'node:fs/promises';
+await mkdir('node_modules/.cache',{recursive:true});
+await build({entryPoints:['src/core/chromaKey.ts'],outfile:'node_modules/.cache/chroma.mjs',bundle:true,platform:'node',format:'esm'});
+const {removeGreenScreen}=await import('../node_modules/.cache/chroma.mjs');
+const make=()=>{const a=new Uint8ClampedArray(64*64*4);for(let i=0;i<a.length;i+=4)a.set([0,255,0,255],i);for(let y=10;y<54;y++)for(let x=20;x<44;x++)a.set([180,90,65,255],(y*64+x)*4);return a;};
+let a=make();a.set([0,180,180,255],(30*64+25)*4);a.set([0,255,0,255],(31*64+25)*4);
+assert.deepEqual(removeGreenScreen(a,64,64),{left:20,top:10,width:24,height:44});
+assert.equal(a[3],0);assert.equal(a[(30*64+25)*4+3],255,'teal stays opaque');assert.equal(a[(31*64+25)*4+3],0,'enclosed green holes are removed');
+assert.deepEqual([...a.slice((20*64+25)*4,(20*64+25)*4+4)],[180,90,65,255],'skin stays unchanged');
+a=make();a.set([90,172,32,255],(20*64+20)*4);removeGreenScreen(a,64,64);assert.ok(a[(20*64+20)*4+3]>0 && a[(20*64+20)*4+3]<255,'blended edges get partial alpha');
+a=make();a.set([180,90,65,255],(32*64)*4);assert.throws(()=>removeGreenScreen(a,64,64),/cut off/);
+a=new Uint8ClampedArray(64*64*4).fill(255);assert.throws(()=>removeGreenScreen(a,64,64),/clean green/);
+a=make();for(let i=0;i<a.length;i+=4)a.set([0,255,0,255],i);assert.throws(()=>removeGreenScreen(a,64,64),/separated/);
+assert.throws(()=>removeGreenScreen(new Uint8ClampedArray(4),1,1),/dimensions/);
+console.log('PASS browser color-key fixtures: bounds, skin, teal, enclosed holes, soft edges, clipping and invalid output');

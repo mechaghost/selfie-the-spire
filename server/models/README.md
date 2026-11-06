@@ -1,3 +1,7 @@
+# Superseded experiment — not used
+
+The user rejected server-side ONNX removal on cost grounds. Runtime, preparation scripts and dependency have been removed. Current implementation uses browser Canvas green-screen removal; see `docs/browser-character-cutout.md`. The notes below are historical experiment evidence, not deployment instructions.
+
 # Combat background removal
 
 The user selected Gemini generation plus server-side background removal. U²-Net runs locally through pinned `onnxruntime-node` 1.31.1; this adds no image-processing provider or per-extraction API call.

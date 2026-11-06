@@ -1,8 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import sharp from 'sharp';
 import {retryGeneration as withRetry} from './generationBudget.js';
-import { removeCombatBackground } from './removeCombatBackground.js';
-import { prepareCombatCutout } from './combatCutout.js';
 
 const ARCHETYPE_IDS = ['neon', 'chrome', 'volt', 'concrete', 'smoke'] as const;
 type ArchetypeId = typeof ARCHETYPE_IDS[number];
@@ -445,14 +443,14 @@ No text, no words, no letters, no numbers. Centered iconic composition.`;
 }
 
 
-/** Generate an opaque studio actor, then extract and normalize it locally. */
+/** Generate controlled green-screen art; the browser removes its backdrop without a model. */
 export async function generateCombatCharacterArt(imageBase64:string, archetype:string, signal?:AbortSignal):Promise<string> {
     const model=getImageModel();
     const match=/^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/]+={0,2})$/.exec(imageBase64);
     if(!match)throw new Error('Unsupported selfie format');
     const prompt=`Create one full-body 2D game character based on this person's recognizable face, hairstyle, skin tone, glasses and visible clothing. Invent appropriate lower-body streetwear when not visible in the photo. Face screen RIGHT in a relaxed combat stance, both hands visible and separated from torso, both shoes fully visible. Preserve identity; do not infer personality or identity from the photo.
 Neo Miami urban fantasy: painterly angular cel shading, crisp dark outlines, detailed teal/coral streetwear accents, restrained ${ARCHETYPE_PALETTES[archetype] || ARCHETYPE_PALETTES.neon} highlights. Match a professional hand-painted 2D deckbuilder actor, not a card illustration or photograph.
-Solid uniform light gray studio background, no ground plane, no cast shadow, no city, no particles, no floating effects, no text, no frame. Only one person. Entire silhouette inside canvas with generous empty margin on all sides. Portrait 2:3 composition. The server will remove the background.`;
+Solid perfectly uniform bright green (#00ff00) chroma-key background. No green or lime clothing, accessories or lighting; use teal, coral and purple instead. No green spill on the person. No ground plane, no cast shadow, no city, no particles, no floating effects, no text, no frame. Only one person. Entire silhouette inside canvas with generous empty margin on all sides. Portrait 2:3 composition. The browser will remove the green background with ordinary color-keying, so keep it completely flat and distinct from the character.`;
     const raw=await withRetry(async()=>{
         const controller=new AbortController();
         const timeout=setTimeout(()=>controller.abort(),60_000);
@@ -462,7 +460,8 @@ Solid uniform light gray studio background, no ground plane, no cast shadow, no 
         } finally {clearTimeout(timeout);}
     },0,signal);
     signal?.throwIfAborted();
-    const cutout=await removeCombatBackground(Buffer.from(stripBase64Prefix(raw),'base64'));
-    signal?.throwIfAborted();
-    return prepareCombatCutout(cutout);
+    const optimized=await sharp(Buffer.from(stripBase64Prefix(raw),'base64'))
+        .resize(768,1152,{fit:'inside',withoutEnlargement:true})
+        .webp({lossless:true}).toBuffer();
+    return `data:image/webp;base64,${optimized.toString('base64')}`;
 }

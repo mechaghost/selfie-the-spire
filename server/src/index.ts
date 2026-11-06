@@ -7,15 +7,6 @@ import type { Context } from 'hono';
 import { cors } from 'hono/cors';
 import { secureHeaders } from 'hono/secure-headers';
 import { characterRoute } from './routes/character.js';
-import { ensureCombatMattingReady } from './services/removeCombatBackground.js';
-
-// Fail before opening a listening socket or reporting healthy when a release
-// enables personalized characters without a usable model/native runtime.
-if (process.env.ENABLE_PERSONALIZED_COMBAT === '1') {
-    await ensureCombatMattingReady();
-    console.log('Personalized combat matting ready');
-}
-
 const app = new Hono();
 
 // ── Cross-origin embedding for public static assets ──

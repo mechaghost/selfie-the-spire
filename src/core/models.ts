@@ -186,6 +186,7 @@ export interface GeneratedCard {
 }
 
 export interface GenerateCharacterResponse {
+    combatArtwork?: {version:1;background:'green';imageUrl:string};
     character: GeneratedCharacter;
     cards: GeneratedCard[];
 }
