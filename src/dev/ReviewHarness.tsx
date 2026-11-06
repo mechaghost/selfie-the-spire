@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {populateFullHandReview} from './fullHandReview';
 import App from '../App';
 import { useGameStore } from '../store/gameStore';
 import { createCardInstance } from '../data/cards';
@@ -26,7 +27,7 @@ export default function ReviewHarness() {
             case 'Personal reveal': reveal(true); break;
             case 'Personal combat': reveal(true); store.getState().startGeneratedRun();store.getState().startCombat(['alley_rat','vending_golem','fire_escape_spider'].map((id,i)=>createEnemyInstance(id,`review-personal-${i}`,store.getState().rng)));break;
             case 'Combat': store.getState().startCombat(['alley_rat', 'vending_golem', 'fire_escape_spider'].map((id, i) => createEnemyInstance(id, `review-${i}`, store.getState().rng))); break;
-            case 'Full hand': store.getState().startCombat(['alley_rat', 'vending_golem', 'fire_escape_spider'].map((id, i) => createEnemyInstance(id, `review-${i}`, store.getState().rng))); store.setState({ hand: Array.from({length: 10}, (_, i) => createCardInstance(i % 2 ? 'haymaker' : 'finesse')) }); break;
+            case 'Full hand': populateFullHandReview(); break;
             case 'Rewards': store.setState({ inCombat: true, combatResult: 'victory', goldReward: 25, cardRewards: cards }); break;
             case 'Shop': store.getState().enterShop(); break;
             case 'Rest': store.setState({ nodeEvent: 'rest' }); break;

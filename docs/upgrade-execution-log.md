@@ -379,3 +379,9 @@ Generated Taxi Ghost's leftward bite/lunge contact pose with built-in imagegen u
 Browser study at 390×844: held Taxi attack at 140 ms, then sampled 320 ms to confirm idle recovery; inspected the previously pending Specter attack at 140 ms. Both silhouettes remain distinct and grounded inside the scene without HUD overlap, and no rectangular background is visible. Browser warnings/errors empty. Evidence taxi-contact-mobile.png and specter-contact-mobile.png under tests/.e2e-out. These are contact/recovery samples, not full clip-motion approval or a complete device matrix.
 
 Validation: clip-playback (including Taxi), renderer-assets, texture-budget, TypeScript and diff checks passed; 55 loose assets packaged with exact decoded derivative checks. Remaining enemy pose coverage, authored inbetweens, scene-wide motion review and release gates remain open. No deployment.
+
+### Save-valid full-hand review fixture
+
+The ten-card fixture now creates twelve owned deck instances, waits for initial combat draws to settle, then assigns ten to hand and two to the draw pile. It avoids changing a replacement review encounter if the user switches screens during initialization. Previously the fixture introduced cards outside the master deck and could race queued draws, making reload evidence unreliable.
+
+Validation: a fresh bundled store reload accepts the actual review save without recovery and preserves all five card collections and RNG state; the production save key remains untouched. Client TypeScript and diff checks pass. Personalized generation route tests (mocked provider) and actual cutout validation/normalization tests also pass. User confirmed keeping Gemini with server background removal; that implementation remains gated pending real-provider selfie quality and hosting checks. No deployment or new browser verification in this pass.

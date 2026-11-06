@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+await build({stdin:{contents:`export {populateFullHandReview} from './src/dev/fullHandReview';export {useGameStore} from './src/store/gameStore';export {validateSave} from './src/core/saveValidation';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/full-hand-review.mjs',bundle:true,platform:'node',format:'esm',define:{'import.meta.env':JSON.stringify({DEV:true})}});
+const memory=new Map();globalThis.location={search:'?review=1&arena=1'};
+globalThis.localStorage={getItem:key=>memory.get(key)??null,setItem:(key,value)=>memory.set(key,value),removeItem:key=>memory.delete(key)};
+const {populateFullHandReview,useGameStore:store,validateSave}=await import('./.e2e-out/full-hand-review.mjs');
+store.getState().initializeRun('full-hand-review');
+await populateFullHandReview();
+const state=store.getState();assert.equal(state.hand.length,10);assert.equal(state.drawPile.length,2);assert.equal(state.masterDeck.length,12);
+const saved=JSON.parse(memory.get('stt_review_run'));validateSave(saved);
+assert.equal(memory.has('stt_run'),false,'review fixture never writes the real run key');
+const reloaded=await import('./.e2e-out/full-hand-review.mjs?reload');
+const restored=reloaded.useGameStore.getState();
+assert.equal(restored.recoveryNotice,null);assert.equal(restored.inCombat,true);assert.equal(restored.isPlayerTurn,true);
+for(const key of ['hand','drawPile','masterDeck','discardPile','exhaustPile'])assert.deepEqual(restored[key],state[key],`${key} preserved`);
+assert.deepEqual(restored.rng.snapshot(),state.rng.snapshot());
+store.getState().initializeRun('cleanup');reloaded.useGameStore.getState().initializeRun('cleanup');
+console.log('PASS: ten-card fixture owns exactly its twelve deck cards; review-only save validates and reload preserves piles/RNG without recovery');
