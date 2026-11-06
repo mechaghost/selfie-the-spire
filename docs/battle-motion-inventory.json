@@ -202,16 +202,18 @@
       "id": "stray_voltage",
       "reachability": "production",
       "status": "review",
-      "keyPoses": [],
-      "timelines": [],
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
       "missingContactPoses": [
-        "attack",
         "hit",
         "defeat"
       ],
       "missingTimelines": [
         "idle",
-        "attack",
         "hit",
         "defeat"
       ]

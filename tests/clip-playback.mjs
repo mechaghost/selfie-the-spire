@@ -8,7 +8,7 @@ assert.equal(clipFrameAt({...clip,loop:true},400),'b');
 assert.equal(clipFrameAt({...clip,completion:'hold'},10000),'c');
 assert.equal(clipFrameAt(clip,140,true),null);
 assert.equal(clipFrameAt({...clip,completion:'hold'},0,true),'c');
-for(const id of ['hero-neon','hero-chrome','hero-volt','hero-concrete','hero-smoke','alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost','graffiti_imp','neon_junkie']) {
+for(const id of ['hero-neon','hero-chrome','hero-volt','hero-concrete','hero-smoke','alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost','graffiti_imp','neon_junkie','stray_voltage']) {
  const visual=ACTOR_VISUALS[id]; validateActorVisual(visual);
  assert.equal(clipFrameAt(visual.clips.attack,140),'attack','contact matches combat impact beat');
  assert.equal(clipFrameAt(visual.clips.attack,320),null,'never hold stale attack');
