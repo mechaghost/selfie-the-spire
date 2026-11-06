@@ -34,6 +34,10 @@ def encode(source):
         # A 704px tier retains high-DPR detail without paying for 768px per pose.
         if relative.parts[0]=='actors' and relative.name.startswith('fire-escape-spider-'):
             resolution=min(1,704/max(rgba.size))
+        # Rat's seven poses render in the same ordinary-enemy slots. Never
+        # increase an existing smaller tier (the wider attack is already 444px).
+        if relative.parts[0]=='actors' and relative.name.startswith('alley-rat-'):
+            resolution=min(resolution,672/max(rgba.size))
         runtime_size = (int(-(-rgba.width * resolution // 1)), int(-(-rgba.height * resolution // 1)))
         runtime = rgba if resolution == 1 else rgba.resize(runtime_size, Image.Resampling.LANCZOS)
         location = relative.parts[0] == 'locations'
@@ -64,7 +68,7 @@ def encode(source):
 
 with ThreadPoolExecutor(max_workers=4) as pool:
     records = list(pool.map(encode, files))
-report = dict(encoding='Lanczos runtime tiers (power-of-two default, 704px Spider); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing',
+report = dict(encoding='Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing',
               memoryNote='Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.',
               sourceBytes=sum(row['sourceBytes'] for row in records),
               runtimeBytes=sum(row['runtimeBytes'] for row in records), assets=records)

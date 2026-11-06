@@ -143,15 +143,16 @@
         "attack",
         "hit",
         "defeat",
+        "blink",
         "windup",
         "recovery"
       ],
       "timelines": [
+        "idle",
         "attack"
       ],
       "missingContactPoses": [],
       "missingTimelines": [
-        "idle",
         "hit",
         "defeat"
       ]

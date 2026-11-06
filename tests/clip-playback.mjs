@@ -64,3 +64,6 @@ console.log('PASS: Golem authored blink duration, cycle boundary and reduced-mot
 for(const [ms,frame] of [[0,'idle'],[4699,'idle'],[4700,'blink'],[4799,'blink'],[4800,'idle'],[9500,'blink']])assert.equal(clipFrameAt(spider.clips.idle,ms),frame);
 assert.equal(clipFrameAt(spider.clips.idle,4750,true),null);
 console.log('PASS: Spider authored blink duration, cycle boundary and reduced-motion static fallback');
+for(const [ms,frame] of [[0,'idle'],[3499,'idle'],[3500,'blink'],[3599,'blink'],[3600,'idle'],[7100,'blink']])assert.equal(clipFrameAt(rat.clips.idle,ms),frame);
+assert.equal(clipFrameAt(rat.clips.idle,3550,true),null);
+console.log('PASS: Rat authored blink duration, cycle boundary and reduced-motion static fallback');
