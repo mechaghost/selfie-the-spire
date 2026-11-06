@@ -849,3 +849,7 @@ Taxi Ghost's headlights and roof beacon dip for 120 ms after 4,600 ms of base id
 ### Manhole Mimic authored idle
 
 Added a 100 ms blink after 4,800 ms of idle, with the same .99 foot anchor. The source alpha masks overlap by 99.3% intersection-over-union. Pixi captures at 320 × 568 show both eyes closing and reopening while the lid and claws stay aligned: `tests/.e2e-out/mimic-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed. The preceding Linux run 42202905180 passed the production smoke and five-district checks.
+
+### Dumpster Crawler authored idle
+
+Added a 110 ms blink after 5,300 ms of idle. The .962 blink anchor compensates for a two-source-pixel difference at the lowest foot. The source alpha masks overlap by 98.7% intersection-over-union. At 320 × 568, the Pixi captures show the eyes closing while the lid, claws, and feet stay aligned. Captures: `tests/.e2e-out/crawler-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.

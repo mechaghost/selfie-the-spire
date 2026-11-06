@@ -227,18 +227,18 @@
         "attack",
         "hit",
         "guard",
-        "defeat"
+        "defeat",
+        "blink"
       ],
       "timelines": [
         "hit",
         "guard",
         "defeat",
+        "idle",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "idle"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "smoke_specter",
