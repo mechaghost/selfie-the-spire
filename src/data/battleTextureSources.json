@@ -51,16 +51,30 @@
   "/assets/battle/actors/boombox-brute-attack-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 540,
+    "runtimeHeight": 360,
+    "resolution": 0.3515625
+  },
+  "/assets/battle/actors/boombox-brute-defeat-v1.webp": {
+    "width": 1377,
+    "height": 1142,
+    "runtimeWidth": 540,
+    "runtimeHeight": 448,
+    "resolution": 0.39215686274509803
+  },
+  "/assets/battle/actors/boombox-brute-hit-v1.webp": {
+    "width": 1377,
+    "height": 1142,
+    "runtimeWidth": 540,
+    "runtimeHeight": 448,
+    "resolution": 0.39215686274509803
   },
   "/assets/battle/actors/boombox-brute-idle-v1.webp": {
     "width": 1378,
     "height": 1142,
-    "runtimeWidth": 689,
-    "runtimeHeight": 571,
-    "resolution": 0.5
+    "runtimeWidth": 540,
+    "runtimeHeight": 448,
+    "resolution": 0.3918722786647315
   },
   "/assets/battle/actors/chrome-attack-v1.webp": {
     "width": 1199,

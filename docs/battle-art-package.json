@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 233801460,
-  "runtimeBytes": 35797486,
+  "sourceBytes": 237203892,
+  "runtimeBytes": 35876866,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -99,27 +99,53 @@
       "asset": "actors/boombox-brute-attack-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 540,
+      "runtimeHeight": 360,
+      "resolution": 0.3515625,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2488441,
-      "runtimeBytes": 383200,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 203692,
+      "decodedRGBABytes": 777600
+    },
+    {
+      "asset": "actors/boombox-brute-defeat-v1.webp",
+      "width": 1377,
+      "height": 1142,
+      "runtimeWidth": 540,
+      "runtimeHeight": 448,
+      "resolution": 0.39215686274509803,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1400262,
+      "runtimeBytes": 175552,
+      "decodedRGBABytes": 967680
+    },
+    {
+      "asset": "actors/boombox-brute-hit-v1.webp",
+      "width": 1377,
+      "height": 1142,
+      "runtimeWidth": 540,
+      "runtimeHeight": 448,
+      "resolution": 0.39215686274509803,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 2002170,
+      "runtimeBytes": 261304,
+      "decodedRGBABytes": 967680
     },
     {
       "asset": "actors/boombox-brute-idle-v1.webp",
       "width": 1378,
       "height": 1142,
-      "runtimeWidth": 689,
-      "runtimeHeight": 571,
-      "resolution": 0.5,
+      "runtimeWidth": 540,
+      "runtimeHeight": 448,
+      "resolution": 0.3918722786647315,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2494517,
-      "runtimeBytes": 489058,
-      "decodedRGBABytes": 1573676
+      "runtimeBytes": 311090,
+      "decodedRGBABytes": 967680
     },
     {
       "asset": "actors/chrome-attack-v1.webp",

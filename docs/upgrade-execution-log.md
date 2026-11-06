@@ -629,3 +629,9 @@ At 320 × 568 in the Spectral Fog Pixi study, both poses remained in Taxi Ghost'
 Added a backward head tilt with a curled claw and clenched jaw, plus a held collapse with the lid shut and limbs splayed. Both 1536 × 1024 cutouts retain the original rusty spiral cover and purple limbs. Hit uses a .99 anchor and 160/60 ms hit/idle timing. Defeat uses a .994 anchor and a 280 ms hold.
 
 At 320 × 568 in the solo Pixi study the recoil stayed below the HUD, and the wider collapse reaches close to both edges of its lane. The defeated target was disabled and its marker removed. No browser errors. Captures: `tests/.e2e-out/manhole-mimic-{hit,defeat}-320.png`. All 550 art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,108,836 samples. Prior Taxi Ghost CI run 42180383234 passed. Full-speed and physical-device review remain open.
+
+### Boombox Brute recoil and shutdown
+
+Added a tilted stereo recoil and a seated shutdown with dark cassette eyes, folded legs and lowered fists. Hit uses .989 and a 160/60 ms hit/idle clip. Defeat uses .995 and a 280 ms hold. The new textures initially put Brute Squad at 5,210,284 bytes. A common 540 px runtime cap keeps all 550 combinations within budget, preserves the originals, and replaces the old attack width compensation.
+
+At 320 × 568 in the Pixi Brute Squad lineup, the updated attack still extends left into open space, the recoil tilts away and the shutdown remains in lane. Only Boombox's target was disabled. Captures: `tests/.e2e-out/boombox-brute-{attack,hit,defeat}-320.png`. Texture, clip playback and TypeScript checks passed, with no confirmed intersections across 1,109,484 bounds samples. Prior CI run 42180845477 passed. Full-speed and physical-device checks remain open.
