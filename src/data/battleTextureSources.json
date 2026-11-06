@@ -349,6 +349,20 @@
     "runtimeHeight": 591,
     "resolution": 0.5
   },
+  "/assets/battle/locations/club-backlot-background-v2.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
+  "/assets/battle/locations/club-backlot-ground-v4.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
   "/assets/battle/locations/club-backlot-v1.webp": {
     "width": 1536,
     "height": 1024,
@@ -384,6 +398,20 @@
     "runtimeHeight": 1024,
     "resolution": 1
   },
+  "/assets/battle/locations/rooftop-background-v2.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
+  "/assets/battle/locations/rooftop-ground-v2.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
   "/assets/battle/locations/rooftop-v1.webp": {
     "width": 1536,
     "height": 1024,
@@ -391,7 +419,35 @@
     "runtimeHeight": 1024,
     "resolution": 1
   },
+  "/assets/battle/locations/underpass-background-v2.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
+  "/assets/battle/locations/underpass-ground-v2.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
   "/assets/battle/locations/underpass-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
+  "/assets/battle/locations/wynwood-background-v2.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
+  "/assets/battle/locations/wynwood-ground-v4.webp": {
     "width": 1536,
     "height": 1024,
     "runtimeWidth": 1536,

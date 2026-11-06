@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 99242722,
-  "runtimeBytes": 25280406,
+  "sourceBytes": 112208600,
+  "runtimeBytes": 34564552,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -555,6 +555,28 @@
       "decodedRGBABytes": 1572060
     },
     {
+      "asset": "locations/club-backlot-background-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1697992,
+      "runtimeBytes": 1220564,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "locations/club-backlot-ground-v4.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1456770,
+      "runtimeBytes": 992848,
+      "decodedRGBABytes": 6291456
+    },
+    {
       "asset": "locations/club-backlot-v1.webp",
       "width": 1536,
       "height": 1024,
@@ -610,6 +632,28 @@
       "decodedRGBABytes": 6291456
     },
     {
+      "asset": "locations/rooftop-background-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1850153,
+      "runtimeBytes": 1388174,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "locations/rooftop-ground-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1598183,
+      "runtimeBytes": 1141096,
+      "decodedRGBABytes": 6291456
+    },
+    {
       "asset": "locations/rooftop-v1.webp",
       "width": 1536,
       "height": 1024,
@@ -621,6 +665,28 @@
       "decodedRGBABytes": 6291456
     },
     {
+      "asset": "locations/underpass-background-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1578478,
+      "runtimeBytes": 1143242,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "locations/underpass-ground-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1577888,
+      "runtimeBytes": 1117286,
+      "decodedRGBABytes": 6291456
+    },
+    {
       "asset": "locations/underpass-v1.webp",
       "width": 1536,
       "height": 1024,
@@ -629,6 +695,28 @@
       "resolution": 1,
       "sourceBytes": 2070671,
       "runtimeBytes": 1501020,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "locations/wynwood-background-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1777818,
+      "runtimeBytes": 1313914,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "locations/wynwood-ground-v4.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1428596,
+      "runtimeBytes": 967022,
       "decodedRGBABytes": 6291456
     },
     {

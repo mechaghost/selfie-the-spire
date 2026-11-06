@@ -1,0 +1,70 @@
+{
+  "tool": "built-in image_gen",
+  "status": "review",
+  "records": [
+    {
+      "id": "wynwood",
+      "plane": "background",
+      "prompt": "Use case: precise-object-edit. Extract an independent BACKGROUND layer from the reference for a professional 2D Neo Miami combat game. Keep original 1536x1024 canvas, original composition, perspective, painterly style and colors. Preserve mural walls, shutters, plants, distant skyline and sunset exactly in their original positions. Preserve a strip of original ground through row y=520, then fade its alpha over rows 520-550; all pixels below y=570 must be genuinely transparent. Do not crop, move, enlarge or redesign the scenery. No new objects, text, people, UI or replacement background. Transparent PNG, no checkerboard.",
+      "reference": "art-source/battle/locations/wynwood-v1.png",
+      "source": "art-source/battle/locations/wynwood-background-v2.png",
+      "runtime": "public/assets/battle/locations/wynwood-background-v2.webp"
+    },
+    {
+      "id": "wynwood",
+      "plane": "ground",
+      "prompt": "Use case: precise-object-edit. Extract an independent GROUND layer from reference for a professional 2D Neo Miami combat game. Keep original 1536x1024 canvas, original perspective and colors. Preserve only cracked purple pavement with warm orange light in its exact original position from row y=480 to bottom. Everything above y=450 must be genuinely transparent, including all buildings, sky, objects, water and scenery. Short alpha transition from y=450 transparent to y=480 opaque. Maintain texture, illumination and markings; no additional haze, objects, text, characters, UI or checkerboard. Do not move, crop or rescale. Transparent PNG; this overlaps a separately extracted background.",
+      "reference": "art-source/battle/locations/wynwood-v1.png",
+      "source": "art-source/rejected-layers/wynwood-ground-v2.png",
+      "status": "rejected; replaced by v4"
+    },
+    {
+      "id": "underpass",
+      "plane": "background",
+      "prompt": "Use case: precise-object-edit. Extract an independent BACKGROUND layer from the reference for a professional 2D Neo Miami combat game. Keep original 1536x1024 canvas, original composition, perspective, painterly style and colors. Preserve bridge beams, concrete pillars, pipes, lamps, canal water, quay curb and bollards exactly in their original positions. Preserve a strip of original ground through row y=520, then fade its alpha over rows 520-550; all pixels below y=570 must be genuinely transparent. Do not crop, move, enlarge or redesign the scenery. No new objects, text, people, UI or replacement background. Transparent PNG, no checkerboard.",
+      "reference": "art-source/battle/locations/underpass-v1.png",
+      "source": "art-source/battle/locations/underpass-background-v2.png",
+      "runtime": "public/assets/battle/locations/underpass-background-v2.webp"
+    },
+    {
+      "id": "underpass",
+      "plane": "ground",
+      "prompt": "Use case: precise-object-edit. Extract an independent GROUND layer from reference for a professional 2D Neo Miami combat game. Keep original 1536x1024 canvas, original perspective and colors. Preserve only dry concrete quay pavement with warm service-light pools; no water in the playable ground in its exact original position from row y=480 to bottom. Everything above y=450 must be genuinely transparent, including all buildings, sky, objects, water and scenery. Short alpha transition from y=450 transparent to y=480 opaque. Maintain texture, illumination and markings; no additional haze, objects, text, characters, UI or checkerboard. Do not move, crop or rescale. Transparent PNG; this overlaps a separately extracted background.",
+      "reference": "art-source/battle/locations/underpass-v1.png",
+      "source": "art-source/battle/locations/underpass-ground-v2.png",
+      "runtime": "public/assets/battle/locations/underpass-ground-v2.webp"
+    },
+    {
+      "id": "club-backlot",
+      "plane": "background",
+      "prompt": "Use case: precise-object-edit. Extract an independent BACKGROUND layer from the reference for a professional 2D Neo Miami combat game. Keep original 1536x1024 canvas, original composition, perspective, painterly style and colors. Preserve club loading dock, railings, stairs, speaker stacks, cable reels, palms and skyline exactly in their original positions. Preserve a strip of original ground through row y=520, then fade its alpha over rows 520-550; all pixels below y=570 must be genuinely transparent. Do not crop, move, enlarge or redesign the scenery. No new objects, text, people, UI or replacement background. Transparent PNG, no checkerboard.",
+      "reference": "art-source/battle/locations/club-backlot-v1.png",
+      "source": "art-source/battle/locations/club-backlot-background-v2.png",
+      "runtime": "public/assets/battle/locations/club-backlot-background-v2.webp"
+    },
+    {
+      "id": "club-backlot",
+      "plane": "ground",
+      "prompt": "Use case: precise-object-edit. Extract an independent GROUND layer from reference for a professional 2D Neo Miami combat game. Keep original 1536x1024 canvas, original perspective and colors. Preserve only dark cracked backlot asphalt with restrained coral and teal light in its exact original position from row y=480 to bottom. Everything above y=450 must be genuinely transparent, including all buildings, sky, objects, water and scenery. Short alpha transition from y=450 transparent to y=480 opaque. Maintain texture, illumination and markings; no additional haze, objects, text, characters, UI or checkerboard. Do not move, crop or rescale. Transparent PNG; this overlaps a separately extracted background.",
+      "reference": "art-source/battle/locations/club-backlot-v1.png",
+      "source": "art-source/rejected-layers/club-backlot-ground-v2.png",
+      "status": "rejected; replaced by v4"
+    },
+    {
+      "id": "rooftop",
+      "plane": "background",
+      "prompt": "Use case: precise-object-edit. Extract an independent BACKGROUND layer from the reference for a professional 2D Neo Miami combat game. Keep original 1536x1024 canvas, original composition, perspective, painterly style and colors. Preserve parapet, service structures, antennae, Art Deco architecture, ocean and skyline exactly in their original positions. Preserve a strip of original ground through row y=520, then fade its alpha over rows 520-550; all pixels below y=570 must be genuinely transparent. Do not crop, move, enlarge or redesign the scenery. No new objects, text, people, UI or replacement background. Transparent PNG, no checkerboard.",
+      "reference": "art-source/battle/locations/rooftop-v1.png",
+      "source": "art-source/battle/locations/rooftop-background-v2.png",
+      "runtime": "public/assets/battle/locations/rooftop-background-v2.webp"
+    },
+    {
+      "id": "rooftop",
+      "plane": "ground",
+      "prompt": "Use case: precise-object-edit. Extract an independent GROUND layer from reference for a professional 2D Neo Miami combat game. Keep original 1536x1024 canvas, original perspective and colors. Preserve only weathered rooftop concrete with existing faint painted markings in its exact original position from row y=480 to bottom. Everything above y=450 must be genuinely transparent, including all buildings, sky, objects, water and scenery. Short alpha transition from y=450 transparent to y=480 opaque. Maintain texture, illumination and markings; no additional haze, objects, text, characters, UI or checkerboard. Do not move, crop or rescale. Transparent PNG; this overlaps a separately extracted background.",
+      "reference": "art-source/battle/locations/rooftop-v1.png",
+      "source": "art-source/battle/locations/rooftop-ground-v2.png",
+      "runtime": "public/assets/battle/locations/rooftop-ground-v2.webp"
+    }
+  ]
+}

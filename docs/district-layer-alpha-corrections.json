@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen",
+  "reason": "Reject dark upper-region alpha contamination in v3",
+  "records": [
+    {
+      "id": "wynwood",
+      "prompt": "Use case: background-extraction. This PNG has unwanted semi-transparent BLACK filling its upper region. ERASE the entire top 400 pixel rows to EXACT ALPHA ZERO. Preserve the original 1536x1024 canvas and bottom pavement art unchanged. From row 400 to 430 use a very narrow clean alpha transition into the purple pavement, with no white, black, haze, fog, glow or colored background. Entire upper 400 rows must contain absolutely NO pixels: true empty transparency. The lower pavement must remain opaque, maintaining original position, cracks and painted lighting. Do not redesign, recrop, move, shrink, add objects, recolor or add a black background. Output a real transparent PNG.",
+      "reference": "art-source/rejected-layers/wynwood-ground-v3.png",
+      "source": "art-source/battle/locations/wynwood-ground-v4.png",
+      "runtime": "public/assets/battle/locations/wynwood-ground-v4.webp"
+    },
+    {
+      "id": "club-backlot",
+      "prompt": "Use case: background-extraction. This PNG has unwanted semi-transparent BLACK filling its upper region. ERASE the entire top 400 pixel rows to EXACT ALPHA ZERO. Preserve the original 1536x1024 canvas and bottom pavement art unchanged. From row 400 to 430 use a very narrow clean alpha transition into the purple pavement, with no white, black, haze, fog, glow or colored background. Entire upper 400 rows must contain absolutely NO pixels: true empty transparency. The lower pavement must remain opaque, maintaining original position, cracks and painted lighting. Do not redesign, recrop, move, shrink, add objects, recolor or add a black background. Output a real transparent PNG.",
+      "reference": "art-source/rejected-layers/club-backlot-ground-v3.png",
+      "source": "art-source/battle/locations/club-backlot-ground-v4.png",
+      "runtime": "public/assets/battle/locations/club-backlot-ground-v4.webp"
+    }
+  ]
+}

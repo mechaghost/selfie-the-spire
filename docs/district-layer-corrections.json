@@ -1,0 +1,22 @@
+{
+  "tool": "built-in image_gen",
+  "reason": "Visible pale band found in browser compositing review",
+  "records": [
+    {
+      "id": "wynwood",
+      "plane": "ground",
+      "prompt": "Use case: precise-object-edit. Fix ONLY the pale white/gray horizontal haze along the top edge of this transparent pavement layer. Replace that pale haze with the same dark muted purple asphalt texture as immediately below it, with a clean alpha-only fade to full transparency. There must be NO white pixels, gray fog, glow, mist or bright rim at the transition. Keep canvas 1536x1024, exact position, pavement cracks, lighting, texture and alpha of all other regions unchanged. Preserve the transparent upper area. This must composite over a dark street with no visible horizontal stripe. Do not introduce any background, buildings, people or objects. Actual transparent output.",
+      "reference": "art-source/rejected-layers/wynwood-ground-v2.png",
+      "source": "art-source/rejected-layers/wynwood-ground-v3.png",
+      "status": "rejected; replaced by v4"
+    },
+    {
+      "id": "club-backlot",
+      "plane": "ground",
+      "prompt": "Use case: precise-object-edit. Fix ONLY the pale white/gray horizontal haze along the top edge of this transparent pavement layer. Replace that pale haze with the same dark muted purple asphalt texture as immediately below it, with a clean alpha-only fade to full transparency. There must be NO white pixels, gray fog, glow, mist or bright rim at the transition. Keep canvas 1536x1024, exact position, pavement cracks, lighting, texture and alpha of all other regions unchanged. Preserve the transparent upper area. This must composite over a dark street with no visible horizontal stripe. Do not introduce any background, buildings, people or objects. Actual transparent output.",
+      "reference": "art-source/rejected-layers/club-backlot-ground-v2.png",
+      "source": "art-source/rejected-layers/club-backlot-ground-v3.png",
+      "status": "rejected; replaced by v4"
+    }
+  ]
+}
