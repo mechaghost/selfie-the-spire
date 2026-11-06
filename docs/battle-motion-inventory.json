@@ -616,19 +616,19 @@
         "hit",
         "defeat",
         "guard",
-        "cast"
+        "cast",
+        "blink"
       ],
       "timelines": [
         "attack",
         "hit",
         "defeat",
         "guard",
-        "cast"
+        "cast",
+        "idle"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "idle"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "dj_phantom",
