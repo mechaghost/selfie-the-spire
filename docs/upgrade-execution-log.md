@@ -1005,3 +1005,11 @@ Added an open-palm activation with a .989 foot anchor and a 160/60 ms cast/idle 
 Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
 
 > Create a single transparent full-body skill cast key pose for this exact Concrete fighter. Preserve tied-back dark hair, beard, muscular build, orange reflective vest, black tank, utility belt, teal knee pads, dark trousers, and tan boots, with the same inked game sprite camera and scale. Facing screen right with feet planted, he deliberately extends one open gloved hand forward, palm down and fingers splayed, while the other clenched hand rests at his waist. This is a grounded commanding activation gesture, not a strike or guard. Keep the actor, hands and soles inside frame with alpha margins. True transparency, no props, ground, lettering, shadow or effects.
+
+### Concrete victory pose
+
+Added a fist-to-chest salute with a .984 foot anchor and the 600 ms celebration timeline. In the 320 × 568 Chromium touch fixture, Concrete landed a lethal Jab, showed the salute, and reached the normal victory overlay with 80 HP. Capture: `tests/.e2e-out/concrete-live-celebrate-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
+
+> Create a single transparent full-body victory key pose for this exact Concrete fighter. Preserve his muscular build, tied dark hair and beard, orange reflective vest, black tank, ochre pouches, teal kneepads and tan boots. Same inked rendering, right-facing camera, original character scale and ground line. He plants both boots in a relaxed wide stance, tilts his chin up with a satisfied grin, and taps a closed fist proudly against his chest while the other hand rests on his hip. Keep both fists below head height and the whole body within the canvas with alpha margins. True transparency, no props, effects, lettering, shadow or background.
