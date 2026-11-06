@@ -2966,6 +2966,21 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "neon_sentinel_elite",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 532850,
+        "decodedBytes": 2849280
+      },
+      "all": {
+        "files": 14,
+        "bytes": 2863008,
+        "decodedBytes": 28293632
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "stray_voltage_solo",
       "location": "ocean-drive",
       "required": {
@@ -3007,6 +3022,21 @@
         "files": 10,
         "bytes": 2851776,
         "decodedBytes": 25176300
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "neon_sentinel_elite",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 532850,
+        "decodedBytes": 2849280
+      },
+      "all": {
+        "files": 15,
+        "bytes": 2850382,
+        "decodedBytes": 34585088
       }
     },
     {
@@ -3221,6 +3251,21 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "neon_sentinel_elite",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 532850,
+        "decodedBytes": 2849280
+      },
+      "all": {
+        "files": 14,
+        "bytes": 2769832,
+        "decodedBytes": 28293632
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "stray_voltage_solo",
       "location": "wynwood",
       "required": {
@@ -3247,6 +3292,21 @@
         "files": 14,
         "bytes": 2762688,
         "decodedBytes": 28290560
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "neon_sentinel_elite",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 532850,
+        "decodedBytes": 2849280
+      },
+      "all": {
+        "files": 14,
+        "bytes": 2759120,
+        "decodedBytes": 28293632
       }
     },
     {
@@ -3292,6 +3352,21 @@
         "files": 14,
         "bytes": 2738870,
         "decodedBytes": 28290560
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "neon_sentinel_elite",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 532850,
+        "decodedBytes": 2849280
+      },
+      "all": {
+        "files": 14,
+        "bytes": 2734136,
+        "decodedBytes": 28293632
       }
     },
     {
@@ -3566,21 +3641,6 @@
     },
     {
       "hero": "hero-neon",
-      "encounter": "neon_sentinel_elite",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 532850,
-        "decodedBytes": 2849280
-      },
-      "all": {
-        "files": 13,
-        "bytes": 2553928,
-        "decodedBytes": 26719232
-      }
-    },
-    {
-      "hero": "hero-neon",
       "encounter": "voltage_king_elite",
       "location": "wynwood",
       "required": {
@@ -3592,21 +3652,6 @@
         "files": 13,
         "bytes": 2550582,
         "decodedBytes": 26716892
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "neon_sentinel_elite",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 532850,
-        "decodedBytes": 2849280
-      },
-      "all": {
-        "files": 14,
-        "bytes": 2541302,
-        "decodedBytes": 33010688
       }
     },
     {
@@ -3742,51 +3787,6 @@
         "files": 13,
         "bytes": 2461478,
         "decodedBytes": 26718768
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "neon_sentinel_elite",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 532850,
-        "decodedBytes": 2849280
-      },
-      "all": {
-        "files": 13,
-        "bytes": 2460752,
-        "decodedBytes": 26719232
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "neon_sentinel_elite",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 532850,
-        "decodedBytes": 2849280
-      },
-      "all": {
-        "files": 13,
-        "bytes": 2450040,
-        "decodedBytes": 26719232
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "neon_sentinel_elite",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 532850,
-        "decodedBytes": 2849280
-      },
-      "all": {
-        "files": 13,
-        "bytes": 2425056,
-        "decodedBytes": 26719232
       }
     },
     {
@@ -4960,6 +4960,36 @@
       }
     },
     {
+      "hero": "hero-volt",
+      "encounter": "neon_sentinel_elite",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 613658,
+        "decodedBytes": 3149408
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1667686,
+        "decodedBytes": 18881728
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "neon_sentinel_elite",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 609936,
+        "decodedBytes": 3148092
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1666304,
+        "decodedBytes": 18879096
+      }
+    },
+    {
       "hero": "hero-chrome",
       "encounter": "manhole_mimic_solo",
       "location": "rooftop",
@@ -5002,6 +5032,36 @@
         "files": 7,
         "bytes": 1658412,
         "decodedBytes": 25167480
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "neon_sentinel_elite",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 613658,
+        "decodedBytes": 3149408
+      },
+      "all": {
+        "files": 7,
+        "bytes": 1655060,
+        "decodedBytes": 25173184
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "neon_sentinel_elite",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 609936,
+        "decodedBytes": 3148092
+      },
+      "all": {
+        "files": 7,
+        "bytes": 1653678,
+        "decodedBytes": 25170552
       }
     },
     {
@@ -5065,6 +5125,21 @@
       }
     },
     {
+      "hero": "hero-chrome",
+      "encounter": "neon_sentinel_elite",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 600948,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1620228,
+        "decodedBytes": 18880512
+      }
+    },
+    {
       "hero": "hero-volt",
       "encounter": "manhole_mimic_solo",
       "location": "underpass",
@@ -5107,6 +5182,21 @@
         "files": 7,
         "bytes": 1612336,
         "decodedBytes": 25168896
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "neon_sentinel_elite",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 600948,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 7,
+        "bytes": 1607602,
+        "decodedBytes": 25171968
       }
     },
     {
@@ -5365,6 +5455,36 @@
       }
     },
     {
+      "hero": "hero-volt",
+      "encounter": "neon_sentinel_elite",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 613658,
+        "decodedBytes": 3149408
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1574510,
+        "decodedBytes": 18881728
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "neon_sentinel_elite",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 609936,
+        "decodedBytes": 3148092
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1573128,
+        "decodedBytes": 18879096
+      }
+    },
+    {
       "hero": "hero-smoke",
       "encounter": "dumpster_crawler_solo",
       "location": "ocean-drive",
@@ -5455,6 +5575,36 @@
       }
     },
     {
+      "hero": "hero-volt",
+      "encounter": "neon_sentinel_elite",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 613658,
+        "decodedBytes": 3149408
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1563798,
+        "decodedBytes": 18881728
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "neon_sentinel_elite",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 609936,
+        "decodedBytes": 3148092
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1562416,
+        "decodedBytes": 18879096
+      }
+    },
+    {
       "hero": "hero-smoke",
       "encounter": "stray_voltage_solo",
       "location": "rooftop",
@@ -5497,6 +5647,21 @@
         "files": 6,
         "bytes": 1555604,
         "decodedBytes": 18877440
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "neon_sentinel_elite",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 545330,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1553592,
+        "decodedBytes": 18880512
       }
     },
     {
@@ -5635,6 +5800,36 @@
       }
     },
     {
+      "hero": "hero-smoke",
+      "encounter": "neon_sentinel_elite",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 545330,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 7,
+        "bytes": 1540966,
+        "decodedBytes": 25171968
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "neon_sentinel_elite",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 613658,
+        "decodedBytes": 3149408
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1538814,
+        "decodedBytes": 18881728
+      }
+    },
+    {
       "hero": "hero-chrome",
       "encounter": "imp_duo",
       "location": "ocean-drive",
@@ -5662,6 +5857,21 @@
         "files": 7,
         "bytes": 1537504,
         "decodedBytes": 25172172
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "neon_sentinel_elite",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 609936,
+        "decodedBytes": 3148092
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1537432,
+        "decodedBytes": 18879096
       }
     },
     {
@@ -5741,6 +5951,21 @@
     },
     {
       "hero": "hero-chrome",
+      "encounter": "neon_sentinel_elite",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 600948,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1527052,
+        "decodedBytes": 18880512
+      }
+    },
+    {
+      "hero": "hero-chrome",
       "encounter": "stray_voltage_solo",
       "location": "wynwood",
       "required": {
@@ -5767,6 +5992,21 @@
         "files": 6,
         "bytes": 1519908,
         "decodedBytes": 18877440
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "neon_sentinel_elite",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 600948,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1516340,
+        "decodedBytes": 18880512
       }
     },
     {
@@ -5887,6 +6127,21 @@
         "files": 6,
         "bytes": 1492954,
         "decodedBytes": 18874176
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "neon_sentinel_elite",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 600948,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1491356,
+        "decodedBytes": 18880512
       }
     },
     {
@@ -6055,6 +6310,21 @@
       }
     },
     {
+      "hero": "hero-smoke",
+      "encounter": "neon_sentinel_elite",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 545330,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1460416,
+        "decodedBytes": 18880512
+      }
+    },
+    {
       "hero": "hero-volt",
       "encounter": "voltage_king_elite",
       "location": "rooftop",
@@ -6187,6 +6457,21 @@
         "files": 6,
         "bytes": 1451686,
         "decodedBytes": 18879504
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "neon_sentinel_elite",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 545330,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1449704,
+        "decodedBytes": 18880512
       }
     },
     {
@@ -6337,6 +6622,21 @@
         "files": 6,
         "bytes": 1429454,
         "decodedBytes": 18877440
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "neon_sentinel_elite",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 545330,
+        "decodedBytes": 3148800
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1424720,
+        "decodedBytes": 18880512
       }
     },
     {
@@ -6761,36 +7061,6 @@
     },
     {
       "hero": "hero-volt",
-      "encounter": "neon_sentinel_elite",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 613658,
-        "decodedBytes": 3149408
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1358606,
-        "decodedBytes": 17307328
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "neon_sentinel_elite",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 609936,
-        "decodedBytes": 3148092
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1357224,
-        "decodedBytes": 17304696
-      }
-    },
-    {
-      "hero": "hero-volt",
       "encounter": "voltage_king_elite",
       "location": "wynwood",
       "required": {
@@ -6865,21 +7135,6 @@
       }
     },
     {
-      "hero": "hero-volt",
-      "encounter": "neon_sentinel_elite",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 613658,
-        "decodedBytes": 3149408
-      },
-      "all": {
-        "files": 6,
-        "bytes": 1345980,
-        "decodedBytes": 23598784
-      }
-    },
-    {
       "hero": "hero-smoke",
       "encounter": "voltage_king_elite",
       "location": "rooftop",
@@ -6892,21 +7147,6 @@
         "files": 5,
         "bytes": 1345054,
         "decodedBytes": 17303772
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "neon_sentinel_elite",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 609936,
-        "decodedBytes": 3148092
-      },
-      "all": {
-        "files": 6,
-        "bytes": 1344598,
-        "decodedBytes": 23596152
       }
     },
     {
@@ -7106,21 +7346,6 @@
     },
     {
       "hero": "hero-chrome",
-      "encounter": "neon_sentinel_elite",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 600948,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1311148,
-        "decodedBytes": 17306112
-      }
-    },
-    {
-      "hero": "hero-chrome",
       "encounter": "voltage_king_elite",
       "location": "wynwood",
       "required": {
@@ -7252,21 +7477,6 @@
         "files": 5,
         "bytes": 1300470,
         "decodedBytes": 17304232
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "neon_sentinel_elite",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 600948,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 6,
-        "bytes": 1298522,
-        "decodedBytes": 23597568
       }
     },
     {
@@ -7450,21 +7660,6 @@
       }
     },
     {
-      "hero": "hero-volt",
-      "encounter": "neon_sentinel_elite",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 613658,
-        "decodedBytes": 3149408
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1265430,
-        "decodedBytes": 17307328
-      }
-    },
-    {
       "hero": "hero-concrete",
       "encounter": "circuit_breaker_elite",
       "location": "club-backlot",
@@ -7477,21 +7672,6 @@
         "files": 5,
         "bytes": 1264774,
         "decodedBytes": 17304232
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "neon_sentinel_elite",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 609936,
-        "decodedBytes": 3148092
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1264048,
-        "decodedBytes": 17304696
       }
     },
     {
@@ -7525,21 +7705,6 @@
       }
     },
     {
-      "hero": "hero-volt",
-      "encounter": "neon_sentinel_elite",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 613658,
-        "decodedBytes": 3149408
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1254718,
-        "decodedBytes": 17307328
-      }
-    },
-    {
       "hero": "hero-chrome",
       "encounter": "circuit_breaker_elite",
       "location": "underpass",
@@ -7555,21 +7720,6 @@
       }
     },
     {
-      "hero": "hero-concrete",
-      "encounter": "neon_sentinel_elite",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 609936,
-        "decodedBytes": 3148092
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1253336,
-        "decodedBytes": 17304696
-      }
-    },
-    {
       "hero": "hero-smoke",
       "encounter": "voltage_king_elite",
       "location": "underpass",
@@ -7582,21 +7732,6 @@
         "files": 5,
         "bytes": 1251878,
         "decodedBytes": 17303772
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "neon_sentinel_elite",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 545330,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1244512,
-        "decodedBytes": 17306112
       }
     },
     {
@@ -7645,36 +7780,6 @@
       }
     },
     {
-      "hero": "hero-smoke",
-      "encounter": "neon_sentinel_elite",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 545330,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 6,
-        "bytes": 1231886,
-        "decodedBytes": 23597568
-      }
-    },
-    {
-      "hero": "hero-volt",
-      "encounter": "neon_sentinel_elite",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 613658,
-        "decodedBytes": 3149408
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1229734,
-        "decodedBytes": 17307328
-      }
-    },
-    {
       "hero": "hero-volt",
       "encounter": "chrome_phantom_elite",
       "location": "rooftop",
@@ -7687,21 +7792,6 @@
         "files": 5,
         "bytes": 1228420,
         "decodedBytes": 17305792
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "neon_sentinel_elite",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 609936,
-        "decodedBytes": 3148092
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1228352,
-        "decodedBytes": 17304696
       }
     },
     {
@@ -7762,21 +7852,6 @@
         "files": 5,
         "bytes": 1218698,
         "decodedBytes": 17305648
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "neon_sentinel_elite",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 600948,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1217972,
-        "decodedBytes": 17306112
       }
     },
     {
@@ -7852,21 +7927,6 @@
         "files": 5,
         "bytes": 1212870,
         "decodedBytes": 17303952
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "neon_sentinel_elite",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 600948,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1207260,
-        "decodedBytes": 17306112
       }
     },
     {
@@ -7976,21 +8036,6 @@
     },
     {
       "hero": "hero-chrome",
-      "encounter": "neon_sentinel_elite",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 600948,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1182276,
-        "decodedBytes": 17306112
-      }
-    },
-    {
-      "hero": "hero-chrome",
       "encounter": "chrome_phantom_elite",
       "location": "rooftop",
       "required": {
@@ -8095,21 +8140,6 @@
       }
     },
     {
-      "hero": "hero-smoke",
-      "encounter": "neon_sentinel_elite",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 545330,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1151336,
-        "decodedBytes": 17306112
-      }
-    },
-    {
       "hero": "hero-chrome",
       "encounter": "neon_yakuza_elite",
       "location": "club-backlot",
@@ -8122,21 +8152,6 @@
         "files": 5,
         "bytes": 1141810,
         "decodedBytes": 17305368
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "neon_sentinel_elite",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 545330,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1140624,
-        "decodedBytes": 17306112
       }
     },
     {
@@ -8197,21 +8212,6 @@
         "files": 5,
         "bytes": 1123150,
         "decodedBytes": 17303160
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "neon_sentinel_elite",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 545330,
-        "decodedBytes": 3148800
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1115640,
-        "decodedBytes": 17306112
       }
     },
     {

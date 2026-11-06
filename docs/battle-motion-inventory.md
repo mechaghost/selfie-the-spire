@@ -23,7 +23,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | sewer_slime | production | attack, hit, defeat, guard, cast, blink | hit, defeat, guard, cast, idle, attack | none | review |
 | fire_escape_spider | production | attack, hit, defeat, cast, guard, blink, windup, recovery | idle, attack | none | review |
 | vending_golem | legacy/dev | attack, hit, defeat, guard, cast, blink, windup, recovery | idle, attack | none | review |
-| neon_sentinel | production | none | none | attack, hit, defeat, guard, cast | review |
+| neon_sentinel | production | attack | attack | hit, defeat, guard, cast | review |
 | chrome_phantom | production | none | none | attack, hit, defeat, guard, cast | review |
 | voltage_king | production | none | none | attack, hit, defeat, guard, cast | review |
 | circuit_breaker | production | none | none | attack, hit, defeat, guard, cast | review |

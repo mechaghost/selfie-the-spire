@@ -529,3 +529,9 @@ Generation prompt: Precise minimal idle blink edit of this exact DJ Phantom. Rep
 ### DJ Phantom compact pose review
 
 The Pixi boss study at 320 × 568 showed the scratch at 140 ms, recoil and cast at 80 ms, blink at 4,999 ms, idle at 5,000 ms and defeat at 40 ms. The scratch, lifted hands, cast and collapse are distinct and stay clear of the hand. The mask sits close to the HUD in the taller poses and the eye change is subtle at this width. No visible jump in the decks or tail baseline across the blink samples. The defeat target was disabled and labeled Defeated. Browser warning and error logs were empty. Captures are `tests/.e2e-out/dj-{attack,hit,cast,blink,idle,defeat}-320.jpg`. Full-speed and physical-device checks remain open.
+
+### Neon Sentinel shield bash
+
+Added a shield-first attack contact with a low split stance. The 1199 × 1312 source has alpha ≥128 bounds (22,95)–(1179,1221), with a .931 foot anchor. The 80/160/80 ms timeline holds the new contact at the impact beat. All 550 art budgets passed. The bounds audit found zero confirmed intersections across 1,101,060 samples. Texture, playback and TypeScript checks passed. Mobile visual review remains open.
+
+Generation prompt: Attack CONTACT pose of the exact Neon Sentinel game sprite. A compact heavy shield bash toward screen LEFT: rotate torso left, thrust existing teal rectangular shield forward against its target at chest height with bent elbow, rear fist tucked at waist, plant both boots in a low split stance. Visor still facing left and visible above shield, no weapon added. Same cream plates, teal panels, coral stripes, purple joints, thin red visor and inked painterly texture. Match reference portrait canvas, visible scale and baseline, tight silhouette with shield and boots fully inside margins. Actual transparent alpha including between limbs. No floor, shadow, impacts, rays, text, sparks or scenery.
