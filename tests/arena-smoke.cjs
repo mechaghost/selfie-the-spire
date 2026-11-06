@@ -25,8 +25,8 @@ async function tabTo(page, control, label) {
     assert.fail(`Could not reach ${label} with Tab`);
 }
 
-async function playFight(page, viewport, input, reducedMotion) {
-    const captureId = `${viewport.width}-${input}-${reducedMotion}`;
+async function playFight(page, { viewport, input, reducedMotion = 'no-preference', loseGraphics = false }) {
+    const captureId = `${viewport.width}-${input}-${loseGraphics ? 'graphics-loss' : reducedMotion}`;
     const activate = async (control, label) => {
         if (input === 'touch') return control.tap();
         await tabTo(page, control, label);
@@ -48,7 +48,9 @@ async function playFight(page, viewport, input, reducedMotion) {
     assert.equal(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches), reducedMotion === 'reduce');
     await activate(page.getByRole('button', { name: /Play a starter run/ }), 'starter run');
     await activate(page.locator('.map-node.available.type-combat').first(), 'first fight');
-    await page.locator('.battle-arena canvas').waitFor();
+    const stage = page.locator('.battle-stage-visual');
+    const canvas = stage.locator('canvas');
+    await canvas.waitFor();
     assert.equal(await page.evaluate(() => typeof window.__gameStore), 'undefined');
     const targets = page.locator('.actor-target:not([disabled])');
     assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => element.getAttribute('aria-label').split(',')[0])),
@@ -93,6 +95,22 @@ async function playFight(page, viewport, input, reducedMotion) {
             const { index, cost } = affordable[0];
             await activate(handAttacks.nth(index), labels[index]);
             await activate(page.getByRole('button', { name: 'Play card', exact: true }), 'Play card');
+            if (plays === 0 && loseGraphics) {
+                await targetPrompt.waitFor();
+                const energyDisplay = page.locator('.energy-current');
+                const beforeLoss = await energyDisplay.textContent();
+                await canvas.evaluate(element => {
+                    const gl = element.getContext('webgl2') ?? element.getContext('webgl');
+                    const extension = gl?.getExtension('WEBGL_lose_context');
+                    if (!extension) throw new Error('The active renderer does not support WEBGL_lose_context');
+                    extension.loseContext();
+                });
+                await stage.locator('.battle-dom-fallback').waitFor();
+                await page.getByRole('button', { name: 'Retry graphics' }).waitFor();
+                assert.equal(await stage.getAttribute('data-stage-status'), 'degraded');
+                assert.equal(await targetPrompt.isVisible(), true, 'graphics loss dismissed the card target prompt');
+                assert.equal(await energyDisplay.textContent(), beforeLoss, 'graphics loss spent energy');
+            }
             if (await targetPrompt.isVisible()) await activate(targets.first(), 'first living enemy');
             if (plays === 0) {
                 const impact = page.locator('.combat-impact.impact-damage').first();
@@ -105,6 +123,13 @@ async function playFight(page, viewport, input, reducedMotion) {
             plays++;
             energy -= cost;
             await waitForDecision(page);
+            if (plays === 1 && loseGraphics) {
+                const afterHit = await targets.evaluateAll(elements => elements.map(element => element.getAttribute('aria-label')));
+                assert.match(afterHit[0], /8 of 14 HP/);
+                await activate(page.getByRole('button', { name: 'Retry graphics' }), 'Retry graphics');
+                await page.locator('.battle-stage-visual[data-stage-status="ready"] canvas').waitFor();
+                assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => element.getAttribute('aria-label'))), afterHit);
+            }
         }
         if (await victory.isVisible()) break;
         await activate(endTurn, 'End Turn');
@@ -146,7 +171,7 @@ async function playFight(page, viewport, input, reducedMotion) {
     assert.equal(save.masterDeck.length, 13);
     assert.ok(save.player.gold > 99);
     assert.deepEqual(errors, []);
-    console.log(`PASS ${viewport.width}×${viewport.height} (${input}, ${reducedMotion}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
+    console.log(`PASS ${viewport.width}×${viewport.height} (${input}, ${loseGraphics ? 'graphics loss and retry' : reducedMotion}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
     return {
         plays, enemyTurns, rewardChoices, stop,
         hp: save.player.hp,
@@ -168,17 +193,20 @@ async function main() {
             { viewport: { width: 844, height: 390 }, input: 'touch' },
             { viewport: { width: 320, height: 568 }, input: 'keyboard' },
             { viewport: { width: 320, height: 568 }, input: 'touch', reducedMotion: 'reduce' },
+            { viewport: { width: 320, height: 568 }, input: 'touch', loseGraphics: true },
         ];
         let portraitBaseline;
-        for (const { viewport, input, reducedMotion = 'no-preference' } of cases) {
+        for (const testCase of cases) {
+            const { viewport, input, reducedMotion = 'no-preference', loseGraphics } = testCase;
             const page = await browser.newPage({ viewport, isMobile: true, hasTouch: input === 'touch', reducedMotion });
             try {
-                const result = await playFight(page, viewport, input, reducedMotion);
+                const result = await playFight(page, testCase);
                 if (!portraitBaseline) portraitBaseline = result;
                 if (reducedMotion === 'reduce') {
                     assert.deepEqual(result, portraitBaseline, 'Reduced motion changed the fight or saved outcome');
                     console.log('PASS normal and reduced motion produce identical portrait combat and reward outcomes');
                 }
+                if (loseGraphics) assert.deepEqual(result, portraitBaseline, 'Graphics loss or retry changed the fight or saved outcome');
             } finally {
                 await page.close();
             }

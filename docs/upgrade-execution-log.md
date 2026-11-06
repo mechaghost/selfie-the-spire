@@ -655,3 +655,7 @@ Extended `tests/arena-smoke.cjs` with a third case at 320 × 568. Every gameplay
 ### Production browser reduced-motion parity
 
 The arena smoke now repeats the same 320 × 568 Rat Pack fight with the browser's reduced-motion preference enabled. It checks that damage feedback remains visible with its CSS animation disabled and compares the normal and reduced runs' attack count, turn count, reward choices, saved HP, gold, ordered deck, current stop and RNG snapshot. The production build passed all four smoke cases, including both normal touch layouts, the keyboard-only encounter and the reduced-motion portrait run. This checks one encounter through the browser preference. The automated engine suites cover disabled motion separately. Prior CI run 42182533738 passed.
+
+### Production WebGL loss during targeting
+
+The production arena smoke now includes a fifth case at 320 × 568. It calls the live canvas's `WEBGL_lose_context` extension while targeting the first Jab, waits for the degraded DOM renderer, and asserts that the target prompt and energy remain intact. The Jab resolves in the fallback and takes the first Rat from 14 to 8 HP. Retry graphics restores Pixi without changing the enemy state. The fight, reward choices, and reloaded save match the normal portrait baseline, including the RNG snapshot. All five smoke cases passed. This exercises real context loss in Chrome with software WebGL. Mid-resolution device recovery remains open. Prior CI run 42182875694 passed.
