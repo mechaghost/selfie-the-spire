@@ -1129,3 +1129,9 @@ Evidence under `tests/.e2e-out/`: `ios-safari-{portrait,landscape,victory,restor
 Bundled the existing Bebas Neue and Space Mono Google Fonts WOFF2 subsets with their OFL notices. The production smoke now blocks third-party HTTP requests and verifies that Bebas Neue regular and both Space Mono weights load before exercising the local selfie flow. The nine smoke scenarios passed in Chromium and WebKit. TypeScript and both production build variants passed.
 
 A separate cold-cache Chromium run at 390 × 844, 1.6 Mbps downstream and 150 ms simulated latency reached the starter menu in 963 ms and an input-ready Pixi arena 11,426 ms after tapping the fight. These are single-run desktop emulation measurements. The arena startup delay remains a release review item.
+
+### Prioritize required arena textures
+
+The renderer now settles all required idle textures before requesting scenery, atlases or extra poses. Optional assets still stream independently and combat opens without waiting for them. A failed required texture skips optional requests and falls back to simplified graphics. The streaming suite verifies request order, failure cleanup, and independent atlas/loose pose streaming.
+
+Compared the local-font baseline `caaaac5` and this change with alternating cold-cache Chromium runs. All four trials used the same legal Rat Pack seed, 390 × 844 touch viewport, 1.6 Mbps downstream and 150 ms simulated latency. Baseline tap-to-ready was 6,872 and 6,353 ms. The new order took 5,041 and 5,345 ms. The ready assertion requires a Pixi canvas and an enabled End Turn button. This measures one encounter under desktop network emulation. The earlier 11.4 second observation used an unpinned encounter and is not the comparison baseline.

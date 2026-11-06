@@ -96,6 +96,17 @@ export class BattleScene {
             this.backdrop.sortableChildren=true;
             this.foreground.sortableChildren=true;
             this.world.sortableChildren=true;
+            await Promise.all(this.snapshot.actors.map(async (actor,index) => {
+                const lease = battleTextures.acquire(actor.visual.fallbackImageUrl); this.leases.push(lease);
+                const texture = await lease.ready;
+                if (this.disposed) return;
+                const shadow = new Graphics(); shadow.zIndex=index*2; this.shadows.set(actor.id,shadow); this.world.addChild(shadow);
+                const sprite = new Sprite(texture); sprite.zIndex=index*2+1; sprite.anchor.set(...actor.visual.footAnchor);
+                this.sprites.set(actor.id,sprite); this.world.addChild(sprite);
+                this.poses.set(`${actor.id}:idle`,texture);
+            }));
+            if (this.disposed) return false;
+            // Idle actors unlock combat. Stream scenery and extra poses after their requests settle.
             void Promise.all(this.snapshot.location.layers.map(async layer=>{
                 const lease=battleTextures.acquire(layer.url);this.leases.push(lease);
                 try {
@@ -105,15 +116,7 @@ export class BattleScene {
                     this.update(this.snapshot);
                 } catch { /* Technical ground remains usable while background art is unavailable. */ }
             }));
-            if(this.disposed)return false;
-            await Promise.all(this.snapshot.actors.map(async (actor,index) => {
-                const lease = battleTextures.acquire(actor.visual.fallbackImageUrl); this.leases.push(lease);
-                const texture = await lease.ready;
-                if (this.disposed) return;
-                const shadow = new Graphics(); shadow.zIndex=index*2; this.shadows.set(actor.id,shadow); this.world.addChild(shadow);
-                const sprite = new Sprite(texture); sprite.zIndex=index*2+1; sprite.anchor.set(...actor.visual.footAnchor);
-                this.sprites.set(actor.id,sprite); this.world.addChild(sprite);
-                this.poses.set(`${actor.id}:idle`,texture);
+            for (const actor of this.snapshot.actors) {
                 const requestedPoses=new Set<string>();
                 const loadPoses=(onlyMissing=false)=>Promise.all(Object.entries(actor.visual.keyPoses ?? {}).filter(([clip])=>!requestedPoses.has(clip) && (!onlyMissing || !actor.visual.atlasFrames?.[clip])).map(async ([clip,pose])=>{
                     if(this.disposed)return;
@@ -131,8 +134,7 @@ export class BattleScene {
                         this.update(this.snapshot);
                     }).catch(()=>{ atlasLease.release();void loadPoses(); });
                 } else void loadPoses();
-            }));
-            if (this.disposed) return false;
+            }
             this.update(this.snapshot);
             this.unsubscribeImpacts=subscribeImpacts(notice=>{
                 if(this.disposed || this.snapshot.reducedMotion || document.hidden || notice.effect==='status')return;
