@@ -378,8 +378,10 @@ async function verifyCombatFeedback(page) {
         const cases = [
             { id: 'graffiti_imp', type: 'Debuff', labels: ['+1 Vulnerable', '+1 Weak'] },
             { id: 'dj_phantom', hits: 4, labels: ['-5', '-5', '-5', '-5'] },
+            { id: 'manhole_mimic', type: 'Attack', labels: ['-12', '+1 Vulnerable'], shake: true },
         ];
         for (const fixture of cases) {
+            if (fixture.shake) await page.emulateMedia({ reducedMotion: 'no-preference' });
             await page.evaluate(id => {
                 const store = window.__gameStore;
                 const { createEnemyInstance } = window.__enemies;
@@ -399,9 +401,13 @@ async function verifyCombatFeedback(page) {
             // Software rendering on CI can stretch these timers in wall-clock time.
             await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
             await page.getByRole('button', { name: 'End Turn', exact: true }).evaluate(button => button.click());
-            await page.clock.runFor(900);
+            await page.clock.runFor(fixture.shake ? 650 : 900);
             const measured = await page.locator('.combat-feedback').evaluate(element => ({
                 arena: element.getBoundingClientRect().toJSON(),
+                shake: {
+                    stage: getComputedStyle(element.closest('.combat-stage')).animationName,
+                    artwork: getComputedStyle(element.parentElement.querySelector('.battle-canvas')).animationName,
+                },
                 notices: Array.from(element.querySelectorAll('.combat-impact'), notice => ({
                     label: notice.textContent,
                     box: notice.getBoundingClientRect().toJSON(),
@@ -415,6 +421,12 @@ async function verifyCombatFeedback(page) {
             check(`[feedback] ${fixture.id} notices fit without overlap at 320 px`,
                 fits && notices.map(notice => notice.label).join('|') === fixture.labels.join('|'),
                 JSON.stringify(notices));
+            if (fixture.shake) {
+                check('[feedback] heavy impact shakes artwork only',
+                    measured.shake.stage === 'none' && measured.shake.artwork === 'stageShakeHeavy' &&
+                    arena.left === 0 && notices.every(({ box }) => box.left >= 3.9 && box.right <= 316),
+                    JSON.stringify(measured));
+            }
             await page.clock.resume();
             await waitIdleTurn(page);
             await page.evaluate(() => window.__gameStore.getState().abandonRun());

@@ -817,3 +817,7 @@ Added an extended-blade, open-palm curse pose with a contained violet wisp, .993
 ### Manhole Mimic Vulnerable cast
 
 Added a violet breath cue with a .999 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, its unchanged opening move applied 12 damage before the cast and +1 Vulnerable; player HP ended at 68. The breath remains visible in the capture, although the second player notice's border reaches the left screen edge. Capture: `tests/.e2e-out/manhole-mimic-live-cast-320.png`. All 550 encounter budgets, texture caps, playback and TypeScript passed. Bounds found zero confirmed intersections across 1,120,716 samples.
+
+### Keep controls and notices stable during heavy impacts
+
+The Mimic's bite moved the entire arena about 5.7 px left during the heavy shake, while the mobile viewport itself stayed fixed. The 2D arena now shakes only its Pixi canvas or decorative fallback. The real bite regression at 320 × 568 uses standard motion and verifies the heavy animation is on the artwork, the arena origin stays fixed, and both the 12-damage and Vulnerable notices stay in bounds without overlap. The full Chromium mechanics suite passed. The follow-up cast capture shows about 4 px clearance at the left edge.
