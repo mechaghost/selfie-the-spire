@@ -613,20 +613,20 @@
       "status": "review",
       "keyPoses": [
         "attack",
-        "hit"
+        "hit",
+        "defeat"
       ],
       "timelines": [
         "attack",
-        "hit"
+        "hit",
+        "defeat"
       ],
       "missingContactPoses": [
-        "defeat",
         "guard",
         "cast"
       ],
       "missingTimelines": [
         "idle",
-        "defeat",
         "guard",
         "cast"
       ]

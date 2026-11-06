@@ -30,7 +30,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | neon_yakuza | production | none | none | attack, hit, defeat, cast | review |
 | chrome_bouncer | production | none | none | attack, hit, defeat, guard, cast | review |
 | the_billboard | production | attack, hit, guard, cast, defeat, blink | hit, guard, cast, defeat, idle, attack | none | review |
-| subway_wyrm | production | attack, hit | attack, hit | defeat, guard, cast | review |
+| subway_wyrm | production | attack, hit, defeat | attack, hit, defeat | guard, cast | review |
 | dj_phantom | production | none | none | attack, hit, defeat, cast | review |
 
 Presence is not art approval. Required guard/cast inferred from executable effects; heroes can use generated effects. Timelines can reuse poses and are not proof of authored inbetweens.
