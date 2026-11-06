@@ -46,7 +46,7 @@ export function BattleStage({snapshot,noticeHost,forceFallback=false,onStatus}: 
     }, [rosterKey,snapshot.location.id,forceFallback,attempt]);
     useEffect(()=>{scene.current?.update(snapshot);},[snapshot]);
     useEffect(()=>{onStatus?.(status);},[status,onStatus]);
-    return <div className="battle-stage-visual" ref={focusReturn} role="group" aria-label="Combat arena" tabIndex={-1} data-stage-status={status}>
+    return <div className="battle-stage-visual" ref={focusReturn} role="group" aria-label={`Combat arena · ${snapshot.location.name}`} tabIndex={-1} data-stage-status={status}>
         <div className="battle-canvas" ref={host} />
         {status !== 'ready' && <div className="battle-dom-fallback" aria-hidden="true" style={{backgroundColor:`#${snapshot.location.sky.toString(16).padStart(6,'0')}`}}>
             <div className="battle-fallback-ground" style={{top:snapshot.layout.width<600 && snapshot.layout.height>=300 && snapshot.layout.enemies.length===3 ? '32%' : '73%',backgroundColor:`#${snapshot.location.ground.toString(16).padStart(6,'0')}`}} />

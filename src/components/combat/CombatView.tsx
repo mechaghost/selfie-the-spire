@@ -10,15 +10,17 @@ import './CombatView.css';
 import { useCombatInteraction } from '../../store/combatInteraction';
 import { BattleArena } from './BattleArena';
 import { CityBackdrop } from '../ui/CityBackdrop';
+import { locationForFloor } from '../../data/locations';
 
 export function CombatView() {
     const actorArena = import.meta.env.VITE_COMBAT_ARENA === '1' || (import.meta.env.DEV && new URLSearchParams(location.search).has('arena'));
     const [targetControls,setTargetControls]=useState<'arena'|'list'>('arena');
     const {
-        player, enemies, endTurn, energy, maxEnergy, isPlayerTurn, combatResult, screenShake
+        player, enemies, floor, endTurn, energy, maxEnergy, isPlayerTurn, combatResult, screenShake
     } = useGameStore((state) => ({
         player: state.player,
         enemies: state.enemies,
+        floor: state.floor,
         endTurn: state.endTurn,
         energy: state.player.energy,
         maxEnergy: state.player.maxEnergy,
@@ -71,7 +73,7 @@ export function CombatView() {
             onClick={handleStageClick}
         >
             <CityBackdrop />
-            <div className="arena-location"><span>NEO MIAMI / AFTER HOURS</span><strong>Ocean Drive</strong></div>
+            <div className="arena-location"><span>NEO MIAMI / AFTER HOURS</span><strong>{locationForFloor(floor).name}</strong></div>
 
             <TopBar />
 
