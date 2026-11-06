@@ -118,6 +118,13 @@
     "runtimeHeight": 650,
     "resolution": 0.5
   },
+  "/assets/battle/actors/dj-phantom-cast-v1.webp": {
+    "width": 1113,
+    "height": 1413,
+    "runtimeWidth": 557,
+    "runtimeHeight": 707,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/dj-phantom-defeat-v1.webp": {
     "width": 1113,
     "height": 1413,

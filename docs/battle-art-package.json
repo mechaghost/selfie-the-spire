@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 196313843,
-  "runtimeBytes": 30484332,
+  "sourceBytes": 198186593,
+  "runtimeBytes": 30847484,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -224,6 +224,19 @@
       "sourceBytes": 1831900,
       "runtimeBytes": 345554,
       "decodedRGBABytes": 1573000
+    },
+    {
+      "asset": "actors/dj-phantom-cast-v1.webp",
+      "width": 1113,
+      "height": 1413,
+      "runtimeWidth": 557,
+      "runtimeHeight": 707,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1872750,
+      "runtimeBytes": 363152,
+      "decodedRGBABytes": 1575196
     },
     {
       "asset": "actors/dj-phantom-defeat-v1.webp",
