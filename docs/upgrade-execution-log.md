@@ -949,3 +949,11 @@ Added a compact two-forearm brace with a .98 foot anchor and a 160/60 ms guard/i
 Built-in imagegen prompt with `volt-idle-v1.png` as reference:
 
 > Create a single full-body defense key pose of the exact Volt fighter in the reference. Match the inked arcade fighting game sprite style, swept black hair with cream streak, yellow and teal electrician jacket, orange cable loop, dark cargo pants and teal and cream sneakers. Facing screen right with both sneakers planted at the original floor line, bend the knees a little and raise both bracers together diagonally in front of the right-facing cheek and chest, elbows tucked, looking toward the threat. The forearms and shoulders should read as a compact protective shape at small mobile size. Keep camera and sprite scale. Both feet and all extremities visible with transparent clearance. True alpha background, no environment, ground, shadow, props, glow or effects.
+
+### Volt defeat pose
+
+Added a grounded kneeling pose with a .967 foot anchor and a held 280 ms defeat clip. At 320 × 568 in Chromium touch emulation, Dumpster Crawler's opening hit took Volt from 5 HP to zero. The kneeling pose appeared before the normal Defeat overlay. Capture: `tests/.e2e-out/volt-live-defeat-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `volt-idle-v1.png` as reference:
+
+> Create one full-body 2D defeat animation key pose for the exact Volt street fighter in this transparent game sprite reference. Same swept black hair and cream streak, yellow and teal electrician jacket, orange waist cable, dark cargo pants, cream and teal sneakers, same inked style and game camera facing right. He has fallen to one knee, head bowed, right hand on his raised knee, other gloved hand planted on the ground for support. Keep his original full standing canvas and feet ground line, leaving abundant clear alpha above his lowered body rather than enlarging or reframing him. Keep all limbs in view. No injuries, lettering, FX, props, ground, shadow or environment. Real transparency.

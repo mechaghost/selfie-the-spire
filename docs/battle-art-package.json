@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 329296122,
-  "runtimeBytes": 50064610,
+  "sourceBytes": 330112506,
+  "runtimeBytes": 50222216,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -2121,6 +2121,19 @@
       "compositedPSNR": null,
       "sourceBytes": 1247215,
       "runtimeBytes": 239968,
+      "decodedRGBABytes": 1575008
+    },
+    {
+      "asset": "actors/volt-defeat-v1.webp",
+      "width": 1186,
+      "height": 1327,
+      "runtimeWidth": 593,
+      "runtimeHeight": 664,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 816384,
+      "runtimeBytes": 157606,
       "decodedRGBABytes": 1575008
     },
     {
