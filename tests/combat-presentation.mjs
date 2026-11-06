@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
-await build({stdin:{contents:`export * from './src/core/combatTiming';export * from './src/rendering/CombatPresentation';export {useGameStore} from './src/store/gameStore';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/combat-presentation.mjs',bundle:true,platform:'node',format:'esm',define:{'import.meta.env':'{}'}});
+await build({stdin:{contents:`export * from './src/core/combatTiming';export * from './src/rendering/CombatPresentation';export {useGameStore} from './src/store/gameStore';export {enemies,createEnemyInstance} from './src/data/enemies';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/combat-presentation.mjs',bundle:true,platform:'node',format:'esm',define:{'import.meta.env':'{}'}});
 let now=0,serial=0;const timers=new Map();
 globalThis.setTimeout=(fn,ms=0)=>{const id=++serial;timers.set(id,{fn,at:now+ms});return id;};globalThis.clearTimeout=id=>timers.delete(id);
 const api=await import('./.e2e-out/combat-presentation.mjs');
@@ -39,3 +39,48 @@ store.setState({enemies:store.getState().enemies.map(enemy=>({...enemy,hp:20,sta
 effect('STATUS_TICK',{targetId:'target'});assert.deepEqual(impacts.slice(-2).map(e=>[e.effect,e.hpDelta]),[['burn',-3],['heal',2]]);assert.equal(store.getState().enemies[0].hp,19);
 stopImpacts();api.setCombatMotionMode('normal');
 console.log('PASS: actual HP/Block deltas, capped healing, fully blocked hits, retaliation and separate Burn/regen outcomes');
+
+const djAttack = api.enemies.dj_phantom.aiPatterns.find(({intent}) => intent.hits === 4)?.intent;
+assert.ok(djAttack, 'DJ Phantom four-hit move exists');
+const djTurns = [];
+for (const mode of ['normal', 'reduced', 'off']) {
+    api.setCombatMotionMode(mode);
+    store.getState().initializeRun('dj-four-hit');
+    const enemy = api.createEnemyInstance('dj_phantom', 'dj', store.getState().rng);
+    store.getState().startCombat([enemy]);
+    settle();
+    store.setState(state => ({
+        player: {...state.player, block: 0, statuses: []},
+        enemies: state.enemies.map(actor => ({...actor, intent: djAttack})),
+    }));
+    const startingHp = store.getState().player.hp;
+    const lunges = [];
+    const hits = [];
+    const stopActions = api.subscribePresentation(notice => {
+        if (notice.phase === 'begin' && notice.type === 'PLAY_ANIMATION' && notice.targetId === 'dj') {
+            lunges.push(now);
+        }
+    });
+    const stopHits = api.subscribeImpacts(notice => {
+        if (notice.effect === 'damage' && notice.targetId === 'player') hits.push({...notice, at: now});
+    });
+    try {
+        store.getState().endTurn();
+        settle();
+    } finally {
+        stopActions();
+        stopHits();
+    }
+    assert.equal(lunges.length, 4);
+    assert.equal(new Set(hits.map(hit => hit.actionId)).size, 4);
+    assert.equal(new Set(hits.map(hit => hit.commandId)).size, 1);
+    assert.deepEqual(hits.map(hit => hit.hpDelta), [-5, -5, -5, -5]);
+    assert.deepEqual(hits.map((hit, i) => hit.at - lunges[i]), Array(4).fill(api.combatDelay('anticipation')));
+    assert.equal(store.getState().player.hp, startingHp - 20);
+    assert.ok(store.getState().isPlayerTurn);
+    djTurns.push(snapshot());
+}
+assert.deepEqual(djTurns[0], djTurns[1]);
+assert.deepEqual(djTurns[0], djTurns[2]);
+api.setCombatMotionMode('normal');
+console.log('PASS: DJ Phantom four lunge starts and four distinct impacts, with identical combat outcomes across motion modes');
