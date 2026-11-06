@@ -128,65 +128,65 @@
   "/assets/battle/actors/fire-escape-spider-attack-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/fire-escape-spider-blink-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/fire-escape-spider-cast-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/fire-escape-spider-defeat-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/fire-escape-spider-guard-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/fire-escape-spider-hit-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/fire-escape-spider-idle-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/fire-escape-spider-recovery-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/fire-escape-spider-windup-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 704,
+    "runtimeHeight": 470,
+    "resolution": 0.4583333333333333
   },
   "/assets/battle/actors/graffiti-imp-attack-v1.webp": {
     "width": 1230,
@@ -256,6 +256,13 @@
     "height": 1402,
     "runtimeWidth": 561,
     "runtimeHeight": 701,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/sewer-slime-attack-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 768,
+    "runtimeHeight": 512,
     "resolution": 0.5
   },
   "/assets/battle/actors/sewer-slime-idle-v1.webp": {
