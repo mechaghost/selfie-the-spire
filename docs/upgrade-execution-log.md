@@ -829,3 +829,7 @@ Added a low boxing guard with both fists up, a .993 foot anchor and a 160/60 ms 
 ### Sequence the guard and cast on compound buffs
 
 A same-actor Block and status move previously started both visuals together, so the guard consumed the full cast window. When both poses are authored, the renderer now shows the guard first and starts the cast when the reaction expires. The queue still applies both effects immediately and the player can act while the visual finishes. The controlled renderer test verifies Slime's guard, Strength cast, idle and separate Weak cast. At 320 × 568 the real Circuit Breaker opening move showed the closed-panel brace, then its raised-hand cast with +10 Block and +3 Strength still visible. Captures: `tests/.e2e-out/circuit-breaker-live-{guard,combined-cast}-320.png`. Renderer streaming, actor motion, combat presentation parity and TypeScript passed.
+
+### Chrome Bouncer Strength cast
+
+Added a chest-thump pose with illuminated gauntlet seams, a .992 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, Chrome Bouncer's existing Buff move showed the guard and then the chest thump. It gained 12 Block and 2 Strength without damaging the player; the cast completed as the next hand became available. Captures: `tests/.e2e-out/chrome-bouncer-live-combined-{guard,cast}-320.png`. All 550 encounter budgets, texture caps, clip playback and TypeScript passed. Bounds found zero confirmed intersections across 1,121,580 samples.
