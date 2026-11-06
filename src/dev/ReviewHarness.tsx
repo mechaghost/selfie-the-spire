@@ -35,7 +35,7 @@ export default function ReviewHarness() {
                 pending.then(()=>{
                     const state=store.getState();
                     if(state.masterDeck!==deck || !state.inCombat || state.enemies[0]?.id!=='review-0')return;
-                    const statuses=[{id:'weak',amount:2},{id:'burn',amount:3},{id:'strength',amount:1},{id:'vulnerable',amount:2}];
+                    const statuses=[{id:'weak',name:'Weak',amount:2},{id:'burn',name:'Burn',amount:3},{id:'strength',name:'Strength',amount:1},{id:'vulnerable',name:'Vulnerable',amount:2}];
                     store.setState({player:{...state.player,block:8,statuses},enemies:state.enemies.map(enemy=>({...enemy,block:5,statuses}))});
                 });
                 break;
