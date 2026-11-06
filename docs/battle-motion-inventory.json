@@ -530,21 +530,21 @@
       "reachability": "production",
       "status": "review",
       "keyPoses": [
-        "attack"
+        "attack",
+        "hit",
+        "defeat"
       ],
       "timelines": [
+        "hit",
+        "defeat",
         "attack"
       ],
       "missingContactPoses": [
-        "hit",
-        "defeat",
         "guard",
         "cast"
       ],
       "missingTimelines": [
         "idle",
-        "hit",
-        "defeat",
         "guard",
         "cast"
       ]
