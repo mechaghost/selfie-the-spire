@@ -917,3 +917,11 @@ Added a held kneeling defeat pose with a .987 foot anchor. In a 320 × 568 Chrom
 ### Verify selfie sprite continuity through graphics loss
 
 The arena-enabled production build passed the 320 × 568 Chromium touch case with a local photo fixture. After reload and forced WebGL context loss, the fallback loaded the exact transparent PNG shown in the hero preview. No fetch, XHR or non-GET requests occurred during the photo flow. On the separate live release, Safari on the iPhone 18 Pro simulator loaded the starter menu and the production health endpoint returned OK. This was a live menu check only; the simulator did not exercise combat or the camera. The live menu still shows the previous hero creation copy.
+
+### Chrome cast pose
+
+Chrome now braces one forearm with the opposite hand while activating a skill. The cast uses a .987 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568 in Chromium touch emulation, playing Pump Iron against Dumpster Crawler showed the cast pose and applied 2 Strength, with HP unchanged. Capture: `tests/.e2e-out/chrome-live-cast-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `chrome-idle-v1.png` as reference:
+
+> Create one transparent PNG full-body cast-contact key pose for the exact same Chrome street fighter shown. Match the reference's grounded game sprite line art, palette, face and dark cropped hair, chrome bomber armor with teal stripes, pendant, cargo pants and cream combat boots. Match original camera, facing screen right, silhouette scale, perspective and planted boots. Only the upper-body gesture changes. In a deliberate non-attack activation gesture, he holds his near gloved palm facing upward at chest height in front of him, while the other gloved hand braces the forearm from underneath. Slight lean toward the hands, focused gaze. Game renders its own FX, so do not include any magic, glow particles, props, floor or shadow. Single sprite with real alpha background and transparent clearance on all sides. Keep both boots and all fingers inside frame.

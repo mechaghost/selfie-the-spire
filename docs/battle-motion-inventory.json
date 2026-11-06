@@ -39,21 +39,21 @@
         "attack",
         "hit",
         "guard",
+        "cast",
         "defeat"
       ],
       "timelines": [
         "hit",
         "guard",
+        "cast",
         "defeat",
         "attack"
       ],
       "missingContactPoses": [
-        "cast",
         "celebrate"
       ],
       "missingTimelines": [
         "idle",
-        "cast",
         "celebrate"
       ]
     },
