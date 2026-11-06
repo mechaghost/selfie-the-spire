@@ -370,6 +370,20 @@
     "runtimeHeight": 656,
     "resolution": 0.5
   },
+  "/assets/battle/actors/neon-sentinel-defeat-v1.webp": {
+    "width": 1199,
+    "height": 1312,
+    "runtimeWidth": 600,
+    "runtimeHeight": 656,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/neon-sentinel-hit-v1.webp": {
+    "width": 1199,
+    "height": 1312,
+    "runtimeWidth": 600,
+    "runtimeHeight": 656,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/neon-sentinel-idle-v1.webp": {
     "width": 1199,
     "height": 1312,

@@ -635,3 +635,9 @@ At 320 × 568 in the solo Pixi study the recoil stayed below the HUD, and the wi
 Added a tilted stereo recoil and a seated shutdown with dark cassette eyes, folded legs and lowered fists. Hit uses .989 and a 160/60 ms hit/idle clip. Defeat uses .995 and a 280 ms hold. The new textures initially put Brute Squad at 5,210,284 bytes. A common 540 px runtime cap keeps all 550 combinations within budget, preserves the originals, and replaces the old attack width compensation.
 
 At 320 × 568 in the Pixi Brute Squad lineup, the updated attack still extends left into open space, the recoil tilts away and the shutdown remains in lane. Only Boombox's target was disabled. Captures: `tests/.e2e-out/boombox-brute-{attack,hit,defeat}-320.png`. Texture, clip playback and TypeScript checks passed, with no confirmed intersections across 1,109,484 bounds samples. Prior CI run 42180845477 passed. Full-speed and physical-device checks remain open.
+
+### Neon Sentinel recoil and defeat
+
+Added a backward recoil with the shield lowered and a held kneeling collapse with a dark visor. Both use the original 1199 × 1312 canvas. The recoil uses a .992 foot anchor and 160/60 ms hit/idle timing. The defeat uses a .976 anchor and a 280 ms hold. The shield stays with the actor in both poses.
+
+Compared shield bash, recoil and defeat in the 320 × 568 solo Pixi study. The recoil's raised boot and backward lean distinguish it from the bash. Its visor sits close to the HUD. The defeated target was disabled with its marker hidden. No browser page errors. Captures: `tests/.e2e-out/neon-sentinel-{attack,hit,defeat}-solo-320.png`. All 550 encounter art budgets, texture, playback and TypeScript checks passed, with no confirmed intersections across 1,110,132 bounds samples. Prior CI run 42181472486 passed. Full-speed and physical-device checks remain open.
