@@ -22,6 +22,8 @@ Current evidence: a known transparent hero flattened onto light gray was extract
 
 ## Studio-edge refinement
 
+Dependency follow-up: the five vulnerabilities noted in the earlier build above were resolved in the subsequent [server dependency review](../../docs/server-dependency-review.md). Current server full and production-only audits report zero known vulnerabilities; native hosting validation remains outstanding.
+
 After segmentation, a conservative flood from the image border reduces background-colored fringe only when all four corner colors agree within six channel levels. It preserves pixels the segmentation considers confident foreground and skips nonuniform backgrounds. It does not key all gray/white pixels globally. Five controlled hero fixtures now show IoU 0.9799–0.9928 and foreground retention 0.99917–0.99998; local extraction was 1.02 s cold and 0.27–0.35 s warm. These numbers measure only the fixtures on this machine.
 
 Visual review still finds residual light edges and retained gray in enclosed negative spaces (notably Volt's arm/body gap). Confident but incorrect model foreground can survive this conservative refinement. Do not treat the improved scores as an alpha-matting quality signoff. Real generated studio images, antialiased color decontamination and enclosed-space extraction still need review and refinement.

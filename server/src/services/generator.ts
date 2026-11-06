@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'node:crypto';
 import { ARCHETYPES } from './archetypes.js';
 import { GeminiAnalysis } from './gemini.js';
 
@@ -15,7 +15,7 @@ interface HeroCardInput {
 
 export function generateCharacterFromAnalysis(analysis: GeminiAnalysis, portraitUrl: string = '', heroCard?: HeroCardInput) {
     const archetype = ARCHETYPES[analysis.archetype];
-    const characterId = uuidv4();
+    const characterId = randomUUID();
 
     const character = {
         id: characterId,

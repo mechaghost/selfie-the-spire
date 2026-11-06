@@ -166,6 +166,6 @@ app.get('/*', serveIndex);
 
 const port = parseInt(process.env.PORT || '3001', 10);
 
-serve({ fetch: app.fetch, port }, () => {
-    console.log(`Server running on http://localhost:${port}`);
+serve({ fetch: app.fetch, port }, (info) => {
+    console.log(`Server running on http://localhost:${info.port}`);
 });

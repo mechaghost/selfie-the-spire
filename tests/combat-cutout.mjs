@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 await mkdir('server/node_modules/.cache/combat-cutout',{recursive:true});
 await build({entryPoints:['server/src/services/combatCutout.ts'],outfile:'server/node_modules/.cache/combat-cutout/processor.mjs',bundle:true,packages:'external',platform:'node',format:'esm'});
 const {prepareCombatCutout}=await import('../server/node_modules/.cache/combat-cutout/processor.mjs');
-const {default:sharp}=await import('../server/node_modules/sharp/lib/index.js');
+const {default:sharp}=await import('./server-sharp.mjs');
 const fixture=await sharp({create:{width:256,height:384,channels:4,background:'#00000000'}})
  .composite([{input:await sharp({create:{width:100,height:280,channels:4,background:'#00aacc'}}).png().toBuffer(),left:78,top:50}]).png().toBuffer();
 const result=await prepareCombatCutout(fixture);

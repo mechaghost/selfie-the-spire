@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
-import sharp from '../server/node_modules/sharp/lib/index.js';
+import sharp from './server-sharp.mjs';
 await build({stdin:{contents:"export * from './src/rendering/locationFraming';export {LOCATIONS} from './src/data/locations';",resolveDir:process.cwd()},outfile:'tests/.e2e-out/location-layers.mjs',bundle:true,platform:'node',format:'esm'});
 const {frameLocationLayer,LOCATIONS}=await import('./.e2e-out/location-layers.mjs');
 for(const [width,height] of [[320,140],[320,300],[390,480],[844,160],[1280,400],[1440,500]]) {

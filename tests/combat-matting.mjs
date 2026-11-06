@@ -6,7 +6,7 @@ await mkdir('server/node_modules/.cache/combat-matting',{recursive:true});
 await build({stdin:{contents:"export * from './server/src/services/removeCombatBackground';export * from './server/src/services/combatCutout';",resolveDir:process.cwd()},outfile:'server/node_modules/.cache/combat-matting/processor.mjs',bundle:true,packages:'external',platform:'node',format:'esm'});
 process.env.COMBAT_MATTING_MODEL_PATH=resolve('server/models/u2net.onnx');
 const {removeCombatBackground,prepareCombatCutout}=await import('../server/node_modules/.cache/combat-matting/processor.mjs');
-const {default:sharp}=await import('../server/node_modules/sharp/lib/index.js');
+const {default:sharp}=await import('./server-sharp.mjs');
 const results=[];
 await mkdir('tests/.e2e-out',{recursive:true});
 for(const name of ['street-runner','chrome','volt','concrete','smoke']) {

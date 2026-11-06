@@ -1,0 +1,11 @@
+# Server dependency release review
+
+The previous clean server install reported five vulnerable packages: Hono and Sharp (high), the Hono Node adapter and UUID (moderate), and esbuild (low). This was a dependency inventory, not proof that every reported vulnerability was exploitable in this application. Static serving, CORS and image decoding are used here; unrelated JWT, SSR and cookie helpers are not.
+
+Updated the locked server dependency tree to Hono 4.13.16, Node adapter 2.1.6, Sharp 0.35.5, tsx 4.23.15 and esbuild 0.28.2. Replaced the only UUID v4 call with Node's `crypto.randomUUID`, removing both UUID and its type package. No UUID serialization format change is intended. Node adapter 2 requires Node 20 or newer; Sharp requires at least Node 20.9. Hosting compatibility must still be checked before release.
+
+Upstream references reviewed: [Hono Node adapter releases](https://github.com/honojs/node-server/releases) describe static-path and raw-backslash fixes; [Sharp 0.35.5 release](https://sharp.pixelplumbing.com/changelog/v0.35.5/) documents the updated image library release. Installed versions and affected ranges were checked against the npm registry and audit service. Full server `npm audit` and production-only audit report zero known vulnerabilities after the update; that is not a general security certification.
+
+Verification: real server startup with missing/corrupt/valid matting weights; HTTP health, built HTML, JavaScript GET/HEAD, security headers, CORS preflight and unavailable-provider response; mocked personalized generation concurrency/cancellation/error handling; generation budget tests; alpha validation and image-size rejection; five real ONNX matting fixtures; five district alpha joins and 84 motion frames. The root production build, including `npm ci` in server, passes. Local platform only; no live Gemini call, production deploy or Linux-host native-runtime approval is claimed.
+
+Sharp changed its internal files. Three tests previously imported a private `sharp/lib/index.js` path; they now resolve the server's installed public package entry point through `tests/server-sharp.mjs`. Actual app imports already used the public `sharp` export. HTTP smoke testing also now uses the actual assigned ephemeral port from the server startup callback.
