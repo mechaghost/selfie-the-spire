@@ -853,3 +853,7 @@ Added a 100 ms blink after 4,800 ms of idle, with the same .99 foot anchor. The 
 ### Dumpster Crawler authored idle
 
 Added a 110 ms blink after 5,300 ms of idle. The .962 blink anchor compensates for a two-source-pixel difference at the lowest foot. The source alpha masks overlap by 98.7% intersection-over-union. At 320 × 568, the Pixi captures show the eyes closing while the lid, claws, and feet stay aligned. Captures: `tests/.e2e-out/crawler-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
+
+### Smoke Specter authored idle
+
+Added a 110 ms narrowing of the eye glow after 5,500 ms of idle. The blink uses a .989 tail anchor and its source alpha mask overlaps the idle by 98.8% intersection-over-union. The 320 × 568 Pixi captures show the hood and tail staying aligned: `tests/.e2e-out/specter-idle-{base,dip,restored}-320.png`. The new frame took Spectral Fog over budget at the original tier. The Specter's runtime poses now cap at 600 px, bringing all 550 encounter combinations under 5 MB. The two-Specter guard/cast fixture passed at 320 × 568 and 844 × 390 after resizing. Texture, bounds, playback and TypeScript passed.

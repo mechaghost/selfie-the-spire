@@ -695,9 +695,16 @@
   "/assets/battle/actors/smoke-specter-attack-v1.webp": {
     "width": 1145,
     "height": 1374,
-    "runtimeWidth": 573,
-    "runtimeHeight": 687,
-    "resolution": 0.5
+    "runtimeWidth": 500,
+    "runtimeHeight": 600,
+    "resolution": 0.4366812227074236
+  },
+  "/assets/battle/actors/smoke-specter-blink-v1.webp": {
+    "width": 1145,
+    "height": 1374,
+    "runtimeWidth": 500,
+    "runtimeHeight": 600,
+    "resolution": 0.4366812227074236
   },
   "/assets/battle/actors/smoke-specter-cast-v1.webp": {
     "width": 1145,
@@ -709,30 +716,30 @@
   "/assets/battle/actors/smoke-specter-defeat-v1.webp": {
     "width": 1145,
     "height": 1374,
-    "runtimeWidth": 573,
-    "runtimeHeight": 687,
-    "resolution": 0.5
+    "runtimeWidth": 500,
+    "runtimeHeight": 600,
+    "resolution": 0.4366812227074236
   },
   "/assets/battle/actors/smoke-specter-guard-v1.webp": {
     "width": 1145,
     "height": 1374,
-    "runtimeWidth": 573,
-    "runtimeHeight": 687,
-    "resolution": 0.5
+    "runtimeWidth": 500,
+    "runtimeHeight": 600,
+    "resolution": 0.4366812227074236
   },
   "/assets/battle/actors/smoke-specter-hit-v1.webp": {
     "width": 1145,
     "height": 1374,
-    "runtimeWidth": 573,
-    "runtimeHeight": 687,
-    "resolution": 0.5
+    "runtimeWidth": 500,
+    "runtimeHeight": 600,
+    "resolution": 0.4366812227074236
   },
   "/assets/battle/actors/smoke-specter-idle-v1.webp": {
     "width": 1145,
     "height": 1374,
-    "runtimeWidth": 573,
-    "runtimeHeight": 687,
-    "resolution": 0.5
+    "runtimeWidth": 500,
+    "runtimeHeight": 600,
+    "resolution": 0.4366812227074236
   },
   "/assets/battle/actors/stray-voltage-attack-v1.webp": {
     "width": 1536,
