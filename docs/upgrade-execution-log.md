@@ -591,3 +591,9 @@ In the 320 × 568 Street Ambush lineup, the lifted paw distinguishes recoil and 
 Hide the ground-level target number for defeated enemies in both the combat arena and the layout study. The defeated HUD label and disabled target remain in the original slot, and living enemy numbers retain their original order.
 
 At 320 × 568, a legal Jab played through the card inspector and arena target defeated a one-HP Stray Voltage in a seeded Street Ambush fixture. Both Pixi and forced DOM fallback removed only Voltage's marker, disabled its target, and preserved the neighboring target's bounding box. No browser errors. Captures: `tests/.e2e-out/defeated-marker-{pixi,fallback}-320.png`. TypeScript and all 30 regression suites passed. The preceding Stray Voltage CI run 42177553003 passed.
+
+### Dumpster Crawler recoil and collapse
+
+Added a tucked-claw recoil with a lifted foot and a low defeat pose with folded legs and closed lid. Both sources are 1536 × 1024. The .956 recoil anchor uses a 160/60 ms hit/idle clip, and the .991 defeat anchor uses a 280 ms hold. The teal chassis and coral pincers retain their original scale and material.
+
+The 320 × 568 solo Pixi study showed both poses clear of the HUD. The wide collapsed sprite fits close to both edges of its lane, with the target marker hidden and the defeated control disabled. No browser errors. Captures: `tests/.e2e-out/dumpster-crawler-{hit,defeat}-320.png`. All 550 art budgets, texture, clip playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,106,892 samples. The prior target-marker CI run 42177889753 passed. Full-speed and physical-device review remain open.
