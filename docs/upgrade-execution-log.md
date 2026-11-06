@@ -1013,3 +1013,13 @@ Added a fist-to-chest salute with a .984 foot anchor and the 600 ms celebration 
 Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
 
 > Create a single transparent full-body victory key pose for this exact Concrete fighter. Preserve his muscular build, tied dark hair and beard, orange reflective vest, black tank, ochre pouches, teal kneepads and tan boots. Same inked rendering, right-facing camera, original character scale and ground line. He plants both boots in a relaxed wide stance, tilts his chin up with a satisfied grin, and taps a closed fist proudly against his chest while the other hand rests on his hip. Keep both fists below head height and the whole body within the canvas with alpha margins. True transparency, no props, effects, lettering, shadow or background.
+
+### Smoke hit pose
+
+Added a backward recoil with a .992 foot anchor and a 160/60 ms hit/idle clip. At 320 × 568 in Chromium touch emulation, Dumpster Crawler's opening hit triggered the pose and reduced Smoke's HP from 80 to 75. Capture: `tests/.e2e-out/smoke-live-hit-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
+
+> Create one transparent full-body hit reaction sprite of the exact Smoke fighter shown. Preserve her dark bun, warm complexion, purple hooded jacket with pale chevrons, coral scarf, teal sash, dark cargo trousers, fingerless gloves and cream high-tops. Same inked game art, character scale and right-facing camera. After a blow from screen right her torso snaps back left, knees flex with both shoes planted, one forearm draws over her ribs and the other hand opens outward for balance. Her head recoils and eyes wince. Preserve the standing canvas and leave clear alpha margins. True transparency, no ground, shadow, effects, blood or props.
+
+Linux run 42214339304 passed its build, rules, art budgets, and six production smoke scenarios including the browser selfie case. Chromium installation took over ten minutes and the job hit its time limit before rotation or the five-district route finished. Increased the job limit from 15 to 25 minutes to accommodate cold installs.

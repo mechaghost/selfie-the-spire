@@ -20,7 +20,8 @@ concurrency:
 jobs:
   regression:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    # Browser installation can take over ten minutes on a cold runner.
+    timeout-minutes: 25
     env:
       GEMINI_API_KEY: ''
       ENABLE_PERSONALIZED_COMBAT: '0'

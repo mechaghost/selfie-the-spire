@@ -111,13 +111,14 @@
       "reachability": "hero",
       "status": "review",
       "keyPoses": [
-        "attack"
+        "attack",
+        "hit"
       ],
       "timelines": [
+        "hit",
         "attack"
       ],
       "missingContactPoses": [
-        "hit",
         "defeat",
         "guard",
         "cast",
@@ -125,7 +126,6 @@
       ],
       "missingTimelines": [
         "idle",
-        "hit",
         "defeat",
         "guard",
         "cast",
