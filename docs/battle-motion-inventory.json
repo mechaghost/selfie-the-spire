@@ -638,18 +638,18 @@
         "attack",
         "hit",
         "defeat",
-        "cast"
+        "cast",
+        "blink"
       ],
       "timelines": [
         "attack",
         "hit",
         "defeat",
-        "cast"
+        "cast",
+        "idle"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "idle"
-      ]
+      "missingTimelines": []
     }
   ]
 }

@@ -118,6 +118,13 @@
     "runtimeHeight": 650,
     "resolution": 0.5
   },
+  "/assets/battle/actors/dj-phantom-blink-v1.webp": {
+    "width": 1210,
+    "height": 1300,
+    "runtimeWidth": 605,
+    "runtimeHeight": 650,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/dj-phantom-cast-v1.webp": {
     "width": 1113,
     "height": 1413,
