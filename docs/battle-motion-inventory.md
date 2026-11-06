@@ -1,6 +1,6 @@
 # Runtime motion inventory
 
-Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Rows with an idle timeline have an authored blink or light-dip loop. The remaining rows need an authored idle sequence. All idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
+Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. The status column reflects the manifest review state. Idle timelines use an authored blink or light dip. Street Runner, Rat, Spider and the legacy Golem have separate attack wind-up, contact and recovery poses. Other attack timelines reuse idle around the contact pose. See the [art coverage ledger](battle-asset-coverage.md) for the visual review scope.
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|

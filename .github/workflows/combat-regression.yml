@@ -42,6 +42,8 @@ jobs:
         run: npm run build
       - name: Run rules, rendering, browser-cutout and HTTP regression suites
         run: npm run test:regression
+      - name: Verify production roster art approval
+        run: node scripts/report_battle_motion.mjs --check-release
       - name: Enforce encounter art budgets
         if: success() || failure()
         run: node scripts/report_encounter_art_budget.mjs --check
