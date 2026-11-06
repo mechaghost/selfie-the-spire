@@ -51,4 +51,12 @@
     padding:2px 6px;
     white-space:nowrap;
     pointer-events:none;
+    animation-name:arenaTurnFadeIn;
 }
+
+.combat-stage.actor-arena-enabled .table-controls .turn-phase-banner.player-turn {
+    animation-name:arenaTurnFadeIn, arenaTurnFadeOut;
+}
+
+@keyframes arenaTurnFadeIn { from { opacity:0; } }
+@keyframes arenaTurnFadeOut { to { opacity:0; } }

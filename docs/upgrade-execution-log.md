@@ -603,3 +603,11 @@ The 320 × 568 solo Pixi study showed both poses clear of the HUD. The wide coll
 A normal-motion production arena build exposed the turn banner covering Rat 3's HUD on the first attack at 320 × 568. Moved the arena turn cue into the center of the controls row. The legacy layout keeps the banner in its existing position.
 
 Repeated the same seeded Ocean Drive Rat Pack fight through the production UI at 320 × 568 and 844 × 390. Each run used seven attack plays and two enemy turns, offered three rewards, added one card to the starting deck and collected 12 gold. Reload restored stop 1, a 13-card deck and 111 gold. No dev store was present or used. Impact captures show the turn cue below the actor plane in both orientations. The portrait reward dialog scrolls vertically. No browser errors. Captures: `tests/.e2e-out/full-speed-{impact,victory}-{320,844}.png`. TypeScript and all 30 regression suites passed. Prior Crawler CI run 42178304461 passed. This covers one legal encounter in an emulated Chrome viewport. Full-route, device and live checks remain open.
+
+### Repeatable production arena smoke
+
+`tests/arena-smoke.cjs` drives the same real Rat Pack fight at 320 × 568 and 844 × 390 against an arena-enabled production build. It asserts the Pixi canvas and absence of the development store, waits for damage feedback, checks the enemy-turn cue's placement, then claims a card and verifies the map stop, deck and gold after reload. Both sizes passed with seven attacks and two enemy turns.
+
+The geometric assertion caught the arena turn cue's inherited entrance slide briefly crossing the landscape arena boundary. The arena cue now fades in place, with no vertical translation. The previous turn-cue CI run 42179130963 passed.
+
+To repeat, build with `VITE_COMBAT_ARENA=1 npx vite build`, serve with `npm run preview`, and run `PW_CHROMIUM=/path/to/chrome node tests/arena-smoke.cjs`. Set `E2E_BASE` to use a different preview URL. This test exercises a single legal encounter in mobile viewport emulation. Device and full-route verification remain separate gates.
