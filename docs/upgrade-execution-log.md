@@ -719,3 +719,7 @@ At 320 × 568, Sentinel's real opening turn showed the raised fist alongside +3 
 Added a planted, leftward spray-can cast using the existing 480 px runtime tier. The 1230 × 1278 source uses a .988 foot anchor and a 160/60 ms cast/idle timeline. At 320 × 568, an Imp duo fixture using the real Debuff intent showed the left Imp extending its can while the twin stayed idle. Separate Weak and Vulnerable notices appeared. Capture: `tests/.e2e-out/graffiti-imp-live-cast-320.png`.
 
 The capture exposed edge clipping on long notices anchored over the player. Combat feedback now clamps its horizontal translation to the arena edges independently of its rise animation. At 320 px with reduced motion, the full +1 Vulnerable notice measured from x=4 to x=147. All 550 art budgets, texture, clip playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,114,668 samples.
+
+### Neon Hunger Strength cast
+
+Added a raised-claw power-up with brighter amber tubes. The 1230 × 1278 cutout uses a .990 foot anchor and a 160/60 ms cast/idle clip. A live 320 × 568 dev combat fixture used Neon Hunger's unchanged opening turn and showed the cast with +2 Strength. The mask sits close to the HUD and both claws remain visible. No browser page errors. Capture: `tests/.e2e-out/neon-junkie-live-cast-320.png`. All 550 art budgets, texture, playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,115,100 samples.
