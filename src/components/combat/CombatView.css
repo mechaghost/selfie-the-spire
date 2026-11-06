@@ -444,3 +444,13 @@
 .combat-target-selection p { margin:0 0 8px; font-size:14px; }
 .combat-target-selection button { min-height:44px; padding:8px 12px; background:#253c50; color:#fff; border:1px solid #8aa4b4; border-radius:6px; font-size:14px; }
 .combat-target-list { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+.combat-announcement {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}

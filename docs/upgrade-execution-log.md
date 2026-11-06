@@ -1135,3 +1135,9 @@ A separate cold-cache Chromium run at 390 × 844, 1.6 Mbps downstream and 150 ms
 The renderer now settles all required idle textures before requesting scenery, atlases or extra poses. Optional assets still stream independently and combat opens without waiting for them. A failed required texture skips optional requests and falls back to simplified graphics. The streaming suite verifies request order, failure cleanup, and independent atlas/loose pose streaming.
 
 Compared the local-font baseline `caaaac5` and this change with alternating cold-cache Chromium runs. All four trials used the same legal Rat Pack seed, 390 × 844 touch viewport, 1.6 Mbps downstream and 150 ms simulated latency. Baseline tap-to-ready was 6,872 and 6,353 ms. The new order took 5,041 and 5,345 ms. The ready assertion requires a Pixi canvas and an enabled End Turn button. This measures one encounter under desktop network emulation. The earlier 11.4 second observation used an unpinned encounter and is not the comparison baseline.
+
+### Combat turn and result announcements
+
+The arena now exposes one polite status for turn changes and results. Player turns include current HP after the queue settles. An ordinary card play keeps the same announcement. The visual impact numbers stay on screen and are hidden from the accessibility tree, avoiding a stream of unlabeled damage values. Existing enemy inspection and the focused results heading remain available.
+
+The production smoke inspects the live-region role and checks its text on player turn, enemy turn and victory. This validates browser semantics and updates. Listening with a screen reader remains a separate release check.

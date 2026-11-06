@@ -49,7 +49,7 @@ export function CombatFeedback({layout,actors}:{layout:BattleLayout;actors:reado
         });
         return()=>{unsubscribe();timers.forEach(clearTimeout);seen.current.clear();};
     },[]);
-    return <div className="combat-feedback" aria-live="polite" aria-atomic="false">
+    return <div className="combat-feedback" aria-hidden="true">
         {[layout.hero, ...layout.enemies].map(slot => {
             const notices = items.filter(item => item.targetId === slot.id);
             if (!notices.length) return null;

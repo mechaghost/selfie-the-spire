@@ -32,6 +32,22 @@ export function CombatView() {
     const busy = useGameStore(state => state.isResolving || state.actionQueue.length > 0);
     const targeting = useCombatInteraction(state=>state.mode === 'targeting');
     const isDisabled = !isPlayerTurn || busy || combatResult !== null || targeting;
+    const phase = combatResult ?? (isPlayerTurn ? (busy ? null : 'player') : 'enemy');
+    const announcedPhase = useRef<typeof phase>(null);
+    const [announcement, setAnnouncement] = useState('');
+    useEffect(() => {
+        if (!actorArena || !phase || phase === announcedPhase.current) return;
+        // Opening draws may begin before isPlayerTurn is set.
+        if (phase === 'enemy' && announcedPhase.current === null) return;
+        announcedPhase.current = phase;
+        const { hp, maxHp } = useGameStore.getState().player;
+        switch (phase) {
+            case 'player': setAnnouncement(`Your turn. ${hp} of ${maxHp} HP.`); break;
+            case 'enemy': setAnnouncement('Enemy turn.'); break;
+            case 'victory': setAnnouncement('Victory. Rewards available.'); break;
+            case 'defeat': setAnnouncement('Defeat. Your run has ended.'); break;
+        }
+    }, [actorArena, phase]);
 
     const [inspectedEnemyId, setInspectedEnemyId] = useState<string | null>(null);
 
@@ -76,6 +92,7 @@ export function CombatView() {
             <div className="arena-location"><span>NEO MIAMI / AFTER HOURS</span><strong>{locationForFloor(floor).name}</strong></div>
 
             <TopBar />
+            {actorArena && <p className="combat-announcement" role="status">{announcement}</p>}
 
             {actorArena ? <BattleArena targetControls={targetControls} /> : <div className="entities-container">
                 {/* Compact player presence for animations/floating text */}

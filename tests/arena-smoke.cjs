@@ -92,6 +92,9 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
         ['Inspect Rat', 'Inspect Rat', 'Inspect Rat']);
 
     const victory = page.getByRole('heading', { name: 'VICTORY', exact: true });
+    const announcement = page.locator('.combat-announcement[role="status"]');
+    await announcement.filter({ hasText: /^Your turn\. \d+ of \d+ HP\.$/ }).waitFor();
+    assert.match(await announcement.ariaSnapshot(), /status: Your turn\./);
     const defeat = page.getByRole('heading', { name: 'DEFEAT', exact: true });
     const endTurn = page.getByRole('button', { name: 'End Turn', exact: true });
     const handAttacks = page.locator('.hand-container').getByRole('button', { name: attacks });
@@ -213,6 +216,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
         if (await victory.isVisible()) break;
         await activate(endTurn, 'End Turn');
         if (enemyTurns === 0) {
+            await announcement.filter({ hasText: 'Enemy turn.' }).waitFor();
             const cue = page.locator('.table-controls .turn-phase-banner.enemy-turn');
             await cue.waitFor();
             const [banner, arena] = await Promise.all([cue.boundingBox(), page.locator('.battle-arena').boundingBox()]);
@@ -222,6 +226,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     }
 
     await victory.waitFor();
+    assert.equal(await announcement.textContent(), 'Victory. Rewards available.');
     assert.ok(plays > 0 && enemyTurns > 0);
     const rewards = page.locator('.reward-card-slot');
     assert.equal(await rewards.count(), 3);
