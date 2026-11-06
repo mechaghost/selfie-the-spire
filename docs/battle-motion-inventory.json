@@ -542,18 +542,18 @@
         "attack",
         "hit",
         "cast",
-        "defeat"
+        "defeat",
+        "blink"
       ],
       "timelines": [
         "hit",
         "cast",
         "defeat",
+        "idle",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "idle"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "chrome_bouncer",

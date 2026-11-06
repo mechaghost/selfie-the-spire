@@ -897,3 +897,7 @@ Added a 130 ms chest-panel dip after 6,600 ms of idle. The .931 foot anchor comp
 ### Chrome Bouncer authored idle
 
 Added a 120 ms visor dip after 6,000 ms of idle, with a .992 foot anchor to align the two-pixel source baseline difference. The alpha masks overlap by 99.1% intersection-over-union. At 320 × 568 the Pixi study shows the visor dimming while the stance stays fixed. Captures: `tests/.e2e-out/bouncer-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
+
+### Neon Yakuza authored idle
+
+Added a 100 ms eye-light dip after 4,900 ms of idle. Rejected the first draft for cropping the hand and boot. The accepted source mask overlaps the base by 98.0% intersection-over-union and the .991 foot anchor aligns the slightly different canvas. At 320 × 568 the Pixi study shows the eye light dip with horns, sword, and boots aligned. Captures: `tests/.e2e-out/yakuza-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, bounds, texture caps, playback and TypeScript passed.
