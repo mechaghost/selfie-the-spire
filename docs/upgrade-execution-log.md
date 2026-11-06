@@ -865,3 +865,7 @@ Added a 100 ms blink after 3,700 ms of idle, retaining the .99 foot anchor. Sour
 ### Neon Hunger authored idle
 
 Added a 140 ms dip of the amber tubes after 6,100 ms of idle. The first draft reframed the claws and was discarded. The replacement preserves the original 1230 × 1278 canvas and .99 foot anchor; source alpha masks overlap by 95.6% intersection-over-union. At 320 × 568 in Pixi, the claws and feet stay in place and the tube change is subtle. Captures: `tests/.e2e-out/hunger-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
+
+### Stagger duplicate enemy idle loops
+
+Enemy idle clips now sample a deterministic 613 ms phase offset per slot. Identical enemies can blink at different times even when they mount in the same frame. Resizing preserves the phase, while the art scrubber still samples the exact requested frame and reduced motion holds idle. The controlled Pixi renderer test verifies these cases with two Slimes and also exercises guard/cast sequencing. Actor motion, TypeScript and both production build variants passed. Linux run 42205335776 passed on the preceding revision.

@@ -237,11 +237,13 @@ try {
 const slimeVisual = ACTOR_VISUALS.sewer_slime;
 const slimeSnapshot = {
     ...reactionSnapshot,
-    actors: [{id:'enemy',defeated:false,visual:slimeVisual}],
+    layout: battleLayout(390,400,['enemy','twin']),
+    actors: ['enemy','twin'].map(id=>({id,defeated:false,visual:slimeVisual})),
 };
 const slimeScene = new BattleScene(host,slimeSnapshot,reason=>{throw new Error(reason);});
 globalThis.performance = {now:()=>clock};
 try {
+    const idleStarted = clock;
     const ready = slimeScene.mount();
     await flush();
     resolve(slimeVisual.fallbackImageUrl);
@@ -255,10 +257,30 @@ try {
     const cast = slimeScene.poses.get('enemy:cast');
     const idle = slimeScene.poses.get('enemy:idle');
     assert.ok(sprite && guard && cast && idle);
+    const twin = slimeScene.sprites.get('twin');
+    const blink = slimeScene.poses.get('enemy:blink');
+    assert.ok(twin && blink);
+    clock = idleStarted + 4800;
+    slimeScene.update(slimeSnapshot);
+    assert.equal(sprite.texture,idle);
+    assert.equal(twin.texture,blink,'second Slime blinks before the first');
+    slimeScene.update({...slimeSnapshot,layout:battleLayout(844,390,['enemy','twin'])});
+    assert.equal(twin.texture,blink,'resizing preserves the idle phase');
+    clock = idleStarted + 5400;
+    slimeScene.update(slimeSnapshot);
+    assert.equal(sprite.texture,blink);
+    assert.equal(twin.texture,idle);
+    const scrubbed = {...slimeSnapshot,actors:slimeSnapshot.actors.map(actor=>({...actor,previewElapsedMs:5400}))};
+    slimeScene.update(scrubbed);
+    assert.equal(twin.texture,blink,'explicit scrubbing ignores the phase offset');
+    slimeScene.update({...scrubbed,reducedMotion:true});
+    assert.equal(sprite.texture,idle);
+    assert.equal(twin.texture,idle);
+    slimeScene.update(slimeSnapshot);
     const block = identifyAction({type:'GAIN_BLOCK',payload:{sourceId:'enemy',targetId:'enemy',amount:6}});
     const strength = identifyAction({type:'APPLY_STATUS',payload:{sourceId:'enemy',targetId:'enemy'}});
     const weak = identifyAction({type:'APPLY_STATUS',payload:{sourceId:'enemy',targetId:'player'}});
-    clock = 3000;
+    clock += 1000;
     publishImpact(block,{effect:'block',targetId:'enemy',hpDelta:0,blockDelta:6});
     publishAction(strength,'begin');
     slimeScene.update(slimeSnapshot);
@@ -281,3 +303,4 @@ try {
 }
 assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
 console.log('PASS: Slime guard then Strength cast, followed by an independent Weak cast');
+console.log('PASS: twin idle phases stay staggered through resize; scrubbing and reduced motion retain exact behavior');

@@ -197,7 +197,11 @@ export class BattleScene {
         const castClip=castAt!==undefined && now>=castAt && now-castAt<REACTION_PRESENTATION_MS && !this.snapshot.reducedMotion && !actor.defeated && clip!=='celebrate' ? 'cast' : null;
         const activeClip=reactionClip ?? castClip ?? clip;
         const authoredClip=actor.visual.clips[activeClip];
-        const frame=authoredClip ? clipFrameAt(authoredClip,reactionClip && reaction ? now-reaction.at : castClip && castAt!==undefined ? now-castAt : elapsed,this.snapshot.reducedMotion) : undefined;
+        // Slot-based phase keeps duplicate enemies from blinking together and survives resizes.
+        const idleOffset=activeClip==='idle' && authoredClip?.loop && actor.previewElapsedMs===undefined
+            ? Math.max(0,slot.index)*613 : 0;
+        const poseElapsed=reactionClip && reaction ? now-reaction.at : castClip && castAt!==undefined ? now-castAt : elapsed+idleOffset;
+        const frame=authoredClip ? clipFrameAt(authoredClip,poseElapsed,this.snapshot.reducedMotion) : undefined;
         const poseClip=authoredClip ? frame ?? 'idle' : reactionClip ?? castClip ?? actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
         const atlasView=this.atlasViews.get(`${actor.id}:${poseClip}`);
         const pose=actor.visual.keyPoses?.[poseClip];
