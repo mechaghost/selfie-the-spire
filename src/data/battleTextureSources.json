@@ -398,6 +398,20 @@
     "runtimeHeight": 635,
     "resolution": 0.5
   },
+  "/assets/battle/actors/vending-golem-recovery-v1.webp": {
+    "width": 1126,
+    "height": 1397,
+    "runtimeWidth": 563,
+    "runtimeHeight": 699,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/vending-golem-windup-v1.webp": {
+    "width": 1254,
+    "height": 1254,
+    "runtimeWidth": 627,
+    "runtimeHeight": 627,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/volt-attack-v1.webp": {
     "width": 1186,
     "height": 1327,

@@ -83,6 +83,9 @@ ACTOR_VISUALS['hero-neon'].clips.attack={frames:['windup','attack','recovery'],d
 ACTOR_VISUALS.alley_rat.keyPoses!.windup={imageUrl:'/assets/battle/actors/alley-rat-windup-v1.webp',footAnchor:[.5,.908]};
 ACTOR_VISUALS.alley_rat.keyPoses!.recovery={imageUrl:'/assets/battle/actors/alley-rat-recovery-v1.webp',footAnchor:[.5,.851]};
 ACTOR_VISUALS.alley_rat.clips.attack={frames:['windup','attack','recovery'],durationsMs:[80,160,80],loop:false,completion:'idle'};
+ACTOR_VISUALS.vending_golem.keyPoses!.windup={imageUrl:'/assets/battle/actors/vending-golem-windup-v1.webp',footAnchor:[.5,.937]};
+ACTOR_VISUALS.vending_golem.keyPoses!.recovery={imageUrl:'/assets/battle/actors/vending-golem-recovery-v1.webp',footAnchor:[.5,.909],scale:1099/1136};
+ACTOR_VISUALS.vending_golem.clips.attack={frames:['windup','attack','recovery'],durationsMs:[80,160,80],loop:false,completion:'idle'};
 Object.values(ACTOR_VISUALS).forEach(validateActorVisual);
 export function resolveAppearance(value: CombatAppearance | undefined, archetype = 'neon'): ActorVisual {
     const base=value && (value.version===1 || value.version===2) && ACTOR_VISUALS[value.actorVisualId]?.id?.startsWith('hero-')

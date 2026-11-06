@@ -428,7 +428,9 @@
         "attack",
         "hit",
         "defeat",
-        "guard"
+        "guard",
+        "windup",
+        "recovery"
       ],
       "timelines": [
         "attack"

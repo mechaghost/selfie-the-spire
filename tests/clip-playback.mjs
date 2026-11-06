@@ -25,3 +25,8 @@ const rat=ACTOR_VISUALS.alley_rat;
 for(const [ms,frame] of [[0,'windup'],[79,'windup'],[80,'attack'],[140,'attack'],[239,'attack'],[240,'recovery'],[319,'recovery'],[320,null]])assert.equal(clipFrameAt(rat.clips.attack,ms),frame);
 assert.equal(clipFrameAt(rat.clips.attack,0,true),null);
 console.log('PASS: Rat authored anticipation/contact/recovery boundaries and reduced-motion skip');
+
+const golem=ACTOR_VISUALS.vending_golem;
+for(const [ms,frame] of [[0,'windup'],[79,'windup'],[80,'attack'],[140,'attack'],[239,'attack'],[240,'recovery'],[319,'recovery'],[320,null]])assert.equal(clipFrameAt(golem.clips.attack,ms),frame);
+assert.equal(clipFrameAt(golem.clips.attack,0,true),null);
+console.log('PASS: Golem authored anticipation/contact/recovery boundaries and reduced-motion skip');
