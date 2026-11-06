@@ -1031,3 +1031,11 @@ Added a side-on crouch with a raised leading forearm, a .981 foot anchor and a 1
 Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
 
 > One transparent full-body defense sprite of the exact Smoke fighter in the reference. Preserve her dark bun, purple chevron hooded jacket, coral scarf, teal sash, dark cargo trousers and cream high-tops. Same inked game art and right-facing camera. Both shoes planted, she lowers into a narrow side-on crouch, leading forearm held vertically just in front of her cheek, rear forearm held horizontally across her ribs, elbows tucked and eyes on the threat. Clearly read as guarding at small size. Match original standing canvas and ground line, keep all limbs visible. Real alpha, no shield, effects, props, scenery, ground or shadow.
+
+### Smoke defeat pose
+
+Added a one-knee recovery attempt with a .987 foot anchor and a held 280 ms defeat clip. At 320 × 568 in Chromium touch emulation, Dumpster Crawler's opening hit took Smoke from 5 HP to zero. The kneeling pose appeared before the normal Defeat screen. Capture: `tests/.e2e-out/smoke-live-defeat-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
+
+> Create one full-body defeat key pose for the exact Smoke street fighter shown. Keep her dark bun, purple chevron jacket, coral scarf, teal sash, dark cargos and cream high-tops, same inked game sprite style and right-facing camera. She has sunk to one knee with her head bowed, one open gloved hand planted flat to support herself and the other holding her ribs. Both shoes and hand fit in frame. Keep the original standing canvas, actor scale and ground line with abundant transparent space over her lowered body. True alpha, no blood, effects, props, scenery, shadow or ground.

@@ -8,7 +8,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | hero-chrome | hero | attack, hit, guard, cast, defeat, celebrate | hit, guard, cast, defeat, celebrate, attack | none | review |
 | hero-volt | hero | attack, hit, guard, cast, defeat, celebrate | hit, guard, cast, defeat, celebrate, attack | none | review |
 | hero-concrete | hero | attack, hit, guard, cast, defeat, celebrate | hit, guard, cast, defeat, celebrate, attack | none | review |
-| hero-smoke | hero | attack, hit, guard | hit, guard, attack | defeat, cast, celebrate | review |
+| hero-smoke | hero | attack, hit, guard, defeat | hit, guard, defeat, attack | cast, celebrate | review |
 | alley_rat | production | attack, hit, defeat, blink, windup, recovery | idle, hit, defeat, attack | none | review |
 | neon_junkie | production | attack, hit, cast, defeat, blink | hit, cast, defeat, idle, attack | none | review |
 | graffiti_imp | production | attack, hit, cast, defeat, blink | hit, cast, defeat, idle, attack | none | review |
