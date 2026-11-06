@@ -707,3 +707,9 @@ In the 320 × 568 solo Pixi study, the recoil tilted visibly away from the hero 
 ### Neon Sentinel shield brace
 
 Added a planted two-handed shield brace for Block reactions. The 1199 × 1312 cutout uses a .985 foot anchor and a 160/60 ms guard/idle clip. At 320 × 568, the frozen guard reads distinctly from the bash, with the shield face forward and the red visor still visible. A dev combat fixture used Sentinel's existing AttackDefend intent and confirmed 8 Block through End Turn. The live screenshot landed after the guard pose, so it verifies Block feedback while the frozen capture verifies framing. Captures: `tests/.e2e-out/neon-sentinel-{guard,live-guard}-320.png`. All 550 art budgets, texture, playback and TypeScript passed. The bounds audit confirmed no intersections across 1,113,804 samples.
+
+### Sentinel Strength cue and status feedback
+
+Added Sentinel's raised-fist cast pose with the shield low, using the original 1199 × 1312 canvas, .986 foot anchor and a 160/60 ms cast/idle clip. The live check exposed missing impact feedback for status applications. Committed status gains now publish their stack amount and display name through the existing feedback channel. The renderer ignores that notice for hit reactions so an applied status cannot replace a simultaneous recoil.
+
+At 320 × 568, Sentinel's real opening turn showed the raised fist alongside +3 Strength and recorded three Strength stacks. Capture: `tests/.e2e-out/neon-sentinel-live-cast-320.png`. All 550 encounter art budgets, bounds, clip playback, TypeScript and 30 regression suites passed. Physical-device review remains open.

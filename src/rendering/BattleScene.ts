@@ -135,7 +135,7 @@ export class BattleScene {
             if (this.disposed) return false;
             this.update(this.snapshot);
             this.unsubscribeImpacts=subscribeImpacts(notice=>{
-                if(this.disposed || this.snapshot.reducedMotion || document.hidden)return;
+                if(this.disposed || this.snapshot.reducedMotion || document.hidden || notice.effect==='status')return;
                 this.reactions.set(notice.targetId,{at:performance.now(),effect:notice.effect});
             });
             this.unsubscribeActions=subscribePresentation(notice=>{

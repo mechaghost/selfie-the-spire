@@ -1230,6 +1230,10 @@ export const useGameStore = create<GameState>((set, get) => ({
                     } else {
                         set({ enemies: get().enemies.map(e => e.id === targetId ? { ...e, statuses: newStatuses } : e) });
                     }
+                    if (status.amount > 0) {
+                        const name = STATUS_REGISTRY[status.id]?.name ?? status.name;
+                        publishImpact(action, { targetId, effect: 'status', hpDelta: 0, blockDelta: 0, label: `+${status.amount} ${name}` });
+                    }
                 }
                 break;
             }

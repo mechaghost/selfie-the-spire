@@ -37,6 +37,11 @@ store.setState({enemies:store.getState().enemies.map(enemy=>({...enemy,block:0,s
 effect('DAMAGE_ENTITY',{sourceId:'player',targetId:'target',amount:1});assert.equal(impacts.at(-1).effect,'thorns');assert.equal(impacts.at(-1).hpDelta,-3);assert.equal(impacts.at(-1).targetId,'player');
 store.setState({enemies:store.getState().enemies.map(enemy=>({...enemy,hp:20,statuses:[{id:'burn',name:'Burn',amount:3},{id:'regen',name:'Regen',amount:2}]}))});
 effect('STATUS_TICK',{targetId:'target'});assert.deepEqual(impacts.slice(-2).map(e=>[e.effect,e.hpDelta]),[['burn',-3],['heal',2]]);assert.equal(store.getState().enemies[0].hp,19);
+effect('APPLY_STATUS',{sourceId:'target',targetId:'target',status:{id:'strength',name:'strength',amount:3}});
+assert.equal(impacts.at(-1).effect,'status');
+assert.equal(impacts.at(-1).targetId,'target');
+assert.equal(impacts.at(-1).label,'+3 Strength');
+assert.equal(store.getState().enemies[0].statuses.find(status=>status.id==='strength').amount,3);
 stopImpacts();api.setCombatMotionMode('normal');
 console.log('PASS: actual HP/Block deltas, capped healing, fully blocked hits, retaliation and separate Burn/regen outcomes');
 
