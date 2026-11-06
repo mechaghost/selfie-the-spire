@@ -913,3 +913,7 @@ Added a forward forearm brace with a .988 foot anchor and a 160/60 ms guard/idle
 ### Chrome defeat pose
 
 Added a held kneeling defeat pose with a .987 foot anchor. In a 320 × 568 Chromium touch fixture, Dumpster Crawler's opening strike took Chrome from 5 HP to zero. The capture shows the kneeling pose before the Defeat overlay, which subsequently opened through the normal result flow. Capture: `tests/.e2e-out/chrome-live-defeat-320.png`. All 550 encounter budgets, texture caps, sprite bounds, playback and TypeScript passed. The preceding Linux run 42211257835 passed.
+
+### Verify selfie sprite continuity through graphics loss
+
+The arena-enabled production build passed the 320 × 568 Chromium touch case with a local photo fixture. After reload and forced WebGL context loss, the fallback loaded the exact transparent PNG shown in the hero preview. No fetch, XHR or non-GET requests occurred during the photo flow. On the separate live release, Safari on the iPhone 18 Pro simulator loaded the starter menu and the production health endpoint returned OK. This was a live menu check only; the simulator did not exercise combat or the camera. The live menu still shows the previous hero creation copy.

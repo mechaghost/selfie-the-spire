@@ -297,10 +297,25 @@ async function verifyLocalSelfie(page) {
         .find(value => Array.isArray(value?.masterDeck))?.player?.combatAppearance?.idleImageUrl);
     assert.equal(restored, sprite.url);
     await page.locator('.map-node.available.type-combat').first().tap();
-    await page.locator('.battle-stage-visual[data-stage-status="ready"] canvas').waitFor();
+    const stage = page.locator('.battle-stage-visual');
+    const canvas = stage.locator('canvas');
+    await stage.and(page.locator('[data-stage-status="ready"]')).locator('canvas').waitFor();
+    await canvas.evaluate(element => {
+        const gl = element.getContext('webgl2') ?? element.getContext('webgl');
+        const extension = gl?.getExtension('WEBGL_lose_context');
+        if (!extension) throw new Error('The active renderer does not support WEBGL_lose_context');
+        extension.loseContext();
+    });
+    const fallbackImages = stage.locator('.battle-dom-fallback .battle-fallback-actor img');
+    await fallbackImages.first().waitFor();
+    const renderedSprites = await fallbackImages.evaluateAll(images => Promise.all(images.map(async image => {
+        await image.decode();
+        return image.src;
+    })));
+    assert.ok(renderedSprites.includes(sprite.url), 'Combat fallback must render the exact selfie sprite from the preview');
     assert.deepEqual(remoteRequests, []);
     assert.deepEqual(errors, []);
-    console.log('PASS 320×568: photo picker, transparent preview, same sprite in restored save, and arena ready without API calls');
+    console.log('PASS 320×568: photo picker, transparent preview, same sprite after reload and WebGL loss, no API calls');
 }
 
 async function main() {

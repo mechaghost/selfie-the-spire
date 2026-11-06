@@ -8,4 +8,4 @@ The visor is a fixed crop. Photo framing determines how the face appears, and th
 
 ## Verification
 
-The browser regression uses a local image fixture to exercise the selfie-to-reveal flow. The store integration test covers cancellation, duplicate submits and persistence. The HTTP test verifies that the retired endpoint returns 410. Physical camera testing on iPhone Safari and Android remains open.
+The 320 × 568 production-build browser regression uses a local photo fixture. It checks transparency in the preview, verifies the saved sprite survives reload, then forces WebGL context loss and confirms the combat fallback decodes the exact preview image. It records fetch, XHR and non-GET requests throughout the flow. The store integration test covers cancellation, duplicate submits and persistence. The HTTP test verifies that the retired endpoint returns 410. Physical camera testing on iPhone Safari and Android remains open.
