@@ -8,7 +8,8 @@
     "build": "tsc && vite build && cd server && npm ci",
     "start": "cd server && npm start",
     "preview": "vite preview",
-    "test:e2e": "node tests/e2e.cjs"
+    "test:e2e": "node tests/e2e.cjs",
+    "test:regression": "node scripts/run_regression.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",

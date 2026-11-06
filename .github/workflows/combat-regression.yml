@@ -1,0 +1,54 @@
+name: Combat regression
+
+on:
+  push:
+    branches: [codex/neo-miami-polish, release]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: combat-regression-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GEMINI_API_KEY: ''
+      ENABLE_PERSONALIZED_COMBAT: '0'
+      VITE_COMBAT_ARENA: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+      - run: npm ci
+      - name: Build arena and install locked server dependencies
+        run: npm run build
+      - name: Run rules, rendering, browser-cutout and HTTP regression suites
+        run: npm run test:regression
+      - name: Retain test logs and parity evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: combat-regression-${{ github.sha }}
+          path: |
+            tests/.e2e-out/regression/
+            tests/.e2e-out/encounter-motion-parity.json
+            tests/.e2e-out/run-motion-parity.json
+            tests/.e2e-out/run-save-continuity.json
+          retention-days: 14
