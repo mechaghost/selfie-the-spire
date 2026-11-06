@@ -299,3 +299,9 @@ This closes the previous atlas-specific browser check, not full animation approv
 Reproduced a lingering source cast when DAMAGE_ENTITY begins within its 220 ms lifetime: the renderer-streaming regression failed before the fix. BattleScene now removes that source's cast on attack begin, before the attack anticipation/contact pose. Other actors' casts and completion notifications are unaffected; clearing also works while hidden or reduced-motion so a stale cast cannot reappear after a mode transition. This changes presentation only.
 
 Validation: renderer-streaming passed with source-specific action-transition assertions and an atlas contact frame assertion (no manual cast-map clearing); actor-motion and combat-presentation passed, including normal/reduced/off outcome parity and impact-delta checks. TypeScript and diff checks passed. Continuous visual animation review remains open.
+
+### Smoke Specter production-enemy attack art
+
+Generated an identity-preserving full-body attack cutout from the existing Specter idle reference using built-in imagegen. Inspected the output: two clawed hands, matching torn teal/coral jacket and purple smoke body, distinct leftward claw extension, transparent background. Archived original PNG and packed a lossless 573×687 derivative (288,000 bytes); source-space dimensions remain 1145×1374 for both idle and attack. Registered the contact pose with .5/.99 anchor and the existing 80/160/80 ms attack timeline. This adds authored attack art to a production encounter enemy previously using idle art.
+
+Validation: actual alpha channel range 0–255; source dimensions match idle; packaging verifies decoded derivative pixels; clip-playback (now including Specter), renderer-assets, texture-budget and TypeScript checks passed. In-arena mobile pose comparison and full motion approval remain pending. No deployment in this step.

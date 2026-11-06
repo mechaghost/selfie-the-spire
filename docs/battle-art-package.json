@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 91499673,
-  "runtimeBytes": 21852648,
+  "sourceBytes": 92967137,
+  "runtimeBytes": 22140648,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -322,6 +322,17 @@
       "sourceBytes": 924482,
       "runtimeBytes": 178068,
       "decodedRGBABytes": 1574400
+    },
+    {
+      "asset": "actors/smoke-specter-attack-v1.webp",
+      "width": 1145,
+      "height": 1374,
+      "runtimeWidth": 573,
+      "runtimeHeight": 687,
+      "resolution": 0.5,
+      "sourceBytes": 1467464,
+      "runtimeBytes": 288000,
+      "decodedRGBABytes": 1574604
     },
     {
       "asset": "actors/smoke-specter-idle-v1.webp",
