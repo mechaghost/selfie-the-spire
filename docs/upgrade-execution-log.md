@@ -801,3 +801,7 @@ Added an open-handed chest-coil charge with a .988 foot anchor and a 160/60 ms c
 ### Circuit Breaker guard
 
 Added closed breaker doors and a braced hammer, using a .944 foot anchor, .92 pose scale to match the idle height and a 160/60 ms guard/idle clip. At 320 × 568, the deterministic opening move showed the closed chest with +10 Block and +3 Strength, and player HP stayed at 80. The notices overlap the lower hammer, while the chest and upper pose remain visible. Capture: `tests/.e2e-out/circuit-breaker-live-guard-320.png`. All 550 encounter budgets, texture, playback and TypeScript passed. Bounds found zero confirmed intersections in 1,118,988 samples.
+
+### Circuit Breaker Vulnerable cast
+
+Added an open-panel pulse with a raised hand, the hammer on the same side as idle, a .933 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, the real AttackDebuff intent showed 8 damage before the cast and +2 Vulnerable; player HP ended at 72. Capture: `tests/.e2e-out/circuit-breaker-live-cast-320.png`. All 550 encounter budgets, texture, playback and TypeScript passed. Bounds found zero confirmed intersections in 1,119,420 samples. Linux run 42198484392 passed the preceding Voltage King revision's production smoke and five-district route and uploaded the evidence.
