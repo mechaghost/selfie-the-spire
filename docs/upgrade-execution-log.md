@@ -745,3 +745,7 @@ The production arena smoke suite now selects a JPEG through the real file input 
 ### Combat targeting during viewport rotation
 
 The production smoke suite now opens the first card's target prompt in the three-Rat fight, switches from 320 × 568 to 844 × 390, and returns to portrait before selecting a target. Both layouts keep the three target buttons at least 44 × 44, fully inside the arena, and mutually disjoint. Target identity, labels, and energy remain stable. The completed fight and persisted outcome match the fixed-portrait baseline. All eight production smoke cases passed locally in Chromium. Physical rotation and background/resume remain open.
+
+### Safari device preflight
+
+Opened the local arena production build in Safari on the iPhone 18 Pro simulator (iOS 27.0, build 24A434). The landing screen rendered with both start actions visible above the Safari controls. Capture: `tests/.e2e-out/safari-simulator-menu.png`. SafariDriver could not find a simulator session host. For the connected physical iPhone 13 it found the device but rejected the session because Web Inspector is disabled. Physical combat, camera, rotation and background/resume therefore remain unverified. Chromium tab switching and minimization under automation did not produce a hidden document, so those probes were excluded from lifecycle evidence.
