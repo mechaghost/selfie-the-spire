@@ -62,8 +62,11 @@ ACTOR_VISUALS.vending_golem.atlasUrl='/assets/battle/actors/vending-golem-poses-
 ACTOR_VISUALS.vending_golem.keyPoses!.guard={imageUrl:'/assets/battle/actors/vending-golem-guard-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.cast={imageUrl:'/assets/battle/actors/fire-escape-spider-cast-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.vending_golem.atlasFrames=GOLEM_ATLAS_FRAMES;
+for(const archetype of ['chrome','volt','concrete','smoke']) {
+    ACTOR_VISUALS[`hero-${archetype}`].keyPoses={attack:{imageUrl:`/assets/battle/actors/${archetype}-attack-v1.webp`,footAnchor:[.5,.98]}};
+}
 // Explicit key-pose timelines; these do not represent approved multi-frame animation art.
-for(const id of ['hero-neon','alley_rat','vending_golem','fire_escape_spider']) {
+for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_golem','fire_escape_spider']) {
     ACTOR_VISUALS[id].clips.attack={frames:['idle','attack','idle'],durationsMs:[80,160,80],loop:false,completion:'idle'};
 }
 Object.values(ACTOR_VISUALS).forEach(validateActorVisual);

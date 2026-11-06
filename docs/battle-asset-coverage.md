@@ -5,10 +5,10 @@ All five hero archetypes and all 23 monsters have generated idle cutouts in revi
 | Visual ID | Reachability | Fallback / dimensions | Provenance | Status |
 |---|---|---|---|---|
 | hero-neon | Starter/generated archetype | /assets/battle/actors/street-runner-idle-v1.webp / 1106×1422 | Built-in image generation; prompts recorded | Idle and attack key poses in review; motion pending |
-| hero-chrome | Starter/generated archetype | /assets/battle/actors/chrome-idle-v1.webp / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| hero-volt | Starter/generated archetype | /assets/battle/actors/volt-idle-v1.webp / 1186×1327 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| hero-concrete | Starter/generated archetype | /assets/battle/actors/concrete-idle-v1.webp / 1194×1317 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
-| hero-smoke | Starter/generated archetype | /assets/battle/actors/smoke-idle-v1.webp / 1199×1312 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
+| hero-chrome | Starter/generated archetype | /assets/battle/actors/chrome-idle-v1.webp / 1199×1312 | Built-in image generation; prompts recorded | Idle and attack key poses in review; reactions and full clips pending |
+| hero-volt | Starter/generated archetype | /assets/battle/actors/volt-idle-v1.webp / 1186×1327 | Built-in image generation; prompts recorded | Idle and attack key poses in review; reactions and full clips pending |
+| hero-concrete | Starter/generated archetype | /assets/battle/actors/concrete-idle-v1.webp / 1194×1317 | Built-in image generation; prompts recorded | Idle and attack key poses in review; reactions and full clips pending |
+| hero-smoke | Starter/generated archetype | /assets/battle/actors/smoke-idle-v1.webp / 1199×1312 | Built-in image generation; prompts recorded | Idle and attack key poses in review; reactions and full clips pending |
 | alley_rat | Production encounter pool | /assets/battle/actors/alley-rat-idle-v1.webp / 1536×1024 | Built-in image generation; prompts recorded | Idle, attack, hit and defeat key poses in review; full clips and pivot review pending |
 | neon_junkie | Production encounter pool | /assets/battle/actors/neon-junkie-idle-v1.webp / 1230×1278 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |
 | graffiti_imp | Production encounter pool | /assets/battle/actors/graffiti-imp-idle-v1.webp / 1230×1278 | Built-in image generation; prompts recorded | Idle cutout in review; motion pending |

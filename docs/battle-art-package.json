@@ -1,8 +1,8 @@
 {
   "encoding": "WebP lossless, exact RGBA pixel verification",
   "memoryNote": "Decoded RGBA byte estimates; not measured GPU allocation or VRAM. No resizing.",
-  "sourceBytes": 86774862,
-  "runtimeBytes": 60444948,
+  "sourceBytes": 91499673,
+  "runtimeBytes": 63488704,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -45,6 +45,14 @@
       "decodedRGBABytes": 6294704
     },
     {
+      "asset": "actors/chrome-attack-v1.webp",
+      "width": 1199,
+      "height": 1312,
+      "sourceBytes": 1151920,
+      "runtimeBytes": 708790,
+      "decodedRGBABytes": 6292352
+    },
+    {
       "asset": "actors/chrome-bouncer-idle-v1.webp",
       "width": 1222,
       "height": 1287,
@@ -75,6 +83,14 @@
       "sourceBytes": 1961006,
       "runtimeBytes": 1451006,
       "decodedRGBABytes": 6290856
+    },
+    {
+      "asset": "actors/concrete-attack-v1.webp",
+      "width": 1194,
+      "height": 1317,
+      "sourceBytes": 1295197,
+      "runtimeBytes": 840476,
+      "decodedRGBABytes": 6289992
     },
     {
       "asset": "actors/concrete-idle-v1.webp",
@@ -203,6 +219,14 @@
       "sourceBytes": 2218514,
       "runtimeBytes": 1542758,
       "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "actors/smoke-attack-v1.webp",
+      "width": 1199,
+      "height": 1312,
+      "sourceBytes": 1030479,
+      "runtimeBytes": 664332,
+      "decodedRGBABytes": 6292352
     },
     {
       "asset": "actors/smoke-idle-v1.webp",
@@ -339,6 +363,14 @@
       "sourceBytes": 1811621,
       "runtimeBytes": 1341044,
       "decodedRGBABytes": 6289164
+    },
+    {
+      "asset": "actors/volt-attack-v1.webp",
+      "width": 1186,
+      "height": 1327,
+      "sourceBytes": 1247215,
+      "runtimeBytes": 830158,
+      "decodedRGBABytes": 6295288
     },
     {
       "asset": "actors/volt-idle-v1.webp",
