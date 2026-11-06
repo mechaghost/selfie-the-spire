@@ -5,7 +5,7 @@ import { CardItem } from '../ui/CardItem';
 import '../ui/CardItem.css';
 import { useCombatInteraction } from '../../store/combatInteraction';
 
-export function HandHUD() {
+export function HandHUD({targetControls='list',onTargetControlsChange}:{targetControls?:'arena'|'list';onTargetControlsChange?:(value:'arena'|'list')=>void}) {
     const { hand, player, playingCards } = useGameStore(state => ({
         hand: state.hand,
         player: state.player,
@@ -35,11 +35,11 @@ export function HandHUD() {
     useEffect(() => () => close(), [close]);
     useEffect(() => {
         if (!targeting) return;
-        const timer = setTimeout(() => document.querySelector<HTMLButtonElement>('[data-combat-target]:not(:disabled), .combat-target-list button')?.focus(), 0);
+        const timer = setTimeout(() => document.querySelector<HTMLButtonElement>(targetControls==='arena' ? '[data-combat-target]:not(:disabled)' : '.combat-target-list button')?.focus(), 0);
         const escape = (event: KeyboardEvent) => { if(event.key === 'Escape') { event.preventDefault(); cancel(); } };
         window.addEventListener('keydown',escape);
         return () => { clearTimeout(timer);window.removeEventListener('keydown',escape); };
-    }, [targeting,cancel]);
+    }, [targeting,cancel,targetControls]);
     const totalCards = hand.length;
     const totalRows = Math.ceil(totalCards / 3);
 
@@ -99,7 +99,8 @@ export function HandHUD() {
             {selected && targeting && <div className="combat-target-selection" role="region" aria-label="Choose card target" onClick={event=>event.stopPropagation()}>
                 <p><strong>{selected.name}</strong> · Choose an enemy</p>
                 {error && <p role="alert">{error}</p>}
-                <div className="combat-target-list">{enemies.filter(enemy=>enemy.hp>0).map(enemy=><button key={enemy.id} onClick={()=>commit(enemy.id)}>{enemy.name} · {enemy.hp} HP</button>)}</div>
+                {targetControls==='list' && <div className="combat-target-list">{enemies.filter(enemy=>enemy.hp>0).map(enemy=><button key={enemy.id} onClick={()=>commit(enemy.id)}>{enemy.name} · {enemy.hp} HP</button>)}</div>}
+                {onTargetControlsChange && <button onClick={()=>onTargetControlsChange(targetControls==='arena'?'list':'arena')}>{targetControls==='arena'?'Use target list':'Use arena targets'}</button>}
                 <button onClick={cancel}>Cancel targeting</button>
             </div>}
             {playingCards.map((pc) => (

@@ -12,7 +12,7 @@ import { BattleStage } from './BattleStage';
 import { InspectionDialog } from '../ui/CardInspector';
 import { describeIntent, describeStatuses } from './EntityPanel';
 import './BattleArena.css';
-export function BattleArena() {
+export function BattleArena({targetControls='arena'}:{targetControls?:'arena'|'list'}) {
     const {player,enemies,floor,isBossFloor,activeAnimations,combatResult} = useGameStore(state=>({player:state.player,enemies:state.enemies,floor:state.floor,isBossFloor:state.isBossFloor,activeAnimations:state.activeAnimations,combatResult:state.combatResult}));
     const {mode,commit} = useCombatInteraction();
     const root=useRef<HTMLDivElement>(null);
@@ -49,6 +49,7 @@ export function BattleArena() {
             const slot=layout.enemies.find(slot=>slot.id===enemy.id)!;
             const intent=intentView(enemy.intent,enemy.statuses,player.statuses);
             return <button key={enemy.id} data-combat-target={enemy.id} data-entity-id={enemy.id} className={`actor-target ${mode==='targeting'?'is-selectable':''}`} disabled={enemy.hp<=0}
+                tabIndex={mode==='targeting' && targetControls==='list' ? -1 : 0}
                 style={{left:slot.target.x,top:slot.target.y,width:slot.target.width,height:slot.target.height}}
                 aria-label={enemy.hp<=0 ? `${enemy.name}, defeated` : `${mode==='targeting'?'Target':'Inspect'} ${enemy.name}, ${enemy.hp} of ${enemy.maxHp} HP, ${enemy.block} Block. ${intent.label}. ${describeStatuses(enemy.statuses).map(status=>status.split(' — ')[0]).join('; ') || 'No active effects.'}`}
                 onClick={event=>{event.stopPropagation();if(mode==='targeting')commit(enemy.id);else setInspected(enemy.id);}}>

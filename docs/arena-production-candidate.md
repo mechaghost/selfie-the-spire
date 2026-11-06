@@ -20,4 +20,4 @@ Map and reload preserved 80 HP, 117 gold, 12 cards, Palm Avenue current stop and
 
 `node tests/arena-production-build.mjs` builds both flag states, verifies renderer/HUD inclusion only when enabled, and checks development fixture labels are absent from both optimized outputs. This checks the real bundler output rather than mirroring the flag condition in a unit test.
 
-Scope: local browser production artifact, one legal battle, 390px viewport. Not the live deployment, physical device, complete nine-floor run, or full release certification. The test also exposed two target-control sets in targeting mode (arena overlay plus text list); sequential keyboard exposure needs follow-up against the one-primary-control-set requirement.
+Scope: local browser production artifact, one legal battle, 390px viewport. Not the live deployment, physical device, complete nine-floor run, or full release certification. The test also exposed two target-control sets in targeting mode (arena overlay plus text list); the subsequent fix and keyboard verification are recorded in `target-control-modes.md`.

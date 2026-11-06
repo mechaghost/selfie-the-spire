@@ -13,6 +13,7 @@ import { CityBackdrop } from '../ui/CityBackdrop';
 
 export function CombatView() {
     const actorArena = import.meta.env.VITE_COMBAT_ARENA === '1' || (import.meta.env.DEV && new URLSearchParams(location.search).has('arena'));
+    const [targetControls,setTargetControls]=useState<'arena'|'list'>('arena');
     const {
         player, enemies, endTurn, energy, maxEnergy, isPlayerTurn, combatResult, screenShake
     } = useGameStore((state) => ({
@@ -68,7 +69,7 @@ export function CombatView() {
 
             <TopBar />
 
-            {actorArena ? <BattleArena /> : <div className="entities-container">
+            {actorArena ? <BattleArena targetControls={targetControls} /> : <div className="entities-container">
                 {/* Compact player presence for animations/floating text */}
                 <div className="player-presence">
                     <EntityPanel entity={player} isPlayer={true} />
@@ -133,7 +134,7 @@ export function CombatView() {
 
             <div className="hand-caption" aria-hidden="true"><span>Your hand<small className="hand-scroll-hint"> · swipe</small></span><span>Inspect a card. Make your move.</span></div>
             <div className={`deck-table ${isDisabled ? 'disabled' : ''}`}>
-                <HandHUD />
+                <HandHUD targetControls={actorArena?targetControls:'list'} onTargetControlsChange={actorArena?setTargetControls:undefined}/>
             </div>
 
             <TargetingArrow />

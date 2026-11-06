@@ -1,0 +1,9 @@
+# One primary keyboard target set
+
+The arena previously exposed both its enemy-overlay buttons and the target list as sequential keyboard stops while choosing a card target. CombatView now owns an explicit arena/list presentation choice shared by BattleArena and HandHUD. It does not create a second gameplay selection state.
+
+Arena mode is the default: only overlay targets are rendered as target choices, with a `Use target list` option in the selected-card summary. List mode renders the text list and removes overlay targets from sequential Tab navigation (`tabIndex=-1`); the overlays remain available for pointer interaction and assistive-technology navigation. `Use arena targets` switches back. Focus moves to the first living target in the selected mode. Legacy combat retains its existing list, without an arena switch. The mode preference persists for that mounted combat screen.
+
+Browser verification at 390×844 used actual CombatView with three enemies, ten cards, and four statuses each. Arena mode focused Rat and rendered no target list. Switching to list produced overlay tab indices [-1,-1,-1] and list indices [0,0,0], focused Rat, and Tab advanced to Golem. Escape reopened Haymaker inspection and restored Play-card focus with energy still 3 and ten cards. Reopening retained list mode. Enter on Golem committed once: energy 3→1, hand 10→9, Golem Block 5→0 and HP 34→30, Vulnerable 2→4. Resolution restored End Turn focus and idle overlay tab indices [0,0,0]. No browser warnings/errors.
+
+Evidence: `tests/.e2e-out/target-mode-list-mobile.png`. TypeScript passes. This verifies sequential keyboard target deduplication, not actual screen-reader certification. Explicit compact-strip presentation and remaining accessibility/release gates still require their own evidence. Local only.
