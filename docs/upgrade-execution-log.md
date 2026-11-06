@@ -909,3 +909,7 @@ Added an authored backward recoil with the forearm across the ribs, a .999 foot 
 ### Chrome guard pose
 
 Added a forward forearm brace with a .988 foot anchor and a 160/60 ms guard/idle clip. At 320 × 568 in Chromium touch emulation, equipping Chrome and playing Dodge through the inspector showed the brace and granted 5 Block, with HP unchanged. Capture: `tests/.e2e-out/chrome-live-guard-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
+
+### Chrome defeat pose
+
+Added a held kneeling defeat pose with a .987 foot anchor. In a 320 × 568 Chromium touch fixture, Dumpster Crawler's opening strike took Chrome from 5 HP to zero. The capture shows the kneeling pose before the Defeat overlay, which subsequently opened through the normal result flow. Capture: `tests/.e2e-out/chrome-live-defeat-320.png`. All 550 encounter budgets, texture caps, sprite bounds, playback and TypeScript passed. The preceding Linux run 42211257835 passed.
