@@ -861,3 +861,7 @@ Added a 110 ms narrowing of the eye glow after 5,500 ms of idle. The blink uses 
 ### Graffiti Imp authored idle
 
 Added a 100 ms blink after 3,700 ms of idle, retaining the .99 foot anchor. Source alpha masks overlap by 98.9% intersection-over-union. At 320 × 568, the Pixi captures show the eyes closing while the spray can and boots stay aligned. The original runtime tier pushed two Street Ambush combinations over 5 MB, so this blink alone uses a 416 px runtime tier. All 550 encounter budgets now pass, with a maximum transfer estimate of 4,980,502 bytes. Texture, bounds, playback and TypeScript passed. The preceding Linux run 42203859119 passed.
+
+### Neon Hunger authored idle
+
+Added a 140 ms dip of the amber tubes after 6,100 ms of idle. The first draft reframed the claws and was discarded. The replacement preserves the original 1230 × 1278 canvas and .99 foot anchor; source alpha masks overlap by 95.6% intersection-over-union. At 320 × 568 in Pixi, the claws and feet stay in place and the tube change is subtle. Captures: `tests/.e2e-out/hunger-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
