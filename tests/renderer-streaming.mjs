@@ -73,6 +73,13 @@ assert.equal(playerSprite.scale.x,baseScale*.5,'named frame uses its explicit sc
 assert.equal(playerSprite.anchor.x,.4);assert.equal(playerSprite.anchor.y,.9);
 scene.update({...customSnapshot,reducedMotion:true});
 assert.equal(playerSprite.texture,scene.poses.get('player:idle'));assert.equal(playerSprite.scale.x,baseScale,'reduced motion restores idle scale');
+const idleLoopSnapshot={...customSnapshot,actors:customSnapshot.actors.map(actor=>actor.id==='player'?{...actor,clip:'idle',previewElapsedMs:800,visual:{...actor.visual,clips:{idle:{frames:['idle','windup'],durationsMs:[800,800],loop:true,completion:'idle'}}}}:actor)};
+scene.update(idleLoopSnapshot);
+assert.equal(playerSprite.texture,customFrame,'authored idle selects its alternate frame');
+scene.update({...idleLoopSnapshot,actors:idleLoopSnapshot.actors.map(actor=>({...actor,previewElapsedMs:1600}))});
+assert.equal(playerSprite.texture,scene.poses.get('player:idle'),'authored idle loops back to the base frame');
+scene.update({...idleLoopSnapshot,reducedMotion:true});
+assert.equal(playerSprite.texture,scene.poses.get('player:idle'),'reduced motion suppresses authored idle cycling');
 scene.poses.delete('player:windup');
 scene.destroy();assert.equal(atlasView.destroyed,true,'atlas views disposed with scene');assert.equal(scene.atlasViews.size,0);assert.equal(scene.casts.size,0);assert.equal(listeners.size,0);assert.equal(apps[0].destroyed,true);
 assert.equal(pending.has('/enemy-attack'),false,'atlas-covered poses are not downloaded twice');

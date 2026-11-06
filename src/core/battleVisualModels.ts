@@ -57,10 +57,17 @@ export function validateActorVisual(visual: ActorVisual): void {
             w<1 || h<1 || sw<1 || sh<1 || ox+w>sw || oy+h>sh ||
             x+w>4096 || y+h>4096 || frame.footAnchor.length!==2 || frame.footAnchor.some(n=>!Number.isFinite(n)||n<0||n>1)) throw new Error(`Invalid atlas frame: ${visual.id}`);
     }
-    for (const clip of Object.values(visual.clips)) {
+    for (const [name,clip] of Object.entries(visual.clips)) {
         if (!clip || !clip.frames.length || clip.frames.length !== clip.durationsMs.length ||
             clip.frames.some(frame => !frame || (frame !== 'idle' && !Object.prototype.hasOwnProperty.call(visual.keyPoses ?? {},frame) && !Object.prototype.hasOwnProperty.call(visual.atlasFrames ?? {},frame))) ||
             !['idle','hold'].includes(clip.completion) || typeof clip.loop !== 'boolean' ||
             clip.durationsMs.some(ms => !Number.isFinite(ms) || ms < 16 || ms > 10000)) throw new Error(`Invalid animation clip: ${visual.id}`);
+        // Asset data may not turn an action/reaction into a permanent animation.
+        // Defeat holds its final image; only the idle sequence repeats.
+        if(name==='idle' ? !clip.loop || clip.completion!=='idle'
+            : name==='defeat' ? clip.loop || clip.completion!=='hold'
+            : !['attack','cast','hit','guard','celebrate'].includes(name) || clip.loop || clip.completion!=='idle') {
+            throw new Error(`Invalid animation lifecycle: ${visual.id}/${name}`);
+        }
     }
 }

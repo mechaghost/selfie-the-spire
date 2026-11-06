@@ -35,3 +35,26 @@ const spider=ACTOR_VISUALS.fire_escape_spider;
 for(const [ms,frame] of [[0,'windup'],[79,'windup'],[80,'attack'],[140,'attack'],[239,'attack'],[240,'recovery'],[319,'recovery'],[320,null]])assert.equal(clipFrameAt(spider.clips.attack,ms),frame);
 assert.equal(clipFrameAt(spider.clips.attack,0,true),null);
 console.log('PASS: Spider authored anticipation/contact/recovery boundaries and reduced-motion skip');
+
+// Authored idle repeats; action/reaction clips finish; defeat holds without looping.
+// Use existing frames to exercise lifecycle validation independently of new art.
+const loopingIdle={frames:['idle','windup'],durationsMs:[800,800],loop:true,completion:'idle'};
+validateActorVisual({...neon,clips:{idle:loopingIdle}});
+assert.equal(clipFrameAt(loopingIdle,799),'idle');
+assert.equal(clipFrameAt(loopingIdle,800),'windup');
+assert.equal(clipFrameAt(loopingIdle,1600),'idle');
+assert.equal(clipFrameAt(loopingIdle,100000,true),null,'reduced motion uses the static idle fallback');
+for(const name of ['attack','cast','hit','guard','celebrate']) {
+ const finite={frames:['idle','windup'],durationsMs:[80,140],loop:false,completion:'idle'};
+ validateActorVisual({...neon,clips:{[name]:finite}});
+ assert.equal(clipFrameAt(finite,220),null);
+ for(const invalid of [{...finite,loop:true},{...finite,completion:'hold'}])assert.throws(()=>validateActorVisual({...neon,clips:{[name]:invalid}}),/lifecycle/);
+}
+const defeat={frames:['hit','defeat'],durationsMs:[80,200],loop:false,completion:'hold'};
+validateActorVisual({...neon,clips:{defeat}});
+assert.equal(clipFrameAt(defeat,100000),'defeat');
+assert.equal(clipFrameAt(defeat,0,true),'defeat');
+for(const invalid of [{...defeat,loop:true},{...defeat,completion:'idle'}])assert.throws(()=>validateActorVisual({...neon,clips:{defeat:invalid}}),/lifecycle/);
+for(const invalid of [{...loopingIdle,loop:false},{...loopingIdle,completion:'hold'}])assert.throws(()=>validateActorVisual({...neon,clips:{idle:invalid}}),/lifecycle/);
+assert.throws(()=>validateActorVisual({...neon,clips:{unknown:loopingIdle}}),/lifecycle/);
+console.log('PASS: authored idle loops, finite action/reaction completion, held defeat, reduced motion and invalid lifecycle rejection');
