@@ -957,3 +957,11 @@ Added a grounded kneeling pose with a .967 foot anchor and a held 280 ms defeat 
 Built-in imagegen prompt with `volt-idle-v1.png` as reference:
 
 > Create one full-body 2D defeat animation key pose for the exact Volt street fighter in this transparent game sprite reference. Same swept black hair and cream streak, yellow and teal electrician jacket, orange waist cable, dark cargo pants, cream and teal sneakers, same inked style and game camera facing right. He has fallen to one knee, head bowed, right hand on his raised knee, other gloved hand planted on the ground for support. Keep his original full standing canvas and feet ground line, leaving abundant clear alpha above his lowered body rather than enlarging or reframing him. Keep all limbs in view. No injuries, lettering, FX, props, ground, shadow or environment. Real transparency.
+
+### Volt cast pose
+
+Added an open-handed skill activation pose with a .978 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568 in Chromium touch emulation, Pump Iron triggered the pose and granted 2 Strength. The open-handed silhouette is distinct from Volt's closed-fist Block stance. Capture: `tests/.e2e-out/volt-live-cast-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `volt-idle-v1.png` as reference:
+
+> A single full-body cast-contact game sprite of the exact Volt fighter shown. Preserve face, cream hair streak, yellow and teal electrician jacket, orange cable loop, dark cargos and teal cream sneakers, same rendering, camera and scale. Both feet planted facing right. Distinct skill activation gesture: left palm wide open upward in front at mid torso, right open palm facing it from above at shoulder height, like charging a small invisible sphere between his hands. Keep his head fully visible and the gesture compact and readable. Entire character with transparent margins. No sphere, sparks, glow, ground, shadows, props or environment. Real alpha background.
