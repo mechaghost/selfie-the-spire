@@ -997,3 +997,11 @@ Added a bowed kneeling pose with a .98 foot anchor and a held 280 ms defeat clip
 Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
 
 > Create one full-body transparent defeat pose for the exact Concrete fighter in this reference. Preserve his tied-back dark hair, beard, muscular build, orange reflective safety vest, black tank, ochre pouches, teal knee pads, dark work trousers and tan work boots. Same inked game sprite style and right-facing camera. He sinks onto one knee with his head bowed, resting both gloved hands on his raised front thigh. Keep the original standing-sized canvas and ground line, with ample alpha above the lowered body. Entire actor inside the frame. Real transparent background, no props, blood, lettering, shadow, ground, effects or scenery.
+
+### Concrete cast pose
+
+Added an open-palm activation with a .989 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568 in Chromium touch emulation, Pump Iron triggered the gesture and granted 2 Strength. Capture: `tests/.e2e-out/concrete-live-cast-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
+
+> Create a single transparent full-body skill cast key pose for this exact Concrete fighter. Preserve tied-back dark hair, beard, muscular build, orange reflective vest, black tank, utility belt, teal knee pads, dark trousers, and tan boots, with the same inked game sprite camera and scale. Facing screen right with feet planted, he deliberately extends one open gloved hand forward, palm down and fingers splayed, while the other clenched hand rests at his waist. This is a grounded commanding activation gesture, not a strike or guard. Keep the actor, hands and soles inside frame with alpha margins. True transparency, no props, ground, lettering, shadow or effects.
