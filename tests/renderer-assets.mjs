@@ -6,8 +6,11 @@ const {frameLocation,LOCATIONS,AssetLeaseCache,ACTOR_VISUALS,validateActorVisual
 let loads=0;const disposed=[];let resolveLoad;
 const cache=new AssetLeaseCache(()=>{loads++;return new Promise(resolve=>resolveLoad=resolve);},value=>disposed.push(value));
 const a=cache.acquire('shared'),b=cache.acquire('shared');await Promise.resolve();assert.equal(loads,1);
+assert.deepEqual(cache.diagnostics(()=>64),{entries:1,references:2,pending:1,estimatedBytes:0},'pending shared resources have no decoded allocation estimate');
 a.release();a.release();assert.equal(cache.stats().references,1);resolveLoad('texture');await b.ready;assert.deepEqual(disposed,[]);
+assert.deepEqual(cache.diagnostics(()=>64),{entries:1,references:1,pending:0,estimatedBytes:64},'count one source, not one allocation per lease');
 b.release();assert.deepEqual(disposed,['texture']);assert.deepEqual(cache.stats(),{entries:0,references:0});
+assert.deepEqual(cache.diagnostics(()=>64),{entries:0,references:0,pending:0,estimatedBytes:0},'disposed resources leave no estimate behind');
 const late=cache.acquire('late');late.release();await Promise.resolve();resolveLoad('late-texture');await late.ready;assert.equal(disposed.at(-1),'late-texture');assert.equal(cache.stats().entries,0);
 let tries=0;const failures=new AssetLeaseCache(async()=>{if(++tries===1)throw Error('missing');return 'retry';},()=>{});
 const bad=failures.acquire('missing');await assert.rejects(bad.ready);bad.release();const good=failures.acquire('missing');assert.equal(await good.ready,'retry');good.release();assert.equal(failures.stats().entries,0);

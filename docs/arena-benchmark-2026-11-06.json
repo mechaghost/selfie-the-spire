@@ -1,0 +1,1341 @@
+{
+  "version": 1,
+  "scope": "Renderer study with fixed visible hand; RAF intervals are not GPU timings or full gameplay certification. Browser cache is not cleared.",
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "width": 390,
+    "height": 844,
+    "dpr": 1,
+    "arenaWidth": 390,
+    "arenaHeight": 379.796875,
+    "reducedMotion": false
+  },
+  "durationMs": 600331,
+  "requestedDurationMs": 600000,
+  "hidden": false,
+  "resized": false,
+  "failures": [],
+  "baseline": {
+    "entries": 0,
+    "references": 0,
+    "pending": 0,
+    "estimatedBytes": 0
+  },
+  "final": {
+    "entries": 0,
+    "references": 0,
+    "pending": 0,
+    "estimatedBytes": 0
+  },
+  "frames": {
+    "samples": 35996,
+    "p50": 16.699999999953434,
+    "p95": 17.5,
+    "p99": 18.10000000000582,
+    "over50ms": 2,
+    "max": 50.79999999998836
+  },
+  "cycles": [
+    {
+      "cycle": 1,
+      "district": "ocean-drive",
+      "readyMs": 94.2999997138977,
+      "frames": {
+        "samples": 1796,
+        "p50": 16.69999999999709,
+        "p95": 17.5,
+        "p99": 17.600000000002183,
+        "over50ms": 0,
+        "max": 17.700000000004366
+      },
+      "peak": {
+        "entries": 20,
+        "references": 20,
+        "pending": 0,
+        "estimatedBytes": 49197192
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 2,
+      "district": "wynwood",
+      "readyMs": 49.5,
+      "frames": {
+        "samples": 1798,
+        "p50": 16.69999999999709,
+        "p95": 17.5,
+        "p99": 17.60000000000582,
+        "over50ms": 0,
+        "max": 32.900000000001455
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36618144
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 3,
+      "district": "underpass",
+      "readyMs": 31.699999809265137,
+      "frames": {
+        "samples": 1798,
+        "p50": 16.69999999999709,
+        "p95": 17.5,
+        "p99": 17.60000000000582,
+        "over50ms": 0,
+        "max": 50
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36619360
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 4,
+      "district": "club-backlot",
+      "readyMs": 41.30000019073486,
+      "frames": {
+        "samples": 1799,
+        "p50": 16.69999999999709,
+        "p95": 17.89999999999418,
+        "p99": 18.59999999999127,
+        "over50ms": 0,
+        "max": 32.30000000000291
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36616728
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 5,
+      "district": "rooftop",
+      "readyMs": 29.5,
+      "frames": {
+        "samples": 1799,
+        "p50": 16.699999999982538,
+        "p95": 18.39999999999418,
+        "p99": 18.60000000000582,
+        "over50ms": 0,
+        "max": 31.59999999999127
+      },
+      "peak": {
+        "entries": 5,
+        "references": 5,
+        "pending": 0,
+        "estimatedBytes": 17306112
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 6,
+      "district": "ocean-drive",
+      "readyMs": 82.89999961853027,
+      "frames": {
+        "samples": 1798,
+        "p50": 16.699999999982538,
+        "p95": 18.20000000001164,
+        "p99": 18.599999999976717,
+        "over50ms": 0,
+        "max": 50
+      },
+      "peak": {
+        "entries": 20,
+        "references": 20,
+        "pending": 0,
+        "estimatedBytes": 49197192
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 7,
+      "district": "wynwood",
+      "readyMs": 48.69999980926514,
+      "frames": {
+        "samples": 1798,
+        "p50": 16.699999999982538,
+        "p95": 17.5,
+        "p99": 17.60000000000582,
+        "over50ms": 1,
+        "max": 50.79999999998836
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36618144
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 8,
+      "district": "underpass",
+      "readyMs": 21.5,
+      "frames": {
+        "samples": 1800,
+        "p50": 16.699999999982538,
+        "p95": 17.39999999999418,
+        "p99": 17.60000000000582,
+        "over50ms": 0,
+        "max": 17.70000000001164
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36619360
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 9,
+      "district": "club-backlot",
+      "readyMs": 56.10000038146973,
+      "frames": {
+        "samples": 1798,
+        "p50": 16.699999999953434,
+        "p95": 17.400000000023283,
+        "p99": 17.699999999953434,
+        "over50ms": 0,
+        "max": 33.30000000001746
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36616728
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 10,
+      "district": "rooftop",
+      "readyMs": 33.80000019073486,
+      "frames": {
+        "samples": 1799,
+        "p50": 16.699999999953434,
+        "p95": 17.400000000023283,
+        "p99": 17.699999999953434,
+        "over50ms": 0,
+        "max": 33.300000000046566
+      },
+      "peak": {
+        "entries": 5,
+        "references": 5,
+        "pending": 0,
+        "estimatedBytes": 17306112
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 11,
+      "district": "ocean-drive",
+      "readyMs": 65.5,
+      "frames": {
+        "samples": 1797,
+        "p50": 16.699999999953434,
+        "p95": 17.400000000023283,
+        "p99": 17.600000000034925,
+        "over50ms": 0,
+        "max": 50
+      },
+      "peak": {
+        "entries": 20,
+        "references": 20,
+        "pending": 0,
+        "estimatedBytes": 49197192
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 12,
+      "district": "wynwood",
+      "readyMs": 55.80000019073486,
+      "frames": {
+        "samples": 1798,
+        "p50": 16.699999999953434,
+        "p95": 17.400000000023283,
+        "p99": 17.600000000034925,
+        "over50ms": 0,
+        "max": 34
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36618144
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 13,
+      "district": "underpass",
+      "readyMs": 21.90000009536743,
+      "frames": {
+        "samples": 1800,
+        "p50": 16.699999999953434,
+        "p95": 17.5,
+        "p99": 17.699999999953434,
+        "over50ms": 0,
+        "max": 17.79999999998836
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36619360
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 14,
+      "district": "club-backlot",
+      "readyMs": 61.09999990463257,
+      "frames": {
+        "samples": 1797,
+        "p50": 16.699999999953434,
+        "p95": 17.5,
+        "p99": 17.600000000034925,
+        "over50ms": 1,
+        "max": 50.09999999997672
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36616728
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 15,
+      "district": "rooftop",
+      "readyMs": 22.100000381469727,
+      "frames": {
+        "samples": 1801,
+        "p50": 16.699999999953434,
+        "p95": 17.5,
+        "p99": 17.600000000034925,
+        "over50ms": 0,
+        "max": 17.70000000001164
+      },
+      "peak": {
+        "entries": 5,
+        "references": 5,
+        "pending": 0,
+        "estimatedBytes": 17306112
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 16,
+      "district": "ocean-drive",
+      "readyMs": 83.40000009536743,
+      "frames": {
+        "samples": 1798,
+        "p50": 16.699999999953434,
+        "p95": 17.5,
+        "p99": 17.699999999953434,
+        "over50ms": 0,
+        "max": 33.300000000046566
+      },
+      "peak": {
+        "entries": 20,
+        "references": 20,
+        "pending": 0,
+        "estimatedBytes": 49197192
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 17,
+      "district": "wynwood",
+      "readyMs": 66.5,
+      "frames": {
+        "samples": 1797,
+        "p50": 16.699999999953434,
+        "p95": 17.5,
+        "p99": 17.600000000034925,
+        "over50ms": 0,
+        "max": 50
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36618144
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 18,
+      "district": "underpass",
+      "readyMs": 45,
+      "frames": {
+        "samples": 1797,
+        "p50": 16.699999999953434,
+        "p95": 17.5,
+        "p99": 17.600000000093132,
+        "over50ms": 0,
+        "max": 49.90000000002328
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36619360
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 19,
+      "district": "club-backlot",
+      "readyMs": 61.299999713897705,
+      "frames": {
+        "samples": 1797,
+        "p50": 16.699999999953434,
+        "p95": 17.5,
+        "p99": 17.699999999953434,
+        "over50ms": 0,
+        "max": 49.90000000002328
+      },
+      "peak": {
+        "entries": 15,
+        "references": 15,
+        "pending": 0,
+        "estimatedBytes": 36616728
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    },
+    {
+      "cycle": 20,
+      "district": "rooftop",
+      "readyMs": 76.40000009536743,
+      "frames": {
+        "samples": 1798,
+        "p50": 16.699999999953434,
+        "p95": 17.5,
+        "p99": 17.600000000093132,
+        "over50ms": 0,
+        "max": 34.199999999953434
+      },
+      "peak": {
+        "entries": 5,
+        "references": 5,
+        "pending": 0,
+        "estimatedBytes": 17306112
+      },
+      "afterDispose": {
+        "entries": 0,
+        "references": 0,
+        "pending": 0,
+        "estimatedBytes": 0
+      }
+    }
+  ],
+  "valid": true,
+  "resourceLoads": [
+    {
+      "asset": "/assets/battle/actors/street-runner-idle-v1.webp",
+      "durationMs": 3.9000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 199110
+    },
+    {
+      "asset": "/assets/battle/actors/vending-golem-idle-v1.webp",
+      "durationMs": 4.400000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 376494
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-background-v2.webp",
+      "durationMs": 4.5,
+      "transferBytes": 300,
+      "encodedBytes": 1306370
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-foreground-v1.webp",
+      "durationMs": 5.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 432756
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-ground-v2.webp",
+      "durationMs": 5.300000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 1024628
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-idle-v1.webp",
+      "durationMs": 4.599999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 237116
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-idle-v1.webp",
+      "durationMs": 6.800000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 284708
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-hit-v1.webp",
+      "durationMs": 2.5999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 199876
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-guard-v1.webp",
+      "durationMs": 2.6999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 198492
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-defeat-v1.webp",
+      "durationMs": 2.8000001907348633,
+      "transferBytes": 300,
+      "encodedBytes": 165344
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-celebrate-v1.webp",
+      "durationMs": 3,
+      "transferBytes": 300,
+      "encodedBytes": 198768
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-attack-v1.webp",
+      "durationMs": 3.3000001907348633,
+      "transferBytes": 300,
+      "encodedBytes": 216498
+    },
+    {
+      "asset": "/assets/battle/actors/vending-golem-poses-v1.webp",
+      "durationMs": 4,
+      "transferBytes": 300,
+      "encodedBytes": 1397658
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-attack-v1.webp",
+      "durationMs": 3.299999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 227590
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-hit-v1.webp",
+      "durationMs": 3.4000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 231270
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-cast-v1.webp",
+      "durationMs": 3.4000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 292622
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-attack-v1.webp",
+      "durationMs": 3.0999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 95254
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-defeat-v1.webp",
+      "durationMs": 3.3000001907348633,
+      "transferBytes": 300,
+      "encodedBytes": 173082
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-hit-v1.webp",
+      "durationMs": 3.8000001907348633,
+      "transferBytes": 300,
+      "encodedBytes": 230946
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-defeat-v1.webp",
+      "durationMs": 4.599999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 212740
+    },
+    {
+      "asset": "/assets/battle/locations/wynwood-ground-v4.webp",
+      "durationMs": 4.900000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 967022
+    },
+    {
+      "asset": "/assets/battle/actors/chrome-idle-v1.webp",
+      "durationMs": 4.800000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 235682
+    },
+    {
+      "asset": "/assets/battle/locations/wynwood-background-v2.webp",
+      "durationMs": 5.200000286102295,
+      "transferBytes": 300,
+      "encodedBytes": 1313914
+    },
+    {
+      "asset": "/assets/battle/actors/chrome-attack-v1.webp",
+      "durationMs": 2.3999996185302734,
+      "transferBytes": 300,
+      "encodedBytes": 209780
+    },
+    {
+      "asset": "/assets/battle/actors/volt-idle-v1.webp",
+      "durationMs": 4.300000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 247310
+    },
+    {
+      "asset": "/assets/battle/locations/underpass-background-v2.webp",
+      "durationMs": 5,
+      "transferBytes": 300,
+      "encodedBytes": 1143242
+    },
+    {
+      "asset": "/assets/battle/locations/underpass-ground-v2.webp",
+      "durationMs": 5.300000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 1117286
+    },
+    {
+      "asset": "/assets/battle/actors/volt-attack-v1.webp",
+      "durationMs": 2.5,
+      "transferBytes": 300,
+      "encodedBytes": 245388
+    },
+    {
+      "asset": "/assets/battle/locations/club-backlot-ground-v4.webp",
+      "durationMs": 3.6999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 992848
+    },
+    {
+      "asset": "/assets/battle/actors/concrete-idle-v1.webp",
+      "durationMs": 3.0999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 243710
+    },
+    {
+      "asset": "/assets/battle/locations/club-backlot-background-v2.webp",
+      "durationMs": 3.8000001907348633,
+      "transferBytes": 300,
+      "encodedBytes": 1220564
+    },
+    {
+      "asset": "/assets/battle/actors/concrete-attack-v1.webp",
+      "durationMs": 1.5999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 250304
+    },
+    {
+      "asset": "/assets/battle/actors/smoke-idle-v1.webp",
+      "durationMs": 6.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 178068
+    },
+    {
+      "asset": "/assets/battle/actors/the-billboard-idle-v1.webp",
+      "durationMs": 7,
+      "transferBytes": 300,
+      "encodedBytes": 426632
+    },
+    {
+      "asset": "/assets/battle/locations/rooftop-ground-v2.webp",
+      "durationMs": 6.699999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 1141096
+    },
+    {
+      "asset": "/assets/battle/locations/rooftop-background-v2.webp",
+      "durationMs": 7,
+      "transferBytes": 300,
+      "encodedBytes": 1388174
+    },
+    {
+      "asset": "/assets/battle/actors/smoke-attack-v1.webp",
+      "durationMs": 1.9000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 197072
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-foreground-v1.webp",
+      "durationMs": 6.900000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 432756
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-background-v2.webp",
+      "durationMs": 7.599999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 1306370
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-ground-v2.webp",
+      "durationMs": 7.700000286102295,
+      "transferBytes": 300,
+      "encodedBytes": 1024628
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-idle-v1.webp",
+      "durationMs": 8.5,
+      "transferBytes": 300,
+      "encodedBytes": 199110
+    },
+    {
+      "asset": "/assets/battle/actors/vending-golem-idle-v1.webp",
+      "durationMs": 7.300000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 376494
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-idle-v1.webp",
+      "durationMs": 8.5,
+      "transferBytes": 300,
+      "encodedBytes": 284708
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-defeat-v1.webp",
+      "durationMs": 9.5,
+      "transferBytes": 300,
+      "encodedBytes": 173082
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-attack-v1.webp",
+      "durationMs": 9.299999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 227590
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-cast-v1.webp",
+      "durationMs": 9.900000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 292622
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-hit-v1.webp",
+      "durationMs": 9.400000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 231270
+    },
+    {
+      "asset": "/assets/battle/actors/vending-golem-poses-v1.webp",
+      "durationMs": 2.3999996185302734,
+      "transferBytes": 300,
+      "encodedBytes": 1397658
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-attack-v1.webp",
+      "durationMs": 2.799999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 95254
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-hit-v1.webp",
+      "durationMs": 3.1999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 230946
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-defeat-v1.webp",
+      "durationMs": 3.299999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 212740
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-attack-v1.webp",
+      "durationMs": 3.299999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 216498
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-hit-v1.webp",
+      "durationMs": 4.5,
+      "transferBytes": 300,
+      "encodedBytes": 199876
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-guard-v1.webp",
+      "durationMs": 4.699999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 198492
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-defeat-v1.webp",
+      "durationMs": 5.300000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 165344
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-celebrate-v1.webp",
+      "durationMs": 5.699999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 198768
+    },
+    {
+      "asset": "/assets/battle/locations/wynwood-ground-v4.webp",
+      "durationMs": 5.199999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 967022
+    },
+    {
+      "asset": "/assets/battle/actors/chrome-idle-v1.webp",
+      "durationMs": 4.699999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 235682
+    },
+    {
+      "asset": "/assets/battle/locations/wynwood-background-v2.webp",
+      "durationMs": 5.5,
+      "transferBytes": 300,
+      "encodedBytes": 1313914
+    },
+    {
+      "asset": "/assets/battle/actors/chrome-attack-v1.webp",
+      "durationMs": 2.0999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 209780
+    },
+    {
+      "asset": "/assets/battle/actors/volt-idle-v1.webp",
+      "durationMs": 2.4000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 247310
+    },
+    {
+      "asset": "/assets/battle/locations/underpass-background-v2.webp",
+      "durationMs": 3.1999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 1143242
+    },
+    {
+      "asset": "/assets/battle/locations/underpass-ground-v2.webp",
+      "durationMs": 3.1999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 1117286
+    },
+    {
+      "asset": "/assets/battle/actors/volt-attack-v1.webp",
+      "durationMs": 1.5,
+      "transferBytes": 300,
+      "encodedBytes": 245388
+    },
+    {
+      "asset": "/assets/battle/locations/club-backlot-ground-v4.webp",
+      "durationMs": 4.199999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 992848
+    },
+    {
+      "asset": "/assets/battle/actors/concrete-idle-v1.webp",
+      "durationMs": 3.6999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 243710
+    },
+    {
+      "asset": "/assets/battle/locations/club-backlot-background-v2.webp",
+      "durationMs": 4.400000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 1220564
+    },
+    {
+      "asset": "/assets/battle/actors/concrete-attack-v1.webp",
+      "durationMs": 1.9000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 250304
+    },
+    {
+      "asset": "/assets/battle/actors/smoke-idle-v1.webp",
+      "durationMs": 3.0999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 178068
+    },
+    {
+      "asset": "/assets/battle/actors/the-billboard-idle-v1.webp",
+      "durationMs": 4.5,
+      "transferBytes": 300,
+      "encodedBytes": 426632
+    },
+    {
+      "asset": "/assets/battle/locations/rooftop-background-v2.webp",
+      "durationMs": 5.400000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 1388174
+    },
+    {
+      "asset": "/assets/battle/locations/rooftop-ground-v2.webp",
+      "durationMs": 5.800000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 1141096
+    },
+    {
+      "asset": "/assets/battle/actors/smoke-attack-v1.webp",
+      "durationMs": 2.6999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 197072
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-foreground-v1.webp",
+      "durationMs": 5.200000286102295,
+      "transferBytes": 300,
+      "encodedBytes": 432756
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-idle-v1.webp",
+      "durationMs": 5.100000381469727,
+      "transferBytes": 300,
+      "encodedBytes": 199110
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-ground-v2.webp",
+      "durationMs": 6.200000286102295,
+      "transferBytes": 300,
+      "encodedBytes": 1024628
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-background-v2.webp",
+      "durationMs": 6.600000381469727,
+      "transferBytes": 300,
+      "encodedBytes": 1306370
+    },
+    {
+      "asset": "/assets/battle/actors/vending-golem-idle-v1.webp",
+      "durationMs": 5.699999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 376494
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-idle-v1.webp",
+      "durationMs": 6.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 284708
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-attack-v1.webp",
+      "durationMs": 7.300000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 227590
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-hit-v1.webp",
+      "durationMs": 8,
+      "transferBytes": 300,
+      "encodedBytes": 231270
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-defeat-v1.webp",
+      "durationMs": 8.5,
+      "transferBytes": 300,
+      "encodedBytes": 173082
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-cast-v1.webp",
+      "durationMs": 8.599999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 292622
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-attack-v1.webp",
+      "durationMs": 3.0999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 216498
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-hit-v1.webp",
+      "durationMs": 3,
+      "transferBytes": 300,
+      "encodedBytes": 199876
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-guard-v1.webp",
+      "durationMs": 3.5,
+      "transferBytes": 300,
+      "encodedBytes": 198492
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-defeat-v1.webp",
+      "durationMs": 3.6999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 165344
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-celebrate-v1.webp",
+      "durationMs": 3.9000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 198768
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-attack-v1.webp",
+      "durationMs": 2.0999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 95254
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-defeat-v1.webp",
+      "durationMs": 2.3000001907348633,
+      "transferBytes": 300,
+      "encodedBytes": 212740
+    },
+    {
+      "asset": "/assets/battle/locations/wynwood-background-v2.webp",
+      "durationMs": 4.299999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 1313914
+    },
+    {
+      "asset": "/assets/battle/locations/wynwood-ground-v4.webp",
+      "durationMs": 3.5,
+      "transferBytes": 300,
+      "encodedBytes": 967022
+    },
+    {
+      "asset": "/assets/battle/actors/chrome-idle-v1.webp",
+      "durationMs": 2.8000001907348633,
+      "transferBytes": 300,
+      "encodedBytes": 235682
+    },
+    {
+      "asset": "/assets/battle/actors/chrome-attack-v1.webp",
+      "durationMs": 2.1999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 209780
+    },
+    {
+      "asset": "/assets/battle/locations/underpass-background-v2.webp",
+      "durationMs": 6.699999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 1143242
+    },
+    {
+      "asset": "/assets/battle/actors/volt-idle-v1.webp",
+      "durationMs": 4.900000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 247310
+    },
+    {
+      "asset": "/assets/battle/locations/underpass-ground-v2.webp",
+      "durationMs": 6.599999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 1117286
+    },
+    {
+      "asset": "/assets/battle/actors/volt-attack-v1.webp",
+      "durationMs": 2.1999998092651367,
+      "transferBytes": 300,
+      "encodedBytes": 245388
+    },
+    {
+      "asset": "/assets/battle/locations/club-backlot-ground-v4.webp",
+      "durationMs": 8.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 992848
+    },
+    {
+      "asset": "/assets/battle/locations/club-backlot-background-v2.webp",
+      "durationMs": 8.599999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 1220564
+    },
+    {
+      "asset": "/assets/battle/actors/concrete-idle-v1.webp",
+      "durationMs": 6.599999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 243710
+    },
+    {
+      "asset": "/assets/battle/actors/concrete-attack-v1.webp",
+      "durationMs": 3.299999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 250304
+    },
+    {
+      "asset": "/assets/battle/locations/rooftop-ground-v2.webp",
+      "durationMs": 7.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 1141096
+    },
+    {
+      "asset": "/assets/battle/locations/rooftop-background-v2.webp",
+      "durationMs": 7.299999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 1388174
+    },
+    {
+      "asset": "/assets/battle/actors/smoke-idle-v1.webp",
+      "durationMs": 4.799999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 178068
+    },
+    {
+      "asset": "/assets/battle/actors/the-billboard-idle-v1.webp",
+      "durationMs": 6.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 426632
+    },
+    {
+      "asset": "/assets/battle/actors/smoke-attack-v1.webp",
+      "durationMs": 2.8000001907348633,
+      "transferBytes": 300,
+      "encodedBytes": 197072
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-foreground-v1.webp",
+      "durationMs": 10.5,
+      "transferBytes": 300,
+      "encodedBytes": 432756
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-ground-v2.webp",
+      "durationMs": 11.5,
+      "transferBytes": 300,
+      "encodedBytes": 1024628
+    },
+    {
+      "asset": "/assets/battle/locations/ocean-drive-background-v2.webp",
+      "durationMs": 11.799999713897705,
+      "transferBytes": 300,
+      "encodedBytes": 1306370
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-idle-v1.webp",
+      "durationMs": 9.699999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 199110
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-idle-v1.webp",
+      "durationMs": 12.900000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 284708
+    },
+    {
+      "asset": "/assets/battle/actors/vending-golem-idle-v1.webp",
+      "durationMs": 13.400000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 376494
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-hit-v1.webp",
+      "durationMs": 13.200000286102295,
+      "transferBytes": 300,
+      "encodedBytes": 231270
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-attack-v1.webp",
+      "durationMs": 13.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 227590
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-defeat-v1.webp",
+      "durationMs": 14.900000095367432,
+      "transferBytes": 300,
+      "encodedBytes": 173082
+    },
+    {
+      "asset": "/assets/battle/actors/fire-escape-spider-cast-v1.webp",
+      "durationMs": 15.300000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 292622
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-attack-v1.webp",
+      "durationMs": 4.399999618530273,
+      "transferBytes": 300,
+      "encodedBytes": 216498
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-guard-v1.webp",
+      "durationMs": 4.5,
+      "transferBytes": 300,
+      "encodedBytes": 198492
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-hit-v1.webp",
+      "durationMs": 5,
+      "transferBytes": 300,
+      "encodedBytes": 199876
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-defeat-v1.webp",
+      "durationMs": 5.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 165344
+    },
+    {
+      "asset": "/assets/battle/actors/street-runner-celebrate-v1.webp",
+      "durationMs": 5.599999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 198768
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-attack-v1.webp",
+      "durationMs": 2.200000286102295,
+      "transferBytes": 300,
+      "encodedBytes": 95254
+    },
+    {
+      "asset": "/assets/battle/actors/alley-rat-defeat-v1.webp",
+      "durationMs": 2.4000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 212740
+    },
+    {
+      "asset": "/assets/battle/actors/vending-golem-poses-v1.webp",
+      "durationMs": 4.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 1397658
+    },
+    {
+      "asset": "/assets/battle/locations/wynwood-ground-v4.webp",
+      "durationMs": 8.199999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 967022
+    },
+    {
+      "asset": "/assets/battle/actors/chrome-idle-v1.webp",
+      "durationMs": 7,
+      "transferBytes": 300,
+      "encodedBytes": 235682
+    },
+    {
+      "asset": "/assets/battle/locations/wynwood-background-v2.webp",
+      "durationMs": 8.800000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 1313914
+    },
+    {
+      "asset": "/assets/battle/actors/chrome-attack-v1.webp",
+      "durationMs": 2.4000000953674316,
+      "transferBytes": 300,
+      "encodedBytes": 209780
+    },
+    {
+      "asset": "/assets/battle/actors/volt-idle-v1.webp",
+      "durationMs": 5.099999904632568,
+      "transferBytes": 300,
+      "encodedBytes": 247310
+    },
+    {
+      "asset": "/assets/battle/locations/underpass-ground-v2.webp",
+      "durationMs": 6.699999809265137,
+      "transferBytes": 300,
+      "encodedBytes": 1117286
+    },
+    {
+      "asset": "/assets/battle/locations/underpass-background-v2.webp",
+      "durationMs": 7.300000190734863,
+      "transferBytes": 300,
+      "encodedBytes": 1143242
+    },
+    {
+      "asset": "/assets/battle/actors/volt-attack-v1.webp",
+      "durationMs": 3.0999999046325684,
+      "transferBytes": 300,
+      "encodedBytes": 245388
+    }
+  ]
+}

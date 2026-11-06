@@ -1,6 +1,6 @@
 # Battle asset coverage ledger
 
-All five hero archetypes and all 23 monsters have generated idle cutouts in review. No registry entries use technical placeholders as their primary artwork; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Current clip coverage is zero; no final animation tier is approved.
+All five hero archetypes and all 23 monsters have generated idle cutouts in review. No registry entries use technical placeholders as their primary artwork; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Ten actors have registered idle/contact/idle attack timelines, but no final animation tier is approved. The generated [runtime motion inventory](battle-motion-inventory.md) reports current pose/timeline presence and missing contact poses directly from manifests; the table below records the original art inventory.
 
 | Visual ID | Reachability | Fallback / dimensions | Provenance | Status |
 |---|---|---|---|---|

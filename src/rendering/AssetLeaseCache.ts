@@ -28,4 +28,8 @@ export class AssetLeaseCache<T> {
         if (entry.value !== undefined) this.dispose(entry.value);
     }
     stats() { return { entries:this.entries.size, references:[...this.entries.values()].reduce((sum,e)=>sum+e.refs,0) }; }
+    diagnostics(estimateBytes:(value:T)=>number) {
+        return {...this.stats(),pending:[...this.entries.values()].filter(entry=>!entry.settled).length,
+            estimatedBytes:[...this.entries.values()].reduce((sum,entry)=>sum+(entry.value===undefined?0:estimateBytes(entry.value)),0)};
+    }
 }

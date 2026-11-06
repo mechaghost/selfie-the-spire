@@ -1,0 +1,629 @@
+{
+  "note": "Presence is not art approval. Required guard/cast inferred from executable effects; heroes can use generated effects. Timelines can reuse poses and are not proof of authored inbetweens.",
+  "actors": 28,
+  "productionEnemies": 21,
+  "approved": 0,
+  "rows": [
+    {
+      "id": "hero-neon",
+      "reachability": "hero",
+      "status": "review",
+      "keyPoses": [
+        "attack",
+        "hit",
+        "guard",
+        "defeat",
+        "celebrate"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ]
+    },
+    {
+      "id": "hero-chrome",
+      "reachability": "hero",
+      "status": "review",
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ]
+    },
+    {
+      "id": "hero-volt",
+      "reachability": "hero",
+      "status": "review",
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ]
+    },
+    {
+      "id": "hero-concrete",
+      "reachability": "hero",
+      "status": "review",
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ]
+    },
+    {
+      "id": "hero-smoke",
+      "reachability": "hero",
+      "status": "review",
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "guard",
+        "cast",
+        "celebrate"
+      ]
+    },
+    {
+      "id": "alley_rat",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [
+        "attack",
+        "hit",
+        "defeat"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat"
+      ]
+    },
+    {
+      "id": "neon_junkie",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ]
+    },
+    {
+      "id": "graffiti_imp",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ]
+    },
+    {
+      "id": "stray_voltage",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat"
+      ]
+    },
+    {
+      "id": "dumpster_crawler",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard"
+      ]
+    },
+    {
+      "id": "smoke_specter",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "taxi_ghost",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [
+        "attack"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "hit",
+        "defeat",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "cast"
+      ]
+    },
+    {
+      "id": "manhole_mimic",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "boombox_brute",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ]
+    },
+    {
+      "id": "neon_wraith",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ]
+    },
+    {
+      "id": "payphone_phantom",
+      "reachability": "legacy/dev",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "sewer_slime",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "fire_escape_spider",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "guard"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "vending_golem",
+      "reachability": "legacy/dev",
+      "status": "review",
+      "keyPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard"
+      ],
+      "timelines": [
+        "attack"
+      ],
+      "missingContactPoses": [
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "neon_sentinel",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "chrome_phantom",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "voltage_king",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "circuit_breaker",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "neon_yakuza",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ]
+    },
+    {
+      "id": "chrome_bouncer",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "the_billboard",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "subway_wyrm",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "guard",
+        "cast"
+      ]
+    },
+    {
+      "id": "dj_phantom",
+      "reachability": "production",
+      "status": "review",
+      "keyPoses": [],
+      "timelines": [],
+      "missingContactPoses": [
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ],
+      "missingTimelines": [
+        "idle",
+        "attack",
+        "hit",
+        "defeat",
+        "cast"
+      ]
+    }
+  ]
+}

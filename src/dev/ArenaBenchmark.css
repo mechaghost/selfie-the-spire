@@ -1,0 +1,10 @@
+.arena-benchmark {background:#091525;color:#f6ece0;min-height:100dvh;font:14px system-ui;}
+.arena-benchmark header {padding:8px 12px;}
+.arena-benchmark h1 {font-size:18px;margin:0;}
+.arena-benchmark p {margin:6px 0;}
+.arena-benchmark button {min-height:44px;margin-right:6px;background:#142c3e;color:white;border:1px solid #578a99;border-radius:5px;padding:6px;}
+.arena-benchmark button:disabled {opacity:.5;}
+.benchmark-stage {position:relative;height:clamp(160px,45dvh,480px);overflow:hidden;}
+.benchmark-hand {display:flex;gap:8px;overflow-x:auto;padding:8px;}
+.benchmark-hand .card {flex:0 0 152px;width:152px;height:220px;}
+.arena-benchmark pre {white-space:pre-wrap;overflow-wrap:anywhere;padding:12px;}
