@@ -1,6 +1,6 @@
 # Runtime motion inventory
 
-Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors, but authored idle animation is still required. The Neon hero, Rat and Golem attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
+Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors, but authored idle animation is still required. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
@@ -21,7 +21,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | neon_wraith | production | none | none | attack, hit, defeat, cast | review |
 | payphone_phantom | legacy/dev | none | none | attack, hit, defeat, guard, cast | review |
 | sewer_slime | production | none | none | attack, hit, defeat, guard, cast | review |
-| fire_escape_spider | production | attack, hit, defeat, cast | attack | guard | review |
+| fire_escape_spider | production | attack, hit, defeat, cast, windup, recovery | attack | guard | review |
 | vending_golem | legacy/dev | attack, hit, defeat, guard, windup, recovery | attack | cast | review |
 | neon_sentinel | production | none | none | attack, hit, defeat, guard, cast | review |
 | chrome_phantom | production | none | none | attack, hit, defeat, guard, cast | review |

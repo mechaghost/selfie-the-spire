@@ -404,7 +404,9 @@
         "attack",
         "hit",
         "defeat",
-        "cast"
+        "cast",
+        "windup",
+        "recovery"
       ],
       "timelines": [
         "attack"
