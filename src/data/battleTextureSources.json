@@ -51,37 +51,44 @@
   "/assets/battle/actors/boombox-brute-attack-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 540,
-    "runtimeHeight": 360,
-    "resolution": 0.3515625
+    "runtimeWidth": 480,
+    "runtimeHeight": 320,
+    "resolution": 0.3125
+  },
+  "/assets/battle/actors/boombox-brute-blink-v1.webp": {
+    "width": 1377,
+    "height": 1142,
+    "runtimeWidth": 480,
+    "runtimeHeight": 399,
+    "resolution": 0.3485838779956427
   },
   "/assets/battle/actors/boombox-brute-cast-v1.webp": {
     "width": 1377,
     "height": 1142,
-    "runtimeWidth": 540,
-    "runtimeHeight": 448,
-    "resolution": 0.39215686274509803
+    "runtimeWidth": 480,
+    "runtimeHeight": 399,
+    "resolution": 0.3485838779956427
   },
   "/assets/battle/actors/boombox-brute-defeat-v1.webp": {
     "width": 1377,
     "height": 1142,
-    "runtimeWidth": 540,
-    "runtimeHeight": 448,
-    "resolution": 0.39215686274509803
+    "runtimeWidth": 480,
+    "runtimeHeight": 399,
+    "resolution": 0.3485838779956427
   },
   "/assets/battle/actors/boombox-brute-hit-v1.webp": {
     "width": 1377,
     "height": 1142,
-    "runtimeWidth": 540,
-    "runtimeHeight": 448,
-    "resolution": 0.39215686274509803
+    "runtimeWidth": 480,
+    "runtimeHeight": 399,
+    "resolution": 0.3485838779956427
   },
   "/assets/battle/actors/boombox-brute-idle-v1.webp": {
     "width": 1378,
     "height": 1142,
-    "runtimeWidth": 540,
-    "runtimeHeight": 448,
-    "resolution": 0.3918722786647315
+    "runtimeWidth": 480,
+    "runtimeHeight": 398,
+    "resolution": 0.3483309143686502
   },
   "/assets/battle/actors/chrome-attack-v1.webp": {
     "width": 1199,

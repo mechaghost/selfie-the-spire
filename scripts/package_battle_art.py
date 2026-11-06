@@ -44,7 +44,7 @@ def encode(source):
         if relative.parts[0]=='actors' and (relative.name=='graffiti-imp-blink-v1.webp' or relative.name.startswith('stray-voltage-')):
             resolution=min(resolution,416/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith('boombox-brute-'):
-            resolution=min(resolution,540/max(rgba.size))
+            resolution=min(resolution,480/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith('street-runner-'):
             resolution=min(resolution,640/max(rgba.size))
         # These poses stream together in Spectral Fog, the heaviest encounter.

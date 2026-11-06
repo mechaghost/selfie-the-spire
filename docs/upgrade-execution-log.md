@@ -873,3 +873,7 @@ Enemy idle clips now sample a deterministic 613 ms phase offset per slot. Identi
 ### Stray Voltage authored idle
 
 Added a 120 ms dip in the eye lamps and coil glow after 5,100 ms of idle, with a .961 foot anchor to match the base pose. The source alpha masks overlap by 95.8% intersection-over-union. In the 320 × 568 Pixi study, the paws stay planted as the lamps change. Captures: `tests/.e2e-out/stray-idle-{base,dip,restored}-320.png`. Stray Voltage uses a 416 px runtime tier so the Street Ambush trio stays within budget with both new idle loops. All 550 encounter combinations, texture caps, bounds, playback and TypeScript passed.
+
+### Boombox Brute authored idle
+
+Added a 120 ms dip of the cassette eyes and meter after 5,700 ms of idle. Both poses use the .99 foot anchor. Source alpha masks overlap by 95.9% intersection-over-union. The 320 × 568 Pixi study shows the lights dip with the cabinet and shoes aligned. Captures: `tests/.e2e-out/boombox-idle-{base,dip,restored}-320.png`. The initial tier put Brute Squad over budget, so Boombox's runtime textures now cap at 480 px. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed. Its real opening Strength cast also passed after the tier change.
