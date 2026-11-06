@@ -986,6 +986,36 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "manhole_mimic_solo",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 565428,
+        "decodedBytes": 3145596
+      },
+      "all": {
+        "files": 13,
+        "bytes": 3075710,
+        "decodedBytes": 29885792
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "manhole_mimic_solo",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 565428,
+        "decodedBytes": 3145596
+      },
+      "all": {
+        "files": 14,
+        "bytes": 3063084,
+        "decodedBytes": 36177248
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "dumpster_crawler_solo",
       "location": "rooftop",
       "required": {
@@ -1226,6 +1256,36 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "manhole_mimic_solo",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 565428,
+        "decodedBytes": 3145596
+      },
+      "all": {
+        "files": 13,
+        "bytes": 2982534,
+        "decodedBytes": 29885792
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "manhole_mimic_solo",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 565428,
+        "decodedBytes": 3145596
+      },
+      "all": {
+        "files": 13,
+        "bytes": 2971822,
+        "decodedBytes": 29885792
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "dumpster_crawler_solo",
       "location": "underpass",
       "required": {
@@ -1387,6 +1447,21 @@
         "files": 12,
         "bytes": 2948550,
         "decodedBytes": 27136032
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "manhole_mimic_solo",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 565428,
+        "decodedBytes": 3145596
+      },
+      "all": {
+        "files": 13,
+        "bytes": 2946838,
+        "decodedBytes": 29885792
       }
     },
     {
@@ -2141,21 +2216,6 @@
     },
     {
       "hero": "hero-neon",
-      "encounter": "manhole_mimic_solo",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 565428,
-        "decodedBytes": 3145596
-      },
-      "all": {
-        "files": 12,
-        "bytes": 2724318,
-        "decodedBytes": 28312928
-      }
-    },
-    {
-      "hero": "hero-neon",
       "encounter": "voltage_king_elite",
       "location": "wynwood",
       "required": {
@@ -2197,21 +2257,6 @@
         "files": 13,
         "bytes": 2712404,
         "decodedBytes": 34605920
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "manhole_mimic_solo",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 565428,
-        "decodedBytes": 3145596
-      },
-      "all": {
-        "files": 13,
-        "bytes": 2711692,
-        "decodedBytes": 34604384
       }
     },
     {
@@ -2456,21 +2501,6 @@
     },
     {
       "hero": "hero-neon",
-      "encounter": "manhole_mimic_solo",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 565428,
-        "decodedBytes": 3145596
-      },
-      "all": {
-        "files": 12,
-        "bytes": 2631142,
-        "decodedBytes": 28312928
-      }
-    },
-    {
-      "hero": "hero-neon",
       "encounter": "subway_wyrm_boss",
       "location": "underpass",
       "required": {
@@ -2516,21 +2546,6 @@
     },
     {
       "hero": "hero-neon",
-      "encounter": "manhole_mimic_solo",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 565428,
-        "decodedBytes": 3145596
-      },
-      "all": {
-        "files": 12,
-        "bytes": 2620430,
-        "decodedBytes": 28312928
-      }
-    },
-    {
-      "hero": "hero-neon",
       "encounter": "subway_wyrm_boss",
       "location": "wynwood",
       "required": {
@@ -2557,21 +2572,6 @@
         "files": 12,
         "bytes": 2596158,
         "decodedBytes": 28314464
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "manhole_mimic_solo",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 565428,
-        "decodedBytes": 3145596
-      },
-      "all": {
-        "files": 12,
-        "bytes": 2595446,
-        "decodedBytes": 28312928
       }
     },
     {
@@ -3911,6 +3911,51 @@
     },
     {
       "hero": "hero-volt",
+      "encounter": "manhole_mimic_solo",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 612946,
+        "decodedBytes": 3147872
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1709286,
+        "decodedBytes": 18878656
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "manhole_mimic_solo",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 609224,
+        "decodedBytes": 3146556
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1707904,
+        "decodedBytes": 18876024
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "manhole_mimic_solo",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 612946,
+        "decodedBytes": 3147872
+      },
+      "all": {
+        "files": 7,
+        "bytes": 1696660,
+        "decodedBytes": 25170112
+      }
+    },
+    {
+      "hero": "hero-volt",
       "encounter": "dumpster_crawler_solo",
       "location": "rooftop",
       "required": {
@@ -3922,6 +3967,21 @@
         "files": 6,
         "bytes": 1696238,
         "decodedBytes": 18878656
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "manhole_mimic_solo",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 609224,
+        "decodedBytes": 3146556
+      },
+      "all": {
+        "files": 7,
+        "bytes": 1695278,
+        "decodedBytes": 25167480
       }
     },
     {
@@ -4000,6 +4060,21 @@
       }
     },
     {
+      "hero": "hero-chrome",
+      "encounter": "manhole_mimic_solo",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 600236,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1661828,
+        "decodedBytes": 18877440
+      }
+    },
+    {
       "hero": "hero-volt",
       "encounter": "stray_voltage_solo",
       "location": "ocean-drive",
@@ -4027,6 +4102,21 @@
         "files": 7,
         "bytes": 1658412,
         "decodedBytes": 25167480
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "manhole_mimic_solo",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 600236,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 7,
+        "bytes": 1649202,
+        "decodedBytes": 25168896
       }
     },
     {
@@ -4075,6 +4165,36 @@
       }
     },
     {
+      "hero": "hero-volt",
+      "encounter": "manhole_mimic_solo",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 612946,
+        "decodedBytes": 3147872
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1616110,
+        "decodedBytes": 18878656
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "manhole_mimic_solo",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 609224,
+        "decodedBytes": 3146556
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1614728,
+        "decodedBytes": 18876024
+      }
+    },
+    {
       "hero": "hero-chrome",
       "encounter": "stray_voltage_solo",
       "location": "ocean-drive",
@@ -4087,6 +4207,36 @@
         "files": 7,
         "bytes": 1612336,
         "decodedBytes": 25168896
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "manhole_mimic_solo",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 612946,
+        "decodedBytes": 3147872
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1605398,
+        "decodedBytes": 18878656
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "manhole_mimic_solo",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 609224,
+        "decodedBytes": 3146556
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1604016,
+        "decodedBytes": 18876024
       }
     },
     {
@@ -4147,6 +4297,21 @@
         "files": 6,
         "bytes": 1596842,
         "decodedBytes": 18874176
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "manhole_mimic_solo",
+      "location": "rooftop",
+      "required": {
+        "files": 2,
+        "bytes": 544618,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1595192,
+        "decodedBytes": 18877440
       }
     },
     {
@@ -4211,6 +4376,21 @@
     },
     {
       "hero": "hero-smoke",
+      "encounter": "manhole_mimic_solo",
+      "location": "ocean-drive",
+      "required": {
+        "files": 2,
+        "bytes": 544618,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 7,
+        "bytes": 1582566,
+        "decodedBytes": 25168896
+      }
+    },
+    {
+      "hero": "hero-smoke",
       "encounter": "dumpster_crawler_solo",
       "location": "rooftop",
       "required": {
@@ -4226,6 +4406,21 @@
     },
     {
       "hero": "hero-volt",
+      "encounter": "manhole_mimic_solo",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 612946,
+        "decodedBytes": 3147872
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1580414,
+        "decodedBytes": 18878656
+      }
+    },
+    {
+      "hero": "hero-volt",
       "encounter": "stray_voltage_solo",
       "location": "underpass",
       "required": {
@@ -4237,6 +4432,21 @@
         "files": 6,
         "bytes": 1579244,
         "decodedBytes": 18878656
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "manhole_mimic_solo",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 609224,
+        "decodedBytes": 3146556
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1579032,
+        "decodedBytes": 18876024
       }
     },
     {
@@ -4267,6 +4477,21 @@
         "files": 7,
         "bytes": 1569518,
         "decodedBytes": 25168896
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "manhole_mimic_solo",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 600236,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1568652,
+        "decodedBytes": 18877440
       }
     },
     {
@@ -4341,6 +4566,21 @@
       "all": {
         "files": 6,
         "bytes": 1558326,
+        "decodedBytes": 18877440
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "manhole_mimic_solo",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 600236,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1557940,
         "decodedBytes": 18877440
       }
     },
@@ -4555,6 +4795,21 @@
       }
     },
     {
+      "hero": "hero-chrome",
+      "encounter": "manhole_mimic_solo",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 600236,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1532956,
+        "decodedBytes": 18877440
+      }
+    },
+    {
       "hero": "hero-concrete",
       "encounter": "smoke_specter_solo",
       "location": "ocean-drive",
@@ -4660,6 +4915,21 @@
       }
     },
     {
+      "hero": "hero-smoke",
+      "encounter": "manhole_mimic_solo",
+      "location": "underpass",
+      "required": {
+        "files": 2,
+        "bytes": 544618,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1502016,
+        "decodedBytes": 18877440
+      }
+    },
+    {
       "hero": "hero-chrome",
       "encounter": "smoke_specter_solo",
       "location": "rooftop",
@@ -4717,6 +4987,21 @@
         "files": 6,
         "bytes": 1492954,
         "decodedBytes": 18874176
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "manhole_mimic_solo",
+      "location": "wynwood",
+      "required": {
+        "files": 2,
+        "bytes": 544618,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1491304,
+        "decodedBytes": 18877440
       }
     },
     {
@@ -4837,6 +5122,21 @@
         "files": 6,
         "bytes": 1467970,
         "decodedBytes": 18874176
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "manhole_mimic_solo",
+      "location": "club-backlot",
+      "required": {
+        "files": 2,
+        "bytes": 544618,
+        "decodedBytes": 3147264
+      },
+      "all": {
+        "files": 6,
+        "bytes": 1466320,
+        "decodedBytes": 18877440
       }
     },
     {
@@ -5710,21 +6010,6 @@
       }
     },
     {
-      "hero": "hero-volt",
-      "encounter": "manhole_mimic_solo",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 612946,
-        "decodedBytes": 3147872
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1357894,
-        "decodedBytes": 17305792
-      }
-    },
-    {
       "hero": "hero-chrome",
       "encounter": "the_billboard_boss",
       "location": "ocean-drive",
@@ -5752,21 +6037,6 @@
         "files": 5,
         "bytes": 1357224,
         "decodedBytes": 17304696
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "manhole_mimic_solo",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 609224,
-        "decodedBytes": 3146556
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1356512,
-        "decodedBytes": 17303160
       }
     },
     {
@@ -5890,21 +6160,6 @@
       }
     },
     {
-      "hero": "hero-volt",
-      "encounter": "manhole_mimic_solo",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 612946,
-        "decodedBytes": 3147872
-      },
-      "all": {
-        "files": 6,
-        "bytes": 1345268,
-        "decodedBytes": 23597248
-      }
-    },
-    {
       "hero": "hero-smoke",
       "encounter": "voltage_king_elite",
       "location": "rooftop",
@@ -5932,21 +6187,6 @@
         "files": 6,
         "bytes": 1344598,
         "decodedBytes": 23596152
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "manhole_mimic_solo",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 609224,
-        "decodedBytes": 3146556
-      },
-      "all": {
-        "files": 6,
-        "bytes": 1343886,
-        "decodedBytes": 23594616
       }
     },
     {
@@ -6281,21 +6521,6 @@
     },
     {
       "hero": "hero-chrome",
-      "encounter": "manhole_mimic_solo",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 600236,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1310436,
-        "decodedBytes": 17304576
-      }
-    },
-    {
-      "hero": "hero-chrome",
       "encounter": "voltage_king_elite",
       "location": "wynwood",
       "required": {
@@ -6472,21 +6697,6 @@
         "files": 6,
         "bytes": 1298522,
         "decodedBytes": 23597568
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "manhole_mimic_solo",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 600236,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 6,
-        "bytes": 1297810,
-        "decodedBytes": 23596032
       }
     },
     {
@@ -6865,21 +7075,6 @@
       }
     },
     {
-      "hero": "hero-volt",
-      "encounter": "manhole_mimic_solo",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 612946,
-        "decodedBytes": 3147872
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1264718,
-        "decodedBytes": 17305792
-      }
-    },
-    {
       "hero": "hero-concrete",
       "encounter": "neon_sentinel_elite",
       "location": "underpass",
@@ -6892,21 +7087,6 @@
         "files": 5,
         "bytes": 1264048,
         "decodedBytes": 17304696
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "manhole_mimic_solo",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 609224,
-        "decodedBytes": 3146556
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1263336,
-        "decodedBytes": 17303160
       }
     },
     {
@@ -7015,21 +7195,6 @@
       }
     },
     {
-      "hero": "hero-volt",
-      "encounter": "manhole_mimic_solo",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 612946,
-        "decodedBytes": 3147872
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1254006,
-        "decodedBytes": 17305792
-      }
-    },
-    {
       "hero": "hero-concrete",
       "encounter": "subway_wyrm_boss",
       "location": "underpass",
@@ -7075,21 +7240,6 @@
       }
     },
     {
-      "hero": "hero-concrete",
-      "encounter": "manhole_mimic_solo",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 609224,
-        "decodedBytes": 3146556
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1252624,
-        "decodedBytes": 17303160
-      }
-    },
-    {
       "hero": "hero-smoke",
       "encounter": "voltage_king_elite",
       "location": "underpass",
@@ -7132,21 +7282,6 @@
         "files": 5,
         "bytes": 1244512,
         "decodedBytes": 17306112
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "manhole_mimic_solo",
-      "location": "rooftop",
-      "required": {
-        "files": 2,
-        "bytes": 544618,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1243800,
-        "decodedBytes": 17304576
       }
     },
     {
@@ -7285,21 +7420,6 @@
       }
     },
     {
-      "hero": "hero-smoke",
-      "encounter": "manhole_mimic_solo",
-      "location": "ocean-drive",
-      "required": {
-        "files": 2,
-        "bytes": 544618,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 6,
-        "bytes": 1231174,
-        "decodedBytes": 23596032
-      }
-    },
-    {
       "hero": "hero-volt",
       "encounter": "neon_sentinel_elite",
       "location": "club-backlot",
@@ -7312,21 +7432,6 @@
         "files": 5,
         "bytes": 1229734,
         "decodedBytes": 17307328
-      }
-    },
-    {
-      "hero": "hero-volt",
-      "encounter": "manhole_mimic_solo",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 612946,
-        "decodedBytes": 3147872
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1229022,
-        "decodedBytes": 17305792
       }
     },
     {
@@ -7357,21 +7462,6 @@
         "files": 5,
         "bytes": 1228352,
         "decodedBytes": 17304696
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "manhole_mimic_solo",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 609224,
-        "decodedBytes": 3146556
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1227640,
-        "decodedBytes": 17303160
       }
     },
     {
@@ -7492,21 +7582,6 @@
         "files": 5,
         "bytes": 1217972,
         "decodedBytes": 17306112
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "manhole_mimic_solo",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 600236,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1217260,
-        "decodedBytes": 17304576
       }
     },
     {
@@ -7642,21 +7717,6 @@
         "files": 5,
         "bytes": 1207260,
         "decodedBytes": 17306112
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "manhole_mimic_solo",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 600236,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1206548,
-        "decodedBytes": 17304576
       }
     },
     {
@@ -7807,21 +7867,6 @@
         "files": 5,
         "bytes": 1182276,
         "decodedBytes": 17306112
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "manhole_mimic_solo",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 600236,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1181564,
-        "decodedBytes": 17304576
       }
     },
     {
@@ -8005,21 +8050,6 @@
       }
     },
     {
-      "hero": "hero-smoke",
-      "encounter": "manhole_mimic_solo",
-      "location": "underpass",
-      "required": {
-        "files": 2,
-        "bytes": 544618,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1150624,
-        "decodedBytes": 17304576
-      }
-    },
-    {
       "hero": "hero-chrome",
       "encounter": "neon_yakuza_elite",
       "location": "club-backlot",
@@ -8077,21 +8107,6 @@
         "files": 5,
         "bytes": 1140624,
         "decodedBytes": 17306112
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "manhole_mimic_solo",
-      "location": "wynwood",
-      "required": {
-        "files": 2,
-        "bytes": 544618,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1139912,
-        "decodedBytes": 17304576
       }
     },
     {
@@ -8182,21 +8197,6 @@
         "files": 5,
         "bytes": 1115640,
         "decodedBytes": 17306112
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "manhole_mimic_solo",
-      "location": "club-backlot",
-      "required": {
-        "files": 2,
-        "bytes": 544618,
-        "decodedBytes": 3147264
-      },
-      "all": {
-        "files": 5,
-        "bytes": 1114928,
-        "decodedBytes": 17304576
       }
     },
     {

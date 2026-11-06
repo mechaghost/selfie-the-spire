@@ -1,0 +1,13 @@
+# Manhole Mimic attack contact
+
+Built-in image generation produced `art-source/battle/actors/manhole-mimic-attack-v1.png` from the existing idle reference. The packaged runtime is `public/assets/battle/actors/manhole-mimic-attack-v1.webp`. This is an original project monster, not borrowed character art.
+
+The closed-jaw bite visibly differs from the open idle while retaining the turquoise/rusted concentric manhole lid, amber slit eyes, coral gums, ivory teeth and purple quadruped body. Source1536×1024 RGBA, alpha0–254; alpha≥128 bounds(21,115)–(1519,992). Anchor[.5,.97], same source-width scale as idle. Runtime is lossless RGBA at the existing power-of-two tier.
+
+Registered attack uses idle80ms/contact160ms/idle80ms, with contact at the existing140ms damage beat and idle completion at320ms. This is a contact-pose improvement; separate wind-up/recovery, authored idle and reaction/defensive/cast art remain outstanding. Production status stays review.
+
+Verification:81 packaged assets; clip validation/contact-beat/completion tests and TypeScript pass. Bounds audit588,888samples, zero confirmed clipping/HUD conflicts. All550 encounter/hero/location inventories remain under5MB and64MiB estimated decoded RGBA. Browser390×844 and320×568, three enemies/ten cards, frozen140ms contact: bite visible, feet aligned, no HUD collision or console warnings/errors. Captures:`tests/.e2e-out/mimic-attack-mobile.png` and `mimic-attack-320.png`. These checks do not prove real-device performance or final art approval. Local only.
+
+## Final prompt
+
+Use case: precise-object-edit. Make an ATTACK CONTACT key pose of this exact Manhole Mimic for a Neo Miami 2D street combat game. Preserve the round rusted turquoise iron manhole lid with concentric embossed grooves, paired amber slit eyes on lid rim, coral gums and ivory triangular teeth, and stocky purple four-legged body with cream claws. Same illustrated inked/painterly style, warm upper-left light and cool right rim. Keep the same three-quarter side view, facing LEFT. Change the pose to a powerful snapping bite toward screen-left: upper lid tipped downward, jaws nearly closing around empty space with teeth visibly interlocking, tongue withdrawn; neck/body stretched slightly forward, front legs braced forward, rear haunches pushing. This must look distinctly like the closing bite contact rather than the existing wide-open idle yawn. Exactly four legs. All claws and lid edges fully inside landscape 1536x1024 canvas with small transparent margin; lowest claws about97percent image height. Keep entire body recognizable and roughly same scale as reference. Single isolated transparent sprite, clean alpha, no floor or ground shadow, no haze, scenery, victim, particles, typography, frame or spritesheet.
