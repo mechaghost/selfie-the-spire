@@ -1055,3 +1055,11 @@ Added a collar-flip salute with a .986 foot anchor and the 600 ms celebration ti
 Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
 
 > Create one transparent full-body victory key pose of the exact Smoke fighter. Match dark bun, purple chevron jacket, coral scarf, teal sash, dark cargos, gloves and cream high-tops, same right-facing camera, inked game art, original ground line and character scale. She straightens with a sly smile and flips her jacket collar outward with one hand while the other rests on her hip, chin lifted, both shoes planted. Distinct relaxed victory body language. Keep full body and hair inside the frame with padding. Real alpha, no effects, props, text, shadow, scenery or floor.
+
+### Concrete idle blink
+
+Added a 100 ms blink after 4,700 ms of idle. The source canvas matches the base and the alpha masks overlap by 98.6% intersection-over-union. The 320 px Pixi frame study shows the blink and return with the boots aligned. Captures: `tests/.e2e-out/concrete-idle-{base,dip,restored}-320.png`. The blink alone uses a 432 px texture tier so all 550 encounter combinations stay within 5 MB. Sprite bounds, texture caps, playback and TypeScript passed. Volt's blink draft changed the framing and was discarded.
+
+Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
+
+> Exact same transparent full-body Concrete sprite, same framing and dimensions. Retouch only his visible eye to close the eyelid for a blink. Leave his head and silhouette, raised fists, orange safety vest, arms, pants, kneepads, boots and their exact positions unchanged. Do not crop, zoom or extend canvas. Maintain true transparent alpha. This frame will alternate with the supplied reference and any movement of the silhouette is a defect.

@@ -293,6 +293,13 @@
     "runtimeHeight": 659,
     "resolution": 0.5
   },
+  "/assets/battle/actors/concrete-blink-v1.webp": {
+    "width": 1194,
+    "height": 1317,
+    "runtimeWidth": 392,
+    "runtimeHeight": 432,
+    "resolution": 0.32801822323462415
+  },
   "/assets/battle/actors/concrete-cast-v1.webp": {
     "width": 1194,
     "height": 1317,
