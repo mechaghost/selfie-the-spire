@@ -213,7 +213,7 @@ If ordinary portrait slots fail, use a compact arena preset with decorative labe
 
 Name the actual test-device models and browser versions at W0. Measure a fixed ten-minute combat/churn script with p50/p95/p99 frame times and long frames; target p95 ≤20ms in standard mode, ≤35ms low mode, with visible quality reduction when budget fails. Record texture dimensions/allocation estimates and resource counts separately from browser process memory; do not label estimates measured VRAM. A repeatable scene must pass cold/warm loading and return resources near baseline after 20 mount/district cycles.
 
-Run a small formative study with five first-time players: identify hero, associate highest threat with its monster, inspect status, target a card and end turn without coaching. Record errors and time; repeated critical confusion requires revision and a fresh task check. This sample provides formative evidence, not statistical certification.
+Run a small formative study with five first-time players using the [first-turn playtest protocol](first-turn-playtest.md). Have players identify their hero, associate the highest threat with its monster, inspect a status, target a card and end the turn without coaching. Record errors and time. Repeated critical confusion requires revision and a fresh task check.
 
 
 ## Round 2 decisions — final protocol refinements

@@ -12,7 +12,7 @@ import { GeneratedCharacter } from '../core/models';
 const character: GeneratedCharacter = { id: 'review', name: 'Neon Runner', archetype: 'neon', title: 'The last light on Ocean Drive', portraitUrl: '/assets/characters/neon.webp', maxHp: 80, maxEnergy: 3, startingGold: 99, traits: ['Streetwise', 'Fearless'] };
 const cards = ['neon_jab', 'dodge_roll', 'haymaker'].map(id => createCardInstance(id));
 function reveal(personal=false) { useGameStore.setState({ seed: '', ugcPhase: 'reveal', generatedCharacter: personal ? {...character,name:'CUTOUT TEST',title:'Local art fixture · no photo',combatAppearance:{version:2,actorVisualId:'hero-chrome',idleImageUrl:fixture.idleImageUrl}} : character, generatedCards: Array.from({ length: 13 }, (_, index) => ({ ...cards[index % cards.length], isHeroCard: index === 12 })) }); }
-const screens = ['Landing', 'Capture', 'Waiting', 'Error', 'Reveal', 'Personal reveal', 'Personal combat', 'Map', 'Combat', 'Full hand', 'Status HUD', 'Rewards', 'Shop', 'Rest', 'Mystery', 'Victory', 'Defeat'] as const;
+const screens = ['Landing', 'Capture', 'Waiting', 'Error', 'Reveal', 'Personal reveal', 'Personal combat', 'Map', 'Combat', 'First-turn playtest', 'Full hand', 'Status HUD', 'Rewards', 'Shop', 'Rest', 'Mystery', 'Victory', 'Defeat'] as const;
 export default function ReviewHarness() {
     const [revision, setRevision] = useState(0);
     const show = (screen: string) => {
@@ -29,6 +29,31 @@ export default function ReviewHarness() {
             case 'Personal reveal': reveal(true); break;
             case 'Personal combat': reveal(true); store.getState().startGeneratedRun();store.getState().startCombat(['alley_rat','vending_golem','fire_escape_spider'].map((id,i)=>createEnemyInstance(id,`review-personal-${i}`,store.getState().rng)));break;
             case 'Combat': store.getState().startCombat(['alley_rat', 'vending_golem', 'fire_escape_spider'].map((id, i) => createEnemyInstance(id, `review-${i}`, store.getState().rng))); break;
+            case 'First-turn playtest': {
+                const ids = ['graffiti_imp', 'alley_rat', 'stray_voltage'];
+                const deck = Array.from({length:12}, () => createCardInstance('neon_jab'));
+                store.setState({masterDeck:deck});
+                store.getState().startCombat(ids.map((id, index) => createEnemyInstance(id, `playtest-${index}`, store.getState().rng)));
+                const setup = () => {
+                    const state = store.getState();
+                    if (state.masterDeck !== deck || state.enemies[0]?.id !== 'playtest-0') return;
+                    store.setState({enemies:state.enemies.map((enemy, index) => ({
+                        ...enemy,
+                        statuses:index === 2 ? [{id:'weak', name:'Weak', amount:1}] : [],
+                        intent:{type:'Attack', effects:[{type:'Damage', target:'Target', amount:[3,4,8][index]}]},
+                    }))});
+                };
+                const state = store.getState();
+                if (state.isResolving || state.actionQueue.length) {
+                    const unsubscribe = store.subscribe(next => {
+                        if (next.masterDeck !== deck || (!next.isResolving && !next.actionQueue.length)) {
+                            unsubscribe();
+                            setup();
+                        }
+                    });
+                } else setup();
+                break;
+            }
             case 'Full hand': populateFullHandReview(); break;
             case 'Status HUD': {
                 const pending=populateFullHandReview();
