@@ -78,6 +78,10 @@ for(const archetype of ['chrome','volt','concrete','smoke']) {
 }
 ACTOR_VISUALS.taxi_ghost.keyPoses={attack:{imageUrl:'/assets/battle/actors/taxi-ghost-attack-v1.webp',footAnchor:[.5,.99]}};
 ACTOR_VISUALS.smoke_specter.keyPoses={attack:{imageUrl:'/assets/battle/actors/smoke-specter-attack-v1.webp',footAnchor:[.5,.99]}};
+ACTOR_VISUALS.smoke_specter.keyPoses.hit={imageUrl:'/assets/battle/actors/smoke-specter-hit-v1.webp',footAnchor:[.5,.991]};
+ACTOR_VISUALS.smoke_specter.clips.hit={frames:['hit','idle'],durationsMs:[160,60],loop:false,completion:'idle'};
+ACTOR_VISUALS.smoke_specter.keyPoses.defeat={imageUrl:'/assets/battle/actors/smoke-specter-defeat-v1.webp',footAnchor:[.5,.998]};
+ACTOR_VISUALS.smoke_specter.clips.defeat={frames:['defeat'],durationsMs:[280],loop:false,completion:'hold'};
 ACTOR_VISUALS.graffiti_imp.keyPoses={attack:{imageUrl:'/assets/battle/actors/graffiti-imp-attack-v1.webp',footAnchor:[.5,.947]}};
 ACTOR_VISUALS.graffiti_imp.keyPoses.hit={imageUrl:'/assets/battle/actors/graffiti-imp-hit-v1.webp',footAnchor:[.5,.988]};
 ACTOR_VISUALS.graffiti_imp.clips.hit={frames:['hit','idle'],durationsMs:[160,60],loop:false,completion:'idle'};
