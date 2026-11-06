@@ -905,3 +905,7 @@ Added a 100 ms eye-light dip after 4,900 ms of idle. Rejected the first draft fo
 ### Chrome hit pose
 
 Added an authored backward recoil with the forearm across the ribs, a .999 foot anchor and a 160/60 ms hit/idle clip. The 320 × 568 Chromium fixture equipped Chrome's existing appearance and resolved Dumpster Crawler's opening move. The hero recoiled and fell from 80 to 75 HP. Capture: `tests/.e2e-out/chrome-live-hit-320.png`. All 550 encounter budgets, texture caps, playback, bounds and TypeScript passed. The attempted Sentinel idle edit still changed the body proportions and was discarded.
+
+### Chrome guard pose
+
+Added a forward forearm brace with a .988 foot anchor and a 160/60 ms guard/idle clip. At 320 × 568 in Chromium touch emulation, equipping Chrome and playing Dodge through the inspector showed the brace and granted 5 Block, with HP unchanged. Capture: `tests/.e2e-out/chrome-live-guard-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
