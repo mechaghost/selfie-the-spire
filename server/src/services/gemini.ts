@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import sharp from 'sharp';
+import {retryGeneration as withRetry} from './generationBudget.js';
 import { removeCombatBackground } from './removeCombatBackground.js';
 import { prepareCombatCutout } from './combatCutout.js';
 
@@ -130,22 +131,8 @@ async function optimizeImage(dataUrl: string, width: number, height?: number): P
     return `data:image/webp;base64,${optimized.toString('base64')}`;
 }
 
-// Retry wrapper for flaky image generation
-async function withRetry<T>(fn: () => Promise<T>, retries = 2): Promise<T> {
-    for (let i = 0; i <= retries; i++) {
-        try {
-            return await fn();
-        } catch (err: any) {
-            if (i === retries) throw err;
-            console.warn(`Image generation attempt ${i + 1} failed; retrying.`);
-            await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-        }
-    }
-    throw new Error('Unreachable');
-}
-
 // ── Moderation ──
-export async function moderateSelfie(imageBase64: string): Promise<{ valid: boolean; reason: string }> {
+export async function moderateSelfie(imageBase64: string, signal?:AbortSignal): Promise<{ valid: boolean; reason: string }> {
     const client = getClient();
     const model = client.getGenerativeModel({ model: 'gemini-2.5-flash' });
     const base64Data = stripBase64Prefix(imageBase64);
@@ -160,7 +147,7 @@ export async function moderateSelfie(imageBase64: string): Promise<{ valid: bool
                 { inlineData: { mimeType: 'image/jpeg', data: base64Data } },
                 { text: MODERATION_PROMPT },
             ]}],
-        }, { signal: controller.signal } as any);
+        }, { signal: signal ? AbortSignal.any([signal,controller.signal]) : controller.signal } as any);
     } finally {
         clearTimeout(timeout);
     }
@@ -177,7 +164,7 @@ export async function moderateSelfie(imageBase64: string): Promise<{ valid: bool
 }
 
 // ── Archetype Analysis ──
-export async function analyzeSelfie(imageBase64: string): Promise<GeminiAnalysis> {
+export async function analyzeSelfie(imageBase64: string, signal?:AbortSignal): Promise<GeminiAnalysis> {
     const client = getClient();
     const model = client.getGenerativeModel({ model: 'gemini-2.5-flash' });
     const base64Data = stripBase64Prefix(imageBase64);
@@ -192,7 +179,7 @@ export async function analyzeSelfie(imageBase64: string): Promise<GeminiAnalysis
                 { inlineData: { mimeType: 'image/jpeg', data: base64Data } },
                 { text: ANALYSIS_PROMPT },
             ]}],
-        }, { signal: controller.signal } as any);
+        }, { signal: signal ? AbortSignal.any([signal,controller.signal]) : controller.signal } as any);
     } finally {
         clearTimeout(timeout);
     }
@@ -227,7 +214,7 @@ export async function analyzeSelfie(imageBase64: string): Promise<GeminiAnalysis
 }
 
 // ── Full-body Character Art (1024px) ──
-export async function generateCharacterArt(imageBase64: string, archetype: string): Promise<string> {
+export async function generateCharacterArt(imageBase64: string, archetype: string, signal?:AbortSignal): Promise<string> {
     const model = getImageModel();
     const base64Data = stripBase64Prefix(imageBase64);
     const magic = ARCHETYPE_MAGIC_EFFECTS[archetype] || ARCHETYPE_MAGIC_EFFECTS.neon;
@@ -249,10 +236,10 @@ ABSOLUTELY NO TEXT, NO WORDS, NO LETTERS, NO NUMBERS, NO SIGNS anywhere in the i
         const result = await model.generateContent([
             { inlineData: { mimeType: 'image/jpeg', data: base64Data } },
             { text: prompt },
-        ]);
+        ], {signal,timeout:60_000});
         const raw = await extractImageFromResponse(result);
         return optimizeImage(raw, 512, 512);
-    });
+    },2,signal);
 }
 
 // ── Card Art (512px for cost efficiency) ──
@@ -261,6 +248,7 @@ export async function generateCardArt(
     cardDescription: string,
     cardType: string,
     archetype: string,
+    signal?:AbortSignal,
 ): Promise<string> {
     const model = getImageModel();
     const palette = ARCHETYPE_PALETTES[archetype] || ARCHETYPE_PALETTES.neon;
@@ -276,10 +264,10 @@ Color palette: ${palette}
 No text, no words, no letters, no numbers. Centered iconic composition, suitable for a small card thumbnail.`;
 
     return withRetry(async () => {
-        const result = await model.generateContent([{ text: prompt }]);
+        const result = await model.generateContent([{ text: prompt }],{signal,timeout:60_000});
         const raw = await extractImageFromResponse(result);
         return optimizeImage(raw, 384, 288);
-    });
+    },2,signal);
 }
 
 // ── Hero Card Mechanics (AI-generated unique card per player) ──
@@ -348,7 +336,7 @@ const HERO_FALLBACKS: Record<string, HeroCardMechanics> = {
     smoke: { name: 'Eclipse', type: 'Attack', cost: 1, target: 'Enemy', exhausts: true, description: 'Deal 12 damage. Apply 2 Weak.', effects: [{ type: 'Damage', amount: 12, target: 'Target' }, { type: 'ApplyStatus', amount: 2, statusId: 'weak', target: 'Target' }] },
 };
 
-export async function generateHeroCardMechanics(analysis: GeminiAnalysis): Promise<HeroCardMechanics> {
+export async function generateHeroCardMechanics(analysis: GeminiAnalysis, signal?:AbortSignal): Promise<HeroCardMechanics> {
     const client = getClient();
     const model = client.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
@@ -365,7 +353,7 @@ export async function generateHeroCardMechanics(analysis: GeminiAnalysis): Promi
     try {
         result = await model.generateContent({
             contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        }, { signal: controller.signal } as any);
+        }, { signal: signal ? AbortSignal.any([signal,controller.signal]) : controller.signal } as any);
     } finally {
         clearTimeout(timeout);
     }
@@ -427,6 +415,7 @@ export async function generateHeroCardArt(
     cardDescription: string,
     cardType: string,
     archetype: string,
+    signal?:AbortSignal,
 ): Promise<string> {
     const model = getImageModel();
     const base64Data = stripBase64Prefix(imageBase64);
@@ -449,15 +438,15 @@ No text, no words, no letters, no numbers. Centered iconic composition.`;
         const result = await model.generateContent([
             { inlineData: { mimeType: 'image/jpeg', data: base64Data } },
             { text: prompt },
-        ]);
+        ], {signal,timeout:60_000});
         const raw = await extractImageFromResponse(result);
         return optimizeImage(raw, 384, 288);
-    });
+    },2,signal);
 }
 
 
 /** Generate an opaque studio actor, then extract and normalize it locally. */
-export async function generateCombatCharacterArt(imageBase64:string, archetype:string):Promise<string> {
+export async function generateCombatCharacterArt(imageBase64:string, archetype:string, signal?:AbortSignal):Promise<string> {
     const model=getImageModel();
     const match=/^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/]+={0,2})$/.exec(imageBase64);
     if(!match)throw new Error('Unsupported selfie format');
@@ -468,9 +457,12 @@ Solid uniform light gray studio background, no ground plane, no cast shadow, no 
         const controller=new AbortController();
         const timeout=setTimeout(()=>controller.abort(),60_000);
         try {
-            const result=await model.generateContent({contents:[{role:'user',parts:[{inlineData:{mimeType:match[1],data:match[2]}},{text:prompt}]}]}, {signal:controller.signal} as any);
+            const result=await model.generateContent({contents:[{role:'user',parts:[{inlineData:{mimeType:match[1],data:match[2]}},{text:prompt}]}]}, {signal:signal ? AbortSignal.any([signal,controller.signal]) : controller.signal} as any);
             return extractImageFromResponse(result);
         } finally {clearTimeout(timeout);}
-    },0);
-    return prepareCombatCutout(await removeCombatBackground(Buffer.from(stripBase64Prefix(raw),'base64')));
+    },0,signal);
+    signal?.throwIfAborted();
+    const cutout=await removeCombatBackground(Buffer.from(stripBase64Prefix(raw),'base64'));
+    signal?.throwIfAborted();
+    return prepareCombatCutout(cutout);
 }
