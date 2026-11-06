@@ -19,7 +19,7 @@
 .impact-heal { color:#baf6c5; border-color:#baf6c5; }
 .impact-block,.impact-blocked { color:#a7e8ff; border-color:#a7e8ff; }
 .impact-burn { color:#ffba79; border-color:#ffba79; }
-@keyframes combatImpactRise { 0% { opacity:0; transform:translateY(8px) scale(.9); } 15%,70% { opacity:1; } 100% { opacity:0; transform:translateY(-30px); } }
+@keyframes combatImpactRise { 0% { opacity:1; transform:translateY(8px); } 70% { opacity:1; } 100% { opacity:0; transform:translateY(-30px); } }
 @media(prefers-reduced-motion:reduce) { .combat-impact { animation:none; } }
 
 /* Short landscape reserves a side hand instead of stacking cards over actors. */

@@ -759,3 +759,7 @@ Added a crossed-forearm guard with a .993 tail anchor and a 160/60 ms guard/idle
 Added a raised-claw smoke cast, with a .999 tail anchor, a 160/60 ms cast/idle clip and a 600 px runtime tier. At 320 × 568, the Specter's real Debuff effect displayed the cast and applied +2 Weak with no HP loss. Capture: `tests/.e2e-out/smoke-specter-live-cast-320.png`. All 550 encounter budgets passed after adjusting the runtime tier. Bounds, texture, playback and TypeScript passed.
 
 CI run 42194280975 passed the production arena smoke suite but timed out while sampling the four-hit feedback stack. The mechanics regression now advances a dedicated browser page's virtual clock to a fixed point before notices expire. Both feedback cases passed locally. CI artifact upload now includes the explicitly listed outputs under the hidden `.e2e-out` directory.
+
+### Read combat results during short poses
+
+In a two-Specter combat fixture, the old notice took 165 ms to reach full opacity, longer than the 160 ms guard pose. Its placement also covered the crossed arms. Notices now start opaque and sit lower on the actor where space allows. Standard motion retains the rise and fade; reduced motion remains static. Chromium touch fixtures at 320 × 568 and 844 × 390 observed full-opacity Block and Weak labels, stable target bounds, 5 Block only on the defending Specter, and 2 Weak on the player. The portrait guard capture shows both the crossed arms and the label. Captures: `tests/.e2e-out/specter-pair-{guard,cast}-{320,844}.png`. The mechanics suite and TypeScript passed.

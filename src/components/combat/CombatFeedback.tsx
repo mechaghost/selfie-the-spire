@@ -33,7 +33,7 @@ export function CombatFeedback({layout}:{layout:BattleLayout}) {
             const style = {
                 '--impact-x': `${slot.foot.x}px`,
                 '--impact-right': `${layout.width - slot.foot.x}px`,
-                top: Math.max(8, Math.min(slot.art.y + slot.art.height * .35, layout.height - notices.length * FEEDBACK_ROW_HEIGHT - 8)),
+                top: Math.max(8, Math.min(slot.art.y + slot.art.height * .6, layout.height - notices.length * FEEDBACK_ROW_HEIGHT - 8)),
                 '--impact-row': `${FEEDBACK_ROW_HEIGHT}px`,
             } as CSSProperties;
             return <div key={slot.id} className="combat-impact-stack" style={style}>
