@@ -1,4 +1,4 @@
-"""Build runtime texture tiers; archive originals and losslessly encode resized derivatives.
+"""Build runtime texture tiers; preserve originals, lossless actors and quality-95 locations.
 
 Requires Pillow with WebP support. Originals live outside Vite's public directory.
 Run from repository root: python3 scripts/package_battle_art.py
@@ -6,8 +6,9 @@ Run from repository root: python3 scripts/package_battle_art.py
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 import json
+import math
 from pathlib import Path
-from PIL import Image, features
+from PIL import Image, ImageChops, ImageStat, features
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--source', type=Path, default=Path('art-source/battle'))
@@ -31,17 +32,35 @@ def encode(source):
             resolution /= 2
         runtime_size = (int(-(-rgba.width * resolution // 1)), int(-(-rgba.height * resolution // 1)))
         runtime = rgba if resolution == 1 else rgba.resize(runtime_size, Image.Resampling.LANCZOS)
-        runtime.save(output, 'WEBP', lossless=True, exact=True, method=6)
+        location = relative.parts[0] == 'locations'
+        runtime.save(output, 'WEBP', lossless=not location, quality=95, exact=True, method=6)
+        psnr = None
         with Image.open(output) as decoded:
-            if decoded.convert('RGBA').tobytes() != runtime.tobytes():
+            decoded = decoded.convert('RGBA')
+            if location:
+                if decoded.getchannel('A').tobytes() != runtime.getchannel('A').tobytes():
+                    raise RuntimeError(f'Location alpha changed: {source}')
+                scores = []
+                for color in [(9,21,37,255),(255,255,255,255)]:
+                    backing = Image.new('RGBA',runtime.size,color)
+                    reference = Image.alpha_composite(backing,runtime).convert('RGB')
+                    candidate = Image.alpha_composite(backing,decoded).convert('RGB')
+                    rms = ImageStat.Stat(ImageChops.difference(reference,candidate)).rms
+                    mse = sum(value*value for value in rms)/3
+                    scores.append(10*math.log10(255**2/mse) if mse else 100)
+                psnr = round(min(scores),2)
+                if psnr < 35:
+                    raise RuntimeError(f'Location compression quality below 35dB: {source}: {psnr}')
+            elif decoded.tobytes() != runtime.tobytes():
                 raise RuntimeError(f'Lossless pixel verification failed: {source}')
         return dict(asset=str(relative), width=rgba.width, height=rgba.height, runtimeWidth=runtime.width, runtimeHeight=runtime.height, resolution=resolution,
+                    encoding='WebP quality 95, exact alpha' if location else 'lossless WebP', compositedPSNR=psnr,
                     sourceBytes=source.stat().st_size, runtimeBytes=output.stat().st_size,
                     decodedRGBABytes=runtime.width*runtime.height*4)
 
 with ThreadPoolExecutor(max_workers=4) as pool:
     records = list(pool.map(encode, files))
-report = dict(encoding='Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification',
+report = dict(encoding='Lanczos power-of-two runtime tiers; actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing',
               memoryNote='Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.',
               sourceBytes=sum(row['sourceBytes'] for row in records),
               runtimeBytes=sum(row['runtimeBytes'] for row in records), assets=records)

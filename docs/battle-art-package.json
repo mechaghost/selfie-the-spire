@@ -1,8 +1,8 @@
 {
-  "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
+  "encoding": "Lanczos power-of-two runtime tiers; actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
   "sourceBytes": 129581891,
-  "runtimeBytes": 37439766,
+  "runtimeBytes": 21098960,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -11,8 +11,10 @@
       "runtimeWidth": 444,
       "runtimeHeight": 222,
       "resolution": 0.25,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1709853,
-      "runtimeBytes": 95254,
+      "runtimeBytes": 95108,
       "decodedRGBABytes": 394272
     },
     {
@@ -22,8 +24,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1720341,
-      "runtimeBytes": 212740,
+      "runtimeBytes": 210652,
       "decodedRGBABytes": 1572864
     },
     {
@@ -33,8 +37,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1877380,
-      "runtimeBytes": 230946,
+      "runtimeBytes": 225724,
       "decodedRGBABytes": 1572864
     },
     {
@@ -44,8 +50,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2207564,
-      "runtimeBytes": 284708,
+      "runtimeBytes": 283590,
       "decodedRGBABytes": 1572864
     },
     {
@@ -55,8 +63,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1919468,
-      "runtimeBytes": 236112,
+      "runtimeBytes": 232724,
       "decodedRGBABytes": 1572864
     },
     {
@@ -66,8 +76,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2108125,
-      "runtimeBytes": 289024,
+      "runtimeBytes": 283916,
       "decodedRGBABytes": 1572864
     },
     {
@@ -77,8 +89,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2488441,
-      "runtimeBytes": 388554,
+      "runtimeBytes": 383200,
       "decodedRGBABytes": 1572864
     },
     {
@@ -88,8 +102,10 @@
       "runtimeWidth": 689,
       "runtimeHeight": 571,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2494517,
-      "runtimeBytes": 489784,
+      "runtimeBytes": 489058,
       "decodedRGBABytes": 1573676
     },
     {
@@ -99,8 +115,10 @@
       "runtimeWidth": 600,
       "runtimeHeight": 656,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1151920,
-      "runtimeBytes": 209780,
+      "runtimeBytes": 205220,
       "decodedRGBABytes": 1574400
     },
     {
@@ -110,8 +128,10 @@
       "runtimeWidth": 611,
       "runtimeHeight": 644,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2190208,
-      "runtimeBytes": 420236,
+      "runtimeBytes": 420204,
       "decodedRGBABytes": 1573936
     },
     {
@@ -121,8 +141,10 @@
       "runtimeWidth": 600,
       "runtimeHeight": 656,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1274564,
-      "runtimeBytes": 235682,
+      "runtimeBytes": 233068,
       "decodedRGBABytes": 1574400
     },
     {
@@ -132,8 +154,10 @@
       "runtimeWidth": 512,
       "runtimeHeight": 768,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1995192,
-      "runtimeBytes": 238060,
+      "runtimeBytes": 237694,
       "decodedRGBABytes": 1572864
     },
     {
@@ -143,8 +167,10 @@
       "runtimeWidth": 611,
       "runtimeHeight": 644,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1961006,
-      "runtimeBytes": 404082,
+      "runtimeBytes": 404302,
       "decodedRGBABytes": 1573936
     },
     {
@@ -154,8 +180,10 @@
       "runtimeWidth": 597,
       "runtimeHeight": 659,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1295197,
-      "runtimeBytes": 250304,
+      "runtimeBytes": 242308,
       "decodedRGBABytes": 1573692
     },
     {
@@ -165,8 +193,10 @@
       "runtimeWidth": 597,
       "runtimeHeight": 659,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1275455,
-      "runtimeBytes": 243710,
+      "runtimeBytes": 242056,
       "decodedRGBABytes": 1573692
     },
     {
@@ -176,8 +206,10 @@
       "runtimeWidth": 605,
       "runtimeHeight": 650,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2013668,
-      "runtimeBytes": 394416,
+      "runtimeBytes": 393126,
       "decodedRGBABytes": 1573000
     },
     {
@@ -187,8 +219,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2108761,
-      "runtimeBytes": 332496,
+      "runtimeBytes": 329134,
       "decodedRGBABytes": 1572864
     },
     {
@@ -198,8 +232,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2315464,
-      "runtimeBytes": 376536,
+      "runtimeBytes": 376378,
       "decodedRGBABytes": 1572864
     },
     {
@@ -209,8 +245,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1881831,
-      "runtimeBytes": 227590,
+      "runtimeBytes": 223682,
       "decodedRGBABytes": 1572864
     },
     {
@@ -220,8 +258,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2173930,
-      "runtimeBytes": 292622,
+      "runtimeBytes": 290950,
       "decodedRGBABytes": 1572864
     },
     {
@@ -231,8 +271,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1505666,
-      "runtimeBytes": 173082,
+      "runtimeBytes": 169412,
       "decodedRGBABytes": 1572864
     },
     {
@@ -242,8 +284,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1914353,
-      "runtimeBytes": 231270,
+      "runtimeBytes": 229450,
       "decodedRGBABytes": 1572864
     },
     {
@@ -253,8 +297,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1950743,
-      "runtimeBytes": 237116,
+      "runtimeBytes": 236658,
       "decodedRGBABytes": 1572864
     },
     {
@@ -264,8 +310,10 @@
       "runtimeWidth": 615,
       "runtimeHeight": 639,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1454740,
-      "runtimeBytes": 302460,
+      "runtimeBytes": 301650,
       "decodedRGBABytes": 1571940
     },
     {
@@ -275,8 +323,10 @@
       "runtimeWidth": 615,
       "runtimeHeight": 639,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1526248,
-      "runtimeBytes": 305538,
+      "runtimeBytes": 305848,
       "decodedRGBABytes": 1571940
     },
     {
@@ -286,8 +336,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2404009,
-      "runtimeBytes": 367452,
+      "runtimeBytes": 367168,
       "decodedRGBABytes": 1572864
     },
     {
@@ -297,8 +349,10 @@
       "runtimeWidth": 562,
       "runtimeHeight": 701,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1221641,
-      "runtimeBytes": 255942,
+      "runtimeBytes": 255946,
       "decodedRGBABytes": 1575848
     },
     {
@@ -308,8 +362,10 @@
       "runtimeWidth": 615,
       "runtimeHeight": 639,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1429139,
-      "runtimeBytes": 303474,
+      "runtimeBytes": 303458,
       "decodedRGBABytes": 1571940
     },
     {
@@ -319,8 +375,10 @@
       "runtimeWidth": 600,
       "runtimeHeight": 656,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1862421,
-      "runtimeBytes": 368270,
+      "runtimeBytes": 367880,
       "decodedRGBABytes": 1574400
     },
     {
@@ -330,8 +388,10 @@
       "runtimeWidth": 600,
       "runtimeHeight": 656,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1299065,
-      "runtimeBytes": 278076,
+      "runtimeBytes": 278254,
       "decodedRGBABytes": 1574400
     },
     {
@@ -341,8 +401,10 @@
       "runtimeWidth": 609,
       "runtimeHeight": 646,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1692050,
-      "runtimeBytes": 327676,
+      "runtimeBytes": 327414,
       "decodedRGBABytes": 1573656
     },
     {
@@ -352,8 +414,10 @@
       "runtimeWidth": 561,
       "runtimeHeight": 701,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1435101,
-      "runtimeBytes": 302376,
+      "runtimeBytes": 302366,
       "decodedRGBABytes": 1573044
     },
     {
@@ -363,8 +427,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2218514,
-      "runtimeBytes": 359796,
+      "runtimeBytes": 359422,
       "decodedRGBABytes": 1572864
     },
     {
@@ -374,8 +440,10 @@
       "runtimeWidth": 600,
       "runtimeHeight": 656,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1030479,
-      "runtimeBytes": 197072,
+      "runtimeBytes": 194202,
       "decodedRGBABytes": 1574400
     },
     {
@@ -385,8 +453,10 @@
       "runtimeWidth": 600,
       "runtimeHeight": 656,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 924482,
-      "runtimeBytes": 178068,
+      "runtimeBytes": 177450,
       "decodedRGBABytes": 1574400
     },
     {
@@ -396,8 +466,10 @@
       "runtimeWidth": 573,
       "runtimeHeight": 687,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1467464,
-      "runtimeBytes": 288000,
+      "runtimeBytes": 288060,
       "decodedRGBABytes": 1574604
     },
     {
@@ -407,8 +479,10 @@
       "runtimeWidth": 573,
       "runtimeHeight": 687,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1353581,
-      "runtimeBytes": 267642,
+      "runtimeBytes": 267458,
       "decodedRGBABytes": 1574604
     },
     {
@@ -418,8 +492,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2331425,
-      "runtimeBytes": 365664,
+      "runtimeBytes": 365290,
       "decodedRGBABytes": 1572864
     },
     {
@@ -429,8 +505,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2269398,
-      "runtimeBytes": 316594,
+      "runtimeBytes": 316404,
       "decodedRGBABytes": 1572864
     },
     {
@@ -440,8 +518,10 @@
       "runtimeWidth": 553,
       "runtimeHeight": 711,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1155255,
-      "runtimeBytes": 216498,
+      "runtimeBytes": 214850,
       "decodedRGBABytes": 1572732
     },
     {
@@ -451,8 +531,10 @@
       "runtimeWidth": 554,
       "runtimeHeight": 711,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1279291,
-      "runtimeBytes": 252912,
+      "runtimeBytes": 248694,
       "decodedRGBABytes": 1575576
     },
     {
@@ -462,8 +544,10 @@
       "runtimeWidth": 553,
       "runtimeHeight": 711,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1044096,
-      "runtimeBytes": 198768,
+      "runtimeBytes": 194964,
       "decodedRGBABytes": 1572732
     },
     {
@@ -473,8 +557,10 @@
       "runtimeWidth": 553,
       "runtimeHeight": 711,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 881610,
-      "runtimeBytes": 165344,
+      "runtimeBytes": 161390,
       "decodedRGBABytes": 1572732
     },
     {
@@ -484,8 +570,10 @@
       "runtimeWidth": 553,
       "runtimeHeight": 711,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1077894,
-      "runtimeBytes": 198492,
+      "runtimeBytes": 194384,
       "decodedRGBABytes": 1572732
     },
     {
@@ -495,8 +583,10 @@
       "runtimeWidth": 553,
       "runtimeHeight": 711,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1066605,
-      "runtimeBytes": 199876,
+      "runtimeBytes": 195442,
       "decodedRGBABytes": 1572732
     },
     {
@@ -506,8 +596,10 @@
       "runtimeWidth": 553,
       "runtimeHeight": 711,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1050313,
-      "runtimeBytes": 199110,
+      "runtimeBytes": 198260,
       "decodedRGBABytes": 1572732
     },
     {
@@ -517,8 +609,10 @@
       "runtimeWidth": 532,
       "runtimeHeight": 739,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1210872,
-      "runtimeBytes": 221220,
+      "runtimeBytes": 218932,
       "decodedRGBABytes": 1572592
     },
     {
@@ -528,8 +622,10 @@
       "runtimeWidth": 532,
       "runtimeHeight": 739,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1250527,
-      "runtimeBytes": 230830,
+      "runtimeBytes": 225254,
       "decodedRGBABytes": 1572592
     },
     {
@@ -539,8 +635,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2435970,
-      "runtimeBytes": 359542,
+      "runtimeBytes": 357708,
       "decodedRGBABytes": 1572864
     },
     {
@@ -550,8 +648,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2404947,
-      "runtimeBytes": 376004,
+      "runtimeBytes": 375730,
       "decodedRGBABytes": 1572864
     },
     {
@@ -561,8 +661,10 @@
       "runtimeWidth": 768,
       "runtimeHeight": 512,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2366261,
-      "runtimeBytes": 365868,
+      "runtimeBytes": 364474,
       "decodedRGBABytes": 1572864
     },
     {
@@ -572,8 +674,10 @@
       "runtimeWidth": 656,
       "runtimeHeight": 600,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1946138,
-      "runtimeBytes": 426632,
+      "runtimeBytes": 426918,
       "decodedRGBABytes": 1574400
     },
     {
@@ -583,8 +687,10 @@
       "runtimeWidth": 620,
       "runtimeHeight": 635,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1576719,
-      "runtimeBytes": 332160,
+      "runtimeBytes": 327602,
       "decodedRGBABytes": 1574800
     },
     {
@@ -594,8 +700,10 @@
       "runtimeWidth": 620,
       "runtimeHeight": 635,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1589994,
-      "runtimeBytes": 334184,
+      "runtimeBytes": 332218,
       "decodedRGBABytes": 1574800
     },
     {
@@ -605,8 +713,10 @@
       "runtimeWidth": 620,
       "runtimeHeight": 635,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1638333,
-      "runtimeBytes": 350646,
+      "runtimeBytes": 347742,
       "decodedRGBABytes": 1574800
     },
     {
@@ -616,8 +726,10 @@
       "runtimeWidth": 620,
       "runtimeHeight": 635,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1665500,
-      "runtimeBytes": 355644,
+      "runtimeBytes": 350290,
       "decodedRGBABytes": 1574800
     },
     {
@@ -627,8 +739,10 @@
       "runtimeWidth": 620,
       "runtimeHeight": 635,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1811621,
-      "runtimeBytes": 376494,
+      "runtimeBytes": 376448,
       "decodedRGBABytes": 1574800
     },
     {
@@ -638,8 +752,10 @@
       "runtimeWidth": 593,
       "runtimeHeight": 664,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1247215,
-      "runtimeBytes": 245388,
+      "runtimeBytes": 239968,
       "decodedRGBABytes": 1575008
     },
     {
@@ -649,8 +765,10 @@
       "runtimeWidth": 593,
       "runtimeHeight": 664,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 1256843,
-      "runtimeBytes": 247310,
+      "runtimeBytes": 245778,
       "decodedRGBABytes": 1575008
     },
     {
@@ -660,8 +778,10 @@
       "runtimeWidth": 665,
       "runtimeHeight": 591,
       "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
       "sourceBytes": 2342164,
-      "runtimeBytes": 468954,
+      "runtimeBytes": 468422,
       "decodedRGBABytes": 1572060
     },
     {
@@ -671,8 +791,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 40.0,
       "sourceBytes": 1697992,
-      "runtimeBytes": 1220564,
+      "runtimeBytes": 211274,
       "decodedRGBABytes": 6291456
     },
     {
@@ -682,8 +804,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 46.67,
       "sourceBytes": 1456770,
-      "runtimeBytes": 992848,
+      "runtimeBytes": 164834,
       "decodedRGBABytes": 6291456
     },
     {
@@ -693,8 +817,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 39.59,
       "sourceBytes": 2177663,
-      "runtimeBytes": 1526870,
+      "runtimeBytes": 284492,
       "decodedRGBABytes": 6291456
     },
     {
@@ -704,8 +830,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 38.56,
       "sourceBytes": 1780063,
-      "runtimeBytes": 1306370,
+      "runtimeBytes": 276308,
       "decodedRGBABytes": 6291456
     },
     {
@@ -715,8 +843,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 55.3,
       "sourceBytes": 628288,
-      "runtimeBytes": 432756,
+      "runtimeBytes": 56136,
       "decodedRGBABytes": 6291456
     },
     {
@@ -726,8 +856,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 45.31,
       "sourceBytes": 1462287,
-      "runtimeBytes": 1024628,
+      "runtimeBytes": 159910,
       "decodedRGBABytes": 6291456
     },
     {
@@ -737,8 +869,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 37.67,
       "sourceBytes": 2207957,
-      "runtimeBytes": 1620744,
+      "runtimeBytes": 342182,
       "decodedRGBABytes": 6291456
     },
     {
@@ -748,8 +882,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 38.34,
       "sourceBytes": 1850153,
-      "runtimeBytes": 1388174,
+      "runtimeBytes": 300612,
       "decodedRGBABytes": 6291456
     },
     {
@@ -759,8 +895,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 45.29,
       "sourceBytes": 1598183,
-      "runtimeBytes": 1141096,
+      "runtimeBytes": 204368,
       "decodedRGBABytes": 6291456
     },
     {
@@ -770,8 +908,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 39.21,
       "sourceBytes": 2261514,
-      "runtimeBytes": 1656722,
+      "runtimeBytes": 382922,
       "decodedRGBABytes": 6291456
     },
     {
@@ -781,8 +921,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 42.04,
       "sourceBytes": 1578478,
-      "runtimeBytes": 1143242,
+      "runtimeBytes": 229620,
       "decodedRGBABytes": 6291456
     },
     {
@@ -792,8 +934,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 45.98,
       "sourceBytes": 1577888,
-      "runtimeBytes": 1117286,
+      "runtimeBytes": 182184,
       "decodedRGBABytes": 6291456
     },
     {
@@ -803,8 +947,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 40.4,
       "sourceBytes": 2070671,
-      "runtimeBytes": 1501020,
+      "runtimeBytes": 257312,
       "decodedRGBABytes": 6291456
     },
     {
@@ -814,8 +960,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 38.82,
       "sourceBytes": 1777818,
-      "runtimeBytes": 1313914,
+      "runtimeBytes": 275860,
       "decodedRGBABytes": 6291456
     },
     {
@@ -825,8 +973,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 46.67,
       "sourceBytes": 1428596,
-      "runtimeBytes": 967022,
+      "runtimeBytes": 125232,
       "decodedRGBABytes": 6291456
     },
     {
@@ -836,8 +986,10 @@
       "runtimeWidth": 1536,
       "runtimeHeight": 1024,
       "resolution": 1,
+      "encoding": "WebP quality 95, exact alpha",
+      "compositedPSNR": 37.85,
       "sourceBytes": 2275998,
-      "runtimeBytes": 1686430,
+      "runtimeBytes": 364362,
       "decodedRGBABytes": 6291456
     }
   ]
