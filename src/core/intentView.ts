@@ -12,3 +12,21 @@ export function intentView(intent: EnemyIntent | null, source: StatusEffect[], t
     const parts=[attack?`Attack ${attack}`:null,block?`Block ${block}`:null,healing?`Heal ${healing}`:null,statuses.length?'Status':null].filter(Boolean);
     return {previewKind:'current' as const,attack,block,statuses,healing,label:parts.join(' · ') || 'Preparing'};
 }
+
+export function describeIntent(intent: EnemyIntent | null, sourceStatuses: StatusEffect[] = [], targetStatuses: StatusEffect[] = []): string {
+    if (!intent) return 'Waiting...';
+    const parts = intent.effects.map(effect => {
+        const n = effect.amount ?? 0;
+        const status = STATUS_REGISTRY[effect.statusId ?? '']?.name ?? effect.statusId ?? 'status';
+        switch (effect.type) {
+            case 'Damage': return `Deals ${attackDamage(n, sourceStatuses, effect.target === 'Self' ? sourceStatuses : targetStatuses)} damage${effect.target === 'Self' ? ' to itself' : ' to you'}`;
+            case 'Block': return effect.target==='Self' ? `Gains ${blockGain(n,sourceStatuses)} Block` : `Grants you ${blockGain(n,targetStatuses)} Block`;
+            case 'ApplyStatus': return effect.target === 'Self' ? `Gains ${n} ${status}` : `Applies ${n} ${status} to you`;
+            case 'Heal': return effect.target==='Self' ? `Heals ${n} HP` : `Heals you for ${n} HP`;
+            default: return '';
+        }
+    }).filter(Boolean);
+    if(!parts.length)return 'Preparing an unknown action.';
+    const damageNote=intent.effects.some(effect=>effect.type==='Damage') ? ' Damage is shown before Block and may change if statuses change.' : '';
+    return `Current preview: ${parts.join('. ')}.${damageNote}`;
+}

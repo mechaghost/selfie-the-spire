@@ -4,8 +4,8 @@ import { Shield, Swords, ShieldPlus, Zap } from 'lucide-react';
 import { useGameStore } from '../../store/gameStore';
 import { STATUS_REGISTRY } from '../../data/statusEffects';
 import './EntityPanel.css';
-import { attackDamage, blockGain } from '../../core/combatMath';
-import { intentView } from '../../core/intentView';
+import { attackDamage } from '../../core/combatMath';
+import { intentView, describeIntent } from '../../core/intentView';
 import { targetAtPoint } from '../../core/targeting';
 import { STATUS_HELP } from '../../core/cardText';
 
@@ -23,21 +23,7 @@ function floatingTextClass(ft: FloatingText): string {
     return `floating-text ${ft.type}${big ? ' big' : ''}`;
 }
 
-export function describeIntent(intent: Enemy['intent'], sourceStatuses: Entity['statuses'] = [], targetStatuses: Entity['statuses'] = []): string {
-    if (!intent) return 'Waiting...';
-    const parts = intent.effects.map(effect => {
-        const n = effect.amount ?? 0;
-        const status = STATUS_REGISTRY[effect.statusId ?? '']?.name ?? effect.statusId;
-        switch (effect.type) {
-            case 'Damage': return `Deals ${attackDamage(n, sourceStatuses, effect.target === 'Self' ? sourceStatuses : targetStatuses)} damage${effect.target === 'Self' ? ' to itself' : ' to you'}`;
-            case 'Block': return effect.target==='Self' ? `Gains ${blockGain(n,sourceStatuses)} Block` : `Grants you ${blockGain(n,targetStatuses)} Block`;
-            case 'ApplyStatus': return effect.target === 'Self' ? `Gains ${n} ${status}` : `Applies ${n} ${status} to you`;
-            case 'Heal': return `Heals ${n} HP`;
-            default: return '';
-        }
-    }).filter(Boolean);
-    return parts.length ? `Current preview: ${parts.join('. ')}. Before Block. Status changes before the attack can change damage.` : 'Preparing an unknown action.';
-}
+export { describeIntent } from '../../core/intentView';
 
 export function describeStatuses(statuses: Entity['statuses']): string[] {
     return statuses.map(s => {
