@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 173646035,
-  "runtimeBytes": 26676472,
+  "sourceBytes": 175483334,
+  "runtimeBytes": 27084814,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -913,6 +913,19 @@
       "sourceBytes": 1645262,
       "runtimeBytes": 360762,
       "decodedRGBABytes": 1574172
+    },
+    {
+      "asset": "actors/the-billboard-cast-v1.webp",
+      "width": 1312,
+      "height": 1199,
+      "runtimeWidth": 656,
+      "runtimeHeight": 600,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1837299,
+      "runtimeBytes": 408342,
+      "decodedRGBABytes": 1574400
     },
     {
       "asset": "actors/the-billboard-defeat-v1.webp",

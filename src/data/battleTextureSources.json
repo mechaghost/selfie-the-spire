@@ -489,6 +489,13 @@
     "runtimeHeight": 599,
     "resolution": 0.5
   },
+  "/assets/battle/actors/the-billboard-cast-v1.webp": {
+    "width": 1312,
+    "height": 1199,
+    "runtimeWidth": 656,
+    "runtimeHeight": 600,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/the-billboard-defeat-v1.webp": {
     "width": 1312,
     "height": 1199,
