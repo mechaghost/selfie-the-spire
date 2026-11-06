@@ -408,15 +408,16 @@
         "defeat",
         "cast",
         "guard",
+        "blink",
         "windup",
         "recovery"
       ],
       "timelines": [
+        "idle",
         "attack"
       ],
       "missingContactPoses": [],
       "missingTimelines": [
-        "idle",
         "hit",
         "defeat",
         "guard",

@@ -61,3 +61,6 @@ console.log('PASS: authored idle loops, finite action/reaction completion, held 
 for(const [ms,frame] of [[0,'idle'],[3899,'idle'],[3900,'blink'],[4009,'blink'],[4010,'idle'],[7910,'blink']])assert.equal(clipFrameAt(golem.clips.idle,ms),frame);
 assert.equal(clipFrameAt(golem.clips.idle,3950,true),null);
 console.log('PASS: Golem authored blink duration, cycle boundary and reduced-motion static fallback');
+for(const [ms,frame] of [[0,'idle'],[4699,'idle'],[4700,'blink'],[4799,'blink'],[4800,'idle'],[9500,'blink']])assert.equal(clipFrameAt(spider.clips.idle,ms),frame);
+assert.equal(clipFrameAt(spider.clips.idle,4750,true),null);
+console.log('PASS: Spider authored blink duration, cycle boundary and reduced-motion static fallback');

@@ -66,6 +66,8 @@ ACTOR_VISUALS.vending_golem.keyPoses!.blink={imageUrl:'/assets/battle/actors/ven
 ACTOR_VISUALS.vending_golem.clips.idle={frames:['idle','blink'],durationsMs:[3900,110],loop:true,completion:'idle'};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.cast={imageUrl:'/assets/battle/actors/fire-escape-spider-cast-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.guard={imageUrl:'/assets/battle/actors/fire-escape-spider-guard-v1.webp',footAnchor:[.5,.913]};
+ACTOR_VISUALS.fire_escape_spider.keyPoses!.blink={imageUrl:'/assets/battle/actors/fire-escape-spider-blink-v1.webp',footAnchor:[.5,.94]};
+ACTOR_VISUALS.fire_escape_spider.clips.idle={frames:['idle','blink'],durationsMs:[4700,100],loop:true,completion:'idle'};
 ACTOR_VISUALS.vending_golem.atlasFrames=GOLEM_ATLAS_FRAMES;
 for(const archetype of ['chrome','volt','concrete','smoke']) {
     ACTOR_VISUALS[`hero-${archetype}`].keyPoses={attack:{imageUrl:`/assets/battle/actors/${archetype}-attack-v1.webp`,footAnchor:[.5,.98]}};
