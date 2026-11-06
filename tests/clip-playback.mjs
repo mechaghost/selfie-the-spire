@@ -67,3 +67,6 @@ console.log('PASS: Spider authored blink duration, cycle boundary and reduced-mo
 for(const [ms,frame] of [[0,'idle'],[3499,'idle'],[3500,'blink'],[3599,'blink'],[3600,'idle'],[7100,'blink']])assert.equal(clipFrameAt(rat.clips.idle,ms),frame);
 assert.equal(clipFrameAt(rat.clips.idle,3550,true),null);
 console.log('PASS: Rat authored blink duration, cycle boundary and reduced-motion static fallback');
+for(const [ms,frame] of [[0,'idle'],[4199,'idle'],[4200,'blink'],[4299,'blink'],[4300,'idle'],[8500,'blink']])assert.equal(clipFrameAt(neon.clips.idle,ms),frame);
+assert.equal(clipFrameAt(neon.clips.idle,4250,true),null);
+console.log('PASS: Street Runner authored blink duration, cycle boundary and reduced-motion static fallback');

@@ -324,65 +324,72 @@
   "/assets/battle/actors/street-runner-attack-v1.webp": {
     "width": 1106,
     "height": 1422,
-    "runtimeWidth": 553,
-    "runtimeHeight": 711,
-    "resolution": 0.5
+    "runtimeWidth": 498,
+    "runtimeHeight": 640,
+    "resolution": 0.450070323488045
+  },
+  "/assets/battle/actors/street-runner-blink-v1.webp": {
+    "width": 1106,
+    "height": 1422,
+    "runtimeWidth": 498,
+    "runtimeHeight": 640,
+    "resolution": 0.450070323488045
   },
   "/assets/battle/actors/street-runner-cast-v1.webp": {
     "width": 1107,
     "height": 1421,
-    "runtimeWidth": 554,
-    "runtimeHeight": 711,
-    "resolution": 0.5
+    "runtimeWidth": 499,
+    "runtimeHeight": 640,
+    "resolution": 0.45038705137227303
   },
   "/assets/battle/actors/street-runner-celebrate-v1.webp": {
     "width": 1106,
     "height": 1422,
-    "runtimeWidth": 553,
-    "runtimeHeight": 711,
-    "resolution": 0.5
+    "runtimeWidth": 498,
+    "runtimeHeight": 640,
+    "resolution": 0.450070323488045
   },
   "/assets/battle/actors/street-runner-defeat-v1.webp": {
     "width": 1106,
     "height": 1422,
-    "runtimeWidth": 553,
-    "runtimeHeight": 711,
-    "resolution": 0.5
+    "runtimeWidth": 498,
+    "runtimeHeight": 640,
+    "resolution": 0.450070323488045
   },
   "/assets/battle/actors/street-runner-guard-v1.webp": {
     "width": 1106,
     "height": 1422,
-    "runtimeWidth": 553,
-    "runtimeHeight": 711,
-    "resolution": 0.5
+    "runtimeWidth": 498,
+    "runtimeHeight": 640,
+    "resolution": 0.450070323488045
   },
   "/assets/battle/actors/street-runner-hit-v1.webp": {
     "width": 1106,
     "height": 1422,
-    "runtimeWidth": 553,
-    "runtimeHeight": 711,
-    "resolution": 0.5
+    "runtimeWidth": 498,
+    "runtimeHeight": 640,
+    "resolution": 0.450070323488045
   },
   "/assets/battle/actors/street-runner-idle-v1.webp": {
     "width": 1106,
     "height": 1422,
-    "runtimeWidth": 553,
-    "runtimeHeight": 711,
-    "resolution": 0.5
+    "runtimeWidth": 498,
+    "runtimeHeight": 640,
+    "resolution": 0.450070323488045
   },
   "/assets/battle/actors/street-runner-recovery-v1.webp": {
     "width": 1064,
     "height": 1478,
-    "runtimeWidth": 532,
-    "runtimeHeight": 739,
-    "resolution": 0.5
+    "runtimeWidth": 461,
+    "runtimeHeight": 640,
+    "resolution": 0.4330175913396482
   },
   "/assets/battle/actors/street-runner-windup-v1.webp": {
     "width": 1064,
     "height": 1478,
-    "runtimeWidth": 532,
-    "runtimeHeight": 739,
-    "resolution": 0.5
+    "runtimeWidth": 461,
+    "runtimeHeight": 640,
+    "resolution": 0.4330175913396482
   },
   "/assets/battle/actors/subway-wyrm-idle-v1.webp": {
     "width": 1536,

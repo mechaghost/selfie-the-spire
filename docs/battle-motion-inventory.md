@@ -1,10 +1,10 @@
 # Runtime motion inventory
 
-Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Rat, Golem and Spider have prototype authored blink loops; other actors still need authored idle sequences, and all idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
+Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Street Runner, Rat, Golem and Spider have prototype authored blink loops; other actors still need authored idle sequences, and all idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
-| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast, windup, recovery | attack | none | review |
+| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast, blink, windup, recovery | idle, attack | none | review |
 | hero-chrome | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-volt | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-concrete | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
