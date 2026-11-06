@@ -845,3 +845,7 @@ The artwork now scales slightly during each translation peak, covering the arena
 ### Taxi Ghost authored idle
 
 Taxi Ghost's headlights and roof beacon dip for 120 ms after 4,600 ms of base idle. Both poses use the same .99 foot anchor and 600 px runtime tier. The source alpha masks overlap by 99.1% intersection-over-union. At 320 × 568, the Pixi study shows the lamps changing while the tires remain aligned. Captures: `tests/.e2e-out/taxi-idle-{base,dip,restored}-320.png`. The clip regression checks transition boundaries, the next loop, and the reduced-motion path back to base idle. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
+
+### Manhole Mimic authored idle
+
+Added a 100 ms blink after 4,800 ms of idle, with the same .99 foot anchor. The source alpha masks overlap by 99.3% intersection-over-union. Pixi captures at 320 × 568 show both eyes closing and reopening while the lid and claws stay aligned: `tests/.e2e-out/mimic-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed. The preceding Linux run 42202905180 passed the production smoke and five-district checks.
