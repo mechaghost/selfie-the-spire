@@ -1039,3 +1039,11 @@ Added a one-knee recovery attempt with a .987 foot anchor and a held 280 ms defe
 Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
 
 > Create one full-body defeat key pose for the exact Smoke street fighter shown. Keep her dark bun, purple chevron jacket, coral scarf, teal sash, dark cargos and cream high-tops, same inked game sprite style and right-facing camera. She has sunk to one knee with her head bowed, one open gloved hand planted flat to support herself and the other holding her ribs. Both shoes and hand fit in frame. Keep the original standing canvas, actor scale and ground line with abundant transparent space over her lowered body. True alpha, no blood, effects, props, scenery, shadow or ground.
+
+### Smoke cast pose
+
+Added a palm-up gesture with a .987 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568 in Chromium touch emulation, Pump Iron triggered the gesture and granted 2 Strength. Capture: `tests/.e2e-out/smoke-live-cast-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed. The prior Linux run 42216758222 finished successfully, including the production arena and five-district route.
+
+Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
+
+> Create one full-body cast sprite of the exact Smoke fighter. Same dark bun, purple chevron hoodie, coral scarf, teal sash, charcoal cargo pants, cream high-tops, inked game art, right-facing camera, standing scale and ground line. She makes a deliberate skill activation gesture: front arm extended slightly downward, wrist turned palm up, fingers open, and rear hand touching her scarf at the collar. Her weight stays centered with shoes planted. Keep all limbs visible and transparent clearance around the silhouette. True alpha, no smoke, effects, glow, scenery, floor, lettering or shadows.
