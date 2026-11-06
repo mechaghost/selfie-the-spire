@@ -7,6 +7,10 @@
     ],
     [
       320,
+      244
+    ],
+    [
+      320,
       300
     ],
     [
@@ -34,7 +38,7 @@
       650
     ]
   ],
-  "samples": 522880,
-  "rectangleCandidates": 1104,
+  "samples": 588240,
+  "rectangleCandidates": 1311,
   "findings": []
 }

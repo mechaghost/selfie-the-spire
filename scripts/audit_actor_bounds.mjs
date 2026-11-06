@@ -17,7 +17,7 @@ for(const visual of Object.values(ACTOR_VISUALS))for(const url of [visual.fallba
     const source=metadata[url];
     bounds.set(url,{left:left/source.resolution,right:right/source.resolution,top:top/source.resolution,bottom:bottom/source.resolution});
 }
-const sizes=[[320,220],[320,300],[390,380],[390,464],[430,520],[664,250],[768,500],[1440,650]];
+const sizes=[[320,220],[320,244],[320,300],[390,380],[390,464],[430,520],[664,250],[768,500],[1440,650]];
 const findings=[];let samples=0,rectangleCandidates=0;
 const clips={idle:0,attack:320,hit:220,guard:220,cast:220,celebrate:600,defeat:280};
 function motionSamples(visual) {
