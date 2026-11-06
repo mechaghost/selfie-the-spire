@@ -617,3 +617,9 @@ To repeat, build with `VITE_COMBAT_ARENA=1 npx vite build`, serve with `npm run 
 Added a backward hood-and-shoulder recoil with claws tucked and a held, dark-eyed collapse onto a low smoke coil. Both cutouts are 1145 × 1374. The hit uses a .991 foot anchor and a 160/60 ms hit/idle clip. The defeat uses a .998 anchor and a 280 ms hold.
 
 At 320 × 568 in the Pixi Spectral Fog lineup, both poses stayed in Specter's lane. The recoil leaves its hood visibly tilted back. The collapsed target was disabled, and Taxi Ghost remained enabled. No browser errors. Captures: `tests/.e2e-out/smoke-specter-{hit,defeat}-320.png`. All 550 encounter art budgets, texture, clip playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,107,540 samples. The preceding production-smoke CI run 42179447476 passed. Full-speed review of these poses and physical-device verification remain open.
+
+### Taxi Ghost recoil and suspension collapse
+
+Added a nose-up recoil on compressed rear springs and a held defeat with the suspension folded and lights dark. Both 1536 × 1024 cutouts retain the checker cab and original texture tier. Hit uses a .94 anchor and 160/60 ms hit/idle timing. Defeat uses a .988 anchor and a 280 ms held clip.
+
+At 320 × 568 in the Spectral Fog Pixi study, both poses remained in Taxi Ghost's lane. The collapse sits low and nearly fills the lane width. The defeated target was disabled and its ground marker removed, while Specter remained enabled. No browser errors. Captures: `tests/.e2e-out/taxi-ghost-{hit,defeat}-320.png`. All 550 art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,108,188 samples. Preceding CI run 42179907099 passed. Full-speed and physical-device review remain open.

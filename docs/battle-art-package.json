@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 225218776,
-  "runtimeBytes": 34491780,
+  "sourceBytes": 229499164,
+  "runtimeBytes": 35159628,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -1224,6 +1224,32 @@
       "compositedPSNR": null,
       "sourceBytes": 2404947,
       "runtimeBytes": 375730,
+      "decodedRGBABytes": 1572864
+    },
+    {
+      "asset": "actors/taxi-ghost-defeat-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1814663,
+      "runtimeBytes": 272070,
+      "decodedRGBABytes": 1572864
+    },
+    {
+      "asset": "actors/taxi-ghost-hit-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 768,
+      "runtimeHeight": 512,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 2465725,
+      "runtimeBytes": 395778,
       "decodedRGBABytes": 1572864
     },
     {

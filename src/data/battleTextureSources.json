@@ -657,6 +657,20 @@
     "runtimeHeight": 512,
     "resolution": 0.5
   },
+  "/assets/battle/actors/taxi-ghost-defeat-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 768,
+    "runtimeHeight": 512,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/taxi-ghost-hit-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 768,
+    "runtimeHeight": 512,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/taxi-ghost-idle-v1.webp": {
     "width": 1536,
     "height": 1024,
