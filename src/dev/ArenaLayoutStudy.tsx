@@ -53,7 +53,7 @@ export default function ArenaLayoutStudy() {
                 {!renderer && <svg aria-hidden="true" viewBox="0 0 130 180" className={`study-actor study-monster ${dead.includes(slot.id) ? 'is-dead' : ''} ${selected === slot.id ? 'selected' : ''}`} style={position(slot.art)}><ellipse cx="65" cy="173" rx="57" ry="6" fill="#070b16"/>{i === 0 && !boss ? <path d="M57 70L12 30 2 40 40 94 3 140 8 166 25 138 55 113 75 113 103 138 122 170 127 140 90 94 128 40 116 30 73 70Z" fill="#99cebf"/> : <path d="M30 22L95 22 122 72 108 132 100 171H77L67 132 54 171H28L16 115 7 70Z" fill={i === 1 ? '#b49ad8' : '#ea9278'}/>}<path d="M40 82H54M77 82H91" stroke="#101a30" strokeWidth="10"/></svg>}
                 <button className="study-target" disabled={dead.includes(slot.id)} aria-label={`${enemies[actorIds[i]].name}, ${dead.includes(slot.id) ? 'defeated' : `30 health, ${studyIntent.label}`}`} aria-pressed={selected === slot.id} style={position(slot.target)} onClick={() => setSelected(slot.id)}>
                     <span className="study-hud actor-hud" style={{position:'absolute',left:slot.hud.x-slot.target.x,top:slot.hud.y-slot.target.y,width:slot.hud.width}}><EnemyHUDContents entity={{name:enemies[actorIds[i]].name,hp:dead.includes(slot.id)?0:30,maxHp:40,block:5,statuses:studyStatuses}} index={i} width={slot.hud.width} intent={studyIntent}/></span>
-                    <span className="study-slot-number" aria-hidden="true">{i+1}</span>
+                    {!dead.includes(slot.id) && <span className="study-slot-number" aria-hidden="true">{i+1}</span>}
                 </button>
             </div>)}
         </section>

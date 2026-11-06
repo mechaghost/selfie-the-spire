@@ -585,3 +585,9 @@ At 320 × 568 in the Pixi duo study, one Imp recoiled while the other stayed idl
 Added a tucked-paw recoil and a belly-down defeat with the lamps dark and the plug tail slack. Both 1536 × 1024 cutouts retain the original silhouette details and use .912 and .962 foot anchors, respectively. The hit uses a 160/60 ms hit/idle clip. The 280 ms defeat clip holds the last frame. A 480 px runtime cap for all Stray Voltage poses keeps the new coverage within the encounter budget while retaining the source files.
 
 In the 320 × 568 Street Ambush lineup, the lifted paw distinguishes recoil and the powered-down pose stays below the other enemies. The ground-level target number partly covers the collapse. Only Voltage lost targetability and no browser errors occurred. Captures: `tests/.e2e-out/stray-voltage-{hit,defeat}-320.png`. All 550 art budgets and texture, playback and TypeScript checks passed. Bounds audit: 1,106,244 samples, zero confirmed intersections. The preceding Imp CI run 42177138871 passed. Full-speed and physical-device review remain open.
+
+### Keep defeat art clear of target markers
+
+Hide the ground-level target number for defeated enemies in both the combat arena and the layout study. The defeated HUD label and disabled target remain in the original slot, and living enemy numbers retain their original order.
+
+At 320 × 568, a legal Jab played through the card inspector and arena target defeated a one-HP Stray Voltage in a seeded Street Ambush fixture. Both Pixi and forced DOM fallback removed only Voltage's marker, disabled its target, and preserved the neighboring target's bounding box. No browser errors. Captures: `tests/.e2e-out/defeated-marker-{pixi,fallback}-320.png`. TypeScript and all 30 regression suites passed. The preceding Stray Voltage CI run 42177553003 passed.

@@ -57,7 +57,7 @@ export function BattleArena({targetControls='arena'}:{targetControls?:'arena'|'l
                 onClick={event=>{event.stopPropagation();if(mode==='targeting')commit(enemy.id);else setInspected(enemy.id);}}>
                 <span className="actor-hud" style={{left:slot.hud.x-slot.target.x,top:slot.hud.y-slot.target.y,width:slot.hud.width}}>
                     <EnemyHUDContents entity={enemy} index={slot.index} width={slot.hud.width} intent={intent}/>
-                </span><span className="actor-slot-marker">{slot.index+1}</span>
+                </span>{enemy.hp>0 && <span className="actor-slot-marker" aria-hidden="true">{slot.index+1}</span>}
             </button>;
         })}
         </div><div className="battle-notice-host" ref={setNoticeHost}/>
