@@ -299,9 +299,20 @@ async function verifyLocalSelfie(page) {
         }
     });
     await page.locator('input[type=file]').setInputFiles(join(__dirname, 'fixtures', 'bob_ross.jpg'));
+    const cropPreview = page.getByRole('img', { name: 'Photo crop preview' });
+    await cropPreview.waitFor();
+    const cropImage = () => cropPreview.evaluate(canvas => canvas.toDataURL('image/jpeg', 0.8));
+    const centered = await cropImage();
+    await page.getByRole('slider', { name: 'Zoom' }).press('End');
+    const zoomed = await cropImage();
+    assert.notEqual(zoomed, centered);
+    await page.getByRole('slider', { name: 'Left to right' }).press('End');
+    const adjusted = await cropImage();
+    assert.notEqual(adjusted, zoomed);
     await page.getByRole('button', { name: 'Use this photo' }).tap();
     const preview = page.locator('.reveal-battle-actor');
     await preview.waitFor();
+    assert.equal(await page.locator('.reveal-portrait-img').getAttribute('src'), adjusted);
     const sprite = await preview.evaluate(async image => {
         await image.decode();
         const canvas = document.createElement('canvas');

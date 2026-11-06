@@ -603,6 +603,16 @@
 .photo-handling { width: min(100%, 34rem); color: #c8d2e9; font-size: .75rem; line-height: 1.6; padding-bottom: 1rem; }
 .photo-handling summary { cursor: pointer; text-align: center; }
 
+.selfie-crop-preview { display: block; width: 100%; height: 100%; border-radius: 50%; }
+.selfie-crop-controls { width: min(100%, 19rem); color: #c8d2e9; font-size: .875rem; }
+.selfie-crop-controls label {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    align-items: center;
+    min-height: 44px;
+}
+.selfie-crop-controls input { min-width: 0; height: 44px; margin: 0; accent-color: #79eff4; }
+
 .selfie-face-guide {
     position: absolute;
     inset: 14%;

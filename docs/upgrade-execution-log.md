@@ -1145,3 +1145,7 @@ The production smoke inspects the live-region role and checks its text on player
 ### Distinguish duplicate enemies in both target modes
 
 Arena buttons now include the actor's slot in their accessible name. The target list shows the same numbers, retaining original positions when defeated actors drop out of the list. The production smoke checks three distinct Rat names, switches between arena and list by keyboard, and verifies that Cancel restores the card inspector's focus. macOS VoiceOver was off during this pass, so spoken output remains unverified.
+
+### Manual selfie framing
+
+Added browser-local zoom and horizontal/vertical framing controls to the camera and library photo flow. The crop guide previews the area used by the visor. The browser keeps a bounded working canvas, and confirmation passes the displayed crop through the existing portrait and combat composition path. The 320 px smoke test checks that zoom and horizontal framing change pixels, that the exact adjusted portrait reaches the reveal, and that the resulting fighter persists after reload and forced WebGL loss. Chromium and WebKit both passed all nine scenarios. At 390 px the off-center fixture's face was visible in the guide and the helmet after adjustment. Captures: `tests/.e2e-out/adjusted-photo-{crop,hero}-390.png`. The connected phone is unavailable for physical testing.

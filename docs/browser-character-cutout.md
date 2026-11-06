@@ -4,7 +4,7 @@ The current upgrade builds the player's 2D combat sprite locally. Canvas clips t
 
 The selfie flow has no model, paid API call or server upload. The game saves the cropped portrait and combat sprite in the local run. Existing saves with version 2 combat art still load. The former character generation endpoint returns HTTP 410 in the upgrade.
 
-The visor is a fixed crop. Photo framing determines how the face appears, and the player can retake the selfie before starting.
+The preview has zoom, horizontal and vertical crop controls. The inner guide marks the portion that appears in the visor. A player can also replace the photo before starting.
 
 ## Verification
 
@@ -14,4 +14,4 @@ The 320 × 568 production-build browser regression uses a local photo fixture. I
 
 On iPhone 18 Pro Simulator with iOS 27.0, XCUITest selected the repository JPEG fixture using Safari's native Photo Library picker, confirmed with **Done**, and tapped **Use this photo**. The browser rendered the personalized preview and the same visor art in a legal first fight with End Turn enabled. Evidence: `tests/.e2e-out/ios-safari-selfie-{reveal,combat}.png` and `tests/.e2e-out/ios-safari-runner/photo-confirm.xcresult`.
 
-The fixture places the subject off-center. The visor showed mostly scenery and part of the face, consistent with the fixed center crop. This run verifies native photo selection and rendering. Physical camera capture remains open.
+The fixture places the subject off-center. The original fixed crop showed mostly scenery and part of the face, which led to the manual framing controls. This simulator run verifies native photo selection and rendering on the earlier build. The browser regression checks that moving and zooming the crop changes the portrait and that the resulting sprite survives reload and graphics loss. Physical camera capture remains open.

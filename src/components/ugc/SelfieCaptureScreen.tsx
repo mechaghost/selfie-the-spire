@@ -1,8 +1,22 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useLayoutEffect, useState, useCallback } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import { Camera, Upload, ArrowLeft, Loader } from 'lucide-react';
 import { eightiesIcon } from '../ui/EightiesIcons';
 import './SelfieCaptureScreen.css';
+
+const centeredCrop = { zoom: 1, x: 50, y: 50 };
+
+function copyPhoto(source: CanvasImageSource, width: number, height: number, mirror = false) {
+    const scale = Math.min(1, 1536 / Math.max(width, height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(width * scale));
+    canvas.height = Math.max(1, Math.round(height * scale));
+    const context = canvas.getContext('2d');
+    if (!context) return null;
+    if (mirror) context.setTransform(-1, 0, 0, 1, canvas.width, 0);
+    context.drawImage(source, 0, 0, canvas.width, canvas.height);
+    return canvas;
+}
 
 export function SelfieCaptureScreen() {
     const { ugcPhase, ugcError, selfieDataUrl, submitSelfie, cancelUgc, initializeRun } = useGameStore(state => ({
@@ -15,17 +29,31 @@ export function SelfieCaptureScreen() {
     }));
 
     const videoRef = useRef<HTMLVideoElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const cropCanvasRef = useRef<HTMLCanvasElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const streamRef = useRef<MediaStream | null>(null);
     const [fileError, setFileError] = useState<string | null>(null);
     const [cameraPending, setCameraPending] = useState(false);
     const [cameraReady, setCameraReady] = useState(false);
-    const [preview, setPreview] = useState<string | null>(null);
+    const [preview, setPreview] = useState<HTMLCanvasElement | null>(null);
+    const [crop, setCrop] = useState(centeredCrop);
     const cameraSession = useRef(0);
     const [cameraError, setCameraError] = useState(false);
 
     const isGenerating = ugcPhase === 'generating';
+    const photoWidth = preview?.width ?? 0;
+    const photoHeight = preview?.height ?? 0;
+    const cropSize = Math.min(photoWidth, photoHeight) / crop.zoom;
+
+    useLayoutEffect(() => {
+        const canvas = cropCanvasRef.current;
+        const context = canvas?.getContext('2d');
+        if (!preview || !canvas || !context) return;
+        const left = (photoWidth - cropSize) * crop.x / 100;
+        const top = (photoHeight - cropSize) * crop.y / 100;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(preview, left, top, cropSize, cropSize, 0, 0, canvas.width, canvas.height);
+    }, [preview, crop, cropSize, photoWidth, photoHeight, isGenerating]);
     const startCamera = useCallback(async () => {
         const session = ++cameraSession.current;
         setCameraError(false);
@@ -64,21 +92,13 @@ export function SelfieCaptureScreen() {
 
     const capturePhoto = () => {
         const video = videoRef.current;
-        const canvas = canvasRef.current;
-        if (!video || !canvas) return;
+        if (!video?.videoWidth || !video.videoHeight) return;
 
-        const size = Math.min(video.videoWidth, video.videoHeight);
-        canvas.width = 512;
-        canvas.height = 512;
-        const ctx = canvas.getContext('2d')!;
-        const sx = (video.videoWidth - size) / 2;
-        const sy = (video.videoHeight - size) / 2;
-        ctx.setTransform(-1, 0, 0, 1, 512, 0);
-        ctx.drawImage(video, sx, sy, size, size, 0, 0, 512, 512);
-
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        const canvas = copyPhoto(video, video.videoWidth, video.videoHeight, true);
+        if (!canvas) return;
         stopCamera();
-        setPreview(dataUrl);
+        setCrop(centeredCrop);
+        setPreview(canvas);
     };
 
     const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,18 +114,11 @@ export function SelfieCaptureScreen() {
             const img = new Image();
             img.onerror = () => setFileError('That image could not be opened. Try a JPEG or PNG.');
             img.onload = () => {
-                const canvas = canvasRef.current;
+                const canvas = copyPhoto(img, img.naturalWidth, img.naturalHeight);
                 if (!canvas) return;
-                const size = Math.min(img.width, img.height);
-                canvas.width = 512;
-                canvas.height = 512;
-                const ctx = canvas.getContext('2d')!;
-                const sx = (img.width - size) / 2;
-                const sy = (img.height - size) / 2;
-                ctx.drawImage(img, sx, sy, size, size, 0, 0, 512, 512);
-                const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
                 stopCamera();
-                setPreview(dataUrl);
+                setCrop(centeredCrop);
+                setPreview(canvas);
             };
             img.src = reader.result as string;
         };
@@ -154,7 +167,7 @@ export function SelfieCaptureScreen() {
 
             <div className="selfie-viewport">
                 <div className="selfie-orbit-ring" />
-                {preview ? <img src={preview} alt="Photo preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} /> : !cameraError ? (
+                {preview ? <canvas ref={cropCanvasRef} width={512} height={512} role="img" aria-label="Photo crop preview" className="selfie-crop-preview" /> : !cameraError ? (
                     <video
                         ref={videoRef}
                         aria-hidden="true"
@@ -174,13 +187,22 @@ export function SelfieCaptureScreen() {
                 {(preview || cameraReady) && <div className="selfie-face-guide" aria-hidden="true" />}
             </div>
 
+            {preview && <div className="selfie-crop-controls" role="group" aria-label="Frame your photo">
+                <label>Zoom<input type="range" min={1} max={3} step={0.05} value={crop.zoom} onChange={event => setCrop({ ...crop, zoom: event.target.valueAsNumber })} /></label>
+                <label>Left to right<input type="range" value={crop.x} disabled={cropSize >= photoWidth} onChange={event => setCrop({ ...crop, x: event.target.valueAsNumber })} /></label>
+                <label>Top to bottom<input type="range" value={crop.y} disabled={cropSize >= photoHeight} onChange={event => setCrop({ ...crop, y: event.target.valueAsNumber })} /></label>
+            </div>}
+
             {(ugcError || fileError) && (
                 <p role="alert" className="selfie-error">{fileError || ugcError}</p>
             )}
 
             <div className="selfie-actions">
                 {preview ? <>
-                    <button className="selfie-capture-btn" onClick={() => submitSelfie(preview)}>Use this photo</button>
+                    <button className="selfie-capture-btn" onClick={() => {
+                        const canvas = cropCanvasRef.current;
+                        if (canvas) void submitSelfie(canvas.toDataURL('image/jpeg', 0.8));
+                    }}>Use this photo</button>
                     <button className="selfie-upload-btn" onClick={() => setPreview(null)}>Replace photo</button>
                 </> : <>
                 {!cameraReady && <button className="selfie-upload-btn" disabled={cameraPending} onClick={startCamera}>Use camera</button>}
@@ -200,7 +222,7 @@ export function SelfieCaptureScreen() {
             <p className="selfie-subtitle">Your photo stays in this browser.</p>
 
             <details className="photo-handling"><summary>How your photo is used</summary>
-                <p>Your browser fits the center of your photo into a Street Runner helmet. Your hero uses the standard starter deck.</p>
+                <p>Your browser fits the area inside the guide into a Street Runner helmet. Your hero uses the standard starter deck.</p>
                 <p>Your cropped portrait and battle sprite are saved on this device when you start your run.</p>
             </details>
             <input
@@ -210,7 +232,6 @@ export function SelfieCaptureScreen() {
                 onChange={handleFileUpload}
                 style={{ display: 'none' }}
             />
-            <canvas ref={canvasRef} style={{ display: 'none' }} />
         </div>
     );
 }
