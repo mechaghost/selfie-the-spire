@@ -15,10 +15,17 @@ export function HandHUD({targetControls='list',onTargetControlsChange}:{targetCo
     const {cardId:selectedId,mode,error,inspect,close,choose,cancel,commit} = useCombatInteraction();
     const targeting = mode === 'targeting';
     const previousMode = useRef(mode);
+    const inspectedCard = useRef<HTMLElement | null>(null);
     useEffect(() => {
         const previous = previousMode.current; previousMode.current = mode;
         if (!((previous === 'targeting' && mode === 'inspect') || (previous !== 'idle' && mode === 'idle'))) return;
-        const timer = setTimeout(() => document.querySelector<HTMLElement>(mode === 'inspect' ? '[data-play-card]' : '.hand-container .card[tabindex], .end-turn-button')?.focus(), 0);
+        const timer = setTimeout(() => {
+            if (mode === 'inspect') {
+                document.querySelector<HTMLElement>('[data-play-card]')?.focus();
+            } else if (inspectedCard.current?.isConnected) {
+                inspectedCard.current.focus();
+            }
+        }, 0);
         return () => clearTimeout(timer);
     }, [mode]);
     const phase = useGameStore(state => state.isPlayerTurn && !state.isResolving && state.actionQueue.length === 0 && !state.combatResult);
@@ -26,7 +33,10 @@ export function HandHUD({targetControls='list',onTargetControlsChange}:{targetCo
     useEffect(() => {
         const wasReady=previousPhase.current;previousPhase.current=phase;
         if(!phase || wasReady)return;
-        const timer=setTimeout(()=>document.querySelector<HTMLElement>('.hand-container .card[tabindex], .end-turn-button')?.focus(),0);
+        const timer=setTimeout(() => {
+            const firstCard = document.querySelector<HTMLElement>('.hand-container .card[tabindex]');
+            (firstCard ?? document.querySelector<HTMLElement>('.end-turn-button'))?.focus();
+        },0);
         return()=>clearTimeout(timer);
     },[phase]);
     const enemies = useGameStore(state => state.enemies);
@@ -78,7 +88,10 @@ export function HandHUD({targetControls='list',onTargetControlsChange}:{targetCo
                         <div className="card-deal-motion">
                         <CardItem
                             card={card}
-                            onInspect={() => inspect(card.instanceId)}
+                            onInspect={() => {
+                                inspectedCard.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+                                inspect(card.instanceId);
+                            }}
                             canPlay={canPlay}
                             isDraggable={true}
                             style={{

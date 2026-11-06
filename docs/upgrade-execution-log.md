@@ -641,3 +641,9 @@ At 320 × 568 in the Pixi Brute Squad lineup, the updated attack still extends l
 Added a backward recoil with the shield lowered and a held kneeling collapse with a dark visor. Both use the original 1199 × 1312 canvas. The recoil uses a .992 foot anchor and 160/60 ms hit/idle timing. The defeat uses a .976 anchor and a 280 ms hold. The shield stays with the actor in both poses.
 
 Compared shield bash, recoil and defeat in the 320 × 568 solo Pixi study. The recoil's raised boot and backward lean distinguish it from the bash. Its visor sits close to the HUD. The defeated target was disabled with its marker hidden. No browser page errors. Captures: `tests/.e2e-out/neon-sentinel-{attack,hit,defeat}-solo-320.png`. All 550 encounter art budgets, texture, playback and TypeScript checks passed, with no confirmed intersections across 1,110,132 bounds samples. Prior CI run 42181472486 passed. Full-speed and physical-device checks remain open.
+
+### Keyboard focus in the production arena
+
+Closing a card inspection now restores focus to the same card when it is still in hand. Canceling targeting returns focus to Play card. When the next player decision becomes available, focus prefers the first card and falls back to End Turn if the hand is empty.
+
+The production smoke now uses Tab and Enter at 320 × 568 to reach and inspect Jab, move to Play card, and enter arena targeting. It checks that focus moves to a live enemy, Escape returns to Play card, and a second Escape restores focus to the original Jab element. The full touch-driven fight and reward reload still passed at 320 × 568 and 844 × 390. TypeScript and the production build passed. The prior Sentinel CI run 42182054146 passed. A complete keyboard-only run and physical assistive-technology checks remain open.

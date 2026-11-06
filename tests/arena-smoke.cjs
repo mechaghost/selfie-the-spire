@@ -43,6 +43,30 @@ async function playFight(page, viewport) {
     const endTurn = page.getByRole('button', { name: 'End Turn', exact: true });
     const handAttacks = page.locator('.hand-container').getByRole('button', { name: attacks });
     const targetPrompt = page.getByRole('region', { name: 'Choose card target' });
+    if (viewport.width === 320) {
+        await waitForDecision(page);
+        const jab = page.locator('.hand-container').getByRole('button', { name: 'Inspect Jab, 1 energy' }).first();
+        await jab.waitFor();
+        const jabElement = await jab.elementHandle();
+        for (let tab = 0; tab < 20 && !await jabElement.evaluate(element => element === document.activeElement); tab++) {
+            await page.keyboard.press('Tab');
+        }
+        assert.equal(await jabElement.evaluate(element => element === document.activeElement), true, 'Jab is keyboard reachable');
+        await page.keyboard.press('Enter');
+        const play = page.getByRole('button', { name: 'Play card', exact: true });
+        await play.waitFor();
+        for (let tab = 0; tab < 5 && !await play.evaluate(element => element === document.activeElement); tab++) {
+            await page.keyboard.press('Tab');
+        }
+        assert.equal(await play.evaluate(element => element === document.activeElement), true, 'Play card is keyboard reachable');
+        await page.keyboard.press('Enter');
+        await page.waitForFunction(() => document.activeElement.matches('[data-combat-target]:not(:disabled)'));
+        await page.keyboard.press('Escape');
+        await page.waitForFunction(() => document.activeElement.matches('[data-play-card]'));
+        await page.keyboard.press('Escape');
+        await page.waitForFunction(element => document.activeElement === element, jabElement);
+    }
+
     let plays = 0;
     let enemyTurns = 0;
     while (enemyTurns < 9) {
