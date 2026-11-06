@@ -933,3 +933,11 @@ Added a compact fist salute with a .989 foot anchor and the existing 600 ms cele
 Built-in imagegen prompt with `chrome-idle-v1.png` as reference:
 
 > Create a full-body transparent victory sprite of the exact Chrome fighter in this reference. Maintain his face, hair, chrome and teal jacket, pendant, cargo pants, cream boots, inked game-art rendering, sprite height and floor line. Keep the original camera and boots planted. Confident compact victory pose: right fist brought upright beside his cheek in a proud, contained salute, left hand resting at his belt, chin up with a slight smile. The fist stays below the top of his head. No props, shadow, lettering, glow, effects, or environment. Real alpha background. Preserve space around the entire figure, including the tops of both shoulders and the boot soles.
+
+### Volt hit pose
+
+Added a backward recoil with a .987 foot anchor and a 160/60 ms hit/idle clip. The 320 × 568 Chromium touch fixture shows the new pose when Dumpster Crawler's opening strike takes Volt from 80 HP to 75. Capture: `tests/.e2e-out/volt-live-hit-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed. Both Chrome blink edits changed the character framing and were discarded.
+
+Built-in imagegen prompt with `volt-idle-v1.png` as reference:
+
+> Create a new full-body transparent game sprite for the exact Volt fighter in the reference, in the instant after taking a blow from screen right. Preserve his identity, black swept hair with cream front streak, yellow and teal electrician jacket, orange cables at belt, charcoal cargo trousers and teal and cream sneakers, plus the same inked rendering and neutral key light. Face screen right, feet planted with bent knees; torso recoils distinctly back toward screen left; face winces, near hand pulls in over the ribs, rear hand opens for balance. Match the original scale and ground line, keep all limbs and shoes visible. No glow, impact streaks, particles, blood, shadows, props, ground, environment or lettering. Real alpha background, transparent padding.
