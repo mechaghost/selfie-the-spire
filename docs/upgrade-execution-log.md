@@ -925,3 +925,11 @@ Chrome now braces one forearm with the opposite hand while activating a skill. T
 Built-in imagegen prompt with `chrome-idle-v1.png` as reference:
 
 > Create one transparent PNG full-body cast-contact key pose for the exact same Chrome street fighter shown. Match the reference's grounded game sprite line art, palette, face and dark cropped hair, chrome bomber armor with teal stripes, pendant, cargo pants and cream combat boots. Match original camera, facing screen right, silhouette scale, perspective and planted boots. Only the upper-body gesture changes. In a deliberate non-attack activation gesture, he holds his near gloved palm facing upward at chest height in front of him, while the other gloved hand braces the forearm from underneath. Slight lean toward the hands, focused gaze. Game renders its own FX, so do not include any magic, glow particles, props, floor or shadow. Single sprite with real alpha background and transparent clearance on all sides. Keep both boots and all fingers inside frame.
+
+### Chrome victory pose
+
+Added a compact fist salute with a .989 foot anchor and the existing 600 ms celebration timeline. In a 320 × 568 Chromium touch fixture, Chrome landed a lethal Jab on a 1 HP Dumpster Crawler and held the salute during the result reveal window. The Victory overlay opened through the regular result flow and the hero remained at 80 HP. Capture: `tests/.e2e-out/chrome-live-celebrate-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `chrome-idle-v1.png` as reference:
+
+> Create a full-body transparent victory sprite of the exact Chrome fighter in this reference. Maintain his face, hair, chrome and teal jacket, pendant, cargo pants, cream boots, inked game-art rendering, sprite height and floor line. Keep the original camera and boots planted. Confident compact victory pose: right fist brought upright beside his cheek in a proud, contained salute, left hand resting at his belt, chin up with a slight smile. The fist stays below the top of his head. No props, shadow, lettering, glow, effects, or environment. Real alpha background. Preserve space around the entire figure, including the tops of both shoulders and the boot soles.
