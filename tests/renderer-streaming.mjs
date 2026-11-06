@@ -204,6 +204,13 @@ try {
  await flush();
  const sprite=reactionScene.sprites.get('enemy');
  const texture=frame=>reactionScene.poses.get(`enemy:${frame}`);
+ const curse=identifyAction({type:'APPLY_STATUS',payload:{sourceId:'enemy',targetId:'player'}});
+ clock=0;publishAction(curse,'begin');reactionScene.update(reactionSnapshot);
+ assert.equal(sprite.texture,texture('cast'),'status source uses its authored cast pose');
+ clock=159;reactionScene.update(reactionSnapshot);assert.equal(sprite.texture,texture('cast'));
+ clock=160;reactionScene.update(reactionSnapshot);assert.equal(sprite.texture,texture('idle'),'cast recovers at 160ms');
+ clock=220;reactionScene.update(reactionSnapshot);assert.equal(reactionScene.casts.size,0,'cast expires after 220ms');
+ clock=1000;
  const damage=identifyAction({type:'DAMAGE_ENTITY',payload:{sourceId:'player',targetId:'enemy',amount:6}});
  publishImpact(damage,{effect:'damage',targetId:'enemy',hpDelta:-6,blockDelta:0});
  reactionScene.update(reactionSnapshot);assert.equal(sprite.texture,texture('hit'),'actual impact selects authored hit');
