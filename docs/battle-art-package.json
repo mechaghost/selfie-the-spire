@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 240419664,
-  "runtimeBytes": 36515906,
+  "sourceBytes": 243935746,
+  "runtimeBytes": 36916256,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -210,6 +210,32 @@
       "compositedPSNR": null,
       "sourceBytes": 1833150,
       "runtimeBytes": 203760,
+      "decodedRGBABytes": 1572864
+    },
+    {
+      "asset": "actors/chrome-phantom-defeat-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "runtimeWidth": 512,
+      "runtimeHeight": 768,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1467963,
+      "runtimeBytes": 156496,
+      "decodedRGBABytes": 1572864
+    },
+    {
+      "asset": "actors/chrome-phantom-hit-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "runtimeWidth": 512,
+      "runtimeHeight": 768,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 2048119,
+      "runtimeBytes": 243854,
       "decodedRGBABytes": 1572864
     },
     {

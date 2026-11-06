@@ -24,7 +24,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | fire_escape_spider | production | attack, hit, defeat, cast, guard, blink, windup, recovery | idle, attack | none | review |
 | vending_golem | legacy/dev | attack, hit, defeat, guard, cast, blink, windup, recovery | idle, attack | none | review |
 | neon_sentinel | production | attack, hit, defeat | hit, defeat, attack | guard, cast | review |
-| chrome_phantom | production | attack | attack | hit, defeat, guard, cast | review |
+| chrome_phantom | production | attack, hit, defeat | hit, defeat, attack | guard, cast | review |
 | voltage_king | production | attack | attack | hit, defeat, guard, cast | review |
 | circuit_breaker | production | attack | attack | hit, defeat, guard, cast | review |
 | neon_yakuza | production | attack | attack | hit, defeat, cast | review |

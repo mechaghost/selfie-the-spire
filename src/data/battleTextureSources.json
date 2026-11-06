@@ -111,6 +111,20 @@
     "runtimeHeight": 768,
     "resolution": 0.5
   },
+  "/assets/battle/actors/chrome-phantom-defeat-v1.webp": {
+    "width": 1024,
+    "height": 1536,
+    "runtimeWidth": 512,
+    "runtimeHeight": 768,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/chrome-phantom-hit-v1.webp": {
+    "width": 1024,
+    "height": 1536,
+    "runtimeWidth": 512,
+    "runtimeHeight": 768,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/chrome-phantom-idle-v1.webp": {
     "width": 1024,
     "height": 1536,

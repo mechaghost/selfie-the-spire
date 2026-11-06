@@ -663,3 +663,9 @@ The production arena smoke now includes a fifth case at 320 × 568. It calls the
 ### Production WebGL loss during damage resolution
 
 Added a sixth arena smoke case. It triggers actual WebGL loss just after Jab is committed. At the trigger, energy is spent and the Rat still has 14 HP. The first damage feedback arrives with the DOM fallback active, the Rat ends at 8 HP, and Retry graphics preserves that state. Final reward choices and save data, including RNG, match the uninterrupted portrait run. All six cases passed in local production Chrome with software WebGL. Prior CI run 42183193026 passed. Physical-device context-loss verification remains open.
+
+### Chrome Phantom recoil and defeat
+
+Added a backward recoil with both wrist blades tucked and a seated defeat with bowed helmet and dark eyes. The 1024 × 1536 sources use .970 and .945 foot anchors. Hit plays for 160 ms with a 60 ms return to idle. The 280 ms defeat clip holds its final frame.
+
+The 320 × 568 solo Pixi study showed distinct silhouettes and a disabled defeated target. The slim limbs and blades read as fine detail at this size. No page errors. Captures: `tests/.e2e-out/chrome-phantom-{hit,defeat}-320.png`. All 550 art budgets and texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,110,780 samples. Prior CI run 42183670361 passed. Full-speed and physical-device review remain open.
