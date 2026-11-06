@@ -84,3 +84,8 @@ for(const [ms,expected] of [[0,'hit'],[159,'hit'],[160,'idle'],[219,'idle'],[220
 for(const ms of [0,279,280,10000])assert.equal(clipFrameAt(slime.clips.defeat,ms),'defeat');
 assert.equal(clipFrameAt(slime.clips.defeat,0,true),'defeat');
 console.log('PASS: Slime finite hit recovery and held defeat including reduced motion');
+for (const [ms, expected] of [[5399,'idle'],[5400,'blink'],[5499,'blink'],[5500,'idle']]) {
+    assert.equal(clipFrameAt(slime.clips.idle,ms),expected);
+}
+assert.equal(clipFrameAt(slime.clips.idle,5450,true),null);
+console.log('PASS: Slime idle blink boundaries and reduced-motion static fallback');

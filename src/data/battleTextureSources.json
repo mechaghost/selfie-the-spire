@@ -303,44 +303,51 @@
   "/assets/battle/actors/sewer-slime-attack-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 512,
-    "runtimeHeight": 342,
-    "resolution": 0.3333333333333333
+    "runtimeWidth": 480,
+    "runtimeHeight": 320,
+    "resolution": 0.3125
+  },
+  "/assets/battle/actors/sewer-slime-blink-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 480,
+    "runtimeHeight": 320,
+    "resolution": 0.3125
   },
   "/assets/battle/actors/sewer-slime-cast-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 512,
-    "runtimeHeight": 342,
-    "resolution": 0.3333333333333333
+    "runtimeWidth": 480,
+    "runtimeHeight": 320,
+    "resolution": 0.3125
   },
   "/assets/battle/actors/sewer-slime-defeat-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 512,
-    "runtimeHeight": 342,
-    "resolution": 0.3333333333333333
+    "runtimeWidth": 480,
+    "runtimeHeight": 320,
+    "resolution": 0.3125
   },
   "/assets/battle/actors/sewer-slime-guard-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 512,
-    "runtimeHeight": 342,
-    "resolution": 0.3333333333333333
+    "runtimeWidth": 480,
+    "runtimeHeight": 320,
+    "resolution": 0.3125
   },
   "/assets/battle/actors/sewer-slime-hit-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 512,
-    "runtimeHeight": 342,
-    "resolution": 0.3333333333333333
+    "runtimeWidth": 480,
+    "runtimeHeight": 320,
+    "resolution": 0.3125
   },
   "/assets/battle/actors/sewer-slime-idle-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 512,
-    "runtimeHeight": 342,
-    "resolution": 0.3333333333333333
+    "runtimeWidth": 480,
+    "runtimeHeight": 320,
+    "resolution": 0.3125
   },
   "/assets/battle/actors/smoke-attack-v1.webp": {
     "width": 1199,

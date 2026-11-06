@@ -388,19 +388,19 @@
         "hit",
         "defeat",
         "guard",
-        "cast"
+        "cast",
+        "blink"
       ],
       "timelines": [
         "hit",
         "defeat",
         "guard",
         "cast",
+        "idle",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "idle"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "fire_escape_spider",
