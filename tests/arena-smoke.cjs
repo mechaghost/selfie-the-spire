@@ -205,6 +205,52 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     };
 }
 
+async function verifyLocalSelfie(page) {
+    const remoteRequests = [];
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(base);
+    await page.getByRole('button', { name: /Put me in the game/ }).tap();
+    page.on('request', request => {
+        if (['fetch', 'xhr'].includes(request.resourceType()) || request.method() !== 'GET') {
+            remoteRequests.push(request.url());
+        }
+    });
+    await page.locator('input[type=file]').setInputFiles(join(__dirname, 'fixtures', 'bob_ross.jpg'));
+    await page.getByRole('button', { name: 'Use this photo' }).tap();
+    const preview = page.locator('.reveal-battle-actor');
+    await preview.waitFor();
+    const sprite = await preview.evaluate(async image => {
+        await image.decode();
+        const canvas = document.createElement('canvas');
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0);
+        return {
+            url: image.src,
+            size: [canvas.width, canvas.height],
+            alpha: [context.getImageData(0, 0, 1, 1).data[3], context.getImageData(138, 69, 1, 1).data[3]],
+        };
+    });
+    assert.match(sprite.url, /^data:image\/png;base64,/);
+    assert.deepEqual(sprite.size, [256, 384]);
+    assert.deepEqual(sprite.alpha, [0, 255]);
+    await page.getByRole('button', { name: 'Begin your journey' }).tap();
+    await page.locator('main.city-street-map').waitFor();
+    await page.reload();
+    await page.locator('main.city-street-map').waitFor();
+    const restored = await page.evaluate(() => Object.values(localStorage)
+        .map(raw => { try { return JSON.parse(raw); } catch { return null; } })
+        .find(value => Array.isArray(value?.masterDeck))?.player?.combatAppearance?.idleImageUrl);
+    assert.equal(restored, sprite.url);
+    await page.locator('.map-node.available.type-combat').first().tap();
+    await page.locator('.battle-stage-visual[data-stage-status="ready"] canvas').waitFor();
+    assert.deepEqual(remoteRequests, []);
+    assert.deepEqual(errors, []);
+    console.log('PASS 320×568: photo picker, transparent preview, same sprite in restored save, and arena ready without API calls');
+}
+
 async function main() {
     await mkdir(output, { recursive: true });
     const browser = await chromium.launch({
@@ -212,6 +258,12 @@ async function main() {
         args: ['--enable-unsafe-swiftshader'],
     });
     try {
+        const selfiePage = await browser.newPage({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
+        try {
+            await verifyLocalSelfie(selfiePage);
+        } finally {
+            await selfiePage.close();
+        }
         const cases = [
             { viewport: { width: 320, height: 568 }, input: 'touch' },
             { viewport: { width: 844, height: 390 }, input: 'touch' },

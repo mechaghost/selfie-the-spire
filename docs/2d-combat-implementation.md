@@ -1,4 +1,4 @@
-> November 5 update: user rejected server ONNX removal. Browser Canvas green-screen removal replaces that approach; native model deployment gates below are historical and superseded. See [current implementation and verification limits](browser-character-cutout.md).
+> November 5 update: user rejected server ONNX removal. The current selfie flow uses browser Canvas to fit the photo into an illustrated Street Runner. Earlier server-model and Gemini color-key experiments are historical. See [current implementation and verification limits](browser-character-cutout.md).
 
 # 2D combat implementation specification
 

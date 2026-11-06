@@ -737,3 +737,7 @@ The browser mechanics suite now resolves Graffiti Imp's real two-debuff intent a
 ### Dumpster Crawler guard
 
 Added a crouched guard with both pincers held in front of the shell, a .944 foot anchor and a 160/60 ms guard/idle clip. At 320 × 568 in Chromium touch emulation, the original opening move lowered the player from 80 to 75 HP and granted Crawler 6 Block. The captured combat frame shows the closed claws alongside the Block notice. Capture: `tests/.e2e-out/dumpster-crawler-live-guard-320.png`. All 550 encounter budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,115,532 samples.
+
+### Production photo picker regression
+
+The production arena smoke suite now selects a JPEG through the real file input at 320 × 568, decodes the 256 × 384 preview PNG and checks transparent corner and opaque visor samples. It starts the run, reloads the map, compares the saved sprite with the preview, and enters the rendered arena. The flow records no Fetch, XHR, or non-GET requests. This case and the six existing arena smoke cases passed locally against the production build in Chromium. The camera and physical devices remain separate verification.
