@@ -11,3 +11,9 @@ No ONNX weights, model preparation or provider credentials are involved. This su
 [Run42165457614](https://github.com/mechaghost/selfie-the-spire/actions/runs/42165457614) completed successfully for exact revision `796701a82222b03ed10b483119f2e2db7d9b4634`. Downloaded artifact report records clean worktree, Linux x64, Nodev24.22.2,30 passed and0 failed. The arena build, dependency install, regression suites and evidence upload all passed; job duration59seconds. Local artifact copy:`tests/.e2e-out/linux-regression-42165457614/`. This verifies the browser-removal implementation's automated Linux checks without ONNX; actual browser decoding remains covered separately by the local browser fixture.
 
 GitHub reported that the pinned v4 action runtimes target deprecated Node20 and are being forced onto Node24. The job succeeded, but updating those pinned action revisions should be handled separately with official-source verification. The application/test runtime itself was explicitly Node24.
+
+## WebKit production smoke
+
+With the arena-enabled production preview running, install the locked WebKit browser with `node node_modules/playwright-core/cli.js install webkit`, then run `E2E_BROWSER=webkit E2E_BASE=http://127.0.0.1:4173 node tests/arena-smoke.cjs`. WebKit screenshots are written separately under `tests/.e2e-out/webkit/`. On macOS the keyboard case uses Option-Tab to reach buttons through sequential focus.
+
+The local macOS run used WebKit 26.5 and covered the same eight scenarios as Chromium, including browser-local selfie creation, portrait and landscape combat, keyboard play, reduced-motion parity, context loss while targeting and resolving, and resizing between orientations while targeting. This is desktop WebKit with touch and viewport emulation. Physical iOS Safari, Android Chrome, camera and device performance still require separate evidence.

@@ -1,12 +1,14 @@
 // Run against a VITE_COMBAT_ARENA=1 production build.
 // E2E_BASE=http://localhost:4173 PW_CHROMIUM=/path/to/chrome node tests/arena-smoke.cjs
+// E2E_BROWSER=webkit node tests/arena-smoke.cjs
 const assert = require('node:assert/strict');
 const { mkdir } = require('node:fs/promises');
 const { join } = require('node:path');
-const { chromium } = require('playwright-core');
+const { chromium, webkit } = require('playwright-core');
 
 const base = process.env.E2E_BASE || 'http://localhost:4173';
-const output = join(__dirname, '.e2e-out');
+const useWebKit = process.env.E2E_BROWSER === 'webkit';
+const output = useWebKit ? join(__dirname, '.e2e-out', 'webkit') : join(__dirname, '.e2e-out');
 const attacks = /^Inspect (Jab|Cheap Shot|Torch It|Haymaker|Tremor|Shiv Toss), (\d+) energy$/;
 const seed = '72b23907-f7cf-4c98-95e8-5e64155244f8';
 
@@ -20,7 +22,8 @@ async function tabTo(page, control, label) {
     await control.waitFor();
     for (let attempt = 0; attempt < 40; attempt++) {
         if (await control.evaluate(element => document.activeElement === element)) return;
-        await page.keyboard.press('Tab');
+        // macOS WebKit uses Option-Tab to include buttons in sequential focus.
+        await page.keyboard.press(useWebKit && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');
     }
     assert.fail(`Could not reach ${label} with Tab`);
 }
@@ -320,10 +323,10 @@ async function verifyLocalSelfie(page) {
 
 async function main() {
     await mkdir(output, { recursive: true });
-    const browser = await chromium.launch({
+    const browser = await (useWebKit ? webkit.launch() : chromium.launch({
         executablePath: process.env.PW_CHROMIUM,
         args: ['--enable-unsafe-swiftshader'],
-    });
+    }));
     try {
         const selfiePage = await browser.newPage({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
         try {
