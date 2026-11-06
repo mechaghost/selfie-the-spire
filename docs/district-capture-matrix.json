@@ -1,0 +1,977 @@
+{
+  "scope": "Local IAB, arena-study fixture, idle scene and ten cards. Not production interaction, physical-device, animation-extrema or contrast certification.",
+  "capturedRevision": "12f5a39",
+  "captures": 120,
+  "checks": [
+    "complete 5×4×6 matrix",
+    "ready renderer and one canvas",
+    "44px targets within arena",
+    "HUDs within arena",
+    "no target-target or HUD-HUD collisions",
+    "HUD/targets clear hand and controls",
+    "hand within viewport",
+    "JPEG dimensions and SHA-256"
+  ],
+  "entries": [
+    {
+      "district": "ocean-drive",
+      "mode": "1 enemy",
+      "width": 320,
+      "height": 568,
+      "file": "ocean-drive-1-enemy-320x568.jpg",
+      "sha256": "10740c8df887821b53fa74ca478048601106dd9eeaad5886731b1f22f1e9a726"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "1 enemy",
+      "width": 390,
+      "height": 844,
+      "file": "ocean-drive-1-enemy-390x844.jpg",
+      "sha256": "c0e41e3e422f05dd28d4fafcf21eef1be0fc7151486621190aed5a2a3f7707f9"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "1 enemy",
+      "width": 430,
+      "height": 932,
+      "file": "ocean-drive-1-enemy-430x932.jpg",
+      "sha256": "d2f31193f896bec871610515caf76567117b36b2a6abb39d86cff3ba552a92a0"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "1 enemy",
+      "width": 844,
+      "height": 390,
+      "file": "ocean-drive-1-enemy-844x390.jpg",
+      "sha256": "894f5406a5543e8ab3911e1e08402de9760a11356e30c78c58699f33f4df9563"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "1 enemy",
+      "width": 768,
+      "height": 1024,
+      "file": "ocean-drive-1-enemy-768x1024.jpg",
+      "sha256": "830f9774486b67a267a23f9847b5d5b95b377e34f5cd8aa1e450d2d3f4309b46"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "1 enemy",
+      "width": 1440,
+      "height": 900,
+      "file": "ocean-drive-1-enemy-1440x900.jpg",
+      "sha256": "f05d3295cb475e4c73b44e23697906e959c901919944399f1a25cfdfb10c764f"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "2 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "ocean-drive-2-enemies-320x568.jpg",
+      "sha256": "7928a0ccb2b6295ceb3a8abba9c47ddf2d1d0d48458ee5c8a0fec4ba6d5717f2"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "2 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "ocean-drive-2-enemies-390x844.jpg",
+      "sha256": "f8897f96887fc67b6c834be27ffdd00a24c35fcd2745793f469f5090effa36be"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "2 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "ocean-drive-2-enemies-430x932.jpg",
+      "sha256": "a045d6344d70c48d9027f9d5bc925aa0ad38557c245457063b8a736488a15b6a"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "2 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "ocean-drive-2-enemies-844x390.jpg",
+      "sha256": "17bc3e6ef971aefdc946f8231836d85047ac2350c0a95fc11bdf6144c684f900"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "2 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "ocean-drive-2-enemies-768x1024.jpg",
+      "sha256": "24db517a49acb7b8e2252d7ab4e10dbf37fc386bad47c60355d46d960eeeacf4"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "2 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "ocean-drive-2-enemies-1440x900.jpg",
+      "sha256": "1f71d1f1d9d5a148d064fb0921661c766a45d9861a4b6ca69b5f5d6031aff5e3"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "3 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "ocean-drive-3-enemies-320x568.jpg",
+      "sha256": "cdecdaa24b47dd8e40a73fa5ff657c519509171c83a080cd535248392ec754aa"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "3 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "ocean-drive-3-enemies-390x844.jpg",
+      "sha256": "5e9a23c45b5dc31ecebf453ecd1c8cb9df88aa82bcbf15c99a4b899c04c50080"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "3 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "ocean-drive-3-enemies-430x932.jpg",
+      "sha256": "002c141e946d36edb8a4910e5c8c9f5eebe5546cadf52611b44b38213f300740"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "3 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "ocean-drive-3-enemies-844x390.jpg",
+      "sha256": "3b7ad92c7a00c0e6a404e603d74fda6d82541aed6929535fbc09b7222c312662"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "3 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "ocean-drive-3-enemies-768x1024.jpg",
+      "sha256": "b864ed076122c9ce66d8f460fef71503cc480dfbc7c60b3c5172abb89aa9a17b"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "3 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "ocean-drive-3-enemies-1440x900.jpg",
+      "sha256": "f0715081cb88559f5683c0895f37d50952706e5f3aa7803598cb05c0bd57c762"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "Boss",
+      "width": 320,
+      "height": 568,
+      "file": "ocean-drive-Boss-320x568.jpg",
+      "sha256": "e96e447d7da3e1093990c6d7bec623f8972766456dbea5d772d9bd0b46a5f651"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "Boss",
+      "width": 390,
+      "height": 844,
+      "file": "ocean-drive-Boss-390x844.jpg",
+      "sha256": "ec4000aa131b42d5198be68e5b7862a2b3bd5046f5cbfc771a0daf82e839dbdc"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "Boss",
+      "width": 430,
+      "height": 932,
+      "file": "ocean-drive-Boss-430x932.jpg",
+      "sha256": "38ee416d8d8765f60a5396a037a8d54761ae0341a801dfc0e3aa30b50e5cc836"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "Boss",
+      "width": 844,
+      "height": 390,
+      "file": "ocean-drive-Boss-844x390.jpg",
+      "sha256": "43ed1dc9d23f3630401edd775b3dfe015afb6a6d5af19377764a67a287292525"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "Boss",
+      "width": 768,
+      "height": 1024,
+      "file": "ocean-drive-Boss-768x1024.jpg",
+      "sha256": "f009c11f26dfd4bd4f5798f620806000f955779025ea20bb370806e6a67b7843"
+    },
+    {
+      "district": "ocean-drive",
+      "mode": "Boss",
+      "width": 1440,
+      "height": 900,
+      "file": "ocean-drive-Boss-1440x900.jpg",
+      "sha256": "aa5a519215a5beda02e4eff72de1ba1b4e0abef804dbf4289bd17ea99abe9c59"
+    },
+    {
+      "district": "wynwood",
+      "mode": "1 enemy",
+      "width": 320,
+      "height": 568,
+      "file": "wynwood-1-enemy-320x568.jpg",
+      "sha256": "db08ae30b9f65ec9dc5aad7ee1e41d9e9cf8bdd84802225dfa0d5e8c2335ff90"
+    },
+    {
+      "district": "wynwood",
+      "mode": "1 enemy",
+      "width": 390,
+      "height": 844,
+      "file": "wynwood-1-enemy-390x844.jpg",
+      "sha256": "bb7c02e9f12e70a673e69f35ba1b2a785eb7276cb2eb88b14e9a580b62afe17c"
+    },
+    {
+      "district": "wynwood",
+      "mode": "1 enemy",
+      "width": 430,
+      "height": 932,
+      "file": "wynwood-1-enemy-430x932.jpg",
+      "sha256": "f111a233b2a3bb44d220d82ab76324e47ea247ecf06afa9e40c260031ee14870"
+    },
+    {
+      "district": "wynwood",
+      "mode": "1 enemy",
+      "width": 844,
+      "height": 390,
+      "file": "wynwood-1-enemy-844x390.jpg",
+      "sha256": "cb9b6336b932e822f5fb125d317c485a9f39d6d30fe85f2ee770ab306216e125"
+    },
+    {
+      "district": "wynwood",
+      "mode": "1 enemy",
+      "width": 768,
+      "height": 1024,
+      "file": "wynwood-1-enemy-768x1024.jpg",
+      "sha256": "6eba99231bf5ffdb84bedad5f27fc0cfb136e41b4870f30f0adc406a7c50f408"
+    },
+    {
+      "district": "wynwood",
+      "mode": "1 enemy",
+      "width": 1440,
+      "height": 900,
+      "file": "wynwood-1-enemy-1440x900.jpg",
+      "sha256": "898b055263f6ab65c7c548d9cac167ce32047c5f98ed1263d11122af2d4ada22"
+    },
+    {
+      "district": "wynwood",
+      "mode": "2 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "wynwood-2-enemies-320x568.jpg",
+      "sha256": "ec5d1b50c826f7fafe03beaa893c9062129f2a28de1867b93b0b781b04f7ca4d"
+    },
+    {
+      "district": "wynwood",
+      "mode": "2 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "wynwood-2-enemies-390x844.jpg",
+      "sha256": "f54608baa5a2bfe5037239c5053b0255786302ba98e969292f28f07c62506e13"
+    },
+    {
+      "district": "wynwood",
+      "mode": "2 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "wynwood-2-enemies-430x932.jpg",
+      "sha256": "4a10d1200e4ecb6683dd2758198e027b40684fb548263f439efdba0757df8599"
+    },
+    {
+      "district": "wynwood",
+      "mode": "2 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "wynwood-2-enemies-844x390.jpg",
+      "sha256": "2d7426c0ba6c293a393186146af61d376cb4a5dcbf5e87fe821ec1ec99ca2cb9"
+    },
+    {
+      "district": "wynwood",
+      "mode": "2 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "wynwood-2-enemies-768x1024.jpg",
+      "sha256": "02fbc11bc1191db1dfddd379f261b9bc0233258e0bd184183e357753115d2058"
+    },
+    {
+      "district": "wynwood",
+      "mode": "2 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "wynwood-2-enemies-1440x900.jpg",
+      "sha256": "32a1ba2e7e742b60301fff1c629e40d3675f71fbeb083adb1b8ad83313f74873"
+    },
+    {
+      "district": "wynwood",
+      "mode": "3 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "wynwood-3-enemies-320x568.jpg",
+      "sha256": "0e191e7bae65332c16961eef4080e0ef29b41046c621a50d4417eea3377c694a"
+    },
+    {
+      "district": "wynwood",
+      "mode": "3 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "wynwood-3-enemies-390x844.jpg",
+      "sha256": "3578a9fcc4fa6cf11fba0ca8bb332fafc4c153da0c38a8bcc55a1bf5fccff6d8"
+    },
+    {
+      "district": "wynwood",
+      "mode": "3 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "wynwood-3-enemies-430x932.jpg",
+      "sha256": "64617d280e7a05af88891b558e2b1b05a7b3d66c1e6fcf6e27ac0db684712122"
+    },
+    {
+      "district": "wynwood",
+      "mode": "3 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "wynwood-3-enemies-844x390.jpg",
+      "sha256": "9d70fd73db858c2b6607de241b031a274213e26dceb5f45f7f67bfa37b343ace"
+    },
+    {
+      "district": "wynwood",
+      "mode": "3 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "wynwood-3-enemies-768x1024.jpg",
+      "sha256": "8e5a02edd8f68d03c91194fe2d936a0757a223809448e718f54bdbbe9d04849d"
+    },
+    {
+      "district": "wynwood",
+      "mode": "3 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "wynwood-3-enemies-1440x900.jpg",
+      "sha256": "6929c36561f40de4bdc80eb799e3cf281ee011028ffbc6b6dca8f3d52eaa6a9d"
+    },
+    {
+      "district": "wynwood",
+      "mode": "Boss",
+      "width": 320,
+      "height": 568,
+      "file": "wynwood-Boss-320x568.jpg",
+      "sha256": "f512ef9bbfd62eaf644b57a959339dce42f7e310ea5d47a1777a57741eb59072"
+    },
+    {
+      "district": "wynwood",
+      "mode": "Boss",
+      "width": 390,
+      "height": 844,
+      "file": "wynwood-Boss-390x844.jpg",
+      "sha256": "ba52aa56f886de95bef659bf7b0c345176c41523c2b6bbaed063e7641888fdbb"
+    },
+    {
+      "district": "wynwood",
+      "mode": "Boss",
+      "width": 430,
+      "height": 932,
+      "file": "wynwood-Boss-430x932.jpg",
+      "sha256": "3f810bc8bd824f2c79a4f8a3a10e9747da4cee72cd8b6106b0ddf20358e164c7"
+    },
+    {
+      "district": "wynwood",
+      "mode": "Boss",
+      "width": 844,
+      "height": 390,
+      "file": "wynwood-Boss-844x390.jpg",
+      "sha256": "ea90e13b2d1e7effbad02eb70f04c6ef3f7818b3717da74b57e6879b46f3443c"
+    },
+    {
+      "district": "wynwood",
+      "mode": "Boss",
+      "width": 768,
+      "height": 1024,
+      "file": "wynwood-Boss-768x1024.jpg",
+      "sha256": "de086eba6137c95317d34d1cc2300646716e42dea59d135c84d159b11ecb84d1"
+    },
+    {
+      "district": "wynwood",
+      "mode": "Boss",
+      "width": 1440,
+      "height": 900,
+      "file": "wynwood-Boss-1440x900.jpg",
+      "sha256": "547087bdd978c06c8f7e89c8f6a7fe1655225c2e27c52ad47f35dd220864d3e8"
+    },
+    {
+      "district": "underpass",
+      "mode": "1 enemy",
+      "width": 320,
+      "height": 568,
+      "file": "underpass-1-enemy-320x568.jpg",
+      "sha256": "0076fb1f6353b944f23281c5b8ac067cad9ec9e7a2f2aec0fc3cce43885bc6c2"
+    },
+    {
+      "district": "underpass",
+      "mode": "1 enemy",
+      "width": 390,
+      "height": 844,
+      "file": "underpass-1-enemy-390x844.jpg",
+      "sha256": "84c737a295f52894c5f76ad724ffc8f8df7069965accf4cc22d82d596d9f2e53"
+    },
+    {
+      "district": "underpass",
+      "mode": "1 enemy",
+      "width": 430,
+      "height": 932,
+      "file": "underpass-1-enemy-430x932.jpg",
+      "sha256": "9a8ddc3848a1a9023997f545fd5adf4d92992a95e6421e4700e90b409021c1f8"
+    },
+    {
+      "district": "underpass",
+      "mode": "1 enemy",
+      "width": 844,
+      "height": 390,
+      "file": "underpass-1-enemy-844x390.jpg",
+      "sha256": "51ae7e1f3f4b59ad5d21a501e17d043bdbac42f48314bf038e58ddd17543652a"
+    },
+    {
+      "district": "underpass",
+      "mode": "1 enemy",
+      "width": 768,
+      "height": 1024,
+      "file": "underpass-1-enemy-768x1024.jpg",
+      "sha256": "18f12cd0b502bd2c9c87cb41ccee5043cb047a8f13004014e686cfc9f0eb3739"
+    },
+    {
+      "district": "underpass",
+      "mode": "1 enemy",
+      "width": 1440,
+      "height": 900,
+      "file": "underpass-1-enemy-1440x900.jpg",
+      "sha256": "69e00e0bb5d52196770dff72552ff2bdd7b0af827db594de4d5c1b398ec67ca2"
+    },
+    {
+      "district": "underpass",
+      "mode": "2 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "underpass-2-enemies-320x568.jpg",
+      "sha256": "15e6553cedc1f8bac4403b68efda9820c36c8fb311cfc7e20cdf836d8dea40fa"
+    },
+    {
+      "district": "underpass",
+      "mode": "2 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "underpass-2-enemies-390x844.jpg",
+      "sha256": "6e0728d612d46abdba24ec772db1115a54dc580d0eb30a52db2b64b86fa9f078"
+    },
+    {
+      "district": "underpass",
+      "mode": "2 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "underpass-2-enemies-430x932.jpg",
+      "sha256": "97f4f75f86456525d62118876ec80f8653a07ed234e719fec654b2c5d1ff94fc"
+    },
+    {
+      "district": "underpass",
+      "mode": "2 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "underpass-2-enemies-844x390.jpg",
+      "sha256": "50dcce3ec17495f82fea04dabb330068c3871ec2c32c4f7f96857092aba247d4"
+    },
+    {
+      "district": "underpass",
+      "mode": "2 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "underpass-2-enemies-768x1024.jpg",
+      "sha256": "73aa0df474977afed3ec8c930ad5afd72621e4eca33700e6fe92cf93f574ea78"
+    },
+    {
+      "district": "underpass",
+      "mode": "2 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "underpass-2-enemies-1440x900.jpg",
+      "sha256": "527c2b18d26610a8c5ca891e2ea0eb75e8d3adc04b4eca80b823fd602d788a0b"
+    },
+    {
+      "district": "underpass",
+      "mode": "3 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "underpass-3-enemies-320x568.jpg",
+      "sha256": "641adaa552114fa0d637766454da0c5dd784ed4ea257128c9e71299e0ebb4de3"
+    },
+    {
+      "district": "underpass",
+      "mode": "3 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "underpass-3-enemies-390x844.jpg",
+      "sha256": "1c14bd1b4e1c085ff9018c298da86d36bdb814d9b935faa94a1b841174cc2dfd"
+    },
+    {
+      "district": "underpass",
+      "mode": "3 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "underpass-3-enemies-430x932.jpg",
+      "sha256": "1de205c822c6bbb2853bcc2c2603f204d76d9d78dae1ef1d6827780c1dcdd635"
+    },
+    {
+      "district": "underpass",
+      "mode": "3 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "underpass-3-enemies-844x390.jpg",
+      "sha256": "310a25a9acd62439e188482bc86dd994823aa38a682f1ccc24fd3648e26819ba"
+    },
+    {
+      "district": "underpass",
+      "mode": "3 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "underpass-3-enemies-768x1024.jpg",
+      "sha256": "aabe6f177b9dbbb98436e15402492d963ae768611f275bdfd43294e16851eb71"
+    },
+    {
+      "district": "underpass",
+      "mode": "3 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "underpass-3-enemies-1440x900.jpg",
+      "sha256": "621121867f24552070d56d639b85e9632ca8501653d9aeaea16a4b672160aed1"
+    },
+    {
+      "district": "underpass",
+      "mode": "Boss",
+      "width": 320,
+      "height": 568,
+      "file": "underpass-Boss-320x568.jpg",
+      "sha256": "a00c5d38897c8c5319c22d22b9e4e49951f642816c2cfc6569e468bd52b7dd8d"
+    },
+    {
+      "district": "underpass",
+      "mode": "Boss",
+      "width": 390,
+      "height": 844,
+      "file": "underpass-Boss-390x844.jpg",
+      "sha256": "81874cb3b93fded4efa33770c908c2b39c9f8ef7255bdd9f1f4e1a78320b84fa"
+    },
+    {
+      "district": "underpass",
+      "mode": "Boss",
+      "width": 430,
+      "height": 932,
+      "file": "underpass-Boss-430x932.jpg",
+      "sha256": "0e2c34b28b6dafde4ae31eac5c3d81e071603bd5bdb2fecf52fa168fcc750651"
+    },
+    {
+      "district": "underpass",
+      "mode": "Boss",
+      "width": 844,
+      "height": 390,
+      "file": "underpass-Boss-844x390.jpg",
+      "sha256": "95ab8537daead4cd3bc7e71b8866eeb4c0cffeeb4301b268f3278479aaea6ab5"
+    },
+    {
+      "district": "underpass",
+      "mode": "Boss",
+      "width": 768,
+      "height": 1024,
+      "file": "underpass-Boss-768x1024.jpg",
+      "sha256": "b83462d1d6be81438fcfafa3422001de7f74603910dcaca7c495ac9239c0c779"
+    },
+    {
+      "district": "underpass",
+      "mode": "Boss",
+      "width": 1440,
+      "height": 900,
+      "file": "underpass-Boss-1440x900.jpg",
+      "sha256": "7049a27b1a302660859cc7e9e027db23fc6158b744ced6029af4d35217e22dd8"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "1 enemy",
+      "width": 320,
+      "height": 568,
+      "file": "club-backlot-1-enemy-320x568.jpg",
+      "sha256": "9270998d86209ddebf01e2cc07d412bee008737c3b8eb550b6f57dc9118c0345"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "1 enemy",
+      "width": 390,
+      "height": 844,
+      "file": "club-backlot-1-enemy-390x844.jpg",
+      "sha256": "304b3e3b3dbca01c09a7d84192c45506d0552a9b7627e6fdbacea19e812be791"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "1 enemy",
+      "width": 430,
+      "height": 932,
+      "file": "club-backlot-1-enemy-430x932.jpg",
+      "sha256": "1e65bf90c626a6cb5b904060d80d88fcb41d3d59e85bb547f62f08d3bedcf58d"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "1 enemy",
+      "width": 844,
+      "height": 390,
+      "file": "club-backlot-1-enemy-844x390.jpg",
+      "sha256": "08b4930b687d307d7271856a2790732bc480a8b75faef4abe28faac2e6de1a10"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "1 enemy",
+      "width": 768,
+      "height": 1024,
+      "file": "club-backlot-1-enemy-768x1024.jpg",
+      "sha256": "6da7a31d9b7fa88b32c8bfa66f235bf45f147a76ec4896b3a3c3222012882c43"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "1 enemy",
+      "width": 1440,
+      "height": 900,
+      "file": "club-backlot-1-enemy-1440x900.jpg",
+      "sha256": "055a45243138cebe12e8ba71e0b79aff78ccc8553df5342090964459ebfe80fe"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "2 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "club-backlot-2-enemies-320x568.jpg",
+      "sha256": "8df327746d450e73e28174beae3b7ffc9a1306193a4d9ac1e102868fdb2c519c"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "2 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "club-backlot-2-enemies-390x844.jpg",
+      "sha256": "d97d5302c77d3d9a2080f8425e00957d473c9f2d9db612b750b4fd68560569d7"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "2 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "club-backlot-2-enemies-430x932.jpg",
+      "sha256": "22f18d127d3d5afbf375c5f6fd236c1f7c12c957c63b31c41521dd0d1403c47c"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "2 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "club-backlot-2-enemies-844x390.jpg",
+      "sha256": "7c3d334e792e5c2c09a1a6d011ecfe64f98dc79dbab4be8f9435ec375b01b87d"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "2 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "club-backlot-2-enemies-768x1024.jpg",
+      "sha256": "198fc7318692ffb0765bb8f585b8b38a27158d118e78b381a77aa2069dfd5cd2"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "2 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "club-backlot-2-enemies-1440x900.jpg",
+      "sha256": "d8095e518379a53fc0a0747eb9825422ea9df6cb4f26a390c6a1688d318c969e"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "3 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "club-backlot-3-enemies-320x568.jpg",
+      "sha256": "69d09f709661513e54346faf23bc7e9180a0ff878594d18bff8d1a60d20065b7"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "3 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "club-backlot-3-enemies-390x844.jpg",
+      "sha256": "55dd5902a7779275b5fed1faf145321ada0e12a6fbe8fb0f9d59d99d3106b553"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "3 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "club-backlot-3-enemies-430x932.jpg",
+      "sha256": "8f053fa279a8e8e954311992d5490462d7d9536bda667beebefc8c703a08dafb"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "3 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "club-backlot-3-enemies-844x390.jpg",
+      "sha256": "62e84dbf7a8b724fa918854add178eca2785e38ebc6031eefc20c2aff9ea41f9"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "3 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "club-backlot-3-enemies-768x1024.jpg",
+      "sha256": "7be4583d9be3ea3084e3ed7f9da09d7fcc2b5020533092e4f13e72570d7c42e3"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "3 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "club-backlot-3-enemies-1440x900.jpg",
+      "sha256": "b0d90232cdf58cf9c917483835de5848661a44a654e8f9e19b5641f5644e8e30"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "Boss",
+      "width": 320,
+      "height": 568,
+      "file": "club-backlot-Boss-320x568.jpg",
+      "sha256": "bdedbee76de7601bb7e557d7cc4755a32c3e431ee76d7a0da5f5bca3e29bb19f"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "Boss",
+      "width": 390,
+      "height": 844,
+      "file": "club-backlot-Boss-390x844.jpg",
+      "sha256": "8169165b16498b1d693a403c35082a588d29911aca9c770c27d9c69cde40fba3"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "Boss",
+      "width": 430,
+      "height": 932,
+      "file": "club-backlot-Boss-430x932.jpg",
+      "sha256": "671bf2f0c6628cadda1cd7c1614a67e3971d79e645f2f6a490575f2758505dac"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "Boss",
+      "width": 844,
+      "height": 390,
+      "file": "club-backlot-Boss-844x390.jpg",
+      "sha256": "4f31e4ec2e81bcaa7efecb700aabe800a288350b316c8c8506a4f78694b93964"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "Boss",
+      "width": 768,
+      "height": 1024,
+      "file": "club-backlot-Boss-768x1024.jpg",
+      "sha256": "073260deb4f789678902da6721ee38ceccdce75512499c86399701d49401e84c"
+    },
+    {
+      "district": "club-backlot",
+      "mode": "Boss",
+      "width": 1440,
+      "height": 900,
+      "file": "club-backlot-Boss-1440x900.jpg",
+      "sha256": "b1cf60957bedf7ef4c53f7edad948e150fbb5f5ebe2c7f23b097b0dbb5192f0d"
+    },
+    {
+      "district": "rooftop",
+      "mode": "1 enemy",
+      "width": 320,
+      "height": 568,
+      "file": "rooftop-1-enemy-320x568.jpg",
+      "sha256": "de1528a9d32ec9d798bf5ff292483ef94e7aaf01c5859bd2178ae923d796fc5f"
+    },
+    {
+      "district": "rooftop",
+      "mode": "1 enemy",
+      "width": 390,
+      "height": 844,
+      "file": "rooftop-1-enemy-390x844.jpg",
+      "sha256": "c2ff612318fb66623ded7016dfdc72db2a6271656e2424ae45dd320951049a6e"
+    },
+    {
+      "district": "rooftop",
+      "mode": "1 enemy",
+      "width": 430,
+      "height": 932,
+      "file": "rooftop-1-enemy-430x932.jpg",
+      "sha256": "70ae939986b57b67dd41ea77f9fe5b719750cbed3699116abc8da948ab46b0ff"
+    },
+    {
+      "district": "rooftop",
+      "mode": "1 enemy",
+      "width": 844,
+      "height": 390,
+      "file": "rooftop-1-enemy-844x390.jpg",
+      "sha256": "fb8d285965dc0c1be2e040253c71876a3fadd8009c63e3d0f3097e43385d815e"
+    },
+    {
+      "district": "rooftop",
+      "mode": "1 enemy",
+      "width": 768,
+      "height": 1024,
+      "file": "rooftop-1-enemy-768x1024.jpg",
+      "sha256": "ac38a491bc0b466442fd7fd5782f02ce6cd9b1146eb02fc95b68768ff7a7290e"
+    },
+    {
+      "district": "rooftop",
+      "mode": "1 enemy",
+      "width": 1440,
+      "height": 900,
+      "file": "rooftop-1-enemy-1440x900.jpg",
+      "sha256": "9b6de77457a0a35ac28e3354a6e8bacb1d2738a1a72662cb7fc75d0d764fac71"
+    },
+    {
+      "district": "rooftop",
+      "mode": "2 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "rooftop-2-enemies-320x568.jpg",
+      "sha256": "bbb06793760b7289a42b6c2dd51e90572c4e5a07fed5b3171d4d698c02da58e1"
+    },
+    {
+      "district": "rooftop",
+      "mode": "2 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "rooftop-2-enemies-390x844.jpg",
+      "sha256": "8188ff2956933ca8a877b59cf1985bdf4f589ffb3f353fbfe0ca5533e37044d0"
+    },
+    {
+      "district": "rooftop",
+      "mode": "2 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "rooftop-2-enemies-430x932.jpg",
+      "sha256": "836692ed426be089878ee7868db073fc49934f90413f6a7ca19fc9ec54b889b3"
+    },
+    {
+      "district": "rooftop",
+      "mode": "2 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "rooftop-2-enemies-844x390.jpg",
+      "sha256": "33588fff911fcb07a98765fb448e3c9a41bd5ed392308e6a7e430444a361c9dd"
+    },
+    {
+      "district": "rooftop",
+      "mode": "2 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "rooftop-2-enemies-768x1024.jpg",
+      "sha256": "a6fb12632734961803388d3f03cf9003cf72c18055211e7e1632c0d94bc8e32d"
+    },
+    {
+      "district": "rooftop",
+      "mode": "2 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "rooftop-2-enemies-1440x900.jpg",
+      "sha256": "649eb522c37d6f2d6ee1114a27ff93b565a0f259e472ff5b52438f90e508db31"
+    },
+    {
+      "district": "rooftop",
+      "mode": "3 enemies",
+      "width": 320,
+      "height": 568,
+      "file": "rooftop-3-enemies-320x568.jpg",
+      "sha256": "df4058af28f7580f2652205ac6069f0e4177a8d8490bcbe0e7c9cc73ceb03b14"
+    },
+    {
+      "district": "rooftop",
+      "mode": "3 enemies",
+      "width": 390,
+      "height": 844,
+      "file": "rooftop-3-enemies-390x844.jpg",
+      "sha256": "b8a090dafea022230b5e7f90a380e63da68ae6cbf02cdaf2a6e5807a0ac6a349"
+    },
+    {
+      "district": "rooftop",
+      "mode": "3 enemies",
+      "width": 430,
+      "height": 932,
+      "file": "rooftop-3-enemies-430x932.jpg",
+      "sha256": "193b9546e1bd5c7601a03170cd91f1803e8e5d1146438313ba283dcde2aa67fc"
+    },
+    {
+      "district": "rooftop",
+      "mode": "3 enemies",
+      "width": 844,
+      "height": 390,
+      "file": "rooftop-3-enemies-844x390.jpg",
+      "sha256": "8c189d003af71490caed85996500f22808271083284214cd913c6e277537b0a1"
+    },
+    {
+      "district": "rooftop",
+      "mode": "3 enemies",
+      "width": 768,
+      "height": 1024,
+      "file": "rooftop-3-enemies-768x1024.jpg",
+      "sha256": "9f08465bad18cf8925f595b8c54cbf8d6bfbf5b7c4afa5fc5c9cb640920573ca"
+    },
+    {
+      "district": "rooftop",
+      "mode": "3 enemies",
+      "width": 1440,
+      "height": 900,
+      "file": "rooftop-3-enemies-1440x900.jpg",
+      "sha256": "99aa8c7bcc25aa40c7522842ac5a89197ffbc3e9ef7f91c935e0592901298e60"
+    },
+    {
+      "district": "rooftop",
+      "mode": "Boss",
+      "width": 320,
+      "height": 568,
+      "file": "rooftop-Boss-320x568.jpg",
+      "sha256": "68bd7822f6d16c58c522a88d277359b0e11b299478748a9cabd6ec08d682aef3"
+    },
+    {
+      "district": "rooftop",
+      "mode": "Boss",
+      "width": 390,
+      "height": 844,
+      "file": "rooftop-Boss-390x844.jpg",
+      "sha256": "4737704bf234691ce4ba8830e7dd796186ca7d095f476a43fc2272bbbef755e7"
+    },
+    {
+      "district": "rooftop",
+      "mode": "Boss",
+      "width": 430,
+      "height": 932,
+      "file": "rooftop-Boss-430x932.jpg",
+      "sha256": "bd39d9945ec3b94a68713ab54cd551baf8c1467386a6ebaaa9c4cdb565478458"
+    },
+    {
+      "district": "rooftop",
+      "mode": "Boss",
+      "width": 844,
+      "height": 390,
+      "file": "rooftop-Boss-844x390.jpg",
+      "sha256": "e8aab038d183e51954f88dff855220a001647db000cebb81450467d0b211420c"
+    },
+    {
+      "district": "rooftop",
+      "mode": "Boss",
+      "width": 768,
+      "height": 1024,
+      "file": "rooftop-Boss-768x1024.jpg",
+      "sha256": "e725f785ec36468c30887df45ad460d0c4e224f2781459b757b2ea0d642182cb"
+    },
+    {
+      "district": "rooftop",
+      "mode": "Boss",
+      "width": 1440,
+      "height": 900,
+      "file": "rooftop-Boss-1440x900.jpg",
+      "sha256": "0f1fd73c5cfc176f2f651bc0bd8e51d5d37e3be2b73b95bdfa8e905ea609933d"
+    }
+  ]
+}
