@@ -1079,3 +1079,11 @@ Added a 100 ms blink after 4,400 ms of idle. The accepted edit matches the base 
 Built-in imagegen prompt with `volt-idle-v1.png` as reference:
 
 > Image editing, retain the input framing and aspect ratio. Make one tiny local change to the supplied RGBA game sprite: draw a closed eyelid over his visible eye. Do not redraw anything else. Keep both shoes exactly where they are and leave the same transparent margins on every side. Preserve his hair angle, face profile, silhouette, hands, orange cable loop, palette, shadow colors and original contours. Return the full source-sized image with genuine transparency.
+
+### Neon Sentinel idle visor dip
+
+Added a 120 ms visor dip after 5,800 ms of idle. The accepted edit shares the original canvas, with 98.3% alpha mask intersection-over-union and a .991 foot anchor. The 320 px Pixi captures show the shield and boots aligned through the dip and return. All 550 encounter budgets, sprite bounds, texture caps, playback and TypeScript passed. The latest Chrome draft was discarded after shifting its boot baseline by 19 source pixels.
+
+Built-in imagegen prompt with `neon-sentinel-idle-v1.png` as reference:
+
+> Image editing, preserve the exact input framing and aspect ratio. Make one tiny local change to this RGBA game sprite: darken just the thin coral visor stripe beneath the angular teal helmet, like a brief power dip. Do not redraw anything else. Keep both boots and shield exactly where they are, with the same transparent margins on every side. Preserve every armor contour, head angle, shield angle, weathering, palette and original shadows. Return the full source-sized image with genuine transparency.

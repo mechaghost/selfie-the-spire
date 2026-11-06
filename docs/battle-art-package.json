@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 345757960,
-  "runtimeBytes": 52972684,
+  "sourceBytes": 347487106,
+  "runtimeBytes": 53325226,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -1172,6 +1172,19 @@
       "compositedPSNR": null,
       "sourceBytes": 1626868,
       "runtimeBytes": 309080,
+      "decodedRGBABytes": 1574400
+    },
+    {
+      "asset": "actors/neon-sentinel-blink-v1.webp",
+      "width": 1199,
+      "height": 1312,
+      "runtimeWidth": 600,
+      "runtimeHeight": 656,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1729146,
+      "runtimeBytes": 352542,
       "decodedRGBABytes": 1574400
     },
     {
