@@ -21,16 +21,15 @@
       ],
       "timelines": [
         "idle",
+        "hit",
+        "guard",
+        "cast",
+        "defeat",
+        "celebrate",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "hit",
-        "defeat",
-        "guard",
-        "cast",
-        "celebrate"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "hero-chrome",
@@ -150,13 +149,12 @@
       ],
       "timelines": [
         "idle",
+        "hit",
+        "defeat",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "hit",
-        "defeat"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "neon_junkie",
@@ -410,15 +408,14 @@
       ],
       "timelines": [
         "idle",
+        "hit",
+        "guard",
+        "cast",
+        "defeat",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "hit",
-        "defeat",
-        "guard",
-        "cast"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "vending_golem",
@@ -436,15 +433,14 @@
       ],
       "timelines": [
         "idle",
+        "hit",
+        "guard",
+        "cast",
+        "defeat",
         "attack"
       ],
       "missingContactPoses": [],
-      "missingTimelines": [
-        "hit",
-        "defeat",
-        "guard",
-        "cast"
-      ]
+      "missingTimelines": []
     },
     {
       "id": "neon_sentinel",

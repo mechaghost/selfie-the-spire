@@ -4,12 +4,12 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
-| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast, blink, windup, recovery | idle, attack | none | review |
+| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast, blink, windup, recovery | idle, hit, guard, cast, defeat, celebrate, attack | none | review |
 | hero-chrome | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-volt | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-concrete | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-smoke | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
-| alley_rat | production | attack, hit, defeat, blink, windup, recovery | idle, attack | none | review |
+| alley_rat | production | attack, hit, defeat, blink, windup, recovery | idle, hit, defeat, attack | none | review |
 | neon_junkie | production | attack, hit, cast, defeat, blink | hit, cast, defeat, idle, attack | none | review |
 | graffiti_imp | production | attack, hit, cast, defeat, blink | hit, cast, defeat, idle, attack | none | review |
 | stray_voltage | production | attack, hit, defeat, blink | hit, defeat, idle, attack | none | review |
@@ -21,8 +21,8 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | neon_wraith | production | attack, hit, defeat, cast, blink | hit, defeat, cast, idle, attack | none | review |
 | payphone_phantom | legacy/dev | none | none | attack, hit, defeat, guard, cast | review |
 | sewer_slime | production | attack, hit, defeat, guard, cast, blink | hit, defeat, guard, cast, idle, attack | none | review |
-| fire_escape_spider | production | attack, hit, defeat, cast, guard, blink, windup, recovery | idle, attack | none | review |
-| vending_golem | legacy/dev | attack, hit, defeat, guard, cast, blink, windup, recovery | idle, attack | none | review |
+| fire_escape_spider | production | attack, hit, defeat, cast, guard, blink, windup, recovery | idle, hit, guard, cast, defeat, attack | none | review |
+| vending_golem | legacy/dev | attack, hit, defeat, guard, cast, blink, windup, recovery | idle, hit, guard, cast, defeat, attack | none | review |
 | neon_sentinel | production | attack, hit, guard, cast, defeat | hit, guard, cast, defeat, attack | none | review |
 | chrome_phantom | production | attack, hit, guard, cast, defeat | hit, guard, cast, defeat, attack | none | review |
 | voltage_king | production | attack, hit, guard, cast, defeat | hit, guard, cast, defeat, attack | none | review |

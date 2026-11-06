@@ -72,6 +72,14 @@ ACTOR_VISUALS.fire_escape_spider.keyPoses!.cast={imageUrl:'/assets/battle/actors
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.guard={imageUrl:'/assets/battle/actors/fire-escape-spider-guard-v1.webp',footAnchor:[.5,.913]};
 ACTOR_VISUALS.fire_escape_spider.keyPoses!.blink={imageUrl:'/assets/battle/actors/fire-escape-spider-blink-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.fire_escape_spider.clips.idle={frames:['idle','blink'],durationsMs:[4700,100],loop:true,completion:'idle'};
+for (const id of ['hero-neon','alley_rat','vending_golem','fire_escape_spider']) {
+    const visual=ACTOR_VISUALS[id];
+    for (const reaction of ['hit','guard','cast'] as const) {
+        if (visual.keyPoses?.[reaction]) visual.clips[reaction]={frames:[reaction],durationsMs:[220],loop:false,completion:'idle'};
+    }
+    visual.clips.defeat={frames:['defeat'],durationsMs:[280],loop:false,completion:'hold'};
+}
+ACTOR_VISUALS['hero-neon'].clips.celebrate={frames:['celebrate'],durationsMs:[600],loop:false,completion:'idle'};
 ACTOR_VISUALS.vending_golem.atlasFrames=GOLEM_ATLAS_FRAMES;
 for(const archetype of ['chrome','volt','concrete','smoke']) {
     ACTOR_VISUALS[`hero-${archetype}`].keyPoses={attack:{imageUrl:`/assets/battle/actors/${archetype}-attack-v1.webp`,footAnchor:[.5,.98]}};

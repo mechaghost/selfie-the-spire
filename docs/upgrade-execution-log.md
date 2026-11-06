@@ -877,3 +877,7 @@ Added a 120 ms dip in the eye lamps and coil glow after 5,100 ms of idle, with a
 ### Boombox Brute authored idle
 
 Added a 120 ms dip of the cassette eyes and meter after 5,700 ms of idle. Both poses use the .99 foot anchor. Source alpha masks overlap by 95.9% intersection-over-union. The 320 × 568 Pixi study shows the lights dip with the cabinet and shoes aligned. Captures: `tests/.e2e-out/boombox-idle-{base,dip,restored}-320.png`. The initial tier put Brute Squad over budget, so Boombox's runtime textures now cap at 480 px. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed. Its real opening Strength cast also passed after the tier change.
+
+### Register the starter encounter reaction timelines
+
+Street Runner, Alley Rat, Vending Golem and Fire Escape Spider now explicitly register their existing reaction artwork. Hit, guard and cast retain the prior 220 ms window where applicable. Defeat holds its final frame and Street Runner's celebration retains its 600 ms window. No source art changed. Bounds, clip playback, renderer streaming, TypeScript and all 550 encounter budgets passed. Both candidate Sentinel idle edits reframed the shield and boots, so its idle asset remains open. Linux run 42206236955 passed on the preceding revision.
