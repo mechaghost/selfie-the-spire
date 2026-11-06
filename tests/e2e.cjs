@@ -369,6 +369,56 @@ async function runMechanics(page) {
     await page.evaluate(() => window.__gameStore.getState().abandonRun());
 }
 
+// Use actual enemy effects to exercise the rendered feedback stack.
+async function verifyCombatFeedback(page) {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    try {
+        const cases = [
+            { id: 'graffiti_imp', type: 'Debuff', labels: ['+1 Vulnerable', '+1 Weak'] },
+            { id: 'dj_phantom', hits: 4, labels: ['-5', '-5', '-5', '-5'] },
+        ];
+        for (const fixture of cases) {
+            await page.evaluate(id => {
+                const store = window.__gameStore;
+                const { createEnemyInstance } = window.__enemies;
+                store.getState().initializeRun('combat-feedback-layout');
+                const enemy = createEnemyInstance(id, 'feedback-enemy', store.getState().rng);
+                store.getState().startCombat([enemy]);
+            }, fixture.id);
+            await page.locator('.battle-stage-visual[data-stage-status="ready"] canvas').waitFor();
+            await waitIdleTurn(page);
+            await page.evaluate(({ id, type, hits }) => {
+                const store = window.__gameStore;
+                const pattern = window.__enemies.enemies[id].aiPatterns.find(({ intent }) =>
+                    type ? intent.type === type : intent.hits === hits);
+                store.setState(state => ({ enemies: state.enemies.map(actor => ({ ...actor, intent: pattern.intent })) }));
+            }, fixture);
+            await page.getByRole('button', { name: 'End Turn', exact: true }).click();
+            await page.waitForFunction(count => document.querySelectorAll('.combat-impact').length === count, fixture.labels.length);
+            const measured = await page.locator('.combat-feedback').evaluate(element => ({
+                arena: element.getBoundingClientRect().toJSON(),
+                notices: Array.from(element.querySelectorAll('.combat-impact'), notice => ({
+                    label: notice.textContent,
+                    box: notice.getBoundingClientRect().toJSON(),
+                })),
+            }));
+            const { arena, notices } = measured;
+            const fits = notices.every(({ box }, index) =>
+                box.left >= arena.left && box.right <= arena.right &&
+                box.top >= arena.top && box.bottom <= arena.bottom &&
+                (index === 0 || box.top >= notices[index - 1].box.bottom));
+            check(`[feedback] ${fixture.id} notices fit without overlap at 320 px`,
+                fits && notices.map(notice => notice.label).join('|') === fixture.labels.join('|'),
+                JSON.stringify(notices));
+            await waitIdleTurn(page);
+            await page.evaluate(() => window.__gameStore.getState().abandonRun());
+        }
+    } finally {
+        await page.emulateMedia({ reducedMotion: 'no-preference' });
+    }
+}
+
 // ── Full-run suite (victory / defeat) ───────────────────────────────
 async function runFullRun(page, runMode) {
     console.log(`— full run: ${runMode} —`);
@@ -576,7 +626,10 @@ async function main() {
     try {
         const page = await newPage(browser, consoleErrors, failedRequests);
 
-        if (mode === 'mechanics' || mode === 'all') await runMechanics(page);
+        if (mode === 'mechanics' || mode === 'all') {
+            await runMechanics(page);
+            await verifyCombatFeedback(page);
+        }
         if (mode === 'victory' || mode === 'all') await runFullRun(page, 'victory');
         if (mode === 'defeat' || mode === 'all') await runFullRun(page, 'defeat');
 

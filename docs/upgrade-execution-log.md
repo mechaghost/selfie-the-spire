@@ -729,3 +729,7 @@ Added a raised-claw power-up with brighter amber tubes. The 1230 × 1278 cutout 
 Combat feedback now groups each target's notices into a vertical stack with 32 px rows. The stack repositions as a unit to fit above the hand, with no layout transition that could briefly leave the newest row outside the arena. Individual labels retain the horizontal edge clamp and normal-motion rise.
 
 At 320 × 568 with reduced motion, browser fixtures ran Graffiti Imp's two-debuff intent and DJ Phantom's four-hit intent. Both sets of notice boxes were fully inside the arena and vertically separated when measured together. TypeScript and the combat presentation suite passed.
+
+### Browser regression for stacked combat notices
+
+The browser mechanics suite now resolves Graffiti Imp's real two-debuff intent and DJ Phantom's real four-hit intent at 320 × 568 with reduced motion. It verifies the exact labels and the bounds of every notice immediately after the last one appears. The local mechanics suite passed both cases with no browser errors. CI already runs this suite as part of `node tests/e2e.cjs all`.
