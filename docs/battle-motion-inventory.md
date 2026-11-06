@@ -1,6 +1,6 @@
 # Runtime motion inventory
 
-Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors, but authored idle animation is still required. The Neon hero attack has authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
+Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors, but authored idle animation is still required. The Neon hero and Rat attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
@@ -9,7 +9,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | hero-volt | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-concrete | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-smoke | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
-| alley_rat | production | attack, hit, defeat | attack | none | review |
+| alley_rat | production | attack, hit, defeat, windup, recovery | attack | none | review |
 | neon_junkie | production | attack | attack | hit, defeat, cast | review |
 | graffiti_imp | production | attack | attack | hit, defeat, cast | review |
 | stray_voltage | production | attack | attack | hit, defeat | review |

@@ -1,0 +1,20 @@
+# Rat attack sequence
+
+Generated using the built-in image generation tool with existing Rat idle and attack artwork as references. Saved originals: `art-source/battle/actors/alley-rat-windup-v1.png` and `art-source/battle/actors/alley-rat-recovery-v1.png`. Runtime derivatives use the same names under `public/assets/battle/actors/` with `.webp` extensions.
+
+Both sources are 1536×1024 RGBA, alpha range 0–254. Alpha >=128 bounds: wind-up (31,126)–(1517,930), recovery (18,204)–(1522,871). Foot anchors [.5,.908] and [.5,.851] align planted claws with the ground. Existing attack width correction is unchanged.
+
+Timeline: wind-up 0–79ms, attack 80–239ms (queue contact 140ms), recovery 240–319ms, then idle. Reduced motion skips the sequence. Generic clip validation now discovers every registered attack timeline rather than relying on a hard-coded actor list.
+
+Verified: all 76 runtime derivatives losslessly match their resized RGBA source; artwork audit 588,240 samples with zero confirmed findings; clip tests include Rat frame boundaries and reduced-motion skip. Browser Pixi review at 390×844 with three monsters and ten cards inspected 0ms crouch and 260ms recovery; no HUD overlap or browser warnings/errors. Evidence: `tests/.e2e-out/rat-windup-mobile.png` and `tests/.e2e-out/rat-recovery-mobile.png`. Return-to-idle is verified by automated playback tests, not the final browser screenshot, which captured a stale frame during the time-field update.
+
+Status remains review. These are three keyposes, not a polished interpolated animation or completed W4 encounter. Head/body scale consistency across transitions and authored idle/hit/defeat animation still need art review. Local only.
+
+## Wind-up prompt
+
+Edit the referenced original Neo Miami Alley Rat game sprite into its pre-attack anticipation pose. Single full-body rat facing LEFT, same three-quarter side camera. Compress into a low crouch, hind legs coiled beneath hips, front paws planted, shoulders lowered, head aimed left, mouth shut with incisors showing, ears tilted slightly back, tail curls up behind on right. Preserve its exact identity: purple charcoal shaggy fur, scarred pink ears and cheek scar, glowing turquoise eyes, worn teal harness with brass buckle and pouch on visible flank, round brass tag, pink segmented tail, four clawed pink paws. Match reference illustrated painterly ink style and warm left/cool right rim light. Use a 1536x1024 landscape canvas, body centered horizontally, planted paws at approximately 94 percent image height, complete silhouette including whiskers and tail, transparent margin. Genuine transparent background, no environment, no floor, no glow backdrop, no text or card frame. This is the compressed anticipation before the airborne attack reference, visibly distinct from ordinary standing idle. Keep head and torso proportions consistent.
+
+## Recovery prompt
+
+Edit the referenced original Neo Miami Alley Rat game sprite into its post-lunge landing recovery pose. Single full-body rat facing LEFT, same three-quarter side camera. Front paws planted wide and ahead near screen-left, elbows bending to absorb landing, head lifted slightly with mouth closing, rear legs settling behind on right, back lengthened horizontally, tail lowered into a rightward S curl. Distinct from coiled anticipation and from airborne attack. Preserve exact identity: purple charcoal shaggy fur, scarred pink ears and cheek scar, glowing turquoise eyes, worn teal harness with brass buckle and pouch on visible flank, round brass tag, pink segmented tail, four clawed pink paws. Match reference illustrated painterly ink style, warm left/cool right rim light, head and torso proportions. Landscape 1536x1024 canvas, body centered, front paws at about94 percent image height; complete silhouette with transparent padding, no clipped whiskers or tail. Genuine transparent background, no environment or floor or backdrop glow, no text/card frame/dust effects. This is a game animation keypose after the airborne pounce reference.
+

@@ -142,7 +142,9 @@
       "keyPoses": [
         "attack",
         "hit",
-        "defeat"
+        "defeat",
+        "windup",
+        "recovery"
       ],
       "timelines": [
         "attack"

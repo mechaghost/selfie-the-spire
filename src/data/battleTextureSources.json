@@ -27,6 +27,20 @@
     "runtimeHeight": 512,
     "resolution": 0.5
   },
+  "/assets/battle/actors/alley-rat-recovery-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 768,
+    "runtimeHeight": 512,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/alley-rat-windup-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 768,
+    "runtimeHeight": 512,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/boombox-brute-attack-v1.webp": {
     "width": 1536,
     "height": 1024,

@@ -8,7 +8,7 @@ assert.equal(clipFrameAt({...clip,loop:true},400),'b');
 assert.equal(clipFrameAt({...clip,completion:'hold'},10000),'c');
 assert.equal(clipFrameAt(clip,140,true),null);
 assert.equal(clipFrameAt({...clip,completion:'hold'},0,true),'c');
-for(const id of ['hero-neon','hero-chrome','hero-volt','hero-concrete','hero-smoke','alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost','graffiti_imp','neon_junkie','stray_voltage','dumpster_crawler']) {
+for(const id of Object.keys(ACTOR_VISUALS).filter(id=>ACTOR_VISUALS[id].clips.attack)) {
  const visual=ACTOR_VISUALS[id]; validateActorVisual(visual);
  assert.equal(clipFrameAt(visual.clips.attack,140),'attack','contact matches combat impact beat');
  assert.equal(clipFrameAt(visual.clips.attack,320),null,'never hold stale attack');
@@ -20,3 +20,8 @@ for(const [ms,frame] of [[0,'windup'],[79,'windup'],[80,'attack'],[140,'attack']
 for(const scale of [0,-1,NaN,Infinity,5])assert.throws(()=>validateActorVisual({...neon,keyPoses:{...neon.keyPoses,windup:{...neon.keyPoses.windup,scale}}}));
 assert.equal(clipFrameAt(neon.clips.attack,0,true),null);
 console.log('PASS: Neon authored anticipation/contact/recovery boundaries and invalid per-frame scale rejection');
+
+const rat=ACTOR_VISUALS.alley_rat;
+for(const [ms,frame] of [[0,'windup'],[79,'windup'],[80,'attack'],[140,'attack'],[239,'attack'],[240,'recovery'],[319,'recovery'],[320,null]])assert.equal(clipFrameAt(rat.clips.attack,ms),frame);
+assert.equal(clipFrameAt(rat.clips.attack,0,true),null);
+console.log('PASS: Rat authored anticipation/contact/recovery boundaries and reduced-motion skip');
