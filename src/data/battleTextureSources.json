@@ -391,6 +391,13 @@
     "runtimeHeight": 480,
     "resolution": 0.3755868544600939
   },
+  "/assets/battle/actors/graffiti-imp-blink-v1.webp": {
+    "width": 1230,
+    "height": 1278,
+    "runtimeWidth": 401,
+    "runtimeHeight": 416,
+    "resolution": 0.325508607198748
+  },
   "/assets/battle/actors/graffiti-imp-cast-v1.webp": {
     "width": 1230,
     "height": 1278,

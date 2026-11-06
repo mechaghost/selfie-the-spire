@@ -857,3 +857,7 @@ Added a 110 ms blink after 5,300 ms of idle. The .962 blink anchor compensates f
 ### Smoke Specter authored idle
 
 Added a 110 ms narrowing of the eye glow after 5,500 ms of idle. The blink uses a .989 tail anchor and its source alpha mask overlaps the idle by 98.8% intersection-over-union. The 320 × 568 Pixi captures show the hood and tail staying aligned: `tests/.e2e-out/specter-idle-{base,dip,restored}-320.png`. The new frame took Spectral Fog over budget at the original tier. The Specter's runtime poses now cap at 600 px, bringing all 550 encounter combinations under 5 MB. The two-Specter guard/cast fixture passed at 320 × 568 and 844 × 390 after resizing. Texture, bounds, playback and TypeScript passed.
+
+### Graffiti Imp authored idle
+
+Added a 100 ms blink after 3,700 ms of idle, retaining the .99 foot anchor. Source alpha masks overlap by 98.9% intersection-over-union. At 320 × 568, the Pixi captures show the eyes closing while the spray can and boots stay aligned. The original runtime tier pushed two Street Ambush combinations over 5 MB, so this blink alone uses a 416 px runtime tier. All 550 encounter budgets now pass, with a maximum transfer estimate of 4,980,502 bytes. Texture, bounds, playback and TypeScript passed. The preceding Linux run 42203859119 passed.

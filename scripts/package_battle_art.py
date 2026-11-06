@@ -40,6 +40,8 @@ def encode(source):
             resolution=min(resolution,672/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith(('sewer-slime-', 'graffiti-imp-', 'stray-voltage-')):
             resolution=min(resolution,480/max(rgba.size))
+        if relative.parts[0]=='actors' and relative.name=='graffiti-imp-blink-v1.webp':
+            resolution=min(resolution,416/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith('boombox-brute-'):
             resolution=min(resolution,540/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith('street-runner-'):
