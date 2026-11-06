@@ -48,6 +48,7 @@ console.log('PASS: actual HP/Block deltas, capped healing, fully blocked hits, r
 const djAttack = api.enemies.dj_phantom.aiPatterns.find(({intent}) => intent.hits === 4)?.intent;
 assert.ok(djAttack, 'DJ Phantom four-hit move exists');
 const djTurns = [];
+const djTurnDurations = [];
 for (const mode of ['normal', 'reduced', 'off']) {
     api.setCombatMotionMode(mode);
     store.getState().initializeRun('dj-four-hit');
@@ -69,6 +70,7 @@ for (const mode of ['normal', 'reduced', 'off']) {
     const stopHits = api.subscribeImpacts(notice => {
         if (notice.effect === 'damage' && notice.targetId === 'player') hits.push({...notice, at: now});
     });
+    const turnStarted = now;
     try {
         store.getState().endTurn();
         settle();
@@ -83,9 +85,32 @@ for (const mode of ['normal', 'reduced', 'off']) {
     assert.deepEqual(hits.map((hit, i) => hit.at - lunges[i]), Array(4).fill(api.combatDelay('anticipation')));
     assert.equal(store.getState().player.hp, startingHp - 20);
     assert.ok(store.getState().isPlayerTurn);
+    djTurnDurations.push(now - turnStarted);
     djTurns.push(snapshot());
 }
 assert.deepEqual(djTurns[0], djTurns[1]);
 assert.deepEqual(djTurns[0], djTurns[2]);
+assert.ok(djTurnDurations[0] <= 4000);
+assert.equal(djTurnDurations[2], 0);
+
+const retaliationDurations = [];
+for (const mode of ['normal', 'reduced', 'off']) {
+    api.setCombatMotionMode(mode);
+    store.getState().initializeRun('crawler-guard');
+    const enemy = api.createEnemyInstance('alley_rat', 'spiked-rat', store.getState().rng);
+    store.getState().startCombat([enemy]);
+    settle();
+    const {hand, player} = store.getState();
+    const jab = hand.find(card => card.id === 'neon_jab');
+    assert.ok(jab);
+    store.setState({enemies:[{...store.getState().enemies[0], statuses:[{id:'thorns',name:'Spikes',amount:3}]}]});
+    const cardStarted = now;
+    store.getState().playCard(jab.instanceId, enemy.id);
+    settle();
+    retaliationDurations.push(now - cardStarted);
+    assert.equal(store.getState().player.hp, player.hp - 3);
+}
+assert.ok(retaliationDurations[0] <= 800);
+assert.equal(retaliationDurations[2], 0);
 api.setCombatMotionMode('normal');
-console.log('PASS: DJ Phantom four lunge starts and four distinct impacts, with identical combat outcomes across motion modes');
+console.log('PASS: four-hit DJ turn and Jab with Spikes, normal/reduced/off timings', {djTurnDurations, retaliationDurations});

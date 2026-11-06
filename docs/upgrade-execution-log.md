@@ -1109,3 +1109,11 @@ Codex reviewed the 21 encounter actors in the Ocean Drive Pixi arena study at 32
 Approved the 21 actors for the authored key-pose baseline. Checked silhouette and material continuity, consistent ground contact or hover, distinction between contact and reaction poses, and recognizable collapsed silhouettes. Idle light changes are deliberately subtle. Rat and Spider use distinct attack anticipation and recovery poses; the remaining reviewed enemies use authored contact art and a renderer lunge. Payphone Phantom and Vending Golem remain outside the current encounter pools. A malformed or retired map encounter reference now falls back to Alley Rat instead of the deleted Jaw Worm template. The save test covers missing and retired IDs through stable checkpoint reloads.
 
 The roster release command passes for all 26 current stock heroes and encounter actors. This approval is the local art pass and leaves physical-device and deployment verification open.
+
+### Release candidate pacing and device availability
+
+The combat presentation test now measures the four-hit DJ Phantom turn and a Jab against a target with Spikes, using the coordinator's fake clock. Normal/reduced/off results were 1,660/620/0 ms for DJ's turn and 320/100/0 ms for Jab with retaliation. The test verifies all four DJ impacts and the 3 HP retaliation. These measurements cover queue timing, separate from browser frame performance.
+
+SafariDriver found the connected physical iPhone 13 running iOS 27.0 but refused to create a session because Web Inspector is disabled on the device. No physical combat, camera, rotation, or background/resume result was obtained.
+
+The optimized arena build from `fed03f9` passed all eight WebKit smoke scenarios on macOS, including the local selfie flow, reward and map reload, rotation, and both forced WebGL-loss paths. The first navigation timed out; the rerun completed. These cases use emulated touch and viewport dimensions.
