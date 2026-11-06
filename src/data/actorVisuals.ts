@@ -72,8 +72,9 @@ ACTOR_VISUALS.graffiti_imp.keyPoses={attack:{imageUrl:'/assets/battle/actors/gra
 ACTOR_VISUALS.neon_junkie.keyPoses={attack:{imageUrl:'/assets/battle/actors/neon-junkie-attack-v1.webp',footAnchor:[.5,.979]}};
 ACTOR_VISUALS.stray_voltage.keyPoses={attack:{imageUrl:'/assets/battle/actors/stray-voltage-attack-v1.webp',footAnchor:[.5,.92]}};
 ACTOR_VISUALS.dumpster_crawler.keyPoses={attack:{imageUrl:'/assets/battle/actors/dumpster-crawler-attack-v1.webp',footAnchor:[.5,.91]}};
+ACTOR_VISUALS.boombox_brute.keyPoses={attack:{imageUrl:'/assets/battle/actors/boombox-brute-attack-v1.webp',footAnchor:[.5,.982],scale:1378/1536}};
 // Explicit key-pose timelines; these do not represent approved multi-frame animation art.
-for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost','graffiti_imp','neon_junkie','stray_voltage','dumpster_crawler']) {
+for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_golem','fire_escape_spider','smoke_specter','taxi_ghost','graffiti_imp','neon_junkie','stray_voltage','dumpster_crawler','boombox_brute']) {
     ACTOR_VISUALS[id].clips.attack={frames:['idle','attack','idle'],durationsMs:[80,160,80],loop:false,completion:'idle'};
 }
 ACTOR_VISUALS['hero-neon'].keyPoses!.windup={imageUrl:'/assets/battle/actors/street-runner-windup-v1.webp',footAnchor:[.5,.974],scale:1422/1478};
