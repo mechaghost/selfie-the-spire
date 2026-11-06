@@ -773,3 +773,7 @@ Linux run 42195618670 passed the production arena cases and five-district route 
 ### Leave room above short combat sprites
 
 Combat notices now use the available gap between the HUD and the sprite when that gap fits the whole stack. The calculation shares the renderer's idle projection and reserves space for known authored poses. Actors without packaged dimensions and tightly packed layouts keep the existing lower placement. The 320 × 568 Spectral Fog capture shows +1 Strength above Taxi Ghost's roof beacon, with the cab and raised suspension visible and the Specter's Block notice still separate. TypeScript, mechanics (including the Imp and DJ stacks), texture caps and both production build variants passed.
+
+### Manhole Mimic guard
+
+Added a planted crouch with the iron lid clamped shut, a .981 foot anchor and a 160/60 ms guard/idle clip. At 320 × 568, the existing Defend intent showed the braced lid and +10 Block with player HP unchanged. Capture: `tests/.e2e-out/manhole-mimic-live-guard-320.png`. All 550 encounter budgets, texture caps, playback and TypeScript passed, with zero confirmed intersections in 1,117,260 bounds samples. The separate production build of the preceding notice-placement commit passed all eight Chromium smoke cases, including rotation and both graphics-loss paths.
