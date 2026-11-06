@@ -1,9 +1,15 @@
 ---
-name: Slay the Tower Card Architecture
+name: slay-the-tower-cards
 description: Documentation on the Card data models, UI component structure, and reusability of the Card UI in Slay the Tower.
 ---
 
 # Slay the Tower Card Architecture
+
+## Project requirements
+
+Do not use GitHub Actions for this project: do not create, enable, dispatch, or wait for Actions workflows, and do not make them a release gate. Run builds and regression tests locally, deploy through Railway, and verify the live domain. This is an explicit user requirement; only a later explicit user instruction can change it.
+
+Dragging cards is core gameplay, not optional. A layout change must preserve mouse and touch drag/drop, the targeting arrow and visible card, hand scrolling, invalid-drop cancellation, and rotation recovery. Verify these with direct drag input using `tests/drag-live.cjs`; tap-to-play checks alone are insufficient.
 
 ## Overview
 The card system in Slay the Tower is broken down into three distinct layers to ensure optimal reusability and clean separation of concerns:
@@ -48,7 +54,7 @@ interface CardItemProps {
     card: Card;                  // The raw data model to render
     style?: React.CSSProperties; // Allowing the parent to control layout/transforms
     canPlay?: boolean;           // Determines hover state and grayscale styling
-    isDraggable?: boolean;       // Toggles drag-and-drop HTML5 events
+    isDraggable?: boolean;       // Enables pointer-based dragging and hand gestures
 }
 ```
 
@@ -59,8 +65,9 @@ interface CardItemProps {
 - **Artwork Container (`.card-artwork`):** Maps to `card.imageId` to render a fixed `3:2` aspect ratio image, nestled between the sub-header and description text.
 
 ### Drag and Drop Architecture
-When `isDraggable` is true, HTML5 Drag Events are attached directly to the `CardItem`. 
-If a card targets a specific `Enemy`, the native ghost drag image is suppressed, and coordinates are continuously pushed to the global Zustand `GameStore`, which drives a Bezier curve targeting arrow in `CombatView.tsx`.
+`CardItem` uses captured Pointer Events for mouse and touch. The hand's orientation determines the gesture: a side hand scrolls vertically and cards drag horizontally into the arena; a bottom hand scrolls horizontally and cards lift into the arena. Keep these paths in one gesture controller so browser panning cannot cancel card dragging. Scrolling remains available for cards that cannot currently be played.
+
+Render the dragged card in a body portal so the hand's scrolling/overflow container cannot clip it. Enemy-targeted cards also show the targeting arrow. Preview and release must use the same CSS-pixel target bounds. Self/all-enemy cards use the actual arena rectangle, including a side-hand layout. Invalid releases and pointer cancellation must not spend energy or change the saved combat checkpoint.
 
 ### Animation Trajectories
 Cards entering or leaving the Hand HUD mathematically transition from the invisible Draw/Discard bounds defined by `CombatView`. 
