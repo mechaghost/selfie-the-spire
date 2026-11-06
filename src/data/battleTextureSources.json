@@ -468,6 +468,20 @@
     "runtimeHeight": 647,
     "resolution": 0.5
   },
+  "/assets/battle/actors/neon-yakuza-defeat-v1.webp": {
+    "width": 1217,
+    "height": 1293,
+    "runtimeWidth": 609,
+    "runtimeHeight": 647,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/neon-yakuza-hit-v1.webp": {
+    "width": 1217,
+    "height": 1293,
+    "runtimeWidth": 609,
+    "runtimeHeight": 647,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/neon-yakuza-idle-v1.webp": {
     "width": 1217,
     "height": 1292,

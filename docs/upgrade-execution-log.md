@@ -691,3 +691,9 @@ The 320 × 568 solo Pixi study shows the bright recoil crown close to the HUD an
 Added a brief piston pullback and a held seated shutdown with the switch panel dark. Both 1119 × 1406 sources preserve the original cabinet and arm shapes. Hit uses a .925 foot anchor and 160/60 ms hit/idle timing. Defeat uses .955 and a 280 ms hold.
 
 The 320 × 568 solo Pixi study showed a distinct shutdown below the HUD. The recoil is subtler than the slam, with most of the change in the piston and rear claw. The defeated target was disabled with its ground marker hidden. No browser page errors. Captures: `tests/.e2e-out/circuit-breaker-{slam,hit,defeat}-320.png`. All 550 encounter art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,112,076 samples. Full-speed elite and physical-device review remain open.
+
+### Neon Yakuza recoil and defeat
+
+Added a backward, chest-clutching recoil and a held seated collapse with a bowed head. The sword stays sheathed in both, leaving the draw slash distinct. Both sources are 1217 × 1293. Hit uses .985 and a 160/60 ms hit/idle clip. Defeat uses .989 and a 280 ms hold.
+
+At 320 × 568 in the solo Pixi study, the recoil horns sit close to the HUD but remain visible. The defeated target was disabled and its marker hidden. No browser page errors. Captures: `tests/.e2e-out/neon-yakuza-{hit,defeat}-320.png`. All 550 encounter art budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,112,724 samples. Full-speed elite and physical-device review remain open.
