@@ -491,3 +491,7 @@ Generation prompt: One CAST frame for this exact Subway Wyrm game sprite, announ
 The cab lamps dim for 120 ms after 6,100 ms of base idle. Both frames use the .99 foot anchor, and reduced motion holds the base frame. All 550 art budgets passed. The bounds audit found zero confirmed intersections across 1,034,892 samples. Texture, playback and TypeScript checks passed. The idle transition, guard and cast still need mobile visual review.
 
 Generation prompt: Precise edit of this exact Subway Wyrm to create a mechanical idle blink. Only dim the three glowing amber lamps on the cab to dark amber glass inside their original housings. Do not change the head shape, mouth, fangs, colors elsewhere, cars, tail, limbs, body silhouette, camera, texture, framing, canvas size or foot position. Same 1536x1024 frame. Transparent exterior and gaps between coils. The three small lamp lenses are the only change. No new parts, haze, shadow, floor or scenery.
+
+### Subway Wyrm compact guard, cast and idle review
+
+At 320 × 568 in the Pixi boss study, the 80 ms guard and cast cleared the HUD and hand. The raised claw and upward roar read as separate gestures. The lamps were dim at 6,219 ms and bright at 6,220 ms without visible displacement at the baseline. Browser logs showed no warnings or errors. Captures are `tests/.e2e-out/wyrm-guard-320.jpg`, `wyrm-cast-320.jpg`, `wyrm-lamps-dim-320.jpg`, and `wyrm-lamps-open-320.jpg`. Full-speed and physical-device review remain open.
