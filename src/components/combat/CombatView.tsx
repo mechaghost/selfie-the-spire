@@ -150,13 +150,13 @@ export function CombatView() {
                 </div>
             </div>
 
-            <div className="hand-caption" aria-hidden="true"><span>Your hand<small className="hand-scroll-hint"> · swipe</small></span><span>Inspect a card. Make your move.</span></div>
+            <div className="hand-caption" aria-hidden="true"><span>Your hand<small className="hand-scroll-hint"> · swipe</small></span><span>Drag a card into the arena.</span></div>
             <div className={`deck-table ${isDisabled ? 'disabled' : ''}`}>
-                {actorArena && <div className="side-hand-caption">Your hand · {handCount}{handCount > 1 && ' · Swipe for cards'}</div>}
+                {actorArena && <div className="side-hand-caption">Your hand · {handCount}{handCount > 1 && ' · Scroll ↕'}<span className="side-drag-hint">Drag left to play</span></div>}
                 <HandHUD targetControls={actorArena?targetControls:'list'} onTargetControlsChange={actorArena?setTargetControls:undefined}/>
             </div>
 
-            {!actorArena && <TargetingArrow />}
+            <TargetingArrow />
             <CombatResultOverlay animateDefeat={actorArena} />
         </div>
     );

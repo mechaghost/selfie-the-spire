@@ -11,3 +11,21 @@
 }
 
 .save-status { position: fixed; bottom: 12px; left: 12px; right: 12px; margin: auto; max-width: 560px; z-index: 10000; padding: 12px 16px; background: #241b10; border: 1px solid #ffca85; color: #fff3dc; border-radius: 8px; font: 13px/1.5 var(--font-family-base); pointer-events: none; }
+
+.landscape-prompt {
+    width: min(340px, calc(100% - 48px));
+    box-sizing: border-box;
+    padding: 24px;
+    border: 1px solid #628695;
+    border-radius: 12px;
+    background: #142637;
+    color: #f5f3ed;
+    text-align: center;
+    font: 1rem/1.5 var(--font-family-base);
+}
+.landscape-prompt::backdrop { background: #091525; }
+.landscape-prompt svg { color: #83d9d0; }
+.landscape-prompt h1 { margin: 8px 0; font: 2rem/1.1 var(--font-family-display); }
+.landscape-prompt p { margin: 0; }
+#root:has(> .landscape-prompt[open]) > :not(.landscape-prompt),
+body:has(.landscape-prompt[open]) dialog:not(.landscape-prompt) { visibility: hidden; }

@@ -35,28 +35,20 @@ async function verifyTargetingAfterRotation(page, viewport, targetPrompt, target
         label: element.getAttribute('aria-label'),
     })));
     const energy = await page.locator('.energy-current').textContent();
-    const portrait = await targets.first().boundingBox();
-    for (const size of [{ width: 844, height: 390 }, viewport]) {
-        await page.setViewportSize(size);
-        await page.waitForFunction(({ expectedWidth, portraitX, landscape }) => {
-            const arena = document.querySelector('.battle-arena')?.getBoundingClientRect();
-            const targets = [...document.querySelectorAll('.actor-target.is-selectable:not(:disabled)')];
-            const boxes = targets.map(target => target.getBoundingClientRect());
-            return innerWidth === expectedWidth && arena && boxes.length === 3 &&
-                (Math.abs(boxes[0].left - portraitX) > 1) === landscape &&
-                boxes.every((box, index) => box.width >= 44 && box.height >= 44 &&
-                    box.left >= arena.left && box.right <= arena.right &&
-                    box.top >= arena.top && box.bottom <= arena.bottom &&
-                    boxes.slice(0, index).every(other => other.right <= box.left || box.right <= other.left ||
-                        other.bottom <= box.top || box.bottom <= other.top));
-        }, { expectedWidth: size.width, portraitX: portrait.x, landscape: size.width > size.height });
-        assert.equal(await targetPrompt.isVisible(), true);
-        assert.equal(await page.locator('.energy-current').textContent(), energy);
-        assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => ({
-            id: element.dataset.combatTarget,
-            label: element.getAttribute('aria-label'),
-        }))), before);
-    }
+    const rotate = page.getByRole('dialog', { name: 'Rotate your device' });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await rotate.waitFor();
+    await page.keyboard.press('Escape');
+    assert.equal(await rotate.isVisible(), true, 'Portrait play cannot be enabled by dismissing the prompt');
+    assert.equal(await page.evaluate(() => document.querySelector('.landscape-prompt').matches(':modal')), true);
+    await page.setViewportSize(viewport);
+    await rotate.waitFor({ state: 'hidden' });
+    await targetPrompt.waitFor();
+    assert.equal(await page.locator('.energy-current').textContent(), energy);
+    assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => ({
+        id: element.dataset.combatTarget,
+        label: element.getAttribute('aria-label'),
+    }))), before);
 }
 
 async function playFight(page, { viewport, input, reducedMotion = 'no-preference', loseGraphics, rotate }) {
@@ -107,16 +99,16 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
             await Promise.all(element.getAnimations({ subtree: true })
                 .filter(animation => animation.effect.getTiming().iterations !== Infinity)
                 .map(animation => animation.finished.catch(() => {})));
-            element.scrollTo({ left: element.scrollWidth, behavior: 'instant' });
-            const { left, right } = element.getBoundingClientRect();
+            element.scrollTo({ top: element.scrollHeight, behavior: 'instant' });
+            const { left, right, top, bottom } = element.getBoundingClientRect();
             const card = element.querySelector('.card-slot:last-child .card').getBoundingClientRect();
-            const measured = { left, right, cardLeft: card.left, cardRight: card.right, width: card.width, height: card.height };
-            element.scrollTo({ left: 0, behavior: 'instant' });
+            const measured = { left, right, top, bottom, cardTop:card.top, cardBottom:card.bottom, cardLeft: card.left, cardRight: card.right, width: card.width, height: card.height };
+            element.scrollTo({ top: 0, behavior: 'instant' });
             return measured;
         });
         assert.equal(edges.width, 152);
         assert.equal(edges.height, 220);
-        assert.ok(edges.cardLeft >= edges.left && edges.cardRight <= edges.right,
+        assert.ok(edges.cardLeft >= edges.left && edges.cardRight <= edges.right && edges.cardTop >= edges.top && edges.cardBottom <= edges.bottom,
             `Landscape hand clips the last card at its scroll limit: ${JSON.stringify(edges)}`);
     }
     if (input === 'keyboard') {
@@ -264,12 +256,14 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     await map.waitFor();
     const stop = await currentStop.getAttribute('aria-label');
     assert.match(stop, /stop 1.*Ocean Drive/);
+    const readCheckpoint = () => page.evaluate(() => JSON.parse(localStorage.getItem('stt_run')));
+    const beforeReload = await readCheckpoint();
+    assert.ok(beforeReload, 'Reward checkpoint exists before reload');
     await page.reload();
     await map.waitFor();
     assert.equal(await currentStop.getAttribute('aria-label'), stop);
-    const save = await page.evaluate(() => Object.values(localStorage).map(raw => {
-        try { return JSON.parse(raw); } catch { return null; }
-    }).find(value => Array.isArray(value?.masterDeck)));
+    const save = await readCheckpoint();
+    assert.deepEqual(save, beforeReload, 'Complete reward checkpoint survives reload');
     assert.equal(save.masterDeck.length, 13);
     assert.ok(save.player.gold > 99);
     assert.deepEqual(errors, []);
@@ -367,7 +361,7 @@ async function verifyLocalSelfie(page) {
     assert.deepEqual(remoteRequests, []);
     assert.deepEqual(thirdPartyRequests, []);
     assert.deepEqual(errors, []);
-    console.log('PASS 320×568: photo picker, transparent preview, same sprite after reload and WebGL loss, no API calls');
+    console.log('PASS mobile landscape: photo picker, transparent preview, same sprite after reload and WebGL loss, no API calls');
 }
 
 async function verifyMissingActorRecovery(page) {
@@ -397,7 +391,7 @@ async function verifyMissingActorRecovery(page) {
     await retry.tap();
     await stage.and(page.locator('[data-stage-status="ready"]')).locator('canvas').waitFor();
     assert.deepEqual(await checkpoint(), afterTurn, 'Graphics retry preserves the completed turn');
-    console.log('PASS 320×568: failed hero image uses a playable silhouette, and retry restores graphics without changing the run');
+    console.log('PASS mobile landscape: failed hero image uses a playable silhouette, and retry restores graphics without changing the run');
 }
 
 async function main() {
@@ -407,40 +401,43 @@ async function main() {
         args: ['--enable-unsafe-swiftshader'],
     }));
     try {
-        const selfiePage = await browser.newPage({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
+        const selfiePage = await browser.newPage({ viewport: { width: 844, height: 390 }, isMobile: true, hasTouch: true });
         try {
+            await selfiePage.setViewportSize({ width: 390, height: 844 });
+            await selfiePage.goto(base);
+            await selfiePage.getByRole('dialog', { name: 'Rotate your device' }).waitFor();
+            await selfiePage.setViewportSize({ width: 844, height: 390 });
             await verifyLocalSelfie(selfiePage);
         } finally {
             await selfiePage.close();
         }
-        const recoveryPage = await browser.newPage({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
+        const recoveryPage = await browser.newPage({ viewport: { width: 568, height: 320 }, isMobile: true, hasTouch: true });
         try {
             await verifyMissingActorRecovery(recoveryPage);
         } finally {
             await recoveryPage.close();
         }
         const cases = [
-            { viewport: { width: 320, height: 568 }, input: 'touch' },
             { viewport: { width: 844, height: 390 }, input: 'touch' },
             { viewport: { width: 320, height: 568 }, input: 'keyboard' },
-            { viewport: { width: 320, height: 568 }, input: 'touch', reducedMotion: 'reduce' },
-            { viewport: { width: 320, height: 568 }, input: 'touch', loseGraphics: 'targeting' },
-            { viewport: { width: 320, height: 568 }, input: 'touch', loseGraphics: 'resolution' },
-            { viewport: { width: 320, height: 568 }, input: 'touch', rotate: true },
+            { viewport: { width: 844, height: 390 }, input: 'touch', reducedMotion: 'reduce' },
+            { viewport: { width: 844, height: 390 }, input: 'touch', loseGraphics: 'targeting' },
+            { viewport: { width: 844, height: 390 }, input: 'touch', loseGraphics: 'resolution' },
+            { viewport: { width: 844, height: 390 }, input: 'touch', rotate: true },
         ];
-        let portraitBaseline;
+        let baseline;
         for (const testCase of cases) {
             const { viewport, input, reducedMotion = 'no-preference', loseGraphics, rotate } = testCase;
             const page = await browser.newPage({ viewport, isMobile: true, hasTouch: input === 'touch', reducedMotion });
             try {
                 const result = await playFight(page, testCase);
-                if (!portraitBaseline) portraitBaseline = result;
+                if (!baseline) baseline = result;
                 if (reducedMotion === 'reduce') {
-                    assert.deepEqual(result, portraitBaseline, 'Reduced motion changed the fight or saved outcome');
-                    console.log('PASS normal and reduced motion produce identical portrait combat and reward outcomes');
+                    assert.deepEqual(result, baseline, 'Reduced motion changed the fight or saved outcome');
+                    console.log('PASS normal and reduced motion produce identical combat and reward outcomes');
                 }
-                if (loseGraphics) assert.deepEqual(result, portraitBaseline, 'Graphics loss or retry changed the fight or saved outcome');
-                if (rotate) assert.deepEqual(result, portraitBaseline, 'Rotation changed the fight or saved outcome');
+                if (loseGraphics) assert.deepEqual(result, baseline, 'Graphics loss or retry changed the fight or saved outcome');
+                if (rotate) assert.deepEqual(result, baseline, 'Rotation changed the fight or saved outcome');
             } finally {
                 await page.close();
             }

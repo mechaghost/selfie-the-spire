@@ -55,6 +55,7 @@ jobs:
           node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4173 --strictPort > tests/.e2e-out/arena-preview.log 2>&1 &
           trap 'kill "$!" 2>/dev/null || true' EXIT
           curl --retry 20 --retry-connrefused --retry-delay 1 --fail --silent http://127.0.0.1:4173/ > /dev/null
+          E2E_BASE=http://127.0.0.1:4173 node tests/drag-live.cjs
           E2E_BASE=http://127.0.0.1:4173 node tests/arena-smoke.cjs 2>&1 | tee tests/.e2e-out/arena-smoke.log
       - name: Verify a legal route through all five districts
         run: node tests/e2e.cjs all 2>&1 | tee tests/.e2e-out/arena-full-run.log

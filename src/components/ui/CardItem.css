@@ -122,3 +122,8 @@
     .card-slot, .card { transition: none; }
     .card-playing-wrapper { animation: none; opacity: 0; }
 }
+
+/* Drag art lives above the scrolling hand, so it never clips at its edge. */
+.card.is-drag-source { opacity:.3; }
+.card-drag-preview { position:fixed; z-index:1100; pointer-events:none; margin:0; opacity:.88; transform:rotate(-4deg) scale(.9); transition:none; box-shadow:0 12px 28px #0009; }
+.card-drag-preview .card-artwork-wrap { flex-shrink:1; min-height:36px; }

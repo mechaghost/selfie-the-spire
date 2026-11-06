@@ -68,6 +68,7 @@ function serveIndex(c: Context) {
         const html = host
             ? indexTemplate.replaceAll(FALLBACK_ORIGIN, `${proto}://${host}`)
             : indexTemplate;
+        c.header('Cache-Control', 'no-cache');
         return c.html(html);
     } catch {
         // dist not built (dev mode) — vite serves the client itself

@@ -45,7 +45,7 @@ export function battleLayout(width: number, height: number, enemyIds: readonly s
             width: targetWidth, height: targetHeight,
         };
         const hudWidth = Math.min(lane - 4, 144);
-        return {id,index,foot,art,target,hud:{x:center-hudWidth/2,y:5,width:hudWidth,height:hudHeight}};
+        return {id,index,foot,art,target,hud:{x:center-hudWidth/2,y:Math.max(5,bodyY-hudHeight-12),width:hudWidth,height:hudHeight}};
     };
     const hero = makeSlot('player',-1,edge+lane*.5);
     const enemies = enemyIds.map((id,index)=>makeSlot(id,index,edge+lane*(1+3*(index+.5)/enemyIds.length)));
