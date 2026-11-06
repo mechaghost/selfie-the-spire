@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 96000372,
-  "runtimeBytes": 22949408,
+  "sourceBytes": 99242722,
+  "runtimeBytes": 25280406,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -566,6 +566,17 @@
       "decodedRGBABytes": 6291456
     },
     {
+      "asset": "locations/ocean-drive-background-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1780063,
+      "runtimeBytes": 1306370,
+      "decodedRGBABytes": 6291456
+    },
+    {
       "asset": "locations/ocean-drive-foreground-v1.webp",
       "width": 1536,
       "height": 1024,
@@ -574,6 +585,17 @@
       "resolution": 1,
       "sourceBytes": 628288,
       "runtimeBytes": 432756,
+      "decodedRGBABytes": 6291456
+    },
+    {
+      "asset": "locations/ocean-drive-ground-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 1536,
+      "runtimeHeight": 1024,
+      "resolution": 1,
+      "sourceBytes": 1462287,
+      "runtimeBytes": 1024628,
       "decodedRGBABytes": 6291456
     },
     {

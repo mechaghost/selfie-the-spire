@@ -2,7 +2,7 @@ import { Application, Container, Graphics, ImageSource, Rectangle, Sprite, Textu
 import { ActorClip, ActorVisual, LocationVisual } from '../core/battleVisualModels';
 import { BattleLayout, ActorSlot } from './battleLayout';
 import { ImpactNotice, subscribeImpacts, subscribePresentation } from './CombatPresentation';
-import { frameLocation, frameForeground } from './locationFraming';
+import { frameLocationLayer, frameForeground } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
 import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActorMotion } from './actorMotion';
 import { locationAtmosphere } from './locationAtmosphere';
@@ -148,11 +148,6 @@ export class BattleScene {
         for(let i=0;i<12;i++) this.ground.rect(i*width/12,height*.1+(i%3)*7,width/15,height*.63).fill({color:0x081527,alpha:.35});
         this.ground.rect(0,height*horizon,width,height*(1-horizon)).fill(snapshot.location.ground)
             .rect(0,height*horizon,width,2).fill({color:snapshot.location.accent,alpha:.55});
-        for(const {sprite,layer} of this.backgroundSprites) {
-            if(layer.plane==='foreground')continue;
-            const frame=frameLocation(width,height,sprite.texture.width,sprite.texture.height,.43,horizon===.32 ? .32 : .5);
-            sprite.position.set(frame.x,frame.y);sprite.width=frame.width;sprite.height=frame.height;
-        }
         for (const actor of snapshot.actors) {
             const slot = actor.id === 'player' ? snapshot.layout.hero : snapshot.layout.enemies.find(slot=>slot.id===actor.id);
             const sprite = this.sprites.get(actor.id);
@@ -208,9 +203,11 @@ export class BattleScene {
     private paintAtmosphere() {
         this.atmosphere.clear();
         const {layout,location,reducedMotion}=this.snapshot;
+        const horizon=layout.width<600 && layout.height>=300 && layout.enemies.length===3 ? .32 : .5;
         for(const {sprite,layer} of this.backgroundSprites) {
-            if(layer.plane!=='foreground')continue;
-            const frame=frameForeground(layout.width,layout.height,sprite.texture.width,sprite.texture.height,performance.now(),reducedMotion || document.hidden,layer.sway);
+            const frame=layer.plane==='foreground'
+                ? frameForeground(layout.width,layout.height,sprite.texture.width,sprite.texture.height,performance.now(),reducedMotion || document.hidden,layer.sway)
+                : frameLocationLayer(layout.width,layout.height,sprite.texture.width,sprite.texture.height,horizon,performance.now(),reducedMotion || document.hidden,layer.plane==='ground'?0:layer.sway);
             sprite.position.set(frame.x,frame.y);sprite.width=frame.width;sprite.height=frame.height;
         }
         for(const mark of locationAtmosphere(location.id,layout.width,layout.height,performance.now(),reducedMotion || document.hidden)) {

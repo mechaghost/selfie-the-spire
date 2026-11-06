@@ -393,3 +393,9 @@ Generated and archived transparent Ocean Drive palm corners with the built-in im
 Verified the scene study at 390×844 and 844×390 with three enemies and ten cards; no actor occlusion, rectangular matte or browser warnings/errors. Captured ocean-layer-mobile.png and ocean-layer-landscape.png. The actual Full hand review fixture also reloaded in-browser with all ten cards and no recovery warning (the initial warning came from the old invalid stored fixture and disappeared after creating the repaired fixture).
 
 Client TypeScript, renderer streaming/layer order/reduced motion/disposal, asset coverage/framing, texture budget and diff checks pass. Packaged 56 loose assets with exact decoded derivative equality. This adds one independent foreground, not full five-location ground/background separation or full parallax approval. No deployment.
+
+### Ocean Drive independent background and ground
+
+Generated separate scenery and wet-road layers from the original plate with built-in imagegen, preserving originals. Added shared aspect-preserving overscan/crop for layered scenery, bounded background drift and enforced stationary ground; reduced motion disables drift. Ocean Drive now has three independently streamed layers. Full prompts and source/runtime paths are in ocean-drive-separated-layers.md.
+
+Verified browser study at 390×844 and 1280×800 with three enemies and ten cards: no visible curb gap, matte rectangle or actor displacement; logs empty. Tests cover 84 drift frames, viewport coverage, aspect ratio, fixed ground/reduced motion, and actual texture alpha overlap (minimum 98.04% coverage). TypeScript and renderer streaming/lifecycle checks pass. Packaged 58 assets. Four districts still need separation; broader art/performance/device/release gates remain open. No deployment.
