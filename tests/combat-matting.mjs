@@ -7,21 +7,27 @@ await build({stdin:{contents:"export * from './server/src/services/removeCombatB
 process.env.COMBAT_MATTING_MODEL_PATH=resolve('server/models/u2net.onnx');
 const {removeCombatBackground,prepareCombatCutout}=await import('../server/node_modules/.cache/combat-matting/processor.mjs');
 const {default:sharp}=await import('../server/node_modules/sharp/lib/index.js');
-const original=await readFile('art-source/battle/actors/street-runner-idle-v1.png');
-const opaque=await sharp(original).flatten({background:'#e6e6e6'}).png().toBuffer();
-const started=performance.now();
-const cutout=await removeCombatBackground(opaque);
-const durationMs=Math.round(performance.now()-started);
-const personal=await prepareCombatCutout(cutout);
+const results=[];
 await mkdir('tests/.e2e-out',{recursive:true});
-await writeFile('tests/.e2e-out/matted-hero.webp',Buffer.from(personal.split(',')[1],'base64'));
-const metadata=await sharp(cutout).metadata();assert.equal(metadata.hasAlpha,true);
-const expected=await sharp(original).ensureAlpha().raw().toBuffer({resolveWithObject:true});
-const actual=await sharp(cutout).ensureAlpha().raw().toBuffer({resolveWithObject:true});
-assert.equal(expected.info.width,actual.info.width);assert.equal(expected.info.height,actual.info.height);
-let intersection=0,union=0;
-for(let i=3;i<expected.data.length;i+=4){const a=expected.data[i]>127,b=actual.data[i]>127;if(a&&b)intersection++;if(a||b)union++;}
-const iou=intersection/union;
-assert.ok(iou>.9,`foreground mask IoU ${iou} must exceed .9 for controlled hero fixture`);
+for(const name of ['street-runner','chrome','volt','concrete','smoke']) {
+ const original=await readFile(`art-source/battle/actors/${name}-idle-v1.png`);
+ const opaque=await sharp(original).flatten({background:'#e6e6e6'}).png().toBuffer();
+ const started=performance.now();
+ const cutout=await removeCombatBackground(opaque);
+ const durationMs=Math.round(performance.now()-started);
+ const personal=await prepareCombatCutout(cutout);
+ await writeFile(`tests/.e2e-out/matted-${name}.webp`,Buffer.from(personal.split(',')[1],'base64'));
+ const metadata=await sharp(cutout).metadata();assert.equal(metadata.hasAlpha,true);
+ const expected=await sharp(original).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+ const actual=await sharp(cutout).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+ assert.equal(expected.info.width,actual.info.width);assert.equal(expected.info.height,actual.info.height);
+ let intersection=0,union=0,originalForeground=0;
+ for(let i=3;i<expected.data.length;i+=4){const a=expected.data[i]>127,b=actual.data[i]>127;if(a)originalForeground++;if(a&&b)intersection++;if(a||b)union++;}
+ const iou=intersection/union,foregroundRetention=intersection/originalForeground;
+ assert.ok(iou>.9,`${name}: foreground mask IoU ${iou} must exceed .9`);
+ assert.ok(foregroundRetention>.97,`${name}: foreground retention ${foregroundRetention} must exceed .97`);
+ results.push({name,durationMs,maskIoU:iou,foregroundRetention,outputCharacters:personal.length});
+}
 await assert.rejects(removeCombatBackground(Buffer.from('bad')));
-console.log(JSON.stringify({result:'PASS',durationMs,maskIoU:iou,outputCharacters:personal.length,note:'Controlled artwork fixture, not live selfie generation or deployment performance'}));
+await writeFile('tests/.e2e-out/combat-matting-report.json',JSON.stringify(results,null,2));
+console.log(JSON.stringify({result:'PASS',results,note:'Controlled artwork fixtures, not live selfie generation or deployment performance'}));

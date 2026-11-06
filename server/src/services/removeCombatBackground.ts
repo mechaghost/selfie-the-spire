@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import {refineStudioMatte} from './refineStudioMatte.js';
 import { InferenceSession, Tensor } from 'onnxruntime-node';
 import { fileURLToPath } from 'node:url';
 
@@ -40,6 +41,7 @@ export async function removeCombatBackground(input: Buffer): Promise<Buffer> {
         const mask=Buffer.from(Uint8Array.from(prediction, value=>Math.round(255*Math.max(0,Math.min(1,(value-low)/(high-low))))));
         const alpha=await sharp(mask,{raw:{width:320,height:320,channels:1}}).resize(metadata.width,metadata.height,{fit:'fill'}).toColourspace('b-w').raw().toBuffer();
         const color=await source.removeAlpha().toColourspace('srgb').raw().toBuffer();
+        refineStudioMatte(color,alpha,metadata.width,metadata.height);
         return sharp(color,{raw:{width:metadata.width,height:metadata.height,channels:3}})
             .joinChannel(alpha,{raw:{width:metadata.width,height:metadata.height,channels:1}}).png().toBuffer();
     } finally {busy=false;}
