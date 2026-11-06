@@ -881,3 +881,7 @@ Added a 120 ms dip of the cassette eyes and meter after 5,700 ms of idle. Both p
 ### Register the starter encounter reaction timelines
 
 Street Runner, Alley Rat, Vending Golem and Fire Escape Spider now explicitly register their existing reaction artwork. Hit, guard and cast retain the prior 220 ms window where applicable. Defeat holds its final frame and Street Runner's celebration retains its 600 ms window. No source art changed. Bounds, clip playback, renderer streaming, TypeScript and all 550 encounter budgets passed. Both candidate Sentinel idle edits reframed the shield and boots, so its idle asset remains open. Linux run 42206236955 passed on the preceding revision.
+
+### Chrome Phantom authored idle
+
+Added a 110 ms eye-light dip after 5,200 ms of idle. The .989 foot anchor compensates for the two-pixel difference in the source silhouette baseline. Source alpha masks overlap by 98.2% intersection-over-union. At 320 × 568, the Pixi study shows the eye lights dim and return while the chrome armor and feet stay aligned. Captures: `tests/.e2e-out/phantom-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
