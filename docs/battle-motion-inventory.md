@@ -1,6 +1,6 @@
 # Runtime motion inventory
 
-Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Street Runner, Rat, Golem, Spider, Wraith, Slime, Billboard, Subway Wyrm and DJ Phantom have prototype authored blink loops; other actors still need authored idle sequences, and all idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
+Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Street Runner, Rat, Golem, Spider, Wraith, Slime, Billboard, Subway Wyrm, DJ Phantom and Taxi Ghost have prototype authored blink loops; other actors still need authored idle sequences, and all idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
@@ -15,7 +15,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | stray_voltage | production | attack, hit, defeat | hit, defeat, attack | none | review |
 | dumpster_crawler | production | attack, hit, guard, defeat | hit, guard, defeat, attack | none | review |
 | smoke_specter | production | attack, hit, guard, cast, defeat | hit, guard, cast, defeat, attack | none | review |
-| taxi_ghost | production | attack, hit, cast, defeat | hit, cast, defeat, attack | none | review |
+| taxi_ghost | production | attack, hit, cast, defeat, blink | hit, cast, defeat, idle, attack | none | review |
 | manhole_mimic | production | attack, hit, guard, cast, defeat | hit, guard, cast, defeat, attack | none | review |
 | boombox_brute | production | attack, hit, cast, defeat | hit, cast, defeat, attack | none | review |
 | neon_wraith | production | attack, hit, defeat, cast, blink | hit, defeat, cast, idle, attack | none | review |

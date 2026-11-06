@@ -874,6 +874,13 @@
     "runtimeHeight": 400,
     "resolution": 0.390625
   },
+  "/assets/battle/actors/taxi-ghost-blink-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 600,
+    "runtimeHeight": 400,
+    "resolution": 0.390625
+  },
   "/assets/battle/actors/taxi-ghost-cast-v1.webp": {
     "width": 1536,
     "height": 1024,

@@ -39,6 +39,36 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "specter_pair",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 667918,
+        "decodedBytes": 3809484
+      },
+      "all": {
+        "files": 24,
+        "bytes": 4957204,
+        "decodedBytes": 39977852
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "specter_pair",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 667918,
+        "decodedBytes": 3809484
+      },
+      "all": {
+        "files": 25,
+        "bytes": 4944578,
+        "decodedBytes": 46269308
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "brute_squad",
       "location": "rooftop",
       "required": {
@@ -125,36 +155,6 @@
         "files": 28,
         "bytes": 4874770,
         "decodedBytes": 41357312
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "underground_nest",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 524534,
-        "decodedBytes": 3212800
-      },
-      "all": {
-        "files": 28,
-        "bytes": 4849786,
-        "decodedBytes": 41357312
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "street_ambush",
-      "location": "rooftop",
-      "required": {
-        "files": 4,
-        "bytes": 708970,
-        "decodedBytes": 3980544
-      },
-      "all": {
-        "files": 28,
-        "bytes": 4836242,
-        "decodedBytes": 39557408
       }
     }
   ],
@@ -191,6 +191,36 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "specter_pair",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 667918,
+        "decodedBytes": 3809484
+      },
+      "all": {
+        "files": 24,
+        "bytes": 4957204,
+        "decodedBytes": 39977852
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "specter_pair",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 667918,
+        "decodedBytes": 3809484
+      },
+      "all": {
+        "files": 25,
+        "bytes": 4944578,
+        "decodedBytes": 46269308
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "brute_squad",
       "location": "rooftop",
       "required": {
@@ -281,6 +311,66 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "ghost_and_rat",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 624674,
+        "decodedBytes": 3439104
+      },
+      "all": {
+        "files": 25,
+        "bytes": 4867346,
+        "decodedBytes": 38524448
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "specter_pair",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 667918,
+        "decodedBytes": 3809484
+      },
+      "all": {
+        "files": 24,
+        "bytes": 4864028,
+        "decodedBytes": 39977852
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "ghost_and_rat",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 624674,
+        "decodedBytes": 3439104
+      },
+      "all": {
+        "files": 26,
+        "bytes": 4854720,
+        "decodedBytes": 44815904
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "specter_pair",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 667918,
+        "decodedBytes": 3809484
+      },
+      "all": {
+        "files": 24,
+        "bytes": 4853316,
+        "decodedBytes": 39977852
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "underground_nest",
       "location": "club-backlot",
       "required": {
@@ -307,6 +397,21 @@
         "files": 28,
         "bytes": 4836242,
         "decodedBytes": 39557408
+      }
+    },
+    {
+      "hero": "hero-neon",
+      "encounter": "specter_pair",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 667918,
+        "decodedBytes": 3809484
+      },
+      "all": {
+        "files": 24,
+        "bytes": 4828332,
+        "decodedBytes": 39977852
       }
     },
     {
@@ -386,6 +491,21 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "ghost_and_rat",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 624674,
+        "decodedBytes": 3439104
+      },
+      "all": {
+        "files": 25,
+        "bytes": 4774170,
+        "decodedBytes": 38524448
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "brute_squad",
       "location": "club-backlot",
       "required": {
@@ -416,6 +536,21 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "ghost_and_rat",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 624674,
+        "decodedBytes": 3439104
+      },
+      "all": {
+        "files": 25,
+        "bytes": 4763458,
+        "decodedBytes": 38524448
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "street_ambush",
       "location": "underpass",
       "required": {
@@ -431,6 +566,21 @@
     },
     {
       "hero": "hero-neon",
+      "encounter": "ghost_and_rat",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 624674,
+        "decodedBytes": 3439104
+      },
+      "all": {
+        "files": 25,
+        "bytes": 4738474,
+        "decodedBytes": 38524448
+      }
+    },
+    {
+      "hero": "hero-neon",
       "encounter": "street_ambush",
       "location": "wynwood",
       "required": {
@@ -442,36 +592,6 @@
         "files": 28,
         "bytes": 4732354,
         "decodedBytes": 39557408
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "specter_pair",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 667918,
-        "decodedBytes": 3809484
-      },
-      "all": {
-        "files": 23,
-        "bytes": 4720060,
-        "decodedBytes": 39017852
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "specter_pair",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 667918,
-        "decodedBytes": 3809484
-      },
-      "all": {
-        "files": 24,
-        "bytes": 4707434,
-        "decodedBytes": 45309308
       }
     },
     {
@@ -521,21 +641,6 @@
     },
     {
       "hero": "hero-neon",
-      "encounter": "ghost_and_rat",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 624674,
-        "decodedBytes": 3439104
-      },
-      "all": {
-        "files": 24,
-        "bytes": 4630202,
-        "decodedBytes": 37564448
-      }
-    },
-    {
-      "hero": "hero-neon",
       "encounter": "subway_wyrm_boss",
       "location": "rooftop",
       "required": {
@@ -551,36 +656,6 @@
     },
     {
       "hero": "hero-neon",
-      "encounter": "specter_pair",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 667918,
-        "decodedBytes": 3809484
-      },
-      "all": {
-        "files": 23,
-        "bytes": 4626884,
-        "decodedBytes": 39017852
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "ghost_and_rat",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 624674,
-        "decodedBytes": 3439104
-      },
-      "all": {
-        "files": 25,
-        "bytes": 4617576,
-        "decodedBytes": 43855904
-      }
-    },
-    {
-      "hero": "hero-neon",
       "encounter": "subway_wyrm_boss",
       "location": "ocean-drive",
       "required": {
@@ -592,21 +667,6 @@
         "files": 20,
         "bytes": 4617106,
         "decodedBytes": 42446336
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "specter_pair",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 667918,
-        "decodedBytes": 3809484
-      },
-      "all": {
-        "files": 23,
-        "bytes": 4616172,
-        "decodedBytes": 39017852
       }
     },
     {
@@ -641,21 +701,6 @@
     },
     {
       "hero": "hero-neon",
-      "encounter": "specter_pair",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 667918,
-        "decodedBytes": 3809484
-      },
-      "all": {
-        "files": 23,
-        "bytes": 4591188,
-        "decodedBytes": 39017852
-      }
-    },
-    {
-      "hero": "hero-neon",
       "encounter": "voltage_king_elite",
       "location": "club-backlot",
       "required": {
@@ -667,21 +712,6 @@
         "files": 18,
         "bytes": 4568096,
         "decodedBytes": 34577192
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "ghost_and_rat",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 624674,
-        "decodedBytes": 3439104
-      },
-      "all": {
-        "files": 24,
-        "bytes": 4537026,
-        "decodedBytes": 37564448
       }
     },
     {
@@ -701,21 +731,6 @@
     },
     {
       "hero": "hero-neon",
-      "encounter": "ghost_and_rat",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 624674,
-        "decodedBytes": 3439104
-      },
-      "all": {
-        "files": 24,
-        "bytes": 4526314,
-        "decodedBytes": 37564448
-      }
-    },
-    {
-      "hero": "hero-neon",
       "encounter": "subway_wyrm_boss",
       "location": "wynwood",
       "required": {
@@ -727,21 +742,6 @@
         "files": 19,
         "bytes": 4525844,
         "decodedBytes": 36154880
-      }
-    },
-    {
-      "hero": "hero-neon",
-      "encounter": "ghost_and_rat",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 624674,
-        "decodedBytes": 3439104
-      },
-      "all": {
-        "files": 24,
-        "bytes": 4501330,
-        "decodedBytes": 37564448
       }
     },
     {
@@ -1225,6 +1225,36 @@
       }
     },
     {
+      "hero": "hero-volt",
+      "encounter": "specter_pair",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 748726,
+        "decodedBytes": 4109612
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3761882,
+        "decodedBytes": 30565948
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "specter_pair",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 745004,
+        "decodedBytes": 4108296
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3760500,
+        "decodedBytes": 30563316
+      }
+    },
+    {
       "hero": "hero-neon",
       "encounter": "dumpster_crawler_solo",
       "location": "underpass",
@@ -1237,6 +1267,36 @@
         "files": 17,
         "bytes": 3757404,
         "decodedBytes": 33009152
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "specter_pair",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 748726,
+        "decodedBytes": 4109612
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3749256,
+        "decodedBytes": 36857404
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "specter_pair",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 745004,
+        "decodedBytes": 4108296
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3747874,
+        "decodedBytes": 36854772
       }
     },
     {
@@ -1300,6 +1360,21 @@
       }
     },
     {
+      "hero": "hero-chrome",
+      "encounter": "specter_pair",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 736016,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3714424,
+        "decodedBytes": 30564732
+      }
+    },
+    {
       "hero": "hero-neon",
       "encounter": "neon_yakuza_elite",
       "location": "rooftop",
@@ -1312,6 +1387,21 @@
         "files": 17,
         "bytes": 3703650,
         "decodedBytes": 33021484
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "specter_pair",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 736016,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3701798,
+        "decodedBytes": 36856188
       }
     },
     {
@@ -1510,6 +1600,36 @@
       }
     },
     {
+      "hero": "hero-volt",
+      "encounter": "ghost_and_rat",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 705482,
+        "decodedBytes": 3739232
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3672024,
+        "decodedBytes": 29112544
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "ghost_and_rat",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 701760,
+        "decodedBytes": 3737916
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3670642,
+        "decodedBytes": 29109912
+      }
+    },
+    {
       "hero": "hero-smoke",
       "encounter": "underground_nest",
       "location": "rooftop",
@@ -1525,6 +1645,81 @@
       }
     },
     {
+      "hero": "hero-volt",
+      "encounter": "specter_pair",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 748726,
+        "decodedBytes": 4109612
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3668706,
+        "decodedBytes": 30565948
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "specter_pair",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 745004,
+        "decodedBytes": 4108296
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3667324,
+        "decodedBytes": 30563316
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "ghost_and_rat",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 705482,
+        "decodedBytes": 3739232
+      },
+      "all": {
+        "files": 18,
+        "bytes": 3659398,
+        "decodedBytes": 35404000
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "ghost_and_rat",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 701760,
+        "decodedBytes": 3737916
+      },
+      "all": {
+        "files": 18,
+        "bytes": 3658016,
+        "decodedBytes": 35401368
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "specter_pair",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 748726,
+        "decodedBytes": 4109612
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3657994,
+        "decodedBytes": 30565948
+      }
+    },
+    {
       "hero": "hero-smoke",
       "encounter": "underground_nest",
       "location": "ocean-drive",
@@ -1537,6 +1732,21 @@
         "files": 21,
         "bytes": 3656616,
         "decodedBytes": 38235648
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "specter_pair",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 745004,
+        "decodedBytes": 4108296
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3656612,
+        "decodedBytes": 30563316
       }
     },
     {
@@ -1597,6 +1807,21 @@
         "files": 11,
         "bytes": 3651244,
         "decodedBytes": 26752284
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "specter_pair",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 680398,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3647788,
+        "decodedBytes": 30564732
       }
     },
     {
@@ -1675,6 +1900,36 @@
       }
     },
     {
+      "hero": "hero-smoke",
+      "encounter": "specter_pair",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 680398,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3635162,
+        "decodedBytes": 36856188
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "specter_pair",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 748726,
+        "decodedBytes": 4109612
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3633010,
+        "decodedBytes": 30565948
+      }
+    },
+    {
       "hero": "hero-chrome",
       "encounter": "underground_nest",
       "location": "wynwood",
@@ -1687,6 +1942,21 @@
         "files": 20,
         "bytes": 3631990,
         "decodedBytes": 31944192
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "specter_pair",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 745004,
+        "decodedBytes": 4108296
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3631628,
+        "decodedBytes": 30563316
       }
     },
     {
@@ -1717,6 +1987,66 @@
         "files": 21,
         "bytes": 3626912,
         "decodedBytes": 36434328
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "ghost_and_rat",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 692772,
+        "decodedBytes": 3738624
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3624566,
+        "decodedBytes": 29111328
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "specter_pair",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 736016,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3621248,
+        "decodedBytes": 30564732
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "ghost_and_rat",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 692772,
+        "decodedBytes": 3738624
+      },
+      "all": {
+        "files": 18,
+        "bytes": 3611940,
+        "decodedBytes": 35402784
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "specter_pair",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 736016,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3610536,
+        "decodedBytes": 30564732
       }
     },
     {
@@ -1900,6 +2230,21 @@
       }
     },
     {
+      "hero": "hero-chrome",
+      "encounter": "specter_pair",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 736016,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3585552,
+        "decodedBytes": 30564732
+      }
+    },
+    {
       "hero": "hero-smoke",
       "encounter": "brute_squad",
       "location": "rooftop",
@@ -1942,6 +2287,36 @@
         "files": 21,
         "bytes": 3580836,
         "decodedBytes": 36435744
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "ghost_and_rat",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 705482,
+        "decodedBytes": 3739232
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3578848,
+        "decodedBytes": 29112544
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "ghost_and_rat",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 701760,
+        "decodedBytes": 3737916
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3577466,
+        "decodedBytes": 29109912
       }
     },
     {
@@ -2080,6 +2455,36 @@
       }
     },
     {
+      "hero": "hero-volt",
+      "encounter": "ghost_and_rat",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 705482,
+        "decodedBytes": 3739232
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3568136,
+        "decodedBytes": 29112544
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "ghost_and_rat",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 701760,
+        "decodedBytes": 3737916
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3566754,
+        "decodedBytes": 29109912
+      }
+    },
+    {
       "hero": "hero-smoke",
       "encounter": "underground_nest",
       "location": "wynwood",
@@ -2137,6 +2542,36 @@
         "files": 11,
         "bytes": 3558068,
         "decodedBytes": 26752284
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "ghost_and_rat",
+      "location": "rooftop",
+      "required": {
+        "files": 3,
+        "bytes": 637154,
+        "decodedBytes": 3738624
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3557930,
+        "decodedBytes": 29111328
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "specter_pair",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 680398,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3554612,
+        "decodedBytes": 30564732
       }
     },
     {
@@ -2201,6 +2636,66 @@
     },
     {
       "hero": "hero-smoke",
+      "encounter": "ghost_and_rat",
+      "location": "ocean-drive",
+      "required": {
+        "files": 3,
+        "bytes": 637154,
+        "decodedBytes": 3738624
+      },
+      "all": {
+        "files": 18,
+        "bytes": 3545304,
+        "decodedBytes": 35402784
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "specter_pair",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 680398,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3543900,
+        "decodedBytes": 30564732
+      }
+    },
+    {
+      "hero": "hero-volt",
+      "encounter": "ghost_and_rat",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 705482,
+        "decodedBytes": 3739232
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3543152,
+        "decodedBytes": 29112544
+      }
+    },
+    {
+      "hero": "hero-concrete",
+      "encounter": "ghost_and_rat",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 701760,
+        "decodedBytes": 3737916
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3541770,
+        "decodedBytes": 29109912
+      }
+    },
+    {
+      "hero": "hero-smoke",
       "encounter": "underground_nest",
       "location": "club-backlot",
       "required": {
@@ -2245,6 +2740,21 @@
       }
     },
     {
+      "hero": "hero-chrome",
+      "encounter": "ghost_and_rat",
+      "location": "underpass",
+      "required": {
+        "files": 3,
+        "bytes": 692772,
+        "decodedBytes": 3738624
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3531390,
+        "decodedBytes": 29111328
+      }
+    },
+    {
       "hero": "hero-smoke",
       "encounter": "street_ambush",
       "location": "rooftop",
@@ -2257,36 +2767,6 @@
         "files": 20,
         "bytes": 3526826,
         "decodedBytes": 30144288
-      }
-    },
-    {
-      "hero": "hero-volt",
-      "encounter": "specter_pair",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 748726,
-        "decodedBytes": 4109612
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3524738,
-        "decodedBytes": 29605948
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "specter_pair",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 745004,
-        "decodedBytes": 4108296
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3523356,
-        "decodedBytes": 29603316
       }
     },
     {
@@ -2317,6 +2797,36 @@
         "files": 11,
         "bytes": 3522372,
         "decodedBytes": 26752284
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "ghost_and_rat",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 692772,
+        "decodedBytes": 3738624
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3520678,
+        "decodedBytes": 29111328
+      }
+    },
+    {
+      "hero": "hero-smoke",
+      "encounter": "specter_pair",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 680398,
+        "decodedBytes": 4109004
+      },
+      "all": {
+        "files": 16,
+        "bytes": 3518916,
+        "decodedBytes": 30564732
       }
     },
     {
@@ -2351,21 +2861,6 @@
     },
     {
       "hero": "hero-volt",
-      "encounter": "specter_pair",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 748726,
-        "decodedBytes": 4109612
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3512112,
-        "decodedBytes": 35897404
-      }
-    },
-    {
-      "hero": "hero-volt",
       "encounter": "street_ambush",
       "location": "club-backlot",
       "required": {
@@ -2377,21 +2872,6 @@
         "files": 20,
         "bytes": 3512048,
         "decodedBytes": 30145504
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "specter_pair",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 745004,
-        "decodedBytes": 4108296
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3510730,
-        "decodedBytes": 35894772
       }
     },
     {
@@ -2482,6 +2962,21 @@
         "files": 18,
         "bytes": 3496728,
         "decodedBytes": 34582016
+      }
+    },
+    {
+      "hero": "hero-chrome",
+      "encounter": "ghost_and_rat",
+      "location": "club-backlot",
+      "required": {
+        "files": 3,
+        "bytes": 692772,
+        "decodedBytes": 3738624
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3495694,
+        "decodedBytes": 29111328
       }
     },
     {
@@ -2650,21 +3145,6 @@
       }
     },
     {
-      "hero": "hero-chrome",
-      "encounter": "specter_pair",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 736016,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3477280,
-        "decodedBytes": 29604732
-      }
-    },
-    {
       "hero": "hero-neon",
       "encounter": "alley_rat_solo",
       "location": "ocean-drive",
@@ -2710,18 +3190,18 @@
       }
     },
     {
-      "hero": "hero-chrome",
-      "encounter": "specter_pair",
-      "location": "ocean-drive",
+      "hero": "hero-smoke",
+      "encounter": "ghost_and_rat",
+      "location": "underpass",
       "required": {
         "files": 3,
-        "bytes": 736016,
-        "decodedBytes": 4109004
+        "bytes": 637154,
+        "decodedBytes": 3738624
       },
       "all": {
-        "files": 16,
-        "bytes": 3464654,
-        "decodedBytes": 35896188
+        "files": 17,
+        "bytes": 3464754,
+        "decodedBytes": 29111328
       }
     },
     {
@@ -2785,6 +3265,21 @@
       }
     },
     {
+      "hero": "hero-smoke",
+      "encounter": "ghost_and_rat",
+      "location": "wynwood",
+      "required": {
+        "files": 3,
+        "bytes": 637154,
+        "decodedBytes": 3738624
+      },
+      "all": {
+        "files": 17,
+        "bytes": 3454042,
+        "decodedBytes": 29111328
+      }
+    },
+    {
       "hero": "hero-neon",
       "encounter": "smoke_specter_solo",
       "location": "club-backlot",
@@ -2812,21 +3307,6 @@
         "files": 11,
         "bytes": 3441562,
         "decodedBytes": 31455528
-      }
-    },
-    {
-      "hero": "hero-volt",
-      "encounter": "ghost_and_rat",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 705482,
-        "decodedBytes": 3739232
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3434880,
-        "decodedBytes": 28152544
       }
     },
     {
@@ -2861,21 +3341,6 @@
     },
     {
       "hero": "hero-concrete",
-      "encounter": "ghost_and_rat",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 701760,
-        "decodedBytes": 3737916
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3433498,
-        "decodedBytes": 28149912
-      }
-    },
-    {
-      "hero": "hero-concrete",
       "encounter": "subway_wyrm_boss",
       "location": "rooftop",
       "required": {
@@ -2890,33 +3355,18 @@
       }
     },
     {
-      "hero": "hero-volt",
-      "encounter": "specter_pair",
-      "location": "underpass",
+      "hero": "hero-smoke",
+      "encounter": "ghost_and_rat",
+      "location": "club-backlot",
       "required": {
         "files": 3,
-        "bytes": 748726,
-        "decodedBytes": 4109612
+        "bytes": 637154,
+        "decodedBytes": 3738624
       },
       "all": {
-        "files": 15,
-        "bytes": 3431562,
-        "decodedBytes": 29605948
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "specter_pair",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 745004,
-        "decodedBytes": 4108296
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3430180,
-        "decodedBytes": 29603316
+        "files": 17,
+        "bytes": 3429058,
+        "decodedBytes": 29111328
       }
     },
     {
@@ -2951,21 +3401,6 @@
     },
     {
       "hero": "hero-volt",
-      "encounter": "ghost_and_rat",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 705482,
-        "decodedBytes": 3739232
-      },
-      "all": {
-        "files": 17,
-        "bytes": 3422254,
-        "decodedBytes": 34444000
-      }
-    },
-    {
-      "hero": "hero-volt",
       "encounter": "subway_wyrm_boss",
       "location": "ocean-drive",
       "required": {
@@ -2977,36 +3412,6 @@
         "files": 12,
         "bytes": 3421784,
         "decodedBytes": 33034432
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "ghost_and_rat",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 701760,
-        "decodedBytes": 3737916
-      },
-      "all": {
-        "files": 17,
-        "bytes": 3420872,
-        "decodedBytes": 34441368
-      }
-    },
-    {
-      "hero": "hero-volt",
-      "encounter": "specter_pair",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 748726,
-        "decodedBytes": 4109612
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3420850,
-        "decodedBytes": 29605948
       }
     },
     {
@@ -3025,21 +3430,6 @@
       }
     },
     {
-      "hero": "hero-concrete",
-      "encounter": "specter_pair",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 745004,
-        "decodedBytes": 4108296
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3419468,
-        "decodedBytes": 29603316
-      }
-    },
-    {
       "hero": "hero-neon",
       "encounter": "neon_junkie_solo",
       "location": "wynwood",
@@ -3052,21 +3442,6 @@
         "files": 17,
         "bytes": 3411830,
         "decodedBytes": 33008440
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "specter_pair",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 680398,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3410644,
-        "decodedBytes": 29604732
       }
     },
     {
@@ -3116,21 +3491,6 @@
     },
     {
       "hero": "hero-smoke",
-      "encounter": "specter_pair",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 680398,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3398018,
-        "decodedBytes": 35896188
-      }
-    },
-    {
-      "hero": "hero-smoke",
       "encounter": "street_ambush",
       "location": "club-backlot",
       "required": {
@@ -3172,36 +3532,6 @@
         "files": 10,
         "bytes": 3396376,
         "decodedBytes": 25162656
-      }
-    },
-    {
-      "hero": "hero-volt",
-      "encounter": "specter_pair",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 748726,
-        "decodedBytes": 4109612
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3395866,
-        "decodedBytes": 29605948
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "specter_pair",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 745004,
-        "decodedBytes": 4108296
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3394484,
-        "decodedBytes": 29603316
       }
     },
     {
@@ -3266,21 +3596,6 @@
     },
     {
       "hero": "hero-chrome",
-      "encounter": "ghost_and_rat",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 692772,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3387422,
-        "decodedBytes": 28151328
-      }
-    },
-    {
-      "hero": "hero-chrome",
       "encounter": "subway_wyrm_boss",
       "location": "rooftop",
       "required": {
@@ -3307,21 +3622,6 @@
         "files": 17,
         "bytes": 3386846,
         "decodedBytes": 33008440
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "specter_pair",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 736016,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3384104,
-        "decodedBytes": 29604732
       }
     },
     {
@@ -3371,21 +3671,6 @@
     },
     {
       "hero": "hero-chrome",
-      "encounter": "ghost_and_rat",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 692772,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 17,
-        "bytes": 3374796,
-        "decodedBytes": 34442784
-      }
-    },
-    {
-      "hero": "hero-chrome",
       "encounter": "subway_wyrm_boss",
       "location": "ocean-drive",
       "required": {
@@ -3397,21 +3682,6 @@
         "files": 12,
         "bytes": 3374326,
         "decodedBytes": 33033216
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "specter_pair",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 736016,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3373392,
-        "decodedBytes": 29604732
       }
     },
     {
@@ -3520,36 +3790,6 @@
       }
     },
     {
-      "hero": "hero-chrome",
-      "encounter": "specter_pair",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 736016,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3348408,
-        "decodedBytes": 29604732
-      }
-    },
-    {
-      "hero": "hero-volt",
-      "encounter": "ghost_and_rat",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 705482,
-        "decodedBytes": 3739232
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3341704,
-        "decodedBytes": 28152544
-      }
-    },
-    {
       "hero": "hero-volt",
       "encounter": "subway_wyrm_boss",
       "location": "underpass",
@@ -3562,21 +3802,6 @@
         "files": 11,
         "bytes": 3341234,
         "decodedBytes": 26742976
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "ghost_and_rat",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 701760,
-        "decodedBytes": 3737916
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3340322,
-        "decodedBytes": 28149912
       }
     },
     {
@@ -3596,21 +3821,6 @@
     },
     {
       "hero": "hero-volt",
-      "encounter": "ghost_and_rat",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 705482,
-        "decodedBytes": 3739232
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3330992,
-        "decodedBytes": 28152544
-      }
-    },
-    {
-      "hero": "hero-volt",
       "encounter": "subway_wyrm_boss",
       "location": "wynwood",
       "required": {
@@ -3622,21 +3832,6 @@
         "files": 11,
         "bytes": 3330522,
         "decodedBytes": 26742976
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "ghost_and_rat",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 701760,
-        "decodedBytes": 3737916
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3329610,
-        "decodedBytes": 28149912
       }
     },
     {
@@ -3671,21 +3866,6 @@
     },
     {
       "hero": "hero-smoke",
-      "encounter": "ghost_and_rat",
-      "location": "rooftop",
-      "required": {
-        "files": 3,
-        "bytes": 637154,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3320786,
-        "decodedBytes": 28151328
-      }
-    },
-    {
-      "hero": "hero-smoke",
       "encounter": "subway_wyrm_boss",
       "location": "rooftop",
       "required": {
@@ -3697,36 +3877,6 @@
         "files": 11,
         "bytes": 3320316,
         "decodedBytes": 26741760
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "specter_pair",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 680398,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3317468,
-        "decodedBytes": 29604732
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "ghost_and_rat",
-      "location": "ocean-drive",
-      "required": {
-        "files": 3,
-        "bytes": 637154,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 17,
-        "bytes": 3308160,
-        "decodedBytes": 34442784
       }
     },
     {
@@ -3745,36 +3895,6 @@
       }
     },
     {
-      "hero": "hero-smoke",
-      "encounter": "specter_pair",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 680398,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3306756,
-        "decodedBytes": 29604732
-      }
-    },
-    {
-      "hero": "hero-volt",
-      "encounter": "ghost_and_rat",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 705482,
-        "decodedBytes": 3739232
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3306008,
-        "decodedBytes": 28152544
-      }
-    },
-    {
       "hero": "hero-volt",
       "encounter": "subway_wyrm_boss",
       "location": "club-backlot",
@@ -3787,21 +3907,6 @@
         "files": 11,
         "bytes": 3305538,
         "decodedBytes": 26742976
-      }
-    },
-    {
-      "hero": "hero-concrete",
-      "encounter": "ghost_and_rat",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 701760,
-        "decodedBytes": 3737916
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3304626,
-        "decodedBytes": 28149912
       }
     },
     {
@@ -3836,21 +3941,6 @@
     },
     {
       "hero": "hero-chrome",
-      "encounter": "ghost_and_rat",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 692772,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3294246,
-        "decodedBytes": 28151328
-      }
-    },
-    {
-      "hero": "hero-chrome",
       "encounter": "subway_wyrm_boss",
       "location": "underpass",
       "required": {
@@ -3881,21 +3971,6 @@
     },
     {
       "hero": "hero-chrome",
-      "encounter": "ghost_and_rat",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 692772,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3283534,
-        "decodedBytes": 28151328
-      }
-    },
-    {
-      "hero": "hero-chrome",
       "encounter": "subway_wyrm_boss",
       "location": "wynwood",
       "required": {
@@ -3911,21 +3986,6 @@
     },
     {
       "hero": "hero-smoke",
-      "encounter": "specter_pair",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 680398,
-        "decodedBytes": 4109004
-      },
-      "all": {
-        "files": 15,
-        "bytes": 3281772,
-        "decodedBytes": 29604732
-      }
-    },
-    {
-      "hero": "hero-smoke",
       "encounter": "voltage_king_elite",
       "location": "club-backlot",
       "required": {
@@ -3937,21 +3997,6 @@
         "files": 10,
         "bytes": 3258680,
         "decodedBytes": 25164072
-      }
-    },
-    {
-      "hero": "hero-chrome",
-      "encounter": "ghost_and_rat",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 692772,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3258550,
-        "decodedBytes": 28151328
       }
     },
     {
@@ -4061,21 +4106,6 @@
     },
     {
       "hero": "hero-smoke",
-      "encounter": "ghost_and_rat",
-      "location": "underpass",
-      "required": {
-        "files": 3,
-        "bytes": 637154,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3227610,
-        "decodedBytes": 28151328
-      }
-    },
-    {
-      "hero": "hero-smoke",
       "encounter": "subway_wyrm_boss",
       "location": "underpass",
       "required": {
@@ -4121,21 +4151,6 @@
     },
     {
       "hero": "hero-smoke",
-      "encounter": "ghost_and_rat",
-      "location": "wynwood",
-      "required": {
-        "files": 3,
-        "bytes": 637154,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3216898,
-        "decodedBytes": 28151328
-      }
-    },
-    {
-      "hero": "hero-smoke",
       "encounter": "subway_wyrm_boss",
       "location": "wynwood",
       "required": {
@@ -4177,21 +4192,6 @@
         "files": 11,
         "bytes": 3196240,
         "decodedBytes": 31467460
-      }
-    },
-    {
-      "hero": "hero-smoke",
-      "encounter": "ghost_and_rat",
-      "location": "club-backlot",
-      "required": {
-        "files": 3,
-        "bytes": 637154,
-        "decodedBytes": 3738624
-      },
-      "all": {
-        "files": 16,
-        "bytes": 3191914,
-        "decodedBytes": 28151328
       }
     },
     {

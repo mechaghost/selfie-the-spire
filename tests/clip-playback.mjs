@@ -89,3 +89,10 @@ for (const [ms, expected] of [[5399,'idle'],[5400,'blink'],[5499,'blink'],[5500,
 }
 assert.equal(clipFrameAt(slime.clips.idle,5450,true),null);
 console.log('PASS: Slime idle blink boundaries and reduced-motion static fallback');
+
+const taxiIdle = ACTOR_VISUALS.taxi_ghost.clips.idle;
+for (const [ms, expected] of [[4599, 'idle'], [4600, 'blink'], [4719, 'blink'], [4720, 'idle'], [9320, 'blink']]) {
+    assert.equal(clipFrameAt(taxiIdle, ms), expected);
+    assert.equal(clipFrameAt(taxiIdle, ms, true), null);
+}
+console.log('PASS: Taxi Ghost light dip boundaries, repeat cycle and reduced-motion static fallback');

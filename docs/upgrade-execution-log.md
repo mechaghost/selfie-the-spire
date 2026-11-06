@@ -841,3 +841,7 @@ Added a raised-hand charge with the sword sheathed, a .988 foot anchor, .91 pose
 ### Cover the arena edges during impact shake
 
 The artwork now scales slightly during each translation peak, covering the arena without moving its HUD or notices. The 2D arena uses translation without roll to avoid exposing corners. The real Mimic regression samples the full 500 ms heavy shake at 5 ms intervals at 320 × 568 and confirms every edge stays covered. The Chromium mechanics suite passed. The Yakuza follow-up capture shows the scene still fills the arena during the cast. The preceding hosted run was canceled during the production arena step, so its five-district result is unavailable.
+
+### Taxi Ghost authored idle
+
+Taxi Ghost's headlights and roof beacon dip for 120 ms after 4,600 ms of base idle. Both poses use the same .99 foot anchor and 600 px runtime tier. The source alpha masks overlap by 99.1% intersection-over-union. At 320 × 568, the Pixi study shows the lamps changing while the tires remain aligned. Captures: `tests/.e2e-out/taxi-idle-{base,dip,restored}-320.png`. The clip regression checks transition boundaries, the next loop, and the reduced-motion path back to base idle. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
