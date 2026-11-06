@@ -1,6 +1,22 @@
 # Battle asset coverage ledger
 
-All five hero archetypes and all 23 monsters have generated idle cutouts in review. No registry entries use technical placeholders as their primary artwork; none has full animation approval. Original fallback vectors are authored in this repository. Implementation owner: Codex; art/design reviewer: pending. Required portfolio clips: idle, attack, hit, defeat; hero also celebrate; cast/guard when mechanics require them. Ten actors have registered idle/contact/idle attack timelines, but no final animation tier is approved. The generated [runtime motion inventory](battle-motion-inventory.md) reports current pose/timeline presence and missing contact poses directly from manifests; the table below records the original art inventory.
+## Current approval
+
+The five stock heroes and 21 enemies in legal encounters passed local visual review at 320 × 568 and 1440 × 900. The approved baseline uses authored idle variations, attack contact, hit and defeat, plus hero celebration and guard or cast where mechanics require them. Street Runner, Alley Rat and Fire Escape Spider also have distinct anticipation and recovery poses. Other approved attacks combine contact art with the renderer's lunge. Payphone Phantom and Vending Golem are legacy fixtures outside the live encounter pool.
+
+The [runtime motion inventory](battle-motion-inventory.md) tracks roster coverage and the [visual review record](upgrade-execution-log.md#stock-hero-art-review) names the Pixi capture sheets. This approval covers the authored key-pose baseline. Physical-device and live release verification are separate gates.
+
+## Production art rules
+
+- Keep the neutral warm upper-left key light, subtle teal rim and violet shadows across the lineup. Keep district color in the [location layers](five-location-layer-review.md) so outfits and enemy silhouettes read consistently across stages.
+- Author heroes facing right and enemies facing left. The renderer uses the authored facing. Review any future mirrored use for asymmetric gear, marks and lighting.
+- Preserve the full silhouette and transparent padding in every frame, including the furthest reach of attacks. Use per-pose anchors and scale to keep feet or the hover point stable. The renderer places a shared contact shadow at the slot's foot anchor. Keep floor shadows out of the source artwork.
+- Check scale and reach in solo, two- and three-enemy layouts, plus solo boss slots. The [actor bounds audit](actor-bounds-review.md) checks the projected visible attack footprint and HUD clearance across stage sizes. The reviewed lineup sheets show stock heroes, regular enemies and bosses in their intended slots.
+- Preserve source canvas, trim offsets and anchors when packing an atlas. The legacy Golem atlas provides the verified example at 2488 × 2546 source pixels and 1244 × 1273 runtime pixels, with two source pixels of edge extrusion per side. The approved roster uses loose WebP poses. Check the [encounter budget](encounter-art-budget.md) whenever adding artwork.
+
+## Historical source inventory
+
+The table and notes below record the original source inventory and early review milestones. Use the runtime motion inventory for current coverage and approval.
 
 | Visual ID | Reachability | Fallback / dimensions | Provenance | Status |
 |---|---|---|---|---|
