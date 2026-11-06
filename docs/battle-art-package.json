@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 215842160,
-  "runtimeBytes": 33707590,
+  "sourceBytes": 219362835,
+  "runtimeBytes": 33518438,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -892,27 +892,53 @@
       "asset": "actors/stray-voltage-attack-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 480,
+      "runtimeHeight": 320,
+      "resolution": 0.3125,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2331425,
-      "runtimeBytes": 365290,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 155560,
+      "decodedRGBABytes": 614400
+    },
+    {
+      "asset": "actors/stray-voltage-defeat-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 480,
+      "runtimeHeight": 320,
+      "resolution": 0.3125,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1470447,
+      "runtimeBytes": 81642,
+      "decodedRGBABytes": 614400
+    },
+    {
+      "asset": "actors/stray-voltage-hit-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 480,
+      "runtimeHeight": 320,
+      "resolution": 0.3125,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 2050228,
+      "runtimeBytes": 118292,
+      "decodedRGBABytes": 614400
     },
     {
       "asset": "actors/stray-voltage-idle-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 480,
+      "runtimeHeight": 320,
+      "resolution": 0.3125,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2269398,
-      "runtimeBytes": 316404,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 137048,
+      "decodedRGBABytes": 614400
     },
     {
       "asset": "actors/street-runner-attack-v1.webp",

@@ -12,7 +12,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | alley_rat | production | attack, hit, defeat, blink, windup, recovery | idle, attack | none | review |
 | neon_junkie | production | attack, hit, defeat | hit, defeat, attack | cast | review |
 | graffiti_imp | production | attack, hit, defeat | hit, defeat, attack | cast | review |
-| stray_voltage | production | attack | attack | hit, defeat | review |
+| stray_voltage | production | attack, hit, defeat | hit, defeat, attack | none | review |
 | dumpster_crawler | production | attack | attack | hit, defeat, guard | review |
 | smoke_specter | production | attack | attack | hit, defeat, guard, cast | review |
 | taxi_ghost | production | attack | attack | hit, defeat, cast | review |

@@ -38,7 +38,7 @@ def encode(source):
         # increase an existing smaller tier (the wider attack is already 444px).
         if relative.parts[0]=='actors' and relative.name.startswith('alley-rat-'):
             resolution=min(resolution,672/max(rgba.size))
-        if relative.parts[0]=='actors' and relative.name.startswith(('sewer-slime-', 'graffiti-imp-')):
+        if relative.parts[0]=='actors' and relative.name.startswith(('sewer-slime-', 'graffiti-imp-', 'stray-voltage-')):
             resolution=min(resolution,480/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith('street-runner-'):
             resolution=min(resolution,640/max(rgba.size))
