@@ -981,3 +981,11 @@ Added a body-blow recoil with a .986 foot anchor and a 160/60 ms hit/idle clip. 
 Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
 
 > Create one transparent full-body hit reaction key pose for the exact Concrete fighter in this sprite reference. Keep his muscular build, dark tied-back hair and beard, orange safety vest with silver stripes, black tank, ochre utility pouches, teal knee pads, dark work trousers and tan work boots, with the same inked rendering and camera facing right. He absorbs a body blow: knees bent, shoulders twist and recoil left, one forearm pressed across his abdomen, other fist loosens and drops out for balance, head pulled back and jaw clenched. Boots planted at original ground line and same character scale. Keep clear margins around all anatomy. True alpha background, no attack effects, bruises, lettering, props, shadow, floor or scenery.
+
+### Concrete guard pose
+
+Added a crossed-forearm crouch with a .984 foot anchor and a 160/60 ms guard/idle clip. Playing Dodge in the 320 × 568 Chromium touch fixture showed the brace and granted 5 Block without changing HP. Capture: `tests/.e2e-out/concrete-live-guard-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
+
+> Create one full-body transparent Block key pose for this exact Concrete street fighter. Match the reference identity, inked rendering, orange safety vest with silver stripes, black tank, ochre pouches, teal knee pads, dark work trousers, tan boots, and tied-back dark hair. Facing screen right with boots planted at the same height, he lowers into a strong compact crouch and firmly crosses his muscular forearms into a visible X in front of his upper chest, looking over them at the incoming threat. Keep the entire actor, all limbs and both soles in frame, with transparent clearance. Maintain original perspective and scale; preserve canvas padding above lowered head. True alpha, no shield, effects, glow, shadow, props, floor, scenery or lettering.
