@@ -461,6 +461,13 @@
     "runtimeHeight": 640,
     "resolution": 0.4330175913396482
   },
+  "/assets/battle/actors/subway-wyrm-attack-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 768,
+    "runtimeHeight": 512,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/subway-wyrm-idle-v1.webp": {
     "width": 1536,
     "height": 1024,
