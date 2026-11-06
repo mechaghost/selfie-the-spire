@@ -973,3 +973,11 @@ Added a two-finger victory sign with a .979 foot anchor and the existing 600 ms 
 Built-in imagegen prompt with `volt-idle-v1.png` as reference:
 
 > Create a transparent full-body victory key pose for this exact Volt fighter. Keep the same swept black hair with cream streak, yellow and teal electrician jacket, orange cable loop, dark cargo trousers, cream and teal sneakers, and inked game-sprite art style. Same camera facing right, original scale, both boots planted at their original ground line. He straightens slightly, grins, and gives an energetic two-finger victory sign with one hand out to the right at shoulder height. His other hand rests at his belt. Keep the whole silhouette in frame with clear padding. No text, props, floor, shadow, environment or effects. True alpha transparency.
+
+### Concrete hit pose
+
+Added a body-blow recoil with a .986 foot anchor and a 160/60 ms hit/idle clip. At 320 × 568 in Chromium touch emulation, Dumpster Crawler's opening hit triggered the recoil and reduced Concrete's HP from 80 to 75. Capture: `tests/.e2e-out/concrete-live-hit-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
+
+> Create one transparent full-body hit reaction key pose for the exact Concrete fighter in this sprite reference. Keep his muscular build, dark tied-back hair and beard, orange safety vest with silver stripes, black tank, ochre utility pouches, teal knee pads, dark work trousers and tan work boots, with the same inked rendering and camera facing right. He absorbs a body blow: knees bent, shoulders twist and recoil left, one forearm pressed across his abdomen, other fist loosens and drops out for balance, head pulled back and jaw clenched. Boots planted at original ground line and same character scale. Keep clear margins around all anatomy. True alpha background, no attack effects, bruises, lettering, props, shadow, floor or scenery.

@@ -293,6 +293,13 @@
     "runtimeHeight": 659,
     "resolution": 0.5
   },
+  "/assets/battle/actors/concrete-hit-v1.webp": {
+    "width": 1194,
+    "height": 1317,
+    "runtimeWidth": 597,
+    "runtimeHeight": 659,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/concrete-idle-v1.webp": {
     "width": 1194,
     "height": 1317,
