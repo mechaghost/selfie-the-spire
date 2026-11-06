@@ -10,7 +10,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | hero-concrete | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-smoke | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | alley_rat | production | attack, hit, defeat | attack | none | review |
-| neon_junkie | production | none | none | attack, hit, defeat, cast | review |
+| neon_junkie | production | attack | attack | hit, defeat, cast | review |
 | graffiti_imp | production | attack | attack | hit, defeat, cast | review |
 | stray_voltage | production | none | none | attack, hit, defeat | review |
 | dumpster_crawler | production | none | none | attack, hit, defeat, guard | review |

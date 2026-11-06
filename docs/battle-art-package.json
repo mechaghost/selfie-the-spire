@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 117404030,
-  "runtimeBytes": 35571974,
+  "sourceBytes": 118625671,
+  "runtimeBytes": 35827916,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -245,6 +245,17 @@
       "sourceBytes": 2404009,
       "runtimeBytes": 367452,
       "decodedRGBABytes": 1572864
+    },
+    {
+      "asset": "actors/neon-junkie-attack-v1.webp",
+      "width": 1123,
+      "height": 1401,
+      "runtimeWidth": 562,
+      "runtimeHeight": 701,
+      "resolution": 0.5,
+      "sourceBytes": 1221641,
+      "runtimeBytes": 255942,
+      "decodedRGBABytes": 1575848
     },
     {
       "asset": "actors/neon-junkie-idle-v1.webp",

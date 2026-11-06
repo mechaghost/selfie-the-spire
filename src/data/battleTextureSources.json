@@ -153,6 +153,13 @@
     "runtimeHeight": 512,
     "resolution": 0.5
   },
+  "/assets/battle/actors/neon-junkie-attack-v1.webp": {
+    "width": 1123,
+    "height": 1401,
+    "runtimeWidth": 562,
+    "runtimeHeight": 701,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/neon-junkie-idle-v1.webp": {
     "width": 1230,
     "height": 1278,
