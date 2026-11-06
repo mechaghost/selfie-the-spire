@@ -4,3 +4,5 @@ dist
 .DS_Store
 .vite
 tests/.e2e-out
+server/models/*.onnx
+server/models/*.onnx.part

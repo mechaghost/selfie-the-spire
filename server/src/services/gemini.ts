@@ -1,5 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import sharp from 'sharp';
+import { removeCombatBackground } from './removeCombatBackground.js';
+import { prepareCombatCutout } from './combatCutout.js';
 
 const ARCHETYPE_IDS = ['neon', 'chrome', 'volt', 'concrete', 'smoke'] as const;
 type ArchetypeId = typeof ARCHETYPE_IDS[number];
@@ -451,4 +453,24 @@ No text, no words, no letters, no numbers. Centered iconic composition.`;
         const raw = await extractImageFromResponse(result);
         return optimizeImage(raw, 384, 288);
     });
+}
+
+
+/** Generate an opaque studio actor, then extract and normalize it locally. */
+export async function generateCombatCharacterArt(imageBase64:string, archetype:string):Promise<string> {
+    const model=getImageModel();
+    const match=/^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/]+={0,2})$/.exec(imageBase64);
+    if(!match)throw new Error('Unsupported selfie format');
+    const prompt=`Create one full-body 2D game character based on this person's recognizable face, hairstyle, skin tone, glasses and visible clothing. Invent appropriate lower-body streetwear when not visible in the photo. Face screen RIGHT in a relaxed combat stance, both hands visible and separated from torso, both shoes fully visible. Preserve identity; do not infer personality or identity from the photo.
+Neo Miami urban fantasy: painterly angular cel shading, crisp dark outlines, detailed teal/coral streetwear accents, restrained ${ARCHETYPE_PALETTES[archetype] || ARCHETYPE_PALETTES.neon} highlights. Match a professional hand-painted 2D deckbuilder actor, not a card illustration or photograph.
+Solid uniform light gray studio background, no ground plane, no cast shadow, no city, no particles, no floating effects, no text, no frame. Only one person. Entire silhouette inside canvas with generous empty margin on all sides. Portrait 2:3 composition. The server will remove the background.`;
+    const raw=await withRetry(async()=>{
+        const controller=new AbortController();
+        const timeout=setTimeout(()=>controller.abort(),60_000);
+        try {
+            const result=await model.generateContent({contents:[{role:'user',parts:[{inlineData:{mimeType:match[1],data:match[2]}},{text:prompt}]}]}, {signal:controller.signal} as any);
+            return extractImageFromResponse(result);
+        } finally {clearTimeout(timeout);}
+    },0);
+    return prepareCombatCutout(await removeCombatBackground(Buffer.from(stripBase64Prefix(raw),'base64')));
 }

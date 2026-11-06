@@ -1,0 +1,11 @@
+# Combat background removal
+
+The user selected Gemini generation plus server-side background removal. U²-Net runs locally through pinned `onnxruntime-node` 1.31.1; this adds no image-processing provider or per-extraction API call.
+
+Prepare model: `npm --prefix server run prepare:combat-model`. This downloads the 176 MB U²-Net ONNX model from the rembg release and checks SHA-256 `8d10d2f3bb75ae3b6d527c77944fc5e7dcd94b29809d47a739a7a728a912b491` (upstream MD5 `60024c5c889badc19c04ad937298a77b` also verified during initial research). Model bytes are ignored by Git and must be downloaded during deployment build or supplied at `COMBAT_MATTING_MODEL_PATH`; never download them in a player request.
+
+Sources: [U²-Net authors](https://github.com/xuebinqin/U-2-Net), [ONNX export and preprocessing reference](https://github.com/danielgatis/rembg/blob/main/rembg/sessions/u2net.py), [normalization reference](https://github.com/danielgatis/rembg/blob/main/rembg/sessions/base.py), [ONNX Node binding](https://onnxruntime.ai/docs/get-started/with-javascript/node.html). U²-Net's Apache-2.0 license is included as U2NET-LICENSE.txt. ONNX Runtime is MIT licensed (distributed in the dependency).
+
+`ENABLE_PERSONALIZED_COMBAT=1` enables the generation route. Keep unset until extraction quality, real selfie generation, resource limits and production-host native runtime are verified. Model readiness is checked before any Gemini calls. Extraction is limited to one in-flight CPU inference per process; excess work fails instead of building an unbounded image queue. Model session stays warm. Pixels are processed in memory; no player photos or extracted artwork are written to server disk by this module.
+
+Current evidence: a known transparent hero flattened onto light gray was extracted with mask IoU 0.984, ~0.9 s locally, and normalized to an 86 KB data URL. This is one controlled fixture, not a hosting benchmark or general quality guarantee. Visual inspection shows a pale fringe around some edges. Edge refinement, varied hairstyles/outfits, real Gemini studio output, resource telemetry and failure/retry UX remain required before enabling the flag. Matching pose generation is separate and remains unfinished.
