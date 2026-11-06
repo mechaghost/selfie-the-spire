@@ -2,24 +2,25 @@ import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 const pixi=`
 export const apps=[];
+export const textureFailures={remaining:0};
 export class Rectangle {constructor(x,y,width,height){Object.assign(this,{x,y,width,height});}}
 class Pair {set(x,y=x){this.x=x;this.y=y;}}
 export class Container {children=[];addChild(...items){this.children.push(...items);} }
 export class Graphics extends Container {clear(){return this;}rect(){return this;}ellipse(){return this;}fill(){return this;}}
 export class Sprite {constructor(texture){this.texture=texture;}anchor=new Pair();scale=new Pair();position=new Pair();}
 export class ImageSource {constructor({resource}){this.resource=resource;}}
-export class Texture {constructor({source}){this.source=source;this.width=100;this.height=100;}destroy(){this.destroyed=true;}}
+export class Texture {constructor({source}){if(textureFailures.remaining>0){textureFailures.remaining--;throw new Error('texture construction failed');}this.source=source;this.width=100;this.height=100;}destroy(){this.destroyed=true;}}
 export class Application {constructor(){apps.push(this);}stage=new Container();canvas={setAttribute(){},addEventListener(){},removeEventListener(){}};renderer={resize(){}};ticker={add(){}};async init(){}render(){}start(){}stop(){}destroy(){this.destroyed=true;}}
 `;
-await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {publishAction,identifyAction} from './src/rendering/CombatPresentation'; export {apps} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
+await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {publishAction,identifyAction} from './src/rendering/CombatPresentation'; export {apps,textureFailures} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
 const pending=new Map();
 globalThis.Image=class {set src(url){if(url)pending.set(url,this);}};
 globalThis.window={devicePixelRatio:1,setTimeout};
 const listeners=new Set();
 globalThis.document={hidden:false,addEventListener:(type,fn)=>listeners.add(fn),removeEventListener:(type,fn)=>listeners.delete(fn)};
-const {BattleScene,battleTextures,apps,battleLayout,publishAction,identifyAction}=await import('./.e2e-out/renderer-streaming.mjs');
+const {BattleScene,battleTextures,apps,battleLayout,publishAction,identifyAction,textureFailures}=await import('./.e2e-out/renderer-streaming.mjs');
 const flush=async()=>{for(let i=0;i<12;i++)await Promise.resolve();};
-const resolve=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);image.onload();};
+const resolve=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);return image.onload();};
 const reject=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);image.onerror();};
 const actor=(id)=>({id,defeated:false,visual:{id,clips:{},fallbackImageUrl:`/${id}`,footAnchor:[.5,1],keyPoses:{attack:{imageUrl:`/${id}-attack`,footAnchor:[.5,1]}}}});
 const snapshot={layout:battleLayout(390,400,['enemy'],false),location:{sky:0,ground:0,accent:0,layers:[{url:'/far',depth:0},{url:'/near',depth:2,plane:'foreground',sway:2}]},actors:[actor('player'),actor('enemy')],reducedMotion:false};
@@ -93,6 +94,20 @@ resolve('/enemy-attack');resolve('/player-attack');resolve('/far');resolve('/nea
 assert.ok(atlasFailure.poses.has('enemy:attack'),'fallback pose installed');
 atlasFailure.destroy();assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
 console.log('PASS: atlas failure falls back to individual poses without duplicate requests or leaked leases');
+// Loose authored frames should not wait behind a slow atlas, nor reload on atlas failure.
+const mixedSnapshot={...snapshot,actors:snapshot.actors.map(actor=>actor.id==='enemy'?{...actor,visual:{...actor.visual,keyPoses:{...actor.visual.keyPoses,windup:{imageUrl:'/enemy-windup',footAnchor:[.5,1]}}}}:actor)};
+const mixed=new BattleScene(host,mixedSnapshot,()=>failures++);
+const mixedMount=mixed.mount();await flush();resolve('/player');resolve('/enemy');await flush();await mixedMount;
+assert.ok(pending.has('/enemy-atlas'));
+assert.ok(pending.has('/enemy-windup'),'non-atlas wind-up starts while atlas is pending');
+assert.equal(pending.has('/enemy-attack'),false,'atlas-covered contact is not duplicated');
+resolve('/enemy-windup');await flush();
+assert.ok(mixed.poses.has('enemy:windup'));
+reject('/enemy-atlas');await flush();
+assert.equal(pending.has('/enemy-windup'),false,'atlas failure does not re-request the independent pose');
+resolve('/enemy-attack');resolve('/player-attack');resolve('/far');resolve('/near');await flush();
+mixed.destroy();assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
+console.log('PASS: non-atlas frames stream independently and are not duplicated on atlas failure');
 // Exercise bitmap ownership independently of GPU allocation.
 globalThis.Image.prototype.naturalWidth=1536;
 globalThis.Image.prototype.naturalHeight=1024;
@@ -106,3 +121,37 @@ assert.ok(bitmaps.length>=3,'large actor textures use resized bitmaps');
 resized.destroy();assert.ok(bitmaps.every(bitmap=>bitmap.closed),'owned bitmaps close when final texture lease ends');
 assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
 console.log('PASS: resized bitmap ownership and final-lease disposal');
+
+// Construction exceptions must reject the lease, not escape an async image handler.
+delete globalThis.createImageBitmap;
+for(const [url,width,height] of [['/construction-failure',1536,1024],['/assets/battle/actors/street-runner-idle-v1.webp',553,711]]) {
+    globalThis.Image.prototype.naturalWidth=width;globalThis.Image.prototype.naturalHeight=height;
+    const construction=battleTextures.acquire(url);
+    const constructionResult=construction.ready.catch(error=>error);
+    await flush();textureFailures.remaining=1;
+    await resolve(url);
+    assert.match((await constructionResult).message,/texture construction failed/);
+    construction.release();
+    assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
+}
+globalThis.Image.prototype.naturalWidth=1536;globalThis.Image.prototype.naturalHeight=1024;
+
+// A network-complete image whose bitmap decoder stalls still has a deadline.
+const deadlines=[];
+window.setTimeout=callback=>{deadlines.push(callback);return 987654321;};
+let completeDecode;
+globalThis.createImageBitmap=()=>new Promise(resolve=>{completeDecode=resolve;});
+const stalled=battleTextures.acquire('/decoder-stall');
+const stalledResult=stalled.ready.catch(error=>error);
+await flush();const decoding=resolve('/decoder-stall');
+assert.equal(typeof completeDecode,'function');
+assert.equal(deadlines.length,1);
+deadlines[0]();
+assert.match((await stalledResult).message,/Asset timeout/);
+stalled.release();
+assert.deepEqual(battleTextures.stats(),{entries:0,references:0},'timed-out decode releases its cache entry');
+const lateBitmap=new ImageBitmap();completeDecode(lateBitmap);await decoding;await flush();
+assert.equal(lateBitmap.closed,true,'bitmap arriving after timeout is closed, never installed');
+assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
+window.setTimeout=setTimeout;
+console.log('PASS: texture construction errors reject; decoder deadline and late bitmap disposal settle cleanly');

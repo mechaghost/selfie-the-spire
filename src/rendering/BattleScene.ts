@@ -12,38 +12,53 @@ import { actorPlacement } from './actorPlacement';
 import { packagedTextureSource, textureDecodePlan } from './textureBudget';
 export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string; previewElapsedMs?:number }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
-function loadTexture(url: string): Promise<Texture> {
-    return new Promise((resolve,reject) => {
-        const image = new Image();
-        const timer = window.setTimeout(() => { image.onload = image.onerror = null; image.src = ''; reject(new Error(`Asset timeout: ${url}`)); }, 12000);
-        image.onload = async () => {
-            clearTimeout(timer); image.onload = image.onerror = null;
-            const packaged=packagedTextureSource(url,image.naturalWidth,image.naturalHeight);
-            if(packaged) {
-                resolve(new Texture({source:new ImageSource({resource:image,resolution:packaged.resolution}),frame:new Rectangle(0,0,packaged.width,packaged.height)}));
-                return;
-            }
-            const plan=textureDecodePlan(url,image.naturalWidth,image.naturalHeight);
-            if(plan.resolution<1 && typeof createImageBitmap==='function') {
-                let bitmap:ImageBitmap|undefined;
-                try {
-                    bitmap=await createImageBitmap(image,{resizeWidth:plan.width,resizeHeight:plan.height,resizeQuality:'high'});
-                    const source=new ImageSource({resource:bitmap,resolution:plan.resolution});
-                    resolve(new Texture({source,frame:new Rectangle(0,0,image.naturalWidth,image.naturalHeight)}));
-                    return;
-                } catch {bitmap?.close(); /* Use the original image if browser decoding is unavailable. */}
-            }
-            resolve(new Texture({source:new ImageSource({resource:image})}));
-        };
-        image.onerror = () => { clearTimeout(timer); image.onload = image.onerror = null; reject(new Error(`Asset unavailable: ${url}`)); };
-        image.src = url;
-    });
-}
-export const battleTextures = new AssetLeaseCache(loadTexture, texture => {
+function disposeTexture(texture:Texture) {
     const resource=texture.source.resource;
     texture.destroy(true);
     if(typeof ImageBitmap!=='undefined' && resource instanceof ImageBitmap)resource.close();
-});
+}
+function loadTexture(url: string): Promise<Texture> {
+    return new Promise((resolve,reject) => {
+        const image = new Image();
+        let settled=false;
+        const cleanup=()=>{clearTimeout(timer);image.onload=image.onerror=null;};
+        const fail=(error:unknown)=>{
+            if(settled)return;
+            settled=true;cleanup();image.src='';reject(error);
+        };
+        const finish=(texture:Texture)=>{
+            if(settled){disposeTexture(texture);return;}
+            settled=true;cleanup();resolve(texture);
+        };
+        // Include asynchronous decoding, not just network completion, in the deadline.
+        const timer=window.setTimeout(()=>fail(new Error(`Asset timeout: ${url}`)),12000);
+        image.onload = async () => {
+            image.onload=image.onerror=null;
+            try {
+                const packaged=packagedTextureSource(url,image.naturalWidth,image.naturalHeight);
+                if(packaged) {
+                    finish(new Texture({source:new ImageSource({resource:image,resolution:packaged.resolution}),frame:new Rectangle(0,0,packaged.width,packaged.height)}));
+                    return;
+                }
+                const plan=textureDecodePlan(url,image.naturalWidth,image.naturalHeight);
+                if(plan.resolution<1 && typeof createImageBitmap==='function') {
+                    let bitmap:ImageBitmap|undefined;
+                    try {
+                        bitmap=await createImageBitmap(image,{resizeWidth:plan.width,resizeHeight:plan.height,resizeQuality:'high'});
+                        if(settled){bitmap.close();return;}
+                        const source=new ImageSource({resource:bitmap,resolution:plan.resolution});
+                        finish(new Texture({source,frame:new Rectangle(0,0,image.naturalWidth,image.naturalHeight)}));
+                        return;
+                    } catch {bitmap?.close(); /* Fall back to the original image if decoding fails. */}
+                }
+                if(!settled)finish(new Texture({source:new ImageSource({resource:image})}));
+            } catch(error) {fail(error);}
+        };
+        image.onerror = () => fail(new Error(`Asset unavailable: ${url}`));
+        image.src = url;
+    });
+}
+export const battleTextures = new AssetLeaseCache(loadTexture, disposeTexture);
 /** Pure presentation: receives snapshots, never accesses game-store actions or RNG. */
 export class BattleScene {
     private app = new Application();
@@ -99,19 +114,21 @@ export class BattleScene {
                 const sprite = new Sprite(texture); sprite.zIndex=index*2+1; sprite.anchor.set(...actor.visual.footAnchor);
                 this.sprites.set(actor.id,sprite); this.world.addChild(sprite);
                 this.poses.set(`${actor.id}:idle`,texture);
-                const loadPoses=(onlyMissing=false)=>Promise.all(Object.entries(actor.visual.keyPoses ?? {}).filter(([clip])=>!onlyMissing || !this.atlasViews.has(`${actor.id}:${clip}`)).map(async ([clip,pose])=>{
+                const requestedPoses=new Set<string>();
+                const loadPoses=(onlyMissing=false)=>Promise.all(Object.entries(actor.visual.keyPoses ?? {}).filter(([clip])=>!requestedPoses.has(clip) && (!onlyMissing || !actor.visual.atlasFrames?.[clip])).map(async ([clip,pose])=>{
                     if(this.disposed)return;
+                    requestedPoses.add(clip);
                     const poseLease=battleTextures.acquire(pose.imageUrl);this.leases.push(poseLease);
                     try {const poseTexture=await poseLease.ready;if(!this.disposed){this.poses.set(`${actor.id}:${clip}`,poseTexture);this.update(this.snapshot);}}
                     catch { /* Idle remains usable if an optional key pose fails to load. */ }
                 }));
                 if(actor.visual.atlasUrl && actor.visual.atlasFrames) {
+                    void loadPoses(true);
                     const atlasLease=battleTextures.acquire(actor.visual.atlasUrl);this.leases.push(atlasLease);
                     void atlasLease.ready.then(atlas=>{
                         if(this.disposed)return;
                         for(const [name,view] of atlasTextures(atlas,actor.visual.atlasFrames!))this.atlasViews.set(`${actor.id}:${name}`,view);
                         this.update(this.snapshot);
-                        return loadPoses(true);
                     }).catch(()=>{ atlasLease.release();void loadPoses(); });
                 } else void loadPoses();
             }));
