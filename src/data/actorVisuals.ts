@@ -42,7 +42,10 @@ for (const [id, file, footY] of [
     ['fire_escape_spider', 'fire-escape-spider-idle-v1.webp', .94],
 ] as const) {
     ACTOR_VISUALS[id] = { ...ACTOR_VISUALS[id], fallbackImageUrl:`/assets/battle/actors/${file}`, footAnchor:[.5,footY],
-        productionStatus:'review', provenance:'Original AI-generated Neo Miami monster using built-in image generation; see docs/battle-art-prompts.md. Idle cutout only; animation approval pending.' };
+        productionStatus:'review', provenance:'Original Neo Miami actor art made with built-in image generation. See docs/battle-art-prompts.md and docs/upgrade-execution-log.md.' };
+}
+for (const archetype of HERO_ARCHETYPES) {
+    ACTOR_VISUALS[`hero-${archetype}`].productionStatus = 'approved';
 }
 ACTOR_VISUALS['hero-neon'].keyPoses = {attack:{imageUrl:'/assets/battle/actors/street-runner-attack-v1.webp',footAnchor:[.5,.97]}};
 ACTOR_VISUALS.alley_rat.keyPoses = {attack:{imageUrl:'/assets/battle/actors/alley-rat-attack-v1.webp',footAnchor:[.5,.93],scale:1536/1774}};

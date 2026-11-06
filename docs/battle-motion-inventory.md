@@ -4,11 +4,11 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
-| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast, blink, windup, recovery | idle, hit, guard, cast, defeat, celebrate, attack | none | review |
-| hero-chrome | hero | attack, hit, guard, cast, defeat, celebrate, blink | hit, guard, cast, defeat, celebrate, idle, attack | none | review |
-| hero-volt | hero | attack, hit, guard, cast, defeat, celebrate, blink | hit, guard, cast, defeat, celebrate, idle, attack | none | review |
-| hero-concrete | hero | attack, hit, guard, cast, defeat, celebrate, blink | hit, guard, cast, defeat, celebrate, idle, attack | none | review |
-| hero-smoke | hero | attack, hit, guard, cast, defeat, celebrate, blink | hit, guard, cast, defeat, celebrate, idle, attack | none | review |
+| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast, blink, windup, recovery | idle, hit, guard, cast, defeat, celebrate, attack | none | approved |
+| hero-chrome | hero | attack, hit, guard, cast, defeat, celebrate, blink | hit, guard, cast, defeat, celebrate, idle, attack | none | approved |
+| hero-volt | hero | attack, hit, guard, cast, defeat, celebrate, blink | hit, guard, cast, defeat, celebrate, idle, attack | none | approved |
+| hero-concrete | hero | attack, hit, guard, cast, defeat, celebrate, blink | hit, guard, cast, defeat, celebrate, idle, attack | none | approved |
+| hero-smoke | hero | attack, hit, guard, cast, defeat, celebrate, blink | hit, guard, cast, defeat, celebrate, idle, attack | none | approved |
 | alley_rat | production | attack, hit, defeat, blink, windup, recovery | idle, hit, defeat, attack | none | review |
 | neon_junkie | production | attack, hit, cast, defeat, blink | hit, cast, defeat, idle, attack | none | review |
 | graffiti_imp | production | attack, hit, cast, defeat, blink | hit, cast, defeat, idle, attack | none | review |
