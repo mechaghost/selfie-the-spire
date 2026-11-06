@@ -1063,3 +1063,11 @@ Added a 100 ms blink after 4,700 ms of idle. The source canvas matches the base 
 Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
 
 > Exact same transparent full-body Concrete sprite, same framing and dimensions. Retouch only his visible eye to close the eyelid for a blink. Leave his head and silhouette, raised fists, orange safety vest, arms, pants, kneepads, boots and their exact positions unchanged. Do not crop, zoom or extend canvas. Maintain true transparent alpha. This frame will alternate with the supplied reference and any movement of the silhouette is a defect.
+
+### Smoke idle blink
+
+Added a 100 ms blink after 5,100 ms of idle. The source canvas and foot baseline match the base, and the alpha masks overlap by 97.4% intersection-over-union. The 320 px Pixi study shows the blink and return with the shoes aligned. Captures: `tests/.e2e-out/smoke-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, sprite bounds, texture caps, playback and TypeScript passed. Prior Linux run 42217668365 passed.
+
+Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
+
+> Edit this exact transparent Smoke fighter PNG into an idle blink frame. Close the visible eye with a thin relaxed eyelid. Preserve the original 1199 by 1312 canvas, exact full-body framing and margins. Do not alter any other pixels: keep her bun, brow, head angle, scarf, purple jacket, hands, teal sash, trouser folds, high-tops and their exact positions. The two frames will alternate in a video game, so even a tiny pose or silhouette shift is unacceptable. Keep true alpha transparency.

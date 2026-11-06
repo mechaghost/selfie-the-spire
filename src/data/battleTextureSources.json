@@ -811,6 +811,13 @@
     "runtimeHeight": 656,
     "resolution": 0.5
   },
+  "/assets/battle/actors/smoke-blink-v1.webp": {
+    "width": 1199,
+    "height": 1312,
+    "runtimeWidth": 600,
+    "runtimeHeight": 656,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/smoke-cast-v1.webp": {
     "width": 1199,
     "height": 1312,
