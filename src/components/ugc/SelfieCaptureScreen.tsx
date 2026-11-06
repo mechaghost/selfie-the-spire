@@ -217,8 +217,8 @@ export function SelfieCaptureScreen() {
                     Choose photo
                 </button>
                 </>}
+                {ugcError && <button className="selfie-upload-btn" onClick={() => initializeRun(crypto.randomUUID())}>Play a starter hero</button>}
             </div>
-            {ugcError && <button className="selfie-upload-btn" onClick={() => initializeRun(crypto.randomUUID())}>Play a starter hero</button>}
             <p className="selfie-subtitle">Your photo stays in this browser.</p>
 
             <details className="photo-handling"><summary>How your photo is used</summary>

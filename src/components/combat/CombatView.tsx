@@ -30,6 +30,7 @@ export function CombatView() {
     }));
 
     const busy = useGameStore(state => state.isResolving || state.actionQueue.length > 0);
+    const handCount = useGameStore(state => state.hand.length);
     const targeting = useCombatInteraction(state=>state.mode === 'targeting');
     const isDisabled = !isPlayerTurn || busy || combatResult !== null || targeting;
     const phase = combatResult ?? (isPlayerTurn ? (busy ? null : 'player') : 'enemy');
@@ -151,6 +152,7 @@ export function CombatView() {
 
             <div className="hand-caption" aria-hidden="true"><span>Your hand<small className="hand-scroll-hint"> · swipe</small></span><span>Inspect a card. Make your move.</span></div>
             <div className={`deck-table ${isDisabled ? 'disabled' : ''}`}>
+                {actorArena && <div className="side-hand-caption">Your hand · {handCount}{handCount > 1 && ' · Swipe for cards'}</div>}
                 <HandHUD targetControls={actorArena?targetControls:'list'} onTargetControlsChange={actorArena?setTargetControls:undefined}/>
             </div>
 
