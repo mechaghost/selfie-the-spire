@@ -413,3 +413,9 @@ Added a development-only performance screen with a visible ten-card hand, rotati
 The 600.331-second desktop-browser run at 390×844/DPR1 produced p95 17.5 ms, p99 18.1 ms and two intervals over 50 ms; all 20 disposals returned entries/references to zero. Peak decoded texture estimate 46.9 MiB. No hide/resize/failure events. Full JSON and limitations: arena-benchmark-results.md. This does not certify real phones, GPU execution time or cold-cache loading. Production build excludes the benchmark and passes TypeScript/resource checks.
 
 Generated a current motion inventory from actor manifests and encounter pools, correcting the stale claim that no timelines exist: ten actors have attack timelines, while all 28 remain review status and portfolio animation coverage is unfinished. No deployment.
+
+### Miami-inspired world street map
+
+User redirected the world-map visual identity away from a Slay the Spire tower graph. Implemented original vector coastal cartography, city blocks/parks/buildings, named avenues, neighborhood signs, right-angle streets and labeled encounter pins. Reachable stops/streets are mint; current stop is amber. Kept seeded graph and encounter choices unchanged through a pure projection. Replaced obsolete map styling and corrected mobile header wrapping/current-stop scroll framing.
+
+Verified 2,752 stops and 3,425 connections across 100 seeds/six widths. Browser checks at 320×568, 390×844, 844×390 and 1280×900; actual map → legal fight → victory/gold → map → reload retained route state and connected choices, without console warnings/errors. TypeScript, copy contracts and production build pass. Details/evidence: neo-miami-street-map.md. No deployment.
