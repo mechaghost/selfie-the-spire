@@ -1,7 +1,7 @@
 .battle-arena { position:relative; grid-area:battlefield; min-width:280px; min-height:140px; margin-bottom:60px; overflow:hidden; z-index:1; }
 .actor-target,.actor-hero-hud { position:absolute; border:1px solid transparent; border-radius:8px; background:none; color:#fff; padding:0; min-width:44px; min-height:44px; cursor:pointer; }
-.actor-target:focus-visible,.actor-hero-hud:focus-visible,.actor-target.is-selectable:hover { outline:2px solid #f7d29e; outline-offset:-2px; }
-.actor-target.is-selectable { border-color:#f7d29e88; }
+.actor-target.is-selectable { border-color:#f7d29e; box-shadow:inset 0 0 0 2px #091525; }
+.actor-target:focus-visible,.actor-hero-hud:focus-visible,.actor-target.is-selectable:hover { outline:2px solid #f7d29e; outline-offset:-2px; box-shadow:inset 0 0 0 4px #091525; }
 .actor-hud { position:absolute; display:flex; flex-direction:column; align-items:center; background:#091525ed; border-radius:6px; line-height:18px; font-size:14px; }
 .actor-hud strong { width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; }
 .actor-hud b { color:#ffdaac; font-size:14px; }

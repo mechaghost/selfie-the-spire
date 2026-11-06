@@ -1,0 +1,160 @@
+{
+  "method": "WCAG relative luminance; sRGB alpha composition over white bounds every SDR district RGB backing. Opaque foreground channels must exceed the brightest backing. Target edges are measured against their adjacent inset dark stroke.",
+  "limits": "CSS color audit only: excludes antialiasing, disabled/dead opacity, ancestor filters, device display conditions, other screens, and comprehension. Browser verification is still needed for actual placement and computed styles.",
+  "results": [
+    {
+      "name": "Hero HP, Block, name and overflow",
+      "foreground": "#fff",
+      "backing": "#091525dd",
+      "minimum": 4.5,
+      "worstCaseRatio": 12.57
+    },
+    {
+      "name": "Enemy HP, Block, name and overflow",
+      "foreground": "#fff",
+      "backing": "#091525ed",
+      "minimum": 4.5,
+      "worstCaseRatio": 15.37
+    },
+    {
+      "name": "Current intent",
+      "foreground": "#ffdaac",
+      "backing": "#091525ed",
+      "minimum": 4.5,
+      "worstCaseRatio": 11.62
+    },
+    {
+      "name": "Hero status icon #ffc585",
+      "foreground": "#ffc585",
+      "backing": "#091525dd",
+      "minimum": 3,
+      "worstCaseRatio": 8.12
+    },
+    {
+      "name": "Enemy status icon #ffc585",
+      "foreground": "#ffc585",
+      "backing": "#091525ed",
+      "minimum": 3,
+      "worstCaseRatio": 9.94
+    },
+    {
+      "name": "Hero status icon #ff9caf",
+      "foreground": "#ff9caf",
+      "backing": "#091525dd",
+      "minimum": 3,
+      "worstCaseRatio": 6.36
+    },
+    {
+      "name": "Enemy status icon #ff9caf",
+      "foreground": "#ff9caf",
+      "backing": "#091525ed",
+      "minimum": 3,
+      "worstCaseRatio": 7.78
+    },
+    {
+      "name": "Hero status icon #ffb276",
+      "foreground": "#ffb276",
+      "backing": "#091525dd",
+      "minimum": 3,
+      "worstCaseRatio": 7.11
+    },
+    {
+      "name": "Enemy status icon #ffb276",
+      "foreground": "#ffb276",
+      "backing": "#091525ed",
+      "minimum": 3,
+      "worstCaseRatio": 8.7
+    },
+    {
+      "name": "Hero status icon #ffe29a",
+      "foreground": "#ffe29a",
+      "backing": "#091525dd",
+      "minimum": 3,
+      "worstCaseRatio": 9.93
+    },
+    {
+      "name": "Enemy status icon #ffe29a",
+      "foreground": "#ffe29a",
+      "backing": "#091525ed",
+      "minimum": 3,
+      "worstCaseRatio": 12.15
+    },
+    {
+      "name": "Hero status icon #9cddff",
+      "foreground": "#9cddff",
+      "backing": "#091525dd",
+      "minimum": 3,
+      "worstCaseRatio": 8.5
+    },
+    {
+      "name": "Enemy status icon #9cddff",
+      "foreground": "#9cddff",
+      "backing": "#091525ed",
+      "minimum": 3,
+      "worstCaseRatio": 10.39
+    },
+    {
+      "name": "Hero status icon #d4bcff",
+      "foreground": "#d4bcff",
+      "backing": "#091525dd",
+      "minimum": 3,
+      "worstCaseRatio": 7.44
+    },
+    {
+      "name": "Enemy status icon #d4bcff",
+      "foreground": "#d4bcff",
+      "backing": "#091525ed",
+      "minimum": 3,
+      "worstCaseRatio": 9.1
+    },
+    {
+      "name": "Hero status icon #a0efc6",
+      "foreground": "#a0efc6",
+      "backing": "#091525dd",
+      "minimum": 3,
+      "worstCaseRatio": 9.37
+    },
+    {
+      "name": "Enemy status icon #a0efc6",
+      "foreground": "#a0efc6",
+      "backing": "#091525ed",
+      "minimum": 3,
+      "worstCaseRatio": 11.46
+    },
+    {
+      "name": "Hero status icon #dce5ee",
+      "foreground": "#dce5ee",
+      "backing": "#091525dd",
+      "minimum": 3,
+      "worstCaseRatio": 9.86
+    },
+    {
+      "name": "Enemy status icon #dce5ee",
+      "foreground": "#dce5ee",
+      "backing": "#091525ed",
+      "minimum": 3,
+      "worstCaseRatio": 12.07
+    },
+    {
+      "name": "Selectable target against inner dark edge",
+      "foreground": "#f7d29e",
+      "backing": "#091525",
+      "minimum": 3,
+      "worstCaseRatio": 12.8
+    },
+    {
+      "name": "Focused target against inner dark edge",
+      "foreground": "#f7d29e",
+      "backing": "#091525",
+      "minimum": 3,
+      "worstCaseRatio": 12.8
+    },
+    {
+      "name": "Actor slot marker border",
+      "foreground": "#d5b88d",
+      "backing": "#091525",
+      "minimum": 3,
+      "worstCaseRatio": 9.66
+    }
+  ]
+}
