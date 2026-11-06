@@ -84,6 +84,8 @@ ACTOR_VISUALS.vending_golem.atlasFrames=GOLEM_ATLAS_FRAMES;
 for(const archetype of ['chrome','volt','concrete','smoke']) {
     ACTOR_VISUALS[`hero-${archetype}`].keyPoses={attack:{imageUrl:`/assets/battle/actors/${archetype}-attack-v1.webp`,footAnchor:[.5,.98]}};
 }
+ACTOR_VISUALS['hero-chrome'].keyPoses!.hit={imageUrl:'/assets/battle/actors/chrome-hit-v1.webp',footAnchor:[.5,.999]};
+ACTOR_VISUALS['hero-chrome'].clips.hit={frames:['hit','idle'],durationsMs:[160,60],loop:false,completion:'idle'};
 ACTOR_VISUALS.taxi_ghost.keyPoses={attack:{imageUrl:'/assets/battle/actors/taxi-ghost-attack-v1.webp',footAnchor:[.5,.99]}};
 ACTOR_VISUALS.taxi_ghost.keyPoses.hit={imageUrl:'/assets/battle/actors/taxi-ghost-hit-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.taxi_ghost.clips.hit={frames:['hit','idle'],durationsMs:[160,60],loop:false,completion:'idle'};

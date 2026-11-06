@@ -901,3 +901,7 @@ Added a 120 ms visor dip after 6,000 ms of idle, with a .992 foot anchor to alig
 ### Neon Yakuza authored idle
 
 Added a 100 ms eye-light dip after 4,900 ms of idle. Rejected the first draft for cropping the hand and boot. The accepted source mask overlaps the base by 98.0% intersection-over-union and the .991 foot anchor aligns the slightly different canvas. At 320 × 568 the Pixi study shows the eye light dip with horns, sword, and boots aligned. Captures: `tests/.e2e-out/yakuza-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, bounds, texture caps, playback and TypeScript passed.
+
+### Chrome hit pose
+
+Added an authored backward recoil with the forearm across the ribs, a .999 foot anchor and a 160/60 ms hit/idle clip. The 320 × 568 Chromium fixture equipped Chrome's existing appearance and resolved Dumpster Crawler's opening move. The hero recoiled and fell from 80 to 75 HP. Capture: `tests/.e2e-out/chrome-live-hit-320.png`. All 550 encounter budgets, texture caps, playback, bounds and TypeScript passed. The attempted Sentinel idle edit still changed the body proportions and was discarded.
