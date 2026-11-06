@@ -10,7 +10,7 @@ import { clipFrameAt } from './clipPlayback';
 import { atlasTextures } from './actorAtlas';
 import { actorPlacement } from './actorPlacement';
 import { textureDecodePlan } from './textureBudget';
-export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string }
+export interface SceneActor { id: string; visual: ActorVisual; defeated: boolean; clip?: ActorClip; motionToken?: string; previewElapsedMs?:number }
 export interface SceneSnapshot { layout: BattleLayout; location: LocationVisual; actors: SceneActor[]; reducedMotion: boolean }
 function loadTexture(url: string): Promise<Texture> {
     return new Promise((resolve,reject) => {
@@ -155,7 +155,7 @@ export class BattleScene {
         const idle=this.poses.get(`${actor.id}:idle`) ?? sprite.texture;
         const now=performance.now();
         const clip:ActorClip=actor.defeated ? 'defeat' : actor.clip ?? 'idle';
-        const elapsed=this.motions.elapsed(actor.id,clip,actor.motionToken,now);
+        const elapsed=actor.previewElapsedMs!==undefined && Number.isFinite(actor.previewElapsedMs) ? Math.max(0,actor.previewElapsedMs) : this.motions.elapsed(actor.id,clip,actor.motionToken,now);
         const motion=sampleActorMotion(motionProfile(actor.visual.id),clip,elapsed,now+slot.foot.x*11,actor.id==='player'?1:-1,this.snapshot.reducedMotion);
         const reaction=this.reactions.get(actor.id);
         const reactionClip=reaction && !actor.defeated && clip!=='celebrate' && !this.snapshot.reducedMotion ? reactionPose(reaction.effect,now-reaction.at) : null;

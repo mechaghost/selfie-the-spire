@@ -43,6 +43,11 @@ assert.deepEqual(backdrop.children.map(child=>child.zIndex),[2,0],'authored dept
 resolve('/enemy-atlas');await flush();
 assert.equal(scene.atlasViews.size,1,'optional atlas installs frame views');
 const atlasView=scene.atlasViews.get('enemy:attack');
+scene.casts.clear(); // Isolate clip sampling from the earlier status-action reaction.
+const preview={...snapshot,actors:snapshot.actors.map(actor=>actor.id==='enemy'?{...actor,clip:'attack',previewElapsedMs:140}:actor)};
+scene.update(preview);assert.equal(scene.sprites.get('enemy').texture,atlasView,'scrub holds contact frame');
+scene.update({...preview,actors:preview.actors.map(actor=>({...actor,previewElapsedMs:320}))});
+assert.equal(scene.sprites.get('enemy').texture,scene.poses.get('enemy:idle'),'scrub samples recovery idle');
 reject('/player-attack');await flush();assert.equal(failures,0,'missing optional pose keeps idle scene usable');
 scene.destroy();assert.equal(atlasView.destroyed,true,'atlas views disposed with scene');assert.equal(scene.atlasViews.size,0);assert.equal(scene.casts.size,0);assert.equal(listeners.size,0);assert.equal(apps[0].destroyed,true);
 assert.equal(pending.has('/enemy-attack'),false,'atlas-covered poses are not downloaded twice');
