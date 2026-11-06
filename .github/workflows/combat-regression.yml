@@ -49,12 +49,12 @@ jobs:
         run: node scripts/report_encounter_art_budget.mjs --check
       - name: Install locked Chromium
         run: node node_modules/playwright-core/cli.js install --with-deps chromium
-      - name: Exercise the production arena
+      - name: Exercise the production arena through Hono
         run: |
           mkdir -p tests/.e2e-out
-          node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4173 --strictPort > tests/.e2e-out/arena-preview.log 2>&1 &
+          (cd server && PORT=4173 exec node --import tsx src/index.ts) > tests/.e2e-out/arena-server.log 2>&1 &
           trap 'kill "$!" 2>/dev/null || true' EXIT
-          curl --retry 20 --retry-connrefused --retry-delay 1 --fail --silent http://127.0.0.1:4173/ > /dev/null
+          curl --retry 20 --retry-connrefused --retry-delay 1 --fail --silent --show-error http://127.0.0.1:4173/health
           E2E_BASE=http://127.0.0.1:4173 node tests/drag-live.cjs
           E2E_BASE=http://127.0.0.1:4173 node tests/arena-smoke.cjs 2>&1 | tee tests/.e2e-out/arena-smoke.log
       - name: Verify a legal route through all five districts
@@ -70,7 +70,7 @@ jobs:
             tests/.e2e-out/encounter-motion-parity.json
             tests/.e2e-out/run-motion-parity.json
             tests/.e2e-out/run-save-continuity.json
-            tests/.e2e-out/arena-preview.log
+            tests/.e2e-out/arena-server.log
             tests/.e2e-out/arena-smoke.log
             tests/.e2e-out/arena-full-run.log
             tests/.e2e-out/vite.log

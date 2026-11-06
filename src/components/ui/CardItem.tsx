@@ -23,7 +23,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
     }));
 
     const cardRef = useRef<HTMLDivElement>(null);
-    const gesture = useRef<{ id: number; x: number; y: number; moved: boolean; scrolling: boolean; sideHand: boolean } | null>(null);
+    const gesture = useRef<{ id: number; x: number; y: number; moved: boolean; scrolling: boolean; sideHand: boolean; hand: HTMLElement | null; scroll: number } | null>(null);
     const suppressClick = useRef(false);
     const origin = useRef({ width: 190, height: 270, x: 0, y: 0 });
     const isTargetingMode = card.target === 'Enemy';
@@ -34,24 +34,34 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
         return canPlay && isDraggable && state.inCombat && state.isPlayerTurn && !state.isResolving && state.actionQueue.length === 0 && !state.combatResult;
     };
     useEffect(() => () => {
+        gesture.current?.hand?.classList.remove('is-hand-scrolling');
         if (useGameStore.getState().dragState.cardId === card.instanceId) resetDragState();
     }, [card.instanceId, resetDragState]);
 
     const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
         suppressClick.current = false;
-        if (!canInteract() || !event.isPrimary || event.button !== 0) return;
+        if (!isDraggable || !event.isPrimary || event.button !== 0) return;
         const rect = event.currentTarget.getBoundingClientRect();
         const hand = event.currentTarget.closest('.deck-table')?.getBoundingClientRect();
         const arena = document.querySelector('.battle-arena-content')?.getBoundingClientRect();
+        const scroller = event.currentTarget.closest<HTMLElement>('.hand-container');
+        const sideHand = !!hand && !!arena && hand.left >= arena.right - 1;
         gesture.current = { id: event.pointerId, x: event.clientX, y: event.clientY, moved: false,
-            scrolling: false, sideHand: !!hand && !!arena && hand.left >= arena.right - 1 };
+            scrolling: false, sideHand, hand: scroller, scroll: (sideHand ? scroller?.scrollTop : scroller?.scrollLeft) ?? 0 };
         origin.current = { width: rect.width, height: rect.height, x: event.clientX - rect.left, y: event.clientY - rect.top };
         event.currentTarget.setPointerCapture(event.pointerId);
     };
     const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
         const pending = gesture.current;
-        if (!pending || pending.id !== event.pointerId || pending.scrolling) return;
+        if (!pending || pending.id !== event.pointerId) return;
         const dx = event.clientX - pending.x, dy = event.clientY - pending.y;
+        const scrollHand = () => {
+            if (!pending.hand) return;
+            pending.hand.classList.add('is-hand-scrolling');
+            if (pending.sideHand) pending.hand.scrollTop = pending.scroll - dy;
+            else pending.hand.scrollLeft = pending.scroll - dx;
+        };
+        if (pending.scrolling) { scrollHand(); return; }
         if (!pending.moved) {
             if (Math.hypot(dx, dy) <= 8) return;
             suppressClick.current = true;
@@ -59,6 +69,7 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
             // A bottom hand scrolls horizontally. Lift a card out of that hand.
             if (event.pointerType === 'touch' && (pending.sideHand ? Math.abs(dy) > Math.abs(dx) : Math.abs(dx) > Math.abs(dy))) {
                 pending.scrolling = true;
+                scrollHand();
                 return;
             }
             if (!canInteract()) return;
@@ -76,11 +87,13 @@ export function CardItem({ card, style, canPlay = true, isDraggable = true, onIn
         }
     };
     const cancelGesture = () => {
+        gesture.current?.hand?.classList.remove('is-hand-scrolling');
         gesture.current = null;
         if (useGameStore.getState().dragState.cardId === card.instanceId) resetDragState();
     };
     const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
         const pending = gesture.current;
+        pending?.hand?.classList.remove('is-hand-scrolling');
         gesture.current = null;
         if (!pending || pending.id !== event.pointerId || !pending.moved) return;
         const state = useGameStore.getState();

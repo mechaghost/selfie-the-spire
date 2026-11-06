@@ -7,6 +7,7 @@ const seed = '72b23907-f7cf-4c98-95e8-5e64155244f8';
  try {for(const viewport of [{width:1440,height:900},{width:844,height:390},{width:568,height:320}]) {
   const touch=viewport.width<1000;
   const page=await browser.newPage({viewport,hasTouch:touch,isMobile:touch});
+  page.setDefaultTimeout(15000);
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(seed=>{const uuid=crypto.randomUUID.bind(crypto);let first=true;crypto.randomUUID=()=>{if(first){first=false;return seed;}return uuid();};},seed);
   if(touch) {await page.setViewportSize({width:390,height:844});await page.goto(base);await page.getByRole('dialog',{name:'Rotate your device'}).waitFor();await page.setViewportSize(viewport);await page.getByRole('dialog',{name:'Rotate your device'}).waitFor({state:'hidden'});}
@@ -20,9 +21,9 @@ const seed = '72b23907-f7cf-4c98-95e8-5e64155244f8';
    const hand=page.locator('.hand-container'); const rect=await hand.boundingBox();
    const x=rect.x+rect.width/2,y=rect.y+Math.min(180,rect.height-20);
    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});
-   for(let i=1;i<=10;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y:y-i*12,id:1}]});
+   for(let i=1;i<=10;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y:y-i*15,id:1}]});await page.waitForTimeout(25);}
    await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
-   assert.ok(await hand.evaluate(e=>e.scrollTop)>0,'Vertical finger swipe scrolls side hand');
+   await page.waitForFunction(()=>document.querySelector('.hand-container').scrollTop>0);
    assert.equal(await page.locator('.card-drag-preview').count(),0);
    await hand.evaluate(e=>e.scrollTo({top:0,behavior:'instant'}));
   }
