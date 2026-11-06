@@ -38,6 +38,6 @@ Prompt: Isolated transparent 1536x1024 game sprite of this exact Sewer Slime per
 
 ## Idle blink
 
-The idle loop uses 5,400 ms of the base frame and a 100 ms blink. Both frames share the .94 foot anchor. The blink source is 1536 × 1024 with alpha ≥128 bounds (37,99)–(1493,967). Slime runtime textures now use a 480 px cap. The new tier and blink transition still need a mobile arena visual check.
+The idle loop uses 5,400 ms of the base frame and a 100 ms blink. Both frames share the .94 foot anchor. The blink source is 1536 × 1024 with alpha ≥128 bounds (37,99)–(1493,967). Slime runtime textures now use a 480 px cap. At 390 × 844 in the Pixi arena study, the eyes were closed at 5,450 ms and open at 5,500 ms. The puddle baseline stayed visually stable and the sprite cleared the HUD. Browser logs showed no warnings or errors. Local captures are `tests/.e2e-out/slime-blink-390.jpg` and `tests/.e2e-out/slime-idle-open-390.jpg`. A 320 px check, full-speed playback, and physical-device review remain open.
 
 Prompt: Make one minimally edited idle blink frame of this exact Sewer Slime. Only close the three amber eyes into thin dark slits with green gel eyelids. Keep the original body silhouette, open mouth, arms, bolts, tile, colors, position, scale, inked texture, and puddle baseline precisely fixed. Exact same canvas 1536x1024. Fully transparent exterior, clear all four edges, no haze or ground shadow. Do not redraw pose. This pairs with original in a 100ms blink.
