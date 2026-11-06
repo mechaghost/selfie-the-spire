@@ -226,19 +226,18 @@
       "keyPoses": [
         "attack",
         "hit",
+        "guard",
         "defeat"
       ],
       "timelines": [
         "hit",
+        "guard",
         "defeat",
         "attack"
       ],
-      "missingContactPoses": [
-        "guard"
-      ],
+      "missingContactPoses": [],
       "missingTimelines": [
-        "idle",
-        "guard"
+        "idle"
       ]
     },
     {

@@ -733,3 +733,7 @@ At 320 × 568 with reduced motion, browser fixtures ran Graffiti Imp's two-debuf
 ### Browser regression for stacked combat notices
 
 The browser mechanics suite now resolves Graffiti Imp's real two-debuff intent and DJ Phantom's real four-hit intent at 320 × 568 with reduced motion. It verifies the exact labels and the bounds of every notice immediately after the last one appears. The local mechanics suite passed both cases with no browser errors. CI already runs this suite as part of `node tests/e2e.cjs all`.
+
+### Dumpster Crawler guard
+
+Added a crouched guard with both pincers held in front of the shell, a .944 foot anchor and a 160/60 ms guard/idle clip. At 320 × 568 in Chromium touch emulation, the original opening move lowered the player from 80 to 75 HP and granted Crawler 6 Block. The captured combat frame shows the closed claws alongside the Block notice. Capture: `tests/.e2e-out/dumpster-crawler-live-guard-320.png`. All 550 encounter budgets, texture, playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,115,532 samples.
