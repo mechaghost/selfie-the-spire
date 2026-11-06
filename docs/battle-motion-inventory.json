@@ -407,15 +407,14 @@
         "hit",
         "defeat",
         "cast",
+        "guard",
         "windup",
         "recovery"
       ],
       "timelines": [
         "attack"
       ],
-      "missingContactPoses": [
-        "guard"
-      ],
+      "missingContactPoses": [],
       "missingTimelines": [
         "idle",
         "hit",
