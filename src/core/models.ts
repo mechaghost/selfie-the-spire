@@ -159,6 +159,7 @@ export type Archetype = 'neon' | 'chrome' | 'volt' | 'concrete' | 'smoke';
 export type UgcPhase = 'capture' | 'generating' | 'reveal' | null;
 
 export interface GeneratedCharacter {
+    combatAppearance?: CombatAppearance;
     id: string;
     name: string;
     archetype: Archetype;

@@ -667,7 +667,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 maxEnergy: generatedCharacter.maxEnergy,
                 gold: generatedCharacter.startingGold,
                 portraitUrl: generatedCharacter.portraitUrl || undefined,
-                combatAppearance: appearanceForArchetype(generatedCharacter.archetype),
+                combatAppearance: normalizeAppearance(generatedCharacter.combatAppearance,generatedCharacter.archetype),
             },
             masterDeck,
             ugcPhase: null,

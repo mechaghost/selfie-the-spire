@@ -1,4 +1,4 @@
-import { ActorVisual, CombatAppearance, validateActorVisual } from '../core/battleVisualModels';
+import { ActorVisual, CombatAppearance, isPersonalizedCutout, validateActorVisual } from '../core/battleVisualModels';
 import { enemies } from './enemies';
 import { GOLEM_ATLAS_FRAMES } from './actorAtlasFrames';
 export const HERO_ARCHETYPES = ['neon','chrome','volt','concrete','smoke'] as const;
@@ -72,13 +72,24 @@ for(const id of [...HERO_ARCHETYPES.map(id=>`hero-${id}`),'alley_rat','vending_g
 }
 Object.values(ACTOR_VISUALS).forEach(validateActorVisual);
 export function resolveAppearance(value: CombatAppearance | undefined, archetype = 'neon'): ActorVisual {
-    if (value?.version === 1 && ACTOR_VISUALS[value.actorVisualId]?.id?.startsWith('hero-')) return ACTOR_VISUALS[value.actorVisualId];
-    return ACTOR_VISUALS[`hero-${archetype}`] ?? ACTOR_VISUALS['hero-neon'];
+    const base=value && (value.version===1 || value.version===2) && ACTOR_VISUALS[value.actorVisualId]?.id?.startsWith('hero-')
+        ? ACTOR_VISUALS[value.actorVisualId] : ACTOR_VISUALS[`hero-${archetype}`] ?? ACTOR_VISUALS['hero-neon'];
+    if(value?.version===2 && isPersonalizedCutout(value.idleImageUrl)) {
+        // Do not borrow another person's attack or reaction artwork. The personal
+        // cutout uses procedural movement until identity-matched poses are available.
+        return {...base,id:`${base.id}-personalized`,fallbackImageUrl:value.idleImageUrl,
+            atlasUrl:undefined,atlasFrames:undefined,keyPoses:undefined,clips:{},footAnchor:[.5,.99],
+            productionStatus:'review',provenance:'Personalized generated combat cutout; matching pose generation pending.'};
+    }
+    return base;
 }
 
 export function appearanceForArchetype(archetype:string):CombatAppearance {
     return {version:1,actorVisualId:resolveAppearance(undefined,archetype).id};
 }
-export function normalizeAppearance(value:CombatAppearance|undefined):CombatAppearance {
-    return {version:1,actorVisualId:resolveAppearance(value).id};
+export function normalizeAppearance(value:CombatAppearance|undefined,archetype='neon'):CombatAppearance {
+    const fallback=appearanceForArchetype(archetype);
+    const actorVisualId=value && ACTOR_VISUALS[value.actorVisualId]?.id?.startsWith('hero-') ? value.actorVisualId : fallback.actorVisualId;
+    if(value?.version===2 && isPersonalizedCutout(value.idleImageUrl))return {version:2,actorVisualId,idleImageUrl:value.idleImageUrl};
+    return {version:1,actorVisualId};
 }

@@ -1,6 +1,16 @@
 export type ActorClip = 'idle' | 'attack' | 'cast' | 'hit' | 'guard' | 'defeat' | 'celebrate';
 export type LocationId = 'ocean-drive' | 'wynwood' | 'underpass' | 'club-backlot' | 'rooftop';
-export interface CombatAppearance { version: 1; actorVisualId: string; paletteId?: string }
+export type CombatAppearance =
+    | { version: 1; actorVisualId: string; paletteId?: string }
+    | { version: 2; actorVisualId: string; idleImageUrl: string };
+/** Embedded runtime WebP only: no remote tracking URLs or executable image formats. */
+export function isPersonalizedCutout(value:unknown):value is string {
+    if(typeof value!=='string' || value.length>512_000 || !/^data:image\/webp;base64,[A-Za-z0-9+/]+={0,2}$/.test(value))return false;
+    try {
+        const bytes=atob(value.slice('data:image/webp;base64,'.length));
+        return bytes.length>=12 && bytes.slice(0,4)==='RIFF' && bytes.slice(8,12)==='WEBP';
+    } catch {return false;}
+}
 export interface AtlasFrame {
     rect: readonly [number,number,number,number];
     sourceSize: readonly [number,number];
@@ -33,7 +43,7 @@ export interface LocationVisual {
 }
 const assetPath = (path: string) => /^\/assets\/battle\/[a-zA-Z0-9_./-]+$/.test(path) && !path.includes('..');
 export function validateActorVisual(visual: ActorVisual): void {
-    if (!visual.id || !assetPath(visual.fallbackImageUrl) || (visual.atlasUrl && !assetPath(visual.atlasUrl)) ||
+    if (!visual.id || !(assetPath(visual.fallbackImageUrl) || isPersonalizedCutout(visual.fallbackImageUrl)) || (visual.atlasUrl && !assetPath(visual.atlasUrl)) ||
         !Number.isFinite(visual.visualHeight) || visual.visualHeight <= 0 || visual.visualHeight > 4096 ||
         visual.footAnchor.length !== 2 || visual.footAnchor.some(n => !Number.isFinite(n) || n < 0 || n > 1)) throw new Error(`Invalid actor visual: ${visual.id}`);
     for (const pose of Object.values(visual.keyPoses ?? {})) {
