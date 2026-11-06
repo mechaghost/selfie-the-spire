@@ -1071,3 +1071,11 @@ Added a 100 ms blink after 5,100 ms of idle. The source canvas and foot baseline
 Built-in imagegen prompt with `smoke-idle-v1.png` as reference:
 
 > Edit this exact transparent Smoke fighter PNG into an idle blink frame. Close the visible eye with a thin relaxed eyelid. Preserve the original 1199 by 1312 canvas, exact full-body framing and margins. Do not alter any other pixels: keep her bun, brow, head angle, scarf, purple jacket, hands, teal sash, trouser folds, high-tops and their exact positions. The two frames will alternate in a video game, so even a tiny pose or silhouette shift is unacceptable. Keep true alpha transparency.
+
+### Volt idle blink
+
+Added a 100 ms blink after 4,400 ms of idle. The accepted edit matches the base canvas and shoe baseline, with 98.3% alpha mask intersection-over-union. The 320 px Pixi study shows the blink and return with shoes aligned. Captures: `tests/.e2e-out/volt-idle-{base,dip,restored}-320.png`. The blink alone uses a 500 px tier. All 550 encounter budgets, sprite bounds, texture caps, playback and TypeScript passed.
+
+Built-in imagegen prompt with `volt-idle-v1.png` as reference:
+
+> Image editing, retain the input framing and aspect ratio. Make one tiny local change to the supplied RGBA game sprite: draw a closed eyelid over his visible eye. Do not redraw anything else. Keep both shoes exactly where they are and leave the same transparent margins on every side. Preserve his hair angle, face profile, silhouette, hands, orange cable loop, palette, shadow colors and original contours. Return the full source-sized image with genuine transparency.

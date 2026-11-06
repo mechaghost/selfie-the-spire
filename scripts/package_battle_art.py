@@ -49,6 +49,8 @@ def encode(source):
             resolution=min(resolution,500/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name=='concrete-blink-v1.webp':
             resolution=min(resolution,432/max(rgba.size))
+        if relative.parts[0]=='actors' and relative.name=='volt-blink-v1.webp':
+            resolution=min(resolution,500/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith('street-runner-'):
             resolution=min(resolution,640/max(rgba.size))
         # These poses stream together in Spectral Fog, the heaviest encounter.

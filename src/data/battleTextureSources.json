@@ -1224,6 +1224,13 @@
     "runtimeHeight": 664,
     "resolution": 0.5
   },
+  "/assets/battle/actors/volt-blink-v1.webp": {
+    "width": 1186,
+    "height": 1327,
+    "runtimeWidth": 447,
+    "runtimeHeight": 500,
+    "resolution": 0.37678975131876413
+  },
   "/assets/battle/actors/volt-cast-v1.webp": {
     "width": 1186,
     "height": 1327,
