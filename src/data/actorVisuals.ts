@@ -52,6 +52,7 @@ ACTOR_VISUALS['hero-neon'].keyPoses!.hit = {imageUrl:'/assets/battle/actors/stre
 ACTOR_VISUALS['hero-neon'].keyPoses!.guard = {imageUrl:'/assets/battle/actors/street-runner-guard-v1.webp',footAnchor:[.5,.99]};
 ACTOR_VISUALS['hero-neon'].keyPoses!.defeat = {imageUrl:'/assets/battle/actors/street-runner-defeat-v1.webp',footAnchor:[.5,.99]};
 ACTOR_VISUALS['hero-neon'].keyPoses!.celebrate = {imageUrl:'/assets/battle/actors/street-runner-celebrate-v1.webp',footAnchor:[.5,.99]};
+ACTOR_VISUALS['hero-neon'].keyPoses!.cast = {imageUrl:'/assets/battle/actors/street-runner-cast-v1.webp',footAnchor:[.5,.99]};
 ACTOR_VISUALS.alley_rat.keyPoses!.hit = {imageUrl:'/assets/battle/actors/alley-rat-hit-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.alley_rat.keyPoses!.defeat = {imageUrl:'/assets/battle/actors/alley-rat-defeat-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.vending_golem.keyPoses!.hit = {imageUrl:'/assets/battle/actors/vending-golem-hit-v1.webp',footAnchor:[.5,.94]};

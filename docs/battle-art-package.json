@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 113663340,
-  "runtimeBytes": 34867012,
+  "sourceBytes": 114942631,
+  "runtimeBytes": 35119924,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -377,6 +377,17 @@
       "sourceBytes": 1155255,
       "runtimeBytes": 216498,
       "decodedRGBABytes": 1572732
+    },
+    {
+      "asset": "actors/street-runner-cast-v1.webp",
+      "width": 1107,
+      "height": 1421,
+      "runtimeWidth": 554,
+      "runtimeHeight": 711,
+      "resolution": 0.5,
+      "sourceBytes": 1279291,
+      "runtimeBytes": 252912,
+      "decodedRGBABytes": 1575576
     },
     {
       "asset": "actors/street-runner-celebrate-v1.webp",

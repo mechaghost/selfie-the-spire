@@ -13,14 +13,13 @@
         "hit",
         "guard",
         "defeat",
-        "celebrate"
+        "celebrate",
+        "cast"
       ],
       "timelines": [
         "attack"
       ],
-      "missingContactPoses": [
-        "cast"
-      ],
+      "missingContactPoses": [],
       "missingTimelines": [
         "idle",
         "hit",

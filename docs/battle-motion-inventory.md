@@ -4,7 +4,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
-| hero-neon | hero | attack, hit, guard, defeat, celebrate | attack | cast | review |
+| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast | attack | none | review |
 | hero-chrome | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-volt | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-concrete | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
