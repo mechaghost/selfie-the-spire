@@ -128,17 +128,13 @@ public/assets/
 
 ## API
 
-**POST `/api/generate-character`** — Submit a selfie, receive a generated character with portrait, archetype, deck, and hero card. Rate limited (3/min per IP, 200/day global).
+**POST `/api/generate-character`** — Retired endpoint. Returns HTTP 410. The browser composes the selfie sprite locally.
 
 **GET `/health`** — Health check.
 
 ## Deployment
 
-Railway watches the `release` branch for auto-deployment.
-
-```bash
-git push origin main:release
-```
+Railway watches the `release` branch for auto-deployment. Follow the [arena release and rollback runbook](docs/arena-release-runbook.md) to promote a verified revision.
 
 ## Art Style
 
