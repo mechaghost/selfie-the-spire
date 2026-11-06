@@ -893,3 +893,7 @@ Added a 130 ms dip of the chest coil and tubes after 6,400 ms of idle. Both pose
 ### Circuit Breaker authored idle
 
 Added a 130 ms chest-panel dip after 6,600 ms of idle. The .931 foot anchor compensates for the one-pixel source baseline difference and source alpha masks overlap by 99.0% intersection-over-union. The 320 × 568 Pixi study shows the circuits dimming while the hammer, doors and boots stay aligned. Captures: `tests/.e2e-out/breaker-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.
+
+### Chrome Bouncer authored idle
+
+Added a 120 ms visor dip after 6,000 ms of idle, with a .992 foot anchor to align the two-pixel source baseline difference. The alpha masks overlap by 99.1% intersection-over-union. At 320 × 568 the Pixi study shows the visor dimming while the stance stays fixed. Captures: `tests/.e2e-out/bouncer-idle-{base,dip,restored}-320.png`. All 550 encounter budgets, texture caps, bounds, playback and TypeScript passed.

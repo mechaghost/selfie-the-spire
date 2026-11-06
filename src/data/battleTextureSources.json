@@ -104,6 +104,13 @@
     "runtimeHeight": 703,
     "resolution": 0.5
   },
+  "/assets/battle/actors/chrome-bouncer-blink-v1.webp": {
+    "width": 1222,
+    "height": 1287,
+    "runtimeWidth": 611,
+    "runtimeHeight": 644,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/chrome-bouncer-cast-v1.webp": {
     "width": 1222,
     "height": 1287,
