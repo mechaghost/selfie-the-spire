@@ -9,7 +9,7 @@ import { setCombatMotionMode } from '../../core/combatTiming';
 import { ActorClip } from '../../core/battleVisualModels';
 import { CombatFeedback } from './CombatFeedback';
 import { BattleStage } from './BattleStage';
-import { ActorStatusSummary } from './ActorStatusSummary';
+import { HeroHUDContents, EnemyHUDContents } from './ActorHUD';
 import { InspectionDialog } from '../ui/CardInspector';
 import { StatusIcon } from '../ui/StatusIcon';
 import { describeIntent, describeStatuses } from './EntityPanel';
@@ -46,7 +46,7 @@ export function BattleArena({targetControls='arena'}:{targetControls?:'arena'|'l
     return <div className="battle-arena"><div className="battle-arena-content" ref={root}>
         <BattleStage snapshot={snapshot} noticeHost={noticeHost} forceFallback={import.meta.env.DEV && new URLSearchParams(location.search).has('fallback')}/>
         <CombatFeedback layout={layout}/>
-        <button className="actor-hero-hud" style={{left:layout.hero.hud.x,top:layout.hero.hud.y,width:layout.hero.hud.width}} onClick={()=>setInspected('player')} aria-label={`Inspect ${player.name}, ${player.hp} of ${player.maxHp} HP, ${player.block} Block. ${describeStatuses(player.statuses).map(status=>status.split(' — ')[0]).join('; ') || 'No active effects.'}`}><strong>You</strong><span>{player.hp}/{player.maxHp}</span><span>◆ {player.block}</span><ActorStatusSummary statuses={player.statuses} width={layout.hero.hud.width}/></button>
+        <button className="actor-hero-hud" style={{left:layout.hero.hud.x,top:layout.hero.hud.y,width:layout.hero.hud.width}} onClick={()=>setInspected('player')} aria-label={`Inspect ${player.name}, ${player.hp} of ${player.maxHp} HP, ${player.block} Block. ${describeStatuses(player.statuses).map(status=>status.split(' — ')[0]).join('; ') || 'No active effects.'}`}><HeroHUDContents entity={player} width={layout.hero.hud.width}/></button>
         {enemies.map(enemy=>{
             const slot=layout.enemies.find(slot=>slot.id===enemy.id)!;
             const intent=intentView(enemy.intent,enemy.statuses,player.statuses);
@@ -56,9 +56,7 @@ export function BattleArena({targetControls='arena'}:{targetControls?:'arena'|'l
                 aria-label={enemy.hp<=0 ? `${enemy.name}, defeated` : `${mode==='targeting'?'Target':'Inspect'} ${enemy.name}, ${enemy.hp} of ${enemy.maxHp} HP, ${enemy.block} Block. ${intent.label}. ${describeStatuses(enemy.statuses).map(status=>status.split(' — ')[0]).join('; ') || 'No active effects.'}`}
                 onClick={event=>{event.stopPropagation();if(mode==='targeting')commit(enemy.id);else setInspected(enemy.id);}}>
                 <span className="actor-hud" style={{left:slot.hud.x-slot.target.x,top:slot.hud.y-slot.target.y,width:slot.hud.width}}>
-                    <strong>{slot.index+1}. {enemy.name}</strong><span>{enemy.hp}/{enemy.maxHp}</span>
-                    <b title={enemy.hp>0 && intent.attack ? 'Current damage preview. Status changes before this attack can change damage. Inspect for details.' : undefined} aria-label={enemy.hp>0 && intent.attack ? `Current damage preview: ${intent.attack}${intent.block ? `; gains ${intent.block} Block` : ''}` : enemy.hp>0 ? intent.label : undefined}>{enemy.hp<=0 ? 'Defeated' : intent.attack ? `≈ ⚔ ${intent.attack}${intent.block?` ◆ ${intent.block}`:''}${intent.statuses.length?' ✦':''}` : [intent.block?`◆ ${intent.block}`:null,intent.healing?`+${intent.healing} HP`:null,intent.statuses.length?'✦':null].filter(Boolean).join(' ') || 'Preparing'}</b>
-                    {enemy.hp>0 && <small className="actor-block-effects" title={`${enemy.block} Block${enemy.statuses.length ? `; ${enemy.statuses.length} active effects. Inspect for details.` : ''}`}><span>◆{enemy.block}</span><ActorStatusSummary statuses={enemy.statuses} width={slot.hud.width-18-String(enemy.block).length*9}/></small>}
+                    <EnemyHUDContents entity={enemy} index={slot.index} width={slot.hud.width} intent={intent}/>
                 </span><span className="actor-slot-marker">{slot.index+1}</span>
             </button>;
         })}

@@ -10,13 +10,8 @@
 .study-actor { position:absolute; overflow:visible; pointer-events:none; }
 .study-monster.selected { filter:drop-shadow(0 0 5px #f9d29a); }
 .study-monster.is-dead { opacity:.12; }
-.study-hero-hud { position:absolute; display:flex; flex-direction:column; font-size:14px; z-index:2; }
 .arena-study .study-target { position:absolute; background:transparent; border:1px solid transparent; padding:0; display:flex; align-items:flex-start; justify-content:flex-start; border-radius:8px; }
 .arena-study .study-target:focus-visible,.arena-study .study-target[aria-pressed=true] { border:2px solid #ffe0a7; outline:0; }
-.study-hud { display:flex; flex-direction:column; align-items:center; width:100%; background:#091525e8; border-radius:6px; line-height:18px; font-size:14px; }
-.study-hud strong { width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:12px; }
-.study-hud b { color:#ffd6a3; }
-.study-hud span:last-child { font-size:11px; }
 .study-slot-number { position:absolute; bottom:0; border-radius:50%; background:#091525; border:1px solid #9db1b4; width:22px; height:22px; line-height:20px; }
 .study-controls { display:flex; align-items:center; justify-content:space-between; padding:4px 8px; gap:8px; font-size:14px; }
 .study-controls button { padding:0 14px; }

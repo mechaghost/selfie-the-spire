@@ -2,7 +2,10 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { battleLayout, Rect } from '../rendering/battleLayout';
 import { CardItem } from '../components/ui/CardItem';
 import { createCardInstance } from '../data/cards';
+import '../components/combat/BattleArena.css';
 import './ArenaLayoutStudy.css';
+import {HeroHUDContents, EnemyHUDContents} from '../components/combat/ActorHUD';
+import {intentView} from '../core/intentView';
 import { BattleStage } from '../components/combat/BattleStage';
 import fixture from './fixtures/personalCutout.json';
 import { ACTOR_VISUALS, HERO_ARCHETYPES, resolveAppearance } from '../data/actorVisuals';
@@ -12,6 +15,8 @@ import { ActorClip } from '../core/battleVisualModels';
 const personalVisual=resolveAppearance({version:2,actorVisualId:'hero-chrome',idleImageUrl:fixture.idleImageUrl});
 const position = (rect: Rect) => ({ left: rect.x, top: rect.y, width: rect.width, height: rect.height });
 const roster = Object.keys(enemies);
+const studyStatuses=[{id:'weak',name:'Weak',amount:2},{id:'burn',name:'Burn',amount:3},{id:'strength',name:'Strength',amount:1},{id:'vulnerable',name:'Vulnerable',amount:2}];
+const studyIntent=intentView({type:'Attack',effects:[{type:'Damage',target:'Target',amount:6},{type:'Damage',target:'Target',amount:6}]},studyStatuses,studyStatuses);
 const cards = Array.from({length:10}, (_, i) => createCardInstance(i % 2 ? 'haymaker' : 'finesse'));
 export default function ArenaLayoutStudy() {
     const [hero,setHero]=useState('neon');
@@ -42,12 +47,12 @@ export default function ArenaLayoutStudy() {
             {renderer && <BattleStage noticeHost={noticeHost} forceFallback={fallback} snapshot={{layout,location:LOCATIONS[district],reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,actors:[{id:'player',visual:hero==='personal-fixture'?personalVisual:ACTOR_VISUALS[`hero-${hero}`],defeated:dead.includes('player'),clip:preview?.actor==='player'?preview.clip:undefined,previewElapsedMs:scrub && preview?.actor==='player'?frameMs:undefined,motionToken:preview?.actor==='player'?String(preview.token):undefined},...layout.enemies.map((slot,i)=>({id:slot.id,visual:ACTOR_VISUALS[actorIds[i]],defeated:dead.includes(slot.id),clip:preview?.actor===slot.id?preview.clip:undefined,previewElapsedMs:scrub && preview?.actor===slot.id?frameMs:undefined,motionToken:preview?.actor===slot.id?String(preview.token):undefined}))]}} />}
             {!renderer && <div className="study-skyline" aria-hidden="true" />}
             {!renderer && <div className="study-road" aria-hidden="true" />}
-            <div className="study-hero-hud" style={position(layout.hero.hud)}><strong>You</strong><span>72/80</span><span>◆ 8</span></div>
+            <div className="study-hero-hud actor-hero-hud" style={position(layout.hero.hud)}><HeroHUDContents entity={{hp:72,maxHp:80,block:8,statuses:studyStatuses}} width={layout.hero.hud.width}/></div>
             {!renderer && <svg aria-hidden="true" className="study-actor study-hero" viewBox="0 0 100 180" style={position(layout.hero.art)}><ellipse cx="50" cy="174" rx="35" ry="5" fill="#070b16"/><path d="M36 78L28 126 18 170H36L51 125 61 170H80L68 119 65 75Z" fill="#d597a8"/><path d="M32 42L21 92 32 98 43 70 62 74 78 92 89 82 69 44Z" fill="#f3a44a"/><circle cx="51" cy="25" r="17" fill="#aee5df"/></svg>}
             {layout.enemies.map((slot, i) => <div key={slot.id}>
                 {!renderer && <svg aria-hidden="true" viewBox="0 0 130 180" className={`study-actor study-monster ${dead.includes(slot.id) ? 'is-dead' : ''} ${selected === slot.id ? 'selected' : ''}`} style={position(slot.art)}><ellipse cx="65" cy="173" rx="57" ry="6" fill="#070b16"/>{i === 0 && !boss ? <path d="M57 70L12 30 2 40 40 94 3 140 8 166 25 138 55 113 75 113 103 138 122 170 127 140 90 94 128 40 116 30 73 70Z" fill="#99cebf"/> : <path d="M30 22L95 22 122 72 108 132 100 171H77L67 132 54 171H28L16 115 7 70Z" fill={i === 1 ? '#b49ad8' : '#ea9278'}/>}<path d="M40 82H54M77 82H91" stroke="#101a30" strokeWidth="10"/></svg>}
-                <button className="study-target" disabled={dead.includes(slot.id)} aria-label={`${enemies[actorIds[i]].name}, ${dead.includes(slot.id) ? 'defeated' : '30 health, attacks for 6 twice'}`} aria-pressed={selected === slot.id} style={position(slot.target)} onClick={() => setSelected(slot.id)}>
-                    <span className="study-hud" style={{position:'absolute',left:slot.hud.x-slot.target.x,top:slot.hud.y-slot.target.y,width:slot.hud.width}}><strong>{i+1}. {enemies[actorIds[i]].name}</strong><span>{dead.includes(slot.id) ? 'Defeated' : '30/40'}</span><b>⚔ 6 × 2</b><span title="Weak 2, Burn 3, Strength 1, Spikes 2">◆5 · +4</span></span>
+                <button className="study-target" disabled={dead.includes(slot.id)} aria-label={`${enemies[actorIds[i]].name}, ${dead.includes(slot.id) ? 'defeated' : `30 health, ${studyIntent.label}`}`} aria-pressed={selected === slot.id} style={position(slot.target)} onClick={() => setSelected(slot.id)}>
+                    <span className="study-hud actor-hud" style={{position:'absolute',left:slot.hud.x-slot.target.x,top:slot.hud.y-slot.target.y,width:slot.hud.width}}><EnemyHUDContents entity={{name:enemies[actorIds[i]].name,hp:dead.includes(slot.id)?0:30,maxHp:40,block:5,statuses:studyStatuses}} index={i} width={slot.hud.width} intent={studyIntent}/></span>
                     <span className="study-slot-number" aria-hidden="true">{i+1}</span>
                 </button>
             </div>)}
