@@ -12,7 +12,7 @@ import { BattleArena } from './BattleArena';
 import { CityBackdrop } from '../ui/CityBackdrop';
 
 export function CombatView() {
-    const actorArena = import.meta.env.DEV && new URLSearchParams(location.search).has('arena');
+    const actorArena = import.meta.env.VITE_COMBAT_ARENA === '1' || (import.meta.env.DEV && new URLSearchParams(location.search).has('arena'));
     const {
         player, enemies, endTurn, energy, maxEnergy, isPlayerTurn, combatResult, screenShake
     } = useGameStore((state) => ({
