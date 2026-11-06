@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 294446557,
-  "runtimeBytes": 45354264,
+  "sourceBytes": 296119183,
+  "runtimeBytes": 45672836,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -1082,6 +1082,19 @@
       "sourceBytes": 1594863,
       "runtimeBytes": 301474,
       "decodedRGBABytes": 1576092
+    },
+    {
+      "asset": "actors/neon-yakuza-cast-v1.webp",
+      "width": 1119,
+      "height": 1406,
+      "runtimeWidth": 560,
+      "runtimeHeight": 703,
+      "resolution": 0.5,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1672626,
+      "runtimeBytes": 318572,
+      "decodedRGBABytes": 1574720
     },
     {
       "asset": "actors/neon-yakuza-defeat-v1.webp",
