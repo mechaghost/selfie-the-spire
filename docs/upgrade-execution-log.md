@@ -941,3 +941,11 @@ Added a backward recoil with a .987 foot anchor and a 160/60 ms hit/idle clip. T
 Built-in imagegen prompt with `volt-idle-v1.png` as reference:
 
 > Create a new full-body transparent game sprite for the exact Volt fighter in the reference, in the instant after taking a blow from screen right. Preserve his identity, black swept hair with cream front streak, yellow and teal electrician jacket, orange cables at belt, charcoal cargo trousers and teal and cream sneakers, plus the same inked rendering and neutral key light. Face screen right, feet planted with bent knees; torso recoils distinctly back toward screen left; face winces, near hand pulls in over the ribs, rear hand opens for balance. Match the original scale and ground line, keep all limbs and shoes visible. No glow, impact streaks, particles, blood, shadows, props, ground, environment or lettering. Real alpha background, transparent padding.
+
+### Volt guard pose
+
+Added a compact two-forearm brace with a .98 foot anchor and a 160/60 ms guard/idle clip. In the 320 × 568 Chromium touch fixture, playing Dodge showed the brace and granted 5 Block with HP unchanged. Capture: `tests/.e2e-out/volt-live-guard-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `volt-idle-v1.png` as reference:
+
+> Create a single full-body defense key pose of the exact Volt fighter in the reference. Match the inked arcade fighting game sprite style, swept black hair with cream streak, yellow and teal electrician jacket, orange cable loop, dark cargo pants and teal and cream sneakers. Facing screen right with both sneakers planted at the original floor line, bend the knees a little and raise both bracers together diagonally in front of the right-facing cheek and chest, elbows tucked, looking toward the threat. The forearms and shoulders should read as a compact protective shape at small mobile size. Keep camera and sprite scale. Both feet and all extremities visible with transparent clearance. True alpha background, no environment, ground, shadow, props, glow or effects.
