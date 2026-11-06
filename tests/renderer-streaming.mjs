@@ -3,6 +3,7 @@ import {build} from 'esbuild';
 const pixi=`
 export const apps=[];
 export const textureFailures={remaining:0};
+export const initialization={wait:undefined};
 export class Rectangle {constructor(x,y,width,height){Object.assign(this,{x,y,width,height});}}
 class Pair {set(x,y=x){this.x=x;this.y=y;}}
 export class Container {children=[];addChild(...items){this.children.push(...items);} }
@@ -10,15 +11,15 @@ export class Graphics extends Container {clear(){return this;}rect(){return this
 export class Sprite {constructor(texture){this.texture=texture;}anchor=new Pair();scale=new Pair();position=new Pair();}
 export class ImageSource {constructor({resource}){this.resource=resource;}}
 export class Texture {constructor({source}){if(textureFailures.remaining>0){textureFailures.remaining--;throw new Error('texture construction failed');}this.source=source;this.width=100;this.height=100;}destroy(){this.destroyed=true;}}
-export class Application {constructor(){apps.push(this);}stage=new Container();canvas={setAttribute(){},addEventListener(){},removeEventListener(){}};renderer={resize(){}};ticker={add(){}};async init(){}render(){}start(){}stop(){}destroy(){this.destroyed=true;}}
+export class Application {constructor(){apps.push(this);}stage=new Container();canvas={setAttribute(){},addEventListener(){},removeEventListener(){}};renderer={resize(){}};ticker={add(){}};async init(){await initialization.wait;}render(){}start(){}stop(){}destroy(){this.destroyed=true;}}
 `;
-await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {publishAction,identifyAction} from './src/rendering/CombatPresentation'; export {apps,textureFailures} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
+await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {publishAction,identifyAction} from './src/rendering/CombatPresentation'; export {startStageMount} from './src/rendering/stageMountLifecycle'; export {apps,textureFailures,initialization} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
 const pending=new Map();
 globalThis.Image=class {set src(url){if(url)pending.set(url,this);}};
 globalThis.window={devicePixelRatio:1,setTimeout};
 const listeners=new Set();
 globalThis.document={hidden:false,addEventListener:(type,fn)=>listeners.add(fn),removeEventListener:(type,fn)=>listeners.delete(fn)};
-const {BattleScene,battleTextures,apps,battleLayout,publishAction,identifyAction,textureFailures}=await import('./.e2e-out/renderer-streaming.mjs');
+const {BattleScene,battleTextures,apps,battleLayout,publishAction,identifyAction,textureFailures,initialization,startStageMount}=await import('./.e2e-out/renderer-streaming.mjs');
 const flush=async()=>{for(let i=0;i<12;i++)await Promise.resolve();};
 const resolve=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);return image.onload();};
 const reject=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);image.onerror();};
@@ -155,3 +156,28 @@ assert.equal(lateBitmap.closed,true,'bitmap arriving after timeout is closed, ne
 assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
 window.setTimeout=setTimeout;
 console.log('PASS: texture construction errors reject; decoder deadline and late bitmap disposal settle cleanly');
+
+// Use the real scene lifecycle with GPU initialization held beyond the stage deadline.
+const nativeSetTimeout=globalThis.setTimeout,nativeClearTimeout=globalThis.clearTimeout;
+let stageDeadline,finishInitialization;
+initialization.wait=new Promise(resolve=>{finishInitialization=resolve;});
+globalThis.setTimeout=callback=>{stageDeadline=callback;return 123456789;};
+globalThis.clearTimeout=()=>{};
+try {
+    let attached=0,stageFailures=0,stageReady=0;
+    const lateScene=new BattleScene({appendChild(){attached++;}},snapshot,()=>stageFailures++);
+    const lateApp=apps.at(-1);
+    const stop=startStageMount({load:async()=>()=>lateScene,onCreate(){},onReady(){stageReady++;},onFailure(){stageFailures++;}});
+    await flush();stageDeadline();
+    assert.equal(stageFailures,1);assert.equal(stageReady,0);
+    assert.equal(attached,0);assert.equal(lateApp.destroyed,undefined,'uninitialized GPU is not destroyed prematurely');
+    finishInitialization();await flush();
+    assert.equal(lateApp.destroyed,true,'GPU resolving after timeout is destroyed');
+    assert.equal(attached,0,'late GPU canvas never attaches');assert.equal(stageReady,0);
+    assert.equal(listeners.size,0);assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
+    stop();assert.equal(stageFailures,1);
+} finally {
+    initialization.wait=undefined;
+    globalThis.setTimeout=nativeSetTimeout;globalThis.clearTimeout=nativeClearTimeout;
+}
+console.log('PASS: stage timeout disposes late GPU initialization without canvas, listeners or asset leases');

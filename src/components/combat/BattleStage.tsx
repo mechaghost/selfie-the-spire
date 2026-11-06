@@ -5,6 +5,7 @@ import './BattleStage.css';
 import { actorPlacement } from '../../rendering/actorPlacement';
 import type { ActorSlot } from '../../rendering/battleLayout';
 import type { SceneActor } from '../../rendering/BattleScene';
+import { startStageMount } from '../../rendering/stageMountLifecycle';
 function FallbackActor({actor,slot}:{actor:SceneActor;slot:ActorSlot}) {
     const [dimensions,setDimensions]=useState<{width:number;height:number}|null>(null);
     const [failed,setFailed]=useState(false);
@@ -29,14 +30,19 @@ export function BattleStage({snapshot,noticeHost,forceFallback=false,onStatus}: 
         let cancelled = false;
         let owned: BattleScene | undefined;
         setStatus(forceFallback ? 'degraded' : 'loading');
-        if (!forceFallback) void import('../../rendering/BattleScene').then(async ({BattleScene}) => {
-            if (cancelled || !host.current) return;
-            owned = new BattleScene(host.current,latest.current,()=>{if(!cancelled)setStatus('degraded');});
-            scene.current = owned;
-            const mounted = await owned.mount();
-            if (!cancelled && mounted) { owned.update(latest.current); setStatus('ready'); }
-        }).catch(()=>{if(!cancelled)setStatus('degraded');});
-        return () => { cancelled=true; owned?.destroy(); if(scene.current===owned)scene.current=null; };
+        const stop=forceFallback ? ()=>{} : startStageMount({
+            load:async()=>{
+                const {BattleScene}=await import('../../rendering/BattleScene');
+                return ()=>{
+                    if(!host.current)throw new Error('Combat stage host unavailable');
+                    return new BattleScene(host.current,latest.current,()=>{if(!cancelled)setStatus('degraded');});
+                };
+            },
+            onCreate:created=>{owned=created;scene.current=created;},
+            onReady:created=>{created.update(latest.current);setStatus('ready');},
+            onFailure:()=>{if(scene.current===owned)scene.current=null;setStatus('degraded');},
+        });
+        return () => { cancelled=true; stop(); if(scene.current===owned)scene.current=null; };
     }, [rosterKey,snapshot.location.id,forceFallback,attempt]);
     useEffect(()=>{scene.current?.update(snapshot);},[snapshot]);
     useEffect(()=>{onStatus?.(status);},[status,onStatus]);
