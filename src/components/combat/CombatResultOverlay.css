@@ -1,4 +1,5 @@
 .combat-result-backdrop {
+    margin: 0; border: 0; width: 100%; height: 100%; max-width: none; max-height: none; color: inherit;
     position: fixed; inset: 0; z-index: 300;
     display: flex; justify-content: center; align-items: safe center;
     box-sizing: border-box; padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
@@ -6,6 +7,8 @@
     background: #030813dc; backdrop-filter: blur(6px);
     animation: resultFade 180ms ease-out;
 }
+.combat-result-backdrop:not([open]) { display:none; }
+.combat-result-backdrop::backdrop { background:transparent; }
 .combat-result-card {
     box-sizing: border-box; width: min(100%, 680px); min-width: 0; flex-shrink: 0;
     padding: clamp(16px, 4vw, 32px); border: 1px solid #73cdbb80; border-radius: 18px;

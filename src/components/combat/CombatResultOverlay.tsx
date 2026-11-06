@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { CardInspector } from '../ui/CardInspector';
 import { DeckBrowser } from '../ui/DeckBrowser';
 import { useGameStore } from '../../store/gameStore';
@@ -21,6 +21,15 @@ export function CombatResultOverlay({animateDefeat=false}:{animateDefeat?:boolea
 
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const revealed=useResultReveal(combatResult,animateDefeat);
+    const dialog=useRef<HTMLDialogElement>(null);
+    const titleId=useId();
+    useEffect(()=>{
+        const element=dialog.current;
+        if(!combatResult || !revealed || !element)return;
+        element.showModal();
+        element.querySelector<HTMLElement>('h1')?.focus();
+        return ()=>{element.close();};
+    },[combatResult,revealed]);
     const selected = cardRewards.find(card => card.instanceId === selectedId);
     if (!combatResult || !revealed) return null;
 
@@ -33,7 +42,7 @@ export function CombatResultOverlay({animateDefeat=false}:{animateDefeat?:boolea
     };
 
     return (
-        <div className="combat-result-backdrop">
+        <dialog ref={dialog} className="combat-result-backdrop" aria-labelledby={titleId} onCancel={event=>event.preventDefault()}>
             <div className={`combat-result-card ${combatResult}`}>
                 <header className="combat-result-header">
                 {isVictory ? (
@@ -42,7 +51,7 @@ export function CombatResultOverlay({animateDefeat=false}:{animateDefeat?:boolea
                     <Skull size={64} className="combat-result-icon defeat" />
                 )}
 
-                <h1 className={`combat-result-title ${combatResult}`}>
+                <h1 id={titleId} tabIndex={-1} className={`combat-result-title ${combatResult}`}>
                     {isVictory ? 'VICTORY' : 'DEFEAT'}
                 </h1>
 
@@ -112,6 +121,6 @@ export function CombatResultOverlay({animateDefeat=false}:{animateDefeat?:boolea
                     )}
                 </div>
             </div>
-        </div>
+        </dialog>
     );
 }
