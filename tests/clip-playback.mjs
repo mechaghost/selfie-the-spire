@@ -15,3 +15,8 @@ for(const id of ['hero-neon','hero-chrome','hero-volt','hero-concrete','hero-smo
  assert.throws(()=>validateActorVisual({...visual,clips:{attack:{...clip,frames:['idle','missing','idle']}}}));
 }
 console.log('PASS: exact clip boundaries, loop/hold/idle completion, skipped frames, reduced motion, contact beat and missing-frame validation');
+const neon=ACTOR_VISUALS['hero-neon'];
+for(const [ms,frame] of [[0,'windup'],[79,'windup'],[80,'attack'],[140,'attack'],[239,'attack'],[240,'recovery'],[319,'recovery'],[320,null]])assert.equal(clipFrameAt(neon.clips.attack,ms),frame);
+for(const scale of [0,-1,NaN,Infinity,5])assert.throws(()=>validateActorVisual({...neon,keyPoses:{...neon.keyPoses,windup:{...neon.keyPoses.windup,scale}}}));
+assert.equal(clipFrameAt(neon.clips.attack,0,true),null);
+console.log('PASS: Neon authored anticipation/contact/recovery boundaries and invalid per-frame scale rejection');

@@ -1,10 +1,10 @@
 # Runtime motion inventory
 
-Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors, but authored idle animation is still required. Attack timelines currently reuse idle/contact/idle rather than authored inbetweens.
+Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors, but authored idle animation is still required. The Neon hero attack has authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
-| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast | attack | none | review |
+| hero-neon | hero | attack, hit, guard, defeat, celebrate, cast, windup, recovery | attack | none | review |
 | hero-chrome | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-volt | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | hero-concrete | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |

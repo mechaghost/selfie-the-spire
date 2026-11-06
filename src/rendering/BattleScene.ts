@@ -175,11 +175,12 @@ export class BattleScene {
         const frame=authoredClip ? clipFrameAt(authoredClip,reactionClip && reaction ? now-reaction.at : castClip && castAt!==undefined ? now-castAt : elapsed,this.snapshot.reducedMotion) : undefined;
         const poseClip=authoredClip ? frame ?? 'idle' : reactionClip ?? castClip ?? actorPoseAt(clip,elapsed,this.snapshot.reducedMotion);
         const atlasView=this.atlasViews.get(`${actor.id}:${poseClip}`);
-        const pose=actor.visual.keyPoses?.[poseClip as ActorClip];
+        const pose=actor.visual.keyPoses?.[poseClip];
         sprite.texture=atlasView ?? this.poses.get(`${actor.id}:${poseClip}`) ?? idle;
         sprite.anchor.set(...(atlasView ? actor.visual.atlasFrames![poseClip].footAnchor : pose && sprite.texture!==idle ? pose.footAnchor : actor.visual.footAnchor));
         const {scale} = actorPlacement(slot,idle.width,idle.height,actor.visual.footAnchor);
-        sprite.scale.set(scale*motion.scaleX,scale*motion.scaleY); sprite.position.set(slot.foot.x+motion.x,slot.foot.y+motion.y); sprite.alpha=motion.alpha; sprite.rotation=motion.rotation;
+        const poseScale=!atlasView && pose && sprite.texture!==idle ? pose.scale ?? 1 : 1;
+        sprite.scale.set(scale*poseScale*motion.scaleX,scale*poseScale*motion.scaleY); sprite.position.set(slot.foot.x+motion.x,slot.foot.y+motion.y); sprite.alpha=motion.alpha; sprite.rotation=motion.rotation;
         sprite.tint=0xffffff;
         if(reaction && !actor.defeated && !this.snapshot.reducedMotion) {
             const progress=(performance.now()-reaction.at)/220;

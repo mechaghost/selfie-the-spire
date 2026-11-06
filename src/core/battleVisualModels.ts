@@ -22,7 +22,8 @@ export interface ActorVisual {
     fallbackImageUrl: string;
     atlasUrl?: string;
     atlasFrames?: Record<string,AtlasFrame>;
-    keyPoses?: Partial<Record<ActorClip, { imageUrl: string; footAnchor: readonly [number, number] }>>;
+    // Frame names can identify anticipation/recovery without adding gameplay states.
+    keyPoses?: Record<string, { imageUrl: string; footAnchor: readonly [number, number]; scale?: number }>;
     footAnchor: readonly [number, number];
     facing: 'left' | 'right';
     mirrorAllowed: boolean;
@@ -47,7 +48,8 @@ export function validateActorVisual(visual: ActorVisual): void {
         !Number.isFinite(visual.visualHeight) || visual.visualHeight <= 0 || visual.visualHeight > 4096 ||
         visual.footAnchor.length !== 2 || visual.footAnchor.some(n => !Number.isFinite(n) || n < 0 || n > 1)) throw new Error(`Invalid actor visual: ${visual.id}`);
     for (const pose of Object.values(visual.keyPoses ?? {})) {
-        if (!pose || !assetPath(pose.imageUrl) || pose.footAnchor.some(n=>!Number.isFinite(n) || n<0 || n>1)) throw new Error(`Invalid key pose: ${visual.id}`);
+        if (!pose || !assetPath(pose.imageUrl) || pose.footAnchor.length!==2 || pose.footAnchor.some(n=>!Number.isFinite(n) || n<0 || n>1) ||
+            (pose.scale!==undefined && (!Number.isFinite(pose.scale) || pose.scale<=0 || pose.scale>4))) throw new Error(`Invalid key pose: ${visual.id}`);
     }
     for(const frame of Object.values(visual.atlasFrames ?? {})) {
         const [x,y,w,h]=frame.rect, [sw,sh]=frame.sourceSize, [ox,oy]=frame.offset;

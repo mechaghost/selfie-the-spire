@@ -60,6 +60,18 @@ scene.update(preview);assert.equal(scene.sprites.get('enemy').texture,atlasView,
 scene.update({...preview,actors:preview.actors.map(actor=>({...actor,previewElapsedMs:320}))});
 assert.equal(scene.sprites.get('enemy').texture,scene.poses.get('enemy:idle'),'scrub samples recovery idle');
 reject('/player-attack');await flush();assert.equal(failures,0,'missing optional pose keeps idle scene usable');
+const playerSprite=scene.sprites.get('player');
+scene.update(snapshot);const baseScale=playerSprite.scale.x;
+const customFrame={width:200,height:200};
+const customSnapshot={...snapshot,actors:snapshot.actors.map(actor=>actor.id==='player'?{...actor,clip:'attack',previewElapsedMs:0,visual:{...actor.visual,keyPoses:{windup:{imageUrl:'/windup',footAnchor:[.4,.9],scale:.5}},clips:{attack:{frames:['windup'],durationsMs:[80],loop:false,completion:'idle'}}}}:actor)};
+scene.update(customSnapshot);
+assert.equal(playerSprite.scale.x,baseScale,'unloaded optional frame must not resize fallback idle');
+scene.poses.set('player:windup',customFrame);scene.update(customSnapshot);
+assert.equal(playerSprite.scale.x,baseScale*.5,'named frame uses its explicit scale correction');
+assert.equal(playerSprite.anchor.x,.4);assert.equal(playerSprite.anchor.y,.9);
+scene.update({...customSnapshot,reducedMotion:true});
+assert.equal(playerSprite.texture,scene.poses.get('player:idle'));assert.equal(playerSprite.scale.x,baseScale,'reduced motion restores idle scale');
+scene.poses.delete('player:windup');
 scene.destroy();assert.equal(atlasView.destroyed,true,'atlas views disposed with scene');assert.equal(scene.atlasViews.size,0);assert.equal(scene.casts.size,0);assert.equal(listeners.size,0);assert.equal(apps[0].destroyed,true);
 assert.equal(pending.has('/enemy-attack'),false,'atlas-covered poses are not downloaded twice');
 await flush();

@@ -279,6 +279,20 @@
     "runtimeHeight": 711,
     "resolution": 0.5
   },
+  "/assets/battle/actors/street-runner-recovery-v1.webp": {
+    "width": 1064,
+    "height": 1478,
+    "runtimeWidth": 532,
+    "runtimeHeight": 739,
+    "resolution": 0.5
+  },
+  "/assets/battle/actors/street-runner-windup-v1.webp": {
+    "width": 1064,
+    "height": 1478,
+    "runtimeWidth": 532,
+    "runtimeHeight": 739,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/subway-wyrm-idle-v1.webp": {
     "width": 1536,
     "height": 1024,

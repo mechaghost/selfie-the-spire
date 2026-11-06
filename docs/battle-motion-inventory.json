@@ -14,7 +14,9 @@
         "guard",
         "defeat",
         "celebrate",
-        "cast"
+        "cast",
+        "windup",
+        "recovery"
       ],
       "timelines": [
         "attack"

@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 114942631,
-  "runtimeBytes": 35119924,
+  "sourceBytes": 117404030,
+  "runtimeBytes": 35571974,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -443,6 +443,28 @@
       "sourceBytes": 1050313,
       "runtimeBytes": 199110,
       "decodedRGBABytes": 1572732
+    },
+    {
+      "asset": "actors/street-runner-recovery-v1.webp",
+      "width": 1064,
+      "height": 1478,
+      "runtimeWidth": 532,
+      "runtimeHeight": 739,
+      "resolution": 0.5,
+      "sourceBytes": 1210872,
+      "runtimeBytes": 221220,
+      "decodedRGBABytes": 1572592
+    },
+    {
+      "asset": "actors/street-runner-windup-v1.webp",
+      "width": 1064,
+      "height": 1478,
+      "runtimeWidth": 532,
+      "runtimeHeight": 739,
+      "resolution": 0.5,
+      "sourceBytes": 1250527,
+      "runtimeBytes": 230830,
+      "decodedRGBABytes": 1572592
     },
     {
       "asset": "actors/subway-wyrm-idle-v1.webp",
