@@ -79,3 +79,8 @@ console.log('PASS: Wraith hit recovery and held defeat, including reduced-motion
 for(const [ms,expected] of [[0,'idle'],[5099,'idle'],[5100,'blink'],[5199,'blink'],[5200,'idle'],[10300,'blink']])assert.equal(clipFrameAt(wraith.clips.idle,ms),expected);
 assert.equal(clipFrameAt(wraith.clips.idle,5150,true),null,'reduced-motion Wraith remains on base idle');
 console.log('PASS: Wraith blink boundaries, repeat cycle and reduced-motion static fallback');
+const slime=ACTOR_VISUALS.sewer_slime;
+for(const [ms,expected] of [[0,'hit'],[159,'hit'],[160,'idle'],[219,'idle'],[220,null]])assert.equal(clipFrameAt(slime.clips.hit,ms),expected);
+for(const ms of [0,279,280,10000])assert.equal(clipFrameAt(slime.clips.defeat,ms),'defeat');
+assert.equal(clipFrameAt(slime.clips.defeat,0,true),'defeat');
+console.log('PASS: Slime finite hit recovery and held defeat including reduced motion');

@@ -303,16 +303,30 @@
   "/assets/battle/actors/sewer-slime-attack-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 640,
+    "runtimeHeight": 427,
+    "resolution": 0.4166666666666667
+  },
+  "/assets/battle/actors/sewer-slime-defeat-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 640,
+    "runtimeHeight": 427,
+    "resolution": 0.4166666666666667
+  },
+  "/assets/battle/actors/sewer-slime-hit-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 640,
+    "runtimeHeight": 427,
+    "resolution": 0.4166666666666667
   },
   "/assets/battle/actors/sewer-slime-idle-v1.webp": {
     "width": 1536,
     "height": 1024,
-    "runtimeWidth": 768,
-    "runtimeHeight": 512,
-    "resolution": 0.5
+    "runtimeWidth": 640,
+    "runtimeHeight": 427,
+    "resolution": 0.4166666666666667
   },
   "/assets/battle/actors/smoke-attack-v1.webp": {
     "width": 1199,

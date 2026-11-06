@@ -1,8 +1,8 @@
 {
-  "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
+  "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner/Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 159509991,
-  "runtimeBytes": 25343194,
+  "sourceBytes": 162996931,
+  "runtimeBytes": 25550970,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -567,27 +567,53 @@
       "asset": "actors/sewer-slime-attack-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 640,
+      "runtimeHeight": 427,
+      "resolution": 0.4166666666666667,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2077105,
-      "runtimeBytes": 325088,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 237604,
+      "decodedRGBABytes": 1093120
+    },
+    {
+      "asset": "actors/sewer-slime-defeat-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 640,
+      "runtimeHeight": 427,
+      "resolution": 0.4166666666666667,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 1375868,
+      "runtimeBytes": 135606,
+      "decodedRGBABytes": 1093120
+    },
+    {
+      "asset": "actors/sewer-slime-hit-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 640,
+      "runtimeHeight": 427,
+      "resolution": 0.4166666666666667,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 2111072,
+      "runtimeBytes": 257184,
+      "decodedRGBABytes": 1093120
     },
     {
       "asset": "actors/sewer-slime-idle-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 640,
+      "runtimeHeight": 427,
+      "resolution": 0.4166666666666667,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2218514,
-      "runtimeBytes": 359422,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 261892,
+      "decodedRGBABytes": 1093120
     },
     {
       "asset": "actors/smoke-attack-v1.webp",
