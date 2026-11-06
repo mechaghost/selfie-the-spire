@@ -149,6 +149,7 @@ Static full-body/silhouette display is degraded error recovery, not evidence of 
 
 ## Verification and release gate
 
+- Roster art: run `node scripts/report_battle_motion.mjs --check-release` before publishing the portfolio build. This checks registered stock heroes and encounter actors for authored motion coverage and explicit art approval. Visual review supplies the approval.
 - Automated parity: same seed/input sequence with normal, reduced and disabled animation; compare HP, energy, statuses, piles, RNG and rewards after every resolved action.
 - Timing/lifecycle: multi-hit, area attacks, Burn before enemy action, Thorns, dead targets, simultaneous defeat, double taps, renderer deadline, late callbacks, new run, StrictMode mount/unmount and context loss.
 - Saves: old starter/generated runs, location/appearance missing fields, reload and interrupted presentation. Never serialize graphics objects.
