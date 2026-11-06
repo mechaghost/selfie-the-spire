@@ -635,19 +635,19 @@
       "reachability": "production",
       "status": "review",
       "keyPoses": [
-        "attack"
+        "attack",
+        "hit"
       ],
       "timelines": [
-        "attack"
+        "attack",
+        "hit"
       ],
       "missingContactPoses": [
-        "hit",
         "defeat",
         "cast"
       ],
       "missingTimelines": [
         "idle",
-        "hit",
         "defeat",
         "cast"
       ]
