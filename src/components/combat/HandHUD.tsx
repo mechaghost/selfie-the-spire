@@ -112,7 +112,7 @@ export function HandHUD({targetControls='list',onTargetControlsChange}:{targetCo
             {selected && targeting && <div className="combat-target-selection" role="region" aria-label="Choose card target" onClick={event=>event.stopPropagation()}>
                 <p><strong>{selected.name}</strong> · Choose an enemy</p>
                 {error && <p role="alert">{error}</p>}
-                {targetControls==='list' && <div className="combat-target-list">{enemies.filter(enemy=>enemy.hp>0).map(enemy=><button key={enemy.id} onClick={()=>commit(enemy.id)}>{enemy.name} · {enemy.hp} HP</button>)}</div>}
+                {targetControls==='list' && <div className="combat-target-list">{enemies.map((enemy,index)=>enemy.hp>0 && <button key={enemy.id} onClick={()=>commit(enemy.id)}>{index+1}. {enemy.name} · {enemy.hp} HP</button>)}</div>}
                 {onTargetControlsChange && <button onClick={()=>onTargetControlsChange(targetControls==='arena'?'list':'arena')}>{targetControls==='arena'?'Use target list':'Use arena targets'}</button>}
                 <button onClick={cancel}>Cancel targeting</button>
             </div>}

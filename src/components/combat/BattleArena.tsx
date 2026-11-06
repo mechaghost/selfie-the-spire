@@ -53,7 +53,7 @@ export function BattleArena({targetControls='arena'}:{targetControls?:'arena'|'l
             return <button key={enemy.id} data-combat-target={enemy.id} data-entity-id={enemy.id} className={`actor-target ${mode==='targeting'?'is-selectable':''}`} disabled={enemy.hp<=0}
                 tabIndex={mode==='targeting' && targetControls==='list' ? -1 : 0}
                 style={{left:slot.target.x,top:slot.target.y,width:slot.target.width,height:slot.target.height}}
-                aria-label={enemy.hp<=0 ? `${enemy.name}, defeated` : `${mode==='targeting'?'Target':'Inspect'} ${enemy.name}, ${enemy.hp} of ${enemy.maxHp} HP, ${enemy.block} Block. ${intent.label}. ${describeStatuses(enemy.statuses).map(status=>status.split(' — ')[0]).join('; ') || 'No active effects.'}`}
+                aria-label={enemy.hp<=0 ? `${enemy.name}, slot ${slot.index+1}, defeated` : `${mode==='targeting'?'Target':'Inspect'} ${enemy.name}, slot ${slot.index+1}, ${enemy.hp} of ${enemy.maxHp} HP, ${enemy.block} Block. ${intent.label}. ${describeStatuses(enemy.statuses).map(status=>status.split(' — ')[0]).join('; ') || 'No active effects.'}`}
                 onClick={event=>{event.stopPropagation();if(mode==='targeting')commit(enemy.id);else setInspected(enemy.id);}}>
                 <span className="actor-hud" style={{left:slot.hud.x-slot.target.x,top:slot.hud.y-slot.target.y,width:slot.hud.width}}>
                     <EnemyHUDContents entity={enemy} index={slot.index} width={slot.hud.width} intent={intent}/>

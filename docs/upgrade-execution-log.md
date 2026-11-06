@@ -1141,3 +1141,7 @@ Compared the local-font baseline `caaaac5` and this change with alternating cold
 The arena now exposes one polite status for turn changes and results. Player turns include current HP after the queue settles. An ordinary card play keeps the same announcement. The visual impact numbers stay on screen and are hidden from the accessibility tree, avoiding a stream of unlabeled damage values. Existing enemy inspection and the focused results heading remain available.
 
 The production smoke inspects the live-region role and checks its text on player turn, enemy turn and victory. This validates browser semantics and updates. Listening with a screen reader remains a separate release check.
+
+### Distinguish duplicate enemies in both target modes
+
+Arena buttons now include the actor's slot in their accessible name. The target list shows the same numbers, retaining original positions when defeated actors drop out of the list. The production smoke checks three distinct Rat names, switches between arena and list by keyboard, and verifies that Cancel restores the card inspector's focus. macOS VoiceOver was off during this pass, so spoken output remains unverified.
