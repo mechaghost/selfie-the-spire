@@ -989,3 +989,11 @@ Added a crossed-forearm crouch with a .984 foot anchor and a 160/60 ms guard/idl
 Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
 
 > Create one full-body transparent Block key pose for this exact Concrete street fighter. Match the reference identity, inked rendering, orange safety vest with silver stripes, black tank, ochre pouches, teal knee pads, dark work trousers, tan boots, and tied-back dark hair. Facing screen right with boots planted at the same height, he lowers into a strong compact crouch and firmly crosses his muscular forearms into a visible X in front of his upper chest, looking over them at the incoming threat. Keep the entire actor, all limbs and both soles in frame, with transparent clearance. Maintain original perspective and scale; preserve canvas padding above lowered head. True alpha, no shield, effects, glow, shadow, props, floor, scenery or lettering.
+
+### Concrete defeat pose
+
+Added a bowed kneeling pose with a .98 foot anchor and a held 280 ms defeat clip. In the 320 × 568 Chromium touch fixture, Dumpster Crawler's opening hit took Concrete from 5 HP to zero. The kneeling pose appeared before the regular Defeat screen. Capture: `tests/.e2e-out/concrete-live-defeat-320.png`. All 550 encounter budgets, sprite bounds, texture caps, clip playback and TypeScript passed.
+
+Built-in imagegen prompt with `concrete-idle-v1.png` as reference:
+
+> Create one full-body transparent defeat pose for the exact Concrete fighter in this reference. Preserve his tied-back dark hair, beard, muscular build, orange reflective safety vest, black tank, ochre pouches, teal knee pads, dark work trousers and tan work boots. Same inked game sprite style and right-facing camera. He sinks onto one knee with his head bowed, resting both gloved hands on his raised front thigh. Keep the original standing-sized canvas and ground line, with ample alpha above the lowered body. Entire actor inside the frame. Real transparent background, no props, blood, lettering, shadow, ground, effects or scenery.

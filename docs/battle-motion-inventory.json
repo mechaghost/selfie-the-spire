@@ -88,21 +88,21 @@
       "keyPoses": [
         "attack",
         "hit",
-        "guard"
+        "guard",
+        "defeat"
       ],
       "timelines": [
         "hit",
         "guard",
+        "defeat",
         "attack"
       ],
       "missingContactPoses": [
-        "defeat",
         "cast",
         "celebrate"
       ],
       "missingTimelines": [
         "idle",
-        "defeat",
         "cast",
         "celebrate"
       ]
