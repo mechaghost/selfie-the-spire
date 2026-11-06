@@ -1117,3 +1117,9 @@ The combat presentation test now measures the four-hit DJ Phantom turn and a Jab
 SafariDriver found the connected physical iPhone 13 running iOS 27.0 but refused to create a session because Web Inspector is disabled on the device. No physical combat, camera, rotation, or background/resume result was obtained.
 
 The optimized arena build from `fed03f9` passed all eight WebKit smoke scenarios on macOS, including the local selfie flow, reward and map reload, rotation, and both forced WebGL-loss paths. The first navigation timed out; the rerun completed. These cases use emulated touch and viewport dimensions.
+
+### Native iPhone Simulator Safari smoke
+
+Drove MobileSafari with an XCUITest runner on the iPhone 18 Pro simulator, iOS 27.0, against the optimized arena build from `fed03f9`. A starter run opened the street map. In the legal Palm Avenue encounter, Safari rotated to landscape and back, went to the Home Screen, then resumed combat. Touch card inspection, play, targeting and End Turn defeated Neon Hunger. The combat script failed its final accessibility query as the End Turn button disappeared, so victory was verified from the rendered screen and separately by tapping the reward action. Safari's Refresh button then restored the same Palm Avenue stop. The restored map showed 117 gold and 12 cards after skipping the card for 18 gold.
+
+Evidence under `tests/.e2e-out/`: `ios-safari-{portrait,landscape,victory,restored-map}.png` and `ios-safari-runner/reload.xcresult`. The reload test passed. This was simulator Safari with system rotation and app switching. Physical iOS and Android, camera, hardware performance, the complete nine-floor device run, and participant sessions remain open. Linux regression run 42222417514 passed for `fed03f9`.
