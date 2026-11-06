@@ -4,3 +4,11 @@ export function frameLocation(width:number,height:number,imageWidth:number,image
     const scale=Math.max(width/imageWidth,height*targetHorizon/(imageHeight*sourceHorizon),height*(1-targetHorizon)/(imageHeight*(1-sourceHorizon)));
     return {x:(width-imageWidth*scale)/2,y:height*targetHorizon-imageHeight*scale*sourceHorizon,width:imageWidth*scale,height:imageHeight*scale};
 }
+
+/** Corner foliage stays at the viewport edges, with the middle of combat unobscured. */
+export function frameForeground(width:number,height:number,imageWidth:number,imageHeight:number,timeMs:number,reducedMotion:boolean,sway=0) {
+    if ([width,height,imageWidth,imageHeight].some(n=>!Number.isFinite(n)||n<=0)) throw new Error('Invalid foreground frame');
+    const amplitude=reducedMotion || !Number.isFinite(sway) ? 0 : Math.max(0,Math.min(3,sway));
+    const scale=(width+6)/imageWidth;
+    return {x:-3+Math.sin((Number.isFinite(timeMs)?timeMs:0)/4000)*amplitude,y:0,width:width+6,height:Math.min(imageHeight*scale,height)};
+}

@@ -2,7 +2,7 @@ import { Application, Container, Graphics, ImageSource, Rectangle, Sprite, Textu
 import { ActorClip, ActorVisual, LocationVisual } from '../core/battleVisualModels';
 import { BattleLayout, ActorSlot } from './battleLayout';
 import { ImpactNotice, subscribeImpacts, subscribePresentation } from './CombatPresentation';
-import { frameLocation } from './locationFraming';
+import { frameLocation, frameForeground } from './locationFraming';
 import { AssetLease, AssetLeaseCache } from './AssetLeaseCache';
 import { ActorMotionClock, actorPoseAt, reactionPose, motionProfile, sampleActorMotion } from './actorMotion';
 import { locationAtmosphere } from './locationAtmosphere';
@@ -49,7 +49,8 @@ export class BattleScene {
     private app = new Application();
     private world = new Container();
     private backdrop = new Container();
-    private backgroundSprites: Sprite[] = [];
+    private foreground = new Container();
+    private backgroundSprites: {sprite:Sprite;layer:LocationVisual['layers'][number]}[] = [];
     private ground = new Graphics();
     private atmosphere = new Graphics();
     private sprites = new Map<string,Sprite>();
@@ -75,15 +76,17 @@ export class BattleScene {
             this.app.canvas.setAttribute('aria-hidden','true');
             this.app.canvas.addEventListener('webglcontextlost',this.contextLost);
             this.app.stage.eventMode = 'none';
-            this.app.stage.addChild(this.ground,this.backdrop,this.atmosphere,this.world);
+            this.app.stage.addChild(this.ground,this.backdrop,this.atmosphere,this.world,this.foreground);
             this.host.appendChild(this.app.canvas);
             this.backdrop.sortableChildren=true;
+            this.foreground.sortableChildren=true;
             this.world.sortableChildren=true;
             void Promise.all(this.snapshot.location.layers.map(async layer=>{
                 const lease=battleTextures.acquire(layer.url);this.leases.push(lease);
                 try {
                     const texture=await lease.ready;if(this.disposed)return;
-                    const sprite=new Sprite(texture);sprite.zIndex=layer.depth;this.backgroundSprites.push(sprite);this.backdrop.addChild(sprite);
+                    const sprite=new Sprite(texture);sprite.zIndex=layer.depth;this.backgroundSprites.push({sprite,layer});
+                    (layer.plane==='foreground'?this.foreground:this.backdrop).addChild(sprite);
                     this.update(this.snapshot);
                 } catch { /* Technical ground remains usable while background art is unavailable. */ }
             }));
@@ -145,7 +148,8 @@ export class BattleScene {
         for(let i=0;i<12;i++) this.ground.rect(i*width/12,height*.1+(i%3)*7,width/15,height*.63).fill({color:0x081527,alpha:.35});
         this.ground.rect(0,height*horizon,width,height*(1-horizon)).fill(snapshot.location.ground)
             .rect(0,height*horizon,width,2).fill({color:snapshot.location.accent,alpha:.55});
-        for(const sprite of this.backgroundSprites) {
+        for(const {sprite,layer} of this.backgroundSprites) {
+            if(layer.plane==='foreground')continue;
             const frame=frameLocation(width,height,sprite.texture.width,sprite.texture.height,.43,horizon===.32 ? .32 : .5);
             sprite.position.set(frame.x,frame.y);sprite.width=frame.width;sprite.height=frame.height;
         }
@@ -204,6 +208,11 @@ export class BattleScene {
     private paintAtmosphere() {
         this.atmosphere.clear();
         const {layout,location,reducedMotion}=this.snapshot;
+        for(const {sprite,layer} of this.backgroundSprites) {
+            if(layer.plane!=='foreground')continue;
+            const frame=frameForeground(layout.width,layout.height,sprite.texture.width,sprite.texture.height,performance.now(),reducedMotion || document.hidden,layer.sway);
+            sprite.position.set(frame.x,frame.y);sprite.width=frame.width;sprite.height=frame.height;
+        }
         for(const mark of locationAtmosphere(location.id,layout.width,layout.height,performance.now(),reducedMotion || document.hidden)) {
             this.atmosphere.rect(mark.x,mark.y,mark.width,mark.height).fill({color:mark.color,alpha:mark.alpha});
         }

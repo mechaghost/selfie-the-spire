@@ -38,7 +38,7 @@ export interface LocationVisual {
     sky: number;
     ground: number;
     accent: number;
-    layers: { url: string; depth: number }[];
+    layers: { url: string; depth: number; plane?: 'background' | 'foreground'; sway?: number }[];
     productionStatus: 'placeholder' | 'review' | 'approved';
 }
 const assetPath = (path: string) => /^\/assets\/battle\/[a-zA-Z0-9_./-]+$/.test(path) && !path.includes('..');

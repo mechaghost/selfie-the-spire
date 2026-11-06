@@ -356,6 +356,13 @@
     "runtimeHeight": 1024,
     "resolution": 1
   },
+  "/assets/battle/locations/ocean-drive-foreground-v1.webp": {
+    "width": 1536,
+    "height": 1024,
+    "runtimeWidth": 1536,
+    "runtimeHeight": 1024,
+    "resolution": 1
+  },
   "/assets/battle/locations/ocean-drive-v1.webp": {
     "width": 1536,
     "height": 1024,

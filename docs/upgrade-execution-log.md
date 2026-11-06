@@ -385,3 +385,11 @@ Validation: clip-playback (including Taxi), renderer-assets, texture-budget, Typ
 The ten-card fixture now creates twelve owned deck instances, waits for initial combat draws to settle, then assigns ten to hand and two to the draw pile. It avoids changing a replacement review encounter if the user switches screens during initialization. Previously the fixture introduced cards outside the master deck and could race queued draws, making reload evidence unreliable.
 
 Validation: a fresh bundled store reload accepts the actual review save without recovery and preserves all five card collections and RNG state; the production save key remains untouched. Client TypeScript and diff checks pass. Personalized generation route tests (mocked provider) and actual cutout validation/normalization tests also pass. User confirmed keeping Gemini with server background removal; that implementation remains gated pending real-provider selfie quality and hosting checks. No deployment or new browser verification in this pass.
+
+### First independent location foreground
+
+Generated and archived transparent Ocean Drive palm corners with the built-in image tool. Added an optional foreground plane above the actor world, independent texture streaming and bounded two-pixel foliage sway that becomes stationary under reduced motion/hidden state. Existing world child ordering and target geometry remain unchanged. Full prompt, paths, alpha checks and limitations are in ocean-drive-layer-art.md.
+
+Verified the scene study at 390×844 and 844×390 with three enemies and ten cards; no actor occlusion, rectangular matte or browser warnings/errors. Captured ocean-layer-mobile.png and ocean-layer-landscape.png. The actual Full hand review fixture also reloaded in-browser with all ten cards and no recovery warning (the initial warning came from the old invalid stored fixture and disappeared after creating the repaired fixture).
+
+Client TypeScript, renderer streaming/layer order/reduced motion/disposal, asset coverage/framing, texture budget and diff checks pass. Packaged 56 loose assets with exact decoded derivative equality. This adds one independent foreground, not full five-location ground/background separation or full parallax approval. No deployment.
