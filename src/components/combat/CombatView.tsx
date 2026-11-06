@@ -59,6 +59,12 @@ export function CombatView() {
         [inspectedEnemyId, enemies]
     );
 
+    const turnBanner = !combatResult && (!isPlayerTurn || showTurnFlash) && (
+        <div className={`turn-phase-banner ${isPlayerTurn ? 'player-turn' : 'enemy-turn'}`}>
+            {isPlayerTurn ? 'Your turn' : 'Enemy turn'}
+        </div>
+    );
+
     return (
         <div
             className={`combat-stage ${actorArena ? 'actor-arena-enabled' : ''} ${screenShake ? `shake-${screenShake.intensity}` : ''}`}
@@ -104,17 +110,7 @@ export function CombatView() {
                 </div>
             )}
 
-            {/* Turn phase indicator */}
-            {!isPlayerTurn && !combatResult && (
-                <div className="turn-phase-banner enemy-turn">
-                    ENEMY TURN
-                </div>
-            )}
-            {showTurnFlash && isPlayerTurn && !combatResult && (
-                <div className="turn-phase-banner player-turn">
-                    YOUR TURN
-                </div>
-            )}
+            {!actorArena && turnBanner}
 
             <div className="table-controls">
                 <div className="controls-left">
@@ -124,6 +120,8 @@ export function CombatView() {
                     </div>
                     <span className="energy-caption">Energy</span>
                 </div>
+
+                {actorArena && turnBanner}
 
                 <div className="controls-right">
                     <button className="end-turn-button" onClick={endTurn} disabled={isDisabled}>

@@ -597,3 +597,9 @@ At 320 × 568, a legal Jab played through the card inspector and arena target de
 Added a tucked-claw recoil with a lifted foot and a low defeat pose with folded legs and closed lid. Both sources are 1536 × 1024. The .956 recoil anchor uses a 160/60 ms hit/idle clip, and the .991 defeat anchor uses a 280 ms hold. The teal chassis and coral pincers retain their original scale and material.
 
 The 320 × 568 solo Pixi study showed both poses clear of the HUD. The wide collapsed sprite fits close to both edges of its lane, with the target marker hidden and the defeated control disabled. No browser errors. Captures: `tests/.e2e-out/dumpster-crawler-{hit,defeat}-320.png`. All 550 art budgets, texture, clip playback and TypeScript checks passed. The bounds audit found zero confirmed intersections across 1,106,892 samples. The prior target-marker CI run 42177889753 passed. Full-speed and physical-device review remain open.
+
+### Production-build Rat Pack combat and turn cue
+
+A normal-motion production arena build exposed the turn banner covering Rat 3's HUD on the first attack at 320 × 568. Moved the arena turn cue into the center of the controls row. The legacy layout keeps the banner in its existing position.
+
+Repeated the same seeded Ocean Drive Rat Pack fight through the production UI at 320 × 568 and 844 × 390. Each run used seven attack plays and two enemy turns, offered three rewards, added one card to the starting deck and collected 12 gold. Reload restored stop 1, a 13-card deck and 111 gold. No dev store was present or used. Impact captures show the turn cue below the actor plane in both orientations. The portrait reward dialog scrolls vertically. No browser errors. Captures: `tests/.e2e-out/full-speed-{impact,victory}-{320,844}.png`. TypeScript and all 30 regression suites passed. Prior Crawler CI run 42178304461 passed. This covers one legal encounter in an emulated Chrome viewport. Full-route, device and live checks remain open.
