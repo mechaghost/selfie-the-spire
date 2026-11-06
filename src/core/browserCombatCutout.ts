@@ -1,4 +1,5 @@
 import {removeGreenScreen} from './chromaKey';
+import {isPersonalizedCutout} from './battleVisualModels';
 
 export async function prepareBrowserCombatCutout(source:string,signal?:AbortSignal):Promise<string> {
     if(source.length>10_000_000 || !/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(source))throw new Error('Invalid generated character image');
@@ -18,12 +19,28 @@ export async function prepareBrowserCombatCutout(source:string,signal?:AbortSign
         context.putImageData(pixels,0,0);
         const output=document.createElement('canvas');output.width=512;output.height=768;
         const target=output.getContext('2d');if(!target)throw new Error('Your browser could not prepare the character');
-        const fit=Math.min(480/bounds.width,736/bounds.height),w=Math.round(bounds.width*fit),h=Math.round(bounds.height*fit);
-        target.drawImage(canvas,bounds.left,bounds.top,bounds.width,bounds.height,Math.floor((512-w)/2),760-h,w,h);
-        for(const quality of [.85,.7]){
+        const drawCutout = (width: number) => {
+            output.width = width;
+            output.height = width * 1.5;
+            const scale = width / 512;
+            const fit = Math.min(480 * scale / bounds.width, 736 * scale / bounds.height);
+            const w = Math.round(bounds.width * fit);
+            const h = Math.round(bounds.height * fit);
+            target.drawImage(canvas, bounds.left, bounds.top, bounds.width, bounds.height,
+                Math.floor((width - w) / 2), Math.round(760 * scale) - h, w, h);
+        };
+        drawCutout(512);
+        for (const quality of [.85, .7]) {
             signal?.throwIfAborted();
-            const url=output.toDataURL('image/webp',quality);
-            if(url.startsWith('data:image/webp;base64,') && url.length<=512_000)return url;
+            const url = output.toDataURL('image/webp', quality);
+            if (!url.startsWith('data:image/webp;')) break;
+            if (isPersonalizedCutout(url)) return url;
+        }
+        for (const width of [384, 256, 192]) {
+            signal?.throwIfAborted();
+            drawCutout(width);
+            const url = output.toDataURL('image/png');
+            if (isPersonalizedCutout(url)) return url;
         }
         throw new Error('Your browser could not save a compact transparent character');
     } finally {image.close();}

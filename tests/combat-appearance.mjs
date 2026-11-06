@@ -45,3 +45,16 @@ for(const invalid of ['https://bad.example/image.webp','data:image/svg+xml;base6
 }
 assert.deepEqual(normalizeAppearance(undefined,'smoke'),{version:1,actorVisualId:'hero-smoke'});
 console.log('PASS: personal cutout preview/start/reload identity, no shared pose substitution, bounded WebP transport and invalid-image fallback');
+
+const png='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jh1sAAAAASUVORK5CYII=';
+const pngAppearance={...personal,idleImageUrl:png};
+assert.equal(isPersonalizedCutout(png),true);
+assert.equal(isPersonalizedCutout(png.replace('image/png','image/webp')),false);
+assert.equal(isPersonalizedCutout('data:image/png;base64,AAAA'),false);
+assert.equal(isPersonalizedCutout(png+'A'.repeat(512_000)),false);
+store.setState({ugcPhase:'reveal',generatedCharacter:{...store.getState().generatedCharacter,id:'png-fallback',name:'PNG hero',archetype:'volt',portraitUrl:'/portrait.webp',combatAppearance:pngAppearance,maxHp:80,maxEnergy:3,startingGold:99,traits:[]},generatedCards:[store.getState().masterDeck[0]]});
+store.getState().startGeneratedRun();
+const pngReload=await import('./.e2e-out/combat-appearance.mjs?png');
+assert.deepEqual(pngReload.useGameStore.getState().player.combatAppearance,pngAppearance);
+assert.equal(resolveAppearance(pngReload.useGameStore.getState().player.combatAppearance).fallbackImageUrl,png);
+console.log('PASS: bounded PNG cutout survives start and reload; invalid MIME and oversized images are rejected');

@@ -3,11 +3,15 @@ export type LocationId = 'ocean-drive' | 'wynwood' | 'underpass' | 'club-backlot
 export type CombatAppearance =
     | { version: 1; actorVisualId: string; paletteId?: string }
     | { version: 2; actorVisualId: string; idleImageUrl: string };
-/** Embedded runtime WebP only: no remote tracking URLs or executable image formats. */
+/** Bounded embedded raster images for personalized sprites. */
 export function isPersonalizedCutout(value:unknown):value is string {
-    if(typeof value!=='string' || value.length>512_000 || !/^data:image\/webp;base64,[A-Za-z0-9+/]+={0,2}$/.test(value))return false;
+    if(typeof value!=='string' || value.length>512_000 || !/^data:image\/(?:webp|png);base64,[A-Za-z0-9+/]+={0,2}$/.test(value))return false;
     try {
-        const bytes=atob(value.slice('data:image/webp;base64,'.length));
+        const separator = value.indexOf(',');
+        const bytes = atob(value.slice(separator + 1));
+        if (value.startsWith('data:image/png;')) {
+            return bytes.length >= 33 && bytes.startsWith('\x89PNG\r\n\x1a\n') && bytes.slice(12, 16) === 'IHDR';
+        }
         return bytes.length>=12 && bytes.slice(0,4)==='RIFF' && bytes.slice(8,12)==='WEBP';
     } catch {return false;}
 }
