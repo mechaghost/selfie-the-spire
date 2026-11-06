@@ -805,3 +805,7 @@ Added closed breaker doors and a braced hammer, using a .944 foot anchor, .92 po
 ### Circuit Breaker Vulnerable cast
 
 Added an open-panel pulse with a raised hand, the hammer on the same side as idle, a .933 foot anchor and a 160/60 ms cast/idle clip. At 320 × 568, the real AttackDebuff intent showed 8 damage before the cast and +2 Vulnerable; player HP ended at 72. Capture: `tests/.e2e-out/circuit-breaker-live-cast-320.png`. All 550 encounter budgets, texture, playback and TypeScript passed. Bounds found zero confirmed intersections in 1,119,420 samples. Linux run 42198484392 passed the preceding Voltage King revision's production smoke and five-district route and uploaded the evidence.
+
+### Chrome Phantom guard
+
+Added a crossed-blade brace with a .990 foot anchor and a 160/60 ms guard/idle clip. The move that triggers it is the existing Block-and-Vulnerable intent. In a 320 × 568 Chromium fixture the Phantom gained 10 Block, the player gained 1 Vulnerable, and HP stayed at 80. Both notices and the crossed blades were visible. Capture: `tests/.e2e-out/chrome-phantom-live-guard-320.png`. All 550 encounter budgets, texture caps, playback and TypeScript passed. The bounds audit found zero confirmed intersections in 1,119,852 samples.
