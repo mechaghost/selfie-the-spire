@@ -1,0 +1,9 @@
+# Graffiti Imp attack contact
+
+Generated with the built-in image tool using `art-source/battle/actors/graffiti-imp-idle-v1.png` as the identity reference. Original output preserved at `art-source/battle/actors/graffiti-imp-attack-v1.png`; runtime derivative is lossless WebP after the standard half-resolution resize.
+
+Prompt: Create one attack-contact pose of exactly the reference character for a professional Neo Miami 2D combat game. Preserve coral skin, teal swept hair, enormous pierced ears, yellow eyes, purple patched vest and shorts, sneakers, paint stains, spray can and painterly outlined style. Face left, crouch and lean left, thrust spray-can hand left with a short vivid teal paint burst, other claw pulled back, rear foot braced. Full body, approximately the same scale on a 1230×1278 canvas, centered body, transparent background. No floor, shadow plate, text, UI or extra characters. Compact effect and readable silhouette; single sprite, not a sheet.
+
+Output is 1230×1278. Opaque silhouette bounds are (11,173)–(1207,1211); attack foot anchor .947 matches the shoe baseline instead of inheriting the idle .99 anchor. The lower head and braced legs are deliberate crouching. Attack contact appears at 80–239ms, covering the 140ms damage beat, and returns to idle by 320ms. Reduced motion skips this transient clip. This remains review artwork, not approved multi-frame animation; wind-up, recovery, hit and defeat artwork are still outstanding.
+
+Verification: local Pixi scene at 390×844 with three enemies and ten cards; frozen 140ms contact and 320ms recovery visually inspected. Shoes remain on the same ground line; paint burst is readable without obscuring another actor. No browser warning/error logs. Evidence: `tests/.e2e-out/graffiti-imp-attack-mobile.png`. Clip boundary/contact/reduced-motion tests and TypeScript pass. This is a desktop-browser mobile viewport, not a physical-device or full battle approval.

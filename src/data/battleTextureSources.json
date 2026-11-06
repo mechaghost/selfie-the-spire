@@ -132,6 +132,13 @@
     "runtimeHeight": 512,
     "resolution": 0.5
   },
+  "/assets/battle/actors/graffiti-imp-attack-v1.webp": {
+    "width": 1230,
+    "height": 1278,
+    "runtimeWidth": 615,
+    "runtimeHeight": 639,
+    "resolution": 0.5
+  },
   "/assets/battle/actors/graffiti-imp-idle-v1.webp": {
     "width": 1230,
     "height": 1278,

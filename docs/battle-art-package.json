@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos power-of-two runtime tiers, then lossless WebP with exact derivative RGBA verification",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 112208600,
-  "runtimeBytes": 34564552,
+  "sourceBytes": 113663340,
+  "runtimeBytes": 34867012,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -212,6 +212,17 @@
       "sourceBytes": 1950743,
       "runtimeBytes": 237116,
       "decodedRGBABytes": 1572864
+    },
+    {
+      "asset": "actors/graffiti-imp-attack-v1.webp",
+      "width": 1230,
+      "height": 1278,
+      "runtimeWidth": 615,
+      "runtimeHeight": 639,
+      "resolution": 0.5,
+      "sourceBytes": 1454740,
+      "runtimeBytes": 302460,
+      "decodedRGBABytes": 1571940
     },
     {
       "asset": "actors/graffiti-imp-idle-v1.webp",
