@@ -55,22 +55,25 @@ export function battleLayout(width: number, height: number, enemyIds: readonly s
     }
     // Portrait uses depth lanes rather than compressing three creatures into one narrow row.
     if (width < 600 && height >= 300 && enemyIds.length === 3) {
-        const laneWidth = areaWidth / 2;
+        // Only the hero HUD occupies the upper-left lane, not the whole hero.
+        const portraitStart=Math.max(92,width*.18);
+        const laneWidth = (width-portraitStart-edge) / 2;
         const laneHeight = height / 2;
-        const heroLaneWidth = Math.min(150, start + laneWidth * .5 - edge * 2);
-        const heroLaneHeight = Math.min(240, height * .55);
+        const heroLaneWidth = Math.min(150, start + areaWidth * .25 - edge * 2);
+        const heroLaneHeight = Math.min(240, laneHeight-20);
         hero.art = {x:edge,y:ground-heroLaneHeight,width:heroLaneWidth,height:heroLaneHeight};
         hero.foot = {x:edge+heroLaneWidth/2,y:ground};
-        hero.hud = {x:edge,y:Math.max(4,hero.art.y-78),width:Math.min(100,heroLaneWidth),height:72};
+        hero.hud = {x:edge,y:Math.max(4,hero.art.y-78),width:portraitStart-32,height:72};
         const enemies = enemyIds.map((id,index): ActorSlot => {
             const row = index === 2 ? 1 : 0;
-            const x = start + (index === 2 ? .5 : index) * laneWidth + 3;
+            const x = index===2 ? hero.art.x+hero.art.width+32 : portraitStart+index*laneWidth+3;
+            const slotWidth=index===2 ? width-edge-x : laneWidth-6;
             const top = row * laneHeight + 4;
             const bottom = (row + 1) * laneHeight - 12;
-            const art = {x,y:top+78,width:laneWidth-6,height:bottom-top-78};
+            const art = {x,y:top+78,width:slotWidth,height:bottom-top-78};
             return {id,index,art,foot:{x:x+art.width/2,y:bottom},
-                target:{x,y:top,width:laneWidth-6,height:laneHeight-16},
-                hud:{x,y:top,width:laneWidth-6,height:72}};
+                target:{x,y:top,width:slotWidth,height:laneHeight-16},
+                hud:{x,y:top,width:slotWidth,height:72}};
         });
         return {width,height,compact,hero,enemies};
     }

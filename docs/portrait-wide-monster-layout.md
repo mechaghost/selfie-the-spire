@@ -1,0 +1,9 @@
+# Wide monsters in portrait combat
+
+The three-enemy tall portrait layout previously reserved the hero's full horizontal footprint beside the upper row, and the third enemy inherited one narrow upper-row cell even though the lower-right lane had unused space. Both reduced wide creature scale.
+
+The upper row now reserves only a hero HUD column plus motion clearance. The lower monster uses the remaining width to the right of the hero with a 32px gap for attack motion. At 390px stage width, the upper art cells grow from 130.4px to 139px; the lower art cell grows to 192px (47% more width). Actual scale remains limited by both width and height, so tall actors do not enlarge indiscriminately and short arenas can remain height-limited. Cards are unchanged.
+
+The hero art's vertical envelope is capped to its own lower depth lane. New overlap checks revealed that the former nominal envelope crossed the upper row at intermediate portrait heights; this is now prevented. On shorter tall-layout arenas the hero can therefore become smaller to maintain separation. Portrait arenas below 300px high keep their existing dedicated compact layout. No enemy reorder, targeting-controller change, or dead-slot collapse was introduced.
+
+Verification: 168 dimension/count combinations pass art bounds, 44px targets, target nonoverlap, HUD clearance, hero/enemy art separation, hit projection and dead-target rejection. Renderer streaming/lifecycle tests pass. Browser Pixi at 390×844 and 320×700 with Crawler/Golem/Voltage, ten cards and frozen Voltage contact: enlarged front monster remains clear of hero/HUD/hand, stable ground anchors, no warning/error logs. Evidence `tests/.e2e-out/wide-monsters-390.png`. This is a partial scale improvement, not the complete all-district/all-roster/physical-device art lock; very short screens still constrain broad characters by available height.

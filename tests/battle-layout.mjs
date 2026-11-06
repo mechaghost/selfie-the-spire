@@ -11,6 +11,8 @@ for(const width of [280,320,390,430,768,844,1440]) for(const height of [140,156,
   assert.ok(slot.target.width>=44 && slot.target.height>=44);
   assert.ok(slot.art.x>=0 && slot.art.y>=0 && slot.art.x+slot.art.width<=width && slot.art.y+slot.art.height<=height);
   assert.ok(!overlaps(slot.hud,slot.art),'HUD must clear maximum art envelope');
+  assert.ok(!overlaps(slot.art,layout.hero.hud),'enemy art must clear hero HUD');
+  assert.ok(!overlaps(slot.art,layout.hero.art),'enemy art must clear hero art');
   assert.ok(!overlaps(slot.target,layout.hero.target));
   for(const other of layout.enemies) if(other.id!==slot.id) assert.ok(!overlaps(slot.target,other.target));
   const bounds={left:17,top:41};
