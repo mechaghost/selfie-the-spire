@@ -9,3 +9,9 @@ No model weights, ONNX dependency, removal API, server matting process or deploy
 Controlled artwork is required: no green clothing, green light, ground shadow or cropped limbs. The algorithm cannot reliably cut arbitrary photographs out of complex backgrounds. Invalid backgrounds, missing foreground, clipped silhouettes, encoding failures and cancellation do not silently substitute another character. Existing generation errors allow retry or use of the starter path.
 
 Validation: deterministic pixel fixtures cover retained skin/teal, enclosed holes, partial alpha, framing and invalid output; mocked provider route tests cover response contracts, disabled rollout, errors, concurrency and cancellation. Type checking and the production build passed, including a clean server dependency install without ONNX. Real Gemini outputs, mobile-browser Canvas/WebP behavior, appearance quality and processing latency still require verification before rollout. Prior ONNX benchmarks and Linux gates are superseded, not evidence for this implementation.
+
+## Browser verification
+
+The DEV review harness now has “Test browser cutout,” which composites the existing local character fixture onto green and invokes the production decoder/remover/encoder. In the in-app browser it produced a 512 × 768 transparent WebP, 62,695 data-URL characters, in 53 ms at the default viewport and 37 ms at 390 × 844. Actual decoded pixels contained transparent background and opaque foreground. Pre-aborted processing and a gray backdrop were rejected. No console errors were observed. Screenshot: `tests/.e2e-out/browser-cutout-390.jpg` (local ignored evidence).
+
+These are desktop-browser measurements with a mobile viewport, not phone benchmarks. The fixture preview is displayed on a checkerboard and was visually inspected; it is not a live selfie or Gemini generation. This harness does not verify the submit/reveal/save pipeline end to end.
