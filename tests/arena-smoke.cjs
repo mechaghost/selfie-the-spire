@@ -16,7 +16,21 @@ async function waitForDecision(page) {
     ));
 }
 
-async function playFight(page, viewport) {
+async function tabTo(page, control, label) {
+    await control.waitFor();
+    for (let attempt = 0; attempt < 40; attempt++) {
+        if (await control.evaluate(element => document.activeElement === element)) return;
+        await page.keyboard.press('Tab');
+    }
+    assert.fail(`Could not reach ${label} with Tab`);
+}
+
+async function playFight(page, viewport, input) {
+    const activate = async (control, label) => {
+        if (input === 'touch') return control.tap();
+        await tabTo(page, control, label);
+        await page.keyboard.press('Enter');
+    };
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.addInitScript(runSeed => {
@@ -30,8 +44,8 @@ async function playFight(page, viewport) {
     }, seed);
 
     await page.goto(base);
-    await page.getByRole('button', { name: /Play a starter run/ }).tap();
-    await page.locator('.map-node.available.type-combat').first().tap();
+    await activate(page.getByRole('button', { name: /Play a starter run/ }), 'starter run');
+    await activate(page.locator('.map-node.available.type-combat').first(), 'first fight');
     await page.locator('.battle-arena canvas').waitFor();
     assert.equal(await page.evaluate(() => typeof window.__gameStore), 'undefined');
     const targets = page.locator('.actor-target:not([disabled])');
@@ -43,22 +57,14 @@ async function playFight(page, viewport) {
     const endTurn = page.getByRole('button', { name: 'End Turn', exact: true });
     const handAttacks = page.locator('.hand-container').getByRole('button', { name: attacks });
     const targetPrompt = page.getByRole('region', { name: 'Choose card target' });
-    if (viewport.width === 320) {
+    if (input === 'keyboard') {
         await waitForDecision(page);
         const jab = page.locator('.hand-container').getByRole('button', { name: 'Inspect Jab, 1 energy' }).first();
-        await jab.waitFor();
+        await tabTo(page, jab, 'Jab');
         const jabElement = await jab.elementHandle();
-        for (let tab = 0; tab < 20 && !await jabElement.evaluate(element => element === document.activeElement); tab++) {
-            await page.keyboard.press('Tab');
-        }
-        assert.equal(await jabElement.evaluate(element => element === document.activeElement), true, 'Jab is keyboard reachable');
         await page.keyboard.press('Enter');
         const play = page.getByRole('button', { name: 'Play card', exact: true });
-        await play.waitFor();
-        for (let tab = 0; tab < 5 && !await play.evaluate(element => element === document.activeElement); tab++) {
-            await page.keyboard.press('Tab');
-        }
-        assert.equal(await play.evaluate(element => element === document.activeElement), true, 'Play card is keyboard reachable');
+        await tabTo(page, play, 'Play card');
         await page.keyboard.press('Enter');
         await page.waitForFunction(() => document.activeElement.matches('[data-combat-target]:not(:disabled)'));
         await page.keyboard.press('Escape');
@@ -83,19 +89,19 @@ async function playFight(page, viewport) {
                 .sort((a, b) => b.cost - a.cost);
             if (!affordable.length) break;
             const { index, cost } = affordable[0];
-            await handAttacks.nth(index).tap();
-            await page.getByRole('button', { name: 'Play card', exact: true }).tap();
-            if (await targetPrompt.isVisible()) await targets.first().tap();
+            await activate(handAttacks.nth(index), labels[index]);
+            await activate(page.getByRole('button', { name: 'Play card', exact: true }), 'Play card');
+            if (await targetPrompt.isVisible()) await activate(targets.first(), 'first living enemy');
             if (plays === 0) {
                 await page.locator('.combat-impact.impact-damage').first().waitFor();
-                await page.screenshot({ path: join(output, `full-speed-impact-${viewport.width}.png`) });
+                await page.screenshot({ path: join(output, `full-speed-impact-${viewport.width}-${input}.png`) });
             }
             plays++;
             energy -= cost;
             await waitForDecision(page);
         }
         if (await victory.isVisible()) break;
-        await endTurn.tap();
+        await activate(endTurn, 'End Turn');
         if (enemyTurns === 0) {
             const cue = page.locator('.table-controls .turn-phase-banner.enemy-turn');
             await cue.waitFor();
@@ -115,9 +121,9 @@ async function playFight(page, viewport) {
     });
     const bounds = await page.locator('.combat-result-card').boundingBox();
     assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= viewport.width, 'reward dialog exceeds viewport width');
-    await page.screenshot({ path: join(output, `full-speed-victory-${viewport.width}.png`) });
-    await rewards.first().getByRole('button').tap();
-    await page.getByRole('button', { name: 'Add to deck' }).tap();
+    await page.screenshot({ path: join(output, `full-speed-victory-${viewport.width}-${input}.png`) });
+    await activate(rewards.first().getByRole('button'), 'first reward card');
+    await activate(page.getByRole('button', { name: 'Add to deck' }), 'Add to deck');
 
     const map = page.locator('main.city-street-map');
     const currentStop = page.locator('.map-node.current');
@@ -133,7 +139,7 @@ async function playFight(page, viewport) {
     assert.equal(save.masterDeck.length, 13);
     assert.ok(save.player.gold > 99);
     assert.deepEqual(errors, []);
-    console.log(`PASS ${viewport.width}×${viewport.height}: ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
+    console.log(`PASS ${viewport.width}×${viewport.height} (${input}): ${plays} attacks, ${enemyTurns} enemy turns, reward and map restored on reload`);
 }
 
 async function main() {
@@ -143,10 +149,15 @@ async function main() {
         args: ['--enable-unsafe-swiftshader'],
     });
     try {
-        for (const viewport of [{ width: 320, height: 568 }, { width: 844, height: 390 }]) {
-            const page = await browser.newPage({ viewport, isMobile: true, hasTouch: true, reducedMotion: 'no-preference' });
+        const cases = [
+            { viewport: { width: 320, height: 568 }, input: 'touch' },
+            { viewport: { width: 844, height: 390 }, input: 'touch' },
+            { viewport: { width: 320, height: 568 }, input: 'keyboard' },
+        ];
+        for (const { viewport, input } of cases) {
+            const page = await browser.newPage({ viewport, isMobile: true, hasTouch: input === 'touch', reducedMotion: 'no-preference' });
             try {
-                await playFight(page, viewport);
+                await playFight(page, viewport, input);
             } finally {
                 await page.close();
             }
