@@ -1,23 +1,11 @@
-# Browser character background removal
+# Browser selfie character
 
-The user's November 5 decision supersedes server ONNX matting: use free browser processing with no background-removal AI model.
+The current upgrade builds the player's 2D combat sprite locally. Canvas clips the center of the selfie into the visor of an illustrated Street Runner and renders the result as a 256 × 384 PNG with a transparent background around the sprite. The player previews the character before starting with the standard Street Runner deck.
 
-Gemini still generates the personalized full-body character (existing provider charges apply), now against a uniform bright green backdrop. The server preserves the complete image with lossless WebP and returns `combatArtwork`, not a falsely transparent combat appearance. The browser uses Canvas pixel color dominance to remove green, soften and decontaminate mixed edges, and remove enclosed green gaps. It normalizes the silhouette to a transparent 512 × 768 WebP with a stable foot baseline, then persists the existing version 2 combat appearance for preview and gameplay.
+The selfie flow has no model, paid API call or server upload. The game saves the cropped portrait and combat sprite in the local run. Existing saves with version 2 combat art still load. The former character generation endpoint returns HTTP 410 in the upgrade.
 
-No model weights, ONNX dependency, removal API, server matting process or deployment model-download step remains. Ordinary generation, hosting and transfer costs still exist. The feature remains behind the existing disabled-by-default personalized-combat rollout flag.
+The visor is a fixed crop. Photo framing determines how the face appears, and the player can retake the selfie before starting.
 
-Controlled artwork is required: no green clothing, green light, ground shadow or cropped limbs. The algorithm cannot reliably cut arbitrary photographs out of complex backgrounds. Invalid backgrounds, missing foreground, clipped silhouettes, encoding failures and cancellation do not silently substitute another character. Existing generation errors allow retry or use of the starter path.
+## Verification
 
-Validation: deterministic pixel fixtures cover retained skin/teal, enclosed holes, partial alpha, framing and invalid output; mocked provider route tests cover response contracts, disabled rollout, errors, concurrency and cancellation. Type checking and the production build passed, including a clean server dependency install without ONNX. Real Gemini outputs, mobile-browser Canvas/WebP behavior, appearance quality and processing latency still require verification before rollout. Prior ONNX benchmarks and Linux gates are superseded, not evidence for this implementation.
-
-## Browser verification
-
-The DEV review harness now has “Test browser cutout,” which composites the existing local character fixture onto green and invokes the production decoder/remover/encoder. In the in-app browser it produced a 512 × 768 transparent WebP, 62,695 data-URL characters, in 53 ms at the default viewport and 37 ms at 390 × 844. Actual decoded pixels contained transparent background and opaque foreground. Pre-aborted processing and a gray backdrop were rejected. No console errors were observed. Screenshot: `tests/.e2e-out/browser-cutout-390.jpg` (local ignored evidence).
-
-These are desktop-browser measurements with a mobile viewport, not phone benchmarks. The fixture preview is displayed on a checkerboard and was visually inspected; it is not a live selfie or Gemini generation. This harness does not verify the submit/reveal/save pipeline end to end.
-
-## Submit-to-save integration
-
-`tests/browser-cutout-generation.mjs` passed against the actual Zustand submit/start/save/load flow with a mocked provider and cutout decoder. It verifies the returned cutout is attached before reveal, survives run start and reload unchanged, and does not replace the portrait. It also verifies an extraction error returns to capture with its retry message, duplicate submits do not call the provider again, cancellation aborts processing, a late old cutout cannot overwrite a newer hero, and unsupported background contracts fail before decoding. This complements the actual Canvas browser fixture; neither substitutes for a real Gemini generation or physical-phone test.
-
-Canvas prefers WebP at 512 × 768. If WebP encoding is unavailable or too large, the browser tries transparent PNG at widths of 384, 256, and 192 pixels while preserving the aspect ratio and foot position. Both formats share the 512,000-character save limit. Tests cover a simulated unsupported encoder, PNG save and reload, and rejection of mismatched MIME types. Physical iPhone Safari verification remains open.
+The browser regression uses a local image fixture to exercise the selfie-to-reveal flow. The store integration test covers cancellation, duplicate submits and persistence. The HTTP test verifies that the retired endpoint returns 410. Physical camera testing on iPhone Safari and Android remains open.
