@@ -713,3 +713,9 @@ Added a planted two-handed shield brace for Block reactions. The 1199 × 1312 cu
 Added Sentinel's raised-fist cast pose with the shield low, using the original 1199 × 1312 canvas, .986 foot anchor and a 160/60 ms cast/idle clip. The live check exposed missing impact feedback for status applications. Committed status gains now publish their stack amount and display name through the existing feedback channel. The renderer ignores that notice for hit reactions so an applied status cannot replace a simultaneous recoil.
 
 At 320 × 568, Sentinel's real opening turn showed the raised fist alongside +3 Strength and recorded three Strength stacks. Capture: `tests/.e2e-out/neon-sentinel-live-cast-320.png`. All 550 encounter art budgets, bounds, clip playback, TypeScript and 30 regression suites passed. Physical-device review remains open.
+
+### Graffiti Imp spray cue and feedback bounds
+
+Added a planted, leftward spray-can cast using the existing 480 px runtime tier. The 1230 × 1278 source uses a .988 foot anchor and a 160/60 ms cast/idle timeline. At 320 × 568, an Imp duo fixture using the real Debuff intent showed the left Imp extending its can while the twin stayed idle. Separate Weak and Vulnerable notices appeared. Capture: `tests/.e2e-out/graffiti-imp-live-cast-320.png`.
+
+The capture exposed edge clipping on long notices anchored over the player. Combat feedback now clamps its horizontal translation to the arena edges independently of its rise animation. At 320 px with reduced motion, the full +1 Vulnerable notice measured from x=4 to x=147. All 550 art budgets, texture, clip playback and TypeScript passed. The bounds audit found zero confirmed intersections across 1,114,668 samples.

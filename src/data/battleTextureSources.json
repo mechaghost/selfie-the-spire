@@ -328,6 +328,13 @@
     "runtimeHeight": 480,
     "resolution": 0.3755868544600939
   },
+  "/assets/battle/actors/graffiti-imp-cast-v1.webp": {
+    "width": 1230,
+    "height": 1278,
+    "runtimeWidth": 462,
+    "runtimeHeight": 480,
+    "resolution": 0.3755868544600939
+  },
   "/assets/battle/actors/graffiti-imp-defeat-v1.webp": {
     "width": 1357,
     "height": 1159,

@@ -187,19 +187,18 @@
       "keyPoses": [
         "attack",
         "hit",
+        "cast",
         "defeat"
       ],
       "timelines": [
         "hit",
+        "cast",
         "defeat",
         "attack"
       ],
-      "missingContactPoses": [
-        "cast"
-      ],
+      "missingContactPoses": [],
       "missingTimelines": [
-        "idle",
-        "cast"
+        "idle"
       ]
     },
     {

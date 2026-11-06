@@ -11,7 +11,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | hero-smoke | hero | attack | attack | hit, defeat, guard, cast, celebrate | review |
 | alley_rat | production | attack, hit, defeat, blink, windup, recovery | idle, attack | none | review |
 | neon_junkie | production | attack, hit, defeat | hit, defeat, attack | cast | review |
-| graffiti_imp | production | attack, hit, defeat | hit, defeat, attack | cast | review |
+| graffiti_imp | production | attack, hit, cast, defeat | hit, cast, defeat, attack | none | review |
 | stray_voltage | production | attack, hit, defeat | hit, defeat, attack | none | review |
 | dumpster_crawler | production | attack, hit, defeat | hit, defeat, attack | guard | review |
 | smoke_specter | production | attack, hit, defeat | hit, defeat, attack | guard, cast | review |

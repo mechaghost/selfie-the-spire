@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import { ImpactNotice, subscribeImpacts } from '../../rendering/CombatPresentation';
 import { BattleLayout } from '../../rendering/battleLayout';
 interface Feedback extends ImpactNotice {key:string}
@@ -30,7 +30,7 @@ export function CombatFeedback({layout}:{layout:BattleLayout}) {
             const slot=item.targetId==='player'?layout.hero:layout.enemies.find(slot=>slot.id===item.targetId);
             if(!slot)return null;
             const offset=items.slice(0,index).filter(other=>other.targetId===item.targetId).length*23;
-            return <span key={item.key} className={`combat-impact impact-${item.effect}`} style={{left:slot.foot.x,top:Math.max(8,slot.art.y+slot.art.height*.35-offset)}}>{impactLabel(item)}</span>;
+            return <span key={item.key} className={`combat-impact impact-${item.effect}`} style={{'--impact-x': `${slot.foot.x}px`, '--impact-right': `${layout.width-slot.foot.x}px`,top:Math.max(8,slot.art.y+slot.art.height*.35-offset)} as CSSProperties}>{impactLabel(item)}</span>;
         })}
     </div>;
 }
