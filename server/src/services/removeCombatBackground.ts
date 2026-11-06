@@ -2,13 +2,24 @@ import sharp from 'sharp';
 import {refineStudioMatte} from './refineStudioMatte.js';
 import { InferenceSession, Tensor } from 'onnxruntime-node';
 import { fileURLToPath } from 'node:url';
+import { createReadStream } from 'node:fs';
+import { createHash } from 'node:crypto';
+
+async function loadVerifiedModel(path: string) {
+    const hash = createHash('sha256');
+    for await (const chunk of createReadStream(path)) hash.update(chunk);
+    if (hash.digest('hex') !== '8d10d2f3bb75ae3b6d527c77944fc5e7dcd94b29809d47a739a7a728a912b491') {
+        throw new Error('Combat matting model checksum mismatch');
+    }
+    return InferenceSession.create(path, { executionProviders: ['cpu'], intraOpNumThreads: 2, interOpNumThreads: 1 });
+}
 
 let session: Promise<InferenceSession> | undefined;
 let busy = false;
 export function ensureCombatMattingReady() {
     if (!session) {
         const path = process.env.COMBAT_MATTING_MODEL_PATH || fileURLToPath(new URL('../../models/u2net.onnx', import.meta.url));
-        session = InferenceSession.create(path, { executionProviders: ['cpu'], intraOpNumThreads: 2, interOpNumThreads: 1 })
+        session = loadVerifiedModel(path)
             .catch(error => { session = undefined; throw error; });
     }
     return session;
