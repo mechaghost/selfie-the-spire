@@ -73,3 +73,4 @@ jobs:
             tests/.e2e-out/full-speed-*.png
             tests/.e2e-out/final_*.png
           retention-days: 14
+          include-hidden-files: true

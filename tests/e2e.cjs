@@ -146,8 +146,9 @@ async function freshStore(page) {
     });
 }
 
-async function newPage(browser, consoleErrors, failedRequests) {
+async function newPage(browser, consoleErrors, failedRequests, { virtualClock = false } = {}) {
     const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    if (virtualClock) await page.clock.install();
     page.on('console', msg => { if (msg.type() === 'error') consoleErrors.push(msg.text()); });
     page.on('pageerror', err => consoleErrors.push('PAGEERROR: ' + err.message));
     page.on('requestfailed', req => failedRequests.push(req.url()));
@@ -394,8 +395,11 @@ async function verifyCombatFeedback(page) {
                     type ? intent.type === type : intent.hits === hits);
                 store.setState(state => ({ enemies: state.enemies.map(actor => ({ ...actor, intent: pattern.intent })) }));
             }, fixture);
-            await page.getByRole('button', { name: 'End Turn', exact: true }).click();
-            await page.waitForFunction(count => document.querySelectorAll('.combat-impact').length === count, fixture.labels.length);
+            // Measure after the queue delivers every hit, before any notice expires.
+            // Software rendering on CI can stretch these timers in wall-clock time.
+            await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
+            await page.getByRole('button', { name: 'End Turn', exact: true }).evaluate(button => button.click());
+            await page.clock.runFor(900);
             const measured = await page.locator('.combat-feedback').evaluate(element => ({
                 arena: element.getBoundingClientRect().toJSON(),
                 notices: Array.from(element.querySelectorAll('.combat-impact'), notice => ({
@@ -411,6 +415,7 @@ async function verifyCombatFeedback(page) {
             check(`[feedback] ${fixture.id} notices fit without overlap at 320 px`,
                 fits && notices.map(notice => notice.label).join('|') === fixture.labels.join('|'),
                 JSON.stringify(notices));
+            await page.clock.resume();
             await waitIdleTurn(page);
             await page.evaluate(() => window.__gameStore.getState().abandonRun());
         }
@@ -628,7 +633,12 @@ async function main() {
 
         if (mode === 'mechanics' || mode === 'all') {
             await runMechanics(page);
-            await verifyCombatFeedback(page);
+            const feedbackPage = await newPage(browser, consoleErrors, failedRequests, { virtualClock: true });
+            try {
+                await verifyCombatFeedback(feedbackPage);
+            } finally {
+                await feedbackPage.close();
+            }
         }
         if (mode === 'victory' || mode === 'all') await runFullRun(page, 'victory');
         if (mode === 'defeat' || mode === 'all') await runFullRun(page, 'defeat');
