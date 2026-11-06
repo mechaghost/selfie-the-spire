@@ -821,3 +821,7 @@ Added a violet breath cue with a .999 foot anchor and a 160/60 ms cast/idle clip
 ### Keep controls and notices stable during heavy impacts
 
 The Mimic's bite moved the entire arena about 5.7 px left during the heavy shake, while the mobile viewport itself stayed fixed. The 2D arena now shakes only its Pixi canvas or decorative fallback. The real bite regression at 320 × 568 uses standard motion and verifies the heavy animation is on the artwork, the arena origin stays fixed, and both the 12-damage and Vulnerable notices stay in bounds without overlap. The full Chromium mechanics suite passed. The follow-up cast capture shows about 4 px clearance at the left edge.
+
+### Chrome Bouncer guard
+
+Added a low boxing guard with both fists up, a .993 foot anchor and a 160/60 ms guard/idle clip. At 320 × 568 in Chromium, the deterministic first move showed the stance alongside +15 Block, with player HP unchanged. Capture: `tests/.e2e-out/chrome-bouncer-live-guard-320.png`. All 550 encounter budgets, texture caps, clip playback and TypeScript passed. Bounds found zero confirmed intersections across 1,121,148 samples. Both production build variants also passed after the separate screen-shake change.
