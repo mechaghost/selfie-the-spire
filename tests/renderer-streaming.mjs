@@ -13,13 +13,13 @@ export class ImageSource {constructor({resource}){this.resource=resource;}}
 export class Texture {constructor({source}){if(textureFailures.remaining>0){textureFailures.remaining--;throw new Error('texture construction failed');}this.source=source;this.width=100;this.height=100;}destroy(){this.destroyed=true;}}
 export class Application {constructor(){apps.push(this);}stage=new Container();canvas={setAttribute(){},addEventListener(){},removeEventListener(){}};renderer={resize(){}};ticker={add(){}};async init(){await initialization.wait;}render(){}start(){}stop(){}destroy(){this.destroyed=true;}}
 `;
-await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {publishAction,identifyAction} from './src/rendering/CombatPresentation'; export {startStageMount} from './src/rendering/stageMountLifecycle'; export {apps,textureFailures,initialization} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
+await build({stdin:{contents:`export * from './src/rendering/BattleScene'; export {ACTOR_VISUALS} from './src/data/actorVisuals'; export {publishImpact,publishAction,identifyAction} from './src/rendering/CombatPresentation'; export {startStageMount} from './src/rendering/stageMountLifecycle'; export {apps,textureFailures,initialization} from 'pixi.js'; export {battleLayout} from './src/rendering/battleLayout';`,resolveDir:process.cwd()},outfile:'tests/.e2e-out/renderer-streaming.mjs',bundle:true,platform:'node',format:'esm',plugins:[{name:'controlled-pixi',setup(b){b.onResolve({filter:/^pixi.js$/},()=>({path:'pixi',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:pixi,loader:'js'}));}}]});
 const pending=new Map();
 globalThis.Image=class {set src(url){if(url)pending.set(url,this);}};
 globalThis.window={devicePixelRatio:1,setTimeout};
 const listeners=new Set();
 globalThis.document={hidden:false,addEventListener:(type,fn)=>listeners.add(fn),removeEventListener:(type,fn)=>listeners.delete(fn)};
-const {BattleScene,battleTextures,apps,battleLayout,publishAction,identifyAction,textureFailures,initialization,startStageMount}=await import('./.e2e-out/renderer-streaming.mjs');
+const {ACTOR_VISUALS,publishImpact,BattleScene,battleTextures,apps,battleLayout,publishAction,identifyAction,textureFailures,initialization,startStageMount}=await import('./.e2e-out/renderer-streaming.mjs');
 const flush=async()=>{for(let i=0;i<12;i++)await Promise.resolve();};
 const resolve=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);return image.onload();};
 const reject=url=>{const image=pending.get(url);assert.ok(image,url);pending.delete(url);image.onerror();};
@@ -188,3 +188,39 @@ try {
     globalThis.setTimeout=nativeSetTimeout;globalThis.clearTimeout=nativeClearTimeout;
 }
 console.log('PASS: stage timeout disposes late GPU initialization without canvas, listeners or asset leases');
+
+// Exercise actual Wraith manifests through the scene's event subscriptions and clock.
+// GPU objects are doubles; frame selection and event arbitration are production code.
+delete globalThis.createImageBitmap; // End the deliberately stalled decoder fixture above.
+const originalPerformance=globalThis.performance;
+let clock=1000;
+globalThis.performance={now:()=>clock};
+const wraithVisual=ACTOR_VISUALS.neon_wraith;
+const reactionSnapshot={...snapshot,location:{...snapshot.location,layers:[]},actors:[{id:'enemy',defeated:false,visual:wraithVisual}]};
+const reactionScene=new BattleScene(host,reactionSnapshot,()=>{throw new Error('reaction scene failed');});
+try {
+ const ready=reactionScene.mount();await flush();resolve(wraithVisual.fallbackImageUrl);await flush();await ready;
+ for(const pose of Object.values(wraithVisual.keyPoses)){if(pending.has(pose.imageUrl))resolve(pose.imageUrl);}
+ await flush();
+ const sprite=reactionScene.sprites.get('enemy');
+ const texture=frame=>reactionScene.poses.get(`enemy:${frame}`);
+ const damage=identifyAction({type:'DAMAGE_ENTITY',payload:{sourceId:'player',targetId:'enemy',amount:6}});
+ publishImpact(damage,{effect:'damage',targetId:'enemy',hpDelta:-6,blockDelta:0});
+ reactionScene.update(reactionSnapshot);assert.equal(sprite.texture,texture('hit'),'actual impact selects authored hit');
+ clock=1139;reactionScene.update(reactionSnapshot);assert.equal(sprite.texture,texture('hit'));
+ clock=1140;reactionScene.update(reactionSnapshot);assert.equal(sprite.texture,texture('idle'),'authored recovery starts at 140ms');
+ clock=1220;reactionScene.update(reactionSnapshot);assert.equal(sprite.texture,texture('idle'));assert.equal(reactionScene.reactions.size,0);
+ // A later hit restarts the reaction; defeat overrides it immediately.
+ clock=1300;publishImpact(damage,{effect:'burn',targetId:'enemy',hpDelta:-1,blockDelta:0});
+ reactionScene.update(reactionSnapshot);assert.equal(sprite.texture,texture('hit'));
+ const defeated={...reactionSnapshot,actors:reactionSnapshot.actors.map(actor=>({...actor,defeated:true}))};
+ reactionScene.update(defeated);assert.equal(sprite.texture,texture('defeat'),'defeat interrupts active reaction');
+ clock=1600;reactionScene.update(defeated);assert.equal(sprite.texture,texture('defeat'),'late frames do not resurrect idle');
+ reactionScene.update({...defeated,reducedMotion:true});assert.equal(sprite.texture,texture('defeat'));
+ reactionScene.update({...reactionSnapshot,reducedMotion:true});assert.equal(sprite.texture,texture('idle'),'reduced-motion living actor skips hit');
+ reactionScene.destroy();
+ publishImpact(damage,{effect:'damage',targetId:'enemy',hpDelta:-6,blockDelta:0});
+ assert.equal(reactionScene.reactions.size,0,'disposed scene receives no late impacts');
+ assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
+ console.log('PASS: actual Wraith impact/recovery, repeat hit, defeat interruption, reduced motion and disposal through scene event subscriptions (controlled GPU and clock)');
+} finally {reactionScene.destroy();globalThis.performance=originalPerformance;}
