@@ -231,3 +231,50 @@ try {
  assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
  console.log('PASS: actual Wraith impact/recovery, repeat hit, defeat interruption, reduced motion and disposal through scene event subscriptions (controlled GPU and clock)');
 } finally {reactionScene.destroy();globalThis.performance=originalPerformance;}
+
+// Slime's self-buff applies Block followed immediately by Strength. Preserve the
+// brace when the cast and Block reaction overlap, then let Weak use its own pose.
+const slimeVisual = ACTOR_VISUALS.sewer_slime;
+const slimeSnapshot = {
+    ...reactionSnapshot,
+    actors: [{id:'enemy',defeated:false,visual:slimeVisual}],
+};
+const slimeScene = new BattleScene(host,slimeSnapshot,reason=>{throw new Error(reason);});
+globalThis.performance = {now:()=>clock};
+try {
+    const ready = slimeScene.mount();
+    await flush();
+    resolve(slimeVisual.fallbackImageUrl);
+    await ready;
+    for (const pose of Object.values(slimeVisual.keyPoses)) {
+        if (pending.has(pose.imageUrl)) resolve(pose.imageUrl);
+    }
+    await flush();
+    const sprite = slimeScene.sprites.get('enemy');
+    const guard = slimeScene.poses.get('enemy:guard');
+    const cast = slimeScene.poses.get('enemy:cast');
+    const idle = slimeScene.poses.get('enemy:idle');
+    assert.ok(sprite && guard && cast && idle);
+    const block = identifyAction({type:'GAIN_BLOCK',payload:{sourceId:'enemy',targetId:'enemy',amount:6}});
+    const strength = identifyAction({type:'APPLY_STATUS',payload:{sourceId:'enemy',targetId:'enemy'}});
+    const weak = identifyAction({type:'APPLY_STATUS',payload:{sourceId:'enemy',targetId:'player'}});
+    clock = 3000;
+    publishImpact(block,{effect:'block',targetId:'enemy',hpDelta:0,blockDelta:6});
+    publishAction(strength,'begin');
+    slimeScene.update(slimeSnapshot);
+    assert.equal(sprite.texture,guard,'Block wins over the overlapping self-buff cast');
+    clock += 220;
+    slimeScene.update(slimeSnapshot);
+    assert.equal(sprite.texture,idle);
+    publishAction(weak,'begin');
+    slimeScene.update(slimeSnapshot);
+    assert.equal(sprite.texture,cast,'Weak plays the cast after the Block reaction expires');
+    clock += 160;
+    slimeScene.update(slimeSnapshot);
+    assert.equal(sprite.texture,idle);
+} finally {
+    slimeScene.destroy();
+    globalThis.performance = originalPerformance;
+}
+assert.deepEqual(battleTextures.stats(),{entries:0,references:0});
+console.log('PASS: Slime guard takes precedence over simultaneous Strength, and Weak plays its cast');
