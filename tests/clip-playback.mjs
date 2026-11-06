@@ -76,3 +76,6 @@ for(const ms of [0,140,279,280,10000])assert.equal(clipFrameAt(wraith.clips.defe
 assert.equal(clipFrameAt(wraith.clips.defeat,0,true),'defeat','reduced motion still communicates defeat');
 for(const [ms,expected] of [[0,'hit'],[139,'hit'],[140,'idle'],[219,'idle'],[220,null]])assert.equal(clipFrameAt(wraith.clips.hit,ms),expected);
 console.log('PASS: Wraith hit recovery and held defeat, including reduced-motion defeat');
+for(const [ms,expected] of [[0,'idle'],[5099,'idle'],[5100,'blink'],[5199,'blink'],[5200,'idle'],[10300,'blink']])assert.equal(clipFrameAt(wraith.clips.idle,ms),expected);
+assert.equal(clipFrameAt(wraith.clips.idle,5150,true),null,'reduced-motion Wraith remains on base idle');
+console.log('PASS: Wraith blink boundaries, repeat cycle and reduced-motion static fallback');

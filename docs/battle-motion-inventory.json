@@ -341,22 +341,21 @@
       "reachability": "production",
       "status": "review",
       "keyPoses": [
-        "attack"
+        "attack",
+        "hit",
+        "defeat",
+        "cast",
+        "blink"
       ],
       "timelines": [
+        "hit",
+        "defeat",
+        "cast",
+        "idle",
         "attack"
       ],
-      "missingContactPoses": [
-        "hit",
-        "defeat",
-        "cast"
-      ],
-      "missingTimelines": [
-        "idle",
-        "hit",
-        "defeat",
-        "cast"
-      ]
+      "missingContactPoses": [],
+      "missingTimelines": []
     },
     {
       "id": "payphone_phantom",

@@ -1,6 +1,6 @@
 # Runtime motion inventory
 
-Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Street Runner, Rat, Golem and Spider have prototype authored blink loops; other actors still need authored idle sequences, and all idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
+Generated with `node scripts/report_battle_motion.mjs` from actor manifests and encounter pools. This separates existing art from missing portfolio work; it does not grant art approval. Idle cutouts exist for all actors. Street Runner, Rat, Golem, Spider and Wraith have prototype authored blink loops; other actors still need authored idle sequences, and all idle animation needs final review. The Neon hero, Rat, Golem and Spider attacks have authored wind-up/contact/recovery poses. Other current attack timelines reuse idle/contact/idle; neither is a complete animation approval.
 
 | Actor | Reachability | Extra key poses | Existing timelines | Missing contact poses | Status |
 |---|---|---|---|---|---|
@@ -18,7 +18,7 @@ Generated with `node scripts/report_battle_motion.mjs` from actor manifests and 
 | taxi_ghost | production | attack | attack | hit, defeat, cast | review |
 | manhole_mimic | production | attack | attack | hit, defeat, guard, cast | review |
 | boombox_brute | production | attack | attack | hit, defeat, cast | review |
-| neon_wraith | production | attack | attack | hit, defeat, cast | review |
+| neon_wraith | production | attack, hit, defeat, cast, blink | hit, defeat, cast, idle, attack | none | review |
 | payphone_phantom | legacy/dev | none | none | attack, hit, defeat, guard, cast | review |
 | sewer_slime | production | attack | attack | hit, defeat, guard, cast | review |
 | fire_escape_spider | production | attack, hit, defeat, cast, guard, blink, windup, recovery | idle, attack | none | review |
