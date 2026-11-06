@@ -763,3 +763,9 @@ CI run 42194280975 passed the production arena smoke suite but timed out while s
 ### Read combat results during short poses
 
 In a two-Specter combat fixture, the old notice took 165 ms to reach full opacity, longer than the 160 ms guard pose. Its placement also covered the crossed arms. Notices now start opaque and sit lower on the actor where space allows. Standard motion retains the rise and fade; reduced motion remains static. Chromium touch fixtures at 320 × 568 and 844 × 390 observed full-opacity Block and Weak labels, stable target bounds, 5 Block only on the defending Specter, and 2 Weak on the player. The portrait guard capture shows both the crossed arms and the label. Captures: `tests/.e2e-out/specter-pair-{guard,cast}-{320,844}.png`. The mechanics suite and TypeScript passed.
+
+### Taxi Ghost Strength cast
+
+Added a raised-suspension charge pose with a brighter roof beacon, a .989 wheel anchor and a 160/60 ms cast/idle clip. Spectral Fog at 320 × 568 resolved Smoke Specter's guard and Taxi Ghost's existing Buff intent. Taxi Ghost gained 1 Strength and the player remained at 80 HP. The capture shows the raised suspension and beacon, with the notice crossing the cab body in portrait. Capture: `tests/.e2e-out/taxi-ghost-live-cast-320.png`. The 600 px Taxi Ghost runtime tier kept all 550 encounter combinations under budget. Bounds, texture, playback and TypeScript passed.
+
+Linux run 42195618670 passed the production arena cases and five-district route and uploaded the evidence. The separate local run exercised the notice readability commit and completed the nine-floor victory with 42 HP and the intentional floor-six defeat.

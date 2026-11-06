@@ -1,8 +1,8 @@
 {
   "encoding": "Lanczos runtime tiers (power-of-two default, 704px Spider, 672px Rat cap, 640px Street Runner cap, 480px Slime cap); actors lossless RGBA, locations WebP quality 95 with exact alpha and >=35dB composited PSNR on dark/white backing",
   "memoryNote": "Decoded runtime RGBA estimates, not measured GPU allocation. Full-resolution originals remain in art-source.",
-  "sourceBytes": 269065867,
-  "runtimeBytes": 41682358,
+  "sourceBytes": 271484461,
+  "runtimeBytes": 41421090,
   "assets": [
     {
       "asset": "actors/alley-rat-attack-v1.webp",
@@ -1490,53 +1490,66 @@
       "asset": "actors/taxi-ghost-attack-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 600,
+      "runtimeHeight": 400,
+      "resolution": 0.390625,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2404947,
-      "runtimeBytes": 375730,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 242086,
+      "decodedRGBABytes": 960000
+    },
+    {
+      "asset": "actors/taxi-ghost-cast-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "runtimeWidth": 600,
+      "runtimeHeight": 400,
+      "resolution": 0.390625,
+      "encoding": "lossless WebP",
+      "compositedPSNR": null,
+      "sourceBytes": 2418594,
+      "runtimeBytes": 237718,
+      "decodedRGBABytes": 960000
     },
     {
       "asset": "actors/taxi-ghost-defeat-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 600,
+      "runtimeHeight": 400,
+      "resolution": 0.390625,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 1814663,
-      "runtimeBytes": 272070,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 175492,
+      "decodedRGBABytes": 960000
     },
     {
       "asset": "actors/taxi-ghost-hit-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 600,
+      "runtimeHeight": 400,
+      "resolution": 0.390625,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2465725,
-      "runtimeBytes": 395778,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 255998,
+      "decodedRGBABytes": 960000
     },
     {
       "asset": "actors/taxi-ghost-idle-v1.webp",
       "width": 1536,
       "height": 1024,
-      "runtimeWidth": 768,
-      "runtimeHeight": 512,
-      "resolution": 0.5,
+      "runtimeWidth": 600,
+      "runtimeHeight": 400,
+      "resolution": 0.390625,
       "encoding": "lossless WebP",
       "compositedPSNR": null,
       "sourceBytes": 2366261,
-      "runtimeBytes": 364474,
-      "decodedRGBABytes": 1572864
+      "runtimeBytes": 235490,
+      "decodedRGBABytes": 960000
     },
     {
       "asset": "actors/the-billboard-attack-v1.webp",

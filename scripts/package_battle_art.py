@@ -44,7 +44,8 @@ def encode(source):
             resolution=min(resolution,540/max(rgba.size))
         if relative.parts[0]=='actors' and relative.name.startswith('street-runner-'):
             resolution=min(resolution,640/max(rgba.size))
-        if relative.parts[0]=='actors' and relative.name=='smoke-specter-cast-v1.webp':
+        # These poses stream together in Spectral Fog, the heaviest encounter.
+        if relative.parts[0]=='actors' and (relative.name=='smoke-specter-cast-v1.webp' or relative.name.startswith('taxi-ghost-')):
             resolution=min(resolution,600/max(rgba.size))
         runtime_size = (int(-(-rgba.width * resolution // 1)), int(-(-rgba.height * resolution // 1)))
         runtime = rgba if resolution == 1 else rgba.resize(runtime_size, Image.Resampling.LANCZOS)

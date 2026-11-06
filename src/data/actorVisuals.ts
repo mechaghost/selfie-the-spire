@@ -79,6 +79,8 @@ for(const archetype of ['chrome','volt','concrete','smoke']) {
 ACTOR_VISUALS.taxi_ghost.keyPoses={attack:{imageUrl:'/assets/battle/actors/taxi-ghost-attack-v1.webp',footAnchor:[.5,.99]}};
 ACTOR_VISUALS.taxi_ghost.keyPoses.hit={imageUrl:'/assets/battle/actors/taxi-ghost-hit-v1.webp',footAnchor:[.5,.94]};
 ACTOR_VISUALS.taxi_ghost.clips.hit={frames:['hit','idle'],durationsMs:[160,60],loop:false,completion:'idle'};
+ACTOR_VISUALS.taxi_ghost.keyPoses.cast={imageUrl:'/assets/battle/actors/taxi-ghost-cast-v1.webp',footAnchor:[.5,.989]};
+ACTOR_VISUALS.taxi_ghost.clips.cast={frames:['cast','idle'],durationsMs:[160,60],loop:false,completion:'idle'};
 ACTOR_VISUALS.taxi_ghost.keyPoses.defeat={imageUrl:'/assets/battle/actors/taxi-ghost-defeat-v1.webp',footAnchor:[.5,.988]};
 ACTOR_VISUALS.taxi_ghost.clips.defeat={frames:['defeat'],durationsMs:[280],loop:false,completion:'hold'};
 ACTOR_VISUALS.smoke_specter.keyPoses={attack:{imageUrl:'/assets/battle/actors/smoke-specter-attack-v1.webp',footAnchor:[.5,.99]}};
