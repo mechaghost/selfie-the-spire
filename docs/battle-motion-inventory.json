@@ -478,20 +478,19 @@
         "attack",
         "hit",
         "guard",
+        "cast",
         "defeat"
       ],
       "timelines": [
         "hit",
         "guard",
+        "cast",
         "defeat",
         "attack"
       ],
-      "missingContactPoses": [
-        "cast"
-      ],
+      "missingContactPoses": [],
       "missingTimelines": [
-        "idle",
-        "cast"
+        "idle"
       ]
     },
     {
