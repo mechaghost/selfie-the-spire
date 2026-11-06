@@ -34,6 +34,11 @@ for(const encounter of encounters)for(const location of LOCATIONS) {
 const descending=(a,b)=>b.all.bytes-a.all.bytes;
 rows.sort(descending);
 const report={note:'File-byte inventory for a cold successful scene load, not network timing or measured VRAM. Unique URLs deduplicated as in cache. Required means actor idle textures awaited before ready; all includes concurrently streamed layers and poses. Excludes app JS, fonts, cards, HTTP overhead, cache reuse, failed-atlas fallback downloads, personalized cutouts, framebuffers, mipmaps and driver overhead. Every legal encounter is exercised in every district because district visuals do not constrain encounter pools.',combinations:rows.length,maxRequiredBytes:Math.max(...rows.map(row=>row.required.bytes)),maxAllBytes:rows[0].all.bytes,maxDecodedBytes:Math.max(...rows.map(row=>row.all.decodedBytes)),over5MB:rows.filter(row=>row.all.bytes>5_000_000).length,over64MiB:rows.filter(row=>row.all.decodedBytes>64*1024*1024).length,worst:rows.slice(0,10),rows};
-await writeFile('docs/encounter-art-budget.json',JSON.stringify(report,null,2)+'\n');
+const checking = process.argv.includes('--check');
+const reportPath = checking ? 'tests/.e2e-out/encounter-art-budget.json' : 'docs/encounter-art-budget.json';
+await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({...report,rows:undefined},null,2));
-if(process.argv.includes('--check') && (report.over5MB || report.over64MiB))process.exitCode=1;
+if (checking && (report.over5MB || report.over64MiB)) {
+    console.error('Encounter art exceeds the transfer or decoded texture budget. See ' + reportPath);
+    process.exitCode = 1;
+}

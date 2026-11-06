@@ -41,6 +41,9 @@ jobs:
         run: npm run build
       - name: Run rules, rendering, browser-cutout and HTTP regression suites
         run: npm run test:regression
+      - name: Enforce encounter art budgets
+        if: success() || failure()
+        run: node scripts/report_encounter_art_budget.mjs --check
       - name: Retain test logs and parity evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -48,6 +51,7 @@ jobs:
           name: combat-regression-${{ github.sha }}
           path: |
             tests/.e2e-out/regression/
+            tests/.e2e-out/encounter-art-budget.json
             tests/.e2e-out/encounter-motion-parity.json
             tests/.e2e-out/run-motion-parity.json
             tests/.e2e-out/run-save-continuity.json
