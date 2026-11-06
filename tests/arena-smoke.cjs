@@ -321,6 +321,36 @@ async function verifyLocalSelfie(page) {
     console.log('PASS 320×568: photo picker, transparent preview, same sprite after reload and WebGL loss, no API calls');
 }
 
+async function verifyMissingActorRecovery(page) {
+    const missing = '**/assets/battle/actors/street-runner-idle-v1.webp';
+    await page.route(missing, route => route.abort('failed'));
+    await page.goto(base);
+    await page.getByRole('button', { name: /Play a starter run/ }).tap();
+    await page.locator('.map-node.available.type-combat').first().tap();
+
+    const stage = page.locator('.battle-stage-visual');
+    const silhouette = stage.locator('.battle-fallback-actor').first().locator('svg');
+    const retry = page.getByRole('button', { name: 'Retry graphics' });
+    await stage.and(page.locator('[data-stage-status="degraded"]')).waitFor();
+    await silhouette.waitFor();
+    await retry.waitFor();
+
+    const checkpoint = () => page.evaluate(() => JSON.parse(localStorage.getItem('stt_run')));
+    const before = await checkpoint();
+    await page.getByRole('button', { name: 'End Turn', exact: true }).tap();
+    await page.waitForFunction(previous => {
+        const save = JSON.parse(localStorage.getItem('stt_run'));
+        return save.isPlayerTurn && JSON.stringify(save.rngSnapshot) !== JSON.stringify(previous);
+    }, before.rngSnapshot);
+    const afterTurn = await checkpoint();
+
+    await page.unroute(missing);
+    await retry.tap();
+    await stage.and(page.locator('[data-stage-status="ready"]')).locator('canvas').waitFor();
+    assert.deepEqual(await checkpoint(), afterTurn, 'Graphics retry preserves the completed turn');
+    console.log('PASS 320×568: failed hero image uses a playable silhouette, and retry restores graphics without changing the run');
+}
+
 async function main() {
     await mkdir(output, { recursive: true });
     const browser = await (useWebKit ? webkit.launch() : chromium.launch({
@@ -333,6 +363,12 @@ async function main() {
             await verifyLocalSelfie(selfiePage);
         } finally {
             await selfiePage.close();
+        }
+        const recoveryPage = await browser.newPage({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
+        try {
+            await verifyMissingActorRecovery(recoveryPage);
+        } finally {
+            await recoveryPage.close();
         }
         const cases = [
             { viewport: { width: 320, height: 568 }, input: 'touch' },
