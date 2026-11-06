@@ -3,12 +3,13 @@ import App from '../App';
 import { useGameStore } from '../store/gameStore';
 import { createCardInstance } from '../data/cards';
 import { createEnemyInstance } from '../data/enemies';
+import fixture from './fixtures/personalCutout.json';
 import { GeneratedCharacter } from '../core/models';
 
 const character: GeneratedCharacter = { id: 'review', name: 'Neon Runner', archetype: 'neon', title: 'The last light on Ocean Drive', portraitUrl: '/assets/characters/neon.webp', maxHp: 80, maxEnergy: 3, startingGold: 99, traits: ['Streetwise', 'Fearless'] };
 const cards = ['neon_jab', 'dodge_roll', 'haymaker'].map(id => createCardInstance(id));
-function reveal() { useGameStore.setState({ seed: '', ugcPhase: 'reveal', generatedCharacter: character, generatedCards: Array.from({ length: 13 }, (_, index) => ({ ...cards[index % cards.length], isHeroCard: index === 12 })) }); }
-const screens = ['Landing', 'Capture', 'Waiting', 'Error', 'Reveal', 'Map', 'Combat', 'Full hand', 'Rewards', 'Shop', 'Rest', 'Mystery', 'Victory', 'Defeat'] as const;
+function reveal(personal=false) { useGameStore.setState({ seed: '', ugcPhase: 'reveal', generatedCharacter: personal ? {...character,name:'CUTOUT TEST',title:'Local art fixture · no photo',combatAppearance:{version:2,actorVisualId:'hero-chrome',idleImageUrl:fixture.idleImageUrl}} : character, generatedCards: Array.from({ length: 13 }, (_, index) => ({ ...cards[index % cards.length], isHeroCard: index === 12 })) }); }
+const screens = ['Landing', 'Capture', 'Waiting', 'Error', 'Reveal', 'Personal reveal', 'Personal combat', 'Map', 'Combat', 'Full hand', 'Rewards', 'Shop', 'Rest', 'Mystery', 'Victory', 'Defeat'] as const;
 export default function ReviewHarness() {
     const [revision, setRevision] = useState(0);
     const show = (screen: string) => {
@@ -22,6 +23,8 @@ export default function ReviewHarness() {
             case 'Waiting': store.setState({ seed: '', ugcPhase: 'generating', selfieDataUrl: '/assets/characters/neon.webp' }); break;
             case 'Error': store.setState({ seed: '', ugcPhase: 'capture', ugcError: 'The connection dropped. Try again or play a starter hero.' }); break;
             case 'Reveal': reveal(); break;
+            case 'Personal reveal': reveal(true); break;
+            case 'Personal combat': reveal(true); store.getState().startGeneratedRun();store.getState().startCombat(['alley_rat','vending_golem','fire_escape_spider'].map((id,i)=>createEnemyInstance(id,`review-personal-${i}`,store.getState().rng)));break;
             case 'Combat': store.getState().startCombat(['alley_rat', 'vending_golem', 'fire_escape_spider'].map((id, i) => createEnemyInstance(id, `review-${i}`, store.getState().rng))); break;
             case 'Full hand': store.getState().startCombat(['alley_rat', 'vending_golem', 'fire_escape_spider'].map((id, i) => createEnemyInstance(id, `review-${i}`, store.getState().rng))); store.setState({ hand: Array.from({length: 10}, (_, i) => createCardInstance(i % 2 ? 'haymaker' : 'finesse')) }); break;
             case 'Rewards': store.setState({ inCombat: true, combatResult: 'victory', goldReward: 25, cardRewards: cards }); break;
