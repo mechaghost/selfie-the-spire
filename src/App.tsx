@@ -1,5 +1,3 @@
-import { useLayoutEffect, useRef } from 'react';
-import { RotateCw } from 'lucide-react';
 import { useGameStore } from './store/gameStore';
 import { CombatView } from './components/combat/CombatView';
 import { MapView } from './components/map/MapView';
@@ -37,44 +35,6 @@ function GameScreen() {
     return <MainMenu />;
 }
 
-function LandscapePrompt() {
-    const dialog = useRef<HTMLDialogElement>(null);
-
-    useLayoutEffect(() => {
-        const portrait = matchMedia('(orientation: portrait) and (any-pointer: coarse)');
-        const prompt = dialog.current!;
-        const sync = () => {
-            if (portrait.matches && !prompt.open) {
-                useGameStore.getState().resetDragState();
-                prompt.showModal();
-            } else if (!portrait.matches && prompt.open) {
-                prompt.close();
-            }
-        };
-        const blockEscape = (event: KeyboardEvent) => {
-            if (prompt.open && event.key === 'Escape') {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-        };
-        sync();
-        portrait.addEventListener('change', sync);
-        document.addEventListener('keydown', blockEscape, true);
-        return () => {
-            portrait.removeEventListener('change', sync);
-            document.removeEventListener('keydown', blockEscape, true);
-            prompt.close();
-        };
-    }, []);
-
-    return <dialog ref={dialog} className="landscape-prompt" aria-labelledby="landscape-title"
-        aria-describedby="landscape-description" onCancel={event => event.preventDefault()}>
-        <RotateCw size={36} aria-hidden="true" />
-        <h1 id="landscape-title">Rotate your device</h1>
-        <p id="landscape-description">Turn your screen sideways to play.</p>
-    </dialog>;
-}
-
 function App() {
     const { saveError, recoveryNotice, dismissRecovery } = useGameStore();
     return <>
@@ -84,7 +44,6 @@ function App() {
             <p>{recoveryNotice}</p>
             <button onClick={dismissRecovery}>Continue</button>
         </InspectionDialog>}
-        <LandscapePrompt />
     </>;
 }
 

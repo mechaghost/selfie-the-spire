@@ -4,14 +4,13 @@ const base = process.env.E2E_BASE || 'http://localhost:4187';
 const seed = '72b23907-f7cf-4c98-95e8-5e64155244f8';
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.PW_CHROMIUM || (process.platform==='darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : undefined),args:['--enable-unsafe-swiftshader']});
- try {for(const viewport of [{width:1440,height:900},{width:844,height:390},{width:568,height:320}]) {
+ try {for(const viewport of [{width:1440,height:900},{width:844,height:390},{width:568,height:320},{width:320,height:568}]) {
   const touch=viewport.width<1000;
   const page=await browser.newPage({viewport,hasTouch:touch,isMobile:touch});
   page.setDefaultTimeout(15000);
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(seed=>{const uuid=crypto.randomUUID.bind(crypto);let first=true;crypto.randomUUID=()=>{if(first){first=false;return seed;}return uuid();};},seed);
-  if(touch) {await page.setViewportSize({width:390,height:844});await page.goto(base);await page.getByRole('dialog',{name:'Rotate your device'}).waitFor();await page.setViewportSize(viewport);await page.getByRole('dialog',{name:'Rotate your device'}).waitFor({state:'hidden'});}
-  else await page.goto(base);
+  await page.goto(base);
   await page.getByRole('button',{name:/Play a starter run/}).click();
   await page.locator('.map-node.available.type-combat').first().click();
   await page.locator('.battle-stage-visual[data-stage-status="ready"] canvas').waitFor();
@@ -19,13 +18,14 @@ const seed = '72b23907-f7cf-4c98-95e8-5e64155244f8';
   const cdp=touch?await page.context().newCDPSession(page):null;
   if(touch) {
    const hand=page.locator('.hand-container'); const rect=await hand.boundingBox();
-   const x=rect.x+rect.width/2,y=rect.y+Math.min(180,rect.height-20);
+   const portrait=viewport.height>viewport.width;
+   const x=rect.x+rect.width*(portrait ? .8 : .5),y=rect.y+Math.min(180,rect.height-20);
    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});
-   for(let i=1;i<=10;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y:y-i*15,id:1}]});await page.waitForTimeout(25);}
+   for(let i=1;i<=10;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:portrait?x-i*15:x,y:portrait?y:y-i*15,id:1}]});await page.waitForTimeout(25);}
    await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
-   await page.waitForFunction(()=>document.querySelector('.hand-container').scrollTop>0);
+   await page.waitForFunction(portrait=>document.querySelector('.hand-container')[portrait?'scrollLeft':'scrollTop']>0,portrait);
    assert.equal(await page.locator('.card-drag-preview').count(),0);
-   await hand.evaluate(e=>e.scrollTo({top:0,behavior:'instant'}));
+   await hand.evaluate(e=>e.scrollTo({top:0,left:0,behavior:'instant'}));
   }
   const save=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('stt_run')));
   async function drag(card,end,cancel=false) {
@@ -58,7 +58,7 @@ const seed = '72b23907-f7cf-4c98-95e8-5e64155244f8';
   await page.waitForFunction(id=>!JSON.parse(localStorage.getItem('stt_run')).hand.some(card=>card.instanceId===id),skillId);
   assert.ok((await save()).player.block>afterAttack.player.block);
   assert.deepEqual(errors,[]);
-  console.log(`PASS ${viewport.width}x${viewport.height}: ${touch?'native touch':'mouse'} attack and self card drag, invalid drop${touch?', cancellation and portrait rotation':''}`);
+  console.log(`PASS ${viewport.width}x${viewport.height}: ${touch?'native touch':'mouse'} attack and self card drag, invalid drop${touch?', cancellation and hand scrolling':''}`);
   await page.waitForTimeout(1200);await page.screenshot({path:`tests/.e2e-out/layout-${viewport.width}.png`});await page.close();
  }} finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

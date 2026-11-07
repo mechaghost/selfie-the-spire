@@ -35,20 +35,15 @@ async function verifyTargetingAfterRotation(page, viewport, targetPrompt, target
         label: element.getAttribute('aria-label'),
     })));
     const energy = await page.locator('.energy-current').textContent();
-    const rotate = page.getByRole('dialog', { name: 'Rotate your device' });
-    await page.setViewportSize({ width: 390, height: 844 });
-    await rotate.waitFor();
-    await page.keyboard.press('Escape');
-    assert.equal(await rotate.isVisible(), true, 'Portrait play cannot be enabled by dismissing the prompt');
-    assert.equal(await page.evaluate(() => document.querySelector('.landscape-prompt').matches(':modal')), true);
-    await page.setViewportSize(viewport);
-    await rotate.waitFor({ state: 'hidden' });
-    await targetPrompt.waitFor();
-    assert.equal(await page.locator('.energy-current').textContent(), energy);
-    assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => ({
-        id: element.dataset.combatTarget,
-        label: element.getAttribute('aria-label'),
-    }))), before);
+    for (const size of [{ width: 390, height: 844 }, viewport]) {
+        await page.setViewportSize(size);
+        await targetPrompt.waitFor();
+        assert.equal(await page.locator('.energy-current').textContent(), energy);
+        assert.deepEqual(await targets.evaluateAll(elements => elements.map(element => ({
+            id: element.dataset.combatTarget,
+            label: element.getAttribute('aria-label'),
+        }))), before);
+    }
 }
 
 async function playFight(page, { viewport, input, reducedMotion = 'no-preference', loseGraphics, rotate }) {
@@ -92,7 +87,8 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
     const endTurn = page.getByRole('button', { name: 'End Turn', exact: true });
     const handAttacks = page.locator('.hand-container').getByRole('button', { name: attacks });
     const targetPrompt = page.getByRole('region', { name: 'Choose card target' });
-    if (viewport.width > viewport.height) {
+    const sideHand = viewport.width >= 500 && viewport.width > viewport.height && viewport.height <= 450;
+    if (sideHand) {
         const hand = page.locator('.hand-container');
         await hand.locator('.card').last().waitFor({ state: 'attached' });
         const edges = await hand.evaluate(async element => {
@@ -154,7 +150,7 @@ async function playFight(page, { viewport, input, reducedMotion = 'no-preference
             const { index, cost } = affordable[0];
             await activate(handAttacks.nth(index), labels[index]);
             const playCard = page.getByRole('button', { name: 'Play card', exact: true });
-            if (plays === 0 && viewport.width > viewport.height) {
+            if (plays === 0 && sideHand) {
                 assert.ok(await playCard.evaluate(button => {
                     const buttonRect = button.getBoundingClientRect();
                     const dialogRect = button.closest('dialog').getBoundingClientRect();
@@ -361,7 +357,7 @@ async function verifyLocalSelfie(page) {
     assert.deepEqual(remoteRequests, []);
     assert.deepEqual(thirdPartyRequests, []);
     assert.deepEqual(errors, []);
-    console.log('PASS mobile landscape: photo picker, transparent preview, same sprite after reload and WebGL loss, no API calls');
+    console.log('PASS mobile portrait: photo picker, transparent preview, same sprite after reload and WebGL loss, no API calls');
 }
 
 async function verifyMissingActorRecovery(page) {
@@ -401,12 +397,8 @@ async function main() {
         args: ['--enable-unsafe-swiftshader'],
     }));
     try {
-        const selfiePage = await browser.newPage({ viewport: { width: 844, height: 390 }, isMobile: true, hasTouch: true });
+        const selfiePage = await browser.newPage({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
         try {
-            await selfiePage.setViewportSize({ width: 390, height: 844 });
-            await selfiePage.goto(base);
-            await selfiePage.getByRole('dialog', { name: 'Rotate your device' }).waitFor();
-            await selfiePage.setViewportSize({ width: 844, height: 390 });
             await verifyLocalSelfie(selfiePage);
         } finally {
             await selfiePage.close();
@@ -418,6 +410,8 @@ async function main() {
             await recoveryPage.close();
         }
         const cases = [
+            { viewport: { width: 320, height: 568 }, input: 'touch' },
+            { viewport: { width: 1440, height: 900 }, input: 'keyboard' },
             { viewport: { width: 844, height: 390 }, input: 'touch' },
             { viewport: { width: 320, height: 568 }, input: 'keyboard' },
             { viewport: { width: 844, height: 390 }, input: 'touch', reducedMotion: 'reduce' },
@@ -428,7 +422,7 @@ async function main() {
         let baseline;
         for (const testCase of cases) {
             const { viewport, input, reducedMotion = 'no-preference', loseGraphics, rotate } = testCase;
-            const page = await browser.newPage({ viewport, isMobile: true, hasTouch: input === 'touch', reducedMotion });
+            const page = await browser.newPage({ viewport, isMobile: viewport.width < 1000, hasTouch: input === 'touch', reducedMotion });
             try {
                 const result = await playFight(page, testCase);
                 if (!baseline) baseline = result;

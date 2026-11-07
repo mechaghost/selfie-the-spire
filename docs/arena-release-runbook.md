@@ -15,7 +15,7 @@ Production Railway watches the `release` branch. Record the current successful d
 
 If the Railway service needs `VITE_COMBAT_ARENA=1`, set it with deploys skipped so the flag and candidate go live in the same build. Fast-forward the watched branch to the commit that passed the local checks. Wait for Railway to report success for that commit, verify `/health`, and compare the live entry script's SHA-256 with the verified artifact.
 
-Run `E2E_BASE=https://selfiethespire.com node tests/drag-live.cjs` to verify mouse/touch dragging, hand scrolling, invalid drops, cancellation and the phone rotation prompt. Then run `E2E_BASE=https://selfiethespire.com node tests/arena-smoke.cjs` against the live domain. The test covers browser-local selfie creation, a legal fight, reward selection and return to the map. It compares the complete saved checkpoint before and after reload, including HP, gold, deck and map position. Set `E2E_BROWSER=webkit` to repeat in WebKit.
+Run `E2E_BASE=https://selfiethespire.com node tests/drag-live.cjs` to verify mouse/touch dragging, hand scrolling, invalid drops, and cancellation in portrait and landscape. Then run `E2E_BASE=https://selfiethespire.com node tests/arena-smoke.cjs` against the live domain. The test covers browser-local selfie creation, a legal fight, reward selection and return to the map. It compares the complete saved checkpoint before and after reload, including HP, gold, deck and map position. Set `E2E_BROWSER=webkit` to repeat in WebKit.
 
 ## Roll back
 
